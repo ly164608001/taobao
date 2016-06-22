@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lxhrainy.myjz.admin.activity.dao.IActivityDeductionDao">
+    
+    <resultMap id="ActivityDeduction" type="com.lxhrainy.myjz.admin.activity.model.ActivityDeduction">
+		<id column="id" property="id"  />
+	    <result column="housesInfo.id" property="housesInfo.id"  />
+	    <result column="starttime" property="starttime"  />
+	    <result column="endtime" property="endtime"  />
+	    <result column="createuser.id" property="createuser.id"  />
+	    <result column="createtime" property="createtime"  />
+	    <result column="availabletime" property="availabletime"  />
+	    <result column="deductiontype" property="deductiontype"  />
+	    <result column="prestoremoney" property="prestoremoney"  />
+	    <result column="deductionmoney" property="deductionmoney"  />
+	    <result column="personnum" property="personnum"  />
+	    <result column="takeinnum" property="takeinnum"  />
+	    <result column="status" property="status"  />
+	    <result column="deleted" property="deleted"  />
+	</resultMap>
+	
+	<sql id="activityDeductionColumns">
+		T.id AS "id",
+		T.housesid AS "housesInfo.id" ,
+		T.starttime AS "starttime",
+		T.endtime AS "endtime",
+		T.createuser AS "createuser.id",
+		user.username AS "createuser.username",
+		T.createtime AS "createtime",
+		T.availabletime AS "availabletime",
+		T.deductiontype AS "deductiontype",
+		T.prestoremoney AS "prestoremoney",
+		T.deductionmoney AS "deductionmoney",
+		T.personnum AS "personnum",
+		T.takeinnum AS "takeinnum",
+		T.status AS "status",
+		T.deleted AS "deleted"
+	</sql>
+	
+    
+	<sql id="activityDeductionJoins">
+	left JOIN user_info user ON user.id = T.createuser
+	left join houses_info housesInfo ON T.housesid = housesInfo.id
+	</sql>
+    
+	<select id="getById" resultType="ActivityDeduction">
+		SELECT 
+			<include refid="activityDeductionColumns"/>
+		FROM activity_deduction T
+		<include refid="activityDeductionJoins"/>
+		WHERE T.id = #{id}
+	</select>
+	
+	<select id="findListByPage" resultMap="ActivityDeduction">
+		SELECT 
+			<include refid="activityDeductionColumns"/>
+		FROM activity_deduction T
+		<include refid="activityDeductionJoins"/>
+		<if test="condition!=null">
+			<where>
+				T.deleted=0
+				<if test="condition.model!=null">
+					<if test="condition.model.prestoremoney!=null and condition.model.prestoremoney!=''">
+						AND T.prestoremoney = '${condition.model.prestoremoney}'
+					</if>
+				</if>
+			</where>
+			order by T.ID DESC
+			<include refid="Sql.pager" />
+		</if>
+	</select>
+	<select id="getCountByCondition" resultType="int">
+		SELECT 
+			count(*)
+		FROM activity_deduction T
+		<include refid="activityDeductionJoins"/>
+		<if test="condition!=null">
+			<where>
+				T.deleted=0
+				<if test="condition.model!=null">
+					<if test="condition.model.prestoremoney!=null and condition.model.prestoremoney!=''">
+						AND T.prestoremoney = '${condition.model.prestoremoney}'
+					</if>
+				</if>
+			</where>
+		</if>
+	</select>
+	
+	<select id="findAllList" resultType="ActivityDeduction">
+		SELECT 
+			<include refid="activityDeductionColumns"/>
+		FROM activity_deduction T
+		<include refid="activityDeductionJoins"/>
+		<where>
+			T.deleted=0
+			<if test="condition.model!=null">
+					<if test="condition.model.prestoremoney!=null and condition.model.prestoremoney!=''">
+						AND T.prestoremoney = '${condition.model.prestoremoney}'
+					</if>
+				</if>
+		</where>		
+	</select>
+	
+	<insert id="insert">
+	INSERT INTO activity_deduction (
+		id,
+		housesid,
+		starttime,
+		endtime,
+		createuser,
+		createtime,
+		availabletime,
+		deductiontype,
+		prestoremoney,
+		deductionmoney,
+		personnum,
+		takeinnum,
+		status,
+		deleted
+		)values (
+		#{id},
+		#{housesid},
+		#{starttime},
+		#{endtime},
+		#{createuser.id},
+		#{createtime},
+		#{availabletime},
+		#{deductiontype},
+		#{prestoremoney},
+		#{deductionmoney},
+		#{personnum},
+		#{takeinnum},
+		#{status},
+		#{deleted}
+		)
+		<!-- 配置Mysql主键自动增长 -->
+		<selectKey resultType="int" keyProperty="id">
+			select
+			LAST_INSERT_ID() as value  
+		</selectKey>
+	</insert>
+		
+	 <update id="update" >
+    update activity_deduction
+    <set >
+      <if test="housesid != null" >
+        housesid = #{housesid},
+      </if>
+      <if test="starttime != null" >
+        starttime = #{starttime},
+      </if>
+      <if test="endtime != null" >
+        endtime = #{endtime},
+      </if>
+      <if test="createuser != null" >
+        createuser = #{createuser.id},
+      </if>
+      <if test="createtime != null" >
+        createtime = #{createtime},
+      </if>
+      <if test="availabletime != null" >
+        availabletime = #{availabletime},
+      </if>
+      <if test="deductiontype != null" >
+        deductiontype = #{deductiontype},
+      </if>
+      <if test="prestoremoney != null" >
+        prestoremoney = #{prestoremoney},
+      </if>
+      <if test="deductionmoney != null" >
+        deductionmoney = #{deductionmoney},
+      </if>
+      <if test="personnum != null" >
+        personnum = #{personnum},
+      </if>
+      <if test="takeinnum != null" >
+        takeinnum = #{takeinnum},
+      </if>
+      <if test="status != null" >
+        status = #{status},
+      </if>
+      <if test="deleted != null" >
+        deleted = #{deleted},
+      </if>
+    </set>
+    where id = #{id}
+  </update>
+	
+	<update id="deleteById">
+		update activity_deduction set 
+			deleted=1
+		WHERE id = #{id}
+	</update>
+	
+	<update id="updateStatus">
+		update activity_deduction set status = #{status}
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

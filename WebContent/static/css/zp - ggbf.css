@@ -1,0 +1,127 @@
+/**********ggbf_t********/
+.ggbf_t {
+	background:#333;
+	height:40px;
+	line-height:40px;
+	font-family:"microsoft yahei";
+	}
+.ggbf_t_w1002 {
+	background:#333;
+	width:1002px;
+	height:40px;
+	line-height:40px;
+	margin:0 auto;
+	}
+/**********ggbf_t_l********/
+.ggbf_t_l {
+	float:left;
+	display:inline-block;
+	}
+.ggbf_t_l a {
+	padding:0 12px;
+	font-size:14px;
+	color:#ffffff;
+	display:inline-block;
+	}
+.ggbf_t_l a:hover {
+	background:#ff702d;
+	}
+.ggbf_t_l1 {
+	width:150px;
+	height:40px;
+	float:left;
+	display:inline-block;
+	}
+.ggbf_t_l2 {
+	float:left;
+	display:inline-block;
+	}
+.ggbf_t_l2 {
+	float:left;
+	display:inline-block;
+	}
+.ggbf_t_l2 ul {
+	}
+.ggbf_t_l2 li {
+	float:left;
+	display:inline-block;
+	}
+/**********ggbf_t_l end********/
+/**********ggbf_t_r********/
+.ggbf_t_r {
+	float:right;
+	display:inline-block;
+	}
+.ggbf_t_r ul {
+	padding-right:12px;
+	}
+.ggbf_t_r li {
+	margin:0 6px;
+	float:left;
+	display:inline-block;
+	font-size:14px;
+	color:#fff;
+	}
+.ggbf_t_r li a {
+	color:#fff;
+	}
+.ggbf_t_r li a:hover {
+	text-decoration:underline;
+	}
+.ggbf_t_r li.li_shu {
+	font-size:18px;
+	color:#999;
+	}
+.ggbf_t_r li.li_gr {
+	height:18px;
+	line-height:18px;
+	padding:11px 0 11px 0;
+	display:inline-block;
+	}
+.ggbf_t_r li.li_gr a {
+	background:url(http://image.lxhrainynet.com/images/zp/ggbf_t_gr.png) no-repeat center left;
+	height:18px;
+	line-height:18px;
+	padding:0 0 0 22px;
+	display:inline-block;
+	}
+/**********ggbf_t_r end********/	
+/**********ggbf_t end********/
+/**********ggbf_b********/
+.ggbf_b {
+	background:url(http://image.lxhrainynet.com/images/zp/ggbf_b.png) top repeat-x;
+	font-family:"微软雅黑";
+	}
+.ggbf_b_w1002 {
+	background:url(http://image.lxhrainynet.com/images/zp/ggbf_b.png) top repeat-x;
+	width:1002px;
+	margin:0 auto;
+	}
+.ggbf_b_h {
+	line-height:24px;
+	padding-top:33px;
+	text-align:center;
+	}
+.ggbf_b_h a {
+	margin:0 8px;
+	color:#000000;
+	}
+.ggbf_b_h a:hover {
+	text-decoration:underline;
+	}
+.ggbf_b_p {
+	text-align:center;
+	}
+.ggbf_b_p p {
+	height:24px;
+	line-height:24px;
+	color:#666;
+	}
+.ggbf_b_i {
+	padding:20px 0 24px 0;
+	text-align:center;
+	}
+.ggbf_b_i a {
+	margin:0 8px;
+	}
+/**********ggbf_b end********/

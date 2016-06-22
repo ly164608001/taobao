@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lxhrainy.myjz.admin.houses.dao.IHousesDetailExternalDao">
+	<sql id="baseColumn">
+		T.id,T.education,T.business,T.medicine,T.park,T.bank,T.recreation,T.hotel,T.carportcondition,T.sport,T.food,T.others,T.housesid,
+		T.modifyuser,T.modifytime
+	</sql>
+
+	<select id="findListByPage" resultType="HousesDetailExternal">
+		SELECT 
+			<include refid="baseColumn"></include>
+			,T.housesid AS "houses.id" 
+		FROM 
+			houses_detail_external T
+		<if test="condition!=null">
+			<where>
+				T.deleted !=1
+			</where>
+			ORDER BY T.id DESC
+			<include refid="Sql.pager" />
+		</if>
+	</select>
+	
+	<select id="getCountByCondition" resultType="int">
+		SELECT 
+			count(*)
+		FROM 
+			houses_detail_external T
+		<if test="condition!=null">
+			<where>
+				T.deleted !=1
+			</where>
+		</if>
+	</select>
+	
+	<select id="findAllList" resultType="HousesDetailExternal">
+		SELECT 
+			<include refid="baseColumn"></include>
+			,T.housesid as "houses.id" 
+		FROM 
+			houses_detail_external T
+		<where>
+				T.deleted !=1
+		</where>
+	</select>
+	
+
+	<!--根据ID获取详情  -->
+	<select id="getById" resultType="HousesDetailExternal">
+		SELECT 
+			<include refid="baseColumn"></include>
+			,T.housesid AS "houses.id"
+		FROM 
+			houses_detail_external T
+		 WHERE 
+		 	id = #{id}
+	</select>
+	
+<!-- 根据ID删除楼盘信息 -->
+	<update id="deleteById">
+		UPDATE 
+			houses_detail_external 
+		SET 
+			deleted=1
+		WHERE 
+			id = #{id}
+	</update>
+	
+	<!-- 插入楼盘详细信息 -->
+	<insert id="insert" >
+		<!-- 配置Mysql主键自动增长 -->
+		<selectKey resultType="int" keyProperty="id" order="BEFORE">
+			SELECT 
+				auto_increment AS id 
+			FROM 
+				information_schema.tables    
+    		WHERE 
+    			table_name='houses_detail_external'  
+		</selectKey>
+		INSERT INTO 
+			houses_detail_external (
+				id,
+				education,
+		       	business,
+		        medicine, 
+		        park,
+		        bank,
+		        recreation,
+				hotel,
+		       	carportcondition,
+		        sport, 
+		        food,
+		        others,
+		        housesid,
+		        modifyuser,
+		        modifytime
+			)
+		VALUES (
+	    	#{id},
+			#{education},
+	       	#{business},
+	        #{medicine}, 
+	        #{park},
+	        #{bank},
+	        #{recreation},
+	        #{hotel},
+			#{carportcondition},
+	       	#{sport},
+	        #{food}, 
+	        #{others},
+	        #{houses.id},
+	        #{modifyuser},
+	        #{modifytime}
+	      )
+	</insert>
+	<!-- 更新楼盘基本信息 -->
+	<update id="update">
+		UPDATE 
+			houses_detail_external 
+		<set>
+			<if test="education !=null and education !=''">
+				education = #{education},
+			</if>
+			<if test="business !=null and business !=''">
+				business = #{business},
+			</if>
+			<if test="medicine !=null and medicine !='' ">
+				medicine = #{medicine},
+			</if>
+			<if test="park !=null and park !=''" >
+				park = #{park},
+			</if>
+			<if test="bank !=null and bank !=''">
+				bank = #{bank},
+			</if>
+			<if test="recreation !=null and recreation !=''" >
+				recreation = #{recreation},
+			</if>
+			<if test="hotel !=null and hotel !=''">
+				hotel = #{hotel},
+			</if>
+			<if test="carportcondition !=null and carportcondition !=''">
+				carportcondition = #{carportcondition},
+			</if>
+			<if test="sport !=null and sport !='' ">
+				sport = #{sport},
+			</if>
+			<if test="food !=null and food !=''" >
+				food = #{food},
+			</if>
+			<if test="others !=null and others !=''">
+				others = #{others},
+			</if>
+			<if test="houses != null and houses.id !=null and houses.id !=''" >
+				housesid = #{houses.id},
+			</if>
+			<if test="modifyuser !=null and modifyuser !=''">
+				modifyuser = #{modifyuser},
+			</if>
+			<if test="modifytime !=null and modifytime !=''" >
+				modifytime = #{modifytime},
+			</if>
+		</set>
+		WHERE 
+			id = #{id}
+	</update>
+	
+	<!--根据楼盘ID获取houses_detail_external详情  -->
+	<select id="getExternalByHousesId" resultType="HousesDetailExternal">
+		SELECT 
+			<include refid="baseColumn"></include>
+		FROM 
+			houses_detail_external T
+		WHERE 
+			housesid = #{housesid}
+	</select>
+	
+</mapper>

@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lxhrainy.myjz.admin.user.dao.IUserAuthInfoDao">
+    
+    <resultMap id="UserAuthInfo" type="com.lxhrainy.myjz.admin.user.model.UserAuthInfo">
+		<id property="id" column="id" />
+		<result property="paypassword" column="paypassword" />
+		<result property="userid" column="userid" />
+		<result property="paypassword" column="paypassword" />
+		<result property="authphone" column="authphone" />
+		<result property="authphonetime" column="authphonetime" />
+		<result property="authemail" column="authemail" />
+		<result property="authemailtime" column="authemailtime" />
+		<result property="bindqq" column="bindqq" />
+		<result property="bindqqtime" column="bindqqtime" />
+		<result property="certificationstatus" column="certificationstatus" />
+		<result property="certificationtime" column="certificationtime" />
+		<result property="handletime" column="handletime" />
+		<result property="handler" column="handler" />
+		<result property="handlememo" column="handlememo" />
+		<result property="deleted" column="deleted" />
+	</resultMap>
+	
+	<sql id="userAuthInfoColumns">
+		T.id AS "id",
+		T.userid AS "userid",
+		T.paypassword AS "paypassword",
+		T.authphone AS "authphone",
+		T.authphonetime AS "authphonetime",
+		T.authemail AS "authemail",
+		T.authemailtime AS "authemailtime",
+		T.bindqq AS "bindqq",
+		T.bindqqtime AS "bindqqtime",
+		T.certificationstatus AS "certificationstatus",
+		T.certificationtime AS "certificationtime",
+		T.handletime AS "handletime",
+		T.handler AS "handler",
+		T.handlememo AS "handlememo",
+		T.deleted AS "deleted",
+		T.realname AS "realname",
+		T.certificateno AS "certificateno",
+		T.cardphoto AS "cardphoto",
+		T.handcardphoto AS "handcardphoto",
+		T.type AS "type",
+		T.openingbank AS "openingbank",
+		T.bankno AS "bankno"
+	</sql>
+	
+	<sql id="userAuthInfoJoins">
+	</sql>
+	
+	<sql id="where">
+		<if test="condition!=null">
+			<where>
+				<if test="condition.model!=null">
+					<if test="condition.model.deleted!=null">
+						T.deleted = #{condition.model.deleted}
+					</if>
+				</if>
+			</where>
+		</if>
+	</sql>
+    
+	<select id="getById" resultType="UserAuthInfo">
+		SELECT 
+			<include refid="userAuthInfoColumns"/>
+		FROM user_auth_info T
+		<include refid="userAuthInfoJoins"/>
+		WHERE T.id = #{id}
+	</select>
+	
+	<select id="findListByPage" resultType="UserAuthInfo">
+		SELECT 
+			<include refid="userAuthInfoColumns"/>
+		FROM user_auth_info T
+		<include refid="userAuthInfoJoins"/>
+		<if test="condition!=null">
+			<include refid="where"/>
+			order by T.ID DESC
+			<include refid="Sql.pager" />
+		</if>
+	</select>
+	
+	<select id="findAllList" resultType="UserAuthInfo">
+		SELECT 
+			<include refid="userAuthInfoColumns"/>
+		FROM user_auth_info T
+		<include refid="userAuthInfoJoins"/>
+		<include refid="where"/>	
+	</select>
+	
+	<select id="getCountByCondition" resultType="int">
+		SELECT 
+			count(*)
+		FROM user_auth_info T
+		<include refid="userAuthInfoJoins"/>
+		<include refid="where"/>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO user_auth_info(
+			id,
+			userid,
+			paypassword,
+			authphone,
+			authphonetime,
+			authemail,
+			authemailtime,
+			bindqq,
+			bindqqtime,
+			certificationstatus,
+			certificationtime,
+			handletime,
+			handler,
+			handlememo,
+			deleted
+		) VALUES (
+			#{id},
+			#{userid},
+			#{paypassword},
+			#{authphone},
+			#{authphonetime},
+			#{authemail},
+			#{authemailtime},
+			#{bindqq},
+			#{bindqqtime},
+			#{certificationstatus},
+			#{certificationtime},
+			#{handletime},
+			#{handler},
+			#{handlememo},
+			#{deleted}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE user_auth_info 
+		<set>
+		<if test="userid!=null">
+			userid = #{userid},
+		</if>
+		<if test="paypassword!=null and paypassword!=''">
+			paypassword = #{paypassword},
+		</if>
+		<if test="authphone!=null and authphone !='' ">
+			authphone = #{authphone},
+		</if>
+		<if test="authphonetime!=null">
+			authphonetime = #{authphonetime},
+			</if>
+		<if test="authemail !=null">
+			authemail = #{authemail},
+			</if>
+		<if test="authemailtime !=null" >
+			authemailtime = #{authemailtime},
+			</if>
+		<if test="bindqq !=null and bindqq !='' ">
+			bindqq = #{bindqq},
+			</if>
+		<if test="bindqqtime !=null">
+			bindqqtime = #{bindqqtime},
+			</if>
+		<if test="certificationstatus !=null">
+			certificationstatus = #{certificationstatus},
+			</if>
+		<if test="certificationtime !=null">
+			certificationtime = #{certificationtime},
+			</if>
+		<if test="handletime !=null">
+			handletime = #{handletime},
+			</if>
+		<if test="handler !=null">
+			handler = #{handler},
+			</if>
+		<if test="handlememo !=null and handlememo !=''">
+			handlememo = #{handlememo},
+			</if>
+		<if test="deleted!=null">
+			deleted = #{deleted},
+		</if>
+		<if test="realname!=null">
+			realname = #{realname},
+		</if>
+		<if test="certificateno!=null">
+			certificateno = #{certificateno},
+		</if>
+		<if test="cardphoto!=null">
+			cardphoto = #{cardphoto},
+		</if>
+		<if test="handcardphoto!=null">
+			handcardphoto = #{handcardphoto},
+		</if>
+		<if test="type!=null">
+			type = #{type},
+		</if>
+		<if test="openingbank!=null">
+			openingbank = #{openingbank},
+		</if>
+		<if test="bankno!=null">
+			bankno = #{bankno},
+		</if>
+	</set>
+		WHERE id = #{id}
+	</update>
+	
+	<update id="deleteById">
+		update user_auth_info set 
+			deleted=1
+		WHERE id = #{id}
+	</update>
+	
+	<select id="getByUserId" resultType="UserAuthInfo">
+		SELECT 
+			<include refid="userAuthInfoColumns"/>
+		FROM user_auth_info T
+		<include refid="userAuthInfoJoins"/>
+		WHERE T.userid = #{userid}
+	</select>
+	
+</mapper>

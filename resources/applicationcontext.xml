@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<beans  
+    xmlns="http://www.springframework.org/schema/beans"  
+    xmlns:tx="http://www.springframework.org/schema/tx"  
+    xmlns:p="http://www.springframework.org/schema/p"  
+    xmlns:aop="http://www.springframework.org/schema/aop"   
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+    xmlns:context="http://www.springframework.org/schema/context" 
+    xsi:schemaLocation="http://www.springframework.org/schema/beans   
+    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd  
+    http://www.springframework.org/schema/context   
+    http://www.springframework.org/schema/context/spring-context-3.0.xsd 
+    http://www.springframework.org/schema/tx   
+    http://www.springframework.org/schema/tx/spring-tx-3.0.xsd   
+    http://www.springframework.org/schema/aop    
+    http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">  
+    
+    <bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor" />
+    <context:component-scan base-package="com.lxhrainy.core.*.service.impl"/>  
+    <context:component-scan base-package="com.lxhrainy.myjz.admin.*.service.impl"/>
+    <context:component-scan base-package="com.lxhrainy.myjz.front.*.service.impl"/>
+    <!-- 配置数据源-->
+	<bean id="jdbcDataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close"> 
+       <property name="driverClassName" value="${driverClassName}" />  
+        <property name="url" value="${url}" /> 
+        <property name="username" value="${username}" />  
+        <property name="password" value="${password}" /> 
+        <!-- 配置初始化大小、最小、最大 -->
+		<property name="initialSize" value="${pool.init}" /> 
+        <property name="maxActive" value="${maxActive}"></property>  
+        <property name="minIdle" value="${minIdle}"></property>  
+        <property name="maxWait" value="${maxWait}"></property>
+        <!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
+		<property name="timeBetweenEvictionRunsMillis" value="60000" />
+		
+		<!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
+		<property name="minEvictableIdleTimeMillis" value="300000" />
+		
+		<property name="validationQuery" value="${testSql}" />
+		<property name="testWhileIdle" value="true" />
+		<property name="testOnBorrow" value="false" />
+		<property name="testOnReturn" value="false" />	
+		
+		<!-- 打开PSCache，并且指定每个连接上PSCache的大小（Oracle使用）
+		<property name="poolPreparedStatements" value="true" />
+		<property name="maxPoolPreparedStatementPerConnectionSize" value="20" /> -->
+		
+		<!-- 配置监控统计拦截的filters -->
+	    <property name="filters" value="stat" /> 
+    </bean>   
+
+    <!-- <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">  
+	    <property name="dataSource" ref="jdbcDataSource" />  
+	    <property name="configLocation" value="classpath:${type}-mybatis-config.xml"></property>  
+	    mapper和resultmap配置路径
+        <property name="mapperLocations">
+            <list>
+            	<value>classpath:mysqldb/*.xml</value>
+            </list>
+        </property>
+	</bean> -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="jdbcDataSource"/>
+        <property name="typeAliasesPackage" value="com.lxhrainy"/>
+        <property name="typeAliasesSuperType" value="com.lxhrainy.core.common.model.BaseModel"/>
+        <property name="mapperLocations" value="classpath:com/lxhrainy/mappings/**/*.xml"/>
+		<property name="configLocation" value="classpath:/${type}-mybatis-config.xml"></property>
+    </bean>
+    <!-- 扫描basePackage下所有以@MyBatisDao注解的接口 -->
+    <bean id="mapperScannerConfigurer" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
+        <property name="basePackage" value="com.lxhrainy.**.dao"/>
+        <property name="annotationClass" value="com.lxhrainy.core.annotation.MyBatisDao"/>
+    </bean>
+    
+    <!-- start定义事务 -->
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="jdbcDataSource" />
+	</bean>
+	<!-- 配置 Annotation 驱动，扫描@Transactional注解的类定义事务  -->
+	<tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true"/>
+	<!-- end定义事务 -->
+	
+	<!-- 缓存配置 -->
+	<bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
+		<property name="configLocation" value="classpath:ecache/ehcache.xml" />
+	</bean>
+	
+	<bean id="springContextHolder" class="com.lxhrainy.core.utils.SpringContextHolder"/>
+</beans>  

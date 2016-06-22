@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lxhrainy.myjz.admin.interaction.dao.IInteractionAppraiseRecordAssocDao">
+    
+	
+	<sql id="interactionAppraiseRecordAssocColumns">
+		T.id AS "id",
+		T.recordid AS "record.id",
+		T.userid AS "user.id",
+		user.username AS "user.username",
+		T.deleted AS "deleted"		
+	</sql>
+	
+    
+	<sql id="interactionAppraiseRecordAssocJoins">
+		left JOIN interaction_appraise_record record ON record.id =T.recordid
+		left JOIN user_info user ON user.id = T.userid
+	</sql>
+	
+		<sql id="where">
+			<if test="condition!=null">
+				<where>
+					<if test="condition.model!=null">
+						<if test="condition.model.deleted!=null">
+							AND T.deleted = #{condition.model.deleted}
+						</if>
+					</if>
+				</where>
+			</if>
+		</sql>
+    
+	<select id="getById" resultType="InteractionAppraiseRecordAssoc">
+		SELECT 
+			<include refid="interactionAppraiseRecordAssocColumns"/>
+		FROM interaction_appraise_record_assoc T
+		<include refid="interactionAppraiseRecordAssocJoins"/>
+		WHERE T.id = #{id}
+	</select>
+	
+	<select id="findListByPage" resultType="InteractionAppraiseRecordAssoc">
+		SELECT 
+			<include refid="interactionAppraiseRecordAssocColumns"/>
+		FROM interaction_appraise_record_assoc T
+		<include refid="interactionAppraiseRecordAssocJoins"/>
+		<include refid="where"/>
+			order by T.ID DESC
+			<include refid="Sql.pager" />
+	</select>
+	
+	<select id="getCountByCondition" resultType="int">
+		SELECT 
+			count(*)
+		FROM interaction_appraise_record_assoc T
+		<include refid="interactionAppraiseRecordAssocJoins"/>
+		<include refid="where"/>
+	</select>
+	
+	<select id="findAllList" resultType="InteractionAppraiseRecordAssoc">
+		SELECT 
+			<include refid="interactionAppraiseRecordAssocColumns"/>
+		FROM interaction_appraise_record_assoc T
+		<include refid="interactionAppraiseRecordAssocJoins"/>
+		<include refid="where"/>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO interaction_appraise_record_assoc(
+			id, 
+			recordid,
+			userid,
+			deleted
+		) VALUES (
+			#{id}, 
+			#{record.id},
+			#{user.id},
+			#{deleted}
+		)
+		<!-- 配置Mysql主键自动增长 -->
+		<selectKey resultType="int" keyProperty="id">
+			select
+			LAST_INSERT_ID() as value  
+		</selectKey>
+	</insert>
+	
+	<update id="update">
+		UPDATE interaction_appraise_record_assoc
+		<set>
+			<if test="recordid!=null">
+				recordid = #{record.id},
+			</if>
+			<if test="userid != null">
+				userid = #{user.id},
+			</if>
+			<if test="deleted!=null">
+			deleted = #{deleted}
+			</if>
+		</set>
+		WHERE id = #{id}
+	</update>
+	
+	<update id="deleteById">
+		update interaction_appraise_record_assoc set 
+			deleted=1
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

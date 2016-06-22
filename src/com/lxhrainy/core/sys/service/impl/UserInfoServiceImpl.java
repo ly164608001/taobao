@@ -1,0 +1,194 @@
+package com.lxhrainy.core.sys.service.impl;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.lxhrainy.core.common.service.AbstractBaseServiceImpl;
+import com.lxhrainy.core.sys.dao.ISysRoleDao;
+import com.lxhrainy.core.sys.dao.IUserInfoDao;
+import com.lxhrainy.core.sys.model.UserInfo;
+import com.lxhrainy.core.sys.service.IUserInfoService;
+import com.lxhrainy.core.utils.AESUtil;
+import com.lxhrainy.myjz.admin.user.dao.IUserAuthInfoDao;
+import com.lxhrainy.myjz.admin.user.dao.IUserDetailInfoDao;
+import com.lxhrainy.myjz.admin.user.dao.IUserMoneyDao;
+import com.lxhrainy.myjz.admin.user.model.UserAuthInfo;
+import com.lxhrainy.myjz.admin.user.model.UserDetailInfo;
+import com.lxhrainy.myjz.admin.user.model.UserMoney;
+import com.lxhrainy.myjz.common.constant.Global;
+
+
+/**
+ * 用户服务实现类
+ * @author xueyunteng
+ * @date 2016-05-23
+ */
+
+@Service
+@Transactional(readOnly = true)
+public class UserInfoServiceImpl extends
+AbstractBaseServiceImpl<IUserInfoDao, UserInfo, Integer>
+implements IUserInfoService {
+	
+	@Autowired
+	IUserInfoDao userInfoDao;
+	@Autowired
+	IUserMoneyDao userMoneyDao;
+	@Autowired
+	IUserDetailInfoDao userDetailInfoDao;
+	@Autowired
+	IUserAuthInfoDao userAuthInfoDao;
+	@Autowired
+	ISysRoleDao sysRoleDao;
+
+	/**
+	 * 用户登录
+	 * @return 存在返回用户信息 不存在返回null
+	 */
+	public UserInfo checkUserLogin(String username,String password, Integer channel){
+		String enPassword = encrptPassword(password);
+		UserInfo userInfo = userInfoDao.checkUserLogin(username ,enPassword, channel);
+		return userInfo;
+	}
+	
+	/**
+	 * 启用用户
+	 */
+	@Transactional(readOnly = false)
+	public int ableUser(int id) {
+		userInfoDao.updateStatus(id,Global.ENABLE);
+		return 1;
+	}
+
+	/**
+	 * 禁用用户
+	 */
+	@Transactional(readOnly = false)
+	public int disableUser(int id) {
+		userInfoDao.updateStatus(id,Global.DISABLE);
+		return 1;
+	}
+
+	/**
+	 * 重置用户密码
+	 */
+	@Transactional(readOnly = false)
+	public int resetPassword(int id) {
+		userInfoDao.updatePassword(id,encrptPassword(Global.DEFAULT_PASSWORD));
+		return id;
+	}
+
+	/**
+	 * 加密密码
+	 * @param password
+	 * @return
+	 */
+	private String encrptPassword(String password) {
+		try {
+			return AESUtil.encrptString(password, "1234567812345678");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "";
+	}
+
+	/**
+	 * 修改密码
+	 * @param userid
+	 * @param oldpassword
+	 * @param password
+	 * @return
+	 */
+	public int modifyPassword(int userid, String oldpassword, String password) {
+		UserInfo user = this.getById(userid);
+		if(!encrptPassword(oldpassword).equals(user.getPassword())){
+			return -1;
+		}
+		
+		dao.updatePassword(userid,encrptPassword(password));
+		return 1;
+	}
+
+	@Override
+	@Transactional(readOnly = false)
+	public int registerMember(UserInfo user) {
+		//判断用户名是否存在
+		UserInfo exsitUser = dao.getByName(user.getUsername());
+		int result = 0;
+		if(exsitUser != null){
+			//用户名已存在
+			result = -2;
+		}else{
+			user.setPassword(encrptPassword(user.getPassword()));
+			user.setType(Global.USER_MEMBER);
+			//保存用户
+			result = userInfoDao.insert(user);
+			if(result != -1){
+				//创建用户的账户信息
+				UserMoney money = new UserMoney();
+				money.setAllbalance(0.00);
+				money.setFrozenbalance(0.00);
+				money.setDeleted(Global.NO);
+				money.setUsablebalance(0.00);
+				money.setUserid(result);
+				userMoneyDao.insert(money);
+				//创建用户详细信息
+				UserDetailInfo detail = new UserDetailInfo();
+				detail.setUserid(result);
+				detail.setDeleted(Global.NO);
+				userDetailInfoDao.insert(detail);
+				//创建用户认证信息
+				UserAuthInfo authInfo = new UserAuthInfo();
+				authInfo.setDeleted(Global.NO);
+				authInfo.setUserid(result);
+				userAuthInfoDao.insert(authInfo);
+				
+				//分配用户权限
+				sysRoleDao.insertUserRole(result, Global.ROLE_MEMBER);
+			}
+		}
+		return result;
+	}
+
+	@Override
+	@Transactional(readOnly = false)
+	public UserInfo getByUsername(String username) {
+		UserInfo userInfo = userInfoDao.getByName(username);
+		return userInfo;
+	}	
+	
+	/**
+	 * 更新用户个人信息
+	 * @param userInfo
+	 * @return
+	 */
+	@Transactional(readOnly = false)
+	public void updateUserInfo(UserInfo userInfo) {
+		this.update(userInfo);
+		userDetailInfoDao.update(userInfo.getDetailInfo());
+	}
+
+	@Override
+	@Transactional(readOnly = false)
+	public int resetPwdFormUser(UserInfo user) {
+		//判断用户信息是否正确
+		UserInfo tempUser = this.getById(user.getId());
+		if(tempUser != null){
+			if(tempUser.getUsername().equals(user.getUsername())){
+				return dao.updatePassword(user.getId(),encrptPassword(user.getPassword()));
+			}
+		}
+		return -1;
+	}
+
+	/**
+	 * 用户详细信息
+	 * @param userid
+	 * @return
+	 */
+	public UserInfo getPersonInfo(int userid) {
+		UserInfo user = dao.getPersonInfo(userid);
+		return user;
+	}
+}

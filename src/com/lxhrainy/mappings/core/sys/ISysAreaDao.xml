@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lxhrainy.core.sys.dao.ISysAreaDao">
+    
+	<sql id="areaColumns">
+		T.id,
+		T.areacode,
+		T.areaname,
+		T.uppk AS "parent.id",
+		T.level,
+		T.leveltype,
+		T.citycode,
+		T.zipcode,
+		T.mergername,
+		T.lng,
+		T.lat,
+		T.pinyin,
+		T.shortname,
+		parent.areaname AS "parent.areaname"
+	</sql>
+	
+	<sql id="areaJoins">
+	left join sys_area parent on parent.id = T.uppk
+    </sql>
+    
+	<select id="getById" resultType="SysArea">
+		SELECT
+			<include refid="areaColumns"/>
+		FROM sys_area T
+		<include refid="areaJoins"/>
+		WHERE T.id = #{id}
+	</select>
+	
+	<select id="findAllList" resultType="SysArea">
+		SELECT
+			<include refid="areaColumns"/>
+		FROM sys_area T
+		<include refid="areaJoins"/>
+		WHERE T.deleted = 0 and T.uppk is not null
+		ORDER BY T.id
+	</select>
+	
+	<!-- <select id="findByParentIdsLike" resultType="SysArea">
+		SELECT
+			T.id,
+			T.pid AS "parent.id"
+		FROM sys_area T
+		WHERE T.deleted = 0 AND T.parent_ids LIKE #{parentIds}
+		ORDER BY T.id
+	</select> -->
+	
+	<select id="findListByPage" resultType="SysArea">
+		SELECT 
+			<include refid="areaColumns"/>
+		FROM sys_area T
+		<include refid="areaJoins"/>
+		<if test="condition!=null">
+			<where>
+				<!-- <if test="condition.model!=null">
+					<if test="condition.model.serialno!=null and condition.model.serialno!=''">
+						T.serialno LIKE '${condition.model.serialno}%'
+					</if>
+				</if>
+				<if test="condition.createtime_start != null">
+					T.createtime > #{condition.createtime_start}
+				</if>
+				<if test="condition.createtime_end != null">
+					T.createtime > #{condition.createtime_end}
+				</if> -->
+			</where>
+			order by T.ID DESC
+			<include refid="Sql.pager" />
+		</if>
+	</select>
+	<select id="getCountByCondition" resultType="int">
+		SELECT 
+			count(*)
+		FROM sys_area T
+		<include refid="areaJoins"/>
+		<if test="condition!=null">
+			<where>
+				<!-- <if test="condition.model!=null">
+					<if test="condition.model.serialno!=null and condition.model.serialno!=''">
+						T.serialno LIKE '${condition.model.serialno}%'
+					</if>
+				</if>
+				<if test="condition.createtime_start != null">
+					T.createtime > #{condition.createtime_start}
+				</if>
+				<if test="condition.createtime_end != null">
+					T.createtime > #{condition.createtime_end}
+				</if> -->
+			</where>
+		</if>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO sys_area(
+			id, 
+			areacode, 
+			areaname, 
+			uppk,
+			level, 
+			leveltype, 
+			citycode,
+			zipcode, 
+			mergername, 
+			lng,
+			lat, 
+			pinyin, 
+			shortname,
+			deleted
+		) VALUES (
+			#{id}, 
+			#{areacode}, 
+			#{areaname}, 
+			#{parent.id},
+			#{level}, 
+			#{leveltype}, 
+			#{citycode},
+			#{zipcode}, 
+			#{mergername}, 
+			#{lng},
+			#{lat}, 
+			#{pinyin}, 
+			#{shortname},
+			#{deleted}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE sys_area SET 
+			uppk = #{parent.id}, 
+			areaname = #{areaname}, 
+		WHERE id = #{id}
+	</update>
+	
+<!-- 	<update id="updateParentIds">
+		UPDATE sys_area SET 
+			pid = #{parent.id}, 
+			parent_ids = #{parentIds}
+		WHERE id = #{id}
+	</update> -->
+	
+	<update id="deleteById">
+		UPDATE sys_area SET 
+			deleted = 1
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

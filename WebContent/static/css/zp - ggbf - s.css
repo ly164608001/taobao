@@ -1,0 +1,104 @@
+/**********ggbf_s********/
+.ggbf_s {
+	width:1002px;
+	height:120px;
+	margin:0 auto;
+	font-family:"microsoft yahei";
+	}
+.ggbf_s_s {
+	margin:38px 5px 0 0;
+	float:right;
+	display:inline-block;
+	}
+.ggbf_s_sk {
+	height:40px;
+	line-height:40px;
+	color:#666;
+	position:relative;
+	top:0px;
+	left:0px;
+	}
+.ggbf_s_sk span.sp_gjc {
+	width:50px;
+	display:inline-block;
+	vertical-align:middle;
+	}
+.ggbf_s_sk input {
+	vertical-align:middle;
+	display:inline-block;
+	}
+.ggbf_s_sk input[type=text] {
+	width:268px;
+	padding:0 5px 0 92px;
+	height:38px;
+	line-height:38px;
+	border:1px solid #ccc;
+	border-right:none;
+	outline:none;
+	font-size:14px;
+	color:#999;
+	}
+.ggbf_s_sk input[type=button] {
+	background:#ff702d;
+	width:104px;
+	height:40px;
+	line-height:40px;
+	border:none;
+	outline:none;
+	cursor:pointer;
+	font-size:14px;
+	color:#fff;
+	}
+.ggbf_s_sk input[type=button]:hover {
+	background:#ff591f;
+	}
+.ggbf_s_sk input[type=button].in_qg {
+	background:#333;
+	}
+.ggbf_s_sk input[type=button].in_qg:hover {
+	background:#222;
+	}
+.ggbf_s_st {
+	width:560px;
+	height:30px;
+	line-height:30px;
+	padding:0 0 0 50px;
+	color:#999;
+	overflow:hidden;
+	}
+.ggbf_s_st a {
+	margin-right:6px;
+	color:#666;
+	}
+.ggbf_s_st a:hover {
+	text-decoration:underline;
+	}
+.ggbf_s_logo {
+	margin:12px 0 0 0;
+	float:left;
+	display:inline-block;
+	}
+.ggbf_s_dz {
+	width:86px;
+	height:38px;
+	line-height:38px;
+	border-right:1px solid #ccc;
+	position:absolute;
+	top:1px;
+	left:51px;
+	}
+.ggbf_s_dz a {
+	background:url(http://image.lxhrainynet.com/images/zp/ggbf_s_dz.png) no-repeat 64px 16px;
+	width:66px;
+	height:38px;
+	line-height:38px;
+	padding:0 20px 0 3px;
+	font-size:14px;
+	color:#333;
+	text-align:center;
+	overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+	display:inline-block;
+	}
+/**********ggbf_s end********/

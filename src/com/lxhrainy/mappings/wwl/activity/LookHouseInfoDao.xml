@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lxhrainy.myjz.admin.activity.dao.ILookHouseInfoDao">
+    
+	<sql id="LookHouseInfoColumns">
+		T.id AS "id",
+		house.id AS "house.id",
+		house.name AS "house.name",
+		house.detailaddress AS "house.detailaddress",
+		house.price AS "house.price",
+		house.housespic AS "house.housespic",
+		T. name AS "name",
+		T.starttime AS "starttime",
+		T.endtime AS "endtime",
+		T.createuser AS "createuser.id",
+		user.username AS "createuser.username",
+		atu.applytime AS "atUser.applytime",
+		atu.id AS "atUser.id",
+		atu.status AS "atUser.status",
+		T.createtime AS "createtime",
+		T.type AS "type",
+		T.applytimes AS "applytimes",
+		T.applytimee AS "applytimee",
+		T.address AS "address",
+		T.personnum AS "personnum",
+		T.activitycontent AS "activitycontent",
+		T.status AS "status",
+		T.applynum AS "applynum",
+		T.deleted AS "deleted"
+	</sql>
+	
+    
+	<sql id="LookHouseInfoJoins">
+		LEFT JOIN user_info user ON T.createuser=user.id
+		LEFT JOIN activity_thematic_user atu ON T.id=atu.activityid
+		LEFT JOIN houses_info house ON house.id=T.housesid
+	</sql>
+    
+	<select id="getById" resultType="LookHouseInfo">
+		SELECT 
+			<include refid="LookHouseInfoColumns"/>
+		FROM activity_thematic T
+		<include refid="LookHouseInfoJoins"/>
+		WHERE T.id = #{id}
+	</select>
+	
+	<select id="findListByPage" resultType="LookHouseInfo">
+		SELECT 
+			<include refid="LookHouseInfoColumns"/>
+		FROM activity_thematic T
+		<include refid="LookHouseInfoJoins"/>
+		<where>
+			T.deleted=0 AND atu.deleted=0 AND house.deleted=0
+			<if test="condition!=null">
+				<if test="condition.userid!=null and condition.userid!=''">
+					AND	atu.userid=#{condition.userid}
+				</if>
+				<if test="condition.createtime_start!=null and condition.createtime_start!=''">
+					AND	atu.applytime &gt; #{condition.createtime_start}
+				</if>
+				<if test="condition.createtime_end!=null and condition.createtime_end!=''">
+					AND	atu.applytime &lt; #{condition.createtime_end}
+				</if>
+				<if test="condition.type!=null and condition.type!=''"> 
+					AND  T.type=#{condition.type} 
+				</if>
+				<if test="condition.status!=null"> 
+					AND  atu.status=#{condition.status} 
+				</if>
+			</if>
+		</where>	
+			order by T.ID DESC
+		<include refid="Sql.pager" />
+		
+	</select>
+	<select id="getCountByCondition" resultType="int">
+		SELECT 
+			count(*)
+		FROM activity_thematic T
+		<include refid="LookHouseInfoJoins"/>
+		<where>
+			T.deleted=0 AND atu.deleted=0 AND house.deleted=0
+			<if test="condition!=null">
+				<if test="condition.userid!=null and condition.userid!=''">
+					AND	atu.userid=#{condition.userid}
+				</if>
+				<if test="condition.createtime_start!=null and condition.createtime_start!=''">
+					AND	atu.applytime &gt; #{condition.createtime_start}
+				</if>
+				<if test="condition.createtime_end!=null and condition.createtime_end!=''">
+					AND	atu.applytime &lt; #{condition.createtime_end}
+				</if>
+				<if test="condition.type!=null and condition.type!=''"> 
+					AND  T.type=#{condition.type} 
+				</if>
+				<if test="condition.status!=null"> 
+					AND  atu.status=#{condition.status} 
+				</if>
+			</if>
+		</where>	
+	</select>
+	
+	<select id="findAllList" resultType="LookHouseInfo">
+		SELECT 
+			<include refid="LookHouseInfoColumns"/>
+		FROM activity_thematic T
+		<include refid="LookHouseInfoJoins"/>
+		<where>
+			T.deleted=0 AND atu.deleted=0 AND house.deleted=0
+			<if test="condition!=null">
+				<if test="condition.userid!=null and condition.userid!=''">
+					AND	atu.userid=#{condition.userid}
+				</if>
+				<if test="condition.createtime_start!=null and condition.createtime_start!=''">
+					AND	T.starttime &gt; #{condition.createtime_start}
+				</if>
+				<if test="condition.createtime_end!=null and condition.createtime_end!=''">
+					AND	T.starttime &lt; #{condition.createtime_end}
+				</if>
+				<if test="condition.type!=null and condition.type!=''"> 
+					AND  T.type=#{condition.type} 
+				</if>
+				<if test="condition.status!=null"> 
+					AND  atu.status=#{condition.status} 
+				</if>
+			</if>
+		</where>			
+	</select>
+	
+	
+</mapper>

@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lxhrainy.myjz.admin.order.dao.IOrderDebookDao">
+    
+	<sql id="orderDebookRecordColumns">
+		T.id AS "id",
+		T.orderid AS "orderid",
+		T.userid AS "userid",
+		T.reasonid AS "reasonid",
+		T.money AS "money",
+		T.description AS "description",
+		T.createtime AS "createtime",
+		T.handleuser AS "handleuser",
+		T.handletime AS "handletime",
+		T.status AS "status",
+		T.refusereasonid AS "refusereasonid",
+		T.refusedescription AS "refusedescription",
+		T.isplatforminto AS "isplatforminto"
+	</sql>
+	
+	<sql id="orderDebookRecordJoins">
+	</sql>
+    
+    <sql id="where">
+		<if test="condition!=null">
+			<where>
+			    1 = 1 
+				<if test="condition.model!=null">
+					<if test="condition.model.orderid!=null">
+						AND T.orderid = #{condition.model.orderid}
+					</if>
+				</if>
+			</where>
+		</if>
+	</sql>
+	
+	<select id="getById" resultType="OrderDebookRecord">
+		SELECT 
+			<include refid="orderDebookRecordColumns"/>
+		FROM order_debook_record T
+		<include refid="orderDebookRecordJoins"/>
+		WHERE T.id = #{id}
+	</select>
+	
+	<select id="findListByPage" resultType="OrderDebookRecord">
+		SELECT 
+			<include refid="orderDebookRecordColumns"/>
+		FROM order_debook_record T
+		<include refid="orderDebookRecordJoins"/>
+		<include refid="where"/>
+		order by T.ID DESC
+			<include refid="Sql.pager" />
+	</select>
+	
+	<select id="findAllList" resultType="OrderDebookRecord">
+		SELECT 
+			<include refid="orderDebookRecordColumns"/>
+		FROM order_debook_record T
+		<include refid="orderDebookRecordJoins"/>
+		<include refid="where"/>
+		order by T.ID DESC
+	</select>
+	
+	<select id="getCountByCondition" resultType="int">
+		SELECT COUNT(1)
+		FROM order_debook_record T
+		<include refid="orderDebookRecordJoins"/>
+		<include refid="where"/>
+	</select>
+	
+	<select id="getLastByOrder" resultType="OrderDebookRecord">
+		SELECT 
+			<include refid="orderDebookRecordColumns"/>
+		FROM order_debook_record T
+		WHERE id = (
+			SELECT MAX(id) FROM order_debook_record 
+			WHERE orderid = #{orderid}
+		)
+	</select>
+	
+	
+	<insert id="insert">
+		INSERT INTO order_debook_record(
+			id,
+			orderid,
+			userid,
+			reasonid,
+			money,
+			description,
+			createtime,
+			handleuser,
+			handletime,
+			status,
+			refusereasonid,
+			refusedescription,
+			isplatforminto
+		) VALUES (
+			#{id},
+			#{orderid},
+			#{userid},
+			#{reasonid},
+			#{money},
+			#{description},
+			#{createtime},
+			#{handleuser},
+			#{handletime},
+			#{status},
+			#{refusereasonid},
+			#{refusedescription},
+			#{isplatforminto}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE order_debook_record SET 	
+			orderid = #{orderid},
+			userid = #{userid},
+			reasonid = #{reasonid},
+			money = #{money},
+			description = #{description},
+			createtime = #{createtime},
+			handleuser = #{handleuser},
+			handletime = #{handletime},
+			status = #{status},
+			refusereasonid = #{refusereasonid},
+			refusedescription = #{refusedescription},
+			isplatforminto = #{isplatforminto}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="deleteById">
+		update order_debook_record set 
+			deleted=1
+		WHERE id = #{id}
+	</update>
+	
+	<update id="updateStatus">
+		update order_debook_record set 
+			status=#{status} 
+		WHERE id = #{id}
+	</update>
+	
+	<update id="audit">
+		update order_debook_record set
+		  <if test="model.refusereasonid!=null">
+		  	refusereasonid=#{model.refusereasonid},
+		  </if>
+		  <if test="model.refusedescription!=null and model.refusedescription!=''">
+		  	refusedescription=#{model.refusedescription},
+		  </if>
+		   	handleuser = #{model.handleuser},
+			handletime = #{model.handletime},
+			status=#{model.status}
+		  
+		WHERE id = #{model.id}
+	</update>
+	
+</mapper>

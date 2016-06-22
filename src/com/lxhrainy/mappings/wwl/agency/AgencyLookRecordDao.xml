@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lxhrainy.myjz.admin.agency.dao.IAgencyLookDao">
+    
+	<sql id="agencyLookRecordColumns">
+		T.id AS "id",
+		T.customerid AS "customerid",
+		T.housesid AS "housesid",
+		T.housestypeids AS "housestypeids",
+		T.floor AS "floor",
+		T.area AS "area",
+		T.serviceuserid AS "serviceuserid",
+		T.servicetime AS "servicetime",
+		T.createtime AS "createtime",
+		T.createuserid AS "createuserid"
+	</sql>
+	
+	<sql id="agencyLookRecordJoins">
+	</sql>
+	
+	<sql id="where">
+		<if test="condition!=null">
+			<where>
+			    1 = 1 
+				<if test="condition.model!=null">
+					<if test="condition.model.deleted!=null">
+						AND T.deleted = #{condition.model.deleted}
+					</if>
+				</if>
+			</where>
+		</if>
+	</sql>
+    
+	<select id="getById" resultType="AgencyLookRecord">
+		SELECT 
+			<include refid="agencyLookRecordColumns"/>
+		FROM agency_look_record T
+		<include refid="agencyLookRecordJoins"/>
+		WHERE T.id = #{id}
+	</select>
+	
+	<select id="findListByPage" resultType="AgencyLookRecord">
+		SELECT 
+			<include refid="agencyLookRecordColumns"/>
+		FROM agency_look_record T
+		<include refid="agencyLookRecordJoins"/>
+		<include refid="where"/>
+		order by T.ID DESC
+			<include refid="Sql.pager" />
+	</select>
+	
+	<select id="findAllList" resultType="AgencyLookRecord">
+		SELECT 
+			<include refid="agencyLookRecordColumns"/>
+		FROM agency_look_record T
+		<include refid="agencyLookRecordJoins"/>
+		<include refid="where"/>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO agency_look_record(
+			id,
+			customerid,
+			housesid,
+			housestypeids,
+			floor,
+			area,
+			serviceuserid,
+			servicetime,
+			createtime,
+			createuserid
+		) VALUES (
+			#{id},
+			#{customerid},
+			#{housesid},
+			#{housestypeids},
+			#{floor},
+			#{area},
+			#{serviceuserid},
+			#{servicetime},
+			#{createtime},
+			#{createuserid}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE agency_look_record SET 	
+			customerid = #{customerid},
+			housesid = #{housesid},
+			housestypeids = #{housestypeids},
+			floor = #{floor},
+			area = #{area},
+			serviceuserid = #{serviceuserid},
+			servicetime = #{servicetime},
+			createtime = #{createtime},
+			createuserid = #{createuserid}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="deleteById">
+		update agency_look_record set 
+			deleted=1
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

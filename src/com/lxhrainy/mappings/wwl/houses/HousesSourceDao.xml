@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lxhrainy.myjz.admin.houses.dao.IHousesSourceDao">
+
+	<sql id="baseColumn">
+		T.id AS "id",T.buildingid AS "buildingid",T.floornum AS "floornum",T.unit AS "unit",T.roomnum AS "roomnum",T.unitprice AS "unitprice",T.totalprice AS "totalprice",
+		T.buildarea AS "buildarea",T.housetypeid AS "housetypeid",T.towards AS "towards",T.status AS "status",T.modifyuser AS "modifyuser",T.modifytime AS "modifytime",
+		T.type AS "type",T.auxiliaryfacilities AS "auxiliaryfacilities",T.deleted AS "deleted"
+	</sql>
+	
+	<sql id="selectPro">
+		hi.name AS "housesBuilding.houses.name",hi.detailaddress AS "housesBuilding.houses.detailaddress",
+		
+		hb.name AS "housesBuilding.name",
+		
+		hs.floornum,hs.unit,hs.unitprice,hs.totalprice,
+		
+		ht.name AS "houseType.name",ht.roomnum AS "houseType.roomnum",ht.toiletnum AS "houseType.toiletnum",
+		ht.hallnum AS "houseType.hallnum",ht.balconynum AS "houseType.balconynum"
+	</sql>
+	
+	<sql id="joinPro">
+		LEFT JOIN houses_building hb ON hs.buildingid = hb.id
+		LEFT JOIN houses_info hi ON hi.id = hb.housesid
+		LEFT JOIN houses_type ht ON ht.id = hs.housetypeid
+	</sql>
+	
+	<select id="findListByPage" resultType="HousesSource">
+		SELECT 
+			<include refid="baseColumn"></include>
+			,hb.name AS "housesBuilding.name" 
+		FROM 
+			houses_source T 
+		LEFT JOIN houses_building hb ON t.buildingid = hb.id
+		<if test="condition!=null">
+			<where>
+				T.deleted !=1
+				<if test="condition.model!=null">
+					<if test="condition.model.housesBuilding.name!=null and condition.model.housesBuilding.name!=''">
+						and hb.name LIKE '%${condition.model.housesBuilding.name}%'
+					</if>
+				</if>
+			</where>
+			ORDER BY T.id DESC
+			<include refid="Sql.pager" />
+		</if>
+	</select>
+	
+	<select id="getCountByCondition" resultType="int">
+		SELECT 
+			count(*)
+		FROM 
+			houses_source T 
+		LEFT JOIN houses_building hb ON t.buildingid = hb.id
+		<if test="condition!=null">
+			<where>
+				T.deleted !=1
+				<if test="condition.model!=null">
+					<if test="condition.model.name!=null and condition.model.name!=''">
+						AND hb.name LIKE '%${condition.model.housesBuilding.name}%'
+					</if>
+				</if>
+			</where>
+		</if>
+	</select>
+	
+	
+	<!--根据ID获取详情  -->
+	<select id="getById" resultType="HousesSource">
+		SELECT 
+			<include refid="baseColumn"></include>
+			,T.buildingid AS "housesBuilding.id",T.housetypeid AS "houseType.id"  
+		FROM 
+			houses_source T 
+		 WHERE T.id = #{id}
+	</select>
+	
+	
+	<!-- 通过房源id获取所有信息(房源、楼栋、楼盘基本、楼盘详细) -->
+	<select id="getInfoById" resultType="HousesSource">
+		SELECT 
+		<include refid="selectPro"></include>
+		FROM 
+			houses_source hs 
+		<include refid="joinPro"></include>
+		WHERE  
+			hs.id = #{id}
+	</select>
+	
+	<update id="deleteById">
+		UPDATE 
+			houses_source 
+		SET 
+			deleted=1
+		WHERE 
+			id = #{id}
+	</update>
+	
+</mapper>

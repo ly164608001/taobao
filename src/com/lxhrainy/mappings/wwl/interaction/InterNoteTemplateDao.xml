@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lxhrainy.myjz.admin.interaction.dao.IInterNoteTemplateDao">
+	
+	
+	<sql id="interNoteTemplateColumns">
+		T.id AS "id",
+		T.name AS "name",
+		T.content AS "content",
+		T.createtime AS "createtime",
+		T.createuser AS "createuser",
+		T.deleted AS "deleted"	
+	</sql>
+	
+    
+	<sql id="interNoteTemplateJoins">
+	
+	</sql>
+    
+	<select id="getById" resultType="InteractionNoteTemplate">
+		SELECT 
+			<include refid="interNoteTemplateColumns"/>
+		FROM interaction_note_template T
+		<include refid="interNoteTemplateJoins"/>
+		WHERE T.id = #{id}  
+		AND T.deleted = 0
+	</select>
+	
+	<select id="findListByPage" resultType="InteractionNoteTemplate">
+		SELECT 
+			<include refid="interNoteTemplateColumns"/>
+		FROM interaction_note_template T
+		<include refid="interNoteTemplateJoins"/>
+		<if test="condition!=null">
+			<where>
+			T.deleted = 0 
+				<if test="condition.model!=null">
+					<if test="condition.model.name!=null and condition.model.name!=''">
+						AND T.name LIKE '${condition.model.name}%' 
+					</if>
+				</if>
+			</where>
+			order by T.ID DESC
+			<include refid="Sql.pager" />
+		</if>
+	</select>
+	
+	<select id="getCountByCondition" resultType="int">
+		SELECT 
+			count(*)
+		FROM interaction_note_template T
+		<include refid="interNoteTemplateJoins"/>
+		<if test="condition!=null">
+			<where>
+			T.deleted = 0 
+				<if test="condition.model!=null">
+					<if test="condition.model.name!=null and condition.model.name!=''">
+						AND	T.name LIKE '${condition.model.name}%'
+					</if>
+					
+				</if>
+			</where>
+		</if>
+	</select>
+	
+	<select id="findAllList" resultType="InteractionNoteTemplate">
+		SELECT 
+			<include refid="interNoteTemplateColumns"/>
+		FROM customer_info T
+		<include refid="interNoteTemplateJoins"/>
+		<where>
+		T.deleted = 0
+			<if test="condition!=null">
+				<if test="condition.model!=null">
+					<if test="condition.model.name!=null and condition.model.name!=''">
+						AND T.name LIKE '${condition.model.name}%'  
+					</if>
+				</if>
+			</if>
+		</where>		
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO interaction_note_template(
+			name,
+			content,
+			createtime,
+			createuser,
+			deleted
+		) VALUES (
+			#{name},
+			#{content},
+			#{createtime},
+			#{createuser},
+			#{deleted}
+		)
+		<!-- 配置Mysql主键自动增长 -->
+		<selectKey resultType="int" keyProperty="id">
+			select
+			LAST_INSERT_ID() as value  
+		</selectKey>
+	</insert>
+	
+	<update id="update">
+		UPDATE interaction_note_template
+		<set>
+			<if test="name !=null">
+				name = #{name},
+			</if>
+			<if test="content != null">
+				content = #{content},
+			</if>
+			<if test="createtime != null">
+				createtime = #{createtime},
+			</if>
+			<if test="createuser != null">
+				createuser = #{createuser},
+			</if>
+			<if test="deleted != null">
+				deleted = #{deleted},
+			</if>
+		</set>
+		WHERE id = #{id}
+	</update>
+	
+	<update id="deleteById">
+		update interaction_note_template set 
+			deleted=1
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

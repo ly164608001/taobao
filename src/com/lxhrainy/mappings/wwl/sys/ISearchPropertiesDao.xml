@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lxhrainy.myjz.admin.properties.dao.ISearchPropertiesDao">
+ 
+ 	<resultMap type="com.lxhrainy.myjz.admin.properties.model.SearchProperties" id="SearchProperties">
+ 		<id property="id" column="id" />
+ 		<result column="area.id" property="area.id"/>
+ 		<result column="loopline" property="loopline"/>
+ 		<result column="metro" property="metro"/>
+ 		<result column="priceids" property="priceids"/>
+ 		<result column="totalpriceids" property="totalpriceids"/>
+ 		<result column="spaceids" property="spaceids"/>
+ 		<result column="deleted" property="deleted"/>
+ 		<result column="area.areaname" property="area.areaname"/>
+ 	</resultMap>
+ 	
+	<sql id="searchPropertiesColums">
+		S.id AS "id",
+		S.areaid AS "area.id",
+		S.loopline AS "loopline",
+		S.metro AS "metro",
+		S.priceids AS "priceids",
+		S.totalpriceids AS "totalpriceids",
+		S.spaceids AS "spaceids",
+		S.deleted AS "deleted",
+		area.areaname AS "area.areaname"
+	</sql>
+	
+	<sql id="searchPropertiesJoins">
+		LEFT JOIN sys_area area ON area.id = S.areaid
+    </sql>
+    
+	<select id="getById" resultType="SearchProperties">
+		SELECT 
+			<include refid="searchPropertiesColums"/>
+		FROM search_properties S
+		<include refid="searchPropertiesJoins"/>
+		WHERE S.id = #{id}
+	</select>
+	
+	<select id="findListByPage" resultMap="SearchProperties">
+		SELECT 
+			<include refid="searchPropertiesColums"/>
+		FROM search_properties S
+		<include refid="searchPropertiesJoins"/>
+		<if test="condition!=null">
+			<where>
+				S.deleted=0
+			</where>
+			order by S.ID DESC
+			<include refid="Sql.pager" />
+		</if>
+	</select>
+	<select id="getCountByCondition" resultType="int">
+		SELECT 
+			count(*)
+		FROM search_properties s
+		<if test="condition!=null">
+			<where>
+				s.deleted = 0
+			</where>
+		</if>
+	</select>
+	
+	<!-- <select id="findAllList" resultType="SearchProperties">
+		SELECT 
+			<include refid="searchPropertiesColums"/>
+		FROM search_properties S
+		<include refid="searchPropertiesJoins"/>
+		<where>
+			S.deleted=0
+		</where>		
+	</select> -->
+	
+	<insert id="insert">
+		INSERT INTO search_properties (
+		id, 
+		areaid, 
+		loopline, 
+      	metro,
+       	priceids,
+       	totalpriceids, 
+      	spaceids,
+     	deleted
+     	)VALUES  (
+     	#{id},
+     	(SELECT id FROM sys_area WHERE sys_area.areaname=#{area.areaname}),
+     	#{loopline}, 
+      	#{metro},
+       	#{priceids},
+        #{totalpriceids}, 
+      	#{spaceids},
+      	#{deleted}
+      )
+		<!-- 配置Mysql主键自动增长 -->
+		<selectKey resultType="int" keyProperty="id">
+			select
+			LAST_INSERT_ID() as value  
+		</selectKey>
+	</insert>
+		
+	 <update id="update" >
+    update search_properties
+    <set >
+      <if test="area != null" >
+        areaid = (SELECT id FROM sys_area WHERE sys_area.areaname=#{area.areaname}),
+      </if>
+      <if test="loopline != null" >
+        loopline = #{loopline},
+      </if>
+      <if test="metro != null" >
+        metro = #{metro},
+      </if>
+      <if test="priceids != null" >
+        priceids = #{priceids},
+      </if>
+      <if test="totalpriceids != null" >
+        totalpriceids = #{totalpriceids},
+      </if>
+      <if test="spaceids != null" >
+        spaceids = #{spaceids},
+      </if>
+       <if test="deleted != null" >
+        deleted = #{deleted}
+      </if>
+    </set>
+    where id = #{id}
+  </update>
+	
+	<update id="deleteById">
+		update search_properties set 
+			deleted=1
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

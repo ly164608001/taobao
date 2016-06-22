@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lxhrainy.myjz.admin.sys.dao.ISysLogDao">
+    
+	<!-- <select id="findList" resultType="Log">
+		SELECT 
+			T.*,
+			u.id AS "createBy.id",
+			u.name AS "createBy.name",
+			c.name AS "createBy.company.name",
+			o.name AS "createBy.office.name"
+		FROM sys_log a
+		JOIN sys_user u ON u.id = T.create_by
+		JOIN sys_office c ON c.id = u.company_id
+		JOIN sys_office o ON o.id = u.office_id
+		WHERE T.create_date BETWEEN #{beginDate} AND #{endDate}
+		<if test="title != null and title != ''">
+			AND T.title LIKE 
+					<if test="dbName == 'oracle'">'%'||#{title}||'%'</if>
+					<if test="dbName == 'mssql'">'%'+#{title}+'%'</if>
+					<if test="dbName == 'mysql'">CONCAT('%', #{title}, '%')</if>
+		</if>
+		<if test="createBy != null and createBy.id != null and createBy.id != ''">
+			AND T.create_by = #{createBy.id}
+		</if>
+		<if test="requestUri != null and requestUri != ''">
+			AND T.request_uri LIKE 
+					<if test="dbName == 'oracle'">'%'||#{requestUri}||'%'</if>
+					<if test="dbName == 'mssql'">'%'+#{requestUri}+'%'</if>
+					<if test="dbName == 'mysql'">CONCAT('%', #{requestUri}, '%')</if>
+		</if>
+		<if test="exception != null and exception != ''">
+			AND T.type = #{TYPE_EXCEPTION}
+		</if>
+		ORDER BY T.create_date DESC
+	</select> -->
+	
+	<select id="findListByPage" resultType="SysLog">
+		SELECT 
+			T.*,
+			u.id AS "createuser.id",
+			u.name AS "createuser.name"
+		FROM sys_log T
+		JOIN sys_user u ON u.id = T.createuser
+		<if test="condition!=null">
+			<where>
+				<!-- <if test="condition.model!=null">
+					<if test="condition.model.serialno!=null and condition.model.serialno!=''">
+						T.serialno LIKE '${condition.model.serialno}%'
+					</if>
+				</if>
+				<if test="condition.createtime_start != null">
+					T.createtime > #{condition.createtime_start}
+				</if>
+				<if test="condition.createtime_end != null">
+					T.createtime > #{condition.createtime_end}
+				</if> -->
+			</where>
+			order by T.ID DESC
+			<include refid="Sql.pager" />
+		</if>
+	</select>
+	<select id="getCountByCondition" resultType="int">
+		SELECT 
+			count(*)
+		FROM sys_log T
+		JOIN sys_user u ON u.id = T.createuser
+		<if test="condition!=null">
+			<where>
+				<!-- <if test="condition.model!=null">
+					<if test="condition.model.serialno!=null and condition.model.serialno!=''">
+						T.serialno LIKE '${condition.model.serialno}%'
+					</if>
+				</if>
+				<if test="condition.createtime_start != null">
+					T.createtime > #{condition.createtime_start}
+				</if>
+				<if test="condition.createtime_end != null">
+					T.createtime > #{condition.createtime_end}
+				</if> -->
+			</where>
+		</if>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO sys_log(
+			id, 
+			type, 
+			title,
+			createuser, 
+			createtime, 
+			remoteip, 
+			useragent, 
+			requesturi, 
+			method, 
+			params, 
+			exception
+		) VALUES (
+			#{id}, 
+			#{type}, 
+			#{title}, 
+			#{createuser.id}, 
+			#{createtime}, 
+			#{remoteip}, 
+			#{useragent}, 
+			#{requesturi}, 
+			#{method}, 
+			#{params}, 
+			#{exception}
+		)
+	</insert>
+	
+</mapper>

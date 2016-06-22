@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lxhrainy.myjz.admin.user.dao.IUserContactsDao">
+    
+     <resultMap id="UserContacts" type="com.lxhrainy.myjz.admin.user.model.UserContacts">
+		<id property="id" column="id" />
+		<result property="name" column="name" />
+		<result property="userid" column="userid" />
+		<result property="idcard" column="idcard" />
+		<result property="phone" column="phone" />
+		<result property="createtime" column="createtime" />
+		<result property="deleted" column="deleted" />
+	</resultMap>
+	
+	<sql id="userContactsColumns">
+		T.id AS "id",
+		T.userid AS "userid",
+		T.name AS "name",
+		T.idcard AS "idcard",
+		T.phone AS "phone",
+		T.createtime AS "createtime",
+		T.deleted AS "deleted"
+	</sql>
+	
+	<sql id="userContactsJoins">
+	</sql>
+    
+    <sql id="where">
+		<if test="condition!=null">
+			<where>
+				<if test="condition.model!=null">
+					<if test="condition.model.deleted!=null">
+						T.deleted = #{condition.model.deleted}
+					</if>
+				</if>
+			</where>
+		</if>
+	</sql>
+	
+	
+	<select id="getById" resultType="UserContacts">
+		SELECT 
+			<include refid="userContactsColumns"/>
+		FROM user_contacts T
+		<include refid="userContactsJoins"/>
+		WHERE T.id = #{id}
+	</select>
+	
+	<select id="findListByPage" resultType="UserContacts">
+		SELECT 
+			<include refid="userContactsColumns"/>
+		FROM user_contacts T
+		<include refid="userContactsJoins"/>
+		<if test="condition!=null">
+			<include refid="where"/>
+			order by T.ID DESC
+			<include refid="Sql.pager" />
+		</if>
+	</select>
+	
+	<select id="findAllList" resultType="UserContacts">
+		SELECT 
+			<include refid="userContactsColumns"/>
+		FROM user_contacts T
+		<include refid="userContactsJoins"/>
+		<include refid="where"/>
+	</select>
+	
+	<select id="getCountByCondition" resultType="int">
+		SELECT 
+			count(*)
+		FROM user_contacts T
+		<include refid="userContactsJoins"/>
+		<include refid="where"/>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO user_contacts(
+			id,
+			userid,
+			name,
+			idcard,
+			phone,
+			createtime,
+			deleted
+		) VALUES (
+			#{id},
+			#{userid},
+			#{name},
+			#{idcard},
+			#{phone},
+			#{createtime},
+			#{deleted}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE user_contacts SET 	
+		<if test="userid !=null">
+			userid = #{userid},
+			</if>
+			<if test="name !=null and name !=''">
+			name = #{name},
+			</if>
+			<if test="idcard !=null and idcard !=''">
+			idcard = #{idcard},
+			</if>
+			<if test="phone !=null and phone !=''">
+			phone = #{phone},
+			</if>
+			<if test="createtime !=null">
+			createtime = #{createtime},
+			</if>
+			<if test="deleted !=null">
+			deleted = #{deleted}
+			</if>
+		WHERE id = #{id}
+	</update>
+	
+	<update id="deleteById">
+		update user_contacts set 
+			deleted=1
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

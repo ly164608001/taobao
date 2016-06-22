@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lxhrainy.core.sys.dao.ISysDictDao">
+    
+	<select id="getById" resultType="SysDict">
+		SELECT 
+			* 
+		FROM sys_dict 
+		WHERE id = #{id}
+	</select>
+	
+	
+	<select id="findAllList" resultType="SysDict">
+		SELECT 
+			* 
+		FROM sys_dict 
+		WHERE deleted = 0 
+		ORDER BY type, sort, updatetime DESC
+	</select>
+	
+	<select id="findTypeList" resultType="SysDict">
+		SELECT 
+			type 
+		FROM sys_dict 
+		WHERE deleted = 0 
+		GROUP BY type
+		ORDER BY type
+	</select>
+	
+	<select id="findListByPage" resultType="SysDict">
+		SELECT 
+			T.*,
+			cuser.id as "createuser.id",
+			cuser.username as "createuser.username",
+			uuser.id as "updateuser.id",
+			uuser.username as "updateuser.username"
+		FROM sys_dict T
+		left join user_info cuser on cuser.id = T.createuser
+		left join user_info uuser on uuser.id = T.updateuser
+		<if test="condition!=null">
+			<where>
+				<!-- <if test="condition.model!=null">
+					<if test="condition.model.serialno!=null and condition.model.serialno!=''">
+						T.serialno LIKE '${condition.model.serialno}%'
+					</if>
+				</if>
+				<if test="condition.createtime_start != null">
+					T.createtime > #{condition.createtime_start}
+				</if>
+				<if test="condition.createtime_end != null">
+					T.createtime > #{condition.createtime_end}
+				</if> -->
+			</where>
+			order by T.ID DESC
+			<include refid="Sql.pager" />
+		</if>
+	</select>
+	<select id="getCountByCondition" resultType="int">
+		SELECT 
+			count(*)
+		FROM sys_dict T
+		left join user_info cuser on cuser.id = T.createuser
+		left join user_info uuser on uuser.id = T.updateuser
+		<if test="condition!=null">
+			<where>
+				<!-- <if test="condition.model!=null">
+					<if test="condition.model.serialno!=null and condition.model.serialno!=''">
+						T.serialno LIKE '${condition.model.serialno}%'
+					</if>
+				</if>
+				<if test="condition.createtime_start != null">
+					T.createtime > #{condition.createtime_start}
+				</if>
+				<if test="condition.createtime_end != null">
+					T.createtime > #{condition.createtime_end}
+				</if> -->
+			</where>
+		</if>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO sys_dict(
+			id, 
+			value, 
+			label, 
+			type, 
+			description, 
+			sort, 
+			<if test="createuser!=null and createuser.id!=null">
+			createuser, 
+			</if>
+			createtime,
+			<if test="updateuser!=null and updateuser.id!=null">
+			updateuser, 
+			</if> 
+			updatetime, 
+			remarks, 
+			deleted
+		) VALUES (
+			#{id}, 
+			#{value}, 
+			#{label}, 
+			#{type}, 
+			#{description}, 
+			#{sort}, 
+			<if test="createuser!=null and createuser.id!=null">
+			#{createuser.id}, 
+			</if>
+			#{createtime}, 
+			<if test="updateuser!=null and updateuser.id!=null">
+			#{updateuser.id}, 
+			</if>
+			#{updatetime}, 
+			#{remarks}, 
+			#{deleted}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE sys_dict SET 
+			value = #{value}, 
+			label = #{label}, 
+			type = #{type}, 
+			description = #{description}, 
+			sort = #{sort}, 
+			<if test="updateuser!=null and updateuser.id!=null">
+			updateuser = #{updateuser.id}, 
+			</if>
+			updatetime = #{updatetime}, 
+			remarks = #{remarks}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="deleteById">
+		UPDATE sys_dict SET 
+			deleted = 1
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

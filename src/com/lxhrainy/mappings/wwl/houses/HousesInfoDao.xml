@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lxhrainy.myjz.admin.houses.dao.IHousesInfoDao">
+	<sql id="baseColumn">
+		T.id,T.name,T.housespic,T.certificatepic,T.discounttype,T.discountvalue,T.status,T.classid,T.price,T.estatetypeids,T.location,
+		T.detailaddress,T.longitude,T.latitude,T.createtime,T.createuser,T.auditor,T.audittime,T.auditmemo,T.apartmentpic,T.villapic,T.modifyuser,
+		T.modifytime,T.soldoutuser,T.soldouttime,T.deleted
+	</sql>
+	
+	<select id="findListByPage" resultType="HousesInfo">
+		SELECT 
+			<include refid="baseColumn"></include>
+		FROM 
+			houses_info T
+		<if test="condition!=null">
+			<where>
+				T.deleted !=1
+				<if test="condition.model!=null">
+					<if test="condition.model.name!=null and condition.model.name!=''">
+						and T.name LIKE '%${condition.model.name}%'
+					</if>
+					<if test="condition.model.status!=null and condition.model.status!=''">
+						and T.status != ${condition.model.status}
+					</if>
+				</if>
+			</where>
+			ORDER BY T.id DESC
+			<include refid="Sql.pager" />
+		</if>
+	</select>
+	
+	<select id="getCountByCondition" resultType="int">
+		SELECT 
+			count(*)
+		FROM 
+			houses_info T
+		<if test="condition!=null">
+			<where>
+				T.deleted !=1
+				<if test="condition.model!=null">
+					<if test="condition.model.name!=null and condition.model.name!=''">
+						AND T.name LIKE '%${condition.model.name}%'
+					</if>
+				</if>
+			</where>
+		</if>
+	</select>
+	
+	<select id="findAllList" resultType="HousesInfo">
+		SELECT 
+			<include refid="baseColumn"></include>
+		FROM 
+			houses_info T
+		<where>
+			<if test="condition!=null">
+				<if test="condition.model!=null">
+					<if test="condition.model.name!=null and condition.model.name!=''">
+						T.name LIKE '${condition.model.name}%'
+					</if>
+				</if>
+			</if>
+		</where>		
+	</select>
+	
+
+	
+	<!--根据ID获取详情  -->
+	<select id="getById" resultType="HousesInfo">
+		SELECT 
+			<include refid="baseColumn"></include>
+		FROM 
+			houses_info T
+		WHERE 
+			T.id = #{id}
+	</select>
+	
+<!-- 根据ID删除楼盘信息 -->
+	<update id="deleteById">
+		UPDATE 
+			houses_info 
+		SET 
+			deleted=1
+		WHERE 
+			id = #{id}
+	</update>
+	
+	<!-- 根据楼盘名字获取楼盘信息 -->
+	<select id="getByName" resultType="HousesInfo">
+		SELECT 
+			T.id,
+			T.createuser as 'createuser.id',
+			T.name
+		FROM 
+			houses_info T
+		<if test="name != null and name != ''">
+			WHERE 
+				T.name = #{name}
+		</if>
+	</select>
+	
+	<!-- 插入楼盘信息 -->
+	<insert id="insert" >
+		<!-- 配置Mysql主键自动增长 -->
+		<selectKey resultType="int" keyProperty="id" order="BEFORE">
+			SELECT 
+				auto_increment AS id 
+			FROM 
+				information_schema.tables    
+    		WHERE 
+    			table_name='houses_info'
+		</selectKey>
+		INSERT INTO 
+			houses_info (
+				id,
+				name,
+		       	housespic,
+		        certificatepic, 
+		        discounttype,
+		        discountvalue,
+		        status,
+		        classid,
+		        price,
+		        estatetypeids,
+		        location,
+		        detailaddress,
+		        longitude,
+		        latitude,
+		        createtime,
+		      	createuser,
+		       	auditor,
+		       	audittime,
+		       	auditmemo,
+		       	apartmentpic,
+		       	villapic,
+		       	modifyuser,
+		       	modifytime,
+		       	soldoutuser,
+		       	soldouttime,
+		        deleted
+			)
+		VALUES (
+	    	#{id},
+			#{name},
+	       	#{housespic},
+	        #{certificatepic}, 
+	        #{discounttype},
+	        #{discountvalue},
+	        #{status},
+	        #{classid},
+	        #{price},
+	        #{estatetypeids},
+	        #{location},
+	        #{detailaddress},
+	        #{longitude},
+	        #{latitude},
+	        #{createtime},
+	      	#{createuser},
+	       	#{auditor},
+	       	#{audittime},
+	       	#{auditmemo},
+	       	#{apartmentpic},
+	       	#{villapic},
+	       	#{modifyuser},
+	       	#{modifytime},
+	       	#{soldoutuser},
+	       	#{soldouttime},
+	        #{deleted}
+	      )
+	</insert>
+	<!-- 更新楼盘基本信息 -->
+	<update id="update">
+		UPDATE 
+			houses_info 
+		<set>
+		<if test="name!=null and name !=''">
+			name = #{name},
+		</if>
+		<if test="housespic!=null and housespic!=''">
+			housespic = #{housespic},
+		</if>
+		<if test="certificatepic!=null and certificatepic !='' ">
+			certificatepic = #{certificatepic},
+		</if>
+		<if test="discounttype!=null and discounttype !=''" >
+			discounttype = #{discounttype},
+		</if>
+		<if test="discountvalue !=null and discountvalue !=''">
+			discountvalue = #{discountvalue},
+		</if>
+		<if test="status !=null " >
+			status = #{status},
+		</if>
+		<if test="classid !=null and classid !='' ">
+			classid = #{classid},
+		</if>
+		<if test="price !=null and price !=''">
+			price = #{price},
+		</if>
+		<if test="estatetypeids !=null and estatetypeids !=''">
+			estatetypeids = #{estatetypeids},
+		</if>
+		<if test="location !=null and location !=''">
+			location = #{location},
+		</if>
+		<if test="detailaddress !=null and detailaddress !=''">
+			detailaddress = #{detailaddress},
+		</if>
+		<if test="longitude !=null and longitude !=''">
+			longitude = #{longitude},
+		</if>
+		<if test="latitude !=null and latitude !=''">
+			latitude = #{latitude},
+		</if>
+		<if test="createtime !=null and createtime !=''">
+			createtime = #{createtime},
+		</if>
+		<if test="createuser !=null and createuser !=''">
+			createuser = #{createuser},
+		</if>
+		<if test="auditor !=null and auditor!=''">
+			auditor = #{auditor},
+		</if>
+		<if test="audittime !=null and audittime !=''">
+			audittime = #{audittime},
+		</if>
+		<if test="audittime !=null and audittime !=''">
+			audittime = #{audittime},
+		</if>
+		<if test="apartmentpic !=null and apartmentpic !=''">
+			apartmentpic = #{apartmentpic},
+		</if>
+		<if test="villapic !=null and villapic != ''">
+			villapic = #{villapic},
+		</if>
+		<if test="modifyuser !=null and modifyuser !=''">
+			modifyuser = #{modifyuser},
+		</if>
+		<if test="modifytime !=null and modifytime !=''">
+			modifytime = #{modifytime},
+		</if>
+		<if test="soldoutuser !=null and soldoutuser !=''">
+			soldoutuser = #{soldoutuser},
+		</if>
+		<if test="soldouttime !=null and soldouttime !=''">
+			soldouttime = #{soldouttime},
+		</if>
+		<if test="deleted !=null ">
+			deleted = #{deleted},
+		</if>
+	</set>
+		WHERE 
+			id = #{id}
+	</update>
+</mapper>

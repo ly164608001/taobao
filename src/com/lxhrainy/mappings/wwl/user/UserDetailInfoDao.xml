@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lxhrainy.myjz.admin.user.dao.IUserDetailInfoDao">
+    
+    <resultMap id="UserDetailInfo" type="com.lxhrainy.myjz.admin.user.model.UserDetailInfo">
+		<id property="id" column="id" />
+		<result property="zipcode" column="zipcode" />
+		<result property="userid" column="userid" />
+		<result property="sex" column="sex" />
+		<result property="birthday" column="birthday" />
+		<result property="bloodtype" column="bloodtype" />
+		<result property="birthplace" column="birthplace" />
+		<result property="apartment" column="apartment" />
+		<result property="personsesc" column="personsesc" />
+		<result property="educationdegree" column="educationdegree" />
+		<result property="job" column="job" />
+		<result property="position" column="position" />
+		<result property="contactaddress" column="contactaddress" />
+		<result property="email" column="email" />
+		<result property="qq" column="qq" />
+		<result property="realname" column="realname" />
+		<result property="certificatetype" column="certificatetype" />
+		<result property="certificateno" column="certificateno" />
+		<result property="modifytime" column="modifytime" />
+		<result property="deleted" column="deleted" />
+	</resultMap>
+	
+	
+	<sql id="userDetailInfoColumns">
+		T.id AS "id",
+		T.userid AS "userid",
+		T.zipcode AS "zipcode",
+		T.sex AS "sex",
+		T.birthday AS "birthday",
+		T.bloodtype AS "bloodtype",
+		T.birthplace AS "birthplace",
+		T.apartment AS "apartment",
+		T.personsesc AS "personsesc",
+		T.educationdegree AS "educationdegree",
+		T.job AS "job",
+		T.position AS "position",
+		T.contactaddress AS "contactaddress",
+		T.email AS "email",
+		T.qq AS "qq",
+		T.realname AS "realname",
+		T.certificatetype AS "certificatetype",
+		T.certificateno AS "certificateno",
+		T.modifytime AS "modifytime",
+		T.deleted AS "deleted"
+	</sql>
+	
+	<sql id="userDetailInfoJoins">
+	</sql>
+    
+    <sql id="where">
+		<if test="condition!=null">
+			<where>
+				<if test="condition.model!=null">
+					<if test="condition.model.deleted!=null">
+						T.deleted = #{condition.model.deleted}
+					</if>
+				</if>
+			</where>
+		</if>
+	</sql>
+	
+	<select id="getById" resultType="UserDetailInfo">
+		SELECT 
+			<include refid="userDetailInfoColumns"/>
+		FROM user_detail_info T
+		<include refid="userDetailInfoJoins"/>
+		WHERE T.id = #{id}
+	</select>
+	
+	<select id="findListByPage" resultType="UserDetailInfo">
+		SELECT 
+			<include refid="userDetailInfoColumns"/>
+		FROM user_detail_info T
+		<include refid="userDetailInfoJoins"/>
+		<include refid="where"/>
+		order by T.ID DESC
+			<include refid="Sql.pager" />
+	</select>
+	
+	<select id="findAllList" resultType="UserDetailInfo">
+		SELECT 
+			<include refid="userDetailInfoColumns"/>
+		FROM user_detail_info T
+		<include refid="userDetailInfoJoins"/>
+		<include refid="where"/>
+	</select>
+	
+	<select id="getCountByCondition" resultType="int">
+		SELECT 
+			count(*)
+		FROM user_detail_info T
+		<include refid="userDetailInfoJoins"/>
+		<include refid="where"/>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO user_detail_info(
+			id,
+			userid,
+			zipcode,
+			sex,
+			birthday,
+			bloodtype,
+			birthplace,
+			apartment,
+			personsesc,
+			educationdegree,
+			job,
+			position,
+			contactaddress,
+			email,
+			qq,
+			realname,
+			certificatetype,
+			certificateno,
+			modifytime,
+			deleted
+		) VALUES (
+			#{id},
+			#{userid},
+			#{zipcode},
+			#{sex},
+			#{birthday},
+			#{bloodtype},
+			#{birthplace},
+			#{apartment},
+			#{personsesc},
+			#{educationdegree},
+			#{job},
+			#{position},
+			#{contactaddress},
+			#{email},
+			#{qq},
+			#{realname},
+			#{certificatetype},
+			#{certificateno},
+			#{modifytime},
+			#{deleted}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE user_detail_info SET 	
+			<if test="idcard !=null">
+			userid = #{userid},
+			</if>
+			<if test="zipcode !=null and zipcode !=''">
+			zipcode = #{zipcode},
+			</if>
+			<if test="sex !=null">
+			sex = #{sex},
+			</if>
+			<if test="birthday !=null and birthday !=''">
+			birthday = #{birthday},
+			</if>
+			<if test="bloodtype !=null and bloodtype !=''">
+			bloodtype = #{bloodtype},
+			</if>
+			<if test="birthplace !=null and birthplace !=''">
+			birthplace = #{birthplace},
+			</if>
+			<if test="apartment !=null and apartment !=''">
+			apartment = #{apartment},
+			</if>
+			<if test="personsesc !=null and personsesc !=''">
+			personsesc = #{personsesc},
+			</if>
+			<if test="educationdegree !=null ">
+			educationdegree = #{educationdegree},
+			</if>
+			<if test="job !=null ">
+			job = #{job},
+			</if>
+			<if test="position !=null and position !=''">
+			position = #{position},
+			</if>
+			<if test="contactaddress !=null and contactaddress !=''">
+			contactaddress = #{contactaddress},
+			</if>
+			<if test="email !=null and email !=''">
+			email = #{email},
+			</if>
+			<if test="qq !=null and qq !=''">
+			qq = #{qq},
+			</if>
+			<if test="realname !=null and realname !=''">
+			realname = #{realname},
+			</if>
+			<if test="certificatetype !=null">
+			certificatetype = #{certificatetype},
+			</if>
+			<if test="certificateno !=null and certificateno !=''">
+			certificateno = #{certificateno},
+			</if>
+			<if test="modifytime !=null">
+			modifytime = #{modifytime},
+			</if>
+			<if test="deleted !=null">
+			deleted = #{deleted}
+			</if>
+		WHERE id = #{id}
+	</update>
+	
+	<update id="deleteById">
+		update user_detail_info set 
+			deleted=1
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

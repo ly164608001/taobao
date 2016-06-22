@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lxhrainy.myjz.admin.user.dao.IUserEnterpriseInfoDao">
+    
+	<sql id="userEnterpriseInfoColumns">
+		T.id AS "id",
+		T.userid AS "userid",
+		T.enterprisename AS "enterprisename",
+		T.logo AS "logo",
+		T.website AS "website",
+		T.telephone AS "telephone",
+		T.location AS "location",
+		T.detailaddress AS "detailaddress",
+		T.longitude AS "longitude",
+		T.latitude AS "latitude",
+		T.enterprisedesc AS "enterprisedesc",
+		T.enterpriseculture AS "enterpriseculture",
+		T.modifytime AS "modifytime",
+		T.modifyuserid AS "modifyuserid",
+		T.deleted AS "deleted"
+	</sql>
+	
+	<sql id="userEnterpriseInfoJoins">
+	</sql>
+    
+    <sql id="where">
+		<if test="condition!=null">
+			<where>
+				<if test="condition.model!=null">
+					<if test="condition.model.deleted!=null">
+						T.deleted = #{condition.model.deleted}
+					</if>
+				</if>
+			</where>
+		</if>
+	</sql>
+	
+	<select id="getById" resultType="UserEnterpriseInfo">
+		SELECT 
+			<include refid="userEnterpriseInfoColumns"/>
+		FROM user_enterprise_info T
+		<include refid="userEnterpriseInfoJoins"/>
+		WHERE T.id = #{id}
+	</select>
+	
+	<select id="findListByPage" resultType="UserEnterpriseInfo">
+		SELECT 
+			<include refid="userEnterpriseInfoColumns"/>
+		FROM user_enterprise_info T
+		<include refid="userEnterpriseInfoJoins"/>
+		<include refid="where"/>
+		order by T.ID DESC
+			<include refid="Sql.pager" />
+	</select>
+	
+	<select id="findAllList" resultType="UserEnterpriseInfo">
+		SELECT 
+			<include refid="userEnterpriseInfoColumns"/>
+		FROM user_enterprise_info a
+		<include refid="userEnterpriseInfoJoins"/>
+		<include refid="where"/>
+	</select>
+	
+	<select id="getCountByCondition" resultType="int">
+		SELECT 
+			count(*)
+		FROM user_enterprise_info T
+		<include refid="userEnterpriseInfoJoins"/>
+		<include refid="where"/>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO user_enterprise_info(
+			id,
+			userid,
+			enterprisename,
+			logo,
+			website,
+			telephone,
+			location,
+			detailaddress,
+			longitude,
+			latitude,
+			enterprisedesc,
+			enterpriseculture,
+			modifytime,
+			modifyuserid,
+			deleted
+		) VALUES (
+			#{id},
+			#{userid},
+			#{enterprisename},
+			#{logo},
+			#{website},
+			#{telephone},
+			#{location},
+			#{detailaddress},
+			#{longitude},
+			#{latitude},
+			#{enterprisedesc},
+			#{enterpriseculture},
+			#{modifytime},
+			#{modifyuserid},
+			#{deleted}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE user_enterprise_info SET 	
+			<if test="userid !=null">
+			userid = #{userid},
+			</if>	
+			<if test="enterprisename !=null and enterprisename !=''">
+			enterprisename = #{enterprisename},
+			</if>	
+			<if test="logo !=null and logo !=''">
+			logo = #{logo},
+			</if>	
+			<if test="website !=null and website !=''">
+			website = #{website},
+			</if>	
+			<if test="telephone !=null and telephone !=''">
+			telephone = #{telephone},
+			</if>	
+			<if test="location !=null and location !=''">
+			location = #{location},
+			</if>	
+			<if test="detailaddress !=null and detailaddress !=''">
+			detailaddress = #{detailaddress},
+			</if>	
+			<if test="longitude !=null">
+			longitude = #{longitude},
+			</if>	
+			<if test="latitude !=null ">
+			latitude = #{latitude},
+			</if>	
+			<if test="enterprisedesc !=null and enterprisedesc !=''">
+			enterprisedesc = #{enterprisedesc},
+			</if>	
+			<if test="enterpriseculture !=null and enterpriseculture !=''">
+			enterpriseculture = #{enterpriseculture},
+			</if>	
+			<if test="modifytime !=null ">
+			modifytime = #{modifytime},
+			</if>	
+			<if test="modifyuserid !=null ">
+			modifyuserid = #{modifyuserid},
+			</if>	
+			<if test="deleted !=null">
+			deleted = #{deleted}
+			</if>	
+		WHERE id = #{id}
+		
+	</update>
+	
+	<update id="deleteById">
+		update user_enterprise_info set 
+			deleted=1
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

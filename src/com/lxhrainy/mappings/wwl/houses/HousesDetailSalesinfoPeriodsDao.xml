@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lxhrainy.myjz.admin.houses.dao.IHousesDetailSalesinfoPeriodsDao">
+	<sql id="baseColumn">
+		T.id,T.opentime,T.launchtime,T.buildingnum,T.households,T.presalelicense,T.typeIds,T.periodsnum,T.modifyuser,
+		T.modifytime,T.salesinfoid,T.deleted
+	</sql>
+
+	<select id="findListByPage" resultType="HousesDetailSalesinfoPeriods">
+		SELECT 
+			<include refid="baseColumn"></include>
+			,T.salesinfoid AS "salesinfo.id" 
+		FROM 
+			houses_detail_salesinfo_periods T
+		<if test="condition!=null">
+			<where>
+				T.deleted !=1
+			</where>
+			ORDER BY T.id DESC
+			<include refid="Sql.pager" />
+		</if>
+	</select>
+	
+	<select id="getCountByCondition" resultType="int">
+		SELECT 
+			count(*)
+		FROM 
+			houses_detail_salesinfo_periods T
+		<if test="condition!=null">
+			<where>
+				T.deleted !=1
+			</where>
+		</if>
+	</select>
+	
+	<select id="findAllList" resultType="HousesDetailSalesinfoPeriods">
+		SELECT 
+			<include refid="baseColumn"></include>
+			,T.salesinfoid AS "salesinfo.id" 
+		FROM 
+			houses_detail_salesinfo_periods T
+		<where>
+			T.deleted != 1
+		</where>
+	</select>
+	
+
+	<!--根据ID获取详情  -->
+	<select id="getById" resultType="HousesDetailSalesinfoPeriods">
+		SELECT 
+			<include refid="baseColumn"></include>
+			,T.salesinfoid AS "salesinfo.id" 
+		FROM 
+			houses_detail_salesinfo_periods T
+		WHERE 
+			id = #{id}
+	</select>
+	
+<!-- 根据ID删除楼盘信息 -->
+	<update id="deleteById">
+		UPDATE 
+			houses_detail_salesinfo_periods 
+		SET 
+			deleted=1
+		WHERE 
+			id = #{id}
+	</update>
+	
+	<!-- 插入楼盘详细信息 -->
+	<insert id="insert" >
+		<!-- 配置Mysql主键自动增长 -->
+		<selectKey resultType="int" keyProperty="id" order="BEFORE">
+			SELECT 
+				auto_increment AS id 
+			FROM 
+				information_schema.tables    
+    		WHERE 
+    			table_name='houses_detail_salesinfo_periods'
+		</selectKey>
+		INSERT INTO 
+			houses_detail_salesinfo_periods (
+				id,
+				opentime,
+				launchtime,
+				buildingnum,
+				households,
+				presalelicense,
+				typeIds,
+				periodsnum,
+				modifyuser,
+				modifytime,
+				salesinfoid,
+				deleted
+			)
+		VALUES (
+	    	#{id},
+			#{opentime},
+	       	#{launchtime},
+	        #{buildingnum}, 
+	        #{households},
+	        #{presalelicense},
+	        #{typeIds},
+	        #{periodsnum},
+	        #{modifyuser}, 
+	        #{modifytime},
+	        #{salesinfo.id},
+	        #{deleted}
+	      )
+	</insert>
+	
+	<!-- 更新楼盘基本信息 -->
+	<update id="update">
+		UPDATE houses_detail_salesinfo_periods 
+		<set>
+			<if test="opentime !=null and opentime !=''">
+				opentime = #{opentime},
+			</if>
+			<if test="launchtime !=null and launchtime !=''">
+				launchtime = #{launchtime},
+			</if>
+			<if test="buildingnum !=null and buildingnum !='' ">
+				buildingnum = #{buildingnum},
+			</if>
+			<if test="households !=null and households !=''" >
+				households = #{households},
+			</if>
+			<if test="presalelicense !=null and presalelicense !=''">
+				presalelicense = #{presalelicense},
+			</if>
+			<if test="typeIds !=null and typeIds !=''" >
+				typeIds = #{typeIds},
+			</if>
+			<if test="periodsnum !=null and periodsnum !=''" >
+				periodsnum = #{periodsnum},
+			</if>
+			<if test="modifyuser !=null and modifyuser !=''" >
+				modifyuser = #{modifyuser},
+			</if>
+			<if test="modifytime !=null and modifytime !=''" >
+				modifytime = #{modifytime},
+			</if>
+			<if test="salesinfo !=null and salesinfo.id !=null and salesinfo.id !=''" >
+				salesinfoid = #{salesinfo.id},
+			</if>
+			<if test="deleted !=null and deleted !=''" >
+				deleted = #{deleted},
+			</if>
+		</set>
+		WHERE 
+			id = #{id}
+	</update>
+	
+	<!--根据楼盘ID获取houses_detail_salesinfo详情  -->
+	<select id="getInfoBySalesinfoId" resultType="HousesDetailSalesinfoPeriods">
+		SELECT 
+			<include refid="baseColumn"></include>
+		FROM 
+			houses_detail_salesinfo_periods T
+		WHERE 
+			salesinfoid = #{salesinfoid} and deleted != 1
+	</select>	
+	
+<!-- 根据salesinfoid删除销售期数信息 -->
+	<update id="deleteBySalesId">
+		UPDATE 
+			houses_detail_salesinfo_periods 
+		SET 
+			deleted=1
+		WHERE 
+			salesinfoid = #{salesinfoid}
+	</update>
+	
+</mapper>

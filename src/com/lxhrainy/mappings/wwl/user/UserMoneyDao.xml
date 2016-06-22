@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lxhrainy.myjz.admin.user.dao.IUserMoneyDao">
+    
+	<sql id="userMoneyColumns">
+		T.id AS "id",
+		T.userid AS "userid",
+		T.allbalance AS "allbalance",
+		T.usablebalance AS "usablebalance",
+		T.frozenbalance AS "frozenbalance",
+		T.deleted AS "deleted"
+	</sql>
+	
+	<sql id="userMoneyJoins">
+	</sql>
+	
+	<sql id="where">
+		<if test="condition!=null">
+			<where>
+				<if test="condition.model!=null">
+					<if test="condition.model.deleted!=null">
+						T.deleted = #{condition.model.deleted}
+					</if>
+				</if>
+			</where>
+		</if>
+	</sql>
+    
+	<select id="getById" resultType="UserMoney">
+		SELECT 
+			<include refid="userMoneyColumns"/>
+		FROM user_money T
+		<include refid="userMoneyJoins"/>
+		WHERE T.id = #{id}
+	</select>
+	
+	<select id="findListByPage" resultType="UserMoney">
+		SELECT 
+			<include refid="userMoneyColumns"/>
+		FROM user_money T
+		<include refid="userMoneyJoins"/>
+		<include refid="where"/>
+		order by T.ID DESC
+			<include refid="Sql.pager" />
+	</select>
+	
+	<select id="findAllList" resultType="UserMoney">
+		SELECT 
+			<include refid="userMoneyColumns"/>
+		FROM user_money T
+		<include refid="userMoneyJoins"/>
+		<include refid="where"/>
+	</select>
+	
+	<select id="getCountByCondition" resultType="int">
+		SELECT 
+			count(*)
+		FROM user_money T
+		<include refid="userMoneyJoins"/>
+		<include refid="where"/>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO user_money(
+			id,
+			userid,
+			allbalance,
+			usablebalance,
+			frozenbalance,
+			deleted
+		) VALUES (
+			#{id},
+			#{userid},
+			#{allbalance},
+			#{usablebalance},
+			#{frozenbalance},
+			#{deleted}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE user_money SET 	
+			<if test="userid !=null">
+			userid = #{userid},
+			</if>	
+			<if test="allbalance !=null">
+			allbalance = #{allbalance},
+			</if>	
+			<if test="usablebalance !=null">
+			usablebalance = #{usablebalance},
+			</if>	
+			<if test="frozenbalance !=null ">
+			frozenbalance = #{frozenbalance},
+			</if>	
+			<if test="deleted !=null and deleted !=''">
+			deleted = #{deleted}
+			</if>	
+		WHERE id = #{id}
+	</update>
+	
+	<update id="deleteById">
+		update user_money set 
+			deleted=1
+		WHERE id = #{id}
+	</update>
+	
+	<select id="getByUserId" resultType="UserMoney">
+		SELECT 
+			<include refid="userMoneyColumns"/>
+		FROM user_money T
+			<include refid="userMoneyJoins"/>
+		WHERE T.userid = #{userid}
+	</select>
+</mapper>

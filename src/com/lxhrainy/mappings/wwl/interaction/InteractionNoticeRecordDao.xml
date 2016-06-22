@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lxhrainy.myjz.admin.interaction.dao.IInteractionNoticeRecordDao">
+    
+    
+    
+	<sql id="interactionNoticeRecordColumns">
+		T.id AS "id",
+		T.content AS "content",
+		T.type AS "type",
+		T.receiveuser AS "receiveuser.id",
+		user.username AS "receiveuser.username",
+		T.sendtime AS "sendtime",
+		T.receivetime AS "receivetime",
+		T.status AS "status",
+		T.deleted AS "deleted"		
+	</sql>
+	
+    
+	<sql id="interactionNoticeRecordJoins">
+		left JOIN user_info user ON user.id = T.receiveuser
+	</sql>
+	
+
+	<select id="getById" resultType="InteractionNoticeRecord">
+		SELECT 
+			<include refid="interactionNoticeRecordColumns"/>
+		FROM interaction_notice_record T
+		<include refid="interactionNoticeRecordJoins"/>
+		WHERE T.id = #{id}
+		AND T.deleted = 0
+	</select>
+	
+	
+	<select id="findListByPage" resultType="InteractionNoticeRecord">
+		SELECT 
+			<include refid="interactionNoticeRecordColumns"/>
+		FROM interaction_notice_record T
+		<include refid="interactionNoticeRecordJoins"/>
+		<if test="condition!=null">
+			<where>
+				 T.deleted=0
+				<if test="condition.model!=null">
+					<if test="condition.model.content!=null and condition.model.content!=''">
+						AND	T.content LIKE '%${condition.model.content}%'
+					</if>
+					<if test="condition.model.type != null">
+						AND	T.type = #{condition.model.type}
+					</if>
+					<if test="condition.model.status != null">
+						AND	T.status = #{condition.model.status}
+					</if>
+				</if>
+				<if test="condition.receiveuser!= null">
+					AND T.receiveuser = #{condition.receiveuser} 
+				</if> 				
+			</where>
+			order by T.ID DESC
+			<include refid="Sql.pager" />
+		</if>
+	</select>
+	
+	
+	
+	<select id="getCountByCondition" resultType="int">
+		SELECT 
+			count(*)
+		FROM interaction_notice_record T
+		<include refid="interactionNoticeRecordJoins"/>
+		<if test="condition!=null">
+			<where>
+				 T.deleted=0
+				<if test="condition.model!=null">
+					<if test="condition.model.content!=null and condition.model.content!=''">
+						AND	T.content LIKE '%${condition.model.content}%'
+					</if>
+					<if test="condition.model.type != null">
+						AND	T.type = #{condition.model.type}
+					</if>
+					<if test="condition.model.status != null">
+						AND	T.status = #{condition.model.status}
+					</if>
+				</if>
+				<if test="condition.receiveuser!= null">
+					AND T.receiveuser = #{condition.receiveuser} 
+				</if> 				
+			</where>
+		</if>
+	</select>
+	
+	<select id="findAllList" resultType="InteractionNoticeRecord">
+		SELECT 
+			<include refid="interactionNoticeRecordColumns"/>
+		FROM interaction_notice_record T
+		<include refid="interactionNoticeRecordJoins"/>
+			<if test="condition!=null">
+			<where>
+				T.deleted = 0
+			</where>
+			</if>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO interaction_notice_record(
+			content,
+			type,
+			receiveuser,
+			sendtime,
+			receivetime,
+			status,
+			deleted
+		) VALUES (
+			#{content},
+			#{type},
+			#{receiveuser.id},
+			#{sendtime},
+			#{receivetime},
+			#{status},
+			#{deleted}
+		)
+		<!-- 配置Mysql主键自动增长 -->
+		<selectKey resultType="int" keyProperty="id">
+			select
+			LAST_INSERT_ID() as value  
+		</selectKey>
+	</insert>
+	
+	<update id="update">
+		UPDATE interaction_notice_record
+		<set>
+			<if test="content!=null">
+				content = #{content},
+			</if>
+			<if test="type != null">
+				type = #{type},
+			</if>
+			<if test="receiveuser != null and receiveuser.id!=null">
+				receiveuser = #{receiveuser.id},
+			</if>
+			<if test="sendtime != null">
+				sendtime = #{sendtime},
+			</if>
+			<if test="receivetime != null">
+				receivetime = #{receivetime},
+			</if>
+			<if test="status != null">
+				status = #{status},
+			</if>
+		</set>
+				WHERE id = #{id}
+	</update>
+	
+	<update id="deleteById">
+		update interaction_notice_record set 
+			deleted=1
+		WHERE id = #{id}
+	</update>
+	
+	<update id="updateStatus">
+		update interaction_notice_record set 
+		      status = #{status}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="readStatus">
+		update interaction_notice_record set 
+		      status =1
+		WHERE id = #{id}
+	</update>
+	
+	<update id="unreadStatus">
+		update interaction_notice_record set 
+		      status =-1
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

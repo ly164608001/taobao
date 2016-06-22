@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lxhrainy.myjz.admin.houses.dao.IHousesDetailInternalDao">
+	<sql id="baseColumn">
+		T.id,T.housesid,T.modifyuser,T.modifytime,T.portcondition,T.watersupplytype,T.powersupplytype,T.heatsupplytype,T.fuelgas,T.networkids,
+		T.telephoneids,T.closecircuitids,T.listtypeid,T.school,T.business,T.sportids,T.other
+	</sql>
+	 
+	<select id="findListByPage" resultType="HousesDetailInternal">
+		SELECT 
+			<include refid="baseColumn"></include>
+			,T.housesid AS "houses.id" 
+		FROM 
+			houses_detail_internal T
+		<if test="condition!=null">
+			<where>
+				T.deleted !=1
+			</where>
+			ORDER BY 
+				T.ID DESC
+			<include refid="Sql.pager" />
+		</if>
+	</select>
+	
+	<select id="getCountByCondition" resultType="int">
+		SELECT 
+			count(*)
+		FROM houses_detail_internal T
+		<if test="condition!=null">
+			<where>
+				T.deleted !=1
+			</where>
+		</if>
+	</select>
+	
+	<select id="findAllList" resultType="HousesDetailInternal">
+		SELECT 
+			<include refid="baseColumn"></include>
+			,T.housesid AS "houses.id" 
+		FROM 
+			houses_detail_internal T
+	</select>
+	
+
+	<!--根据ID获取详情  -->
+	<select id="getById" resultType="HousesDetailInternal">
+		SELECT 
+			<include refid="baseColumn"></include>
+			T.housesid AS "houses.id"
+		FROM 
+			houses_detail_internal T
+		 WHERE 
+		 	id = #{id}
+	</select>
+	
+<!-- 根据ID删除楼盘信息 -->
+	<update id="deleteById">
+		UPDATE 
+			houses_detail_internal 
+		SET 
+			deleted=1
+		WHERE 
+			id = #{id}
+	</update>
+	
+	<!-- 插入楼盘详细信息 -->
+	<insert id="insert" >
+		<!-- 配置Mysql主键自动增长 -->
+		<selectKey resultType="int" keyProperty="id" order="BEFORE">
+			SELECT 
+				auto_increment AS id 
+			FROM 
+				information_schema.tables    
+    		WHERE 
+    			table_name='houses_detail_internal'
+		</selectKey>
+		INSERT INTO 
+			houses_detail_internal (
+				id,
+				housesid,
+		       	modifyuser,
+		        modifytime, 
+		        portcondition,
+		        watersupplytype,
+		        powersupplytype,
+				heatsupplytype,
+		       	fuelgas,
+		        networkids, 
+		        telephoneids,
+		        closecircuitids,
+		        listtypeid,
+		        school,
+		        business,
+		        sportids,
+		        other
+			)
+		VALUES (
+	    	#{id},
+			#{houses.id},
+	       	#{modifyuser},
+	        #{modifytime}, 
+	        #{portcondition},
+	        #{watersupplytype},
+	        #{powersupplytype},
+	        #{heatsupplytype},
+			#{fuelgas},
+	       	#{networkids},
+	        #{telephoneids}, 
+	        #{closecircuitids},
+	        #{listtypeid},
+	        #{school},
+	        #{business},
+	        #{sportids},
+	        #{other}
+	      )
+	</insert>
+	
+	<!-- 更新楼盘基本信息 -->
+	<update id="update">
+		UPDATE 
+			houses_detail_internal 
+		<set>
+			<if test="houses != null and houses.id !=null and houses.id !=''">
+				housesid = #{houses.id},
+			</if>
+			<if test="modifyuser !=null and modifyuser !=''">
+				modifyuser = #{modifyuser},
+			</if>
+			<if test="modifytime !=null and modifytime !='' ">
+				modifytime = #{modifytime},
+			</if>
+			<if test="portcondition !=null and portcondition !=''" >
+				portcondition = #{portcondition},
+			</if>
+			<if test="watersupplytype !=null and watersupplytype !=''">
+				watersupplytype = #{watersupplytype},
+			</if>
+			<if test="powersupplytype !=null and powersupplytype !=''" >
+				powersupplytype = #{powersupplytype},
+			</if>
+			<if test="heatsupplytype !=null and heatsupplytype !=''">
+				heatsupplytype	 = #{heatsupplytype},
+			</if>
+			<if test="fuelgas !=null and fuelgas !=''">
+				fuelgas = #{fuelgas},
+			</if>
+			<if test="networkids !=null and networkids !='' ">
+				networkids = #{networkids},
+			</if>
+			<if test="telephoneids !=null and telephoneids !=''" >
+				telephoneids = #{telephoneids},
+			</if>
+			<if test="closecircuitids !=null and closecircuitids !=''">
+				closecircuitids = #{closecircuitids},
+			</if>
+			<if test="listtypeid !=null and listtypeid !=''" >
+				listtypeid = #{listtypeid},
+			</if>
+			<if test="school !=null and school !=''">
+				school = #{school},
+			</if>
+			<if test="business !=null and business !=''" >
+				business = #{business},
+			</if>
+			<if test="sportids !=null and sportids !=''">
+				sportids = #{sportids},
+			</if>
+			<if test="other !=null and other !=''" >
+				other = #{other},
+			</if>
+		</set>
+		WHERE 
+			id = #{id}
+	</update>
+	
+	<!--根据楼盘ID获取houses_detail_internal详情  -->
+	<select id="getInternalByHousesId" resultType="HousesDetailInternal">
+		SELECT 
+			<include refid="baseColumn"></include>
+		FROM 
+			houses_detail_internal T
+		WHERE 
+			housesid = #{housesid}
+	</select>
+	
+</mapper>

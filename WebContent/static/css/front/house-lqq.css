@@ -1,0 +1,250 @@
+﻿/*房地产商-消息中心-通知*/
+.read-nav-border{padding:0 15px; border-left:#e5e5e5 solid 1px;border-right:#e5e5e5 solid 1px;border-bottom:#e5e5e5 solid 1px;}
+.remark-all{float:left;}
+.remark-time{float:right;}
+.remark-time label{ height:30px; line-height:30px; display:inline-block; float:left;}
+.first-time span.timepic{ width:21px; height:17px; display:block; cursor:pointer; background:url(images/timepic.png) no-repeat; position:absolute; top:6px; right:10px;}
+.Email-main li{ height:40px; line-height:40px; padding-left:25px; color:#414141; font-size:14px; border-bottom:#e5e5e5 solid 1px;}
+.Email-main li input[type=checkbox]{ margin:10px 20px 0 0;vertical-align:middle;float:left;}
+.Email-main li div.Email-open{ padding-left:40px;vertical-align:middle;float:left; background:url(images/Email-open.png) left center no-repeat;}
+.Email-main li div.Email-close{ padding-left:40px;vertical-align:middle;float:left; background:url(images/Email-close.png) left center no-repeat;}
+.Email-main li div.publish-time{ color:#888; font-size:12px; float:right;}
+.batch-delect{ height:24px; line-height:24px; color:#666; padding:0 15px; border:#b5b5b5 solid 1px; border-radius:5px; display:inline-block; float:left;}
+.batch-delect-bor{margin:15px 0 0 25px;}
+
+/*房地产商-消息中心-互动-大众点评*/
+.PubliComment ul.ul-PubliComment li{ margin-bottom:50px;}
+.PubliComment li div.commentator{ padding:0 0 0 15px;}
+.head-img{ width:55px; height:55px; margin:20px 15px 0 0; float:left;}
+.CommandStandard{ width:865px; float:left;}
+.CommandStandard-l{ float:left;}
+.PubliComment ul.ul-PubliComment li .CommandStandard-l ul.ul-CommandStandard-l li{ margin-bottom:0;}
+.CommandStandard-l li ul,.CommandStandard-l ul li,.CommandStandard-l li a{ display:inline-block; float:left;}
+.CommandStandard-l li{ padding-top:15px; margin-right:33px; color:#414141; font-size:14px;}
+.CommandStandard-l li a.head-name{ margin-right:20px;}
+.star{ float:left;}
+.star span{ width:12px; height:12px; display:inline-block;}
+.star span.icon-tips-star-red{ background:url(images/house-start-red.png) no-repeat;}
+.command-time{ padding-top:15px; color:#888; float:right;}
+.CommandStandard-r{ float:right;}
+.finger{ width:16px; height:16px; margin:10px 5px 0 0; cursor:pointer; background:url(images/finger.png) no-repeat; display:inline-block; float:left;}
+.CommandStandard-r a{ font-size:14px; display:inline-block;}
+.lh40{ height:40px; line-height:40px; color:#666; font-size:14px;}
+.dottedline{ border-bottom:#e5e5e5 dashed 1px;}
+.btline{ border-bottom:#e5e5e5 solid 1px;}
+.PostReply{}
+.PostReply-opera{ height:30px; line-height:30px;}
+.PostReply-opera-l{ float:left;}
+.PostReply-opera-r{ padding-right:15px; cursor:pointer; background:url(images/pick-up.png) right center no-repeat; display:inline-block; float:right;}
+.PostReply textarea{ width:920px; height:60px; padding:10px; color:#949494; font-size:14px;  border:#e5e5e5 solid 1px;}
+.pl-reply-box{ margin-top:20px;}
+.pl-reply{ width:85px; height:30px; margin-right:20px; outline:none; cursor:pointer; }
+.pl-reply01{color:#fff; border:0; background:#3197df;}
+.pl-reply02{color:#333; border:#e5e5e5 solid 1px; background:#fff;}
+
+/*房地产商-消息中心-互动-站内信*/
+.remark-all a.all-delect{ height:28px; line-height:28px; margin-left:15px; vertical-align:middle; color:#666; padding:0 15px; border:#b5b5b5 solid 1px; border-radius:5px; display:inline-block;}
+
+/*房地产商-消息中心-违规记录*/
+.ViolationRecord{ border:#e5e5e5 solid 1px;}
+.ViolationRecord-title{ height:45px; line-height:45px; background:#f5f8fa; border-bottom:#e5e5e5 solid 1px;}
+.ViolationRecord-title-l{ color:#546d7e; font-size:18px; text-indent:13px; float:left;}
+.ViolationRecord-title-r{ margin-right:15px; color:#000; font-size:14px;float:right;}
+.ViolationRecord-main{}
+.ViolationRecord-main li{ padding:15px; border-bottom:#e5e5e5 solid 1px;}
+.ViolationRecord-main-l{ width:805px; line-height:25px; color:#373737; font-size:14px; letter-spacing:1px; float:left;}
+.ViolationRecord-main-r{ color:#949494; float:right;}
+
+/*房地产商-营销中心-代理管理*/
+.AgentManagement{}
+.AgentDetail{ margin-bottom:10px;}
+.AgentDetail-l{ width:538px; height:223px; padding:15px 0 20px 40px; border:#e5e5e5 solid 1px; float:left;}
+.AgentDetail-l li{ height:45px; line-height:45px;color:#414141;}
+.AgentDetail-l li label{ width:100px;color:#414141; font-size:16px; text-align:right; display:inline-block; float:left;}
+.AgentDetail-l li span{font-size:18px; letter-spacing:2px; display:inline-block; float:left;}
+.AgentDetail-l li span a{ font-size:14px; display:inline-block; float:left;}
+.AgentDetail-l li span em{ font-size:24px; display:inline-block; float:left;}
+.AgentDetail-r{ width:348px; height:183px; padding:35px 15px 40px 20px; border:#e5e5e5 solid 1px; float:right;}
+.AgentDetail-r li{ width:160px; height:80px; line-height:80px; margin-bottom:20px; color:#fff; font-size:24px; text-align:center; letter-spacing:1px; cursor:pointer; display:inline-block; float:left;}
+.AgentDetail-r li.libg01{ background:#7ab800;}
+.AgentDetail-r li.libg02{ background:#0085c3;}
+.AgentDetail-r li.libg03{ background:#f2af00;}
+.AgentDetail-r li.libg04{ background:#dc5034;}
+.CurrentAgent-box{ padding:0 10px 60px 10px; border:#e5e5e5 solid 1px;}
+.CurrentAgent-title{}
+.CurrentAgent-title-l{ height:60px; line-height:60px; color:#414141; font-size:18px; float:left;}
+.CurrentAgent-title-r{ float:right;}
+.AgentName-search{ position:relative;top:0;right:0;}
+.AgentName-search a{ width:17px; height:16px; display:block; cursor:pointer; background:url(images/btn-search2.png) no-repeat; position:absolute;top:8px; right:10px;}
+.input-AgentName-search{ width:200px; height:30px; line-height:30px; color:#949494; font-size:14px; text-indent:10px; outline:none; border:#e5e5e5 solid 1px;}
+.AgentManagement-tab{border:#e5e5e5 solid 1px; border-collapse: collapse}
+.AgentManagement-tab th{ height:50px; color:#546d7e; font-size:14px; background:#f5f8fa;}
+.AgentManagement-tab td{ height:40px; color:#414141; font-size:14px;text-align:center; border:#e5e5e5 solid 1px;}
+.btn-renew{ width:50px; height:25px; color:#fff; border:0; border-radius:5px; background:#3197de;}
+.btn-stop{ width:50px; height:25px; color:#414141; border-radius:5px; border:#e5e5e5 solid 1px; background:#fff;}
+
+
+/*房地产商-营销中心-红包管理*/
+.btn-addred{ width:100px; height:30px; line-height:30px; color:#fff; font-size:14px; border:0; border-radius:5px; outline:none; cursor:pointer; background:#93c33a;}
+.switch-on{ width:35px; height:21px; margin:0 auto; background:url(images/swicth-on.png) center no-repeat; display:block;}
+.switch-off{ width:35px; height:21px; margin:0 auto; background:url(images/swicth-off.png) center no-repeat; display:block;}
+.redpacket-tab{border-collapse:collapse; border:0;}
+.redpacket-tab th{ height:50px; color:#546d7e; font-size:14px; background:#f5f8fa; border-bottom:#e5e5e5 solid 1px;}
+.redpacket-tab td{ height:40px; color:#414141; font-size:14px;text-align:center; border-bottom:#e5e5e5 solid 1px;}
+
+/*房地产商-营销中心-房源管理*/
+.inset-tab{ border-collapse:collapse; border:#e5e5e5 solid 1px;}
+.inset-tab th{ height:40px; color:#666; font-size:14px; background:#fef7f1;}
+.inset-tab td{ height:40px; text-align:center; border:#e5e5e5 solid 1px; background:#fff;}
+.str{ width:210px; text-overflow:ellipsis; white-space:nowrap; overflow:hidden;}
+
+/*房地产商-营销中心-客户管理*/
+.btn-opera{ width:100px; height:30px; color:#666; font-size:14px; outline:none; background:#fff; border:#dcdcdc solid 1px;}
+.input-text{ width:228px; height:28px; line-height:28px; color:#949494; font-size:14px; text-indent:5px; border:#dcdcdc solid 1px; border-radius:5px; outline:none;}
+
+/*房地产商-营销中心-房团详情*/
+.CondoTour-detail{ padding-left:55px;color:#414141; font-size:14px;}
+.CondoTour-detail li{ margin-bottom:20px;}
+.CondoTour-detail li label{ width:75px; margin-right:10px; text-align:right;  display:block; float:left;}
+.CondoTour-detail li span{ display:inline-block; float:left;}
+.btn-msg{ width:100px; height:30px; color:#414141; background:#f5f8fa; border-radius:5px; border:#dcdcdc solid 1px;}
+.btn-transfer{ width:55px; height:25px; line-height:25px; margin:0 auto; padding:0px 0 0 5px; color:#888; font-size:12px; border:#dcdcdc solid 1px; display:block; }
+.btn-transfer span{ width:15px; height:14px; margin-top:5px; display:block; float:left;background:url(images/transfer.png) center no-repeat;}
+.CurrentAgent-title h3{ color:#414141; font-size:18px; font-weight:normal;}
+.fz{ height:30px; line-height:30px; color:#888; font-size:14px;}
+.sel{ width:135px; height:30px; color:#949494; font-size:14px; border:#dcdcdc solid 1px;}
+
+/*房地产商-营销中心-当前楼盘代理-详情*/
+.AgentPopup-title{ height:50px; line-height:50px; color:#000; font-size:16px; text-align:center;}
+.AgentPopup-main{ padding-left:3%;}
+.AgentPopup-main li{ margin-bottom:20px;color:#414141; font-size:14px; display:block; float:left;}
+.AgentPopup-main li label{ margin-right:10px; display:block; float:left;}
+.AgentPopup-main li span{ display:block; float:left;}
+.buildTable th{ height:50px; color:#546d7e; font-size:14px; background:#f5f8fa;}
+.buildTable td{ border:#dcdcdc solid 1px;}
+
+/*房地产商-营销中心-代理授权-代理申请*/
+.grantTable th{ height:50px; background:#f5f8fa;}
+.grantTable td{ border:#dcdcdc solid 1px;}
+.green{ color:#168829;}
+.btn-detail{ width:50px; height:25px; color:#fff; border:0; border-radius:5px; background:#3cb851;}
+
+/*房地产商-营销中心-房源管理-新增代售房源*/
+.input-detail{ padding:30px 0 0 15px; border-bottom:#dcdcdc solid 1px;}
+.input-detail li{ width:310px; margin-left:40px; padding-bottom:20px; display:inline-block; float:left;}
+.input-detail li label{ width:100px; height:35px; line-height:35px; margin-right:10px; color:#414141; font-size:14px; text-align:right; display:block; float:left;}
+.input-detail li input[type=text],select{ width:198px; height:32px; line-height:32px; outline:none; border:#dcdcdc solid 1px;}
+.choose-house{}
+.house-sel label{ height:35px; line-height:35px; color:#414141; font-size:14px; display:block; float:left;}
+.house-sel select{ width:120px; height:35px; margin-right:10px;}
+.radio-box input[type=radio]{ vertical-align:middle;}
+.radio-box span{ height:35px; line-height:35px; color:#414141; font-size:14px; vertical-align:middle;}
+.chooseHose{ height:298px;overflow-y:scroll}
+.chooseHose-Tab{ }
+.chooseHose-Tab th{ height:50px; color:#546d7e; font-size:14px; background:#f5f8fa;}
+.chooseHose-Tab input[type=radio]{ vertical-align:middle;}
+.chooseHose-Tab span{ vertical-align:middle;}
+.chooseHose-Tab td{ height:40px; padding:0; color:#666; font-size:14px; text-align:center; background:#fff;}
+.bder{ border-top:#dcdcdc solid 1px;}
+.input-money{ width:158px; height:33px; outline:none; border:#dcdcdc solid 1px;}
+.chooseHose input[type=text]{ width:88px; height:23px; color:#666; font-size:14px; text-indent:5px; outline:none; border:#dcdcdc solid 1px;}
+.save-box input[type=button]{ width:95px; height:30px; font-size:14px; border-radius:5px;}
+.btn-qx{ background:#fff; border:#bfbfbf solid 1px;}
+.btn-pb{ color:#fff; background:#3197de; border:0;}
+
+/*房地产商-营销中心-房源管理-新增代售房源*/
+.MSG-Setting{ padding:20px 20px 0 20px;}
+.MSG-Setting li{ margin-bottom:20px;}
+.MSG-Setting li label{ width:100px; height:40px; line-height:40px; margin-right:10px; text-align:right; color:#414141; font-size:14px; display:block; float:left;}
+.MSG-Setting li select{ width:200px; height:40px; color:#414141; font-size:14px;}
+.MSG-Setting li textarea{ width:360px; height:120px; border:#dcdcdc solid 1px; border-radius:5px;}
+
+/*房地产商-营销中心-红包管理-新增红包*/
+.time-limit{ position:relative; top:0; right:0;}
+.MSG-Setting li input[type=text]{ width:200px; height:40px; color:#949494; font-size:14px; text-indent:10px; outline:none; border:#dcdcdc solid 1px;}
+.time-limit a.timepic{width: 21px;height: 17px;display: block;background: url(images/timepic.png) no-repeat;position: absolute;top: 10px; right: 10px;}
+.radio-box-h40{ height:40px; line-height:40px;}
+.radio-box-h40 input[type=radio]{ vertical-align:middle;}
+.radio-box-h40 span{ height:40px; line-height:40px; color:#414141; font-size:14px; display:inline-block; vertical-align:middle;}
+
+/*房地产商-营销中心-代理授权-代理邀请-代理房源详情*/
+.Consignee-detail{ font-size:14px; border-bottom:#dcdcdc solid 1px;}
+.Consignee-detail dt{ color:#000;}
+.Consignee-detail dd{ width:260px; height:40px; line-height:40px; margin-right:100px; display:inline-block; float:left;}
+
+/*房地产商-营销中心-代理申请-待处理申请*/
+.requestState-box{}
+.CurrentState{ height:48px; line-height:48px; color:#666; font-size:14px; text-indent:25px; background:#f5f8fa; border:#eee solid 1px; }
+.requestState-content{ border:#e5e5e5 solid 1px; padding:0 20px;}
+.requestContent-Tab{ border:0;}
+.requestContent-Tab td{ text-align:left; border-top:0;border-bottom:#e5e5e5 solid 1px;}
+.requestHouse-list{}
+.requestHouse-list-nav{ border-bottom:#f7941d solid 2px;}
+.requestHouse-list-nav li{ height:45px; line-height:45px; padding:0 30px; color:#fff; font-size:18px; background:#f7941d; display:inline-block; float:left;}
+.ApplyReason-box-title{ height:40px; line-height:40px;}
+.ApplyReason-text{ color:#f7941d; font-size:18px;}
+.ApplyReason-box textarea{ width:950px; height:80px; line-height:25px; padding:15px; color:#666; font-size:14px; border:#dcdcdc solid 1px;}
+
+/*房地产商-营销中心-代理申请-待处理申请-操作（协商*/
+.consult{ padding:35px 0 30px 0; border-top:#dcdcdc solid 1px;}
+.consult li{ margin-bottom:20px;}
+.consult li label{ width:120px; height:35px; line-height:35px; font-size:14px; text-align:right; display:inline-block; float:left;}
+.consult li span{ height:35px; line-height:35px;}
+.consult li input[type=text]{ width:158px; height:33px; line-height:33px; border:#dcdcdc solid 1px;}
+.consult li select{ width:160px; height:35px; line-height:33px;}
+
+/*房地产商-营销中心-代理申请-待处理申请-同意申请*/
+.handle-detail{ line-height:30px; padding:10px 0 10px 20px; font-size:14px; border:#dcdcdc solid 1px; background:#f9f9f9;}
+
+/*房地产商-营销中心-活动管理-抢购活动-添加活动*/
+.joinHouse{}
+.joinHouse-title{ font-size:16px;}
+.joinHouse-title span{ height:26px; line-height:28px; padding:0 15px; color:#414141; font-size:12px; border:#dcdcdc solid 1px; display:inline-block;}
+.ml50{ margin-left:50px;}
+.alredy-sel{ padding:5px 0 15px 10px; border:#fbb900 solid 1px; background:#fefae6;}
+.alredy-sel label{ height:30px; line-height:30px; color:#666; font-size:14px; display:inline-block; float:left;}
+.alredy-sel-box dl{line-height:30px; font-size:14px;}
+.alredy-sel-box dd{ color:#414141;}
+.fz18{ font-size:18px;}
+.restored select{ font-size:14px;}
+.ml150{ margin-left:150px;}
+.bg-red{ background:#ec5140;}
+
+/*房地产商-人员架构-人员分配*/
+.talign-l{ text-align:left;}
+.fz12{ font-size:12px;}
+
+/*房地产商-人员架构-人员分配-新增员工*/
+.sel-content span{ height:25px; line-height:25px; padding:0 20px; color:#fff; border-radius:5px; background:#99cdcd; display:inline-block; float:left; position:relative; top:0; right:0;}
+.samll-close{ text-decoration:none; position:absolute; top:-5px; right:5px;}
+
+/*房地产商-企业中心-企业未认证*/
+.enterpriseCertification-box{ padding:10px 20px 40px 20px; border:#e4e4e4 solid 1px;}
+.enterpriseCertification-box-title{ color:#414141; font-size:16px;}
+.tips-text{ font-size:16px; text-align:center;}
+.enterprise-logo{ width:200px; height:100px;}
+
+/*房地产商-楼盘中心--楼盘详情-详细资料-楼盘参数*/
+.houseSpecial{ width:710px;}
+.houseSpecial span{ width:78px; height:25px; line-height:25px; margin:0 5px 15px 0; color:#949494; font-size:13px; text-align:center; background:#f2f2f2; border:#c9c9c9 dashed 1px; display:inline-block;}
+.houseSpecial span:hover,.houseSpecial span.active{ color:#333; background:#fff6d4; border:#ffcc00 solid 1px;}
+.houseParam{ padding-left:80px;}
+
+/*房地产商-楼盘中心--楼盘详情-详细资料-销售信息*/
+.saleMsg{}
+.periodDetail-box{}
+.periodDetail-title{ color:#000; font-size:18px;}
+.basicMsg01 .MSG-Setting li label.talign-r{ text-align:right;}
+.buildText{ color:#333; font-size:18px;}
+.timeBetwidth{ width:345px;}
+.pdt25{ padding-top:25px;}
+
+
+
+
+
+
+
+
+
+

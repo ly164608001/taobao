@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lxhrainy.myjz.admin.agency.dao.IAgencyHousesDao">
+    
+	<sql id="agencyHousesAssocColumns">
+		T.housesourceid AS "housesourceid",
+		T.agencyid AS "agencyid"
+	</sql>
+	
+	<sql id="agencyHousesAssocJoins">
+	</sql>
+	
+	<sql id="where">
+		<if test="condition!=null">
+			<where>
+			    1 = 1 
+				<if test="condition.model!=null">
+					<if test="condition.model.deleted!=null">
+						AND T.deleted = #{condition.model.deleted}
+					</if>
+				</if>
+			</where>
+		</if>
+	</sql>
+    
+	<select id="getById" resultType="AgencyHousesAssoc">
+		SELECT 
+			<include refid="agencyHousesAssocColumns"/>
+		FROM agency_houses_assoc T
+		<include refid="agencyHousesAssocJoins"/>
+		WHERE T.id = #{id}
+	</select>
+	
+	<select id="findListByPage" resultType="AgencyHousesAssoc">
+		SELECT 
+			<include refid="agencyHousesAssocColumns"/>
+		FROM agency_houses_assoc T
+		<include refid="agencyHousesAssocJoins"/>
+		<include refid="where"/>
+		order by T.ID DESC
+			<include refid="Sql.pager" />
+	</select>
+	
+	<select id="findAllList" resultType="AgencyHousesAssoc">
+		SELECT 
+			<include refid="agencyHousesAssocColumns"/>
+		FROM agency_houses_assoc T
+		<include refid="agencyHousesAssocJoins"/>
+		<include refid="where"/>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO agency_houses_assoc(
+			housesourceid,
+			agencyid
+		) VALUES (
+			#{housesourceid},
+			#{agencyid}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE agency_houses_assoc SET 	
+			housesourceid = #{housesourceid},
+			agencyid = #{agencyid}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="deleteById">
+		update agency_houses_assoc set 
+			deleted=1
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

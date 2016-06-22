@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lxhrainy.myjz.admin.activity.dao.IActivityRushDao">
+    
+    <resultMap id="ActivityRush" type="com.lxhrainy.myjz.admin.activity.model.ActivityRush">
+		<id column="id" property="id"  />
+	    <result column="housesid" property="housesid"/>
+	    <result column="name" property="name"  />
+	    <result column="starttime" property="starttime"/>
+	    <result column="endtime" property="endtime"  />
+	    <result column="createuser.id" property="createuser.id"/>
+	    <result column="createuser.username" property="createuser.username"/>
+	    <result column="createtime" property="createtime"/>
+	    <result column="status" property="status" />
+	    <result column="deleted" property="deleted" />
+	</resultMap>
+	
+	<sql id="activityRushColumns">
+		T.id AS "id",
+		T.housesid AS "housesid",
+		T.name AS "name",
+		T.starttime AS "starttime",
+		T.endtime AS "endtime",
+		T.createuser AS "createuser.id",
+		createuser.username AS "createuser.username",
+		T.createtime AS "createtime",
+		T.status AS "status",
+		T.deleted AS "deleted"
+		
+	</sql>
+	
+    
+	<sql id="activityRushJoins">
+	JOIN user_info createuser ON createuser.id = T.createuser
+	</sql>
+    
+	<select id="getById" resultType="ActivityRush">
+		SELECT 
+			<include refid="activityRushColumns"/>
+		FROM activity_rush T
+		<include refid="activityRushJoins"/>
+		WHERE T.id = #{id}
+	</select>
+	
+	<select id="findListByPage" resultMap="ActivityRush">
+		SELECT 
+			<include refid="activityRushColumns"/>
+		FROM activity_rush T
+		<include refid="activityRushJoins"/>
+		<if test="condition!=null">
+			<where>
+				T.deleted=0
+				<if test="condition.model!=null">
+					<if test="condition.model.name!=null and condition.model.name!=''">
+						AND T.name LIKE '%${condition.model.name}%'
+					</if>
+				</if>
+			</where>
+			order by T.ID DESC
+			<include refid="Sql.pager" />
+		</if>
+	</select>
+	<select id="getCountByCondition" resultType="int">
+		SELECT 
+			count(*)
+		FROM activity_rush T
+		<include refid="activityRushJoins"/>
+		<if test="condition!=null">
+			<where>
+			 	T.deleted=0
+				<if test="condition.model!=null">
+					<if test="condition.model.name!=null and condition.model.name!=''">
+						AND T.name LIKE '%${condition.model.name}%'
+					</if>
+				</if>
+			</where>
+		</if>
+	</select>
+	
+	<select id="findAllList" resultType="ActivityRush">
+		SELECT 
+			<include refid="activityRushColumns"/>
+		FROM activity_rush T
+		<include refid="activityRushJoins"/>
+		<where>
+			T.deleted=0
+			<if test="condition!=null">
+				<if test="condition.model!=null">
+					<if test="condition.model.name!=null and condition.model.name!=''">
+						AND T.name LIKE '%${condition.model.name}%'
+					</if>
+				</if>
+			</if>
+		</where>		
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO activity_rush (
+		id,
+		housesid,
+		name, 
+      	starttime,
+       	endtime,
+        createuser, 
+      	createtime,
+       	status,
+        deleted
+      )
+    values (
+    	#{id},
+     	#{housesid},
+     	#{name}, 
+     	#{starttime},
+     	#{endtime},
+       	#{createuser.id}, 
+      	#{createtime}, 
+      	#{status},
+       	#{deleted}
+      )
+		<!-- 配置Mysql主键自动增长 -->
+		<selectKey resultType="int" keyProperty="id">
+			select
+			LAST_INSERT_ID() as value  
+		</selectKey>
+	</insert>
+		
+	 <update id="update" >
+    update activity_rush
+    <set >
+      <if test="housesid != null" >
+        housesid = #{housesid},
+      </if>
+      <if test="name != null" >
+        name = #{name},
+      </if>
+      <if test="starttime != null" >
+        starttime = #{starttime},
+      </if>
+      <if test="endtime != null" >
+        endtime = #{endtime},
+      </if>
+      <if test="createuser != null" >
+        createuser = #{createuser.id},
+      </if>
+      <if test="createtime != null" >
+        createtime = #{createtime},
+      </if>
+      <if test="status != null" >
+        status = #{status},
+      </if>
+      <if test="deleted != null" >
+        deleted = #{deleted}
+      </if>
+    </set>
+    where id = #{id}
+  </update>
+	
+	<update id="deleteById">
+		update activity_rush set 
+			deleted=1
+		WHERE id = #{id}
+	</update>
+	<update id="updateStatus">
+		update activity_rush set status = #{status}
+		WHERE id = #{id}
+	</update>
+</mapper>

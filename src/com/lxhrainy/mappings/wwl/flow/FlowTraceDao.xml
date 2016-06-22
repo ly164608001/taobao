@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lxhrainy.myjz.admin.flow.dao.IFlowTraceDao">
+    
+	
+	<sql id="flowTraceColumns">
+		T.id AS "id",
+		T.serialno AS "serialno",
+		T.status AS "status",
+		T.channel AS "channel",
+		T.type AS "type",
+		T.bankname AS "bankname",
+		T.account AS "account",
+		T.userid AS "user.id",
+		T.createtime AS "createtime",
+		T.payeeuserid AS "payeeuser.id",
+		T.money AS "money",
+		T.memo AS "memo",
+		T.deleted AS "deleted"
+	</sql>
+    
+	<sql id="flowTraceJoins">
+	Left JOIN user_info user ON user.id = T.userid
+	Left join user_info payeeuser on payeeuser.id = T.payeeuserid
+	</sql>
+    
+	<select id="getById" resultType="FlowTrace">
+		SELECT 
+			<include refid="flowTraceColumns"/>
+		FROM flow_trace T
+		<include refid="flowTraceJoins"/>
+		WHERE T.id = #{id}
+	</select>
+	
+	<select id="findListByPage" resultType="FlowTrace">
+		SELECT 
+			<include refid="flowTraceColumns"/>
+		FROM flow_trace T
+		<include refid="flowTraceJoins"/>
+		<if test="condition!=null">
+			<where>
+				T.deleted = 1
+				<if test="condition.model!=null">
+					<if test="condition.model.serialno!=null and condition.model.serialno!=''">
+						AND T.serialno LIKE '%${condition.model.serialno}%'
+					</if>
+					<if test="condition.model.status!=null">
+						AND T.status = #{status}
+					</if>
+					<if test="condition.model.type!=null">
+						AND T.type = #{type}
+					</if>
+				</if>
+				<if test="condition.createtime_start != null">
+					AND T.createtime<![CDATA[ >= #{condition.createtime_start} ]]>
+				</if>
+				<if test="condition.createtime_end != null">
+					AND T.createtime<![CDATA[ >= #{condition.createtime_end} ]]>
+				</if>
+				<if test="condition.minMoney != null">
+					AND T.money &gt;= #{condition.minMoney}
+				</if>
+				<if test="condition.maxMoney != null">
+					AND T.money &lt;= #{condition.maxMoney}
+				</if>
+			</where>
+			order by T.ID DESC
+			<include refid="Sql.pager" />
+		</if>
+	</select>
+	<select id="getCountByCondition" resultType="int">
+		SELECT 
+			count(*)
+		FROM flow_trace T
+		<include refid="flowTraceJoins"/>
+		<if test="condition!=null">
+			<where>
+				T.deleted = 1
+				<if test="condition.model!=null">
+					<if test="condition.model.serialno!=null and condition.model.serialno!=''">
+						AND T.serialno LIKE '%${condition.model.serialno}%'
+					</if>
+					<if test="condition.model.status!=null">
+						AND T.status = #{status}
+					</if>
+					<if test="condition.model.type!=null">
+						AND T.type = #{type}
+					</if>
+				</if>
+				<if test="condition.createtime_start != null">
+					AND T.createtime<![CDATA[ >= #{condition.createtime_start} ]]>
+				</if>
+				<if test="condition.createtime_end != null">
+					AND T.createtime<![CDATA[ >= #{condition.createtime_end} ]]>
+				</if>
+				<if test="condition.minMoney != null">
+					AND T.money &gt;= #{condition.minMoney}
+				</if>
+				<if test="condition.maxMoney != null">
+					AND T.money &lt;= #{condition.maxMoney}
+				</if>
+			</where>
+		</if>
+	</select>
+	
+	<select id="findAllList" resultType="FlowTrace">
+		SELECT 
+			<include refid="flowTraceColumns"/>
+		FROM flow_trace T
+		<include refid="flowTraceJoins"/>
+		<where>
+			deleted != 1
+			<if test="condition.model!=null">
+				<if test="condition.model.serialno!=null and condition.model.serialno!=''">
+					and T.serialno LIKE '${condition.model.serialno}%'
+				</if>
+			</if>
+			<if test="condition.createtime_start != null">
+				and T.createtime > #{condition.createtime_start}
+			</if>
+			<if test="condition.createtime_end != null">
+				and T.createtime > #{condition.createtime_end}
+			</if>
+		</where>		
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO flow_trace(
+			serialno,
+			status,
+			channel,
+			type,
+			bankname,
+			account,
+			userid,
+			createtime,
+			payeeuserid,
+			money,
+			memo,
+			deleted
+		) VALUES (
+			#{serialno},
+			#{status},
+			#{channel},
+			#{type},
+			#{bankname},
+			#{account},
+			#{user.id},
+			#{createtime},
+			#{payeeuser.id},
+			#{money},
+			#{memo},
+			#{deleted}
+		)
+		<!-- 配置Mysql主键自动增长 -->
+		<selectKey resultType="int" keyProperty="id">
+			select
+			LAST_INSERT_ID() as value  
+		</selectKey>
+	</insert>
+	
+	<update id="update">
+		UPDATE flow_trace
+		<set>
+			<if test="serialno!=null">
+				serialno = #{serialno},
+			</if>
+			<if test="status!=null">
+				status = #{status},
+			</if>
+			<if test="channel!=null">
+				channel = #{channel},
+			</if>
+			<if test="type!=null">
+				type = #{type},
+			</if>
+			<if test="bankname!=null">
+				bankname = #{bankname},
+			</if>
+			<if test="account!=null">
+				account = #{account},
+			</if>
+			<if test="user!=null and user.id!=null">
+				userid = #{user.id},
+			</if>
+			<if test="createtime!=null">
+				createtime = #{createtime},
+			</if>
+			<if test="payeeuserid!=null">
+				payeeuserid = #{payeeuser.id},
+			</if>
+			<if test="money!=null">
+				money = #{money},
+			</if>
+			<if test="memo!=null">
+				memo = #{memo},
+			</if>
+			<if test="deleted != null">
+				deleted = #{deleted}
+			</if>
+		</set>
+		WHERE id = #{id}
+	</update>
+	
+	<update id="deleteById">
+		update flow_trace set 
+			deleted=1
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

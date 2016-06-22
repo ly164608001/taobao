@@ -1,0 +1,507 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lxhrainy.myjz.admin.order.dao.IOrderInfoDao">
+
+	<resultMap id="orderBase" type="OrderInfo">
+		<id property="id" column="id" />
+		<result property="orderno" column="orderno" />
+		<result property="status" column="status"/>
+		<result property="currentstatus" column="currentstatus"/>
+		<result property="createtime" column="createtime"/>
+		<result property="confirmtime" column="confirmtime"/>
+		<result property="paytime" column="paytime"/>
+		<result property="contracttime" column="contracttime"/>
+		<result property="finishtime" column="finishtime"/>
+		<result property="remaincontracttime" column="remaincontracttime"/>
+		<result property="lastdebooktime" column="lastdebooktime"/>
+		<result property="remaindebooktime" column="remaindebooktime"/>
+		<result property="statusreport" column="statusreport"/>
+		<result property="bookmoney" column="bookmoney"/>
+		<result property="oriallmoney" column="oriallmoney"/>
+		<result property="subsidymoney" column="subsidymoney"/>
+		<result property="deductionmoney" column="deductionmoney"/>
+		<result property="bonusmoney" column="bonusmoney"/>
+		<result property="commissionmoney" column="commissionmoney"/>
+		<result property="buyername" column="buyername"/>
+		<result property="buyerphone" column="buyerphone"/>
+		<result property="buyeridcard" column="buyeridcard"/>
+		<result property="deleted" column="deleted"/>
+		<result property="seller.id" column="seller.id" />
+		<result property="seller.username" column="seller.username"/>
+		<result property="housesInfo.id" column="housesInfo.id"/>
+		<result property="source.id" column="source.id"/>
+	</resultMap>
+	
+	<resultMap id="orderList" type="OrderInfo">
+		<id property="id" column="id" />
+		<result property="orderno" column="orderno" />
+		<result property="status" column="status"/>
+		<result property="currentstatus" column="currentstatus"/>
+		<result property="createtime" column="createtime"/>
+		<result property="confirmtime" column="confirmtime"/>
+		<result property="paytime" column="paytime"/>
+		<result property="contracttime" column="contracttime"/>
+		<result property="finishtime" column="finishtime"/>
+		<result property="remaincontracttime" column="remaincontracttime"/>
+		<result property="lastdebooktime" column="lastdebooktime"/>
+		<result property="remaindebooktime" column="remaindebooktime"/>
+		<result property="statusreport" column="statusreport"/>
+		<result property="bookmoney" column="bookmoney"/>
+		<result property="oriallmoney" column="oriallmoney"/>
+		<result property="subsidymoney" column="subsidymoney"/>
+		<result property="deductionmoney" column="deductionmoney"/>
+		<result property="bonusmoney" column="bonusmoney"/>
+		<result property="commissionmoney" column="commissionmoney"/>
+		<result property="buyername" column="buyername"/>
+		<result property="buyerphone" column="buyerphone"/>
+		<result property="buyeridcard" column="buyeridcard"/>
+		<result property="deleted" column="deleted"/>
+		
+		<result property="user.id" column="user.id"/>
+		<result property="user.username" column="user.username"/>
+		<result property="seller.id" column="seller.id" />
+		<result property="seller.username" column="seller.username"/>
+		<result property="seller.phone" column="seller.phone"/>
+		<result property="estate.id" column="estate.id"/>
+		<result property="estate.username" column="estate.username"/>
+		
+		<result property="housesInfo.id" column="housesInfo.id"/>
+		<result property="housesInfo.name" column="housesInfo.name"/>
+		<result property="housesInfo.detailaddress" column="housesInfo.detailaddress"/>
+		
+		<result property="source.id" column="source.id"/>
+		<result property="source.floornum" column="source.floornum"/>
+		<result property="source.buildarea" column="source.buildarea"/>
+		<result property="source.unitprice" column="source.unitprice"/>
+		<result property="source.totalprice" column="source.totalprice"/>
+		<result property="source.unit" column="source.unit"/>
+		<result property="source.roomnum" column="source.roomnum"/>
+		
+		<result property="source.houseType.name" column="houseType.name"/>
+		<result property="source.houseType.roomnum" column="houseType.roomnum"/>
+		<result property="source.houseType.toiletnum" column="houseType.toiletnum"/>
+		<result property="source.houseType.hallnum" column="houseType.hallnum"/>
+		<result property="source.houseType.balconynum" column="houseType.balconynum"/>
+		<result property="source.houseType.id" column="houseType.id"/>
+		
+		<result property="source.housesBuilding.name" column="housesBuilding.name"/>
+		<result property="source.housesBuilding.id" column="housesBuilding.id"/>
+		
+		<collection property="debookList" ofType="OrderDebookRecord">
+			<id property="id" column="debookList.id" />
+			<id property="createtime" column="debookList.createtime" />
+			<id property="handletime" column="debookList.handletime" />
+			<id property="status" column="debookList.status" />
+		</collection>
+		
+	</resultMap>
+	
+	
+    <resultMap id="orderDetail" type="OrderInfo">
+		<id property="id" column="id" />
+		<result property="orderno" column="orderno" />
+		<result property="status" column="status"/>
+		<result property="currentstatus" column="currentstatus"/>
+		<result property="createtime" column="createtime"/>
+		<result property="confirmtime" column="confirmtime"/>
+		<result property="paytime" column="paytime"/>
+		<result property="contracttime" column="contracttime"/>
+		<result property="finishtime" column="finishtime"/>
+		<result property="remaincontracttime" column="remaincontracttime"/>
+		<result property="lastdebooktime" column="lastdebooktime"/>
+		<result property="remaindebooktime" column="remaindebooktime"/>
+		<result property="statusreport" column="statusreport"/>
+		<result property="bookmoney" column="bookmoney"/>
+		<result property="oriallmoney" column="oriallmoney"/>
+		<result property="subsidymoney" column="subsidymoney"/>
+		<result property="deductionmoney" column="deductionmoney"/>
+		<result property="bonusmoney" column="bonusmoney"/>
+		<result property="commissionmoney" column="commissionmoney"/>
+		<result property="buyername" column="buyername"/>
+		<result property="buyerphone" column="buyerphone"/>
+		<result property="buyeridcard" column="buyeridcard"/>
+		<result property="deleted" column="deleted"/>
+		
+		<result property="user.id" column="user.id"/>
+		<result property="user.username" column="user.username"/>
+		<result property="seller.id" column="seller.id" />
+		<result property="seller.username" column="seller.username"/>
+		<result property="seller.phone" column="seller.phone"/>
+		<result property="estate.id" column="estate.id"/>
+		<result property="estate.username" column="estate.username"/>
+		
+		<result property="housesInfo.id" column="housesInfo.id"/>
+		<result property="housesInfo.name" column="housesInfo.name"/>
+		<result property="housesInfo.detailaddress" column="housesInfo.detailaddress"/>
+		
+		<result property="source.id" column="source.id"/>
+		<result property="source.floornum" column="source.floornum"/>
+		<result property="source.buildarea" column="source.buildarea"/>
+		<result property="source.unitprice" column="source.unitprice"/>
+		<result property="source.totalprice" column="source.totalprice"/>
+		<result property="source.unit" column="source.unit"/>
+		<result property="source.roomnum" column="source.roomnum"/>
+		
+		<result property="source.houseType.name" column="houseType.name"/>
+		<result property="source.houseType.roomnum" column="houseType.roomnum"/>
+		<result property="source.houseType.toiletnum" column="houseType.toiletnum"/>
+		<result property="source.houseType.hallnum" column="houseType.hallnum"/>
+		<result property="source.houseType.balconynum" column="houseType.balconynum"/>
+		<result property="source.houseType.id" column="houseType.id"/>
+		
+		<result property="source.housesBuilding.name" column="housesBuilding.name"/>
+		<result property="source.housesBuilding.id" column="housesBuilding.id"/>
+		
+		<result property="appraise.id" column="appraise.id"/>
+		<result property="appraise.pricestar" column="appraise.pricestar"/>
+		<result property="appraise.placestar" column="appraise.placestar"/>
+		<result property="appraise.trafficstar" column="appraise.trafficstar"/>
+		<result property="appraise.conditionstar" column="appraise.conditionstar"/>
+		<result property="appraise.pics" column="appraise.pics"/>
+		<result property="appraise.content" column="appraise.content"/>
+		<result property="appraise.servicemannerstar" column="appraise.servicemannerstar"/>
+		<result property="appraise.serviceskillstar" column="appraise.serviceskillstar"/>
+		<result property="appraise.appraisecontent" column="appraise.appraisecontent"/>
+		<result property="appraise.appendcontent" column="appraise.appendcontent"/>
+		<result property="appraise.appendappraisecontent" column="appraise.appendappraisecontent"/>
+		
+		<collection property="debookList" ofType="OrderDebookRecord">
+			<id property="id" column="debookList.id" />
+			<id property="createtime" column="debookList.createtime" />
+			<id property="handletime" column="debookList.handletime" />
+			<id property="status" column="debookList.status" />
+			<id property="refusedescription" column="debookList.refusedescription" />
+			<id property="description" column="debookList.description" />
+			<id property="money" column="debookList.money" />
+			<id property="reasonid" column="debookList.reasonid" />
+		</collection>
+		
+	</resultMap>
+	
+	
+	<sql id="orderInfoColumns">
+		T.id AS "id",
+		T.orderno AS "orderno",
+		T.status AS "status",
+		T.currentstatus AS "currentstatus",
+		T.createtime AS "createtime",
+		T.confirmtime AS "confirmtime",
+		T.paytime AS "paytime",
+		T.contracttime AS "contracttime",
+		T.finishtime AS "finishtime",
+		T.remaincontracttime AS "remaincontracttime",
+		T.lastdebooktime AS "lastdebooktime",
+		T.remaindebooktime AS "remaindebooktime",
+		T.statusreport AS "statusreport",
+		T.bookmoney AS "bookmoney",
+		T.oriallmoney AS "oriallmoney",
+		T.subsidymoney AS "subsidymoney",
+		T.deductionmoney AS "deductionmoney",
+		T.bonusmoney AS "bonusmoney",
+		T.commissionmoney AS "commissionmoney",
+		T.buyername AS "buyername",
+		T.buyerphone AS "buyerphone",
+		T.buyeridcard AS "buyeridcard",
+		T.deleted AS "deleted",
+		
+		T.sellerid AS "seller.id",
+		T.userid AS "user.id",
+		T.housesid AS "housesInfo.id",
+		T.sourceid AS "source.id"
+	</sql>
+	
+	<sql id="orderListColumns">
+		H.name AS "housesInfo.name",
+		H.detailaddress AS "housesInfo.detailaddress",
+		HS.floornum AS "source.floornum",
+		HS.buildarea AS "source.buildarea",
+		HS.unitprice AS "source.unitprice",
+		HS.totalprice AS "source.totalprice",
+		HS.unit AS "source.unit",
+		HS.roomnum AS "source.roomnum",
+		
+		HB.id AS "housesBuilding.id",
+		HB.name AS "housesBuilding.name",
+		
+		HT.id AS "houseType.id",
+		HT.name AS "houseType.name",
+		
+		TD.id AS "debookList.id",
+		TD.createtime AS "debookList.createtime",
+		TD.handletime AS "debookList.handletime",
+		TD.status AS "debookList.status",
+		
+		U.username AS "user.username",
+		EU.username AS "estate.username",
+		EU.id AS "estate.id",
+		S.username AS "seller.username",
+		S.phone AS "seller.phone",
+		HT.roomnum AS "houseType.roomnum",
+		HT.toiletnum AS "houseType.toiletnum",
+		HT.hallnum AS "houseType.hallnum",
+		HT.balconynum AS "houseType.balconynum"
+	</sql>
+	
+	<sql id="orderDetailColumns">
+		TD.description AS "debookList.description",
+		TD.refusereasonid AS "debookList.refusereasonid",
+		TD.money AS "debookList.money",
+		TD.reasonid AS "debookList.reasonid",
+		
+		appraise.id AS "appraise.id",
+		appraise.pricestar AS "appraise.pricestar",
+		appraise.placestar AS "appraise.placestar",
+		appraise.trafficstar AS "appraise.trafficstar",
+		appraise.conditionstar AS "appraise.conditionstar",
+		appraise.pics AS "appraise.pics",
+		appraise.content AS "appraise.content",
+		appraise.servicemannerstar AS "appraise.servicemannerstar",
+		appraise.serviceskillstar AS "appraise.serviceskillstar",
+		appraise.appraisecontent AS "appraise.appraisecontent",
+		appraise.appendcontent AS "appraise.appendcontent",
+		appraise.appendappraisecontent AS "appraise.appendappraisecontent"
+	</sql>
+	
+	<sql id="orderListJoins">
+		LEFT JOIN user_info U on U.id = T.userid
+		LEFT JOIN user_info S on S.id = T.sellerid
+		LEFT JOIN houses_info H on H.id = T.housesid
+		LEFT JOIN user_info EU on EU.id = H.createuser
+		LEFT JOIN houses_source HS on HS.id = T.sourceid
+		LEFT JOIN houses_type HT on HT.id = HS.housetypeid
+		LEFT JOIN houses_building HB on HB.id = HS.buildingid
+		LEFT JOIN order_debook_record TD ON TD.orderid = T.ID
+	</sql>
+	
+	<sql id="orderDetailJoins">
+		LEFT JOIN order_appraise_record appraise ON appraise.orderid = T.ID
+	</sql>
+	
+    <sql id="where">
+		<if test="condition!=null">
+			<where>
+			    T.deleted = 0 
+				<if test="condition.model!=null">
+					<if test="condition.model.status!=null">
+						AND T.status = #{condition.model.status}
+					</if>
+					<if test="condition.model.currentstatus!=null">
+						AND T.currentstatus = #{condition.model.currentstatus}
+					</if>
+					<if test="condition.model.user!=null">
+						<if test="condition.model.user.id!=null">
+							AND T.userid = #{condition.model.user.id}
+						</if>
+					</if>
+					<if test="condition.model.estate!=null">
+						<if test="condition.model.estate.id!=null">
+							AND EU.id = #{condition.model.estate.id}
+						</if>
+					</if>
+				</if>
+			</where>
+		</if>
+	</sql>
+	
+	<select id="getById" resultMap="orderBase">
+		SELECT 
+			<include refid="orderInfoColumns"/>
+		FROM order_info T
+		WHERE T.id = #{id} 
+			AND T.deleted = 0
+	</select>
+	
+	<select id="getDetailById" resultMap="orderDetail">
+		SELECT 
+			<include refid="orderInfoColumns"/>,
+			<include refid="orderListColumns"/>,
+			<include refid="orderDetailColumns"/>
+		FROM order_info T
+		<include refid="orderListJoins"/>
+		<include refid="orderDetailJoins"/>
+		WHERE T.id = #{id} 
+			AND T.deleted = 0
+	</select>
+	
+	<select id="findListByPage" resultMap="orderList">
+		SELECT 
+			<include refid="orderInfoColumns"/>,
+			<include refid="orderListColumns"/>
+		FROM order_info T
+		<include refid="orderListJoins"/>
+		<include refid="where"/>
+		order by T.ID DESC
+			<include refid="Sql.pager" />
+	</select>
+	
+	<select id="findAllList" resultMap="orderList">
+		SELECT 
+			<include refid="orderInfoColumns"/>,
+			<include refid="orderListColumns"/>
+		FROM order_info T
+		<include refid="orderListJoins"/>
+		<include refid="where"/>
+	</select>
+	
+	<select id="getCountByCondition" resultType="int">
+		SELECT COUNT(1)
+		FROM order_info T
+		LEFT JOIN houses_info H on H.id = T.housesid
+		LEFT JOIN user_info EU on EU.id = H.createuser
+		<include refid="where"/>
+	</select>
+	
+	<select id="getCountConfirm" resultType="int">
+		SELECT COUNT(1)
+		FROM order_info T
+		LEFT JOIN houses_info H on H.id = T.housesid
+		LEFT JOIN user_info EU on EU.id = H.createuser
+		WHERE T.status = 0
+			AND EU.id = #{estateid}
+			AND NOW()-T.createtime > 7200000
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO order_info(
+			id,
+			orderno,
+			housesid,
+			sourceid,
+			userid,
+			sellerid,
+			status,
+			currentstatus,
+			createtime,
+			confirmtime,
+			paytime,
+			contracttime,
+			finishtime,
+			remaincontracttime,
+			lastdebooktime,
+			remaindebooktime,
+			statusreport,
+			bookmoney,
+			oriallmoney,
+			subsidymoney,
+			deductionmoney,
+			bonusmoney,
+			commissionmoney,
+			buyername,
+			buyerphone,
+			buyeridcard,
+			deleted,
+			ordersource
+		) VALUES (
+			#{id},
+			#{orderno},
+			#{housesInfo.id},
+			#{source.id},
+			#{user.id},
+			#{seller.id},
+			#{status},
+			#{currentstatus},
+			#{createtime},
+			#{confirmtime},
+			#{paytime},
+			#{contracttime},
+			#{finishtime},
+			#{remaincontracttime},
+			#{lastdebooktime},
+			#{remaindebooktime},
+			#{statusreport},
+			#{bookmoney},
+			#{oriallmoney},
+			#{subsidymoney},
+			#{deductionmoney},
+			#{bonusmoney},
+			#{commissionmoney},
+			#{buyername},
+			#{buyerphone},
+			#{buyeridcard},
+			#{deleted},
+			#{ordersource}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE order_info SET 	
+			orderno = #{orderno},
+			housesid = #{housesid},
+			sourceid = #{sourceid},
+			userid = #{userid},
+			sellerid = #{sellerid},
+			status = #{status},
+			currentstatus = #{currentstatus},
+			createtime = #{createtime},
+			confirmtime = #{confirmtime},
+			paytime = #{paytime},
+			contracttime = #{contracttime},
+			finishtime = #{finishtime},
+			remaincontracttime = #{remaincontracttime},
+			lastdebooktime = #{lastdebooktime},
+			remaindebooktime = #{remaindebooktime},
+			statusreport = #{statusreport},
+			bookmoney = #{bookmoney},
+			oriallmoney = #{oriallmoney},
+			subsidymoney = #{subsidymoney},
+			deductionmoney = #{deductionmoney},
+			bonusmoney = #{bonusmoney},
+			commissionmoney = #{commissionmoney},
+			buyername = #{buyername},
+			buyerphone = #{buyerphone},
+			buyeridcard = #{buyeridcard},
+			deleted = #{deleted},
+			ordersource = #{ordersource}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="updateTimeAndStatus">
+		UPDATE order_info SET 
+			<if test="model.status!=null">
+				status = #{model.status},
+			</if>	
+			<if test="model.currentstatus!=null">
+				currentstatus = #{model.currentstatus},
+			</if>
+			<if test="model.confirmtime!=null">
+				confirmtime = #{model.confirmtime},
+			</if>
+			<if test="model.createtime!=null">
+				createtime = #{model.createtime},
+			</if>
+			<if test="model.paytime!=null">
+				paytime = #{model.paytime},
+			</if>
+			<if test="model.contracttime!=null">
+				contracttime = #{model.contracttime},
+			</if>
+			<if test="model.finishtime!=null">
+				finishtime = #{model.finishtime},
+			</if>
+			<if test="model.remaincontracttime!=null">
+				remaincontracttime = #{model.remaincontracttime},
+			</if>
+			<if test="model.lastdebooktime!=null">
+				lastdebooktime = #{model.lastdebooktime},
+			</if>
+			<if test="model.remaindebooktime!=null">
+				remaindebooktime = #{model.remaindebooktime},
+			</if>
+			id = #{model.id}
+		WHERE id = #{model.id}
+	</update>
+	
+	<update id="updateStatus">
+		UPDATE order_info SET 
+			status = #{status},
+			currentstatus = #{currentstatus}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="deleteById">
+		update order_info set 
+			deleted=1
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

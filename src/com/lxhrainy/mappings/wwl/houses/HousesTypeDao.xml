@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lxhrainy.myjz.admin.houses.dao.IHousesTypeDao">
+	<sql id="baseColumn">
+		T.id,T.name,T.roomnum,T.toiletnum,T.hallnum,T.balconynum,T.typepic,T.floorheight,T.buildarea,T.sharedarea,
+		T.presentedarea,T.status,T.memo,T.ordervalue,T.modifyuser,T.modifytime,T.deleted
+	</sql>
+	
+	<select id="findListByPage" resultType="HousesType">
+		SELECT 
+			<include refid="baseColumn"></include>
+		FROM 
+			houses_type T
+		<if test="condition!=null">
+			<where>
+				T.deleted !=1
+			</where>
+			ORDER BY T.id DESC
+			<include refid="Sql.pager" />
+		</if>
+	</select>
+	
+	<select id="getCountByCondition" resultType="int">
+		SELECT 
+			count(*)
+		FROM houses_type T
+		<if test="condition!=null">
+			<where>
+				T.deleted !=1
+			</where>
+		</if>
+	</select>
+	
+	<select id="findAllList" resultType="HousesType">
+		SELECT 
+			<include refid="baseColumn"></include>
+		FROM 
+			houses_type T
+		<if test="condition!=null">
+			<where>
+				T.deleted !=1
+			</where>
+		</if>
+	</select>
+	
+
+	<!--根据ID获取详情  -->
+	<select id="getById" resultType="HousesType">
+		SELECT 
+			<include refid="baseColumn"></include>
+		FROM 
+			houses_type T
+		WHERE 
+			id = #{id}
+	</select>
+	
+<!-- 根据ID删除楼盘信息 -->
+	<update id="deleteById">
+		UPDATE 
+			houses_type 
+		SET 
+			deleted=1
+		WHERE 
+			id = #{id}
+	</update>
+	
+	<!-- 插入楼盘详细信息 -->
+	<insert id="insert" >
+		<!-- 配置Mysql主键自动增长 -->
+		<selectKey resultType="int" keyProperty="id" order="BEFORE">
+			SELECT 
+				auto_increment AS id 
+			FROM 
+				information_schema.tables    
+    		WHERE 
+    			table_name='houses_type'
+		</selectKey>
+		INSERT INTO 
+			houses_type (
+				id,
+				name,
+		       	roomnum,
+		        toiletnum, 
+		        hallnum,
+		        balconynum,
+		        typepic,
+		        floorheight,
+		        buildarea,
+		        sharedarea,
+		        presentedarea,
+		        status,
+		        memo,
+		        ordervalue,
+		        modifyuser,
+		        modifytime,
+		        deleted
+			)
+		VALUES (
+	    	#{id},
+			#{name},
+	       	#{roomnum},
+	        #{toiletnum}, 
+	        #{hallnum},
+	        #{balconynum},
+	        #{typepic},
+	        #{floorheight},
+	        #{buildarea},
+			#{sharedarea},
+	       	#{presentedarea},
+	       	#{status},
+	        #{memo}, 
+	        #{ordervalue},
+	        #{modifyuser},
+	        #{modifytime},
+	        #{deleted}
+	      )
+	</insert>
+	<!-- 更新楼盘基本信息 -->
+	<update id="update">
+		UPDATE 
+			houses_type 
+		<set>
+			<if test="name !=null and name !=''">
+				name = #{name},
+			</if>
+			<if test="roomnum !=null and roomnum !=''">
+				roomnum = #{roomnum},
+			</if>
+			<if test="toiletnum !=null and toiletnum !='' ">
+				toiletnum = #{toiletnum},
+			</if>
+			<if test="hallnum !=null and hallnum !=''" >
+				hallnum = #{hallnum},
+			</if>
+			<if test="balconynum !=null and balconynum !=''">
+				balconynum = #{balconynum},
+			</if>
+			<if test="typepic !=null and typepic !=''" >
+				typepic = #{typepic},
+			</if>
+			<if test="floorheight !=null and floorheight !=''" >
+				floorheight = #{floorheight},
+			</if>
+			<if test="buildarea !=null and buildarea !=''">
+				buildarea = #{buildarea},
+			</if>
+			<if test="sharedarea !=null and sharedarea !=''">
+				sharedarea = #{sharedarea},
+			</if>
+			<if test="presentedarea !=null and presentedarea !='' ">
+				presentedarea = #{presentedarea},
+			</if>
+			<if test="status !=null and status !=''" >
+				status = #{status},
+			</if>
+			<if test="memo !=null and memo !=''">
+				memo = #{memo},
+			</if>
+			<if test="ordervalue !=null and ordervalue !=''" >
+				ordervalue = #{ordervalue},
+			</if>
+			<if test="modifyuser !=null and modifyuser !=''" >
+				modifyuser = #{modifyuser},
+			</if>
+			<if test="modifytime !=null and modifytime !=''" >
+				modifytime = #{modifytime},
+			</if>
+			<if test="deleted !=null and deleted !=''" >
+				deleted = #{deleted},
+			</if>
+		</set>
+		WHERE 
+			id = #{id}
+	</update>
+</mapper>

@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lxhrainy.myjz.admin.houses.dao.IHousesFlashDao">
+	<sql id="baseColumn">
+		T.id,T.title,T.videoaddress,T.housesid,T.ordervalue,T.modifyuser,T.modifytime,T.deleted
+	</sql>
+
+	<select id="findListByPage" resultType="HousesFlash">
+		SELECT 
+			<include refid="baseColumn"></include>
+			,T.housesid AS "houses.id" 
+		FROM 
+			houses_flash T
+		<if test="condition!=null">
+			<where>
+				T.deleted !=1
+			</where>
+			ORDER BY T.id DESC
+			<include refid="Sql.pager" />
+		</if>
+	</select>
+	
+	<select id="getCountByCondition" resultType="int">
+		SELECT 
+			count(*)
+		FROM houses_flash T
+		<if test="condition!=null">
+			<where>
+				T.deleted !=1
+			</where>
+		</if>
+	</select>
+	
+	<select id="findAllList" resultType="HousesFlash">
+		SELECT 
+			<include refid="baseColumn"></include>
+		FROM 
+			houses_flash T
+		<where>
+			T.deleted !=1
+		</where>
+	</select>
+	
+
+	<!--根据ID获取详情  -->
+	<select id="getById" resultType="HousesFlash">
+		SELECT 
+			<include refid="baseColumn"></include>
+			,t.housesid AS "houses.id"
+		FROM 
+			houses_flash T
+		WHERE 
+			id = #{id}
+	</select>
+	
+<!-- 根据ID删除楼盘信息 -->
+	<update id="deleteById">
+		UPDATE 
+			houses_flash 
+		SET 
+			deleted=1
+		WHERE 
+			id = #{id}
+	</update>
+	
+	<!-- 插入楼盘详细信息 -->
+	<insert id="insert" >
+		<!-- 配置Mysql主键自动增长 -->
+		<selectKey resultType="int" keyProperty="id" order="BEFORE">
+			SELECT 
+				auto_increment AS id 
+			FROM 
+				information_schema.tables    
+    		WHERE 
+    			table_name='houses_flash'
+		</selectKey>
+		INSERT INTO 
+			houses_flash (
+				id,
+				title,
+		       	videoaddress,
+		        housesid,
+		        ordervalue,
+		        modifyuser,
+		        modifytime,
+		        deleted
+			)
+		VALUES (
+	    	#{id},
+			#{title},
+	       	#{videoaddress},
+	        #{houses.id},
+	        #{ordervalue},
+	        #{modifyuser},
+	        #{modifytime},
+	        #{deleted}
+	      )
+	</insert>
+	<!-- 更新楼盘基本信息 -->
+	<update id="update">
+		UPDATE 
+			houses_flash 
+		<set>
+			<if test="title !=null and title !=''">
+				title = #{title},
+			</if>
+			<if test="videoaddress !=null and videoaddress !=''">
+				videoaddress = #{videoaddress},
+			</if>
+			<if test="houses !=null and  houses.id and houses.id !=''" >
+				housesid = #{houses.id},
+			</if>
+			<if test="ordervalue !=null and ordervalue !=''">
+				ordervalue = #{ordervalue},
+			</if>
+			<if test="modifyuser !=null and modifyuser !=''" >
+				modifyuser = #{modifyuser},
+			</if>
+			<if test="modifytime !=null and modifytime !=''" >
+				modifytime = #{modifytime},
+			</if>
+			<if test="deleted !=null and deleted !=''" >
+				deleted = #{deleted},
+			</if>
+		</set>
+		WHERE 
+			id = #{id}
+	</update>
+</mapper>

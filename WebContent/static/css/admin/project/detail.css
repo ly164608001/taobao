@@ -1,0 +1,66 @@
+/**********ls_1013********/
+.ls_1013 {
+	}
+.ls_1013_c {
+	min-width:200px;
+	margin-bottom:20px;
+	border:1px solid #ddd;
+	border-radius:5px;
+	box-shadow:3px 4px 5px #eee;
+	}
+.ls_1013_cl {
+	width:48%;
+	float:left;
+	display:inline-block;
+	}
+.ls_1013_cr {
+	width:49%;
+	float:right;
+	display:inline-block;
+	}
+.ls_1013_c_h {
+	height:54px;
+	line-height:54px;
+	padding:0 12px 0 12px;
+	border-bottom:1px solid #ccc;
+	font-family:"Microsoft YaHei";
+	font-size:24px;
+	}
+.ls_1013_c_c {
+	line-height:38px;
+	padding:0 12px 0 12px;
+	font-size:14px;
+	}
+	
+.ls_1013_cr .ls_1013_c_c  {
+	margin:18px 0 0 0;
+	}
+.ls_1013_cr a {
+	width:100px;
+	margin:0 12px 12px 12px;
+	float:left;
+	display:inline-block;
+	font-size:14px;
+	color:#333;
+	text-align:center;
+	}
+.ls_1013_cr a:hover {
+	text-decoration:underline;
+	}
+.ls_1013_cr a div {
+	background:url(../images/.png) no-repeat;
+	background-position:0px -20px;
+	width:100px;
+	height:56px;
+	border:1px solid #eee;
+	}
+.ls_1013_cr p {
+	height:26px;
+	line-height:26px;
+	}
+.ls_1013_cr p span {
+	font-family:Arial, Helvetica, sans-serif;
+	color:#f7991e;
+	}
+
+/**********ls_1013 end********/

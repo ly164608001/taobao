@@ -1,0 +1,249 @@
+/**********ls_1012_0********/
+.ls_1012_0 {
+	line-height:32px;
+	padding:12px 0 0 12px;
+	}
+.ls_1012_0 input {
+	height:22px;
+	line-height:18px;
+	padding:0 6px;
+	*padding:0 3px;
+	margin:0 3px;
+	display:inline-block;
+	vertical-align:middle;
+	cursor:pointer;
+	}
+@-moz-document url-prefix() { .ls_1012_0 input {line-height:14px;} } 
+/**********ls_1012_0 end********/
+/**********ls_1012_1********/
+.ls_1012_1 {
+	white-space:nowrap; 
+	padding:0 0 20px 0;
+	}
+.ls_1012_1 ul {
+	}
+.ls_1012_1 li {
+	width:auto;
+	padding:20px 0 0 20px;
+	float:left;
+	display:inline-block;
+	}
+.ls_1012_1 dl {
+	background:#fff;
+	border:1px solid #ddd;
+	border-radius:5px;
+	box-shadow:3px 4px 5px #eee;
+	}
+.ls_1012_1 dl:hover {
+	border:1px solid #ccc;
+	box-shadow:3px 4px 5px #ccc;
+	}
+.ls_1012_1 dt {
+	background:#f7f7f7;
+	line-height:38px;
+	}
+.ls_1012_1 dt .span_l {
+	padding:0 9px 0 9px;
+	float:left;
+	display:inline-block;
+	font-size:13px;
+	}
+.ls_1012_1 dt .span_r {
+	float:right;
+	*float:none;
+	display:inline;
+	}
+.ls_1012_1 dt input {
+	height:22px;
+	line-height:18px;
+	padding:0 6px;
+	*padding:0 3px;
+	margin:0 3px;
+	display:inline-block;
+	vertical-align:middle;
+	cursor:pointer;
+	}
+@-moz-document url-prefix() { .ls_1012_1 dt input {line-height:14px;} } 
+.ls_1012_1 dd {
+	}
+.ls_1012_1 dd div {
+	line-height:26px;
+	}
+.ls_1012_1 dd .span_l {
+	padding:0 6px 0 6px;
+	float:left;
+	display:inline-block;
+	color:#666;
+	}
+.ls_1012_1 dd .span_r {
+	display:inline-block;
+	}
+.ls_1012_1 dd input {
+	height:22px;
+	line-height:18px;
+	padding:0 6px;
+	*padding:0 3px;
+	margin:0 3px;
+	display:inline-block;
+	vertical-align:middle;
+	cursor:pointer;
+	}
+@-moz-document url-prefix() { .ls_1012_1 dd input {line-height:14px;} } 
+/**********ls_1012_1 end********/
+/**********ls_1012_2********/
+.ls_1012_2 {
+	background:#fff;
+	width:auto;
+	border:1px solid #ddd;
+	border-radius:5px;
+	position:fixed;
+	top:50%;
+	left:50%;
+	margin:-80px 0 0 -150px;
+	z-index:99999;
+	}
+.ls_1012_2 ul {
+	}
+.ls_1012_2 li {
+	line-height:22px;
+	padding:5px;
+	}
+.ls_1012_2 div {
+	background:#f7f7f7;
+	line-height:28px;
+	padding:0 5px 0 5px;
+	font-size:13px;
+	text-align:center;
+	}
+.ls_1012_2 li.li_c {
+	color:#666;
+	}
+.ls_1012_2 li.li_b {
+	padding:10px 0;
+	text-align:center;
+	}
+.ls_1012_2 li input {
+	height:22px;
+	line-height:18px;
+	padding:0 6px;
+	*padding:0 3px;
+	margin:0 3px;
+	display:inline-block;
+	vertical-align:middle;
+	cursor:pointer;
+	}
+@-moz-document url-prefix() { .ls_1012_2 li input {line-height:14px;} } 
+.ls_1012_2 li input[type=text] {
+	width:86px;
+	height:20px;
+	line-height:20px;
+	border:1px solid #ddd;
+	cursor:text;
+	}
+.ls_1012_2 li select {
+	height:20px;
+	line-height:20px;
+	border:1px solid #ddd;
+	display:inline-block;
+	vertical-align:middle;
+	}
+/**********ls_1012_2 end********/
+/**********ls_1012_3********/
+.ls_1012_3 {
+	word-break:break-all;
+	}
+.ls_1012_3_h {
+	}
+.ls_1012_3_h dl {
+	background:#fff;
+	width:300px;
+	margin:0 auto;
+	border:1px solid #ddd;
+	border-radius:5px;
+	box-shadow:3px 4px 5px #eee;
+	}
+.ls_1012_3_h dt {
+	background:#f7f7f7;
+	line-height:24px;
+	padding:8px 5px;
+	font-size:13px;
+	}
+.ls_1012_3_h dd {
+	line-height:20px;
+	padding:5px 5px;
+	color:#666;
+	}
+.ls_1012_3_h .p_a {
+	background:#ccc;
+	width:100%;
+	height:1px;
+	line-height:1px;
+	display:inline-block;
+	position:relative;
+	top:52px;
+	left:0px;
+	}
+.ls_1012_3_h .span_a {
+	background:#ccc;
+	width:1px;
+	height:52px;
+	display:inline-block;
+	position:absolute;
+	top:-52px;
+	left:50%;
+	}
+.ls_1012_3_c {
+	width:100%;
+	padding:36px 0 24px 0;
+	*padding:36px 0 36px 0;
+	overflow-x:auto;
+	overflow-y:hidden;
+	}
+.ls_1012_3_c ul {
+	padding:52px 0 0 0;
+	}
+.ls_1012_3_c li {
+	width:200px;
+	margin:0 auto;
+	padding:0 0 0 20px;
+	float:left;
+	display:inline-block;
+	position:relative;
+	top:0;
+	left:0;
+	}
+.ls_1012_3_c li .div_a {
+	background:#ccc;
+	width:1px;
+	height:36px;
+	position:absolute;
+	top:-36px;
+	left:50%;
+	margin:0 0 0 8px;
+	}
+.ls_1012_3_c li .div_at {
+	height:36px;
+	line-height:36px;
+	position:absolute;
+	top:-36px;
+	left:50%;
+	margin:0 0 0 -10px;
+	}
+.ls_1012_3_c dl {
+	background:#fff;
+	border:1px solid #ddd;
+	border-radius:5px;
+	box-shadow:3px 4px 5px #eee;
+	}
+.ls_1012_3_c dt {
+	background:#f7f7f7;
+	line-height:24px;
+	padding:8px 5px;
+	font-size:13px;
+	}
+.ls_1012_3_c dd {
+	line-height:20px;
+	padding:5px 5px;
+	color:#666;
+	}
+/**********ls_1012_3 end********/

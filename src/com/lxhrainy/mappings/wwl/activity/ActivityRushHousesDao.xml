@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lxhrainy.myjz.admin.activity.dao.IActivityRushHousesDao">
+   <resultMap id="ActivityRushHouses" type="com.lxhrainy.myjz.admin.activity.model.ActivityRushHouses" >
+	    <result column="rushid" property="rushid"  />
+	    <result column="sourceid.id" property="sourceid.id"  />
+	    <result column="price" property="price"  />
+  	</resultMap>
+   
+	
+	<sql id="activityRushHousesColumns">
+		T.rushid AS "rushid",
+		T.sourceid AS "sourceid.id",
+		T.price AS "price",		
+	</sql>
+	
+    
+	<sql id="activityRushHousesJoins">
+	LEFT JOIN houses_source house ON house.id = T.sourceid
+
+	</sql>
+    
+	<select id="getById" resultType="ActivityRushHouses">
+		SELECT 
+			<include refid="activityRushHousesColumns"/>
+		FROM activity_rush_houses T
+		<include refid="activityRushHousesJoins"/>
+		WHERE T.rushid = #{rushid} 
+	</select>
+	
+	<select id="findListByPage" resultMap="ActivityRushHouses">
+		SELECT 
+			<include refid="activityRushHousesColumns"/>
+		FROM activity_rush_houses T
+		<include refid="activityRushHousesJoins"/>
+		<if test="condition!=null">
+			<where>
+				<if test="condition.model!=null">
+					<if test="condition.model.rushid!=null and condition.model.rushid!=''">
+						T.rushid = '${condition.model.rushid}'
+					</if>
+				</if>
+			</where>
+			order by T.rushid DESC
+			<include refid="Sql.pager" />
+		</if>
+	</select>
+	<select id="getCountByCondition" resultType="int">
+		SELECT 
+			count(*)
+		FROM activity_rush_houses T
+		<include refid="activityRushHousesJoins"/>
+		<if test="condition!=null">
+			<where>
+				<if test="condition.model!=null">
+					<if test="condition.model.name!=null and condition.model.name!=''">
+						 T.name = '${condition.model.name}'
+					</if>
+				</if>
+			</where>
+		</if>
+	</select>
+	
+	<select id="findAllList" resultType="ActivityRushHouses">
+		SELECT 
+			<include refid="activityRushHousesColumns"/>
+		FROM activity_rush_houses T
+		<include refid="activityRushHousesJoins"/>
+		<where>
+			<if test="condition!=null">
+				<if test="condition.model!=null">
+					<if test="condition.model.rushid!=null and condition.model.rushid!=''">
+						T.rushid = '${condition.model.rushid}'
+					</if>
+				</if>
+			</if>
+		</where>		
+	</select>
+	
+	<insert id="insert">
+	INSERT INTO activity_rush_houses (
+		rushid,
+		sourceid,
+		price
+		)
+		values (
+		#{rushid},
+		#{sourceid},
+		#{price}
+		)
+		<!-- 配置Mysql主键自动增长 -->
+		<selectKey resultType="int" keyProperty="id">
+			select
+			LAST_INSERT_ID() as value  
+		</selectKey>
+	</insert>
+		
+	 <update id="update" >
+    update activity_rush_houses
+    <set >
+      <if test="rushid != null" >
+        #{rushid},
+      </if>
+      <if test="sourceid != null" >
+        #{sourceid.id},
+      </if>
+      <if test="price != null" >
+        #{price},
+      </if>
+    </set>
+    where id = #{id}
+  </update>
+	
+	<update id="deleteById">
+		update activity_rush_houses set 
+			deleted=1
+		WHERE rushid = #{rushid}
+	</update>
+	
+</mapper>

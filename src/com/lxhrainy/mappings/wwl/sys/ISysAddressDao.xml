@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lxhrainy.myjz.admin.sys.dao.ISysAddressDao">
+    
+	<sql id="areaColumns">
+		T.id,
+		T.pid AS "parent.id",
+		T.name,
+		T.depth
+	</sql>
+	
+	<sql id="areaJoins">
+    </sql>
+    
+	<select id="getById" resultType="SysAddress">
+		SELECT
+			<include refid="areaColumns"/>
+		FROM sys_address T
+		<include refid="areaJoins"/>
+		WHERE T.id = #{id}
+	</select>
+	
+	<select id="findAllList" resultType="SysAddress">
+		SELECT
+			<include refid="areaColumns"/>
+		FROM sys_address T
+		<include refid="areaJoins"/>
+		WHERE T.deleted = 0
+		ORDER BY T.id
+	</select>
+	
+	<!-- <select id="findByParentIdsLike" resultType="SysAddress">
+		SELECT
+			T.id,
+			T.pid AS "parent.id"
+		FROM sys_address T
+		WHERE T.deleted = 0 AND T.parent_ids LIKE #{parentIds}
+		ORDER BY T.id
+	</select> -->
+	
+	<insert id="insert">
+		INSERT INTO sys_address(
+			id, 
+			pid, 
+			name, 
+			depth,
+			deleted
+		) VALUES (
+			#{id}, 
+			#{parent.id}, 
+			#{name}, 
+			#{depth}, 
+			#{deleted}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE sys_address SET 
+			pid = #{parent.id}, 
+			name = #{name}, 
+			depth = #{depth}, 
+			deleted = #{deleted}
+		WHERE id = #{id}
+	</update>
+	
+<!-- 	<update id="updateParentIds">
+		UPDATE sys_address SET 
+			pid = #{parent.id}, 
+			parent_ids = #{parentIds}
+		WHERE id = #{id}
+	</update> -->
+	
+	<update id="deleteById">
+		UPDATE sys_address SET 
+			deleted = 1
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

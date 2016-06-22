@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lxhrainy.myjz.admin.activity.dao.IActivityBonusDao">
+    
+    <resultMap id="ActivityBonus" type="com.lxhrainy.myjz.admin.activity.model.ActivityBonus">
+		<id property="id" column="id" />
+		<result column="senduser.id" property="senduser.id"/>
+		<result column="senduser.username" property="senduser.username"/>
+	    <result column="sendtime" property="sendtime" />
+	    <result column="money" property="money" />
+	    <result column="availabletime" property="availabletime" />
+	    <result column="count" property="count" />
+	    <result column="type" property="type" />
+	    <result column="usecount" property="usecount" />
+	    <result column="status" property="status" />
+	    <result column="housesid" property="housesid" />
+	    <result column="islimit" property="islimit" />
+	    <result column="buildtypeids" property="buildtypeids" />
+	    <result column="housestypeids" property="housestypeids" />
+	    <result column="deleted" property="deleted" />
+	</resultMap>
+	
+	<sql id="activityBonusColumns">
+		T.id AS "id",
+		T.senduserid AS "senduser.id",
+		T.sendtime AS "sendtime",
+		T.money AS "money",
+		T.availabletime AS "availabletime",
+		T.count AS "count",
+		T.type AS "type",
+		T.usecount AS "usecount",
+		T.status AS "status",
+		T.housesid AS "housesid",
+		T.islimit AS "islimit",
+		T.buildtypeids AS "buildtypeids",
+		T.housestypeids AS "housestypeids",
+		T.deleted AS "deleted",
+		user.username AS "senduser.username"
+	</sql>
+	
+    
+	<sql id="activityBonusJoins">
+	left JOIN user_info user ON user.id = T.senduserid
+	</sql>
+    
+	<select id="getById" resultType="ActivityBonus">
+		SELECT 
+			<include refid="activityBonusColumns"/>
+		FROM activity_bonus T
+		<include refid="activityBonusJoins"/>
+		WHERE T.id = #{id}
+	</select>
+	
+	<select id="findListByPage" resultMap="ActivityBonus">
+		SELECT 
+			<include refid="activityBonusColumns"/>
+		FROM activity_bonus T
+		<include refid="activityBonusJoins"/>
+		<if test="condition!=null">
+			<where>
+				T.deleted=0
+				<if test="condition.model!=null">
+					<if test="condition.model.money!=null and condition.model.money!=''">
+						AND T.money = '${condition.model.money}'
+					</if>
+				</if>
+			</where>
+			order by T.ID DESC
+			<include refid="Sql.pager" />
+		</if>
+	</select>
+	<select id="getCountByCondition" resultType="int">
+		SELECT 
+			count(*)
+		FROM activity_bonus T
+		<include refid="activityBonusJoins"/>
+		<if test="condition!=null">
+			<where>
+				T.deleted=0
+				<if test="condition.model!=null">
+					<if test="condition.model.money!=null and condition.model.money!=''">
+						AND T.money = '${condition.model.money}'
+					</if>
+				</if>
+			</where>
+		</if>
+	</select>
+	
+	<select id="findAllList" resultType="ActivityBonus">
+		SELECT 
+			<include refid="activityBonusColumns"/>
+		FROM activity_bonus T
+		<include refid="activityBonusJoins"/>
+		<where>
+			T.deleted=0
+			<if test="condition!=null">
+				<if test="condition.model!=null">
+					<if test="condition.model.money!=null and condition.model.money!=''">
+						AND T.money = '${condition.model.money}'
+					</if>
+				</if>
+			</if>
+		</where>		
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO activity_bonus (
+		id, 
+		senduserid, 
+		sendtime, 
+      	money,
+       	availabletime,
+       	count, 
+      	type,
+		usecount,
+		status, 
+      	housesid,
+		islimit,
+		buildtypeids, 
+     	housestypeids,
+     	deleted
+     	)VALUES  (
+     	#{id},
+     	#{senduser.id},
+     	#{sendtime}, 
+      	#{money},
+       	#{availabletime},
+        #{count}, 
+      	#{type},
+      	#{usecount},
+        #{status}, 
+      	#{housesid},
+       	#{islimit},
+        #{buildtypeids}, 
+      	#{housestypeids},
+      	#{deleted}
+      )
+		<!-- 配置Mysql主键自动增长 -->
+		<selectKey resultType="int" keyProperty="id">
+			select
+			LAST_INSERT_ID() as value  
+		</selectKey>
+	</insert>
+		
+	 <update id="update" >
+    update activity_bonus
+    <set >
+      <if test="senduser != null" >
+        senduserid = #{senduser.id},
+      </if>
+      <if test="sendtime != null" >
+        sendtime = #{sendtime},
+      </if>
+      <if test="money != null" >
+        money = #{money},
+      </if>
+      <if test="availabletime != null" >
+        availabletime = #{availabletime},
+      </if>
+      <if test="count != null" >
+        count = #{count},
+      </if>
+      <if test="type != null" >
+        type = #{type},
+      </if>
+      <if test="usecount != null" >
+        usecount = #{usecount},
+      </if>
+      <if test="status != null" >
+        status = #{status},
+      </if>
+      <if test="housesid != null" >
+        housesid = #{housesid},
+      </if>
+      <if test="islimit != null" >
+        islimit = #{islimit},
+      </if>
+      <if test="buildtypeids != null" >
+        buildtypeids = #{buildtypeids},
+      </if>
+      <if test="housestypeids != null" >
+        housestypeids = #{housestypeids},
+      </if>
+       <if test="deleted != null" >
+        deleted = #{deleted}
+      </if>
+    </set>
+    where id = #{id}
+  </update>
+	
+	<update id="deleteById">
+		update activity_bonus set 
+			deleted=1
+		WHERE id = #{id}
+	</update>
+	
+	<update id="updateStatus">
+		update activity_bonus set status = #{status}
+		WHERE id = #{id}
+	</update>
+</mapper>

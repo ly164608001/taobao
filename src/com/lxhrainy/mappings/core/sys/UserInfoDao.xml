@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lxhrainy.core.sys.dao.IUserInfoDao">
+    
+    <sql id="userInfoColumns">
+    	T.id AS "id",
+		T.username AS "username",
+		T.password AS "password",
+		T.phone AS "phone",
+		T.registertime AS "registertime",
+		T.lastlogintime AS "lastlogintime",
+		T.loginip AS "loginip",
+		T.type AS "type",
+		T.status AS "status",
+		T.icon AS "icon",
+		T.deleted AS "deleted"
+    </sql>
+    
+	<sql id="personInfoColumns">
+		D.userid AS "detailInfo.userid",
+		D.sex AS "detailInfo.sex",
+		D.birthday AS "detailInfo.birthday",
+		D.bloodtype AS "detailInfo.bloodtype",
+		D.birthplace AS "detailInfo.birthplace",
+		D.apartment AS "detailInfo.apartment",
+		D.personsesc AS "detailInfo.personsesc",
+		D.educationdegree AS "detailInfo.educationdegree",
+		D.job AS "detailInfo.job",
+		D.position AS "detailInfo.position",
+		D.contactaddress AS "detailInfo.contactaddress",
+		D.email AS "detailInfo.email",
+		D.qq AS "detailInfo.qq",
+		D.realname AS "detailInfo.realname",
+		D.certificatetype AS "detailInfo.certificatetype",
+		D.certificateno AS "detailInfo.certificateno",
+		D.modifytime AS "detailInfo.modifytime",
+		D.deleted AS "detailInfo.deleted"
+	</sql>
+	
+	<sql id="userInfoJoins">
+		LEFT JOIN user_detail_info D ON D.userid = T.id
+	</sql>
+    
+    <sql id="where">
+		<if test="condition!=null">
+			<where>
+			    1 = 1 
+				<if test="condition.model!=null">
+					<if test="condition.model.deleted!=null">
+						AND T.deleted = #{condition.model.deleted}
+					</if>
+					<if test="condition.model.type!=null">
+						AND T.type = #{condition.model.type}
+					</if>
+					<if test="condition.model.username!=null and condition.model.username!=''">
+						AND T.username LIKE '${condition.model.username}%'
+					</if>
+				</if>
+			</where>
+		</if>
+	</sql>
+	
+	<select id="getById" resultType="UserInfo">
+		SELECT 
+			<include refid="userInfoColumns"/>
+		FROM user_info T
+		WHERE T.id = #{id}
+	</select>
+	
+	<select id="getPersonInfo" resultType="UserInfo">
+		SELECT 
+			<include refid="userInfoColumns"/>,
+			<include refid="personInfoColumns"/>
+		FROM user_info T
+		<include refid="userInfoJoins"/>
+		WHERE T.id = #{id}
+	</select>
+	
+	<select id="checkUserLogin" resultType="UserInfo">
+		SELECT 
+			<include refid="userInfoColumns"/>
+		FROM user_info T
+		WHERE 
+			T.username = #{username} 
+			and T.password = #{password}
+			and T.channel = #{channel}
+	</select>
+	
+	<select id="findListByPage" resultType="UserInfo">
+		SELECT 
+			<include refid="userInfoColumns"/>
+		FROM user_info T
+		<include refid="userInfoJoins"/>
+		<include refid="where"/>
+		order by T.ID DESC
+			<include refid="Sql.pager" />
+	</select>
+	
+	<select id="findAllList" resultType="UserInfo">
+		SELECT 
+			<include refid="userInfoColumns"/>
+		FROM user_info T
+		<include refid="userInfoJoins"/>
+		<include refid="where"/>
+	</select>
+	
+	<select id="getCountByCondition" resultType="int">
+		SELECT 
+			count(*)
+		FROM user_info T
+		<include refid="userInfoJoins"/>
+		<include refid="where"/>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO user_info(
+			id,
+			username,
+			password,
+			phone,
+			registertime,
+			lastlogintime,
+			loginip,
+			type,
+			status,
+			deleted,
+			icon
+		) VALUES (
+			#{id},
+			#{username},
+			#{password},
+			#{phone},
+			#{registertime},
+			#{lastlogintime},
+			#{loginip},
+			#{type},
+			#{status},
+			#{deleted},
+			#{icon}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE user_info SET 	
+			<if test="username !=null and username !=''">
+			username = #{username},
+			</if>	
+			<if test="password !=null and password !=''">
+			password = #{password},
+			</if>	
+			<if test="phone !=null and phone !=''">
+			phone = #{phone},
+			</if>	
+			<if test="registertime !=null ">
+			registertime = #{registertime},
+			</if>	
+			<if test="lastlogintime !=null ">
+			lastlogintime = #{lastlogintime},
+			</if>	
+			<if test="loginip !=null and loginip !=''">
+			loginip = #{loginip},
+			</if>	
+			<if test="type !=null">
+			type = #{type},
+			</if>	
+			<if test="status !=null">
+			status = #{status},
+			</if>	
+			<if test="deleted !=null ">
+			deleted = #{deleted},
+			</if>
+			<if test="icon !=null ">
+			icon = #{icon},
+			</if>	
+			id = #{id}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="updateStatus">
+		update user_info set status = #{status}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="updatePassword">
+		update user_info set password = #{password}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="deleteById">
+		update user_info set 
+			deleted=1
+		WHERE id = #{id}
+	</update>
+	
+	<select id="getByName" resultType="UserInfo">
+		SELECT 
+			T.id,
+			T.username,
+			T.phone
+		FROM user_info T
+		WHERE T.username = #{username}
+	</select>
+	
+</mapper>

@@ -1,0 +1,436 @@
+.mslcgl{
+	width:994px;
+	padding-left:10px;
+	height:40px;
+	background:#f1f1f1;
+	margin:0px auto;
+	line-height:40px;
+	font-family:"微软雅黑";
+	font-size:14px;
+	color:#ff702d;
+	}
+.mslc{
+	width:1004px;
+	margin:0px auto;
+	}
+.mslc_part1{
+	width:984px;
+	padding-left:20px;
+	margin-top:25px;
+	}
+.mslc_part2{
+	height:20px;
+	margin-bottom:30px;
+	padding-left:10px;
+	padding-top:20px;
+	}
+.mslc_part2 li{
+	width:235px;
+	font-family:"微软雅黑";
+	font-size:14px;
+	color:#aaaaaa;
+	display:inline-block;
+	float:left;
+	}
+.mslc_part2 li.col_r{
+	color:#ff702d;
+	}
+.mslc_part2 li.sfly{
+	width:230px;
+	}
+.mslc_part2 li.lcjs{
+	width:56px;
+	}
+.jbz1_border{
+	width:994px;
+	padding-left:10px;
+	height:40px;
+	background:#f1f1f1;
+	margin:0px auto;
+	}
+.zl{
+	margin-right:830px;
+	line-height:40px;
+	font-family:"微软雅黑";
+	font-size:14px;
+	color:#ff702d;
+	float:left;
+	}
+.in_bu{
+	width:100px;
+	height:30px;
+	margin-top:5px;
+	font-family:"微软雅黑";
+	font-size:12px;
+	color:#ffffff;
+	border-radius:5px;
+	background:#ff702d;
+	border:none;
+	float:left;
+	}
+.jbzl{
+	width:994px;
+	height:170px;
+	padding-left:10px;
+	padding-top:15px;
+	margin:0px auto;
+	}
+.jbzl_part1{
+	width:530px;
+	font-family:"微软雅黑";
+	font-size:14px;
+	color:#515151;
+	float:left;
+	}
+.jbzl_part1 li{
+	width:265px;
+	display:inline-block;
+	float:left;
+	}
+.jbzl_part2{
+	margin-left:305px;
+	margin-top:15px;
+	float:left;
+	}
+.mspj{
+	width:1004px;
+	margin:0px auto;
+	margin-top:25px;
+	}
+.mspj_part1{
+	margin-bottom:30px;
+	font-family:"微软雅黑";
+	font-size:14px;
+	color:#515151;
+	}
+.mspj_part2{
+	width:540px;
+	margin-left:15px;
+	padding-left:430px;
+	height:28px;
+	border:1px dashed #a5a5a5;
+	}
+.sz{
+	margin-top:7px;
+	margin-right:5px;
+	float:left;
+	}
+.tjpj{
+	float:left;
+	line-height:28px;
+	font-family:"微软雅黑";
+	font-size:14px;
+	color:#ff702d;
+	}
+
+.fsyqh{
+	width:1004px;
+	margin:0px auto;
+	}
+.in_bu1{
+	margin:0px auto;
+	width:100px;
+	height:30px;
+	margin-top:35px;
+	margin-left:430px;
+	font-family:"微软雅黑";
+	font-size:12px;
+	color:#ffffff;
+	background:#ff702d;
+	border:none;
+	border-radius:5px;
+	float:left;
+	}
+.sfms{
+	width:1004px;
+	margin:0px auto;
+	}
+.in_bu2{
+	width:80px;
+	height:30px;
+	margin-top:35px;
+	margin-left:235px;
+	margin-right:295px;
+	font-family:"微软雅黑";
+	font-size:12px;
+	color:#ffffff;
+	background:#ff702d;
+	border-radius:5px;
+	border:none;
+	float:left;
+	}
+.in_bu3{
+	width:80px;
+	height:30px;
+	margin-top:35px;
+	font-family:"微软雅黑";
+	font-size:12px;
+	color:#ffffff;
+	border:none;
+	border-radius:5px;
+	background:#aaaaaa;
+	float:left;
+	}
+.in_bu4{
+	width:80px;
+	height:30px;
+	margin-top:35px;
+	font-family:"微软雅黑";
+	font-size:12px;
+	color:#ffffff;
+	border:none;
+	border-radius:5px;
+	background:#ff702d;
+	float:left;
+	}
+.in_bu5{
+	margin:0px auto;
+	width:100px;
+	height:30px;
+	margin-top:35px;
+	margin-left:430px;
+	font-family:"微软雅黑";
+	font-size:12px;
+	color:#ffffff;
+	background:#aaaaaa;
+	border-radius:5px;
+	border:none;
+	float:left;
+	}
+.in_bu6{
+	width:80px;
+	height:30px;
+	margin-top:63px;
+	margin-left:450px;
+	font-family:"微软雅黑";
+	font-size:12px;
+	color:#ffffff;
+	border:none;
+	border-radius:5px;
+	background:#ff702d;
+	}
+.in_bu7{
+	width:80px;
+	height:30px;
+	margin-left:450px;
+	font-family:"微软雅黑";
+	font-size:12px;
+	color:#ffffff;
+	border:none;
+	border-radius:5px;
+	background:#ff702d;
+	}
+.in_bu8{
+	width:80px;
+	height:30px;
+	margin-left:450px;
+	font-family:"微软雅黑";
+	font-size:12px;
+	color:#096cb2;
+	border:none;
+	border-radius:5px;
+	background:#ffffff;
+	}
+/**********mslc_tc********/
+.mslc_tc {
+	background:url(http://image.lxhrainynet.com/images/zp/company/talent/interview/zp_qyzx_lctc.png) repeat;
+	border-radius:3px;
+	padding:5px;
+	position:fixed;
+	left:50%;
+	top:50%;
+	margin:-140px 0 0 -410px;
+	font-family:"黑体";
+	}
+.mslc_tc1 {
+	background:#fff;
+	width:820px;
+	height:280px;
+	}
+.mslc_tc_h {
+	height:42px;
+	line-height:42px;
+	font-size:18px;
+	color:#ff702d;
+	text-align:center;
+	}
+.mslc_tc_in {
+	height:34px;
+	line-height:34px;
+	padding:14px 0;
+	text-align:center;
+	}
+.mslc_tc_in a {
+	background:#ff702d;
+	width:116px;
+	height:34px;
+	line-height:34px;
+	border-radius:5px;
+	font-size:14px;
+	color:#fff;
+	display:inline-block;
+	}
+.mslc_tc_in a:hover {
+	background:#ff591f;
+	}
+.mslc_tc_c {
+	height:170px;
+	}
+.mslc_tc_c p {
+	line-height:22px;
+	padding:0 32px 0 72px;
+	font-size:15px;
+	}
+.mslc_tc_c p.p_1 {
+	padding:0 32px 0 32px;
+	}
+.mslc_tc_c input[type=text] {
+	background:url(http://image.lxhrainynet.com/images/zp/company/talent/interview/zp_ico_20rq.png) no-repeat right center;
+	width:120px;
+	height:22px;
+	line-height:22px;
+	margin:0 3px;
+	padding:0 23px 0 3px;
+	border:1px solid #ccc;
+	outline:none;
+	vertical-align:middle;
+	}
+.mslc_tc_c select {
+	border:1px solid #ccc;
+	margin:0 3px;
+	outline:none;
+	vertical-align:middle;
+	}
+/**********mslc_tc end********/
+/**********lcjs********/
+.lcjs_part2{
+	height:20px;
+	margin-bottom:30px;
+	padding-left:10px;
+	margin-top:20px;
+	}
+.lcjs_part2 li{
+	width:235px;
+	font-family:"微软雅黑";
+	font-size:14px;
+	color:#aaaaaa;
+	display:inline-block;
+	float:left;
+	}
+.lcjs_part2 li.msyq{
+	color:#ff702d;
+	}
+.lcjs_part2 li.sfly{
+	width:230px;
+	}
+.lcjs_part2 li.lcjs{
+	width:56px;
+	color:#ff702d;
+	}
+.border_one{
+	width:998px;
+	margin:0px auto;
+	margin-bottom:7px;
+	border:#dcdcdc solid 5px;
+	}
+.border_two{
+	width:1004px;
+	margin:0px auto;
+	border:#dcdcdc solid 1px;
+	}
+/**********lcjs end********/
+/**********mspj-wmj********/
+
+/**********mspj-wmj end*******/
+/**********mspj-mj*******/
+.mspjbj_part1{
+	height:153px;
+	padding-top:5px;
+	margin-bottom:40px;
+	font-family:"微软雅黑";
+	font-size:14px;
+	color:#515151;
+	border:#b1b1b1 solid 1px;
+	}
+/**********mspj-mj end*******/
+/**********bjwc*******/
+.bjwc{
+	width:994px;
+	padding-left:10px;
+	height:40px;
+	background:#f1f1f1;
+	margin:0px auto;
+	}
+.pj{
+	margin-right:800px;
+	line-height:40px;
+	font-family:"微软雅黑";
+	font-size:14px;
+	color:#ff702d;
+	float:left;
+	}
+.in_bu10{
+	width:58px;
+	height:20px;
+	margin-top:10px;
+	margin-right:5px;
+	border:#ff702d solid 1px;
+	background:url(http://image.lxhrainynet.com/images/zp/company/talent/interview/sc.jpg) no-repeat;
+	float:left;
+	}
+.in_bu11{
+	width:58px;
+	height:20px;
+	margin-top:10px;
+	border:#ff702d solid 1px;
+	background:url(http://image.lxhrainynet.com/images/zp/company/talent/interview/2.2_04.jpg) no-repeat;
+	float:left;
+	}
+/**********bjwc end*******/
+/**********sfly*******/
+
+/**********sfly end*******/
+/**********yms-lcjs*******/
+.ymslcjs_part2{
+	height:20px;
+	margin-bottom:30px;
+	padding-left:10px;
+	padding-top:20px;
+	}
+.ymslcjs_part2 li{
+	width:238px;
+	font-family:"微软雅黑";
+	font-size:14px;
+	color:#aaaaaa;
+	display:inline-block;
+	float:left;
+	}
+.ymslcjs_part2 li.msyq{
+	color:#ff702d;
+	}
+.ymslcjs_part2 li.sfly{
+	width:220px;
+	color:#ff702d;
+	}
+.ymslcjs_part2 li.lcjs{
+	width:56px;
+	color:#ff702d;
+	}
+.text{
+	width:1004px;
+	margin:0px auto;
+	}
+.text_one{
+	margin-top:25px;
+	margin-left:355px;
+	font-family:"微软雅黑";
+	font-size:20px;
+	color:#ff702d;
+	}
+.text_two{
+	margin-left:430px;
+	font-family:"微软雅黑";
+	font-size:14px;
+	color:#096cb2;
+	}
+/**********yms-lcjs end*******/

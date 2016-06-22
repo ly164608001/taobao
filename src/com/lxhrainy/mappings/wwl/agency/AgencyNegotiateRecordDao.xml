@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lxhrainy.myjz.admin.agency.dao.IAgencyNegotiateDao">
+    
+	<sql id="agencyNegotiateRecordColumns">
+		T.id AS "id",
+		T.associd AS "associd",
+		T.content AS "content",
+		T.replyuserid AS "replyuserid",
+		T.replytime AS "replytime"
+	</sql>
+	
+	<sql id="agencyNegotiateRecordJoins">
+	</sql>
+	
+	<sql id="where">
+		<if test="condition!=null">
+			<where>
+			    1 = 1 
+				<if test="condition.model!=null">
+					<if test="condition.model.deleted!=null">
+						AND T.deleted = #{condition.model.deleted}
+					</if>
+				</if>
+			</where>
+		</if>
+	</sql>
+    
+	<select id="getById" resultType="AgencyNegotiateRecord">
+		SELECT 
+			<include refid="agencyNegotiateRecordColumns"/>
+		FROM agency_negotiate_record T
+		<include refid="agencyNegotiateRecordJoins"/>
+		WHERE T.id = #{id}
+	</select>
+	
+	<select id="findListByPage" resultType="AgencyNegotiateRecord">
+		SELECT 
+			<include refid="agencyNegotiateRecordColumns"/>
+		FROM agency_negotiate_record T
+		<include refid="agencyNegotiateRecordJoins"/>
+		<include refid="where"/>
+		order by T.ID DESC
+			<include refid="Sql.pager" />
+	</select>
+	
+	<select id="findAllList" resultType="AgencyNegotiateRecord">
+		SELECT 
+			<include refid="agencyNegotiateRecordColumns"/>
+		FROM agency_negotiate_record T
+		<include refid="agencyNegotiateRecordJoins"/>
+		<include refid="where"/>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO agency_negotiate_record(
+			id,
+			associd,
+			content,
+			replyuserid,
+			replytime
+		) VALUES (
+			#{id},
+			#{associd},
+			#{content},
+			#{replyuserid},
+			#{replytime}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE agency_negotiate_record SET 	
+			associd = #{associd},
+			content = #{content},
+			replyuserid = #{replyuserid},
+			replytime = #{replytime}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="deleteById">
+		update agency_negotiate_record set 
+			deleted=1
+		WHERE id = #{id}
+	</update>
+	
+</mapper>
