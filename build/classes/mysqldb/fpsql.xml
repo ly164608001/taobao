@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+<mapper namespace="com.lxhrainy.tools.dao.FpSqlMapper">  
+
+	<insert id="insert" parameterType="Map" >
+		${sql}
+	</insert>
+	<insert id="insertByAutoKey" parameterType="Map" useGeneratedKeys="true" keyProperty="id" >
+		${sql}
+	</insert>
+	
+	<update id="update" parameterType="Map">
+		${sql}
+	</update>
+	
+	<delete id="delete" parameterType="Map">
+		${sql}
+	</delete>
+	
+	<select id="selectMap" parameterType="Map" resultType="Map">
+		${sql}
+	</select>
+	<select id="selectList" parameterType="Map" resultType="Map">
+		${sql}
+	</select>
+	
+	<select id="selectObject" parameterType="Map" resultType="Object" >
+		${sql}
+	</select>
+	<select id="selectObjectList" parameterType="Map" resultType="Object" >
+		${sql}
+	</select>
+	
+	<select id="selectInteger" parameterType="Map" resultType="java.lang.Integer" >
+		${sql}
+	</select>
+	<select id="selectString" parameterType="Map" resultType="java.lang.String" >
+		${sql}
+	</select>
+	<select id="selectIntList" parameterType="Map" resultType="java.lang.Integer">
+		${sql}
+	</select>
+</mapper>

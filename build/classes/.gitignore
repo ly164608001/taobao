@@ -1,11 +1,1 @@
-/applicationcontext.xml
 /com/
-/ecache/
-/log4j.properties
-/mongo.properties
-/mysql-mybatis-config.xml
-/mysql.properties
-/mysqlapplicationcontext.xml
-/mysqldb/
-/springservlet-config.xml
-/sysConfig.properties

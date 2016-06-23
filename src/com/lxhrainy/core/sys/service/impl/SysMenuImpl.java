@@ -84,7 +84,7 @@ public class SysMenuImpl extends AbstractBaseServiceImpl<ISysMenuDao, SysMenu, I
 			}
 			
 			for(SysMenu menu : menuList){
-				if(menu.getParent().getId().intValue() == 0){
+				if(menu.getParent().getId().intValue() == Global.ROOT_MENU_ID){
 					result.add(menu);
 				}
 			}

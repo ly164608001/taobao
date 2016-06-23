@@ -2,6 +2,8 @@ package com.lxhrainy.myjz.common.constant;
 
 public class Global {
 	
+	public final static int ROOT_MENU_ID = 1;
+	
 	//会员角色ID
 	public final static int ROLE_MEMBER = 1;
 	
