@@ -28,6 +28,10 @@ public class UserInfo extends BaseModel {
 	private Integer deleted; // 删除标识
 	private Integer channel; // 来源
 	private UserDetailInfo detailInfo; // 用户详细信息
+	
+	private String app;
+	
+	private String uuid;
 
 	public String getIcon() {
 		return icon;
@@ -129,6 +133,22 @@ public class UserInfo extends BaseModel {
 
 	public void setChannel(Integer channel) {
 		this.channel = channel;
+	}
+
+	public String getApp() {
+		return app;
+	}
+
+	public void setApp(String app) {
+		this.app = app;
+	}
+
+	public String getUuid() {
+		return uuid;
+	}
+
+	public void setUuid(String uuid) {
+		this.uuid = uuid;
 	}
 
 }

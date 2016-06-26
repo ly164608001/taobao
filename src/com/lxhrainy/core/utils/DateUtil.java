@@ -1,5 +1,7 @@
 package com.lxhrainy.core.utils;
 
+import java.sql.Timestamp;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -860,6 +862,14 @@ public class DateUtil {
 	 */
 	public static long getMillis() {
 		return new Date().getTime();
+	}
+	
+	public static Timestamp gettimestamp() {
+		Date dt = new Date();
+		DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String nowTime = df.format(dt);
+		java.sql.Timestamp buydate = java.sql.Timestamp.valueOf(nowTime);
+		return buydate;
 	}
 	
 }

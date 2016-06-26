@@ -11,13 +11,13 @@ import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 
-import net.sf.json.JSONObject;
-
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileItemFactory;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
+
+import com.alibaba.fastjson.JSONObject;
 
 /**
  * KindEditor文件上传类
@@ -26,7 +26,8 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
  */
 public class UploadFileUtil {
 
-	public String savefile(HttpServletRequest request) {
+	@SuppressWarnings({ "rawtypes", "unused" })
+	public static JSONObject savefile(HttpServletRequest request) {
 
 		// 文件保存目录路径
 		String savePath = request.getSession().getServletContext()
@@ -125,19 +126,19 @@ public class UploadFileUtil {
 				}
 
 				JSONObject obj = new JSONObject();
-				obj.put("error", 0);
+				obj.put("success", true);
 				obj.put("url", saveUrl + newFileName);
-				return obj.toString();
+				return obj;
 			}
 		}
 		return getError("文件为空。");
 	}
 
-	private String getError(String message) {
+	private static JSONObject getError(String message) {
 		JSONObject obj = new JSONObject();
-		obj.put("error", 1);
+		obj.put("success", false);
 		obj.put("message", message);
-		return obj.toString();
+		return obj;
 	}
 	
 }
