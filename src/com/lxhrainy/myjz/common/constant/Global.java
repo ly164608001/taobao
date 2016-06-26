@@ -3,6 +3,8 @@ package com.lxhrainy.myjz.common.constant;
 public class Global {
 	
 	/**帮助中心 start**/
+	//顶级菜单的pid为-1
+	public final static int ROOT_HELPMENU_ID = -1;
 	
 	//帮助菜单类型  1 买家中心 2卖家中心
 	public final static int USER_CENTER = 1;
