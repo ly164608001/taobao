@@ -113,7 +113,7 @@ public class SysMenuImpl extends AbstractBaseServiceImpl<ISysMenuDao, SysMenu, I
 	@Override
 	public List<TreeNode> getMenuTreeByRoleId(Integer roleid) {
 		temprightids = sysMenuDao.getMenuIdsByRoleId(roleid);
-		return findTreeNodesByParentId(0);
+		return findTreeNodesByParentId(Global.ROOT_MENU_ID);
 	}
 
 	@Override

@@ -2,6 +2,14 @@ package com.lxhrainy.myjz.common.constant;
 
 public class Global {
 	
+	/**帮助中心 start**/
+	
+	//帮助菜单类型  1 买家中心 2卖家中心
+	public final static int USER_CENTER = 1;
+	public final static int SELLER_CENTER = 2;
+	
+	/**帮助中心 end**/
+	
 	public final static int ROOT_MENU_ID = 1;
 	
 	//会员角色ID
