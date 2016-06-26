@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lxhrainy.myjz.admin.goods.dao.IGoodsTypeDao">
+    
+	<sql id="goodsTypeColumns">
+		T.id AS "id",
+		T.typename AS "typename",
+		T.pid AS "pid",
+		T.status AS "status",
+		T.sort AS "sort",
+		T.deleted AS "deleted"
+	</sql>
+	
+	<sql id="goodsTypeJoins">
+	</sql>
+	
+	<sql id="where">
+		<if test="condition!=null">
+			<where>
+				<if test="condition.model!=null">
+					<if test="condition.model.deleted!=null">
+						T.deleted = #{condition.model.deleted}
+					</if>
+				</if>
+			</where>
+		</if>
+	</sql>
+    
+	
+	<select id="getById" resultType="GoodsType">
+		SELECT 
+			<include refid="goodsTypeColumns"/>
+		FROM  goods_type T
+		<include refid="goodsTypeJoins"/>
+		WHERE T.id = #{id}
+	</select>
+	
+	<select id="findListByPage" resultType="GoodsType">
+		SELECT 
+			<include refid="goodsTypeColumns"/>
+		FROM goods_type T
+		<include refid="goodsTypeJoins"/>
+		<include refid="where"/>
+		order by T.ID DESC
+			<include refid="Sql.pager" />
+	</select>
+	
+	<select id="findAllList" resultType="GoodsType">
+		SELECT 
+			<include refid="goodsTypeColumns"/>
+		FROM goods_type T
+		<include refid="goodsTypeJoins"/>
+		<include refid="where"/>
+	</select>
+	
+	<select id="getCountByCondition" resultType="int">
+		SELECT 
+			count(*)
+		FROM goods_type T
+		<include refid="goodsTypeJoins"/>
+		<include refid="where"/>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO goods_type(
+			id,
+			typename,
+			pid,
+			status,
+			sort,
+			deleted
+		) VALUES (
+			#{id},
+			#{typename},
+			#{pid},
+			#{status},
+			#{sort},
+			#{deleted}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE goods_type SET 	
+			<if test="typename !=null and typename !=''">
+				typename = #{typename},
+			</if>	
+			<if test="pid !=null">
+				pid = #{pid},
+			</if>	
+			<if test="status !=null">
+				status = #{status},
+			</if>	
+			<if test="sort !=null">
+				sort = #{sort},
+			</if>
+			<if test="deleted !=null">
+				deleted = #{deleted},
+			</if>	
+			id = #{id}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="deleteById">
+		update goods_type set 
+			deleted=1
+		WHERE id = #{id}
+	</update>
+	
+</mapper>
