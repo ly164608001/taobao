@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lxhrainy.myjz.admin.helpcenter.dao.IHelpMenuDao">
+    
+	<sql id="helpMenuColumns">
+		T.id AS "id",
+		T.name AS "name",
+		T.type AS "type",
+		T.url AS "url",
+		T.sort AS "sort",
+		T.deleted AS "deleted",
+		
+		T.pid AS "parent.id",
+		P.name AS "parent.name"
+	</sql>
+	
+	<sql id="helpMenuJoins">
+		LEFT JOIN help_menu P ON P.id = T.pid
+	</sql>
+	
+	<sql id="where">
+		<if test="condition!=null">
+			<where>
+				T.deleted = 0
+				<if test="condition.model!=null">
+					<if test="condition.model.name!=null and condition.model.name!=''">
+						AND T.name like CONCAT('%',#{condition.model.name},'%')
+					</if>
+				</if>
+			</where>
+		</if>
+	</sql>
+    
+	
+	<select id="getById" resultType="HelpMenu">
+		SELECT 
+			<include refid="helpMenuColumns"/>
+		FROM help_menu T
+		<include refid="helpMenuJoins"/>
+		WHERE T.id = #{id}
+	</select>
+	
+	<select id="findListByPage" resultType="HelpMenu">
+		SELECT 
+			<include refid="helpMenuColumns"/>
+		FROM help_menu T
+		<include refid="helpMenuJoins"/>
+		<include refid="where"/>
+		order by T.ID
+			<include refid="Sql.pager" />
+	</select>
+	
+	<select id="findAllList" resultType="HelpMenu">
+		SELECT 
+			<include refid="helpMenuColumns"/>
+		FROM help_menu T
+		<include refid="helpMenuJoins"/>
+		<include refid="where"/>
+	</select>
+	
+	<select id="getCountByCondition" resultType="int">
+		SELECT 
+			count(*)
+		FROM help_menu T
+		<include refid="helpMenuJoins"/>
+		<include refid="where"/>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO help_menu(
+			id,
+			name,
+			pid,
+			type,
+			url,
+			sort,
+			deleted
+		) VALUES (
+			#{id},
+			#{name},
+			#{parent.id},
+			#{type},
+			#{url},
+			#{sort},
+			#{deleted}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE help_menu SET 	
+			<if test="name !=null and name !=''">
+				name = #{name},
+			</if>	
+			<if test="parent!=null and parent.id !=null">
+				pid = #{parent.id},
+			</if>	
+			<if test="type !=null">
+				type = #{type},
+			</if>	
+			<if test="url !=null and url !=''">
+				url = #{url},
+			</if>	
+			<if test="sort !=null">
+				sort = #{sort},
+			</if>
+			<if test="deleted !=null">
+				deleted = #{deleted},
+			</if>	
+			id = #{id}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="deleteById">
+		update help_menu set 
+			deleted=1
+		WHERE id = #{id}
+	</update>
+	
+</mapper>
