@@ -7,29 +7,27 @@
 </head>
 <body>
 
-	<form id="addform" action="${basePath}admin/helpcenter/menu/addsave.htm" method="post">
+	<form id="addform" action="${basePath}admin/goods/type/addsave.htm" method="post">
 		<input type="hidden" value="${parent.id}" name="parent.id" />
-		<input type="hidden" value="${parent.type}" name="type" />
 		<table cellpadding="5">
 			<tr>
 				<td>上级菜单:</td>
-				<td>${parent.name}</td>
-			</tr>
-			<tr>
-				<td>类型:</td>
-				<td>${fns:getDictLabel(parent.type,'HelpCenter','')}</td>
+				<td>${parent.typename}</td>
 			</tr>
 			<tr>
 				<td>名称:</td>
-				<td><input name="name" class="easyui-validatebox textbox" /></td>
-			</tr>
-			<tr>
-				<td>链接:</td>
-				<td><input name="url" class="easyui-validatebox textbox" /></td>
+				<td><input name="typename" class="easyui-validatebox textbox" /></td>
 			</tr>
 			<tr>
 				<td>排序:</td>
 				<td><input name="sort" class="easyui-validatebox textbox" /></td>
+			</tr>
+			<tr>
+				<td>状态:</td>
+				<td>
+					<input type="radio" value="1" name="status" checked />显示
+					<input type="radio" value="0" name="status" />隐藏
+				</td>
 			</tr>
 			<tr>
 				<td></td>

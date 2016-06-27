@@ -17,7 +17,7 @@ import com.lxhrainy.myjz.admin.goods.oe.GoodsTypeVO;
 import com.lxhrainy.myjz.admin.goods.service.IGoodsTypeService;
 import com.lxhrainy.myjz.common.constant.Global;
 
-@RequestMapping("/admin/goodstype/list")
+@RequestMapping("/admin/goods/type")
 @Controller
 public class GoodsTypeController extends BaseController {
 
@@ -65,13 +65,12 @@ public class GoodsTypeController extends BaseController {
 	 */
 	@RequestMapping("/add")
 	public ModelAndView add(Integer pid) {
+		GoodsType parent = null;
 		if(pid == null){
 			pid = Global.ROOT_HELPMENU_ID;
-		}
-		
-		GoodsType parent = new GoodsType();
-		parent.setId(pid);
-		if(pid != null){
+			parent = new GoodsType();
+			parent.setId(pid);
+		}else{
 			parent = goodsTypeService.getById(pid);
 		}
 		

@@ -8,10 +8,12 @@ import com.lxhrainy.core.common.model.BaseModel;
  * @author xueyunteng
  */
 public class GoodsType extends BaseModel {
+
+	private static final long serialVersionUID = 1L;
 	/** 商品类目名称 **/
 	private String typename;
 	/** 上级类目ID **/
-	private Integer pid;
+	private GoodsType parent;
 	/** 状态(隐藏/显示) **/
 	private Integer status;
 	/** 排序 **/
@@ -27,12 +29,12 @@ public class GoodsType extends BaseModel {
 		this.typename = typename;
 	}
 
-	public Integer getPid() {
-		return pid;
+	public GoodsType getParent() {
+		return parent;
 	}
 
-	public void setPid(Integer pid) {
-		this.pid = pid;
+	public void setParent(GoodsType parent) {
+		this.parent = parent;
 	}
 
 	public Integer getStatus() {

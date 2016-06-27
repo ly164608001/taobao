@@ -9,7 +9,6 @@
 
 	<form id="addform" action="${basePath}admin/helpcenter/menu/addsave.htm" method="post">
 		<input type="hidden" value="${parent.id}" name="parent.id" />
-		<input type="hidden" value="${parent.type}" name="type" />
 		<table cellpadding="5">
 			<tr>
 				<td>上级菜单:</td>
@@ -17,7 +16,18 @@
 			</tr>
 			<tr>
 				<td>类型:</td>
-				<td>${fns:getDictLabel(parent.type,'HelpCenter','')}</td>
+				<td>
+					<c:if test="${not empty parent.type}">
+						<input type="hidden" value="${parent.type}" name="type" />
+						${fns:getDictLabel(parent.type,'HelpCenter','')}
+					</c:if>
+					<c:if test="${empty parent.type}">
+						<select name="type">
+							<option value="1" selected="selected">买家中心</option>
+							<option value="2">卖家中心</option>
+						</select>
+					</c:if>
+				</td>
 			</tr>
 			<tr>
 				<td>名称:</td>

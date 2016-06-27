@@ -16,19 +16,11 @@
 	}
 	
 	function forrmaterType(value,row){
-		if(${fns:getDictValue('买家中心','HelpCenter','')} == value){
-			return '买家中心';
-		}
-	
-		return '卖家中心';
+		return (value == 1 ? '买家中心':'卖家中心');
 	}
 	
 	function forrmaterPid(value,row){
-		if(value == ${fns:getDictValue('顶级菜单父id','TopHelpMenuPid','')}){
-			return '';
-		}
-	
-		return value;
+		return (value == -1 ? '': value);
 	}
 	
 </script>

@@ -1,17 +1,17 @@
 package com.lxhrainy.myjz.admin.goods.oe;
 
 import com.lxhrainy.core.common.oe.BaseVO;
-import com.lxhrainy.myjz.admin.helpcenter.model.HelpMenu;
+import com.lxhrainy.myjz.admin.goods.model.GoodsType;
 
 public class GoodsTypeVO extends BaseVO {
 
-	private HelpMenu model;
+	private GoodsType model;
 
-	public HelpMenu getModel() {
+	public GoodsType getModel() {
 		return model;
 	}
 
-	public void setModel(HelpMenu model) {
+	public void setModel(GoodsType model) {
 		this.model = model;
 	}
 	

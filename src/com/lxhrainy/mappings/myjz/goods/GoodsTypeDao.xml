@@ -8,18 +8,23 @@
 		T.pid AS "pid",
 		T.status AS "status",
 		T.sort AS "sort",
-		T.deleted AS "deleted"
+		T.deleted AS "deleted",
+		
+		P.id AS "parent.id",
+		P.typename AS "parent.typename"
 	</sql>
 	
 	<sql id="goodsTypeJoins">
+		LEFT JOIN goods_type P ON P.id = T.pid
 	</sql>
 	
 	<sql id="where">
 		<if test="condition!=null">
 			<where>
+				T.deleted = 0
 				<if test="condition.model!=null">
-					<if test="condition.model.deleted!=null">
-						T.deleted = #{condition.model.deleted}
+					<if test="condition.model.typename!=null and condition.model.typename!=''">
+						AND T.typename like CONCAT('%',#{condition.model.typename},'%')
 					</if>
 				</if>
 			</where>
@@ -72,7 +77,7 @@
 		) VALUES (
 			#{id},
 			#{typename},
-			#{pid},
+			#{parent.id},
 			#{status},
 			#{sort},
 			#{deleted}
@@ -84,8 +89,8 @@
 			<if test="typename !=null and typename !=''">
 				typename = #{typename},
 			</if>	
-			<if test="pid !=null">
-				pid = #{pid},
+			<if test="parent !=null and parent.id!= null">
+				pid = #{parent.id},
 			</if>	
 			<if test="status !=null">
 				status = #{status},

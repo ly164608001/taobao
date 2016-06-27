@@ -65,13 +65,12 @@ public class HelpMenuController extends BaseController {
 	 */
 	@RequestMapping("/add")
 	public ModelAndView add(Integer pid) {
+		HelpMenu parent = null;
 		if(pid == null){
 			pid = Global.ROOT_HELPMENU_ID;
-		}
-		
-		HelpMenu parent = new HelpMenu();
-		parent.setId(pid);
-		if(pid != null){
+			parent = new HelpMenu();
+			parent.setId(pid);
+		}else{
 			parent = helpMenuService.getById(pid);
 		}
 		
