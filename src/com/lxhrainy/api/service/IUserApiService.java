@@ -6,8 +6,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.lxhrainy.api.model.ApiParams;
 import com.lxhrainy.api.util.ResultJson;
+import com.lxhrainy.core.common.service.IBaseService;
+import com.lxhrainy.core.sys.model.UserInfo;
 
-public interface IUserApiService{
+public interface IUserApiService extends IBaseService<UserInfo, Integer>{
 	/**
 	 * 获取手机验证码
 	 * @param params  手机号码

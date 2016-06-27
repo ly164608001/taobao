@@ -19,6 +19,7 @@
     <context:component-scan base-package="com.lxhrainy.core.*.service.impl"/>  
     <context:component-scan base-package="com.lxhrainy.myjz.admin.*.service.impl"/>
     <context:component-scan base-package="com.lxhrainy.myjz.front.*.service.impl"/>
+    <context:component-scan base-package="com.lxhrainy.api.service.impl"/>
     <!-- 配置数据源-->
 	<bean id="jdbcDataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close"> 
        <property name="driverClassName" value="${driverClassName}" />  

@@ -15,6 +15,7 @@ import com.lxhrainy.api.util.ResultJson;
 import com.lxhrainy.core.sys.model.UserInfo;
 import com.lxhrainy.core.sys.service.IUserInfoService;
 import com.lxhrainy.core.utils.ContextHolderUtils;
+import com.lxhrainy.core.utils.ResourceUtil;
 import com.lxhrainy.core.utils.oConvertUtils;
 
 
@@ -43,11 +44,9 @@ public class AuthInterceptor implements HandlerInterceptor {
 	 * 在controller前拦截
 	 */
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object object) throws Exception {
-		String queryString = request.getQueryString();
+		String requestPath = ResourceUtil.getRequestPath(request);// 用户访问的资源地址
 		//如果该请求不在拦截范围内，直接返回true
-		if (oConvertUtils.isNotEmpty(queryString) 
-				&& queryString.split("&").length > 0
-				&& excludeUrls.contains(queryString.split("&")[0])) {
+		if (excludeUrls.contains(requestPath)) {
 			return true;
 		} else {
 			UserInfo loginUser = ApiCacheUtil.getLoginUser();

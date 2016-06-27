@@ -1,5 +1,6 @@
 package com.lxhrainy.core.utils;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -173,4 +174,15 @@ public class StringUtil {
 		   } 
 		   return true; 
 		}
+	/**
+	 * 格式化数字
+	 * 
+	 * @param number
+	 * @param pattern
+	 * @return
+	 */
+	public static String formatNumber(Double number, String pattern) {
+		DecimalFormat df = new DecimalFormat(pattern);
+		return df.format(number);
+	}
 }

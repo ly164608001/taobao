@@ -3,7 +3,6 @@
  */
 package com.lxhrainy.api.service.impl;
 
-import java.io.Serializable;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
@@ -23,9 +22,9 @@ import com.lxhrainy.core.sys.model.UserInfo;
  * @author dyno
  *
  */
-@Service("userApiService")
+@Service
 @Transactional
-public class UserApiServiceImpl extends AbstractBaseServiceImpl<IUserInfoDao, UserInfo, Serializable> implements IUserApiService  {
+public class UserApiServiceImpl extends AbstractBaseServiceImpl<IUserInfoDao, UserInfo, Integer> implements IUserApiService  {
 
 	@Override
 	public ResultJson getVerity(ApiParams params) {
