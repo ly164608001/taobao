@@ -27,6 +27,7 @@ import com.lxhrainy.core.sys.model.SysMenu;
 import com.lxhrainy.core.sys.oe.SysMenuVO;
 import com.lxhrainy.core.sys.service.ISysMenuService;
 import com.lxhrainy.core.utils.StringUtils;
+import com.lxhrainy.myjz.common.constant.Global;
 
 /**
  * 菜单Controller
@@ -71,7 +72,7 @@ public class SysMenuController extends BaseController {
 			menu = sysMenuService.getById(menu.getId());
 		}
 		if (menu.getParent()==null || menu.getParent().getId()==null){
-			menu.setParent(new SysMenu(0));
+			menu.setParent(new SysMenu(Global.ROOT_MENU_ID));
 		}
 		menu.setParent(sysMenuService.getById(menu.getParent().getId()));
 		// 获取排序号，最末节点排序号+30
