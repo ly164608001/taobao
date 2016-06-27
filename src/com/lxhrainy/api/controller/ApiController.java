@@ -9,11 +9,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
@@ -29,7 +27,6 @@ import com.lxhrainy.core.utils.UploadFileUtil;
  * 手机用户相关API的Controller.
  * @author dyno
  */
-@Scope("prototype")
 @Controller
 @RequestMapping("/api")
 @SuppressWarnings("unchecked")
@@ -255,37 +252,6 @@ public class ApiController {
 		this.writeJsonToResponse(rj, response);
 	}
 	/**
-	 * 图片上传
-	 * @param request
-	 * @param response
-	 */
-	@RequestMapping(params = "uploadimg" , method = RequestMethod.POST)
-	public void uploadimg(HttpServletRequest request, HttpServletResponse response) {
-		ResultJson rj = new ResultJson();
-		//TSAttachment file = systemService.uploadFile(uploadFile);
-		JSONObject result = UploadFileUtil.savefile(request);
-		if ((boolean) result.get("success")) {
-			rj.setSuccess(true);
-			rj.setError_code(ResultJson.SUCCESS);
-			rj.setMessage("上传成功");
-			//TODO 返回url
-			//rj.setResult(file.getId());
-		} else {
-			rj.setError_code(ResultJson.ERROR_CODE_API);
-			rj.setMessage("上传失败");
-		}
-		this.writeJsonToResponse(rj, response);
-	}
-	/**
-	 * GET方式 二进制图片数据
-	 * @param request id
-	 * @param response
-	 */
-	@RequestMapping(params = "getimg" , method = RequestMethod.GET)
-	public void getimg(@RequestParam("id") String id,  HttpServletResponse response) {
-		userApiService.getimg(id, response);
-	}
-	/**
 	 * 提交支付账号密码设置
 	 * @param params
 	 * @param response
@@ -382,6 +348,26 @@ public class ApiController {
 	public void msglist(InputStream inputStream, HttpServletResponse response) {
 		ApiParams params = ApiJSONUtil.decryptJSON(inputStream, ApiParams.class);
 		ResultJson rj = userApiService.msglist(params);
+		this.writeJsonToResponse(rj, response);
+	}
+	
+	/**
+	 * 图片上传
+	 * @param request
+	 * @param response
+	 */
+	@RequestMapping("/uploadimg")
+	public void uploadimg(HttpServletRequest request, HttpServletResponse response) {
+		ResultJson rj = new ResultJson();
+		JSONObject result = UploadFileUtil.uploadFile(request);
+		if ((boolean) result.get("success")) {
+			rj.setSuccess(true);
+			rj.setError_code(ResultJson.SUCCESS);
+			rj.setMessage("上传成功");
+		} else {
+			rj.setError_code(ResultJson.ERROR_CODE_API);
+			rj.setMessage("上传失败");
+		}
 		this.writeJsonToResponse(rj, response);
 	}
 	

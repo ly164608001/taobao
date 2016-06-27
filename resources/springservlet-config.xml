@@ -44,8 +44,7 @@
     </bean>
     
     <!-- 默认的注解映射的支持 -->  
-   	<mvc:annotation-driven>
-	</mvc:annotation-driven>
+   	<mvc:annotation-driven></mvc:annotation-driven>
       
     <!-- 静态资源映射 -->
     <!-- <mvc:resources mapping="/js/**" location="/js/" />
@@ -60,7 +59,7 @@
 
     <!-- 开启controller注解支持 -->
     <!-- use-default-filters="false" 只扫描指定的注解 -->
-    <context:component-scan base-package="com.lxhrainy.core.sys.web,com.lxhrainy.myjz.admin.*.web,com.lxhrainy.myjz.front.web" use-default-filters="false">
+    <context:component-scan base-package="com.lxhrainy.api.controller,com.lxhrainy.core.sys.web,com.lxhrainy.myjz.admin.*.web,com.lxhrainy.myjz.front.web" use-default-filters="false">
         <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
     </context:component-scan>
     <!-- 视图解析器 -->
@@ -143,6 +142,16 @@
 						<value>front/toValidateInfo.htm</value>
 						<value>front/toResetPwd.htm</value>
 						<value>front/resetResult.htm</value>
+					</list>
+				</property>
+	    	</bean> 
+		</mvc:interceptor> 
+		<mvc:interceptor>  
+		    <mvc:mapping path="/api/**"/>
+	    	<bean class="com.lxhrainy.api.interceptors.AuthInterceptor">
+	    		<property name="excludeUrls">
+					<list>
+						<value>api/uploadimg.htm</value>
 					</list>
 				</property>
 	    	</bean> 
