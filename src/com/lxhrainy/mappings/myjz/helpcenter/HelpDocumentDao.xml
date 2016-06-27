@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lxhrainy.myjz.admin.dao.helpcenter.HelpDocumentDao">
+    
+	<sql id="helpDocumentColumns">
+		T.id AS "id",
+		T.title AS "title",
+		T.href AS "href",
+		T.deleted AS "deleted",
+		T.sort AS "sort",
+		T.status AS "status",
+		
+		T.menuid AS "menu.id",
+		M.name AS "menu.name"
+	</sql>
+	
+	<sql id="helpDocumentJoins">
+		LEFT JOIN help_menu M ON M.id = T.menuid
+	</sql>
+    
+    <sql id="where">
+		<if test="condition!=null">
+			<where>
+				T.deleted = 0
+				<if test="condition.model!=null">
+					<if test="condition.model.title!=null and condition.model.title!=''">
+						AND T.title like CONCAT('%',#{condition.model.title},'%')
+					</if>
+				</if>
+			</where>
+		</if>
+	</sql>
+	
+	<select id="getById" resultType="HelpDocument">
+		SELECT 
+			<include refid="helpDocumentColumns"/>
+		FROM help_document T
+		<include refid="helpDocumentJoins"/>
+		WHERE T.id = #{id} 
+			AND T.deleted = 0
+	</select>
+	
+	<select id="findListByPage" resultType="HelpDocument">
+		SELECT 
+			<include refid="helpDocumentColumns"/>
+		FROM help_document T
+		<include refid="helpDocumentJoins"/>
+		<include refid="where"/>
+		order by T.ID
+			<include refid="Sql.pager" />
+	</select>
+	
+	<select id="findAllList" resultType="HelpDocument">
+		SELECT 
+			<include refid="helpDocumentColumns"/>
+		FROM help_document T
+		<include refid="helpDocumentJoins"/>
+		<include refid="where"/>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO help_document(
+			id,
+			title,
+			menuid,
+			href,
+			deleted,
+			sort,
+			status
+		) VALUES (
+			#{id},
+			#{title},
+			#{menu.id},
+			#{href},
+			#{deleted},
+			#{sort},
+			#{status}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE help_document SET 	
+			title = #{title},
+			menuid = #{menuid},
+			href = #{href},
+			deleted = #{deleted},
+			sort = #{sort},
+			status = #{status}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="deleteById">
+		update help_document set 
+			deleted=1
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

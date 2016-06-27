@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50096
 File Encoding         : 65001
 
-Date: 2016-06-27 23:18:16
+Date: 2016-06-28 00:27:38
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -115,9 +115,9 @@ CREATE TABLE `goods_type` (
   `pid` int(11) default NULL COMMENT '上级ID',
   `status` int(1) default NULL COMMENT '状态(隐藏/显示)',
   `sort` int(11) default NULL COMMENT '排序',
-  `deleted` int(1) default NULL COMMENT '删除标识',
+  `deleted` int(1) default '0' COMMENT '删除标识',
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of goods_type
@@ -154,10 +154,10 @@ CREATE TABLE `help_menu` (
   `type` int(1) default NULL COMMENT '文档类型 ',
   `name` varchar(128) character set utf8 default NULL COMMENT '文档名称',
   `sort` int(11) default NULL COMMENT '排序',
-  `deleted` int(1) default NULL COMMENT '删除标识',
+  `deleted` int(1) default '0' COMMENT '删除标识',
   `url` varchar(255) character set utf8 default NULL COMMENT '连接',
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1 COMMENT='帮助菜单';
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1 COMMENT='帮助菜单';
 
 -- ----------------------------
 -- Records of help_menu

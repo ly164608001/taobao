@@ -8,6 +8,10 @@ import com.lxhrainy.core.common.model.BaseModel;
  * @author xueyunteng
  */
 public class HelpMenu extends BaseModel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	/** 菜单名称 **/
 	private String name;
 	/** 上级类目 **/
