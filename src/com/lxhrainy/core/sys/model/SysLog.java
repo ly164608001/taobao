@@ -15,7 +15,7 @@ public class SysLog extends BaseModel
 	/**日志标题**/
 	private String title;
 	/**创建人**/
-	private SysUser createuser;
+	private UserInfo createuser;
 	/**创建时间**/
 	private Date createtime;
 	/**操作IP地址**/
@@ -56,10 +56,10 @@ public class SysLog extends BaseModel
 		this.remoteip = remoteip;
 	}
 
-	public SysUser getCreateuser() {
+	public UserInfo getCreateuser() {
 		return createuser;
 	}
-	public void setCreateuser(SysUser createuser) {
+	public void setCreateuser(UserInfo createuser) {
 		this.createuser = createuser;
 	}
 	public Date getCreatetime() {
