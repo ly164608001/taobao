@@ -1,6 +1,7 @@
 package com.lxhrainy.myjz.admin.helpcenter.web;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
@@ -151,4 +152,17 @@ public class HelpMenuController extends BaseController {
 		return rj;
 	}
 
+	@RequestMapping("/getlistbypid")
+	@ResponseBody
+	public JSONObject getListByPid(Integer pid) {
+		JSONObject rj = new JSONObject();
+		List<HelpMenu> list = new ArrayList<HelpMenu>();
+		if(pid != null){
+			list = helpMenuService.getListByPid(pid);
+		}
+		
+		rj.put("list", list);
+		return rj;
+	}
+	
 }

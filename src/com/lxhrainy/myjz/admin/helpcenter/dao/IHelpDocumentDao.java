@@ -2,7 +2,7 @@ package com.lxhrainy.myjz.admin.helpcenter.dao;
 
 import com.lxhrainy.core.annotation.MyBatisDao;
 import com.lxhrainy.core.common.dao.IBaseDao;
-import com.lxhrainy.myjz.admin.helpcenter.model.HelpMenu;
+import com.lxhrainy.myjz.admin.helpcenter.model.HelpDocument;
 
 
 /**
@@ -11,6 +11,6 @@ import com.lxhrainy.myjz.admin.helpcenter.model.HelpMenu;
  * @version 2016-06-28
  */
 @MyBatisDao
-public interface HelpDocumentDao extends IBaseDao<HelpMenu> {
+public interface IHelpDocumentDao extends IBaseDao<HelpDocument> {
 	
 }

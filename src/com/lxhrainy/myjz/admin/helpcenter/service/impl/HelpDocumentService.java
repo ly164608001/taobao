@@ -5,8 +5,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.lxhrainy.core.common.service.AbstractBaseServiceImpl;
-import com.lxhrainy.myjz.admin.helpcenter.dao.IHelpMenuDao;
-import com.lxhrainy.myjz.admin.helpcenter.model.HelpMenu;
+import com.lxhrainy.myjz.admin.helpcenter.dao.IHelpDocumentDao;
+import com.lxhrainy.myjz.admin.helpcenter.model.HelpDocument;
 import com.lxhrainy.myjz.admin.helpcenter.service.IHelpDocumentService;
 
 
@@ -18,7 +18,7 @@ import com.lxhrainy.myjz.admin.helpcenter.service.IHelpDocumentService;
 @Service
 @Transactional(readOnly = true)
 public class HelpDocumentService extends
-AbstractBaseServiceImpl<IHelpMenuDao, HelpMenu, Integer>
+AbstractBaseServiceImpl<IHelpDocumentDao, HelpDocument, Integer>
 implements IHelpDocumentService  {
 
 	

@@ -1,5 +1,8 @@
 package com.lxhrainy.myjz.admin.helpcenter.service.impl;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,6 +23,17 @@ import com.lxhrainy.myjz.admin.helpcenter.service.IHelpMenuService;
 public class HelpMenuServiceImpl extends
 AbstractBaseServiceImpl<IHelpMenuDao, HelpMenu, Integer>
 implements IHelpMenuService {
-
 	
+	@Autowired
+	IHelpMenuDao dao;
+
+	/**
+	 * 获取指定下级菜单列表
+	 * @param level
+	 * @return
+	 */
+	public List<HelpMenu> getListByPid(int pid) {
+		List<HelpMenu> list = dao.getListByPid(pid);
+		return list;
+	}
 }

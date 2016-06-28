@@ -40,6 +40,14 @@
 		WHERE T.id = #{id}
 	</select>
 	
+	<select id="getListByPid" resultType="HelpMenu">
+		SELECT 
+			<include refid="helpMenuColumns"/>
+		FROM help_menu T
+		<include refid="helpMenuJoins"/>
+		WHERE T.pid = #{pid}
+	</select>
+	
 	<select id="findListByPage" resultType="HelpMenu">
 		SELECT 
 			<include refid="helpMenuColumns"/>
