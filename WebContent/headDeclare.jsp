@@ -21,3 +21,4 @@
 <script type="text/javascript" src="${basePath}static/js/My97DatePicker/WdatePicker.js"></script>
 <script type="text/javascript" src="${basePath}static/js/common.js"></script>
 <script type="text/javascript" src="${basePath}static/js/easyui.extends.js"></script>
+<script type="text/javascript" src="${basePath}static/js/select.js"></script>
