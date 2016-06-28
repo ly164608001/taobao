@@ -40,12 +40,6 @@
 	</form>
 	
 	<script src="${basePath}static/js/admin/initdata.js"></script>
-	<script type="text/javascript">
-		$(function(){
-			_initSelect();
-		})
-	</script>
-	
 	
 </body>
 </html>

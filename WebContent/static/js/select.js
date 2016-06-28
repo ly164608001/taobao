@@ -4,8 +4,11 @@
 	 * @version v1.0
 	 * @date 2016-06-28 23:54:12
 	 */
-
 	//初始化select
+    $(function(){
+            _initSelect();
+      })
+      
 	function _initSelect(){
 		$('.xytSelect').each(function(){
 			var $this = $(this);
