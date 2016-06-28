@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50096
 File Encoding         : 65001
 
-Date: 2016-06-26 23:11:15
+Date: 2016-06-29 00:17:05
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -115,13 +115,35 @@ CREATE TABLE `goods_type` (
   `pid` int(11) default NULL COMMENT '上级ID',
   `status` int(1) default NULL COMMENT '状态(隐藏/显示)',
   `sort` int(11) default NULL COMMENT '排序',
-  `deleted` int(1) default NULL COMMENT '删除标识',
+  `deleted` int(1) default '0' COMMENT '删除标识',
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of goods_type
 -- ----------------------------
+INSERT INTO `goods_type` VALUES ('1', '服饰鞋帽', '-1', '1', '1', '0');
+INSERT INTO `goods_type` VALUES ('2', '家用电器', '-1', '1', '2', '0');
+
+-- ----------------------------
+-- Table structure for `help_document`
+-- ----------------------------
+DROP TABLE IF EXISTS `help_document`;
+CREATE TABLE `help_document` (
+  `id` int(11) NOT NULL COMMENT '文档id',
+  `title` varchar(64) default NULL COMMENT '文档名',
+  `menuid` int(11) default NULL COMMENT '文档类目id',
+  `href` varchar(255) default NULL COMMENT '文档生成页面的连接',
+  `deleted` int(1) default '0' COMMENT '删除标识',
+  `sort` int(11) default NULL,
+  `status` int(1) default NULL COMMENT '状态 (显示隐藏)',
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of help_document
+-- ----------------------------
+INSERT INTO `help_document` VALUES ('1', '测试文档', '4', null, '0', '1', '1');
 
 -- ----------------------------
 -- Table structure for `help_menu`
@@ -133,10 +155,10 @@ CREATE TABLE `help_menu` (
   `type` int(1) default NULL COMMENT '文档类型 ',
   `name` varchar(128) character set utf8 default NULL COMMENT '文档名称',
   `sort` int(11) default NULL COMMENT '排序',
-  `deleted` int(1) default NULL COMMENT '删除标识',
+  `deleted` int(1) default '0' COMMENT '删除标识',
   `url` varchar(255) character set utf8 default NULL COMMENT '连接',
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1 COMMENT='帮助菜单';
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1 COMMENT='帮助菜单';
 
 -- ----------------------------
 -- Records of help_menu
@@ -146,6 +168,7 @@ INSERT INTO `help_menu` VALUES ('2', '-1', '2', '卖家新手上路', '1', '0', 
 INSERT INTO `help_menu` VALUES ('4', '2', '2', '注册', '1', '0', null);
 INSERT INTO `help_menu` VALUES ('5', '2', '2', '登录', '2', '0', null);
 INSERT INTO `help_menu` VALUES ('6', '2', '2', '平台名词', '3', '0', '');
+INSERT INTO `help_menu` VALUES ('7', '6', '2', '测试多级', null, '0', '');
 
 -- ----------------------------
 -- Table structure for `order_basic_properties`
@@ -4072,7 +4095,7 @@ CREATE TABLE `sys_dict` (
   `remarks` varchar(255) default NULL COMMENT '备注信息',
   `deleted` int(1) NOT NULL default '0' COMMENT '删除标记',
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of sys_dict
@@ -4083,7 +4106,9 @@ INSERT INTO `sys_dict` VALUES ('30', '1', '是', 'YesOrNo', '是否', null, null
 INSERT INTO `sys_dict` VALUES ('31', '0', '否', 'YesOrNo', '是否', null, null, null, null, null, null, null, '0');
 INSERT INTO `sys_dict` VALUES ('32', '1', '买家中心', 'HelpCenter', '帮助菜单所属类型', null, null, null, null, null, null, null, '0');
 INSERT INTO `sys_dict` VALUES ('33', '2', '卖家中心', 'HelpCenter', '帮助菜单所属类型', null, null, null, null, null, null, null, '0');
-INSERT INTO `sys_dict` VALUES ('34', '-1', '顶级菜单父id', 'TopHelpMenuPid', '帮助菜单顶级类目父id', null, null, null, null, null, null, null, '0');
+INSERT INTO `sys_dict` VALUES ('34', '-1', '顶级菜单父id', 'TopMenuPid', '顶级类目菜单父id', null, null, null, null, null, null, null, '0');
+INSERT INTO `sys_dict` VALUES ('35', '1', '显示', 'ShowOrHidden', '隐藏或显示', null, null, null, null, null, null, null, '0');
+INSERT INTO `sys_dict` VALUES ('36', '0', '隐藏', 'ShowOrHidden', '隐藏或显示', null, null, null, null, null, null, null, '0');
 
 -- ----------------------------
 -- Table structure for `sys_log`
@@ -4134,7 +4159,7 @@ CREATE TABLE `sys_menu` (
   PRIMARY KEY  (`id`),
   KEY `sys_menu_parent_id` USING BTREE (`parentid`),
   KEY `sys_menu_del_flag` USING BTREE (`deleted`)
-) ENGINE=InnoDB AUTO_INCREMENT=74 DEFAULT CHARSET=utf8 COMMENT='菜单表';
+) ENGINE=InnoDB AUTO_INCREMENT=81 DEFAULT CHARSET=utf8 COMMENT='菜单表';
 
 -- ----------------------------
 -- Records of sys_menu
@@ -4149,7 +4174,39 @@ INSERT INTO `sys_menu` VALUES ('26', '1', '-1,1', '基础数据', '160', '', nul
 INSERT INTO `sys_menu` VALUES ('53', '7', '-1,7,1', '数据字典', '50', 'admin/sys/dict/list.htm', null, null, '1', '', '3', '2016-06-12 15:57:10', '3', '2016-06-12 15:57:10', null, '0', '0', '0');
 INSERT INTO `sys_menu` VALUES ('54', '7', '-1,7,1', '地域管理', '80', 'admin/sys/area/list.htm', null, null, '1', '', '3', '2016-06-13 11:42:47', '3', '2016-06-13 11:42:47', null, '0', '0', '0');
 INSERT INTO `sys_menu` VALUES ('67', '1', '-1,1', '用户管理', '370', '', null, null, '1', '', '3', '2016-06-17 09:42:54', '3', '2016-06-17 09:42:54', null, '0', '0', '1');
-INSERT INTO `sys_menu` VALUES ('73', '26', '-1,126,', '帮助中心', '1', 'admin/helpcenter/menu/list.htm', null, null, '1', '', '3', '2016-06-26 20:39:09', '3', '2016-06-26 20:39:09', null, '0', '0', '0');
+INSERT INTO `sys_menu` VALUES ('73', '26', '-1,126,', '帮助菜单', '1', 'admin/helpcenter/menu/list.htm', null, null, '1', '', '3', '2016-06-26 20:39:09', '3', '2016-06-28 21:01:16', null, '0', '0', '0');
+INSERT INTO `sys_menu` VALUES ('74', '26', '-1,126,', '商品类目管理', '31', 'admin/goods/type/list.htm', null, null, '1', '', '3', '2016-06-27 21:10:43', '3', '2016-06-27 21:10:43', null, '0', '0', '0');
+INSERT INTO `sys_menu` VALUES ('75', '1', '-11,', '商家管理', '400', '', null, null, '1', '', '3', '2016-06-27 23:07:15', '3', '2016-06-27 23:07:15', null, '0', '0', '0');
+INSERT INTO `sys_menu` VALUES ('76', '75', '-11,75,', '店铺管理', '1', '', null, null, '1', '', '3', '2016-06-27 23:07:34', '3', '2016-06-27 23:07:34', null, '0', '0', '0');
+INSERT INTO `sys_menu` VALUES ('77', '75', '-11,75,', '收获地址管理', '31', '', null, null, '1', '', '3', '2016-06-27 23:08:06', '3', '2016-06-27 23:08:06', null, '0', '0', '0');
+INSERT INTO `sys_menu` VALUES ('78', '75', '-11,75,', '标签管理', '61', '', null, null, '1', '', '3', '2016-06-27 23:08:23', '3', '2016-06-27 23:08:23', null, '0', '0', '0');
+INSERT INTO `sys_menu` VALUES ('79', '75', '-11,75,', ' 好评内容管理', '91', '', null, null, '1', '', '3', '2016-06-27 23:08:36', '3', '2016-06-27 23:08:36', null, '0', '0', '0');
+INSERT INTO `sys_menu` VALUES ('80', '26', '-1,126,', '帮助文档', '1', 'admin/helpcenter/document/list.htm', null, null, '1', '', '3', '2016-06-28 21:02:52', '3', '2016-06-28 21:14:40', null, '0', '0', '0');
+
+-- ----------------------------
+-- Table structure for `sys_notice`
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_notice`;
+CREATE TABLE `sys_notice` (
+  `id` int(11) NOT NULL auto_increment,
+  `content` varchar(255) default NULL COMMENT '消息内容',
+  `type` int(1) default NULL COMMENT '消息类型',
+  `status` int(1) default NULL COMMENT '状态',
+  `userid` int(11) default NULL COMMENT '接收用户',
+  `source` int(1) default NULL COMMENT '来源',
+  `createtime` datetime default NULL COMMENT '消息发送时间',
+  `title` varchar(64) default NULL COMMENT '消息标题',
+  `img` varchar(255) default NULL COMMENT '消息封面',
+  `url` varchar(255) default NULL COMMENT '消息跳转地址',
+  `createUser` int(11) default NULL COMMENT '创建人',
+  `memo` varchar(255) default NULL COMMENT '备注',
+  `deleted` int(1) default NULL COMMENT '删除标识',
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='消息表';
+
+-- ----------------------------
+-- Records of sys_notice
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for `sys_role`
@@ -4172,7 +4229,7 @@ CREATE TABLE `sys_role` (
   PRIMARY KEY  (`id`),
   KEY `sys_role_del_flag` USING BTREE (`deleted`),
   KEY `sys_role_enname` USING BTREE (`enname`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COMMENT='角色表';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='角色表';
 
 -- ----------------------------
 -- Records of sys_role
@@ -4202,6 +4259,13 @@ INSERT INTO `sys_role_menu` VALUES ('1', '53');
 INSERT INTO `sys_role_menu` VALUES ('1', '54');
 INSERT INTO `sys_role_menu` VALUES ('1', '67');
 INSERT INTO `sys_role_menu` VALUES ('1', '73');
+INSERT INTO `sys_role_menu` VALUES ('1', '74');
+INSERT INTO `sys_role_menu` VALUES ('1', '75');
+INSERT INTO `sys_role_menu` VALUES ('1', '76');
+INSERT INTO `sys_role_menu` VALUES ('1', '77');
+INSERT INTO `sys_role_menu` VALUES ('1', '78');
+INSERT INTO `sys_role_menu` VALUES ('1', '79');
+INSERT INTO `sys_role_menu` VALUES ('1', '80');
 
 -- ----------------------------
 -- Table structure for `sys_user_role`
