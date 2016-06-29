@@ -18,7 +18,7 @@ import com.lxhrainy.core.sys.service.ISysNoticeService;
  * @author lxhrainy 
  * @date 2016年5月20日 上午11:32:34
  */
-@Service("sysDictService")
+@Service("sysNoticeImpl")
 @Transactional(readOnly = true)
 public class SysNoticeImpl extends AbstractBaseServiceImpl<ISysNoticeDao, SysNotice, Integer>
 	implements ISysNoticeService{

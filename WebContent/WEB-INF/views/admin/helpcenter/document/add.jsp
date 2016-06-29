@@ -4,6 +4,7 @@
 <html>
 <head>
 <script type="text/javascript" src="${basePath}static/js/admin/global.js"></script>
+<script type="text/javascript" src="${basePath}static/js/select.js"></script>
 </head>
 <body>
 
@@ -40,6 +41,10 @@
 	</form>
 	
 	<script src="${basePath}static/js/admin/initdata.js"></script>
-	
+	<script type="text/javascript">
+		$(function(){
+			_initSelect();
+		}) 
+	</script>
 </body>
 </html>

@@ -9,14 +9,14 @@ import com.lxhrainy.core.sys.model.SysDict;
 import com.lxhrainy.core.sys.service.ISysDictService;
 
 /**
- * @ClassName: OrderServiceImpl 
- * @Description: 订单Service实现类
+ * @ClassName: SysDictServiceImpl 
+ * @Description: 系统字典实现类
  * @author lxhrainy 
  * @date 2016年5月20日 上午11:32:34
  */
 @Service("sysDictService")
 @Transactional(readOnly = true)
-public class SysDictImpl extends AbstractBaseServiceImpl<ISysDictDao, SysDict, Integer>
+public class SysDictServiceImpl extends AbstractBaseServiceImpl<ISysDictDao, SysDict, Integer>
 	implements ISysDictService{
 	
 }

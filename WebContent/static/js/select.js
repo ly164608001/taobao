@@ -6,8 +6,8 @@
 	 */
 	//初始化select
     $(function(){
-            _initSelect();
-      })
+         _initSelect();
+      });
       
 	function _initSelect(){
 		$('.xytSelect').each(function(){
@@ -25,7 +25,7 @@
 				dateType : 'json',
 				success : function(result){
 					var json = eval('('+result+')');
-					var arr = json.list; 
+					var arr = json.list;
 					
 					var options = '<option value="">请选择</option>';
 					if(arr != null && arr.length > 0){
@@ -66,6 +66,7 @@
 				success : function(result){
 					var json = eval('('+result+')');
 					var arr = json.list; 
+					
 					if(arr == null || arr.length == 0){
 						$this.nextAll('select').remove();
 					}else{
