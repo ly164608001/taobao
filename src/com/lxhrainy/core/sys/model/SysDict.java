@@ -23,11 +23,11 @@ public class SysDict extends BaseModel
 	/**父级ID**/
 	private Integer parentid;
 	/**创建者**/
-	private SysUser createuser;
+	private UserInfo createuser;
 	/**创建时间**/
 	private Date createtime;
 	/**更新者**/
-	private SysUser updateuser;
+	private UserInfo updateuser;
 	/**更新时间**/
 	private Date updatetime;
 	/**备注信息**/
@@ -99,10 +99,10 @@ public class SysDict extends BaseModel
 	{
 		this.deleted = deleted;
 	}
-	public SysUser getCreateuser() {
+	public UserInfo getCreateuser() {
 		return createuser;
 	}
-	public void setCreateuser(SysUser createBy) {
+	public void setCreateuser(UserInfo createBy) {
 		this.createuser = createBy;
 	}
 	public Date getCreatetime() {
@@ -111,10 +111,10 @@ public class SysDict extends BaseModel
 	public void setCreatetime(Date createtime) {
 		this.createtime = createtime;
 	}
-	public SysUser getUpdateuser() {
+	public UserInfo getUpdateuser() {
 		return updateuser;
 	}
-	public void setUpdateuser(SysUser updateBy) {
+	public void setUpdateuser(UserInfo updateBy) {
 		this.updateuser = updateBy;
 	}
 	public Date getUpdatetime() {

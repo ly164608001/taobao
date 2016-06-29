@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
@@ -35,7 +34,7 @@ public class ApiController {
 	@Autowired
 	private IUserApiService userApiService;
 	
-	@RequestMapping(params = "test")
+	@RequestMapping("/test")
 	public String test() throws IOException {
 		return "api/test";
 	}
@@ -46,7 +45,7 @@ public class ApiController {
 	 * @param response
 	 * @throws IOException 
 	 */
-	@RequestMapping(params = "getVerity")
+	@RequestMapping("/getVerity")
 	public void getVerity(InputStream inputStream, HttpServletResponse response) throws IOException {
 		ApiParams params =	ApiJSONUtil.decryptJSON(inputStream, ApiParams.class);
 		ResultJson rj = userApiService.getVerity(params);
@@ -62,7 +61,7 @@ public class ApiController {
 	 *		captcha 验证码（必须）
 	 * @param response
 	 */
-	@RequestMapping(params = "register" , method = RequestMethod.POST)
+	@RequestMapping("/register" )
 	public void register(InputStream inputStream, HttpServletResponse response) {
 		ApiCacheUtil.getLoginUser();
 		ApiParams params =	ApiJSONUtil.decryptJSON(inputStream, ApiParams.class);
@@ -76,7 +75,7 @@ public class ApiController {
 	 * 		password 密码（必须）
 	 * @param response
 	 */
-	@RequestMapping(params = "login" , method = RequestMethod.POST)
+	@RequestMapping("/login" )
 	public void login(InputStream inputStream, HttpServletResponse response) {
 		ApiParams params =	ApiJSONUtil.decryptJSON(inputStream, ApiParams.class);
 		ResultJson rj = userApiService.login(params,response);
@@ -86,7 +85,7 @@ public class ApiController {
 	 * 登出接口
 	 * @param response
 	 */
-	@RequestMapping(params = "logout" , method = RequestMethod.POST)
+	@RequestMapping("/logout" )
 	public void logout(HttpServletResponse response) {
 		ResultJson rj =new ResultJson();
 		ApiCacheUtil.logoutUser();
@@ -101,7 +100,7 @@ public class ApiController {
 	 * 			
 	 * @param response
 	 */
-	@RequestMapping(params = "bindToken" , method = RequestMethod.POST)
+	@RequestMapping("/bindToken" )
 	public void bindToken(InputStream inputStream, HttpServletResponse response) {
 		ApiParams params =	ApiJSONUtil.decryptJSON(inputStream, ApiParams.class);
 		ResultJson rj = userApiService.bindToken(params);
@@ -115,7 +114,7 @@ public class ApiController {
 	 * @param response
 	 * @throws IOException 
 	 */
-	@RequestMapping(params = "changePwd")
+	@RequestMapping("/changePwd")
 	public void changePwd(InputStream inputStream, HttpServletResponse response){
 		ApiParams params =	ApiJSONUtil.decryptJSON(inputStream, ApiParams.class);
 		ResultJson rj = userApiService.changePwd(params);
@@ -127,7 +126,7 @@ public class ApiController {
 	 * @param response
 	 * @throws IOException 
 	 */
-	@RequestMapping(params = "resetPwd")
+	@RequestMapping("/resetPwd")
 	public void resetPwd(InputStream inputStream, HttpServletResponse response){
 		ApiParams params =	ApiJSONUtil.decryptJSON(inputStream, ApiParams.class);
 		ResultJson rj = userApiService.resetPwd(params);
@@ -140,7 +139,7 @@ public class ApiController {
 	 * 		   rule 用户身份（必须）0:货主,1:车主
 	 * @param response
 	 */
-	@RequestMapping(params = "accountInfo" , method = RequestMethod.POST)
+	@RequestMapping("/accountInfo" )
 	public void accountInfo(InputStream inputStream, HttpServletResponse response) {
 		ApiParams params =	ApiJSONUtil.decryptJSON(inputStream, ApiParams.class);
 		ResultJson rj = userApiService.accountInfo(params);
@@ -153,7 +152,7 @@ public class ApiController {
 	 * 		    rule 用户身份（必须）0:货主,1:车主
 	 * @param response
 	 */
-	@RequestMapping(params = "userInfo" , method = RequestMethod.POST)
+	@RequestMapping("/userInfo" )
 	public void userInfo(InputStream inputStream, HttpServletResponse response) {
 		ApiParams params =	ApiJSONUtil.decryptJSON(inputStream, ApiParams.class);
 		ResultJson rj = userApiService.userInfo(params);
@@ -166,7 +165,7 @@ public class ApiController {
 	 * 		    rule 用户身份（必须）0:货主,1:车主
 	 * @param response
 	 */
-	@RequestMapping(params = "updateInfo" , method = RequestMethod.POST)
+	@RequestMapping("/updateInfo" )
 	public void updateInfo(InputStream inputStream, HttpServletResponse response) {
 		ApiParams params =	ApiJSONUtil.decryptJSON(inputStream, ApiParams.class);
 		ResultJson rj = userApiService.updateInfo(params);
@@ -190,7 +189,7 @@ public class ApiController {
 	 * 		   identity_back_iconid 身份证背面照片id
 	 * @param response
 	 */
-	@RequestMapping(params = "certifiedDriver" , method = RequestMethod.POST)
+	@RequestMapping("/certifiedDriver" )
 	public void certifiedDriver(InputStream inputStream, HttpServletResponse response) {
 		Map<String, String> params = ApiJSONUtil.decryptJSON(inputStream, Map.class);
 		ResultJson rj = userApiService.certifiedDriver(params);
@@ -216,7 +215,7 @@ public class ApiController {
 	 * 		   identity_back_iconid 身份证背面照片id
 	 * @param response
 	 */
-	@RequestMapping(params = "certifiedUser" , method = RequestMethod.POST)
+	@RequestMapping("/certifiedUser" )
 	public void certifiedUser(InputStream inputStream, HttpServletResponse response) {
 		Map<String, String> params = ApiJSONUtil.decryptJSON(inputStream, Map.class);
 		ResultJson rj = userApiService.certifiedUser(params);
@@ -245,7 +244,7 @@ public class ApiController {
 	 * @param license_iconid 行驶证照片照片id
 	 * @param response
 	 */
-	@RequestMapping(params = "certifiedCar" , method = RequestMethod.POST)
+	@RequestMapping("/certifiedCar" )
 	public void certifiedCar(InputStream inputStream, HttpServletResponse response) {
 		ApiParams params = ApiJSONUtil.decryptJSON(inputStream, ApiParams.class);
 		ResultJson rj = userApiService.certifiedCar(params);
@@ -256,7 +255,7 @@ public class ApiController {
 	 * @param params
 	 * @param response
 	 */
-	@RequestMapping(params = "payPassword" , method = RequestMethod.POST)
+	@RequestMapping("/payPassword" )
 	public void payPassword(InputStream inputStream, HttpServletResponse response) {
 		ApiParams params = ApiJSONUtil.decryptJSON(inputStream, ApiParams.class);
 		ResultJson rj = userApiService.payPassword(params);
@@ -267,7 +266,7 @@ public class ApiController {
 	 * @param params
 	 * @param response
 	 */
-	@RequestMapping(params = "bindPay" , method = RequestMethod.POST)
+	@RequestMapping("/bindPay" )
 	public void bindPay(InputStream inputStream, HttpServletResponse response) {
 		ApiParams params = ApiJSONUtil.decryptJSON(inputStream, ApiParams.class);
 		ResultJson rj = userApiService.bindPay(params);
@@ -278,7 +277,7 @@ public class ApiController {
 	* @param params
 	* @param response
 	*/
-	@RequestMapping(params = "unbindPay" , method = RequestMethod.POST)
+	@RequestMapping("/unbindPay" )
 	public void unbindPay(InputStream inputStream, HttpServletResponse response) {
 		ApiParams params = ApiJSONUtil.decryptJSON(inputStream, ApiParams.class);
 		ResultJson rj = userApiService.unbindPay(params);
@@ -289,7 +288,7 @@ public class ApiController {
 	 * @param params
 	 * @param response
 	 */
-	@RequestMapping(params = "topup" , method = RequestMethod.POST)
+	@RequestMapping("/topup" )
 	public void topup(InputStream inputStream, HttpServletResponse response) {
 		ApiParams params = ApiJSONUtil.decryptJSON(inputStream, ApiParams.class);
 		ResultJson rj = userApiService.topup(params);
@@ -300,7 +299,7 @@ public class ApiController {
 	 * @param params
 	 * @param response
 	 */
-	@RequestMapping(params = "payOrder" , method = RequestMethod.POST)
+	@RequestMapping("/payOrder" )
 	public void payOrder(InputStream inputStream, HttpServletResponse response) {
 		ApiParams params = ApiJSONUtil.decryptJSON(inputStream, ApiParams.class);
 		ResultJson rj = userApiService.payOrder(params);
@@ -311,7 +310,7 @@ public class ApiController {
 	 * @param params
 	 * @param response
 	 */
-	@RequestMapping(params = "withdrawal" , method = RequestMethod.POST)
+	@RequestMapping("/withdrawal" )
 	public void withdrawal(InputStream inputStream, HttpServletResponse response) {
 		ApiParams params = ApiJSONUtil.decryptJSON(inputStream, ApiParams.class);
 		ResultJson rj = userApiService.withdrawal(params);
@@ -322,7 +321,7 @@ public class ApiController {
 	 * @param params
 	 * @param response
 	 */
-	@RequestMapping(params = "billList" , method = RequestMethod.POST)
+	@RequestMapping("/billList" )
 	public void billList(InputStream inputStream, HttpServletResponse response) {
 		ApiParams params = ApiJSONUtil.decryptJSON(inputStream, ApiParams.class);
 		ResultJson rj = userApiService.billList(params);
@@ -333,7 +332,7 @@ public class ApiController {
 	 * @param params
 	 * @param response
 	 */
-	@RequestMapping(params = "adlist" , method = RequestMethod.POST)
+	@RequestMapping("/adlist" )
 	public void adlist(InputStream inputStream, HttpServletResponse response) {
 		ApiParams params = ApiJSONUtil.decryptJSON(inputStream, ApiParams.class);
 		ResultJson rj = userApiService.adlist(params);
@@ -344,10 +343,22 @@ public class ApiController {
 	 * @param params
 	 * @param response
 	 */
-	@RequestMapping(params = "msglist" , method = RequestMethod.POST)
+	@RequestMapping("/MessageList")
 	public void msglist(InputStream inputStream, HttpServletResponse response) {
 		ApiParams params = ApiJSONUtil.decryptJSON(inputStream, ApiParams.class);
 		ResultJson rj = userApiService.msglist(params);
+		this.writeJsonToResponse(rj, response);
+	}
+	
+	/**
+	 * 消息已读
+	 * @param params
+	 * @param response
+	 */
+	@RequestMapping("/MessageRead")
+	public void msgread(InputStream inputStream, HttpServletResponse response) {
+		ApiParams params = ApiJSONUtil.decryptJSON(inputStream, ApiParams.class);
+		ResultJson rj = userApiService.msgread(params);
 		this.writeJsonToResponse(rj, response);
 	}
 	
@@ -356,7 +367,7 @@ public class ApiController {
 	 * @param request
 	 * @param response
 	 */
-	@RequestMapping("/uploadimg")
+	@RequestMapping("/UploadImage")
 	public void uploadimg(HttpServletRequest request, HttpServletResponse response) {
 		ResultJson rj = new ResultJson();
 		JSONObject result = UploadFileUtil.uploadFile(request);

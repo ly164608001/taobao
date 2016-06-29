@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lxhrainy.core.sys.dao.ISysNoticeDao">
+    
+    <sql id="noticeColumns">
+    	T.id AS "id",
+		T.content AS "content",
+		T.type AS "type",
+		T.userid AS "user.id",
+		T.source AS "source",
+		T.createtime AS "createtime",
+		T.title AS "title",
+		T.img AS "img",
+		T.url AS "url",
+		T.createUser AS "createUser.id",
+		T.memo AS "memo",
+		T.deleted AS "deleted"
+    </sql>
+    <sql id="noticeJoins">
+		LEFT JOIN sys_user U ON U.id = T.userid
+		LEFT JOIN sys_user CU ON CU.id = T.createUser
+    </sql>
+    
+	<select id="getById" resultType="SysNotice">
+		SELECT 
+			<include refid="noticeColumns"/>
+		FROM sys_Notice T
+			<include refid="noticeJoins"/>
+		WHERE T.id = #{id}
+	</select>
+	
+	
+	<select id="findAllList" resultType="SysNotice">
+		SELECT 
+			<include refid="noticeColumns"/>
+		FROM sys_notice T
+			<include refid="noticeJoins"/>
+		WHERE T.deleted = 0 
+		ORDER BY T.id DESC
+	</select>
+	
+	<select id="findListByPage" resultType="SysNotice">
+		SELECT 
+			<include refid="noticeColumns"/>
+		FROM sys_notice T
+			<include refid="noticeJoins"/>
+		<if test="condition!=null">
+			<where>
+				<!-- <if test="condition.model!=null">
+					<if test="condition.model.serialno!=null and condition.model.serialno!=''">
+						T.serialno LIKE '${condition.model.serialno}%'
+					</if>
+				</if>
+				<if test="condition.createtime_start != null">
+					T.createtime > #{condition.createtime_start}
+				</if>
+				<if test="condition.createtime_end != null">
+					T.createtime > #{condition.createtime_end}
+				</if> -->
+			</where>
+			order by T.ID DESC
+			<include refid="Sql.pager" />
+		</if>
+	</select>
+	<select id="getCountByCondition" resultType="int">
+		SELECT 
+			count(*)
+		FROM sys_notice T
+			<include refid="noticeJoins"/>
+		<if test="condition!=null">
+			<where>
+				<!-- <if test="condition.model!=null">
+					<if test="condition.model.serialno!=null and condition.model.serialno!=''">
+						T.serialno LIKE '${condition.model.serialno}%'
+					</if>
+				</if>
+				<if test="condition.createtime_start != null">
+					T.createtime > #{condition.createtime_start}
+				</if>
+				<if test="condition.createtime_end != null">
+					T.createtime > #{condition.createtime_end}
+				</if> -->
+			</where>
+		</if>
+	</select>
+	
+	<select id="getListForMobile" resultType="SysNotice">
+		SELECT 
+			<include refid="noticeColumns"/>
+		FROM sys_notice T
+			<include refid="noticeJoins"/>
+		<if test="condition!=null">
+			<where>
+				<if test="condition.model != null">
+					<if test="condition.model.type != null">
+						AND T.type = #{condition.model.type}
+					</if>
+					<if test="condition.model.user != null">
+						<if test="condition.model.user.id != null">
+							AND T.userid = #{condition.model.user.id}
+						</if>
+					</if>
+				</if>
+				<if test="condition.offsetid != null">
+					AND T.id &lt; #{condition.offsetid}
+				</if>
+			</where>
+		order by T.id desc
+		limit 0,${condition.count}
+		</if>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO sys_notice(
+			id, 
+			content, 
+			type, 
+			<if test="createUser!=null and createUser.id!=null">
+				userid, 
+			</if>
+			source, 
+			<if test="createUser!=null and createUser.id!=null">
+				createUser, 
+			</if>
+			createtime,
+			title, 
+			img, 
+			url, 
+			memo,
+			deleted
+		) VALUES (
+			#{id}, 
+			#{content}, 
+			#{type}, 
+			<if test="createUser!=null and createUser.id!=null">
+				#{user.id}, 
+			</if>
+			#{source}, 
+			<if test="createUser!=null and createUser.id!=null">
+				#{createUser.id}, 
+			</if>
+			#{createtime},
+			#{title}, 
+			#{img}, 
+			#{url}, 
+			#{memo},
+			#{deleted}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE sys_notice SET 
+			content = #{content}, 
+			type = #{type}, 
+			<if test="createUser!=null and createUser.id!=null">
+				userid = #{user.id}, 
+			</if>
+			source = #{source}, 
+			<if test="createUser!=null and createUser.id!=null">
+				createUser = #{createUser.id}, 
+			</if>
+			createtime = #{createtime},
+			title = #{title}, 
+			img = #{img}, 
+			url = #{url}, 
+			memo = #{memo},
+			deleted = #{deleted}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="deleteById">
+		UPDATE sys_notice SET 
+			deleted = 1
+		WHERE id = #{id}
+	</update>
+	
+	<update id="updateFromMobile">
+		UPDATE sys_notice SET
+			status = 1
+		<if test="condition!=null">
+			<where>
+				<if test="condition.model != null">
+					<if test="condition.model.type != null">
+						AND T.type = #{condition.model.type}
+					</if>
+					<if test="condition.model.user != null">
+						<if test="condition.model.user.id != null">
+							AND T.userid = #{condition.model.user.id}
+						</if>
+					</if>
+				</if>
+				<if test="condition.offsetid != null">
+					AND T.id &lt; #{condition.offsetid}
+				</if>
+				<if test="condition.messageid != null">
+					AND T.id = #{condition.messageid}
+				</if>
+			</where>
+		</if>
+	</update>
+	
+</mapper>

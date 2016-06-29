@@ -148,16 +148,10 @@ public interface IUserApiService extends IBaseService<UserInfo, Integer>{
 	 */
 	public ResultJson msglist(ApiParams params);
 	/**
-	 * 获取收藏的车主/货主列表
+	 * 消息已读
 	 * @param params
 	 * @return
 	 */
-	public ResultJson getFavorites(ApiParams params);
-	/**
-	 * 收藏车主/货主
-	 * @param params
-	 * @return
-	 */
-	public ResultJson setFavorites(ApiParams params);
+	public ResultJson msgread(ApiParams params);
 	
 }
