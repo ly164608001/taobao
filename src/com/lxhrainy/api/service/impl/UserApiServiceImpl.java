@@ -247,7 +247,44 @@ public class UserApiServiceImpl extends AbstractBaseServiceImpl<IUserInfoDao, Us
 					rj.addSuccessMsg("成功",rs);
 				}else{
 					rj.setError_code(ResultJson.ERROR_CODE_API);
-					rj.addFailureMsg("接口异常，请稍后再试");
+					rj.addFailureMsg("网络异常，请稍后再试");
+				}
+			}
+		}
+		return rj;
+	}
+
+	@Override
+	public ResultJson msgdel(ApiParams params) {
+		ResultJson rj = new ResultJson();
+		rj.setError_code(ResultJson.ERROR_CODE_PARAMETERS);
+		rj.setMessage("参数错误");
+		if (oConvertUtils.isNotEmpty(params) 
+				&& oConvertUtils.isNotEmpty(params.getMessagetype())
+				&& StringUtil.isNumeric(params.getMessagetype())
+				&& (oConvertUtils.isNotEmpty(params.getMessageid()) || oConvertUtils.isNotEmpty(params.getOffsetid()))){
+			int offsetid = oConvertUtils.getInt(params.getOffsetid());
+			int messageid = oConvertUtils.getInt(params.getMessageid());
+
+			UserInfo loginUser = ApiCacheUtil.getLoginUser();
+			if (oConvertUtils.isNotEmpty(loginUser)) {
+				
+				SysNoticeVO vo = new SysNoticeVO();
+				SysNotice model = new SysNotice();
+				model.setType(oConvertUtils.getInt(params.getMessagetype()));
+				model.setUser(loginUser);
+				if(messageid != 0){
+					model.setId(messageid);
+				}else if(offsetid != 0){
+					vo.setOffsetid(offsetid);
+				}
+				boolean result = sysNoticeService.delMsgFromMobile(vo);
+				if(result){
+					JSONObject rs = new JSONObject();
+					rj.addSuccessMsg("成功",rs);
+				}else{
+					rj.setError_code(ResultJson.ERROR_CODE_API);
+					rj.addFailureMsg("网络异常，请稍后再试");
 				}
 			}
 		}

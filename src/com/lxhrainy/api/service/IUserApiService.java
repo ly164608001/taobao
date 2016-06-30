@@ -153,5 +153,11 @@ public interface IUserApiService extends IBaseService<UserInfo, Integer>{
 	 * @return
 	 */
 	public ResultJson msgread(ApiParams params);
+	/**
+	 * 消息删除
+	 * @param params
+	 * @return
+	 */
+	public ResultJson msgdel(ApiParams params);
 	
 }

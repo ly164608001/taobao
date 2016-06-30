@@ -18,9 +18,9 @@ import com.lxhrainy.core.sys.service.ISysNoticeService;
  * @author lxhrainy 
  * @date 2016年5月20日 上午11:32:34
  */
-@Service("sysNoticeImpl")
+@Service
 @Transactional(readOnly = true)
-public class SysNoticeImpl extends AbstractBaseServiceImpl<ISysNoticeDao, SysNotice, Integer>
+public class SysNoticeServiceImpl extends AbstractBaseServiceImpl<ISysNoticeDao, SysNotice, Integer>
 	implements ISysNoticeService{
 
 	@Autowired
@@ -34,6 +34,15 @@ public class SysNoticeImpl extends AbstractBaseServiceImpl<ISysNoticeDao, SysNot
 	@Override
 	public boolean updateFromMobile(SysNoticeVO vo) {
 		int result = dao.updateFromMobile(vo);
+		if(result != -1){
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public boolean delMsgFromMobile(SysNoticeVO vo) {
+		int result = dao.delMsgFromMobile(vo);
 		if(result != -1){
 			return true;
 		}
