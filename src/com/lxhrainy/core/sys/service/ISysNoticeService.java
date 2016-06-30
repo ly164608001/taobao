@@ -27,5 +27,12 @@ public interface ISysNoticeService extends IBaseService<SysNotice, Integer>{
 	 * @return
 	 */
 	boolean updateFromMobile(SysNoticeVO vo);
+
+	/**
+	 * 删除消息记录
+	 * @param vo
+	 * @return
+	 */
+	boolean delMsgFromMobile(SysNoticeVO vo);
 	
 }

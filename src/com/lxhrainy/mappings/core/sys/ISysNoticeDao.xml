@@ -199,4 +199,28 @@
 		</if>
 	</update>
 	
+	<update id="delMsgFromMobile">
+		UPDATE sys_notice SET
+			deleted = 1
+		<if test="condition!=null">
+			<where>
+				<if test="condition.model != null">
+					<if test="condition.model.type != null">
+						AND T.type = #{condition.model.type}
+					</if>
+					<if test="condition.model.user != null">
+						<if test="condition.model.user.id != null">
+							AND T.userid = #{condition.model.user.id}
+						</if>
+					</if>
+				</if>
+				<if test="condition.offsetid != null">
+					AND T.id &lt; #{condition.offsetid}
+				</if>
+				<if test="condition.messageid != null">
+					AND T.id = #{condition.messageid}
+				</if>
+			</where>
+		</if>
+	</update>
 </mapper>

@@ -10,7 +10,7 @@ import com.lxhrainy.core.oe.SysNoticeVO;
 import com.lxhrainy.core.sys.model.SysNotice;
 
 /**
- * 区域DAO接口
+ * 消息DAO接口
  * @author lxhrainy
  * @date 2016-04-15
  * @version 1.0
@@ -31,5 +31,12 @@ public interface ISysNoticeDao extends IBaseDao<SysNotice> {
 	 * @return
 	 */
 	int updateFromMobile(@Param("condition")SysNoticeVO vo);
+
+	/**
+	 * 删除消息记录
+	 * @param vo
+	 * @return
+	 */
+	int delMsgFromMobile(@Param("condition")SysNoticeVO vo);
 	
 }

@@ -361,6 +361,17 @@ public class ApiController {
 		ResultJson rj = userApiService.msgread(params);
 		this.writeJsonToResponse(rj, response);
 	}
+	/**
+	 * 消息删除
+	 * @param params
+	 * @param response
+	 */
+	@RequestMapping("/MessageDele")
+	public void msgdel(InputStream inputStream, HttpServletResponse response) {
+		ApiParams params = ApiJSONUtil.decryptJSON(inputStream, ApiParams.class);
+		ResultJson rj = userApiService.msgdel(params);
+		this.writeJsonToResponse(rj, response);
+	}
 	
 	/**
 	 * 图片上传
