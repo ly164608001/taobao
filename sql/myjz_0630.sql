@@ -10,10 +10,25 @@ Target Server Type    : MYSQL
 Target Server Version : 50096
 File Encoding         : 65001
 
-Date: 2016-06-29 00:17:05
+Date: 2016-06-30 23:21:59
 */
 
 SET FOREIGN_KEY_CHECKS=0;
+
+-- ----------------------------
+-- Table structure for `basic_level_info`
+-- ----------------------------
+DROP TABLE IF EXISTS `basic_level_info`;
+CREATE TABLE `basic_level_info` (
+  `id` int(11) NOT NULL auto_increment,
+  `name` varchar(31) default NULL COMMENT '等级名称',
+  `deleted` int(1) default NULL COMMENT '删除标识',
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='等级信息表';
+
+-- ----------------------------
+-- Records of basic_level_info
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for `buyer_account_basic_info`
@@ -4077,6 +4092,24 @@ INSERT INTO `sys_area` VALUES ('820301', '820301', '圣方济各堂区', '820300
 INSERT INTO `sys_area` VALUES ('900000', '900000', '钓鱼岛', '100000', '省', '', '', '', '中国,钓鱼岛', '123.478088', '25.742385', 'DiaoyuDao', '钓鱼岛', '0');
 
 -- ----------------------------
+-- Table structure for `sys_config`
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_config`;
+CREATE TABLE `sys_config` (
+  `id` int(11) NOT NULL auto_increment,
+  `keyid` varchar(64) default NULL COMMENT '键ID',
+  `keyname` varchar(255) default NULL COMMENT '名称',
+  `keyvalue` varchar(255) default NULL COMMENT '键值',
+  `memo` varchar(255) default NULL COMMENT '备注',
+  `deleted` int(1) default NULL COMMENT '删除标识',
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of sys_config
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for `sys_dict`
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_dict`;
@@ -4389,6 +4422,22 @@ CREATE TABLE `user_auth_info` (
 -- Records of user_auth_info
 -- ----------------------------
 INSERT INTO `user_auth_info` VALUES ('1', '4', null, null, null, null, null, null, null, null, null, null, null, null, '0', null, null, null, null, null, null, null);
+
+-- ----------------------------
+-- Table structure for `user_config`
+-- ----------------------------
+DROP TABLE IF EXISTS `user_config`;
+CREATE TABLE `user_config` (
+  `id` int(11) NOT NULL auto_increment,
+  `userid` int(11) default NULL COMMENT '用户ID',
+  `message` int(1) default '1' COMMENT '消息通知设置(0：否；1：是)',
+  `autoaudit` varchar(255) default '1' COMMENT '自动审核(0：否；1：是)',
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of user_config
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for `user_detail_info`
