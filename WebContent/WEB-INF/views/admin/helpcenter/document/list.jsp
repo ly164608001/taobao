@@ -3,19 +3,48 @@
 <%@include file="/tagDeclare.jsp"%>
 <html>
 <head>
-<link rel="stylesheet" type="text/css" href="${basePath}static/js/easyui/themes/bootstrap/easyui.css"/>
-<link rel="stylesheet" type="text/css" href="${basePath}static/js/easyui/themes/icon.css"/>
-<script type="text/javascript" src="${basePath}static/js/admin/global.js"></script>
-
-<script>
+	<link rel="stylesheet" type="text/css" href="${basePath}static/js/easyui/themes/bootstrap/easyui.css"/>
+	<link rel="stylesheet" type="text/css" href="${basePath}static/js/easyui/themes/icon.css"/>
+	<script type="text/javascript" src="${basePath}static/js/admin/global.js"></script>
 	
-	function formatteradminuserbutton(value,row) {
-		return  '<a href="javascript:void(0)" class="easyui-linkbutton" onclick="openDialog(\'编辑\',\'${basePath}admin/helpcenter/document/update.htm?id='+row.id+'\',300,300)">编辑</a>&nbsp;'
-			 + '<a href="javascript:void(0)" class="easyui-linkbutton" onclick="deleterow(\'${basePath}admin/helpcenter/document/delete.htm?id='+row.id+'\')">删除</a>';
-	}
+	<link rel="stylesheet" href="${basePath}static/js/kindeditor/themes/default/default.css" />
+	<link rel="stylesheet" href="${basePath}static/js/kindeditor/plugins/code/prettify.css" />
 	
-</script>
+	<script charset="utf-8" src="${basePath}static/js/kindeditor/kindeditor-all.js"></script>
+	<script charset="utf-8" src="${basePath}static/js/kindeditor/lang/zh-CN.js"></script>
+	<script charset="utf-8" src="${basePath}static/js/kindeditor/plugins/code/prettify.js"></script>
+	<script>
+		KindEditor.ready(function(K) {
+			var editor1 = K.create('textarea[name="content"]', {
+				cssPath : '${basePath}static/js/kindeditor/plugins/code/prettify.css',
+				uploadJson : '${basePath}static/js/kindeditor/jsp/upload_json.jsp',
+				fileManagerJson : '${basePath}static/js/kindeditor/jsp/file_manager_json.jsp',
+				allowFileManager : true,
+				afterCreate : function() {
+					var self = this;
+					K.ctrl(document, 13, function() {
+						self.sync();
+						document.forms['example'].submit();
+					});
+					K.ctrl(self.edit.doc, 13, function() {
+						self.sync();
+						document.forms['example'].submit();
+					});
+				}
+			});
+			prettyPrint();
+		});
+	</script>
+	<script>
+		
+		function formatteradminuserbutton(value,row) {
+			return  '<a href="javascript:void(0)" class="easyui-linkbutton" onclick="openDialog(\'编辑\',\'${basePath}admin/helpcenter/document/update.htm?id='+row.id+'\',300,300)">编辑</a>&nbsp;'
+				 + '<a href="javascript:void(0)" class="easyui-linkbutton" onclick="deleterow(\'${basePath}admin/helpcenter/document/delete.htm?id='+row.id+'\')">删除</a>';
+		}
+		
+	</script>
 </head>
+
 <body>
 	<div class="easyui-panel" title="帮助文档列表"
 		data-options="striped: true,collapsible:true,iconCls:'icon-search'">
@@ -52,7 +81,7 @@
 	            text: '添加',  
 	            iconCls: 'icon-add',  
 	            handler: function() {  
-	                openDialog("添加","${basePath}admin/helpcenter/document/add.htm",700,500);  
+	                openDialog("添加","${basePath}admin/helpcenter/document/add.htm",720,500);  
 	            }  
 	        }] ;
 	</script>
