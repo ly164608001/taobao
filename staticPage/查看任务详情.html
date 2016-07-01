@@ -1,0 +1,461 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="renderer" content="webkit|ie-comp|ie-stand">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+	<meta http-equiv="Cache-Control" content="no-siteapp" />
+	<!--[if lt IE 9]>
+	<script type="text/javascript" src="lib/html5.js"></script>
+	<script type="text/javascript" src="lib/respond.min.js"></script>
+	<script type="text/javascript" src="lib/PIE_IE678.js"></script>
+	<![endif]-->
+	<link rel="stylesheet" type="text/css" href="static/h-ui/css/H-ui.css" />
+	<link rel="stylesheet" type="text/css" href="lib/Hui-iconfont/1.0.7/iconfont.css" />
+	<link rel="stylesheet" type="text/css" href="lib/icheck/icheck.css" />
+	<link rel="stylesheet" type="text/css" href="css/style.css" />
+	<!--[if lt IE 9]>
+	<link href="static/h-ui/css/H-ui.ie.css" rel="stylesheet" type="text/css" />
+	<![endif]-->
+	<!--[if IE 6]>
+	<script type="text/javascript" src="lib/DD_belatedPNG_0.0.8a-min.js" ></script>
+	<script>DD_belatedPNG.fix('*');</script>
+	<![endif]-->
+	<title>查看任务详情</title>
+	<meta name="keywords" content="关键词,5个左右,单个8汉字以内">
+	<meta name="description" content="网站描述，字数尽量空制在80个汉字，160个字符以内！"></head>
+<body>
+	<!-- <header class="navbar-wrapper">
+	<div class="navbar navbar-black navbar-fixed-top">
+		<div class="container cl">
+			<h5>
+				你好，
+				<span>布衣柜商家</span>
+				<a href="#" class="login-out">退出</a>
+			</h5>
+		</div>
+	</div>
+</header>
+-->
+<header class="navbar-wrapper">
+	<div class="navbar navbar-black navbar-orange navbar-fixed-top">
+		<div class="container cl">
+			<div class="logo">
+				<img src="images/logo.png"></div>
+			<nav class="nav navbar-nav nav-collapse" role="navigation" id="Hui-navbar">
+				<ul class="cl">
+					<li>
+						<a href="首页.html">首页</a>
+					</li>
+					<li>
+						<a href="任务大厅.html">任务大厅</a>
+					</li>
+					<li class="current">
+						<a href="/">任务管理</a>
+					</li>
+					<!-- <li>
+					<a href="#">账号充值</a>
+				</li>
+				<li>
+					<a href="#">申请提现</a>
+				</li>
+				<li>
+					<a href="#">账户明细</a>
+				</li>
+				<li>
+					<a href="#">帮助中心</a>
+				</li>
+				-->
+			</ul>
+		</nav>
+		<nav class="navbar-userbar hidden-xs nav navbar-nav">
+			<ul class="cr">
+				<li class="dropDown dropDown_hover">
+					<a href="#" class="dropDown_A">
+						用户中心 <i class="Hui-iconfont">&#xe6d5;</i>
+					</a>
+					<ul class="dropDown-menu menu radius box-shadow">
+						<li>
+							<a href="#">账号充值</a>
+						</li>
+						<li>
+							<a href="#">申请提现</a>
+						</li>
+						<li>
+							<a href="#">账号明细</a>
+						</li>
+					</ul>
+				</li>
+				<li>
+					<a href="#">帮助中心</a>
+				</li>
+			</ul>
+		</nav>
+	</div>
+</div>
+</header>
+
+<section class="container mt50 clearfix">
+<nav class="Hui-breadcrumb">
+	<!-- <i class="icon iconfont">&#xf012b;</i>
+-->
+<span>当前位置：</span>
+<a class="maincolor" href="/">首页</a>
+<span class="c-666 en">&gt;</span>
+会员中心
+<span class="c-666 en">&gt;</span>
+<span class="c-666">任务详情</span>
+</nav>
+<div class="clearfix mt10">
+
+<div class="menuSidebar f-l">
+	<dl>
+		<dt>
+			<i></i>
+			任务大厅
+		</dt>
+		<dd>
+			<a href="#">大厅任务</a>
+		</dd>
+		<dt>
+			<i class="n3"></i>
+			淘宝任务
+		</dt>
+		<dd>
+			<a href="#">淘宝精刷任务</a>
+		</dd>
+		<dd>
+			<a href="#">淘宝普通任务</a>
+		</dd>
+		<dd>
+			<a href="#">任务申述</a>
+		</dd>
+		<dt>
+			<i class="n3"></i>
+			京东任务
+		</dt>
+		<dd>
+			<a href="#">京东精刷任务</a>
+		</dd>
+		<dd>
+			<a href="#">京东普通任务</a>
+		</dd>
+		<dd>
+			<a href="#">任务申述</a>
+		</dd>
+		<dt>
+			<i class="n3"></i>
+			流量任务
+		</dt>
+		<dd>
+			<a href="#">淘宝流量任务</a>
+		</dd>
+		<dd>
+			<a href="#">任务申述</a>
+		</dd>
+		<dt>
+			<i class="n5"></i>
+			小号管理
+		</dt>
+		<dd>
+			<a href="#">淘宝小号</a>
+		</dd>
+		<dd>
+			<a href="#">京东小号</a>
+		</dd>
+		<dt>
+			<i class="n4"></i>
+			我的账户
+		</dt>
+		<dd>
+			<a href="#">申请提现</a>
+		</dd>
+		<dd>
+			<a href="#">账户明细</a>
+		</dd>
+		<dd>
+			<a href="#">基本资料</a>
+		</dd>
+		<dd>
+			<a href="#">修改密码</a>
+		</dd>
+		<dd class="last">
+			<a href="#">退出登入</a>
+		</dd>
+	</dl>
+</div>
+<div class="workContent f-r">
+	<h4>
+		<span class="title">发来的任务</span>
+	</h4>
+	<div class="moneyOrder rechange workDetail">
+		<form action="" method="post" class="form form-horizontal" id="demoform-1">
+			<legend></legend>
+			<h4>1.任务基本信息</h4>
+			<div class="row cl">
+				<label class="form-label col-xs-4 col-sm-3">淘宝店铺<em class="orange">*</em></label>
+				<div class="formControls col-xs-2 col-sm-3">
+					<span class="text">
+						<span class="orange">qq66545665</span>
+					</span>
+				</div>
+			</div>
+			<div class="row cl">
+				<label class="form-label col-xs-4 col-sm-3">搜索入口<em class="orange">*</em></label>
+				<div class="formControls col-xs-2 col-sm-3">
+					<span class="select-box">
+					  <select class="select" size="1" name="demo1">
+					    <option value="" selected>淘宝</option>
+					    <option value="1">天猫</option>
+					    <option value="2">淘宝直通车</option>
+					  </select>
+					</span>
+				</div>
+			</div>
+			<div class="row cl">
+				<label class="form-label col-xs-4 col-sm-3">搜索进店方式<em class="orange">*</em></label>
+				<div class="formControls col-xs-4 col-sm-6">
+					<div class="radio-box">
+					    <input type="radio" id="radio-2" name="demo-radio1" checked>
+					    <label for="radio-2">搜商品</label>
+					  </div>
+					  <div class="radio-box">
+					    <input type="radio" id="radio-1" name="demo-radio1">
+					    <label for="radio-1">搜店铺</label>
+					  </div>
+					  <div class="radio-box">
+					    <input type="radio" id="radio-3" name="demo-radio1">
+					    <label for="radio-3">搜直通车</label>
+					  </div>
+					  <div class="radio-box">
+					    <input type="radio" id="radio-4" name="demo-radio1">
+					    <label for="radio-4">淘口令</label>
+					  </div>
+				</div>
+			</div>
+			<div class="row cl">
+				<label class="form-label col-xs-4 col-sm-3">搜索关键字<em class="orange">*</em></label>
+				<div class="formControls col-xs-2 col-sm-3">
+					<span class="text">
+						<span class="orange">布衣柜</span>&nbsp;
+						<span class="orange">实木</span>
+					</span>
+				</div>
+			</div>
+			<div class="row cl">
+				<label class="form-label col-xs-4 col-sm-3">搜索关键字<em class="orange">*</em></label>
+				<div class="formControls col-xs-2 col-sm-3">
+					<span class="text">
+						<span >前几页</span>&nbsp;
+					</span>
+				</div>
+			</div>
+			<div class="row cl" style="min-height: 110px">
+				<label class="form-label col-xs-4 col-sm-3">商品链接位置截图</label>
+				<div class="formControls col-xs-4 col-sm-6">
+					<span>
+						<a href="#" class="detail-jpg layer-photos-demo" id="layer-photos-demo"> 
+						<img layer-pid="showBigimg" layer-src="images/jietu.png" src="images/jietu.png" alt="">
+						</a>
+					</span>
+				</div>
+			</div>
+			<div class="row cl">
+				<label class="form-label col-xs-4 col-sm-3">商品链接地址<em class="orange">*</em></label>
+				<div class="formControls col-xs-8 col-sm-9">
+					<span class="text">
+						<span >https://item.taobao.com/item.htm?spm=686.1000925.0.0.1xFxyZ&id=534086898914</span>&nbsp;
+					</span>
+				</div>
+			</div>
+
+			<div class="row cl">
+				<label class="form-label col-xs-4 col-sm-3">单个商品保证金：</label>
+				<div class="formControls col-xs-2 col-sm-3">
+					<input type="text" class="input-text" autocomplete="off" placeholder="1300"></div>
+				<div class="formControls col-xs-2 col-sm-3">
+					<span class="text">元&nbsp;&nbsp;<em class="gray">您目前商品保证金为<em class="red">236.54</em>元。</em></span>
+				</div>
+			</div>
+			<div class="row cl">
+				<p class="gray text-tip"> 接手人完成您的任务时<em class="red">平台自动</em>将等额的商品保证金作为商品款返还给接手人(即<em class="red">平台线上放款</em>)</p>
+			</div>
+			<div class="row cl">
+				<label class="form-label col-xs-4 col-sm-3">是否包邮：</label>
+				<div class="formControls col-xs-4 col-sm-6">
+					<span class="tab-tip">包邮</span>
+					<span class="tab-tip">不包邮</span>
+				</div>
+				
+			</div>
+			<div class="row cl">
+				<label class="form-label col-xs-4 col-sm-3">发布时间：</label>
+				<div class="formControls col-xs-2 col-sm-3">
+					<input type="text" class="input-text" autocomplete="off" placeholder="2015-10-50 25:25:25" ></div>
+				<div class="formControls col-xs-2 col-sm-3">
+					
+				</div>
+			</div>
+			<div class="row cl">
+				<label class="form-label col-xs-4 col-sm-3">单任务拍下宝贝数：<em class="orange">*</em></label>
+				<div class="formControls col-xs-2 col-sm-3">
+					<input type="text" class="input-text" autocomplete="off" placeholder="1"></div>
+				<div class="formControls col-xs-6 col-sm-6">
+					<span class="text">件&nbsp;&nbsp;<em class="gray">单个任务要求刷手在您店铺中拍下的宝贝数量。商品总担保价格<em class="red">236.54</em>元。</em></span>
+				</div>
+			</div>
+			<div class="row cl">
+				<label class="form-label col-xs-4 col-sm-3">是否手机下单：</label>
+				<div class="formControls col-xs-8 col-sm-9">
+					<span class="tab-tip">是</span>
+					<span class="tab-tip">否</span>
+					<span class="text">件&nbsp;&nbsp;<em class="gray">额外支付&nbsp;<em class="orange">2</em>&nbsp;个旺点将奖励给买家</em></span>
+				</div>
+				
+			</div>
+			<div class="row cl">
+				<label class="form-label col-xs-4 col-sm-3">基本旺点：<em class="orange">*</em></label>
+				<div class="formControls col-xs-2 col-sm-3">
+					<input type="text" class="input-text" autocomplete="off" placeholder="1"></div>
+				<div class="formControls col-xs-6 col-sm-6">
+					<span class="text">个旺点&nbsp;&nbsp;<em class="gray">不包括任务其它条件需要设置的旺点,您目前还有旺点<em class="red">236.54</em>个。</em></span>
+				</div>
+			</div>
+			<div class="row cl">
+				<label class="form-label col-xs-4 col-sm-3">追加悬赏：<em class="orange">*</em></label>
+				<div class="formControls col-xs-2 col-sm-3">
+					<input type="text" class="input-text" autocomplete="off" placeholder="1"></div>
+				<div class="formControls col-xs-6 col-sm-6">
+					<span class="text">个旺点&nbsp;&nbsp;<em class="gray"></span>
+				</div>
+			</div>
+			<h4>2.任务需求设置</h4>
+			<div class="row cl">
+				<label class="form-label col-xs-4 col-sm-3">要求确认时间<em class="orange">*</em></label>
+				<div class="formControls col-xs-8 col-sm-9">
+					<span class="text">
+						<span>物流显示签收后才能确认收货(旺点2) </span>&nbsp;
+					</span>
+					<span><label for="sureTime"><input type="checkbox" name="" id="sureTime">不带字好评</label></span>
+				</div>
+			</div>
+			<div class="row cl">
+				<label class="form-label col-xs-4 col-sm-3">快递签收：</label>
+				<div class="formControls col-xs-8 col-sm-9">
+					<span class="tab-tip">需买家本人签收</span>
+					<span class="tab-tip">落地签收</span>
+					<span class="text"><em class="red">什么的落地签</em><em class="gray">当快件到达收货地后会自动签收，无需买家本人签收，即落地签收。</em></span>
+				</div>
+				
+			</div>
+			<div class="row cl">
+				<label class="form-label col-xs-4 col-sm-3">留言提醒：</label>
+				<div class="formControls col-xs-8 col-sm-9">
+					<span class="tab-tip">是</span>
+					<span class="tab-tip">否</span>
+					<span class="text">额外支付<em class="orange">0.5</em>个旺点将奖励给买家。在此给买家留言提醒，请勿附加无理要求，违规被举报，必将严惩。</span>
+				</div>
+				
+			</div>
+			<div class="row cl">
+				<div class="panel panel-default">
+					<div class="panel-body">
+						<div class="row cl">
+							<label class="form-label col-xs-4 col-sm-3">给卖家留言：</label>
+							<div class="formControls col-xs-8 col-sm-9">
+								<textarea class="textarea" placeholder="例如留言内容：请发顺丰，要红色的那款。" rows="" cols="" name=""></textarea><span><a href="#"> 还是不懂？点这查看示例</a></span>
+							</div>
+						</div>
+						<div class="row cl">
+						<label class="form-label col-xs-4 col-sm-3">复选框：</label>
+						<div class="formControls skin-minimal col-xs-8 col-sm-9">
+							<div class="check-box">
+								<div class="icheckbox-blue"><input type="checkbox" id="checkbox-5"></div>
+								<label for="checkbox-5">复选框</label>
+							</div>
+							<div class="check-box">
+								<div class="icheckbox-blue checked"><input type="checkbox" id="checkbox-6" checked=""></div>
+								<label for="checkbox-6">复选框 checked状态</label>
+							</div>
+						</div>
+					</div>
+					</div>
+				</div>
+			</div>
+			<div class="row cl">
+				<div class="col-xs-2 col-sm-4 btnWrap">
+					<input class="btn radius btn-secondary btn-ti" type="submit" value="提交支付宝转账信息"></div>
+			</div>
+			<h5>充值示例如下图：</h5>
+			<div class="rechange-img">
+				<img src="images/alipaylz.jpg" alt=""></div>
+		</form>
+	</div>
+
+</div>
+</div>
+</section>
+<footer class="footer mt-20">
+<div class="container">
+
+<p>
+	Copyright &copy;2013-2016
+	<br>
+	<a rel="nofollow" target="_blank" href="#">京ICP备15015336号-1</a>
+	<br>
+	未经允许，禁止转载、抄袭、镜像
+	<br>用心做站，做不一样的站</p>
+</div>
+</footer>
+<a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=270863798&site=qq&menu=yes" id="QQ-link">
+<img border="0" src="http://wpa.qq.com/pa?p=2:270863798:53" alt="点击这里给我发消息" title="点击这里给我发消息"/>
+</a>
+<script type="text/javascript" src="lib/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="lib/layer/2.1/layer.js"></script>
+<script type="text/javascript" src="lib/laypage/1.2/laypage.js"></script>
+<script type="text/javascript" src="lib/My97DatePicker/WdatePicker.js"></script>
+<script type="text/javascript" src="lib/icheck/jquery.icheck.min.js"></script>
+<script type="text/javascript" src="lib/bootstrap-Switch/bootstrapSwitch.js"></script>
+<script type="text/javascript" src="lib/Validform/5.3.2/Validform.min.js"></script>
+<script type="text/javascript" src="lib/Validform/5.3.2/passwordStrength-min.js"></script>
+<script type="text/javascript" src="lib/layer/layer.js"></script>
+<script type="text/javascript" src="static/h-ui/js/H-ui.js"></script>
+<script>
+//var navigation = responsiveNav("Hui-navbar", {customToggle: ".nav-toggle"});
+
+$(function(){
+	$('.skin-minimal input').iCheck({
+		checkboxClass: 'icheckbox-blue',
+		radioClass: 'iradio-blue',
+		increaseArea: '20%'
+	});
+	$("#demoform").Validform({
+		tiptype:2
+	});
+	// 返回顶部 
+	$(function(){$(window).on("scroll",$backToTopFun);$backToTopFun();});
+	// 收缩
+	$('.open-btn').on('click',function(){
+		$(this).parent('.tiro-control').siblings('.panel').find('.showHide').slideToggle();
+		$(this).toggleClass('active');
+		if ($(this).hasClass('active')) {
+			$(this).text('展开');
+			// $(this).find('i').css('background-position','4px -28px')
+		}else{
+			$(this).text('收缩');
+			// $(this).find('i').css('background-position','4px 7px')
+		}
+	});
+	
+    $.Huitab("#tab_demo .tabBar span","#tab_demo .tabCon","current","click","0");
+    layer.ready(function(){ //为了layer.ext.js加载完毕再执行
+	  layer.photos({
+	    photos: '#layer-photos-demo'
+	  });
+});  
+});
+</script>
+</body>
+</html>
+<!--H-ui前端框架提供前端技术支持 h-ui.net @2015-8-4 -->
