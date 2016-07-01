@@ -159,5 +159,17 @@ public interface IUserApiService extends IBaseService<UserInfo, Integer>{
 	 * @return
 	 */
 	public ResultJson msgdel(ApiParams params);
+	/**
+	 * 消息通知设置
+	 * @param params
+	 * @return
+	 */
+	public ResultJson msgset(ApiParams params);
+	/**
+	 * 获取系统配置信息
+	 * @param params
+	 * @return
+	 */
+	public ResultJson getSysConfig(ApiParams params);
 	
 }

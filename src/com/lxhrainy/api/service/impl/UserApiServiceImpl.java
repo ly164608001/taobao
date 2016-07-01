@@ -26,6 +26,8 @@ import com.lxhrainy.core.sys.model.UserInfo;
 import com.lxhrainy.core.sys.service.ISysNoticeService;
 import com.lxhrainy.core.utils.StringUtil;
 import com.lxhrainy.core.utils.oConvertUtils;
+import com.lxhrainy.myjz.admin.user.model.UserConfig;
+import com.lxhrainy.myjz.admin.user.service.IUserConfigService;
 
 /**
  * 用户数据
@@ -38,6 +40,8 @@ public class UserApiServiceImpl extends AbstractBaseServiceImpl<IUserInfoDao, Us
 
 	@Autowired
 	private ISysNoticeService sysNoticeService;
+	@Autowired
+	private IUserConfigService userConfigService;
 	
 	@Override
 	public ResultJson getVerity(ApiParams params) {
@@ -289,6 +293,40 @@ public class UserApiServiceImpl extends AbstractBaseServiceImpl<IUserInfoDao, Us
 			}
 		}
 		return rj;
+	}
+
+	@Override
+	public ResultJson msgset(ApiParams params) {
+		ResultJson rj = new ResultJson();
+		rj.setError_code(ResultJson.ERROR_CODE_PARAMETERS);
+		rj.setMessage("参数错误");
+		if (oConvertUtils.isNotEmpty(params) 
+				&& oConvertUtils.isNotEmpty(params.getEnable())){
+			boolean enable = params.getEnable();
+			UserInfo loginUser = ApiCacheUtil.getLoginUser();
+			
+			if (oConvertUtils.isNotEmpty(loginUser)) {
+				UserConfig config = new UserConfig();
+				config.setUser(loginUser);
+				config.setMessage(enable?"YES":"NO");
+				//更新设置信息
+				boolean result = userConfigService.updateMsgSet(config);
+				if(result){
+					JSONObject rs = new JSONObject();
+					rj.addSuccessMsg("成功",rs);
+				}else{
+					rj.setError_code(ResultJson.ERROR_CODE_API);
+					rj.addFailureMsg("网络异常，请稍后再试");
+				}
+			}
+		}
+		return rj;
+	}
+
+	@Override
+	public ResultJson getSysConfig(ApiParams params) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

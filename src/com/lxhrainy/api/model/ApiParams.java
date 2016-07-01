@@ -9,10 +9,6 @@ package com.lxhrainy.api.model;
  */
 public class ApiParams {
 	/**
-	 * messageid  消息id
-	 */
-	private String messageid;
-	/**
 	 * 平台	android,ios
 	 */
 	private String platform; 
@@ -43,12 +39,27 @@ public class ApiParams {
 	 */
 	private  String offsetid;
 	/**
+	 * messageid  消息id
+	 */
+	private String messageid;
+	/**
 	 * 消息类型
 	 * 0:网站公告;
 	 * 1:我的通知
 	 */
 	private String messagetype;
+	/**
+	 * NO:关闭;YES:打开;
+	 * 打开关闭状态
+	 */
+	private boolean enable;
 	
+	public boolean getEnable() {
+		return enable;
+	}
+	public void setEnable(boolean enable) {
+		this.enable = enable;
+	}
 	public String getMessageid() {
 		return messageid;
 	}

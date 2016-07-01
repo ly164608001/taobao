@@ -32,6 +32,7 @@ public class SysNoticeServiceImpl extends AbstractBaseServiceImpl<ISysNoticeDao,
 	}
 
 	@Override
+	@Transactional(readOnly = false)
 	public boolean updateFromMobile(SysNoticeVO vo) {
 		int result = dao.updateFromMobile(vo);
 		if(result != -1){

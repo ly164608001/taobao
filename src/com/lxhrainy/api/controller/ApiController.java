@@ -374,6 +374,30 @@ public class ApiController {
 	}
 	
 	/**
+	 * 消息通知设置
+	 * @param params
+	 * @param response
+	 */
+	@RequestMapping("/MessageSet")
+	public void msgset(InputStream inputStream, HttpServletResponse response) {
+		ApiParams params = ApiJSONUtil.decryptJSON(inputStream, ApiParams.class);
+		ResultJson rj = userApiService.msgset(params);
+		this.writeJsonToResponse(rj, response);
+	}
+	
+	/**
+	 * 获取系统配置
+	 * @param params
+	 * @param response
+	 */
+	@RequestMapping("/Config")
+	public void config(InputStream inputStream, HttpServletResponse response) {
+		ApiParams params = ApiJSONUtil.decryptJSON(inputStream, ApiParams.class);
+		ResultJson rj = userApiService.getSysConfig(params);
+		this.writeJsonToResponse(rj, response);
+	}
+	
+	/**
 	 * 图片上传
 	 * @param request
 	 * @param response

@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lxhrainy.core.sys.dao.IUserConfigDao">
+    
+    <sql id="userConfigColumns">
+    	T.id AS "id",
+		T.userid AS "user.id",
+		T.message AS "message",
+		T.autoaudit AS "autoaudit"
+    </sql>
+    <sql id="userConfigJoins">
+		LEFT JOIN sys_user U ON U.id = T.userid
+    </sql>
+    
+	<select id="getById" resultType="UserConfig">
+		SELECT 
+			<include refid="userConfigColumns"/>
+		FROM user_config T
+			<include refid="userConfigJoins"/>
+		WHERE T.id = #{id}
+	</select>
+	
+	
+	<select id="findAllList" resultType="UserConfig">
+		SELECT 
+			<include refid="userConfigColumns"/>
+		FROM user_config T
+			<include refid="userConfigJoins"/>
+		WHERE T.deleted = 0 
+		ORDER BY T.id DESC
+	</select>
+	
+	<select id="findListByPage" resultType="UserConfig">
+		SELECT 
+			<include refid="userConfigColumns"/>
+		FROM user_config T
+			<include refid="userConfigJoins"/>
+		<if test="condition!=null">
+			<where>
+				<!-- <if test="condition.model!=null">
+					<if test="condition.model.serialno!=null and condition.model.serialno!=''">
+						T.serialno LIKE '${condition.model.serialno}%'
+					</if>
+				</if>
+				<if test="condition.createtime_start != null">
+					T.createtime > #{condition.createtime_start}
+				</if>
+				<if test="condition.createtime_end != null">
+					T.createtime > #{condition.createtime_end}
+				</if> -->
+			</where>
+			order by T.ID DESC
+			<include refid="Sql.pager" />
+		</if>
+	</select>
+	<select id="getCountByCondition" resultType="int">
+		SELECT 
+			count(*)
+		FROM user_config T
+			<include refid="userConfigJoins"/>
+		<if test="condition!=null">
+			<where>
+				<!-- <if test="condition.model!=null">
+					<if test="condition.model.serialno!=null and condition.model.serialno!=''">
+						T.serialno LIKE '${condition.model.serialno}%'
+					</if>
+				</if>
+				<if test="condition.createtime_start != null">
+					T.createtime > #{condition.createtime_start}
+				</if>
+				<if test="condition.createtime_end != null">
+					T.createtime > #{condition.createtime_end}
+				</if> -->
+			</where>
+		</if>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO user_config(
+			id, 
+			userid, 
+			message, 
+			autoaudit
+		) VALUES (
+			#{id}, 
+			<if test="user!=null and user.id!=null">
+				#{user.id}, 
+			</if>
+			#{message}, 
+			#{autoaudit}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE user_config SET 
+			<if test="user!=null and user.id!=null">
+				userid = #{user.id}, 
+			</if>
+			message = #{message}, 
+			autoaudit = #{autoaudit}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="deleteById">
+		delete from user_config
+		WHERE id = #{id}
+	</update>
+	
+	<update id="updateMsgSet">
+		UPDATE user_config SET 
+			message = #{message}
+		WHERE userid = #{config.user.id}
+	</update>
+	
+</mapper>
