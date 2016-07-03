@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50096
 File Encoding         : 65001
 
-Date: 2016-06-30 23:21:59
+Date: 2016-07-03 21:04:38
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -152,13 +152,14 @@ CREATE TABLE `help_document` (
   `deleted` int(1) default '0' COMMENT '删除标识',
   `sort` int(11) default NULL,
   `status` int(1) default NULL COMMENT '状态 (显示隐藏)',
+  `content` text COMMENT '文档内容',
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of help_document
 -- ----------------------------
-INSERT INTO `help_document` VALUES ('1', '测试文档', '4', null, '0', '1', '1');
+INSERT INTO `help_document` VALUES ('1', '测试文档', '4', null, '0', '1', '1', null);
 
 -- ----------------------------
 -- Table structure for `help_menu`
@@ -4430,8 +4431,8 @@ DROP TABLE IF EXISTS `user_config`;
 CREATE TABLE `user_config` (
   `id` int(11) NOT NULL auto_increment,
   `userid` int(11) default NULL COMMENT '用户ID',
-  `message` int(1) default '1' COMMENT '消息通知设置(0：否；1：是)',
-  `autoaudit` varchar(255) default '1' COMMENT '自动审核(0：否；1：是)',
+  `message` varchar(10) default 'YES' COMMENT '消息通知设置(NO：否；YES：是)',
+  `autoaudit` varchar(10) default 'YES' COMMENT '自动审核(NO：否；YES：是)',
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
