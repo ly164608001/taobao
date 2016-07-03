@@ -23,7 +23,7 @@ import com.alibaba.fastjson.JSONObject;
 /**
  * KindEditor文件上传类
  * 
- * @author Administrator 狼
+ * @author xueyunteng
  */
 public class UploadFileUtil {
 
@@ -32,8 +32,7 @@ public class UploadFileUtil {
 
 		// 文件保存目录路径
 		String savePath = request.getSession().getServletContext()
-				.getRealPath("/")
-				+ "attached/";
+									.getRealPath("/") + "attached/";
 
 		// 文件保存目录URL
 		String saveUrl = request.getContextPath() + "/attached/";
@@ -52,30 +51,16 @@ public class UploadFileUtil {
 		if (!ServletFileUpload.isMultipartContent(request)) {
 			return getError("请选择文件。");
 		}
-//		// 检查目录
-//		File uploadDir = new File(savePath);
-//		if (!uploadDir.isDirectory()) {
-//			return getError("上传目录不存在。");
-//		}
-//		// 检查目录写权限
-//		if (!uploadDir.canWrite()) {
-//			return getError("上传目录没有写权限。");
-//		}
-//
+		
 		String dirName = request.getParameter("dir");
 		if (dirName == null) {
 			dirName = "image";
 		}
-//		if (!extMap.containsKey(dirName)) {
-//			return getError("目录名不正确。");
-//		}
+		
 		// 创建文件夹
 		savePath += dirName + "/";
 		saveUrl += dirName + "/";
-//		File saveDirFile = new File(savePath);
-//		if (!saveDirFile.exists()) {
-//			saveDirFile.mkdirs();
-//		}
+		
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 		String ymd = sdf.format(new Date());
 		savePath += ymd + "/";

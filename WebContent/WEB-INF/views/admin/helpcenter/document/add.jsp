@@ -32,16 +32,13 @@
 			<tr>
 				<td colspan="4">
 					<textarea cols="180" rows="8" style="width:680px;height:300px;" id="content"
-						name="content" onclick="alert('cao');">此处进行内容编辑...</textarea>
+						name="content">此处进行内容编辑...</textarea>
 				</td>
 			</tr>
 			<tr>
-				<td></td>
-				<td>
-				 	<a href="javascript:void(0)" class="easyui-linkbutton" id="addsubmit">提 交</a>
-				 </td>
-				 <td></td>
-				 <td></td>
+				<td colspan="4" align="right">
+					<a href="javascript:void(0)" class="easyui-linkbutton" id="addsubmit">提 交</a>
+				</td>
 			</tr>
 		</table>
 	</form>
@@ -51,8 +48,8 @@
 		KindEditor.ready(function(K) {
 			var editor1 = K.create('textarea[name="content"]', {
 				cssPath : '${basePath}static/js/kindeditor/plugins/code/prettify.css',
-				uploadJson : '${basePath}static/js/kindeditor/jsp/upload_json.jsp',
-				fileManagerJson : '${basePath}static/js/kindeditor/jsp/file_manager_json.jsp',
+				uploadJson : '${basePath}admin/common/fileupload/upload.htm',
+				fileManagerJson : '${basePath}admin/common/fileupload/upload2.htm',
 				allowFileManager : true,
 				afterCreate : function() {
 					var self = this;
@@ -60,13 +57,9 @@
 						self.sync();
 						document.forms['example'].submit();
 					});
-					K.ctrl(self.edit.doc, 13, function() {
-						self.sync();
-						document.forms['example'].submit();
-					});
 				},
 				afterFocus : function(){
-					if($('#content').val() == '此处进行内容编辑...'){
+					if(editor1.html() == '此处进行内容编辑...'){
 						editor1.html('');
 					}
 				},

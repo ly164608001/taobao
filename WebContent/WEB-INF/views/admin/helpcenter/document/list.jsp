@@ -17,16 +17,12 @@
 		KindEditor.ready(function(K) {
 			var editor1 = K.create('textarea[name="content"]', {
 				cssPath : '${basePath}static/js/kindeditor/plugins/code/prettify.css',
-				uploadJson : '${basePath}static/js/kindeditor/jsp/upload_json.jsp',
-				fileManagerJson : '${basePath}static/js/kindeditor/jsp/file_manager_json.jsp',
+				uploadJson : '${basePath}admin/common/fileupload/upload.htm',
+				fileManagerJson : '${basePath}admin/common/fileupload/upload2.htm',
 				allowFileManager : true,
 				afterCreate : function() {
 					var self = this;
 					K.ctrl(document, 13, function() {
-						self.sync();
-						document.forms['example'].submit();
-					});
-					K.ctrl(self.edit.doc, 13, function() {
 						self.sync();
 						document.forms['example'].submit();
 					});

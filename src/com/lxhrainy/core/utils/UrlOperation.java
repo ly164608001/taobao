@@ -1,17 +1,12 @@
 package com.lxhrainy.core.utils;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
-import java.util.List;
 import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
 
 import net.sf.json.JSONObject;
 
@@ -72,7 +67,7 @@ public class UrlOperation {
 	 * @param map 参数
 	 * @return
 	 */
-	public static String post(String url ,Map map)
+	public static String post(String url ,Map<String,Object> map)
 	{
 		String param = "";
 		if(map !=null)
