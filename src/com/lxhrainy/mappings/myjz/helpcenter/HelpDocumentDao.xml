@@ -9,6 +9,7 @@
 		T.deleted AS "deleted",
 		T.sort AS "sort",
 		T.status AS "status",
+		T.content AS "content",
 		
 		T.menuid AS "menu.id",
 		M.name AS "menu.name"
@@ -73,7 +74,8 @@
 			href,
 			deleted,
 			sort,
-			status
+			status,
+			content
 		) VALUES (
 			#{id},
 			#{title},
@@ -81,7 +83,8 @@
 			#{href},
 			#{deleted},
 			#{sort},
-			#{status}
+			#{status},
+			#{content}
 		)
 	</insert>
 	
@@ -92,7 +95,8 @@
 			href = #{href},
 			deleted = #{deleted},
 			sort = #{sort},
-			status = #{status}
+			status = #{status},
+			content = #{content}
 		WHERE id = #{id}
 	</update>
 	

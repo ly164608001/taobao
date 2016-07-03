@@ -17,6 +17,20 @@ public class HelpDocument extends BaseModel {
 	private Integer deleted; // 删除标识
 	private Integer sort; 	 // 排序
 	private Integer status;  // 状态 (显示隐藏)
+	private String content; //文档内容
+
+	
+	public String getContent() {
+		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
+	}
+
+	public void setMenu(HelpMenu menu) {
+		this.menu = menu;
+	}
 
 	public String getTitle() {
 		return title;

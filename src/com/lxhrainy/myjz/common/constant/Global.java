@@ -2,6 +2,7 @@ package com.lxhrainy.myjz.common.constant;
 
 public class Global {
 	
+	
 	/**帮助中心 start**/
 	//顶级菜单的pid为-1
 	public final static int ROOT_HELPMENU_ID = -1;
@@ -11,6 +12,8 @@ public class Global {
 	public final static int SELLER_CENTER = 2;
 	
 	/**帮助中心 end**/
+	
+	public final static String PROJECT_NAME = "core";
 	
 	public final static int ROOT_MENU_ID = 1;
 	

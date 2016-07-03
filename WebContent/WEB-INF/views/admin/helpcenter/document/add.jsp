@@ -8,8 +8,7 @@
 </head>
 <body>
 	
-	<form id="addform" action="${basePath}admin/helpcenter/menu/addsave.htm" method="post">
-		<input type="hidden" value="${parent.id}" name="parent.id" />
+	<form id="addform" action="${basePath}admin/helpcenter/document/addsave.htm" method="post">
 		<table cellpadding="5">
 			<tr>
 				<td>菜单类目:</td>
@@ -37,7 +36,7 @@
 			</tr>
 			<tr>
 				<td colspan="4" align="right">
-					<a href="javascript:void(0)" class="easyui-linkbutton" id="addsubmit">提 交</a>
+					<a href="javascript:void(0)" class="easyui-linkbutton" onclick="checkForm();">提 交</a>
 				</td>
 			</tr>
 		</table>
@@ -51,19 +50,22 @@
 				uploadJson : '${basePath}admin/common/fileupload/upload.htm',
 				fileManagerJson : '${basePath}admin/common/fileupload/upload2.htm',
 				allowFileManager : true,
+				allowImageRemote : false,
 				afterCreate : function() {
 					var self = this;
 					K.ctrl(document, 13, function() {
 						self.sync();
-						document.forms['example'].submit();
 					});
 				},
+				
 				afterFocus : function(){
+					this.sync();
 					if(editor1.html() == '此处进行内容编辑...'){
 						editor1.html('');
 					}
 				},
 				afterBlur : function(){
+					this.sync();
 					if(editor1.html() == ''){
 						editor1.html('此处进行内容编辑...');
 					}
@@ -76,6 +78,11 @@
 		$(function(){
 			_initSelect();
 		}) 
+		
+		
+		function checkForm(){
+			$('#addform').submit();
+		}
 	</script>
 </body>
 </html>

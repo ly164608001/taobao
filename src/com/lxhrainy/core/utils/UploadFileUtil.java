@@ -7,7 +7,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
@@ -128,9 +127,8 @@ public class UploadFileUtil {
 	
 	private static JSONObject getJsonError(String message) {
 		JSONObject obj = new JSONObject();
-		obj.put("error_code", 1);
+		obj.put("error", 1);
 		obj.put("message", message);
-		obj.put("success", false);
 		return obj;
 	}
 	
@@ -230,12 +228,8 @@ public class UploadFileUtil {
 				}
 
 				JSONObject obj = new JSONObject();
-				Map<String,String> resultMap = new HashMap<>();
-				resultMap.put("imgeurl", saveUrl + newFileName);
-				obj.put("error_code", 0);
-				obj.put("result", resultMap);
-				obj.put("success", true);
-				obj.put("message", "");
+				obj.put("error", 0);
+				obj.put("url", saveUrl + newFileName);
 				return obj;
 			}
 		}
