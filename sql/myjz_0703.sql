@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50096
 File Encoding         : 65001
 
-Date: 2016-07-03 21:04:38
+Date: 2016-07-03 23:46:19
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -145,7 +145,7 @@ INSERT INTO `goods_type` VALUES ('2', '家用电器', '-1', '1', '2', '0');
 -- ----------------------------
 DROP TABLE IF EXISTS `help_document`;
 CREATE TABLE `help_document` (
-  `id` int(11) NOT NULL COMMENT '文档id',
+  `id` int(11) NOT NULL auto_increment COMMENT '文档id',
   `title` varchar(64) default NULL COMMENT '文档名',
   `menuid` int(11) default NULL COMMENT '文档类目id',
   `href` varchar(255) default NULL COMMENT '文档生成页面的连接',
@@ -154,12 +154,15 @@ CREATE TABLE `help_document` (
   `status` int(1) default NULL COMMENT '状态 (显示隐藏)',
   `content` text COMMENT '文档内容',
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of help_document
 -- ----------------------------
 INSERT INTO `help_document` VALUES ('1', '测试文档', '4', null, '0', '1', '1', null);
+INSERT INTO `help_document` VALUES ('2', '', null, null, '0', null, null, '发达发达<img src=\"/core/upload/image/2016/07/03/20160703232645_743.png\" alt=\"\" />');
+INSERT INTO `help_document` VALUES ('3', '', null, null, '0', null, null, '发放<img src=\"/core/upload/image/2016/07/03/20160703232948_253.png\" alt=\"\" />');
+INSERT INTO `help_document` VALUES ('4', '', null, null, '0', null, null, '<img src=\"/core/upload/image/2016/07/03/20160703233400_263.png\" alt=\"\" />此处进行内容编辑...发送');
 
 -- ----------------------------
 -- Table structure for `help_menu`
