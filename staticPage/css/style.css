@@ -97,7 +97,7 @@ a{color: #333; text-decoration: none;font-size: 14px;}
 .Huialert-error{border-color:#ff5a09;background-color: #ff5a09}
 .workContent h4{background: #f8f8f8;padding: 10px;}
 .workContent h4 .title{border-left: 4px solid #FF5A09;display: inline-block;padding-left: 5px;}
-.workContent{width: 83%}
+.workContent{width: 100%}
 .serch-type .title{display: inline-block;margin-right: 10px;}
 .serch-type ul{display: inline-block;}
 .serch-type ul li{float: left;}
@@ -416,3 +416,8 @@ p{font-size: 14px;}
 
 /*个人中心*/
 .userCenter .formControls span.text{height: 22px;line-height: 22px;}
+
+
+/*iframe*/
+.taobaoIframe{width:80%;min-height: 900px}
+.ml20{margin-left: 20px}

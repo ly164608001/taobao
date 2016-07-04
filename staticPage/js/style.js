@@ -15,3 +15,36 @@ $(function(){
 	innerHtml=timeBet.join('');
 	$('.timeBet').append(innerHtml);
 })
+
+// iframe高度自适应
+function setIframeHeight(iframe) {
+if (iframe) {
+var iframeWin = iframe.contentWindow || iframe.contentDocument.parentWindow;
+if (iframeWin.document.body) {
+iframe.height = iframeWin.document.documentElement.scrollHeight || iframeWin.document.body.scrollHeight;
+}
+}
+};
+
+window.onload = function () {
+setIframeHeight(document.getElementById('external-frame'));
+};
+
+// JavaScript Document
+$(document).ready(function(e) {
+    $('.stage-nav li').click(function(){
+		$(this).addClass('li-h2').siblings().removeClass('li-h2');
+	});
+	$('.search-nav-l li').click(function(){
+		$(this).addClass('li-h').siblings().removeClass('li-h');
+	});
+	$('.type-nav-l li').click(function(){
+		$(this).addClass('li-h3').siblings().removeClass('li-h3');
+	});
+	$('.MessageCenter-nav-l li a').click(function(){
+		$(this).addClass('li-h5').parent().siblings().find('a').removeClass('li-h5');
+	});
+	$('.read-nav li').click(function(){
+		$(this).addClass('li-h6').siblings().removeClass('li-h6');
+	});
+});
