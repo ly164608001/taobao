@@ -22,7 +22,7 @@
     <script type="text/javascript" src="lib/DD_belatedPNG_0.0.8a-min.js" ></script>
     <script>DD_belatedPNG.fix('*');</script>
     <![endif]-->
-    <title>登入</title>
+    <title>注册</title>
     <meta name="keywords" content="关键词,5个左右,单个8汉字以内">
     <meta name="description" content="网站描述，字数尽量空制在80个汉字，160个字符以内！"></head>
 <body>
@@ -48,6 +48,15 @@
                 <ul>
                     <li class="clearfix">
                         <label>
+                            我的身份： <em class="red">*</em>
+                        </label>
+                        <div class="check-box clearfix label-checkWrap">
+                            <input type="checkbox" id="checkbox-2 " checked class="f-l">
+                            <label for="checkbox-2" class="label-check">我是刷手</label>
+                          </div>
+                    </li>
+                    <li class="clearfix">
+                        <label>
                             用户名： <em class="red">*</em>
                         </label>
                         <input type="text" placeholder="请输入用户名" />
@@ -69,7 +78,18 @@
                             <em class="red">*</em>
                         </label>
                         <input type="text" placeholder="请确认密码" />
-                        <span class="tip">两次密码不一致，请重新输入</span>
+                        <span class="tip red">两次密码不一致，请重新输入</span>
+                    </li>
+                    <li class="clearfix">
+                        <label>
+                            QQ号码：
+                            <em class="red">*</em>
+                        </label>
+                        <input type="text" placeholder="请输入手机号" />
+                        <span class="tip">请填写您常使用的QQ号码</span>
+                    </li>
+                    <li class="clearfix msg-tips">
+                        <p>QQ请一定正确填写，客服在验证审核环节及后续服务时都会使用QQ联系你</p>
                     </li>
                     <li class="clearfix">
                         <label>
@@ -77,6 +97,19 @@
                             <em class="red">*</em>
                         </label>
                         <input type="text" placeholder="请输入手机号" />
+                        <span class="tip">请填写您常使用手机号码</span>
+                    </li>
+                    <li class="clearfix">
+                        <label>
+                            验证码：
+                            <em class="red">*</em>
+                        </label>
+                        <div class="reCaptcha checkyan">
+                            <input type="text" placeholder="请输入手机验证码" class="checkyanIpt" />
+                            <span class="checkyanImg">验证码</span>
+                           <span class="tip">看不清？ <a href="#" class="red">换一换</a></span>
+                           <span class="tip">请输入验证码</span>
+                        </div>
                     </li>
                     <li class="clearfix">
                         <label>
@@ -91,7 +124,7 @@
                     </li>
                 </ul>
             </div>
-            <input class="btn-now" type="button" value="立即注册" />
+            <input class="btn-now" type="button" value="确认并注册" />
         </div>
     </div>
     <footer class="footer mt-20">

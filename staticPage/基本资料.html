@@ -22,7 +22,7 @@
 	<script type="text/javascript" src="lib/DD_belatedPNG_0.0.8a-min.js" ></script>
 	<script>DD_belatedPNG.fix('*');</script>
 	<![endif]-->
-	<title>好评地址列表</title>
+	<title>基本资料</title>
 	<meta name="keywords" content="关键词,5个左右,单个8汉字以内">
 	<meta name="description" content="网站描述，字数尽量空制在80个汉字，160个字符以内！"></head>
 <body>
@@ -105,10 +105,9 @@
 <span class="c-666 en">&gt;</span>
 会员中心
 <span class="c-666 en">&gt;</span>
-<span class="c-666">好评地址列表</span>
+<span class="c-666">基本资料</span>
 </nav>
 <div class="clearfix mt10">
-
 <div class="menuSidebar f-l">
 	<dl>
 		<dt>
@@ -187,93 +186,102 @@
 </div>
 <div class="workContent f-r">
 	<h4>
-		<span class="title">好评地址列表</span>
+		<span class="title">基本资料</span>
 	</h4>
-	
-	<div class="workDoing mt20">
-		<div id="tab_demo" class="HuiTab">
+
+	<div class="btnWrap clearfix">
+
+		<div id="tab_detail" class="HuiTab">
 			<div class="tabBar cl">
-				<span>收货地址列表</span>
-			</div>
-			<div class="tabCon">
-				<div class="search-tab mt20 search-tab-mini">
-				<ul>
-					<li class="tab02">
-						<span class="tab-title" style="width: 90px;">关键词：</span>
-						<input type="text" placeholder="请输入关键词" class="input-text radius size-M">
-					
-						<input class="btn radius btn-secondary" type="button" value="查询"></li>
-						<li class="tab02">
-					
-						<input class="btn radius btn-secondary btn-addAddress" type="button" value="+添加收货地址">
-						<input class="btn radius btn-secondary btn-deleteAddress1" type="button" value="-删除所有已使用过地址">
-						<input class="btn radius btn-secondary btn-deleteAddress2" type="button" value="-删除所有未使用过地址">
-						<input class="btn radius btn-secondary btn-addAddressAll" type="button" value="+批量导入收货地址">
-						</li>
-				</ul>
-			</div>
-				<div class="workTable mt30 appealTable">
-					<table class="table table-border table-bg">
-						<thead>
-							<tr>
-								<th>标签名</th>
-								<th>姓名</th>
-								<th>电话</th>
-								<th>地址</th>
-								<th>状态</th>
-								<th>添加时间</th>
-								<th>操作</th>
+				<span class="current">基本资料</span>
 
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>
-									<span>2015-52-15 52:52:41</span>
+			</div>
+			<div class="tabCon" style="display: block;">
 
-								</td>
-								<td>
-									<span>某某</span>
-								</td>
-								<td>
-									<span>54564564654564</span>
-								</td>
-								<td>
-									<span>啊实打实大傻蛋</span>
-								</td>
-								<td>
-									<span>可以</span>
-								</td>
-								<td>
-									<span>2015-52-15 52:52:41</span>
-								</td>
-								<td>
-									<a href="#" class="btn btn-link">删除</a>
-								</td>
-							</tr>
-						</tbody>
-					</table>
+				<div class="moneyOrder rechange">
+					<form action="" method="post" class="form form-horizontal" id="demoform-1">
+						<legend></legend>
+
+						<div class="row cl">
+							<label class="form-label col-xs-4 col-sm-3">用户名：</label>
+							<div class="formControls col-xs-2 col-sm-3">
+								<span class="text">
+									<span class="orange">布衣柜商家</span>
+								</span>
+							</div>
+						</div>
+						<div class="row cl">
+							<label class="form-label col-xs-4 col-sm-3">姓名：</label>
+							<div class="formControls col-xs-2 col-sm-3">
+								<span class="text">
+									<span class="orange">黄建群</span>
+								</span>
+							</div>
+						</div>
+						<div class="row cl">
+							<label class="form-label col-xs-4 col-sm-3">手机：</label>
+							<div class="formControls col-xs-2 col-sm-3">
+								<span class="text">
+									<span class="orange">186647686456</span>
+								</span>
+							</div>
+						</div>
+						<div class="row cl">
+							<label class="form-label col-xs-4 col-sm-3">性别：</label>
+							<div class="formControls col-xs-6 col-sm-6">
+								<div class="radio-box">
+									<input type="radio" id="radio-1" name="demo-radio1">
+									<label for="radio-1">男</label>
+								</div>
+								<div class="radio-box">
+									<input type="radio" id="radio-2" name="demo-radio1">
+									<label for="radio-2">女</label>
+								</div>
+								<div class="radio-box">
+									<input type="radio" id="radio-3" name="demo-radio1">
+									<label for="radio-3">保密</label>
+								</div>
+							</div>
+						</div>
+						<div class="row cl">
+							<label class="form-label col-xs-4 col-sm-3">出生日期：</label>
+							<div class="formControls col-xs-2 col-sm-3">
+								<span class="timeAlone"></span>
+							</div>
+						</div>
+						<div class="row cl">
+							<label class="form-label col-xs-4 col-sm-3">QQ：</label>
+							<div class="formControls col-xs-2 col-sm-3">
+								<input type="text" class="input-text" autocomplete="off" placeholder="布衣柜商家" value="布衣柜商家"></div>
+							<div class="formControls col-xs-2 col-sm-3">
+								<span class="onShow">请输入联系QQ</span>
+							</div>
+						</div>
+						
+						<div class="row cl">
+							<div class="col-xs-2 col-sm-4 btnWrap">
+								<input class="btn radius btn-secondary btn-ti" type="submit" value="提交"></div>
+						</div>
+					
+						
+					</form>
 				</div>
-
 			</div>
-			<div class="tabCon">内容二</div>
-		</div>
-		<div class="clearfix page-wrap"></div>
-	</div>
 
-</div>
+		</div>
+	</div>
 </div>
 </section>
 <footer class="footer mt-20">
 <div class="container">
 
-<p>
-	Copyright &copy;2013-2016
-	<br>
-	<a rel="nofollow" target="_blank" href="#">京ICP备15015336号-1</a>
-	<br>
-	未经允许，禁止转载、抄袭、镜像
-	<br>用心做站，做不一样的站</p>
+	<p>
+		Copyright &copy;2013-2016
+		<br>
+		<a rel="nofollow" target="_blank" href="#">京ICP备15015336号-1</a>
+		<br>
+		未经允许，禁止转载、抄袭、镜像
+		<br>用心做站，做不一样的站</p>
 </div>
 </footer>
 <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=270863798&site=qq&menu=yes" id="QQ-link">
@@ -288,98 +296,22 @@
 <script type="text/javascript" src="lib/Validform/5.3.2/Validform.min.js"></script>
 <script type="text/javascript" src="lib/Validform/5.3.2/passwordStrength-min.js"></script>
 <script type="text/javascript" src="lib/layer/layer.js"></script>
-<!-- 日期控件 -->
-<script type="text/javascript" src="lib/My97DatePicker/WdatePicker.js"></script>
-<!-- 分页控件 -->
+<script type="text/javascript" src="static/h-ui/js/H-ui.js"></script>
 <script type="text/javascript" src="js/page.js"></script>
 <script type="text/javascript" src="js/style.js"></script>
-<script type="text/javascript" src="static/h-ui/js/H-ui.js"></script>
 <script>
 //var navigation = responsiveNav("Hui-navbar", {customToggle: ".nav-toggle"});
 
 $(function(){
-	$('.skin-minimal input').iCheck({
-		checkboxClass: 'icheckbox-blue',
-		radioClass: 'iradio-blue',
-		increaseArea: '20%'
-	});
-	$("#demoform").Validform({
-		tiptype:2
-	});
+	// 添加选中项
+	$('.tab-tip').click(function(){
+		$(this).addClass('active').siblings().removeClass('active');
+	})
 	// 返回顶部 
 	$(function(){$(window).on("scroll",$backToTopFun);$backToTopFun();});
-	// 收缩
-	$('.open-btn').on('click',function(){
-		$(this).parent('.tiro-control').siblings('.panel').find('.showHide').slideToggle();
-		$(this).toggleClass('active');
-		if ($(this).hasClass('active')) {
-			$(this).text('展开');
-			// $(this).find('i').css('background-position','4px -28px')
-		}else{
-			$(this).text('收缩');
-			// $(this).find('i').css('background-position','4px 7px')
-		}
-	});
-	// 添加收货地址
-	$('.btn-addAddress').on('click',function(){
-            indexAgency=layer.open({
-                type:2,
-                area:['600px','400px'],
-                closeBtn:1,
-                shadeClose:true,
-                content:['./添加收货地址(弹窗).html','no'],
-                title:'添加收货地址',
-                btn:['确定','取消'],
-                yes:function(index){
-                    console.log('这里执行提交操作');
-                }
-            });  
-        });
-   // 确认删除
-        $('.btn-deleteAddress1').on('click',function(){
-            indexOk = top.layer.open({
-                type:1,
-                content:'您确定要删除所有已使用过的收货地址吗?',
-                shadeClose:true,
-                title:'信息',
-                btn:['确认','取消'],
-                yes:function(){
-                   console.log('成功回调');
-                    
-                }
-            });
-            return false;
-        });
-         $('.btn-deleteAddress2').on('click',function(){
-            indexOk = top.layer.open({
-                type:1,
-                content:'您确定要删除所有已使用过的收货地址吗?',
-                shadeClose:true,
-                title:'信息',
-                btn:['确认','取消'],
-                yes:function(){
-                   console.log('成功回调');
-                    
-                }
-            });
-            return false;
-        });
-         // 批量上传文件
-	$('.btn-addAddressAll').on('click',function(){
-            indexAgency=layer.open({
-                type:2,
-                area:['600px','400px'],
-                closeBtn:1,
-                shadeClose:true,
-                content:['./批量导入收货地址(弹窗).html','no'],
-                title:'添加收货地址',
-                btn:['确定','取消'],
-                yes:function(index){
-                    console.log('这里执行提交操作');
-                }
-            });  
-        });
-    $.Huitab("#tab_demo .tabBar span","#tab_demo .tabCon","current","click","0");
+	// tab切换
+	$.Huitab("#tab_detail .tabBar span","#tab_detail .tabCon","current","click","0");
+	 
 });
 </script>
 </body>

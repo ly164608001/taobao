@@ -22,7 +22,7 @@
 	<script type="text/javascript" src="lib/DD_belatedPNG_0.0.8a-min.js" ></script>
 	<script>DD_belatedPNG.fix('*');</script>
 	<![endif]-->
-	<title>好评地址列表</title>
+	<title>标签管理</title>
 	<meta name="keywords" content="关键词,5个左右,单个8汉字以内">
 	<meta name="description" content="网站描述，字数尽量空制在80个汉字，160个字符以内！"></head>
 <body>
@@ -105,7 +105,7 @@
 <span class="c-666 en">&gt;</span>
 会员中心
 <span class="c-666 en">&gt;</span>
-<span class="c-666">好评地址列表</span>
+<span class="c-666">标签管理</span>
 </nav>
 <div class="clearfix mt10">
 
@@ -187,13 +187,13 @@
 </div>
 <div class="workContent f-r">
 	<h4>
-		<span class="title">好评地址列表</span>
+		<span class="title">标签管理</span>
 	</h4>
 	
 	<div class="workDoing mt20">
 		<div id="tab_demo" class="HuiTab">
 			<div class="tabBar cl">
-				<span>收货地址列表</span>
+				<span>标签列表</span>
 			</div>
 			<div class="tabCon">
 				<div class="search-tab mt20 search-tab-mini">
@@ -205,10 +205,8 @@
 						<input class="btn radius btn-secondary" type="button" value="查询"></li>
 						<li class="tab02">
 					
-						<input class="btn radius btn-secondary btn-addAddress" type="button" value="+添加收货地址">
-						<input class="btn radius btn-secondary btn-deleteAddress1" type="button" value="-删除所有已使用过地址">
-						<input class="btn radius btn-secondary btn-deleteAddress2" type="button" value="-删除所有未使用过地址">
-						<input class="btn radius btn-secondary btn-addAddressAll" type="button" value="+批量导入收货地址">
+						<input class="btn radius btn-secondary btn-addTips" type="button" value="+添加标签">
+					
 						</li>
 				</ul>
 			</div>
@@ -217,11 +215,8 @@
 						<thead>
 							<tr>
 								<th>标签名</th>
-								<th>姓名</th>
-								<th>电话</th>
-								<th>地址</th>
-								<th>状态</th>
 								<th>添加时间</th>
+								<th>排序</th>
 								<th>操作</th>
 
 							</tr>
@@ -229,26 +224,18 @@
 						<tbody>
 							<tr>
 								<td>
-									<span>2015-52-15 52:52:41</span>
+									<span>福建</span>
 
 								</td>
 								<td>
-									<span>某某</span>
-								</td>
-								<td>
-									<span>54564564654564</span>
-								</td>
-								<td>
-									<span>啊实打实大傻蛋</span>
-								</td>
-								<td>
-									<span>可以</span>
-								</td>
-								<td>
 									<span>2015-52-15 52:52:41</span>
 								</td>
 								<td>
-									<a href="#" class="btn btn-link">删除</a>
+									<span>1</span>
+								</td>
+								<td>
+									<a href="#" class="btn btn-secondary radius">编辑</a>
+									<a href="#" class="btn btn-secondary radius">删除</a>
 								</td>
 							</tr>
 						</tbody>
@@ -321,13 +308,13 @@ $(function(){
 		}
 	});
 	// 添加收货地址
-	$('.btn-addAddress').on('click',function(){
+	$('.btn-addTips').on('click',function(){
             indexAgency=layer.open({
                 type:2,
                 area:['600px','400px'],
                 closeBtn:1,
                 shadeClose:true,
-                content:['./添加收货地址(弹窗).html','no'],
+                content:['./添加标签(弹窗).html','no'],
                 title:'添加收货地址',
                 btn:['确定','取消'],
                 yes:function(index){
@@ -335,50 +322,7 @@ $(function(){
                 }
             });  
         });
-   // 确认删除
-        $('.btn-deleteAddress1').on('click',function(){
-            indexOk = top.layer.open({
-                type:1,
-                content:'您确定要删除所有已使用过的收货地址吗?',
-                shadeClose:true,
-                title:'信息',
-                btn:['确认','取消'],
-                yes:function(){
-                   console.log('成功回调');
-                    
-                }
-            });
-            return false;
-        });
-         $('.btn-deleteAddress2').on('click',function(){
-            indexOk = top.layer.open({
-                type:1,
-                content:'您确定要删除所有已使用过的收货地址吗?',
-                shadeClose:true,
-                title:'信息',
-                btn:['确认','取消'],
-                yes:function(){
-                   console.log('成功回调');
-                    
-                }
-            });
-            return false;
-        });
-         // 批量上传文件
-	$('.btn-addAddressAll').on('click',function(){
-            indexAgency=layer.open({
-                type:2,
-                area:['600px','400px'],
-                closeBtn:1,
-                shadeClose:true,
-                content:['./批量导入收货地址(弹窗).html','no'],
-                title:'添加收货地址',
-                btn:['确定','取消'],
-                yes:function(index){
-                    console.log('这里执行提交操作');
-                }
-            });  
-        });
+  
     $.Huitab("#tab_demo .tabBar span","#tab_demo .tabCon","current","click","0");
 });
 </script>
