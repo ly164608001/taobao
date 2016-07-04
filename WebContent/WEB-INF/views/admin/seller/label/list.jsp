@@ -26,7 +26,7 @@
 		<form id="dgquery">
 			<table>
 				<tr>
-					<td>菜单名</td>
+					<td>标签名</td>
 					<td><input name="model.name" class="easyui-validatebox textbox" value="${vo.model.name}"></td>
 					<td></td>
 					<td></td>

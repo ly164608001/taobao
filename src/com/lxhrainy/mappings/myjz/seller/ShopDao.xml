@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lxhrainy.myjz.admin.seller.dao.IShopDao">
+    
+	<sql id="sellerShopColumns">
+		T.id AS "id",
+		T.name AS "name",
+		T.type AS "type",
+		T.manager AS "manager",
+		T.indexurl AS "indexurl",
+		T.alltasknum AS "alltasknum",
+		T.status AS "status",
+		T.userid AS "user.id",
+		T.createtime AS "createtime",
+		
+		U.username AS "user.username"
+	</sql>
+	
+	<sql id="sellerShopJoins">
+		LEFT JOIN user_info U ON U.id = T.userid 
+	</sql>
+    
+    <sql id="where">
+		<if test="condition!=null">
+			<where>
+				<if test="condition.model!=null">
+					<if test="condition.model.name!=null and condition.model.name!=''">
+						AND T.name like CONCAT('%',#{condition.model.name},'%')
+					</if>
+				</if>
+			</where>
+		</if>
+	</sql>
+    
+	<select id="getById" resultType="Shop">
+		SELECT 
+			<include refid="sellerShopColumns"/>
+		FROM seller_shop T 
+		<include refid="sellerShopJoins"/>
+		WHERE T.id = #{id}
+	</select>
+	
+	<select id="findListByPage" resultType="Shop">
+		SELECT 
+			<include refid="sellerShopColumns"/>
+		FROM seller_shop T 
+		<include refid="sellerShopJoins"/>
+		<include refid="where"/>
+		order by T.ID
+			<include refid="Sql.pager" />
+	</select>
+	
+	<select id="findAllList" resultType="Shop">
+		SELECT 
+			<include refid="sellerShopColumns"/>
+		FROM seller_shop T 
+		<include refid="sellerShopJoins"/>
+		<include refid="where"/>
+	</select>
+	
+	<select id="getCountByCondition" resultType="int">
+		SELECT 
+			COUNT(1)
+		FROM seller_shop T
+		<include refid="sellerShopJoins"/>
+		<include refid="where"/>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO seller_shop(
+			id,
+			name,
+			type,
+			manager,
+			indexurl,
+			alltasknum,
+			status,
+			userid,
+			createtime
+		) VALUES (
+			#{id},
+			#{name},
+			#{type},
+			#{manager},
+			#{indexurl},
+			#{alltasknum},
+			#{status},
+			#{user.id},
+			#{createtime}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE seller_shop SET 	
+			name = #{name},
+			type = #{type},
+			manager = #{manager},
+			indexurl = #{indexurl},
+			alltasknum = #{alltasknum},
+			status = #{status},
+			userid = #{user.id},
+			createtime = #{createtime}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="updateStatus">
+		UPDATE seller_shop SET 
+			status = #{status}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="deleteById">
+		DELETE FROM seller_shop
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

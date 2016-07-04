@@ -7,6 +7,9 @@ public class Global {
 	public final static int LABEL_TYPE_ADDR = 1;
 	public final static int LABEL_TYPE_APPRAISE = 2;
 	
+	//店铺类型 1 淘宝 
+	public final static int SHOP_TYPE_TB = 1;
+	
 	/** 商家管理 end**/
 	
 	/**帮助中心 start**/
