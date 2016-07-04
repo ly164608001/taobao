@@ -1,0 +1,147 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="renderer" content="webkit|ie-comp|ie-stand">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+	<meta http-equiv="Cache-Control" content="no-siteapp" />
+	<!--[if lt IE 9]>
+	<script type="text/javascript" src="lib/html5.js"></script>
+	<script type="text/javascript" src="lib/respond.min.js"></script>
+	<script type="text/javascript" src="lib/PIE_IE678.js"></script>
+	<![endif]-->
+	<link rel="stylesheet" type="text/css" href="static/h-ui/css/H-ui.css" />
+	<link rel="stylesheet" type="text/css" href="lib/Hui-iconfont/1.0.7/iconfont.css" />
+	<link rel="stylesheet" type="text/css" href="lib/icheck/icheck.css" />
+	<link rel="stylesheet" type="text/css" href="css/style.css" />
+	<!--[if lt IE 9]>
+	<link href="static/h-ui/css/H-ui.ie.css" rel="stylesheet" type="text/css" />
+	<![endif]-->
+	<!--[if IE 6]>
+	<script type="text/javascript" src="lib/DD_belatedPNG_0.0.8a-min.js" ></script>
+	<script>DD_belatedPNG.fix('*');</script>
+	<![endif]-->
+	<title>设置买号收货地址(弹窗)</title>
+	<meta name="keywords" content="关键词,5个左右,单个8汉字以内">
+	<meta name="description" content="网站描述，字数尽量空制在80个汉字，160个字符以内！"></head>
+<body>
+	<section>
+		<div class="black-remind">
+    <i></i>
+    <p>
+    1、现在快递单号业务理论上支持全国所有大中城市收货，请将该小号淘宝收货地址设置完善<br>
+    2、本页面填写的地址用来接手“已购买真实快递单号的任务”；<span class="c_f0">请务必填写时与淘宝上本小号的收货地址保持一致</span>！
+    </p>
+  </div>
+		<div class="addCar pob-addBuySddress">
+			<form action="" method="post" class="form form-horizontal" id="demoform-1">
+				<div class="row cl">
+					<label class="form-label col-xs-4 col-sm-3">
+						<span class="c-red">*</span>
+						淘宝号/旺旺号：
+					</label>
+					<div class="formControls col-xs-4 col-sm-3">
+						<span class="red">于庭漫步</span>
+						</div>
+
+				</div>
+				<div class="row cl">
+					<label class="form-label col-xs-3 col-sm-3">
+						<span class="c-red">*</span>
+						省/市/区县：
+					</label>
+					<div class="formControls col-xs-3 col-sm-3">
+						<span class="select-box">
+							<select class="select" size="1" name="demo1">
+								<option value="" selected="">省</option>
+								<option value="1">菜单一</option>
+								<option value="2">菜单二</option>
+								<option value="3">菜单三</option>
+							</select>
+						</span>
+					</div>
+					<div class="formControls col-xs-3 col-sm-3">
+						<span class="select-box">
+							<select class="select" size="1" name="demo1">
+								<option value="" selected="">市</option>
+								<option value="1">菜单一</option>
+								<option value="2">菜单二</option>
+								<option value="3">菜单三</option>
+							</select>
+						</span>
+					</div>
+					<div class="formControls col-xs-3 col-sm-3">
+						<span class="select-box">
+							<select class="select" size="1" name="demo1">
+								<option value="" selected="">区</option>
+								<option value="1">菜单一</option>
+								<option value="2">菜单二</option>
+								<option value="3">菜单三</option>
+							</select>
+						</span>
+					</div>
+					<div id="ddlCityIdTip" class="onShow">请选择省/市/区县</div>
+				</div>
+				
+				<div class="row cl">
+					<label class="form-label col-xs-4 col-sm-3">
+						<span class="c-red">*</span>
+						收货人详细地址：
+					</label>
+					<div class="formControls col-xs-4 col-sm-3">
+						<input type="text" class="input-text" autocomplete="off" placeholder="收货人详细地址" ></div>
+						<div id="addressTip" class="onShow">无需重复填写省/市，不明白的可联系客服；<span class="c_f0">必须要与淘宝上的地址一致</span></div>
+
+				</div>
+				<div class="row cl">
+					<label class="form-label col-xs-4 col-sm-3">
+						<span class="c-red">*</span>
+						收货人姓名：
+					</label>
+					<div class="formControls col-xs-4 col-sm-3">
+						<input type="text" class="input-text" autocomplete="off" placeholder="收货人姓名" ></div>
+						<div id="linknameTip" class="onShow">请输入收货人姓名，<span class="c_f0">必须与淘宝上收货人姓名相同</span></div>
+
+				</div>
+				<div class="row cl">
+					<label class="form-label col-xs-4 col-sm-3">
+						<span class="c-red">*</span>
+						收货人手机号码：
+					</label>
+					<div class="formControls col-xs-4 col-sm-3">
+						<input type="text" class="input-text" autocomplete="off" placeholder="收货人手机号码" ></div>
+						<div id="linktelTip" class="onShow">请输入收货人手机号码，<span class="c_f0">必须和淘宝上登记的收货人信息一致</span></div>
+
+				</div>
+				
+				<div class="row cl">
+					<label class="form-label col-xs-4 col-sm-3">
+						<span class="c-red">*</span>
+						交易密码：
+					</label>
+					<div class="formControls col-xs-4 col-sm-3">
+						<input type="password" class="input-text" autocomplete="off" placeholder="交易密码" ></div>
+						<div id="paypwdTip" class="onShow">请输入交易密码,默认为注册时的登录密码,<a href="#" target="_blank" class="blue">交易密码忘记了？点击这里</a></div>
+
+				</div>
+				
+			
+			</form>
+		</div>
+	</section>
+
+	<script type="text/javascript" src="lib/jquery/1.9.1/jquery.min.js"></script>
+	<script type="text/javascript" src="lib/layer/2.1/layer.js"></script>
+	<script type="text/javascript" src="lib/laypage/1.2/laypage.js"></script>
+	<script type="text/javascript" src="lib/My97DatePicker/WdatePicker.js"></script>
+	<script type="text/javascript" src="lib/icheck/jquery.icheck.min.js"></script>
+	<script type="text/javascript" src="lib/bootstrap-Switch/bootstrapSwitch.js"></script>
+	<script type="text/javascript" src="lib/Validform/5.3.2/Validform.min.js"></script>
+	<script type="text/javascript" src="lib/Validform/5.3.2/passwordStrength-min.js"></script>
+	<script type="text/javascript" src="lib/layer/layer.js"></script>
+	<script type="text/javascript" src="static/h-ui/js/H-ui.js"></script>
+
+</body>
+</html>
+<!--H-ui前端框架提供前端技术支持 h-ui.net @2015-8-4 -->
