@@ -25,65 +25,6 @@
 	<meta name="keywords" content="关键词,5个左右,单个8汉字以内">
 	<meta name="description" content="网站描述，字数尽量空制在80个汉字，160个字符以内！"></head>
 <body>
-
-<header class="navbar-wrapper">
-	<div class="navbar navbar-black navbar-orange navbar-fixed-top">
-		<div class="container cl">
-			<div class="logo">
-				<img src="images/logo.png"></div>
-			<nav class="nav navbar-nav nav-collapse" role="navigation" id="Hui-navbar">
-				<ul class="cl">
-					<li>
-						<a href="首页.html">首页</a>
-					</li>
-					<li>
-						<a href="任务大厅.html">任务大厅</a>
-					</li>
-					<li class="current">
-						<a href="/">任务管理</a>
-					</li>
-					<!-- <li>
-					<a href="#">账号充值</a>
-				</li>
-				<li>
-					<a href="#">申请提现</a>
-				</li>
-				<li>
-					<a href="#">账户明细</a>
-				</li>
-				<li>
-					<a href="#">帮助中心</a>
-				</li>
-				-->
-			</ul>
-		</nav>
-		<nav class="navbar-userbar hidden-xs nav navbar-nav">
-			<ul class="cr">
-				<li class="dropDown dropDown_hover">
-					<a href="#" class="dropDown_A">
-						用户中心 <i class="Hui-iconfont">&#xe6d5;</i>
-					</a>
-					<ul class="dropDown-menu menu radius box-shadow">
-						<li>
-							<a href="#">账号充值</a>
-						</li>
-						<li>
-							<a href="#">申请提现</a>
-						</li>
-						<li>
-							<a href="#">账号明细</a>
-						</li>
-					</ul>
-				</li>
-				<li>
-					<a href="#">帮助中心</a>
-				</li>
-			</ul>
-		</nav>
-	</div>
-</div>
-</header>
-
 <section class="container mt50 clearfix">
 <nav class="Hui-breadcrumb">
 	<!-- <i class="icon iconfont">&#xf012b;</i>
@@ -198,21 +139,7 @@
 <!-- iframe嵌入 -->
 <iframe src="./sideBar02-iframe.html"  frameborder="0" scrolling="no" id="external-frame" onload="setIframeHeight(this)" name="external-frame" class="taobaoIframe"></iframe>
 </section>
-<footer class="footer mt-20">
-<div class="container">
 
-	<p>
-		Copyright &copy;2013-2016
-		<br>
-		<a rel="nofollow" target="_blank" href="#">京ICP备15015336号-1</a>
-		<br>
-		未经允许，禁止转载、抄袭、镜像
-		<br>用心做站，做不一样的站</p>
-</div>
-</footer>
-<a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=270863798&site=qq&menu=yes" id="QQ-link">
-<img border="0" src="http://wpa.qq.com/pa?p=2:270863798:53" alt="点击这里给我发消息" title="点击这里给我发消息"/>
-</a>
 <script type="text/javascript" src="lib/jquery/1.9.1/jquery.min.js"></script>
 <script type="text/javascript" src="lib/layer/2.1/layer.js"></script>
 <script type="text/javascript" src="lib/My97DatePicker/WdatePicker.js"></script>
@@ -220,21 +147,5 @@
 <script type="text/javascript" src="static/h-ui/js/H-ui.js"></script>
 <script type="text/javascript" src="js/page.js"></script>
 <script type="text/javascript" src="js/style.js"></script>
-<script>
-//var navigation = responsiveNav("Hui-navbar", {customToggle: ".nav-toggle"});
-
-$(function(){
-	// 添加选中项
-	$('.tab-tip').click(function(){
-		$(this).addClass('active').siblings().removeClass('active');
-	})
-	// 返回顶部 
-	$(function(){$(window).on("scroll",$backToTopFun);$backToTopFun();});
-	// tab切换
-	$.Huitab("#tab_detail .tabBar span","#tab_detail .tabCon","current","click","0");
-	 
-});
-</script>
 </body>
 </html>
-<!--H-ui前端框架提供前端技术支持 h-ui.net @2015-8-4 -->

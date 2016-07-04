@@ -86,21 +86,5 @@
 	<script type="text/javascript" src="static/h-ui/js/H-ui.js"></script>
 	<script type="text/javascript" src="js/page.js"></script>
 	<script type="text/javascript" src="js/style.js"></script>
-	<script>
-//var navigation = responsiveNav("Hui-navbar", {customToggle: ".nav-toggle"});
-
-$(function(){
-	// 添加选中项
-	$('.tab-tip').click(function(){
-		$(this).addClass('active').siblings().removeClass('active');
-	})
-	// 返回顶部 
-	$(function(){$(window).on("scroll",$backToTopFun);$backToTopFun();});
-	// tab切换
-	$.Huitab("#tab_detail .tabBar span","#tab_detail .tabCon","current","click","0");
-	 
-});
-</script>
 </body>
 </html>
-<!--H-ui前端框架提供前端技术支持 h-ui.net @2015-8-4 -->

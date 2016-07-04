@@ -87,7 +87,7 @@ a{color: #333; text-decoration: none;font-size: 14px;}
 .menuSidebar dl dt{padding-left: 10px;font-size: 16px}
 .menuSidebar dl dd a{display: block;padding-left: 40px;color: #999;}
 .menuSidebar dl dd a:hover{background: #FF5A09;color: #fff;text-decoration: none;}
-.menuSidebar dl dd.active a{color: #FF5A09;}
+.menuSidebar dl dd.active a{background: #FF5A09;color: #fff;text-decoration: none;}
 .menuSidebar dl dd.last{border-bottom: 1px solid #e5e5e5}
 .menuSidebar dl dt i{display: inline-block; width: 20px; height: 20px; background-image: url(../images/leftnav_icon.png); background-repeat: no-repeat; margin: 0 6px 0 4px; vertical-align: middle;}
 .menuSidebar dl dt i.n3{background-position: 0 -62px;}
@@ -419,5 +419,5 @@ p{font-size: 14px;}
 
 
 /*iframe*/
-.taobaoIframe{width:80%;min-height: 900px}
+.taobaoIframe{width:85%;min-height: 900px}
 .ml20{margin-left: 20px}

@@ -48,3 +48,23 @@ $(document).ready(function(e) {
 		$(this).addClass('li-h6').siblings().removeClass('li-h6');
 	});
 });
+
+// 导航选中效果
+$(function(){
+	$('.menuSidebar dl dd').on('click',function(){
+		$(this).addClass('active').siblings().removeClass('active');
+		return false;
+	})
+})
+
+$(function(){
+	// 添加选中项
+	$('.tab-tip').click(function(){
+		$(this).addClass('active').siblings().removeClass('active');
+	})
+	// 返回顶部 
+	$(function(){$(window).on("scroll",$backToTopFun);$backToTopFun();});
+	// tab切换
+	$.Huitab("#tab_detail .tabBar span","#tab_detail .tabCon","current","click","0");
+	 
+});
