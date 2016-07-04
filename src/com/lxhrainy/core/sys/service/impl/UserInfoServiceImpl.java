@@ -191,4 +191,14 @@ implements IUserInfoService {
 		UserInfo user = dao.getPersonInfo(userid);
 		return user;
 	}
+
+	@Override
+	public boolean isExistUserName(String username, Integer type) {
+		//判断用户名是否存在
+		UserInfo exsitUser = dao.getByName(username);
+		if(exsitUser == null){
+			return true;
+		}
+		return false;
+	}
 }

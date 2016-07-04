@@ -9,13 +9,9 @@ package com.lxhrainy.api.model;
  */
 public class ApiParams {
 	/**
-	 * 平台	android,ios
+	 * android:android平台;ios:ios平台;
 	 */
 	private String platform; 
-	/**
-	 * 软件名	driver,user
-	 */
-	private String app; 
 	/**
 	 * 手机唯一编号	
 	 */
@@ -54,6 +50,57 @@ public class ApiParams {
 	 */
 	private boolean enable;
 	
+	/**start 用户信息**/
+	//QQ号码
+	private String QQ;
+	//验证码
+	private String captcha;
+	//真实姓名
+	private String name;
+	//登录/交易密码
+	private String password;
+	//手机号
+	private String phone;
+	//用户名
+	private String username;
+	/**end 用户信息**/
+	
+	public String getQQ() {
+		return QQ;
+	}
+	public void setQQ(String qQ) {
+		QQ = qQ;
+	}
+	public String getCaptcha() {
+		return captcha;
+	}
+	public void setCaptcha(String captcha) {
+		this.captcha = captcha;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	public String getPhone() {
+		return phone;
+	}
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+	public String getUsername() {
+		return username;
+	}
+	public void setUsername(String username) {
+		this.username = username;
+	}
 	public boolean getEnable() {
 		return enable;
 	}
@@ -71,12 +118,6 @@ public class ApiParams {
 	}
 	public void setPlatform(String platform) {
 		this.platform = platform;
-	}
-	public String getApp() {
-		return app;
-	}
-	public void setApp(String app) {
-		this.app = app;
 	}
 	public String getUuid() {
 		return uuid;

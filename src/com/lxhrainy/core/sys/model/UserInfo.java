@@ -27,6 +27,7 @@ public class UserInfo extends BaseModel {
 	private Integer status; // 状态
 	private Integer deleted; // 删除标识
 	private Integer channel; // 来源
+	private String inviter; //邀请者
 	private UserDetailInfo detailInfo; // 用户详细信息
 	
 	private String app;
@@ -149,6 +150,14 @@ public class UserInfo extends BaseModel {
 
 	public void setUuid(String uuid) {
 		this.uuid = uuid;
+	}
+
+	public String getInviter() {
+		return inviter;
+	}
+
+	public void setInviter(String inviter) {
+		this.inviter = inviter;
 	}
 
 }

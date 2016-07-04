@@ -45,7 +45,7 @@ public class ApiController {
 	 * @param response
 	 * @throws IOException 
 	 */
-	@RequestMapping("/getVerity")
+	@RequestMapping("/GetInvitation")
 	public void getVerity(InputStream inputStream, HttpServletResponse response) throws IOException {
 		ApiParams params =	ApiJSONUtil.decryptJSON(inputStream, ApiParams.class);
 		ResultJson rj = userApiService.getVerity(params);
@@ -61,7 +61,7 @@ public class ApiController {
 	 *		captcha 验证码（必须）
 	 * @param response
 	 */
-	@RequestMapping("/register" )
+	@RequestMapping("/Sigin" )
 	public void register(InputStream inputStream, HttpServletResponse response) {
 		ApiCacheUtil.getLoginUser();
 		ApiParams params =	ApiJSONUtil.decryptJSON(inputStream, ApiParams.class);

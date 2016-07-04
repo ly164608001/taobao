@@ -3,7 +3,11 @@
  */
 package com.lxhrainy.api.service.impl;
 
+import java.io.IOException;
+import java.io.Serializable;
+import java.text.MessageFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -17,17 +21,24 @@ import com.alibaba.fastjson.JSONObject;
 import com.lxhrainy.api.model.ApiParams;
 import com.lxhrainy.api.service.IUserApiService;
 import com.lxhrainy.api.util.ApiCacheUtil;
+import com.lxhrainy.api.util.ApiConstant;
 import com.lxhrainy.api.util.ResultJson;
+import com.lxhrainy.api.util.SmsUtil;
 import com.lxhrainy.core.common.service.AbstractBaseServiceImpl;
 import com.lxhrainy.core.oe.SysNoticeVO;
 import com.lxhrainy.core.sys.dao.IUserInfoDao;
 import com.lxhrainy.core.sys.model.SysNotice;
 import com.lxhrainy.core.sys.model.UserInfo;
 import com.lxhrainy.core.sys.service.ISysNoticeService;
+import com.lxhrainy.core.sys.service.IUserInfoService;
+import com.lxhrainy.core.utils.DateUtil;
+import com.lxhrainy.core.utils.PasswordUtil;
 import com.lxhrainy.core.utils.StringUtil;
 import com.lxhrainy.core.utils.oConvertUtils;
 import com.lxhrainy.myjz.admin.user.model.UserConfig;
+import com.lxhrainy.myjz.admin.user.model.UserMoney;
 import com.lxhrainy.myjz.admin.user.service.IUserConfigService;
+import com.lxhrainy.myjz.admin.user.service.IUserMoneyService;
 
 /**
  * 用户数据
@@ -42,17 +53,121 @@ public class UserApiServiceImpl extends AbstractBaseServiceImpl<IUserInfoDao, Us
 	private ISysNoticeService sysNoticeService;
 	@Autowired
 	private IUserConfigService userConfigService;
+	@Autowired
+	private IUserInfoService userInfoService;
+	@Autowired
+	private IUserMoneyService userMoneyService;
 	
 	@Override
 	public ResultJson getVerity(ApiParams params) {
-		// TODO Auto-generated method stub
-		return null;
+		ResultJson rj = new ResultJson(ResultJson.ERROR_CODE_PARAMETERS,"参数错误");
+		if (oConvertUtils.isNotEmpty(params) && StringUtil.isNotEmpty(params.getPhone())) {
+			String phone = params.getPhone();
+			//int length = oConvertUtils.getInt(sysconfigService.getValueByKey("captcha.lenght"), 6);
+			int length = 6;
+			String captcha = StringUtil.numRandom(length);
+			//String content = sysconfigService.getValueByKey("captcha.content");
+			String content = "[蚂蚁兼职]亲，您的验证码是{0}，在3分钟内有效。如非本人操作请忽略本短信。";
+			String msg = MessageFormat.format(content, captcha);
+			try {
+				if (SmsUtil.send(msg, phone)) {
+					ApiCacheUtil.addCaptchaChache(phone, captcha + "-" + DateUtil.getMillis());
+					rj.setError_code(ResultJson.SUCCESS);
+					rj.setSuccess(true);
+					rj.setMessage("验证码已发送");
+				} else {
+					rj.setError_code(ResultJson.ERROR_CODE_GENERAL);
+					rj.setMessage("验证码发送失败，请稍后再试");
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+				rj.setError_code(ResultJson.ERROR_CODE_GENERAL);
+				rj.setMessage("验证码发送失败，请稍后再试");
+				return rj;
+			}
+		}
+		return rj;
 	}
 
 	@Override
 	public ResultJson register(ApiParams mobileUser) {
-		// TODO Auto-generated method stub
-		return null;
+		ResultJson rj = new ResultJson();
+		rj.setError_code(ResultJson.ERROR_CODE_PARAMETERS);
+		rj.setMessage("参数错误");
+		if (oConvertUtils.isNotEmpty(mobileUser)) {
+			if (oConvertUtils.isNotEmpty(mobileUser.getUsername()) 
+					&& StringUtil.isNotEmpty(mobileUser.getPassword())
+					&& StringUtil.isNotEmpty(mobileUser.getName())
+					&& StringUtil.isNotEmpty(mobileUser.getCaptcha())
+					&& StringUtil.isNotEmpty(mobileUser.getQQ())
+					&& StringUtil.isNotEmpty(mobileUser.getPhone())
+					&& StringUtil.isNotEmpty(mobileUser.getUuid())
+					&& StringUtil.isNotEmpty(mobileUser.getPlatform())) {
+				// 验证验证码
+				String captcha = ApiCacheUtil.getCaptchaChache(mobileUser.getUsername());
+				if (StringUtil.isEmpty(captcha)) {
+					rj.setError_code(ResultJson.ERROR_CODE_CAPTCHA);
+					rj.setMessage("请获取验证码");
+					return rj;
+				} else {
+					String[] captchaArray =  captcha.split("-");
+					if (captchaArray.length == 2 ) {
+						long a = (new Date().getTime() - Long.parseLong(captchaArray[1])) / 1000;
+						if (!captchaArray[0].equals(mobileUser.getCaptcha())) {
+							rj.setError_code(ResultJson.ERROR_CODE_CAPTCHA);
+							rj.setMessage("验证码错误");
+							return rj;
+						} else if ( a > 180) {
+							rj.setError_code(ResultJson.ERROR_CODE_CAPTCHA);
+							rj.setMessage("验证码超时，请重新获取");
+							return rj;
+						}
+					}
+				}
+				
+				Integer type = 2;
+				// 用户注册
+				
+				if (userInfoService.isExistUserName(mobileUser.getUsername(), type)) {
+					rj.setError_code(ResultJson.ERROR_CODE_USER_EXIST);
+					rj.setMessage("账号已注册,请直接登录");
+					return rj;
+				}
+				
+				if (StringUtil.isNotEmpty(mobileUser.getInviter()) 
+						&& !userInfoService.isExistUserName(mobileUser.getInviter(),type)) {
+					rj.setError_code(ResultJson.ERROR_CODE_INVITER_NOT_EXIST);
+					rj.setMessage("邀请人不存在");
+				} else {
+					UserInfo mobileUserEntity = new UserInfo();
+					mobileUserEntity.setPassword(PasswordUtil.encrypt(mobileUser.getUsername(), mobileUser.getPassword(), PasswordUtil.getStaticSalt()));
+					mobileUserEntity.setUsername(mobileUser.getUsername());
+					mobileUserEntity.setInviter(mobileUser.getInviter());
+					mobileUserEntity.setType(type);
+					mobileUserEntity.setPhone(mobileUser.getUsername());
+					mobileUserEntity.setStatus(ApiConstant.API_USER_ALLOW);
+					mobileUserEntity.setRegistertime(new Date());
+					Serializable id = userInfoService.save(mobileUserEntity);
+					if (oConvertUtils.isEmpty(id)) {
+						rj.setError_code(ResultJson.ERROR_CODE_API);
+						rj.setMessage("注册失败");
+					} else {
+						ApiCacheUtil.removeCaptchaChache(mobileUser.getUsername());
+						UserMoney account = new UserMoney();
+						account.setUserid(mobileUserEntity.getId());
+						account.setAllbalance(0d);
+						account.setFrozenbalance(0d);
+						account.setUsablebalance(0d);
+						userMoneyService.save(account);
+						
+						rj.setSuccess(true);
+						rj.setError_code(ResultJson.SUCCESS);
+						rj.setMessage("注册成功");
+					}
+				}
+			}
+		}
+		return rj;
 	}
 
 	@Override
@@ -325,7 +440,9 @@ public class UserApiServiceImpl extends AbstractBaseServiceImpl<IUserInfoDao, Us
 
 	@Override
 	public ResultJson getSysConfig(ApiParams params) {
-		// TODO Auto-generated method stub
+		//TODO 获取小号等级列表信息
+		//TODO 投诉类型
+		//TODO 提示信息
 		return null;
 	}
 

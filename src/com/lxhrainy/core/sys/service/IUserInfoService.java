@@ -77,4 +77,12 @@ public interface IUserInfoService extends IBaseService<UserInfo, Integer>{
 	 * @return
 	 */
 	UserInfo getPersonInfo(int userid);
+
+	/**
+	 * 判断用户名是否存在
+	 * @param username
+	 * @param type
+	 * @return
+	 */
+	boolean isExistUserName(String username, Integer type);
 }

@@ -15,9 +15,9 @@ import com.lxhrainy.core.utils.StringUtil;
 */
 public class SmsUtil {
 	// 系统配置
-	private static final String USERNAME = "15359198641";
+	private static final String USERNAME = "1111111";
 	private static final String PASSWORD = "9FA6EB4D075A98F84F896CF0D451";
-	private static final String SIGN = "好运联联";
+	private static final String SIGN = "蚂蚁兼职";
 
 	public static boolean send(String msg, String mobile) throws IOException {
 		// 创建StringBuffer对象用来操作字符串
