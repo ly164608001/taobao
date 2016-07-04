@@ -68,7 +68,7 @@
 	
 	<select id="getCountByCondition" resultType="int">
 		SELECT 
-			count(*)
+			COUNT(1)
 		FROM help_menu T
 		<include refid="helpMenuJoins"/>
 		<include refid="where"/>

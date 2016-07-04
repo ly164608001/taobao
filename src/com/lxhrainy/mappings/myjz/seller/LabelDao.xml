@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lxhrainy.myjz.admin.seller.dao.ILabelDao">
+    
+	<sql id="sellerLabelColumns">
+		T.id AS "id",
+		T.name AS "name",
+		T.type AS "type",
+		T.sort AS "sort",
+		T.userid AS "user.id",
+		T.createtime AS "createtime",
+		
+		U.username AS "user.username"
+	</sql>
+	
+	<sql id="sellerLabelJoins">
+		LEFT JOIN user_info U ON U.id = T.userid 
+	</sql>
+    
+    <sql id="where">
+		<if test="condition!=null">
+			<where>
+				<if test="condition.model!=null">
+					<if test="condition.model.name!=null and condition.model.name!=''">
+						AND T.name like CONCAT('%',#{condition.model.name},'%')
+					</if>
+				</if>
+			</where>
+		</if>
+	</sql>
+	
+	<select id="getById" resultType="Label">
+		SELECT 
+			<include refid="sellerLabelColumns"/>
+		FROM seller_label T
+		<include refid="sellerLabelJoins"/>
+		WHERE T.id = #{id}
+	</select>
+	
+	<select id="findListByPage" resultType="Label">
+		SELECT 
+			<include refid="sellerLabelColumns"/>
+		FROM seller_label T
+		<include refid="sellerLabelJoins"/>
+		<include refid="where"/>
+		order by T.ID
+			<include refid="Sql.pager" />
+	</select>
+	
+	<select id="findAllList" resultType="Label">
+		SELECT 
+			<include refid="sellerLabelColumns"/>
+		FROM seller_label T
+		<include refid="sellerLabelJoins"/>
+		<include refid="where"/>
+	</select>
+	
+	<select id="getCountByCondition" resultType="int">
+		SELECT 
+			COUNT(1)
+		FROM seller_label T
+		<include refid="sellerLabelJoins"/>
+		<include refid="where"/>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO seller_label(
+			id,
+			name,
+			type,
+			sort,
+			userid,
+			createtime
+		) VALUES (
+			#{id},
+			#{name},
+			#{type},
+			#{sort},
+			#{user.id},
+			#{createtime}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE seller_label SET 	
+			name = #{name},
+			type = #{type},
+			sort = #{sort},
+			userid = #{user.id},
+			createtime = #{createtime}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="deleteById">
+		DELETE FROM seller_label
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

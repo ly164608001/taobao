@@ -2,6 +2,12 @@ package com.lxhrainy.myjz.common.constant;
 
 public class Global {
 	
+	/** 商家管理 start**/
+	//标签管理类型 1 收货类型 2 好评内容
+	public final static int LABEL_TYPE_ADDR = 1;
+	public final static int LABEL_TYPE_APPRAISE = 2;
+	
+	/** 商家管理 end**/
 	
 	/**帮助中心 start**/
 	//顶级菜单的pid为-1

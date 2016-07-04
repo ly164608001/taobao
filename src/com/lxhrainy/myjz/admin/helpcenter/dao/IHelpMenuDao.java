@@ -2,6 +2,8 @@ package com.lxhrainy.myjz.admin.helpcenter.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.lxhrainy.core.annotation.MyBatisDao;
 import com.lxhrainy.core.common.dao.IBaseDao;
 import com.lxhrainy.myjz.admin.helpcenter.model.HelpMenu;
@@ -20,6 +22,6 @@ public interface IHelpMenuDao extends IBaseDao<HelpMenu> {
 	 * @param level
 	 * @return
 	 */
-	List<HelpMenu> getListByPid(int pid);
+	List<HelpMenu> getListByPid(@Param("pid")int pid);
 	
 }
