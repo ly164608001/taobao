@@ -183,6 +183,10 @@ a{color: #333; text-decoration: none;font-size: 14px;}
     -moz-border-radius: 3px;
     -webkit-border-radius: 3px;
 }
+.black-remind p {
+    line-height: 24px;
+    color: #333;
+}
 .black-remind i {
     display: inline-block;
     position: absolute;
@@ -440,3 +444,21 @@ p{font-size: 14px;}
 .detail-jpg{display: inline-block;width: 100px;height: 100px}
 .detail-jpg img{width: 100%;height: 100%}
 .workDetail .text-tip{padding-left: 150px}
+
+/*任务申诉*/
+.img-loadWrap a{display: inline-block;;float: left;width: 109px;height: 108px;}
+.img-loadWrap a img{width: 100%}
+.addCar .formControls.img-loadWrap{min-width: 400px}
+.addCar .formControls textarea{width: 100%;min-height: 100px;}
+
+/*我要审核*/
+.sure-order{margin:10px;}
+.sure-order .order-txt{margin:20px 0 0 60px}
+
+/*修改审核模式*/
+.sureModeal .form-horizontal .form-label{width: 160px}
+.sureModeal .btnWrap .btn-ti{margin-left: 160px}
+
+/*任务统计*/
+.search-tab-mini.search-tab .tab02 input.input-text{width: 130px}
+.search-tab-mini.search-tab .tab02 input.input-text-mini{width:60px;text-align: center;}

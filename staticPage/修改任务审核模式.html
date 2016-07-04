@@ -22,7 +22,7 @@
 	<script type="text/javascript" src="lib/DD_belatedPNG_0.0.8a-min.js" ></script>
 	<script>DD_belatedPNG.fix('*');</script>
 	<![endif]-->
-	<title>任务管理</title>
+	<title>修改任务审核模式</title>
 	<meta name="keywords" content="关键词,5个左右,单个8汉字以内">
 	<meta name="description" content="网站描述，字数尽量空制在80个汉字，160个字符以内！"></head>
 <body>
@@ -187,27 +187,9 @@
 </div>
 <div class="workContent f-r">
 	<h4>
-		<span class="title">淘宝精刷任务</span>
+		<span class="title">任务审核设置</span>
 	</h4>
-	<div class="header">
-		<div class="panel panel-default panel-shenHead">
-			<div class="panel-body">
-				<h5>
-					您当前的任务审核模式
-					<input class="btn radius btn-secondary btn-change" type="button" value="修改任务审核模式"></h5>
-				<p>
-					<span>
-						1、审核已付款：
-						<span class="orange">商家自审</span>
-					</span>
-					<span>
-						2、审核确认收货好评：
-						<span class="orange">商家自审</span>
-					</span>
-				</p>
-			</div>
-		</div>
-	</div>
+
 	<section class="mt20">
 		<div class="panel panel-default panel-tips mt20">
 			<div class="panel-header">重要说明</div>
@@ -288,8 +270,8 @@
 							<label for="checkshow">
 								<input type="checkbox" name="checkshow" id="checkshow">&nbsp;下次不再自动展开</label>
 						</div>
+					</div>
 				</div>
-			</div>
 				<div class="tiro-control">
 					<span class="click-btn open-btn">收缩</span>
 					<!--  <span class="click-btn open-btn">
@@ -298,189 +280,83 @@
 				</span>
 				-->
 			</div>
-		
-	</section>
-	<div class="progressImg mt20">
-		<img src="images/tasklc2.png">
-	</div>
-	<div class="workDoing mt20">
-		<div id="tab_demo" class="HuiTab">
-			<div class="tabBar cl">
-				<span>要你操作的任务</span>
-				<span>进行中的任务</span>
-				<span>暂停中的任务</span>
-				<span>已完成的任务</span>
-				<span>全部任务</span>
-			</div>
-			<div class="tabCon">
-				<div class="search-tab mt20 search-tab-other">
-					<ul>
-						<li class="tab02">
-							<span class="tab-title" style="width: 140px;">任务编号、订单号：</span>
-							<input type="text" placeholder="请输入任务编号" class="input-text radius size-M">
-							<span class="tab-title">淘宝号：</span>
-							<input type="text" placeholder="请输入淘宝号" class="input-text radius size-M">
-							<span class="tab-title">单品价格：</span>
-							<input type="text" placeholder="请输入单品价格" class="input-text radius size-M">
-							
-						</li>
-						<li class="tab02">
-							<span class="tab-title">发布时间：</span>
-							<span class="timeBet"></span>
-							<span class="tab-title">店铺名称：</span>
-							<span class="select-box radius">
-							  <select class="select" size="1" name="demo1">
-							    <option value="" selected>默认select</option>
-							    <option value="1">菜单一</option>
-							    <option value="2">菜单二</option>
-							    <option value="3">菜单三</option>
-							  </select>
-							</span>
-							<input class="btn radius btn-secondary" type="button" value="查询">
-						</li>
-					</ul>
-				</div>
-				<div class="serch-type clearfix mt20">
-					<span class="title f-l">当前状态：</span>
-					<ul class="clearfix f-l">
-						<li>
-							<a href="#">已接手待审核(0)</a>
-						</li>
-						<li>
-							<a href="#">待付款(0)</a>
-						</li>
-						<li>
-							<a href="#">已付款待审核(0)</a>
-						</li>
-						<li>
-							<a href="#">待发货(0)</a>
-						</li>
-						<li>
-							<a href="#">待收货(0)</a>
-						</li>
-						<li>
-							<a href="#">已好评，待确认(0)</a>
-						</li>
-						<li>
-							<a href="#">申述中(0)</a>
-						</li>
-					</ul>
-				</div>
-				<div class="workTable mt30 searchTable">
-					<table class="table table-border table-bg">
-						<thead>
-							<tr>
-							<th><input type="checkbox" name=""></th>
-								<th width="20%">任务编号</th>
-								<th>任务价格（元）</th>
-								<th width="20%">任务要求</th>
-								<th>悬赏佣金</th>
-								<th >任务状态</th>
-								<th>任务操作</th>
-							</tr>
-							<tr>
-								<th><input type="checkbox" name=""></th>
-								<th colspan="6">
-									<span class="mr10">发布时间：2015-02-05 22:51:56</span>
-									<span class="mr10">QQ: 5464569846</span>
-								</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-							<td>1</td>
-								<td class="first">
-								<span>TB201606261747428126850</span>
-								<span>发布人：L千语</span>
-								<span>关键词：<em class="red">布衣柜</em> <em class="red">实木</em></span>
-								<span>
-									<span class="label label-warning radius">淘宝</span>
-									<span class="mobile-order" title="接任务者需要通过手机、pad等智能设备的app下单支付">手机订单</span>
-								</span>
 
-							</td>
-								<td class="text-c assure-icon alipay">
-									<span><em class="red">1</em>件</span>
-									<span>单件<em class="red">138.00</em>元</span>
-									<span>总额<em class="red">138.00</em>元</span>
-									<span><i></i>平台担保</span>
-								</td>
-								<td>
-								<span>物流显示签收后五星带字好评</span>
-								<span>
-									<span class="label label-success radius">本人签收</span>
-									<span class="label label-success radius">三星</span>
-									<span class="label label-success radius">实名</span>
-									<span class="label label-success radius">拍付款</span>
-									<span class="label label-warning radius">分享</span>
-									<span class="label label-warning radius">收藏</span>
-									<span class="label label-warning radius">浏览</span>
-									<span class="label label-success radius">本人签收</span>
-									<span class="label label-success radius">三星</span>
-									<span class="label label-success radius">实名</span>
-									<span class="label label-success radius">拍付款</span>
-									<span class="label label-warning radius">分享</span>
-									<span class="label label-warning radius">收藏</span>
-									<span class="label label-warning radius">浏览</span><br>
-									<span class="pt5 order">淘宝订单号：<em class="red">1639040737871287</em></span>
-									<span><a href="#" class="btn btn-link btnBady">查看宝贝截图</a></span>
-								</span>
-							</td>
-								<td>
-									<span class="red">8.04元</span>
-									<span>11.82个旺点</span>
-								</td>
-								<td>
-									<span>申诉中</span>
-									<span><a href="#" class="btn btn-link">我要撤销申诉</a></span>
-								</td>
-								<td>
-								<span><a href="#" class="btn btn btn-secondary radius btn-sure">我要审核</a></span>
-									<span><a href="#" class="btn btn-link btn-answer">查看申诉</a></span>
-									<span><a href="#" class="btn btn-link">查看任务详情</a></span>
-								</td>
-							</tr>
-							<tr>
-								<td colspan="5">
-									<span>接手方：<img src="images/vip0.jpg"> (IP:<em>106.3.45.233</em>) 接手时间：<em>2016/6/24 18:03:59 </em>付款时间：<em>2016/6/24 19:07:50</em></span>
-								</td>
-								<td>
-									<span><i class="wangwang"></i>采用买号<em class="blue">独家秀秀</em></span>
-								</td>
-								<td>
-									<span><a href="#" class="btn btn-link">查看淘宝地址</a></span>
-								</td>
-							</tr>
-						</tbody>
-					</table>
+		</section>
+
+		<div class="workDoing mt20">
+			<div id="tab_demo" class="HuiTab">
+				<div class="tabBar cl">
+					<span>任务审核设置</span>
+
 				</div>
-				<div class="  mt10 text-c">
-					<a href="#" class="btn btn-secondary radius"><i></i>刷新任务</a>
+				<div class="tabCon">
+					<div class="moneyOrder sureModeal">
+
+						<form action="" method="post" class="form form-horizontal" id="demoform-1">
+							<legend></legend>
+							<div class="row cl">
+								<label class="form-label col-xs-4 col-sm-3">审核已付款：</label>
+								<div class="formControls col-xs-8 col-sm-9">
+									<div class="radio-box f-l">
+										<input type="radio" id="radio-1" name="demo-radio1">
+										<label for="radio-1">商家自审</label>
+									</div>
+									<div class="radio-box f-l">
+										<input type="radio" id="radio-2" name="demo-radio1">
+										<label for="radio-2">平台自动审核</label>
+									</div>
+								</div>
+							</div>
+							<div class="row cl">
+								<label class="form-label col-xs-4 col-sm-3">审核确认收货好评：</label>
+								<div class="formControls col-xs-8 col-sm-9">
+									<div class="radio-box f-l">
+										<input type="radio" id="radio-3" name="demo-radio1">
+										<label for="radio-3">商家自审</label>
+									</div>
+									<div class="radio-box f-l">
+										<input type="radio" id="radio-4" name="demo-radio1">
+										<label for="radio-4">平台自动审核</label>
+									</div>
+								</div>
+							</div>
+							<div class="row cl">
+								<label class="form-label col-xs-4 col-sm-3">交易密码：</label>
+								<div class="formControls col-xs-2 col-sm-3">
+									<input type="password" class="input-text" autocomplete="off" placeholder="交易密码"></div>
+								<div class="formControls col-xs-3 col-sm-4">
+									<span class="onShow">请输入交易密码,默认为注册时的登录密码</span>
+								</div>
+							</div>
+							
+
+							<div class="row cl">
+								<div class="col-xs-2 col-sm-4 btnWrap">
+									<input class="btn radius btn-secondary btn-ti" type="submit" value="提交"></div>
+							</div>
+						</form>
+					</div>
 				</div>
+
 			</div>
-			<div class="tabCon">内容二</div>
-			<div class="tabCon">内容二</div>
-			<div class="tabCon">内容二</div>
-			<div class="tabCon">内容二</div>
 		</div>
 	</div>
-</div>
 
 </section>
 <footer class="footer mt-20">
-<div class="container">
+	<div class="container">
 
-<p>
-	Copyright &copy;2013-2016
-	<br>
-	<a rel="nofollow" target="_blank" href="#">京ICP备15015336号-1</a>
-	<br>
-	未经允许，禁止转载、抄袭、镜像
-	<br>用心做站，做不一样的站</p>
-</div>
+		<p>
+			Copyright &copy;2013-2016
+			<br>
+			<a rel="nofollow" target="_blank" href="#">京ICP备15015336号-1</a>
+			<br>
+			未经允许，禁止转载、抄袭、镜像
+			<br>用心做站，做不一样的站</p>
+	</div>
 </footer>
 <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=270863798&site=qq&menu=yes" id="QQ-link">
-<img border="0" src="http://wpa.qq.com/pa?p=2:270863798:53" alt="点击这里给我发消息" title="点击这里给我发消息"/>
+	<img border="0" src="http://wpa.qq.com/pa?p=2:270863798:53" alt="点击这里给我发消息" title="点击这里给我发消息"/>
 </a>
 <script type="text/javascript" src="lib/jquery/1.9.1/jquery.min.js"></script>
 <script type="text/javascript" src="lib/layer/2.1/layer.js"></script>
