@@ -390,3 +390,29 @@ p{font-size: 14px;}
     margin-bottom: 20px;
 }
 .btnWrap-ren a{margin-left: 240px}
+
+
+/*淘宝小号*/
+.taobaoTxt .taobaoTxt-ipt{width: 200px}
+.taobaoTxt{margin: 20px 0 0 50px;max-width: 850px;}
+.heart{display: inline-block;width: 16px;height: 16px;background: url(../images/b_red_3.gif) no-repeat center;background-position: 0px 0px}
+.heartList{margin-left: 10px}
+.pob-addBuySddress.addCar .formControls{width: 150px;float: left;}
+.pobMinitaobao.addCar .form-label{width: 250px}
+.pobMinitaobao.addCar .formControls{width: 200px}
+.pobMinitaobao.addCar .formControls.formControlsArea{width: 100px;}
+.pobMinitaobao{width: 850px;}
+.task-point {
+    display: inline-block;
+    height: 16px;
+    background-image: url(../images/task-icon.png);
+    background-repeat: no-repeat;
+    text-indent: -9999px;
+    overflow: hidden;
+    vertical-align: middle;
+    margin-bottom: 3px;
+}
+.task-mode05{width: 60px;margin-left: 5px}
+
+/*个人中心*/
+.userCenter .formControls span.text{height: 22px;line-height: 22px;}
