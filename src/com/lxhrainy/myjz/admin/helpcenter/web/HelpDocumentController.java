@@ -2,6 +2,7 @@ package com.lxhrainy.myjz.admin.helpcenter.web;
 
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -76,7 +77,6 @@ public class HelpDocumentController extends BaseController {
 	 */
 	@RequestMapping("/add")
 	public ModelAndView add(Integer pid) {
-		
 		mv.setViewName("admin/helpcenter/document/add");
 		return mv;
 	}
@@ -89,7 +89,9 @@ public class HelpDocumentController extends BaseController {
 	@ResponseBody
 	public JSONObject addsave(HelpDocument model) {
 		JSONObject rj = new JSONObject();
-		if(model == null ){
+		if(model == null || StringUtils.isEmpty(model.getTitle())  
+				|| StringUtils.isEmpty(model.getContent()) || model.getMenu() == null
+				|| model.getMenu().getId() == null){
 			rj.put("success", false);
 			rj.put("msg", "保存失败");
 		}else{
@@ -108,7 +110,11 @@ public class HelpDocumentController extends BaseController {
 	@RequestMapping("/update")
 	public ModelAndView update(Integer id) {
 		if(id != null){
-			mv.addObject("model", helpDocumentService.getById(id));
+			HelpDocument model = helpDocumentService.getById(id);
+			mv.addObject("model", model);
+			if(model != null && model.getMenu() != null){
+				mv.addObject("menuname", menuService.getFullnameById(model.getMenu().getId()));
+			}
 		}
 		
 		mv.setViewName("admin/helpcenter/document/update");
@@ -123,14 +129,20 @@ public class HelpDocumentController extends BaseController {
 	@ResponseBody
 	public JSONObject updatesave(HelpDocument model) {
 		JSONObject rj = new JSONObject();
-		if(model != null && model.getId() > 0){
+		if(model == null || model.getId() == null || StringUtils.isEmpty(model.getTitle())  
+				|| StringUtils.isEmpty(model.getContent()) || model.getMenu() == null
+				|| model.getMenu().getId() == null){
+			rj.put("success", false);
+			rj.put("msg", "更新失败");
+		}else{
 			HelpDocument oldInfo = helpDocumentService.getById(model.getId());
+			oldInfo.setContent(model.getContent());
+			oldInfo.setMenu(model.getMenu());
+			oldInfo.setSort(model.getSort());
+			oldInfo.setTitle(model.getTitle());
 			helpDocumentService.update(oldInfo);
 			rj.put("success", true);
 			rj.put("msg", "更新成功");
-		}else{
-			rj.put("success", false);
-			rj.put("msg", "更新失败");
 		}
 		return rj;
 	}

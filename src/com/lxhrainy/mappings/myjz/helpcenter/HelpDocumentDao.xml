@@ -90,13 +90,28 @@
 	
 	<update id="update">
 		UPDATE help_document SET 	
+			<if test="title!=null and title!=''">
 			title = #{title},
-			menuid = #{menuid},
+			</if>
+			<if test="menu!=null and menu.id!=null">
+			menuid = #{menu.id},
+			</if>
+			<if test="href!=null and href!=''">
 			href = #{href},
+			</if>
+			<if test="deleted!=null">
 			deleted = #{deleted},
+			</if>
+			<if test="sort!=null">
 			sort = #{sort},
+			</if>
+			<if test="status!=null">
 			status = #{status},
-			content = #{content}
+			</if>
+			<if test="content!=null and content!=''">
+			content = #{content},
+			</if>
+			id = #{id}
 		WHERE id = #{id}
 	</update>
 	

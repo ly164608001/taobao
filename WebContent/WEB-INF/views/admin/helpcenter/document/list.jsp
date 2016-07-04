@@ -6,6 +6,7 @@
 	<link rel="stylesheet" type="text/css" href="${basePath}static/js/easyui/themes/bootstrap/easyui.css"/>
 	<link rel="stylesheet" type="text/css" href="${basePath}static/js/easyui/themes/icon.css"/>
 	<script type="text/javascript" src="${basePath}static/js/admin/global.js"></script>
+	<script type="text/javascript" src="${basePath}static/js/select.js"></script>
 	
 	<link rel="stylesheet" href="${basePath}static/js/kindeditor/themes/default/default.css" />
 	<link rel="stylesheet" href="${basePath}static/js/kindeditor/plugins/code/prettify.css" />
@@ -34,7 +35,7 @@
 	<script>
 		
 		function formatteradminuserbutton(value,row) {
-			return  '<a href="javascript:void(0)" class="easyui-linkbutton" onclick="openDialog(\'编辑\',\'${basePath}admin/helpcenter/document/update.htm?id='+row.id+'\',300,300)">编辑</a>&nbsp;'
+			return '<a href="javascript:void(0)" class="easyui-linkbutton" onclick="openDialog(\'编辑\',\'${basePath}admin/helpcenter/document/update.htm?id='+row.id+'\',760,540)">编辑</a>&nbsp;'
 				 + '<a href="javascript:void(0)" class="easyui-linkbutton" onclick="deleterow(\'${basePath}admin/helpcenter/document/delete.htm?id='+row.id+'\')">删除</a>';
 		}
 		
@@ -66,7 +67,6 @@
 				<th field="id" width="40">id</th>
 				<th field="title" width="120">文档标题</th>
 				<th field="menu.name" width="100">菜单类目</th>
-				<th field="url" width="180">链接</th>
 				<th field="isadmin" width="180" formatter="formatteradminuserbutton">操作</th>
 			</tr>
 		</thead>

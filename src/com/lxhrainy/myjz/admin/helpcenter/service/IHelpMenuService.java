@@ -2,8 +2,6 @@ package com.lxhrainy.myjz.admin.helpcenter.service;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Param;
-
 import com.lxhrainy.core.common.service.IBaseService;
 import com.lxhrainy.myjz.admin.helpcenter.model.HelpMenu;
 
@@ -19,6 +17,12 @@ public interface IHelpMenuService extends IBaseService<HelpMenu, Integer>{
 	 * @param level
 	 * @return
 	 */
-	List<HelpMenu> getListByPid(@Param("pid")int pid);
+	List<HelpMenu> getListByPid(int pid);
 
+	/**
+	 * 获取全名称
+	 * @param id
+	 * @return
+	 */
+	String getFullnameById(Integer id);
 }

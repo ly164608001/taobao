@@ -51,7 +51,6 @@
 				<th field="parent.id" width="40" formatter="forrmaterPid">父id</th>
 				<th field="name" width="120">菜单名称</th>
 				<th field="type" formatter="forrmaterType" width="100">类型</th>
-				<th field="url" width="180">链接</th>
 				<th field="sort" width="30">排序</th>
 				<th field="isadmin" width="180" formatter="formatteradminuserbutton">操作</th>
 			</tr>

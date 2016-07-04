@@ -10,6 +10,7 @@ import com.lxhrainy.core.common.service.AbstractBaseServiceImpl;
 import com.lxhrainy.myjz.admin.helpcenter.dao.IHelpMenuDao;
 import com.lxhrainy.myjz.admin.helpcenter.model.HelpMenu;
 import com.lxhrainy.myjz.admin.helpcenter.service.IHelpMenuService;
+import com.lxhrainy.myjz.common.constant.Global;
 
 
 /**
@@ -35,5 +36,30 @@ implements IHelpMenuService {
 	public List<HelpMenu> getListByPid(int pid) {
 		List<HelpMenu> list = dao.getListByPid(pid);
 		return list;
+	}
+	
+	/**
+	 * 获取全名称
+	 * @param id
+	 * @return
+	 */
+	public String getFullnameById(Integer id) {
+		if(id == null){
+			return "";
+		}
+		
+		String name = "";
+		HelpMenu menu = this.getById(id);
+		while (true) {
+			name = " > " + menu.getName() + name;
+			int pid = menu.getParent().getId();
+			if(pid == Global.ROOT_HELPMENU_ID){
+				break;
+			} 
+			menu = this.getById(pid);
+		}
+		
+		name = name.substring(2,name.length());
+		return name;
 	}
 }

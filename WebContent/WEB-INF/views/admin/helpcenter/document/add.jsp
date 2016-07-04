@@ -4,7 +4,6 @@
 <html>
 <head>
 	<script type="text/javascript" src="${basePath}static/js/admin/global.js"></script>
-	<script type="text/javascript" src="${basePath}static/js/select.js"></script>
 </head>
 <body>
 	
@@ -18,15 +17,15 @@
 								link="${basePath}admin/helpcenter/menu/getlistbypid.htm" pid="-1"
 								valuename="id" labelname="name">
 						</select>
-						<input type="hidden" value="" name="menu.id" />
+						<input type="hidden" value="" name="menu.id" required="required" id="menuid"/>
 					</span>
 				</td>
 			</tr>
 			<tr>
 				<td>文档标题:</td>
-				<td><input name="title" class="easyui-validatebox textbox" width="120px;"/></td>
+				<td><input name="title" required="required" class="easyui-validatebox textbox" width="120px;"/></td>
 				<td>排序:</td>
-				<td><input name="sort" class="easyui-validatebox textbox" width="40px;"/></td>
+				<td><input name="sort" required="required" class="easyui-validatebox textbox" width="40px;"/></td>
 			</tr>
 			<tr>
 				<td colspan="4">
@@ -44,6 +43,37 @@
 	
 	<script src="${basePath}static/js/admin/initdata.js"></script>
 	<script type="text/javascript">
+		function checkForm(){
+			var menuid = $('#menuid').val();
+			var content = $.trim($('#content').val());
+			if(menuid == ''){
+				$.messager.alert("提示", "请选择菜单!");
+				return;
+			} 
+			if(content == ''){
+				$.messager.alert("提示", "请输入文档内容!");
+				return;
+			}
+			
+			if( $("#addform").form('validate')){
+				$.ajax({
+					type : 'post',
+					url : '${basePath}admin/helpcenter/document/addsave.htm',
+					data : $('#addform').serialize(),
+					dataType : 'json',
+					success : function(result){
+						if(result.success){
+							window.location.href = '${basePath}admin/helpcenter/document/list.htm';
+						}else{
+							$.messager.alert("提示", result.msg);
+						}
+					}
+				});
+				
+			}
+			
+		}
+		
 		KindEditor.ready(function(K) {
 			var editor1 = K.create('textarea[name="content"]', {
 				cssPath : '${basePath}static/js/kindeditor/plugins/code/prettify.css',
@@ -79,10 +109,6 @@
 			_initSelect();
 		}) 
 		
-		
-		function checkForm(){
-			$('#addform').submit();
-		}
 	</script>
 </body>
 </html>
