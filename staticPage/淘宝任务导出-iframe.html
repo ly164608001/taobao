@@ -1,0 +1,178 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="renderer" content="webkit|ie-comp|ie-stand">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+	<meta http-equiv="Cache-Control" content="no-siteapp" />
+	<!--[if lt IE 9]>
+	<script type="text/javascript" src="lib/html5.js"></script>
+	<script type="text/javascript" src="lib/respond.min.js"></script>
+	<script type="text/javascript" src="lib/PIE_IE678.js"></script>
+	<![endif]-->
+	<link rel="stylesheet" type="text/css" href="static/h-ui/css/H-ui.css" />
+	<link rel="stylesheet" type="text/css" href="lib/Hui-iconfont/1.0.7/iconfont.css" />
+	<link rel="stylesheet" type="text/css" href="css/style.css" />
+	<!--[if lt IE 9]>
+	<link href="static/h-ui/css/H-ui.ie.css" rel="stylesheet" type="text/css" />
+	<![endif]-->
+	<!--[if IE 6]>
+	<script type="text/javascript" src="lib/DD_belatedPNG_0.0.8a-min.js" ></script>
+	<script>DD_belatedPNG.fix('*');</script>
+	<![endif]-->
+	<title>淘宝任务导出-iframe</title>
+	<meta name="keywords" content="关键词,5个左右,单个8汉字以内">
+	<meta name="description" content="网站描述，字数尽量空制在80个汉字，160个字符以内！"></head>
+<body>
+	<div class="workContent ml20">
+		<h4>
+			<span class="title">淘宝任务导出</span>
+		</h4>
+		<div id="tab_detail" class="HuiTab">
+			<div class="tabBar cl">
+				<span class="current">平台淘宝任务</span>
+				<span class="">内部淘宝任务</span>
+			</div>
+			<div class="tabCon" style="display: block;">
+				<div class="search-tab mt20 search-tab-work-push">
+					<ul>
+						<li class="tab02">
+							<span class="tab-title" style="width: 80px;">任务编号：</span>
+							<input type="text" placeholder="请输入任务编号" class="input-text radius size-M">
+							<span class="tab-title" style="width: 80px;">订单号：</span>
+							<input type="text" placeholder="请输入订单号" class="input-text radius size-M">
+							<span class="tab-title" style="width: 80px;">选择店铺：</span>
+							<span class="select-box">
+								<select class="select" size="1" name="demo1">
+									<option value="" selected>请选择</option>
+									<option value="1">菜单一</option>
+									<option value="2">菜单二</option>
+									<option value="3">菜单三</option>
+								</select>
+							</span>
+
+						</li>
+						<li class="tab02">
+							<span class="tab-title" style="width: 80px;">商品ID：</span>
+							<input type="text" placeholder="请输入商品ID" class="input-text radius size-M">
+							<span class="tab-title" style="width: 90px;">商品关键字：</span>
+							<input type="text" placeholder="请输入商品关键字" class="input-text radius size-M">
+							<span class="tab-title" style="width: 80px;">任务状态：</span>
+							<span class="select-box">
+								<select class="select" size="1" name="demo1">
+									<option value="" selected>请选择</option>
+									<option value="1">菜单一</option>
+									<option value="2">菜单二</option>
+									<option value="3">菜单三</option>
+								</select>
+							</span>
+						</li>
+						<li class="tab02">
+							<span class="tab-title">发布时间：</span>
+							<span class="timeBet"></span>
+							<span class="tab-title">付款时间：</span>
+							<span class="timeBet"></span>
+
+						</li>
+						<li class="tab02 clearfix">
+							<input class="btn btn-warning radius f-r" type="button" value="结果导出EXAL">
+							<input class="btn radius btn-secondary f-r mr10" type="button" value="查询"></li>
+					</ul>
+				</div>
+
+				<div class="workTable mt30 workTable-file">
+					<table class="table table-border table-bg">
+						<thead>
+							<tr>
+								<th>店铺名</th>
+								<th>任务编号</th>
+								<th>淘宝/天猫订单号</th>
+								<th>任务价格</th>
+								<th>佣金</th>
+								<th>状态</th>
+								<th>时间</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>和家家居品牌馆2</td>
+								<td>TB201607040932272641440</td>
+								<td>TB201607040932272641440</td>
+								<td>
+									<span> <em class="red">1.38</em>
+										元
+									</span>
+									<span>
+										件数 <em class="red">10</em>
+										件
+									</span>
+								</td>
+								<td>
+									<span>
+										<em class="red">51</em>
+										元
+									</span>
+								</td>
+								<td>
+									<span>
+										任务状态：
+										<em class="red">正常</em>
+									</span>
+									<span>
+										接手状态：
+										<em class="red">等待接受</em>
+									</span>
+									<span>
+										用户号：
+										<em class="red">354556</em>
+									</span>
+									<span>
+										旺旺号：
+										<em class="red">354556</em>
+									</span>
+								</td>
+								<td>
+									<span>
+										发布：
+										<em class="red">2016-10-20 01:21:20</em>
+									</span>
+									<span>
+										接单：
+										<em class="red">2016-10-20 01:21:20</em>
+									</span>
+									<span>
+										付款：
+										<em class="red">2016-10-20 01:21:20</em>
+									</span>
+
+								</td>
+							</tr>
+
+						</tbody>
+					</table>
+				</div>
+				<div class="clearfix page-wrap"></div>
+			</div>
+			<div class="tabCon" style="display: none;">第二页</div>
+
+		</div>
+
+	</div>
+	<script type="text/javascript" src="lib/jquery/1.9.1/jquery.min.js"></script>
+	<script type="text/javascript" src="lib/layer/2.1/layer.js"></script>
+	<script type="text/javascript" src="lib/My97DatePicker/WdatePicker.js"></script>
+	<script type="text/javascript" src="lib/layer/layer.js"></script>
+	<script type="text/javascript" src="static/h-ui/js/H-ui.js"></script>
+	<script type="text/javascript" src="js/page.js"></script>
+	<script type="text/javascript" src="js/style.js"></script>
+	<script type="text/javascript">
+	$(function(){
+		layer.config({
+	    extend: ['skin/layerSkinExtend.css'], //加载新皮肤
+	    skin: 'layer-ext-myskin' //一旦设定，所有弹层风格都采用此主题。
+	});
+	})
+</script>
+</body>
+</html>

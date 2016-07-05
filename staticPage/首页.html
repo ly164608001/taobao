@@ -13,7 +13,6 @@
 	<![endif]-->
 	<link rel="stylesheet" type="text/css" href="static/h-ui/css/H-ui.css" />
 	<link rel="stylesheet" type="text/css" href="lib/Hui-iconfont/1.0.7/iconfont.css" />
-	<link rel="stylesheet" type="text/css" href="lib/icheck/icheck.css" />
 	<link rel="stylesheet" type="text/css" href="css/style.css" />
 	<!--[if lt IE 9]>
 	<link href="static/h-ui/css/H-ui.ie.css" rel="stylesheet" type="text/css" />
@@ -24,7 +23,8 @@
 	<![endif]-->
 	<title>首页</title>
 	<meta name="keywords" content="关键词,5个左右,单个8汉字以内">
-	<meta name="description" content="网站描述，字数尽量空制在80个汉字，160个字符以内！"></head>
+	<meta name="description" content="网站描述，字数尽量空制在80个汉字，160个字符以内！">
+</head>
 <body>
 	<!-- <header class="navbar-wrapper">
 	<div class="navbar navbar-black navbar-fixed-top">
@@ -445,31 +445,15 @@
 </a>
 <script type="text/javascript" src="lib/jquery/1.9.1/jquery.min.js"></script>
 <script type="text/javascript" src="lib/layer/2.1/layer.js"></script>
-<script type="text/javascript" src="lib/laypage/1.2/laypage.js"></script>
 <script type="text/javascript" src="lib/My97DatePicker/WdatePicker.js"></script>
-<script type="text/javascript" src="lib/icheck/jquery.icheck.min.js"></script>
-<script type="text/javascript" src="lib/bootstrap-Switch/bootstrapSwitch.js"></script>
-<script type="text/javascript" src="lib/Validform/5.3.2/Validform.min.js"></script>
-<script type="text/javascript" src="lib/Validform/5.3.2/passwordStrength-min.js"></script>
 <script type="text/javascript" src="lib/layer/layer.js"></script>
 <script type="text/javascript" src="static/h-ui/js/H-ui.js"></script>
-<!-- 日期控件 -->
-<script type="text/javascript" src="lib/My97DatePicker/WdatePicker.js"></script>
+<script type="text/javascript" src="js/page.js"></script>
 <script type="text/javascript" src="js/style.js"></script>
 <script>
-//var navigation = responsiveNav("Hui-navbar", {customToggle: ".nav-toggle"});
+
 
 $(function(){
-	$('.skin-minimal input').iCheck({
-		checkboxClass: 'icheckbox-blue',
-		radioClass: 'iradio-blue',
-		increaseArea: '20%'
-	});
-	$("#demoform").Validform({
-		tiptype:2
-	});
-	 // 返回顶部 
-	$(function(){$(window).on("scroll",$backToTopFun);$backToTopFun();});
 	// 收缩
 	$('.open-btn').on('click',function(){
 		$(this).parent('.tiro-control').siblings('.panel').find('.showHide').slideToggle();
@@ -488,9 +472,10 @@ $(function(){
 	    skin: 'layer-ext-myskin' //一旦设定，所有弹层风格都采用此主题。
 	});
 	// 弹出提示
-        indexAgency= top.layer.open({
+        $(window).on('load',function(){
+		indexAgency= top.layer.open({
             type:2,
-            area:['900px','650px'],
+            area:['900px','550px'],
             shadeClose:true,
             content:['./提示弹窗.html','no'],
             btn:'确定',
@@ -500,9 +485,9 @@ $(function(){
                 layer.close(indexAgency);
             }
         }); 
+	}) 
 
 });
 </script>
 </body>
 </html>
-<!--H-ui前端框架提供前端技术支持 h-ui.net @2015-8-4 -->

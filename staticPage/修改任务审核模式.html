@@ -13,7 +13,6 @@
 	<![endif]-->
 	<link rel="stylesheet" type="text/css" href="static/h-ui/css/H-ui.css" />
 	<link rel="stylesheet" type="text/css" href="lib/Hui-iconfont/1.0.7/iconfont.css" />
-	<link rel="stylesheet" type="text/css" href="lib/icheck/icheck.css" />
 	<link rel="stylesheet" type="text/css" href="css/style.css" />
 	<!--[if lt IE 9]>
 	<link href="static/h-ui/css/H-ui.ie.css" rel="stylesheet" type="text/css" />
@@ -185,206 +184,34 @@
 		</dd>
 	</dl>
 </div>
-<div class="workContent f-r">
-	<h4>
-		<span class="title">任务审核设置</span>
-	</h4>
-
-	<section class="mt20">
-		<div class="panel panel-default panel-tips mt20">
-			<div class="panel-header">重要说明</div>
-			<div class="panel-body">
-				<p>
-					1、确认要发布任务的产品
-					<span class="orange">已关闭淘宝客</span>
-					的推广，以免部分买家利用淘宝客获得额外您的推广佣金；
-				</p>
-				<p>
-					2、买家如没按商家要求做任务，商家可以投诉，
-					<span class="orange">平台只受理未完成任务的投诉</span>
-					，任务完成不再受理；
-				</p>
-				<div class="showHide">
-					<p>
-						3、快递
-						<span class="orange">物流出现卡住或没有物流信息</span>
-						的情况，淘宝上发货
-						<span class="orange">超过了7天</span>
-						，即
-						<span class="orange">第8天</span>
-						应允许买家在淘宝确认收货和好评，这种情况不算买家提前收货，请商家选择好的快递公司；
-					</p>
-					<p>
-						4、在任务【
-						<span class="orange">接手方已付款，等待商家审核</span>
-						】的商家审核步骤，请商家严格审查
-						<span class="orange">买家付款信息(订单号、买家旺旺号)</span>
-						等信息 ，如出现不一致，请马上提起申诉，否则后续出现相关问题后果自负。比如：❶、出现接单旺旺号与店铺实际下单旺旺号不一致，但您也给审核通过了，导致后面您真实发货，后果自负；❷、出现买家在旺旺刷平台回填的订单号与店铺实际下单的订单号不一致，但您也给审核通过了，导致后面您真实发货，后果自负；
-					</p>
-					<p>
-						5、在任务【
-						<span class="orange">确认收货好评，完成任务</span>
-						】的商家审核步骤，默认审核操作时间
-						<span class="orange">24小时</span>
-						，请商家严格审查
-						<span class="orange">买家是否确认收货和好评</span>
-						等，若买家未按要求完成，请马上提起申诉，否则后续出现相关问题后果自负；
-					</p>
-
-					<p>
-						6、任务【
-						<span class="orange">确认收货好评，完成任务</span>
-						】的商家审核步骤，商家在默认
-						<span class="orange">24小时</span>
-						内未审核，如果
-						<span class="orange">再超过24小时</span>
-						还未审核，即在
-						<span class="blue">48小时未审核</span>
-						，系统将自动返款(本金和佣金)给买家，请商家及时审核，出现相关问题后果自负。任务有超时会补偿旺点给买家（
-						<span class="blue">每超出12小时补偿2个旺点</span>
-						）；
-					</p>
-					<p>
-						7、
-						<span class="blue">1个旺点=0.68元</span>
-						；
-					</p>
-
-					<p>
-						8、【
-						<span class="blue">重要说明</span>
-						】 若商家的账户余额不足（
-						<span class="orange">
-							余额
-							< 0元</span>
-								），还有进行中的任务，需要商家审核的步骤【
-								<span class="orange">接手方已付款，等待商家审核</span>
-								】、【
-								<span class="orange">确认收货好评，完成任务</span>
-								】，商家未在默认
-								<span class="orange">24小时</span>
-								内审核，超时的任务自动审核通过，若后续出现相关问题后果商家自行承担！
-							</p>
-						</div>
-						<div class="checkShow">
-							<label for="checkshow">
-								<input type="checkbox" name="checkshow" id="checkshow">&nbsp;下次不再自动展开</label>
-						</div>
-					</div>
-				</div>
-				<div class="tiro-control">
-					<span class="click-btn open-btn">收缩</span>
-					<!--  <span class="click-btn open-btn">
-					收缩
-					<i></i>
-				</span>
-				-->
-			</div>
-
-		</section>
-
-		<div class="workDoing mt20">
-			<div id="tab_demo" class="HuiTab">
-				<div class="tabBar cl">
-					<span>任务审核设置</span>
-
-				</div>
-				<div class="tabCon">
-					<div class="moneyOrder sureModeal">
-
-						<form action="" method="post" class="form form-horizontal" id="demoform-1">
-							<legend></legend>
-							<div class="row cl">
-								<label class="form-label col-xs-4 col-sm-3">审核已付款：</label>
-								<div class="formControls col-xs-8 col-sm-9">
-									<div class="radio-box f-l">
-										<input type="radio" id="radio-1" name="demo-radio1">
-										<label for="radio-1">商家自审</label>
-									</div>
-									<div class="radio-box f-l">
-										<input type="radio" id="radio-2" name="demo-radio1">
-										<label for="radio-2">平台自动审核</label>
-									</div>
-								</div>
-							</div>
-							<div class="row cl">
-								<label class="form-label col-xs-4 col-sm-3">审核确认收货好评：</label>
-								<div class="formControls col-xs-8 col-sm-9">
-									<div class="radio-box f-l">
-										<input type="radio" id="radio-3" name="demo-radio1">
-										<label for="radio-3">商家自审</label>
-									</div>
-									<div class="radio-box f-l">
-										<input type="radio" id="radio-4" name="demo-radio1">
-										<label for="radio-4">平台自动审核</label>
-									</div>
-								</div>
-							</div>
-							<div class="row cl">
-								<label class="form-label col-xs-4 col-sm-3">交易密码：</label>
-								<div class="formControls col-xs-2 col-sm-3">
-									<input type="password" class="input-text" autocomplete="off" placeholder="交易密码"></div>
-								<div class="formControls col-xs-3 col-sm-4">
-									<span class="onShow">请输入交易密码,默认为注册时的登录密码</span>
-								</div>
-							</div>
-							
-
-							<div class="row cl">
-								<div class="col-xs-2 col-sm-4 btnWrap">
-									<input class="btn radius btn-secondary btn-ti" type="submit" value="提交"></div>
-							</div>
-						</form>
-					</div>
-				</div>
-
-			</div>
-		</div>
-	</div>
-
+<!-- iframe嵌入 -->
+<iframe src="./修改任务审核模式-iframe.html"  frameborder="0" scrolling="no" id="external-frame" onload="setIframeHeight(this)" name="external-frame" class="taobaoIframe"></iframe>
+</div>
 </section>
 <footer class="footer mt-20">
-	<div class="container">
+<div class="container">
 
-		<p>
-			Copyright &copy;2013-2016
-			<br>
-			<a rel="nofollow" target="_blank" href="#">京ICP备15015336号-1</a>
-			<br>
-			未经允许，禁止转载、抄袭、镜像
-			<br>用心做站，做不一样的站</p>
-	</div>
+<p>
+	Copyright &copy;2013-2016
+	<br>
+	<a rel="nofollow" target="_blank" href="#">京ICP备15015336号-1</a>
+	<br>
+	未经允许，禁止转载、抄袭、镜像
+	<br>用心做站，做不一样的站</p>
+</div>
 </footer>
 <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=270863798&site=qq&menu=yes" id="QQ-link">
-	<img border="0" src="http://wpa.qq.com/pa?p=2:270863798:53" alt="点击这里给我发消息" title="点击这里给我发消息"/>
+<img border="0" src="http://wpa.qq.com/pa?p=2:270863798:53" alt="点击这里给我发消息" title="点击这里给我发消息"/>
 </a>
 <script type="text/javascript" src="lib/jquery/1.9.1/jquery.min.js"></script>
 <script type="text/javascript" src="lib/layer/2.1/layer.js"></script>
-<script type="text/javascript" src="lib/laypage/1.2/laypage.js"></script>
 <script type="text/javascript" src="lib/My97DatePicker/WdatePicker.js"></script>
-<script type="text/javascript" src="lib/icheck/jquery.icheck.min.js"></script>
-<script type="text/javascript" src="lib/bootstrap-Switch/bootstrapSwitch.js"></script>
-<script type="text/javascript" src="lib/Validform/5.3.2/Validform.min.js"></script>
-<script type="text/javascript" src="lib/Validform/5.3.2/passwordStrength-min.js"></script>
 <script type="text/javascript" src="lib/layer/layer.js"></script>
 <script type="text/javascript" src="static/h-ui/js/H-ui.js"></script>
-<script type="text/javascript" src="js/style.js"></script>
 <script type="text/javascript" src="js/page.js"></script>
+<script type="text/javascript" src="js/style.js"></script>
 <script>
-//var navigation = responsiveNav("Hui-navbar", {customToggle: ".nav-toggle"});
-
 $(function(){
-	$('.skin-minimal input').iCheck({
-		checkboxClass: 'icheckbox-blue',
-		radioClass: 'iradio-blue',
-		increaseArea: '20%'
-	});
-	$("#demoform").Validform({
-		tiptype:2
-	});
-	// 返回顶部 
-	$(function(){$(window).on("scroll",$backToTopFun);$backToTopFun();});
-	// 收缩
 	// 收缩
 	$('.open-btn').on('click',function(){
 		$(this).parent('.tiro-control').siblings('.panel').find('.showHide').slideToggle();
@@ -397,67 +224,11 @@ $(function(){
 			$(this).css('background-position','52px 11px');
 		}
 	});
-	
-    // layer.open({
-    //     type: 1,
-    //     area: ['600px', '360px'],
-    //     shadeClose: true, //点击遮罩关闭
-    //     title:'重点说明',
-    //     content: '\<\div style="padding:20px;">自定义内容\<\/div>'
-    // });
+
     $.Huitab("#tab_demo .tabBar span","#tab_demo .tabCon","current","click","0");
 });
-$(function(){
-	// 任务申诉
-	 $('.btn-answer').on('click',function(){
-            indexAgency=layer.open({
-                type:2,
-                area:['700px','650px'],
-                closeBtn:1,
-                shadeClose:true,
-                content:['./任务申诉(弹窗).html','no'],
-                title:'任务申诉',
-                btn:['确定','取消'],
-                yes:function(index){
-                    console.log('这里执行提交操作');
-                }
-            });  
-            return false;
-        });
-	 // 我要审核
-	 $('.btn-sure').on('click',function(){
-            indexAgency=layer.open({
-                type:2,
-                area:['700px','550px'],
-                closeBtn:1,
-                shadeClose:true,
-                content:['./我要审核(弹窗).html','no'],
-                title:'任务申诉',
-                btn:['确认刷手已付款','我要投诉，刷手虚假付款','取消'],
-                yes:function(index){
-                    console.log('这里执行提交操作');
-                }
-            });  
-            return false;
-        });
-	 // 查看已付款截图
-	 $('.btnBady').on('click',function(){
-            indexAgency=layer.open({
-                type:2,
-                area:['580px','600px'],
-                closeBtn:1,
-                shadeClose:true,
-                content:['./查看已付款订单截图(弹窗).html'],
-                title:'查看已付款订单截图',
-                yes:function(index){
-                    console.log('这里执行提交操作');
-                }
-            });  
-            return false;
-        });
-});
+
 
 </script>
 </body>
 </html>
-<!--H-ui前端框架提供前端技术支持 h-ui.net @2015-8-4 -->

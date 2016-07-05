@@ -1,0 +1,137 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="renderer" content="webkit|ie-comp|ie-stand">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+	<meta http-equiv="Cache-Control" content="no-siteapp" />
+	<!--[if lt IE 9]>
+	<script type="text/javascript" src="lib/html5.js"></script>
+	<script type="text/javascript" src="lib/respond.min.js"></script>
+	<script type="text/javascript" src="lib/PIE_IE678.js"></script>
+	<![endif]-->
+	<link rel="stylesheet" type="text/css" href="static/h-ui/css/H-ui.css" />
+	<link rel="stylesheet" type="text/css" href="lib/Hui-iconfont/1.0.7/iconfont.css" />
+	<link rel="stylesheet" type="text/css" href="css/style.css" />
+	<!--[if lt IE 9]>
+	<link href="static/h-ui/css/H-ui.ie.css" rel="stylesheet" type="text/css" />
+	<![endif]-->
+	<!--[if IE 6]>
+	<script type="text/javascript" src="lib/DD_belatedPNG_0.0.8a-min.js" ></script>
+	<script>DD_belatedPNG.fix('*');</script>
+	<![endif]-->
+	<title>标签管理</title>
+	<meta name="keywords" content="关键词,5个左右,单个8汉字以内">
+	<meta name="description" content="网站描述，字数尽量空制在80个汉字，160个字符以内！"></head>
+<body>
+	<div class="workContent ml20">
+	<h4>
+		<span class="title">标签管理</span>
+	</h4>
+	
+	<div class="workDoing mt20">
+		<div id="tab_demo" class="HuiTab">
+			<div class="tabBar cl">
+				<span>标签列表</span>
+			</div>
+			<div class="tabCon">
+				<div class="search-tab mt20 search-tab-mini">
+				<ul>
+					<li class="tab02">
+						<span class="tab-title" style="width: 90px;">关键词：</span>
+						<input type="text" placeholder="请输入关键词" class="input-text radius size-M">
+					
+						<input class="btn radius btn-secondary" type="button" value="查询"></li>
+						<li class="tab02">
+					
+						<input class="btn radius btn-secondary btn-addTips" type="button" value="+添加标签">
+					
+						</li>
+				</ul>
+			</div>
+				<div class="workTable mt30 appealTable">
+					<table class="table table-border table-bg">
+						<thead>
+							<tr>
+								<th>标签名</th>
+								<th>添加时间</th>
+								<th>排序</th>
+								<th>操作</th>
+
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>
+									<span>福建</span>
+
+								</td>
+								<td>
+									<span>2015-52-15 52:52:41</span>
+								</td>
+								<td>
+									<span>1</span>
+								</td>
+								<td>
+									<a href="#" class="btn btn-secondary radius">编辑</a>
+									<a href="#" class="btn btn-secondary radius">删除</a>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+
+			</div>
+			<div class="tabCon">内容二</div>
+		</div>
+		<div class="clearfix page-wrap"></div>
+	</div>
+
+</div>
+<script type="text/javascript" src="lib/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="lib/layer/2.1/layer.js"></script>
+<script type="text/javascript" src="lib/My97DatePicker/WdatePicker.js"></script>
+<script type="text/javascript" src="lib/layer/layer.js"></script>
+<script type="text/javascript" src="static/h-ui/js/H-ui.js"></script>
+<script type="text/javascript" src="js/page.js"></script>
+<script type="text/javascript" src="js/style.js"></script>
+<script>
+$(function(){
+	layer.config({
+	    extend: ['skin/layerSkinExtend.css'], //加载新皮肤
+	    skin: 'layer-ext-myskin' //一旦设定，所有弹层风格都采用此主题。
+	});
+	// 收缩
+	$('.open-btn').on('click',function(){
+		$(this).parent('.tiro-control').siblings('.panel').find('.showHide').slideToggle();
+		$(this).toggleClass('active');
+		if ($(this).hasClass('active')) {
+			$(this).text('展开');
+			// $(this).find('i').css('background-position','4px -28px')
+		}else{
+			$(this).text('收缩');
+			// $(this).find('i').css('background-position','4px 7px')
+		}
+	});
+	// 添加收货地址
+	$('.btn-addTips').on('click',function(){
+            indexAgency=top.layer.open({
+                type:2,
+                area:['600px','400px'],
+                closeBtn:1,
+                shadeClose:true,
+                content:['./添加标签(弹窗).html','no'],
+                title:'添加收货地址',
+                btn:['确定','取消'],
+                yes:function(index){
+                    console.log('这里执行提交操作');
+                }
+            });  
+        });
+  
+    $.Huitab("#tab_demo .tabBar span","#tab_demo .tabCon","current","click","0");
+});
+</script>
+</body>
+</html>
