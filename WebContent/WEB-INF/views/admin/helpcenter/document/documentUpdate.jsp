@@ -82,7 +82,7 @@
 				dataType : 'json',
 				success : function(result){
 					if(result.success){
-						window.location.href = '${basePath}admin/helpcenter/document/list.htm';
+						window.location.href = '${basePath}admin/helpcenter/document/documentList.htm';
 					}else{
 						$.messager.alert("提示", result.msg);
 					}
