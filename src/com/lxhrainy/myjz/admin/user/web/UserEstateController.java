@@ -47,7 +47,7 @@ public class UserEstateController extends BaseController {
 	
 	@RequestMapping("/datalist")
 	@ResponseBody
-	public JSONObject listdata(Integer rows, Integer page, UserInfoVO vo) {
+	public JSONObject listdata(UserInfoVO vo) {
 		JSONObject rj = new JSONObject();
 		List<UserInfo> list = userInfoService.getListByPage(vo);
 		rj.put("total", vo.getTotalCount());

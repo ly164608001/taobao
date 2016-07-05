@@ -1,6 +1,7 @@
 package com.lxhrainy.myjz.admin.goods.web;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
@@ -50,7 +51,7 @@ public class GoodsTypeController extends BaseController {
 	
 	@RequestMapping("/datalist")
 	@ResponseBody
-	public JSONObject listdata(Integer rows, Integer page, GoodsTypeVO vo) {
+	public JSONObject listdata(GoodsTypeVO vo) {
 		JSONObject rj = new JSONObject();
 		List<GoodsType> list = goodsTypeService.getListByPage(vo);
 		rj.put("total", vo.getTotalCount());
@@ -151,4 +152,20 @@ public class GoodsTypeController extends BaseController {
 		return rj;
 	}
 
+	/**
+	 * 获取类目列表
+	 */
+	@RequestMapping("/getlistbypid")
+	@ResponseBody
+	public JSONObject getlistbypid(Integer pid) {
+		JSONObject rj = new JSONObject();
+		List<GoodsType> list = new ArrayList<GoodsType>();
+		if(pid != null){
+			list = goodsTypeService.getListByPid(pid);
+		}
+		
+		rj.put("list", list);
+		return rj;
+	}
+	
 }

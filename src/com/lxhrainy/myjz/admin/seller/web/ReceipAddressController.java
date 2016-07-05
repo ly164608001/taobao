@@ -12,28 +12,28 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSONObject;
 import com.lxhrainy.core.common.controller.BaseController;
-import com.lxhrainy.myjz.admin.seller.model.Label;
-import com.lxhrainy.myjz.admin.seller.oe.LabelVO;
-import com.lxhrainy.myjz.admin.seller.service.ILabelService;
+import com.lxhrainy.myjz.admin.seller.model.ReceiptAddress;
+import com.lxhrainy.myjz.admin.seller.oe.ReceiptAddressVO;
+import com.lxhrainy.myjz.admin.seller.service.IReceiptAddressService;
 
-@RequestMapping("/admin/seller/label")
+@RequestMapping("/admin/seller/receipaddress")
 @Controller
-public class LabelController extends BaseController {
+public class ReceipAddressController extends BaseController {
 
 	@Autowired
-	ILabelService labelService;	
+	IReceiptAddressService addressService;	
 	
 	/***
 	 * 详情
 	 * @param
 	 */
-	@RequestMapping("/labelDetail")
+	@RequestMapping("/receipaddressDetail")
 	public ModelAndView detail(Integer id) {
 		if(id!=null){
-			mv.addObject("model", labelService.getById(id));
+			mv.addObject("model", addressService.getById(id));
 		}
 		
-		mv.setViewName("admin/seller/label/labelDetail");
+		mv.setViewName("admin/seller/receipaddress/receipaddressDetail");
 		return mv;
 	}
 	
@@ -41,17 +41,17 @@ public class LabelController extends BaseController {
 	 * 列表
 	 * @param
 	 */
-	@RequestMapping("/labelList")
+	@RequestMapping("/receipaddressList")
 	public ModelAndView list() {
-		mv.setViewName("admin/seller/label/labelList");
+		mv.setViewName("admin/seller/receipaddress/receipaddressList");
 		return mv;
 	}
 	
 	@RequestMapping("/datalist")
 	@ResponseBody
-	public JSONObject listdata(LabelVO vo) {
+	public JSONObject listdata(ReceiptAddressVO vo) {
 		JSONObject rj = new JSONObject();
-		List<Label> list = labelService.getListByPage(vo);
+		List<ReceiptAddress> list = addressService.getListByPage(vo);
 		rj.put("total", vo.getTotalCount());
 		rj.put("rows",list);
 		rj.put("vo",vo);
@@ -62,9 +62,9 @@ public class LabelController extends BaseController {
 	 * 新增
 	 * @param
 	 */
-	@RequestMapping("/labelAdd")
+	@RequestMapping("/receipaddressAdd")
 	public ModelAndView add(Integer pid) {
-		mv.setViewName("admin/seller/label/labelAdd");
+		mv.setViewName("admin/seller/receipaddress/receipaddressAdd");
 		return mv;
 	}
 	
@@ -74,16 +74,16 @@ public class LabelController extends BaseController {
 	 */
 	@RequestMapping("/addsave")
 	@ResponseBody
-	public JSONObject addsave(Label model) {
+	public JSONObject addsave(ReceiptAddress model) {
 		JSONObject rj = new JSONObject();
 		if(model == null || StringUtils.isEmpty(model.getName())
-				|| model.getSort() == null){
+				){
 			rj.put("success", false);
 			rj.put("msg", "保存失败");
 		}else{
 			model.setCreatetime(new Date());
 			model.setUser(this.getCurrentUser());
-			labelService.save(model);
+			addressService.save(model);
 			rj.put("success", true);
 			rj.put("msg", "保存成功");
 		}
@@ -94,13 +94,13 @@ public class LabelController extends BaseController {
 	 * 修改
 	 * @param
 	 */
-	@RequestMapping("/labelUpdate")
+	@RequestMapping("/receipaddressUpdate")
 	public ModelAndView update(Integer id) {
 		if(id != null){
-			mv.addObject("model", labelService.getById(id));
+			mv.addObject("model", addressService.getById(id));
 		}
 		
-		mv.setViewName("admin/seller/label/labelUpdate");
+		mv.setViewName("admin/seller/receipaddress/receipaddressUpdate");
 		return mv;
 	}
 	
@@ -110,19 +110,17 @@ public class LabelController extends BaseController {
 	 */
 	@RequestMapping("/updatesave")
 	@ResponseBody
-	public JSONObject updatesave(Label model) {
+	public JSONObject updatesave(ReceiptAddress model) {
 		JSONObject rj = new JSONObject();
 		if(model == null || StringUtils.isEmpty(model.getName())
-				|| model.getSort() == null){
+				){
 			rj.put("success", false);
 			rj.put("msg", "更新失败");
 		}
 		else{
-			Label oldInfo = labelService.getById(model.getId());
+			ReceiptAddress oldInfo = addressService.getById(model.getId());
 			oldInfo.setName(model.getName());
-			oldInfo.setSort(model.getSort());
-			oldInfo.setType(model.getType());
-			labelService.update(oldInfo);
+			addressService.update(oldInfo);
 			rj.put("success", true);
 			rj.put("msg", "更新成功");
 		}
@@ -133,11 +131,11 @@ public class LabelController extends BaseController {
 	 * 删除
 	 * @param ID
 	 */
-	@RequestMapping("/labelDelete")
+	@RequestMapping("/receipaddressDelete")
 	@ResponseBody
 	public JSONObject delete(Integer id) {
 		JSONObject rj = new JSONObject();
-		labelService.deleteById(id);
+		addressService.deleteById(id);
 		rj.put("success", true);
 		rj.put("msg", "删除成功");
 		return rj;

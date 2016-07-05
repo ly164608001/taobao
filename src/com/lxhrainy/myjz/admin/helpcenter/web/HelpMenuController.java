@@ -51,7 +51,7 @@ public class HelpMenuController extends BaseController {
 	
 	@RequestMapping("/datalist")
 	@ResponseBody
-	public JSONObject listdata(Integer rows, Integer page, HelpMenuVO vo) {
+	public JSONObject listdata(HelpMenuVO vo) {
 		JSONObject rj = new JSONObject();
 		List<HelpMenu> list = helpMenuService.getListByPage(vo);
 		rj.put("total", vo.getTotalCount());

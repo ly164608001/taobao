@@ -12,12 +12,15 @@
 		T.status AS "status",
 		T.userid AS "user.id",
 		T.createtime AS "createtime",
+		T.goodstypeid AS "goodsType.id",
 		
-		U.username AS "user.username"
+		U.username AS "user.username",
+		GT.typename AS "goodsType.typename"
 	</sql>
 	
 	<sql id="sellerShopJoins">
 		LEFT JOIN user_info U ON U.id = T.userid 
+		LEFT JOIN goods_type GT ON GT.id = T.goodstypeid 
 	</sql>
     
     <sql id="where">
@@ -76,7 +79,8 @@
 			alltasknum,
 			status,
 			userid,
-			createtime
+			createtime,
+			goodstypeid
 		) VALUES (
 			#{id},
 			#{name},
@@ -86,7 +90,8 @@
 			#{alltasknum},
 			#{status},
 			#{user.id},
-			#{createtime}
+			#{createtime},
+			#{goodsType.id}
 		)
 	</insert>
 	
@@ -99,7 +104,8 @@
 			alltasknum = #{alltasknum},
 			status = #{status},
 			userid = #{user.id},
-			createtime = #{createtime}
+			createtime = #{createtime},
+			goodstypeid = #{goodsType.id}
 		WHERE id = #{id}
 	</update>
 	

@@ -62,7 +62,7 @@ public class HelpDocumentController extends BaseController {
 	
 	@RequestMapping("/datalist")
 	@ResponseBody
-	public JSONObject listdata(Integer rows, Integer page, HelpDocumentVO vo) {
+	public JSONObject listdata(HelpDocumentVO vo) {
 		JSONObject rj = new JSONObject();
 		List<HelpDocument> list = helpDocumentService.getListByPage(vo);
 		rj.put("total", vo.getTotalCount());

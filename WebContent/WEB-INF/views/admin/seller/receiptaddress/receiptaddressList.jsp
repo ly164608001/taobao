@@ -6,28 +6,33 @@
 <link rel="stylesheet" type="text/css" href="${basePath}static/js/easyui/themes/bootstrap/easyui.css"/>
 <link rel="stylesheet" type="text/css" href="${basePath}static/js/easyui/themes/icon.css"/>
 <script type="text/javascript" src="${basePath}static/js/admin/global.js"></script>
+<script type="text/javascript" src="${basePath}static/js/select.js"></script>
 
 <script>
 	
 	function formatteradminuserbutton(value,row) {
-		return  '<a href="javascript:void(0)" class="easyui-linkbutton" onclick="openDialog(\'编辑\',\'${basePath}admin/seller/label/labelUpdate.htm?id='+row.id+'\',300,300)">编辑</a>&nbsp;'
-			 + '<a href="javascript:void(0)" class="easyui-linkbutton" onclick="deleterow(\'${basePath}admin/seller/label/labelDelete.htm?id='+row.id+'\')">删除</a>';
+		var oprBtn = '<a href="javascript:void(0)" class="easyui-linkbutton" onclick="openDialog(\'编辑\',\'${basePath}admin/seller/receiptaddress/receiptaddressUpdate.htm?id='+row.id+'\',420,320)">编辑</a>&nbsp;'
+		 				+ '<a href="javascript:void(0)" class="easyui-linkbutton" onclick="deleterow(\'${basePath}admin/seller/receiptaddress/receiptaddressDelete.htm?id='+row.id+'\')">删除</a>&nbsp;';
+		if(row.status == 0){
+			oprBtn += '<a href="javascript:void(0)" class="easyui-linkbutton" onclick="activate('+row.id+')">激活</a>&nbsp;';
+		}
+		return  oprBtn;
 	}
 	
-	function forrmaterType(value,row){
-		return (value == 1 ? '收货地址':'好评内容');
+	function forrmaterStatus(value,row){
+		return (value == 1 ? '已使用':'未使用');
 	}
 	
 </script>
 </head>
 <body>
-	<div class="easyui-panel" title="标签列表"
+	<div class="easyui-panel" title="收获地址列表"
 		data-options="striped: true,collapsible:true,iconCls:'icon-search'">
 		<form id="dgquery">
 			<table>
 				<tr>
-					<td>标签名</td>
-					<td><input name="model.name" value="" class="easyui-validatebox textbox" value="${vo.model.name}"></td>
+					<td>关键字</td>
+					<td><input name="model.name" class="easyui-validatebox textbox" value="${vo.keyword}"></td>
 					<td></td>
 					<td></td>
 					<td></td>
@@ -42,10 +47,12 @@
 		<thead>
 			<tr>
 				<th field="id" width="40">id</th>
-				<th field="name" width="80">标签名称</th>
-				<th field="user.username" width="120">用户</th>
-				<th field="type" formatter="forrmaterType" width="100">类型</th>
-				<th field="sort" width="30">排序</th>
+				<th field="label.name" width="80">标签名</th>
+				<th field="name" width="80">姓名</th>
+				<th field="phone" width="80">电话</th>
+				<th field="address" width="120">地址</th>
+				<th field="status" forrmaterStatus width="80">状态</th>
+				<th field="createtime" width="100">添加时间</th>
 				<th field="isadmin" width="180" formatter="formatteradminuserbutton">操作</th>
 			</tr>
 		</thead>
@@ -56,7 +63,7 @@
 	            text: '添加',  
 	            iconCls: 'icon-add',  
 	            handler: function() {  
-	                openDialog("添加","${basePath}admin/seller/label/labelAdd.htm",300,270);  
+	                openDialog("添加","${basePath}admin/seller/receiptaddress/receiptaddressAdd.htm",380,280);  
 	            }  
 	        }] ;
 	</script>

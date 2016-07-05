@@ -50,7 +50,7 @@ public class ShopController extends BaseController {
 	
 	@RequestMapping("/datalist")
 	@ResponseBody
-	public JSONObject listdata(Integer rows, Integer page, ShopVO vo) {
+	public JSONObject listdata(ShopVO vo) {
 		JSONObject rj = new JSONObject();
 		List<Shop> list = shopService.getListByPage(vo);
 		rj.put("total", vo.getTotalCount());

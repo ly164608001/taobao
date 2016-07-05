@@ -4,6 +4,7 @@ import java.util.Date;
 
 import com.lxhrainy.core.common.model.BaseModel;
 import com.lxhrainy.core.sys.model.UserInfo;
+import com.lxhrainy.myjz.admin.goods.model.GoodsType;
 
 /**
  * 店铺管理Entity
@@ -22,6 +23,15 @@ public class Shop extends BaseModel {
 	private Integer status; // 状态 (是否启用)
 	private UserInfo user; // 用户ID
 	private Date createtime; // 创建时间
+	private GoodsType goodsType; // 店铺品类(商品类目)
+
+	public GoodsType getGoodsType() {
+		return goodsType;
+	}
+
+	public void setGoodsType(GoodsType goodsType) {
+		this.goodsType = goodsType;
+	}
 
 	public String getName() {
 		return name;

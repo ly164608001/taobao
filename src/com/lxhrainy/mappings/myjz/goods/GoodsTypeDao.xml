@@ -5,12 +5,11 @@
 	<sql id="goodsTypeColumns">
 		T.id AS "id",
 		T.typename AS "typename",
-		T.pid AS "pid",
+		T.pid AS "parent.id",
 		T.status AS "status",
 		T.sort AS "sort",
 		T.deleted AS "deleted",
 		
-		P.id AS "parent.id",
 		P.typename AS "parent.typename"
 	</sql>
 	
@@ -38,6 +37,15 @@
 		FROM  goods_type T
 		<include refid="goodsTypeJoins"/>
 		WHERE T.id = #{id}
+	</select>
+	
+	<select id="getListByPid" resultType="GoodsType">
+		SELECT 
+			<include refid="goodsTypeColumns"/>
+		FROM  goods_type T
+		<include refid="goodsTypeJoins"/>
+		WHERE T.pid = #{pid}
+			AND T.deleted = 0
 	</select>
 	
 	<select id="findListByPage" resultType="GoodsType">

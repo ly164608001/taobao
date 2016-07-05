@@ -6,11 +6,12 @@
 <link rel="stylesheet" type="text/css" href="${basePath}static/js/easyui/themes/bootstrap/easyui.css"/>
 <link rel="stylesheet" type="text/css" href="${basePath}static/js/easyui/themes/icon.css"/>
 <script type="text/javascript" src="${basePath}static/js/admin/global.js"></script>
+<script type="text/javascript" src="${basePath}static/js/select.js"></script>
 
 <script>
 	
 	function formatteradminuserbutton(value,row) {
-		var oprBtn = '<a href="javascript:void(0)" class="easyui-linkbutton" onclick="openDialog(\'编辑\',\'${basePath}admin/seller/shop/shopUpdate.htm?id='+row.id+'\',300,300)">编辑</a>&nbsp;'
+		var oprBtn = '<a href="javascript:void(0)" class="easyui-linkbutton" onclick="openDialog(\'编辑\',\'${basePath}admin/seller/shop/shopUpdate.htm?id='+row.id+'\',420,320)">编辑</a>&nbsp;'
 		 				+ '<a href="javascript:void(0)" class="easyui-linkbutton" onclick="deleterow(\'${basePath}admin/seller/shop/shopDelete.htm?id='+row.id+'\')">删除</a>&nbsp;';
 		if(row.status == 0){
 			oprBtn += '<a href="javascript:void(0)" class="easyui-linkbutton" onclick="activate('+row.id+')">激活</a>&nbsp;';
@@ -69,11 +70,12 @@
 			<tr>
 				<th field="id" width="40">id</th>
 				<th field="name" width="120">店铺名称</th>
+				<th field="type" formatter="forrmaterType" width="80">类型</th>
+				<th field="goodsType.typename" width="80">品类</th>
 				<th field="manager" width="100">掌柜号</th>
 				<th field="user.username" width="100">用户</th>
-				<th field="type" formatter="forrmaterType" width="80">类型</th>
 				<th field="alltasknum" width="80">总发布任务</th>
-				<th field="status" formatter="forrmaterStatus" width="80">状态</th>
+				<th field="status" formatter="forrmaterStatus" width="60">状态</th>
 				<th field="isadmin" width="180" formatter="formatteradminuserbutton">操作</th>
 			</tr>
 		</thead>
@@ -84,7 +86,7 @@
 	            text: '添加',  
 	            iconCls: 'icon-add',  
 	            handler: function() {  
-	                openDialog("添加","${basePath}admin/seller/shop/shopAdd.htm",300,270);  
+	                openDialog("添加","${basePath}admin/seller/shop/shopAdd.htm",380,280);  
 	            }  
 	        }] ;
 	</script>
