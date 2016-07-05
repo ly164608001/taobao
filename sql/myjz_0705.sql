@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50096
 File Encoding         : 65001
 
-Date: 2016-07-05 23:45:20
+Date: 2016-07-05 23:59:00
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -126,21 +126,19 @@ CREATE TABLE `buyer_account_vpn_info` (
 DROP TABLE IF EXISTS `goods_type`;
 CREATE TABLE `goods_type` (
   `id` int(11) NOT NULL auto_increment,
-  `typename` varchar(128) character set utf8 default NULL COMMENT '类型名称',
+  `typename` varchar(128) default NULL COMMENT '类型名称',
   `pid` int(11) default NULL COMMENT '上级ID',
   `status` int(1) default NULL COMMENT '状态(隐藏/显示)',
   `sort` int(11) default NULL COMMENT '排序',
   `deleted` int(1) default '0' COMMENT '删除标识',
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='商品类目';
 
 -- ----------------------------
 -- Records of goods_type
 -- ----------------------------
 INSERT INTO `goods_type` VALUES ('1', '服饰鞋帽', '-1', '1', '1', '0');
 INSERT INTO `goods_type` VALUES ('2', '家用电器', '-1', '1', '2', '0');
-INSERT INTO `goods_type` VALUES ('3', '1', '-1', '1', '1', '1');
-INSERT INTO `goods_type` VALUES ('4', '还有什么', '-1', '1', '23', '1');
 
 -- ----------------------------
 -- Table structure for `help_document`
@@ -156,14 +154,11 @@ CREATE TABLE `help_document` (
   `status` int(1) default NULL COMMENT '状态 (显示隐藏)',
   `content` text COMMENT '文档内容',
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COMMENT='帮助文档';
 
 -- ----------------------------
 -- Records of help_document
 -- ----------------------------
-INSERT INTO `help_document` VALUES ('1', '测试文档', '5', null, '0', '1', '1', '<strong>打发</strong>');
-INSERT INTO `help_document` VALUES ('7', '测试', '1', null, '0', '22', null, '<p>\r\n	发达发达<img src=\"http://localhost:8080/core/static/js/kindeditor/plugins/emoticons/images/0.gif\" border=\"0\" alt=\"\" />非发放\r\n</p>\r\n<p>\r\n	<img src=\"/core/upload/image/2016/07/04/20160704213928_885.png\" alt=\"\" /> \r\n</p>');
-INSERT INTO `help_document` VALUES ('8', 'fff222', '1', null, '0', '22', null, 'gaga');
 
 -- ----------------------------
 -- Table structure for `help_menu`
@@ -173,12 +168,12 @@ CREATE TABLE `help_menu` (
   `id` int(11) NOT NULL auto_increment COMMENT '唯一标示',
   `pid` int(11) default NULL COMMENT '上级id',
   `type` int(1) default NULL COMMENT '文档类型 ',
-  `name` varchar(128) character set utf8 default NULL COMMENT '文档名称',
+  `name` varchar(128) default NULL COMMENT '文档名称',
   `sort` int(11) default NULL COMMENT '排序',
   `deleted` int(1) default '0' COMMENT '删除标识',
-  `url` varchar(255) character set utf8 default NULL COMMENT '连接',
+  `url` varchar(255) default NULL COMMENT '连接',
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1 COMMENT='帮助菜单';
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COMMENT='帮助菜单';
 
 -- ----------------------------
 -- Records of help_menu
@@ -188,7 +183,6 @@ INSERT INTO `help_menu` VALUES ('2', '-1', '2', '卖家新手上路', '2', '0', 
 INSERT INTO `help_menu` VALUES ('4', '2', '2', '注册', '1', '0', null);
 INSERT INTO `help_menu` VALUES ('5', '2', '2', '登录', '2', '0', null);
 INSERT INTO `help_menu` VALUES ('6', '2', '2', '平台名词', '3', '0', '');
-INSERT INTO `help_menu` VALUES ('7', '6', '2', '测试多级', null, '1', '');
 INSERT INTO `help_menu` VALUES ('8', '-1', '1', '注册', '4', '0', '');
 
 -- ----------------------------
