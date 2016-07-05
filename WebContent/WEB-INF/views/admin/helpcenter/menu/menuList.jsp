@@ -10,23 +10,29 @@
 <script>
 	
 	function formatteradminuserbutton(value,row) {
-		return  '<a href="javascript:void(0)" class="easyui-linkbutton" onclick="openDialog(\'编辑\',\'${basePath}admin/seller/label/update.htm?id='+row.id+'\',300,300)">编辑</a>&nbsp;'
-			 + '<a href="javascript:void(0)" class="easyui-linkbutton" onclick="deleterow(\'${basePath}admin/seller/label/delete.htm?id='+row.id+'\')">删除</a>';
+		return  '<a href="javascript:void(0)" class="easyui-linkbutton" onclick="openDialog(\'编辑\',\'${basePath}admin/helpcenter/menu/menuUpdate.htm?id='+row.id+'\',300,300)">编辑</a>&nbsp;'
+			 + '<a href="javascript:void(0)" class="easyui-linkbutton" onclick="openDialog(\'添加\',\'${basePath}admin/helpcenter/menu/menuAdd.htm?pid='+row.id+'\',300,270)">添加子菜单</a>&nbsp;'
+			 + '<a href="javascript:void(0)" class="easyui-linkbutton" onclick="deleterow(\'${basePath}admin/helpcenter/menu/menuDelete.htm?id='+row.id+'\')">删除</a>';
 	}
 	
 	function forrmaterType(value,row){
-		return (value == 1 ? '收货地址':'好评内容');
+		return (value == 1 ? '买家中心':'卖家中心');
+	}
+	
+	function forrmaterPid(value,row){
+		return (value == -1 ? '': value);
 	}
 	
 </script>
 </head>
 <body>
-	<div class="easyui-panel" title="标签列表"
+	<div class="easyui-panel" title="帮助菜单列表"
 		data-options="striped: true,collapsible:true,iconCls:'icon-search'">
 		<form id="dgquery">
+			<input type="hidden" name="model.deleted" value="0"/>
 			<table>
 				<tr>
-					<td>标签名</td>
+					<td>菜单名</td>
 					<td><input name="model.name" class="easyui-validatebox textbox" value="${vo.model.name}"></td>
 					<td></td>
 					<td></td>
@@ -42,8 +48,8 @@
 		<thead>
 			<tr>
 				<th field="id" width="40">id</th>
-				<th field="name" width="80">标签名称</th>
-				<th field="user.username" width="120">用户</th>
+				<th field="parent.id" width="40" formatter="forrmaterPid">父id</th>
+				<th field="name" width="120">菜单名称</th>
 				<th field="type" formatter="forrmaterType" width="100">类型</th>
 				<th field="sort" width="30">排序</th>
 				<th field="isadmin" width="180" formatter="formatteradminuserbutton">操作</th>
@@ -56,7 +62,7 @@
 	            text: '添加',  
 	            iconCls: 'icon-add',  
 	            handler: function() {  
-	                openDialog("添加","${basePath}admin/seller/label/add.htm",300,270);  
+	                openDialog("添加","${basePath}admin/helpcenter/menu/menuAdd.htm",300,270);  
 	            }  
 	        }] ;
 	</script>

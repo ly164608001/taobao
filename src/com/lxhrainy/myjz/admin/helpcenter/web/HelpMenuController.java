@@ -29,13 +29,13 @@ public class HelpMenuController extends BaseController {
 	 * 详情
 	 * @param
 	 */
-	@RequestMapping("/view")
+	@RequestMapping("/menuDetail")
 	public ModelAndView detail(Integer id) {
 		if(id!=null){
 			mv.addObject("model", helpMenuService.getById(id));
 		}
 		
-		mv.setViewName("admin/helpcenter/menu/view");
+		mv.setViewName("admin/helpcenter/menu/menuDetail");
 		return mv;
 	}
 	
@@ -43,9 +43,9 @@ public class HelpMenuController extends BaseController {
 	 * 列表
 	 * @param
 	 */
-	@RequestMapping("/list")
+	@RequestMapping("/menuList")
 	public ModelAndView list() {
-		mv.setViewName("admin/helpcenter/menu/list");
+		mv.setViewName("admin/helpcenter/menu/menuList");
 		return mv;
 	}
 	
@@ -64,7 +64,7 @@ public class HelpMenuController extends BaseController {
 	 * 新增
 	 * @param
 	 */
-	@RequestMapping("/add")
+	@RequestMapping("/menuAdd")
 	public ModelAndView add(Integer pid) {
 		HelpMenu parent = null;
 		if(pid == null){
@@ -76,7 +76,7 @@ public class HelpMenuController extends BaseController {
 		}
 		
 		mv.addObject("parent", parent);
-		mv.setViewName("admin/helpcenter/menu/add");
+		mv.setViewName("admin/helpcenter/menu/menuAdd");
 		return mv;
 	}
 	
@@ -105,13 +105,13 @@ public class HelpMenuController extends BaseController {
 	 * 修改
 	 * @param
 	 */
-	@RequestMapping("/update")
+	@RequestMapping("/menuUpdate")
 	public ModelAndView update(Integer id) {
 		if(id != null){
 			mv.addObject("model", helpMenuService.getById(id));
 		}
 		
-		mv.setViewName("admin/helpcenter/menu/update");
+		mv.setViewName("admin/helpcenter/menu/menuUpdate");
 		return mv;
 	}
 	
@@ -142,7 +142,7 @@ public class HelpMenuController extends BaseController {
 	 * 删除
 	 * @param ID
 	 */
-	@RequestMapping("/delete")
+	@RequestMapping("/menuDelete")
 	@ResponseBody
 	public JSONObject delete(Integer id) {
 		JSONObject rj = new JSONObject();

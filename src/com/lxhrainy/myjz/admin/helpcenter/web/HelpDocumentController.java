@@ -37,13 +37,13 @@ public class HelpDocumentController extends BaseController {
 	 * 详情
 	 * @param
 	 */
-	@RequestMapping("/view")
+	@RequestMapping("/documentDetail")
 	public ModelAndView detail(Integer id) {
 		if(id!=null){
 			mv.addObject("model", helpDocumentService.getById(id));
 		}
 		
-		mv.setViewName("admin/helpcenter/document/view");
+		mv.setViewName("admin/helpcenter/document/documentDetail");
 		return mv;
 	}
 	
@@ -51,12 +51,12 @@ public class HelpDocumentController extends BaseController {
 	 * 列表
 	 * @param
 	 */
-	@RequestMapping("/list")
+	@RequestMapping("/documentList")
 	public ModelAndView list() {
 		List<HelpMenu> list = menuService.getListByPid(Global.ROOT_HELPMENU_ID);
 		
 		mv.addObject("list", list);
-		mv.setViewName("admin/helpcenter/document/list");
+		mv.setViewName("admin/helpcenter/document/documentList");
 		return mv;
 	}
 	
@@ -75,9 +75,9 @@ public class HelpDocumentController extends BaseController {
 	 * 新增
 	 * @param
 	 */
-	@RequestMapping("/add")
+	@RequestMapping("/documentAdd")
 	public ModelAndView add(Integer pid) {
-		mv.setViewName("admin/helpcenter/document/add");
+		mv.setViewName("admin/helpcenter/document/documentAdd");
 		return mv;
 	}
 	
@@ -107,7 +107,7 @@ public class HelpDocumentController extends BaseController {
 	 * 修改
 	 * @param
 	 */
-	@RequestMapping("/update")
+	@RequestMapping("/documentUpdate")
 	public ModelAndView update(Integer id) {
 		if(id != null){
 			HelpDocument model = helpDocumentService.getById(id);
@@ -117,7 +117,7 @@ public class HelpDocumentController extends BaseController {
 			}
 		}
 		
-		mv.setViewName("admin/helpcenter/document/update");
+		mv.setViewName("admin/helpcenter/document/documentUpdate");
 		return mv;
 	}
 	
@@ -151,7 +151,7 @@ public class HelpDocumentController extends BaseController {
 	 * 删除
 	 * @param ID
 	 */
-	@RequestMapping("/delete")
+	@RequestMapping("/documentDelete")
 	@ResponseBody
 	public JSONObject delete(Integer id) {
 		JSONObject rj = new JSONObject();

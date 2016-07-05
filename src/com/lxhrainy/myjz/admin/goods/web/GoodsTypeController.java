@@ -28,13 +28,13 @@ public class GoodsTypeController extends BaseController {
 	 * 详情
 	 * @param
 	 */
-	@RequestMapping("/view")
+	@RequestMapping("/typeDetail")
 	public ModelAndView detail(Integer id) {
 		if(id!=null){
 			mv.addObject("model", goodsTypeService.getById(id));
 		}
 		
-		mv.setViewName("admin/goods/type/view");
+		mv.setViewName("admin/goods/type/typeDetail");
 		return mv;
 	}
 	
@@ -42,9 +42,9 @@ public class GoodsTypeController extends BaseController {
 	 * 列表
 	 * @param
 	 */
-	@RequestMapping("/list")
+	@RequestMapping("/typeList")
 	public ModelAndView list() {
-		mv.setViewName("admin/goods/type/list");
+		mv.setViewName("admin/goods/type/typeList");
 		return mv;
 	}
 	
@@ -63,7 +63,7 @@ public class GoodsTypeController extends BaseController {
 	 * 新增
 	 * @param
 	 */
-	@RequestMapping("/add")
+	@RequestMapping("/typeAdd")
 	public ModelAndView add(Integer pid) {
 		GoodsType parent = null;
 		if(pid == null){
@@ -75,7 +75,7 @@ public class GoodsTypeController extends BaseController {
 		}
 		
 		mv.addObject("parent", parent);
-		mv.setViewName("admin/goods/type/add");
+		mv.setViewName("admin/goods/type/typeAdd");
 		return mv;
 	}
 	
@@ -104,13 +104,13 @@ public class GoodsTypeController extends BaseController {
 	 * 修改
 	 * @param
 	 */
-	@RequestMapping("/update")
+	@RequestMapping("/typeUpdate")
 	public ModelAndView update(Integer id) {
 		if(id != null){
 			mv.addObject("model", goodsTypeService.getById(id));
 		}
 		
-		mv.setViewName("admin/goods/type/update");
+		mv.setViewName("admin/goods/type/typeUpdate");
 		return mv;
 	}
 	
@@ -141,7 +141,7 @@ public class GoodsTypeController extends BaseController {
 	 * 删除
 	 * @param ID
 	 */
-	@RequestMapping("/delete")
+	@RequestMapping("/typeDelete")
 	@ResponseBody
 	public JSONObject delete(Integer id) {
 		JSONObject rj = new JSONObject();

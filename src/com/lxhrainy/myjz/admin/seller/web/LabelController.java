@@ -27,13 +27,13 @@ public class LabelController extends BaseController {
 	 * 详情
 	 * @param
 	 */
-	@RequestMapping("/view")
+	@RequestMapping("/labelDetail")
 	public ModelAndView detail(Integer id) {
 		if(id!=null){
 			mv.addObject("model", labelService.getById(id));
 		}
 		
-		mv.setViewName("admin/seller/label/view");
+		mv.setViewName("admin/seller/label/labelDetail");
 		return mv;
 	}
 	
@@ -41,9 +41,9 @@ public class LabelController extends BaseController {
 	 * 列表
 	 * @param
 	 */
-	@RequestMapping("/list")
+	@RequestMapping("/labelList")
 	public ModelAndView list() {
-		mv.setViewName("admin/seller/label/list");
+		mv.setViewName("admin/seller/label/labelList");
 		return mv;
 	}
 	
@@ -62,9 +62,9 @@ public class LabelController extends BaseController {
 	 * 新增
 	 * @param
 	 */
-	@RequestMapping("/add")
+	@RequestMapping("/labelAdd")
 	public ModelAndView add(Integer pid) {
-		mv.setViewName("admin/seller/label/add");
+		mv.setViewName("admin/seller/label/labelAdd");
 		return mv;
 	}
 	
@@ -94,13 +94,13 @@ public class LabelController extends BaseController {
 	 * 修改
 	 * @param
 	 */
-	@RequestMapping("/update")
+	@RequestMapping("/labelUpdate")
 	public ModelAndView update(Integer id) {
 		if(id != null){
 			mv.addObject("model", labelService.getById(id));
 		}
 		
-		mv.setViewName("admin/seller/label/update");
+		mv.setViewName("admin/seller/label/labelUpdate");
 		return mv;
 	}
 	
@@ -133,7 +133,7 @@ public class LabelController extends BaseController {
 	 * 删除
 	 * @param ID
 	 */
-	@RequestMapping("/delete")
+	@RequestMapping("/labelDelete")
 	@ResponseBody
 	public JSONObject delete(Integer id) {
 		JSONObject rj = new JSONObject();

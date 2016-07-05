@@ -28,13 +28,13 @@ public class ShopController extends BaseController {
 	 * 详情
 	 * @param
 	 */
-	@RequestMapping("/view")
+	@RequestMapping("/shopDetail")
 	public ModelAndView detail(Integer id) {
 		if(id!=null){
 			mv.addObject("model", shopService.getById(id));
 		}
 		
-		mv.setViewName("admin/seller/shop/view");
+		mv.setViewName("admin/seller/shop/shopDetail");
 		return mv;
 	}
 	
@@ -42,9 +42,9 @@ public class ShopController extends BaseController {
 	 * 列表
 	 * @param
 	 */
-	@RequestMapping("/list")
+	@RequestMapping("/shopList")
 	public ModelAndView list() {
-		mv.setViewName("admin/seller/shop/list");
+		mv.setViewName("admin/seller/shop/shopList");
 		return mv;
 	}
 	
@@ -63,9 +63,9 @@ public class ShopController extends BaseController {
 	 * 新增
 	 * @param
 	 */
-	@RequestMapping("/add")
+	@RequestMapping("/shopAdd")
 	public ModelAndView add(Integer pid) {
-		mv.setViewName("admin/seller/shop/add");
+		mv.setViewName("admin/seller/shop/shopAdd");
 		return mv;
 	}
 	
@@ -104,13 +104,13 @@ public class ShopController extends BaseController {
 	 * 修改
 	 * @param
 	 */
-	@RequestMapping("/update")
+	@RequestMapping("/shopUpdate")
 	public ModelAndView update(Integer id) {
 		if(id != null){
 			mv.addObject("model", shopService.getById(id));
 		}
 		
-		mv.setViewName("admin/seller/shop/update");
+		mv.setViewName("admin/seller/shop/shopUpdate");
 		return mv;
 	}
 	
@@ -156,7 +156,7 @@ public class ShopController extends BaseController {
 	 * 删除
 	 * @param ID
 	 */
-	@RequestMapping("/delete")
+	@RequestMapping("/shopDelete")
 	@ResponseBody
 	public JSONObject delete(Integer id) {
 		JSONObject rj = new JSONObject();
@@ -167,7 +167,7 @@ public class ShopController extends BaseController {
 	}
 	
 	/***
-	 * 删除
+	 * 激活
 	 * @param ID
 	 */
 	@RequestMapping("/activate")

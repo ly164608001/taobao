@@ -35,8 +35,8 @@
 	<script>
 		
 		function formatteradminuserbutton(value,row) {
-			return '<a href="javascript:void(0)" class="easyui-linkbutton" onclick="openDialog(\'编辑\',\'${basePath}admin/helpcenter/document/update.htm?id='+row.id+'\',760,540)">编辑</a>&nbsp;'
-				 + '<a href="javascript:void(0)" class="easyui-linkbutton" onclick="deleterow(\'${basePath}admin/helpcenter/document/delete.htm?id='+row.id+'\')">删除</a>';
+			return '<a href="javascript:void(0)" class="easyui-linkbutton" onclick="openDialog(\'编辑\',\'${basePath}admin/helpcenter/document/documentUpdate.htm?id='+row.id+'\',760,540)">编辑</a>&nbsp;'
+				 + '<a href="javascript:void(0)" class="easyui-linkbutton" onclick="deleterow(\'${basePath}admin/helpcenter/document/documentDelete.htm?id='+row.id+'\')">删除</a>';
 		}
 		
 	</script>
@@ -77,7 +77,7 @@
 	            text: '添加',  
 	            iconCls: 'icon-add',  
 	            handler: function() {  
-	                openDialog("添加","${basePath}admin/helpcenter/document/add.htm",720,500);  
+	                openDialog("添加","${basePath}admin/helpcenter/document/documentAdd.htm",720,500);  
 	            }  
 	        }] ;
 	</script>

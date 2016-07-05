@@ -10,26 +10,24 @@
 <script>
 	
 	function formatteradminuserbutton(value,row) {
-		return  '<a href="javascript:void(0)" class="easyui-linkbutton" onclick="openDialog(\'编辑\',\'${basePath}admin/goods/type/update.htm?id='+row.id+'\',300,300)">编辑</a>&nbsp;'
-			 + '<a href="javascript:void(0)" class="easyui-linkbutton" onclick="openDialog(\'添加\',\'${basePath}admin/goods/type/add.htm?pid='+row.id+'\',300,270)">添加子菜单</a>&nbsp;'
-			 + '<a href="javascript:void(0)" class="easyui-linkbutton" onclick="deleterow(\'${basePath}admin/goods/type/delete.htm?id='+row.id+'\')">删除</a>';
+		return  '<a href="javascript:void(0)" class="easyui-linkbutton" onclick="openDialog(\'编辑\',\'${basePath}admin/seller/label/labelUpdate.htm?id='+row.id+'\',300,300)">编辑</a>&nbsp;'
+			 + '<a href="javascript:void(0)" class="easyui-linkbutton" onclick="deleterow(\'${basePath}admin/seller/label/labelDelete.htm?id='+row.id+'\')">删除</a>';
 	}
 	
-	function forrmaterStatus(value,row){
-		return (value == 1 ? '显示':'隐藏');
+	function forrmaterType(value,row){
+		return (value == 1 ? '收货地址':'好评内容');
 	}
 	
 </script>
 </head>
 <body>
-	<div class="easyui-panel" title="商品类目列表"
+	<div class="easyui-panel" title="标签列表"
 		data-options="striped: true,collapsible:true,iconCls:'icon-search'">
 		<form id="dgquery">
-			<input type="hidden" name="model.deleted" value="0"/>
 			<table>
 				<tr>
-					<td>菜单名</td>
-					<td><input name="model.typename" class="easyui-validatebox textbox" value="${vo.model.name}"></td>
+					<td>标签名</td>
+					<td><input name="model.name" class="easyui-validatebox textbox" value="${vo.model.name}"></td>
 					<td></td>
 					<td></td>
 					<td></td>
@@ -44,9 +42,9 @@
 		<thead>
 			<tr>
 				<th field="id" width="40">id</th>
-				<th field="parent.id" width="40">父id</th>
-				<th field="typename" width="120">类目名称</th>
-				<th field="status" formatter="forrmaterStatus" width="40">状态</th>
+				<th field="name" width="80">标签名称</th>
+				<th field="user.username" width="120">用户</th>
+				<th field="type" formatter="forrmaterType" width="100">类型</th>
 				<th field="sort" width="30">排序</th>
 				<th field="isadmin" width="180" formatter="formatteradminuserbutton">操作</th>
 			</tr>
@@ -58,7 +56,7 @@
 	            text: '添加',  
 	            iconCls: 'icon-add',  
 	            handler: function() {  
-	                openDialog("添加","${basePath}admin/goods/type/add.htm",300,270);  
+	                openDialog("添加","${basePath}admin/seller/label/labelAdd.htm",300,270);  
 	            }  
 	        }] ;
 	</script>

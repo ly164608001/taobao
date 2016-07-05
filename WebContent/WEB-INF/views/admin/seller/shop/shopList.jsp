@@ -10,8 +10,8 @@
 <script>
 	
 	function formatteradminuserbutton(value,row) {
-		var oprBtn = '<a href="javascript:void(0)" class="easyui-linkbutton" onclick="openDialog(\'编辑\',\'${basePath}admin/seller/shop/update.htm?id='+row.id+'\',300,300)">编辑</a>&nbsp;'
-		 				+ '<a href="javascript:void(0)" class="easyui-linkbutton" onclick="deleterow(\'${basePath}admin/seller/shop/delete.htm?id='+row.id+'\')">删除</a>&nbsp;';
+		var oprBtn = '<a href="javascript:void(0)" class="easyui-linkbutton" onclick="openDialog(\'编辑\',\'${basePath}admin/seller/shop/shopUpdate.htm?id='+row.id+'\',300,300)">编辑</a>&nbsp;'
+		 				+ '<a href="javascript:void(0)" class="easyui-linkbutton" onclick="deleterow(\'${basePath}admin/seller/shop/shopDelete.htm?id='+row.id+'\')">删除</a>&nbsp;';
 		if(row.status == 0){
 			oprBtn += '<a href="javascript:void(0)" class="easyui-linkbutton" onclick="activate('+row.id+')">激活</a>&nbsp;';
 		}
@@ -84,7 +84,7 @@
 	            text: '添加',  
 	            iconCls: 'icon-add',  
 	            handler: function() {  
-	                openDialog("添加","${basePath}admin/seller/shop/add.htm",300,270);  
+	                openDialog("添加","${basePath}admin/seller/shop/shopAdd.htm",300,270);  
 	            }  
 	        }] ;
 	</script>
