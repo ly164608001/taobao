@@ -20,7 +20,7 @@
 .count_tab ul li{float: left;}
 .taobao li{width: 254px;}
 .taobao .count_block{width: 230px; margin: 0 auto;}
-.taobao .count_block dl.blue{background: #79ceee;}
+.taobao .count_block dl.blue{background: #3bb4f2;}
 .taobao .count_block dl{height: 120px; color: #fff; text-align: center;}
 .taobao .count_block dl.blue h2{background: url('../images/count_bg2.png') repeat-x 0 bottom;}
 .taobao .count_block dl h2{display: block; font-size: 16px; padding: 13px 0;}
@@ -31,7 +31,7 @@
 .taobao .count_block dl dd{float: right; width: 115px;}
 .taobao .count_block p{text-align: center; padding: 5px 0; background: #fafafa;}
 .taobao .count_block dl.orange{background: #ff5a09;}
-.jd .blue{background: #79ceee;}
+.jd .blue{background: #3bb4f2;}
 .jd .count_block{width: 290px; height: 120px; margin: 0 auto; color: #fff; text-align: center;}
 .jd .count_block h2{display: block; font-size: 16px; padding: 35px 0 5px 0;}
 .jd .count_block p{font-size: 24px;}
@@ -40,7 +40,7 @@
 .count_frame .count_left{float: left; width: 870px;}
 .task_count_tit .panel-header input[type=text]{width: 150px;margin: 0 5px;}
 .notice .notice_tit{height: 32px; border-bottom: 2px solid #79ceee;}
-.notice .notice_tit h2.selected{background: #79ceee; color: #fff; font-weight: bold; font-size: 14px;}
+.notice .notice_tit h2.selected{background: #3bb4f2; color: #fff; font-weight: bold; font-size: 14px;}
 .count_frame .count_right{width: 380px;}
 .notice .notice_tit h2{float: left; width: 80px; height: 32px; line-height: 32px; background: #f1f1f1; font-size: 12px; text-align: center; margin-right: 5px; cursor: pointer; padding: 0;}
 .notice .notice_tab{padding: 8px 0 8px 0;}
