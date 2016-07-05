@@ -87,93 +87,11 @@ public class Global {
 	public final static int DEDUCTION_SCALE=1;
 	public final static int DEDUCTION_MONEY=2;
 	
-	/**楼盘 start**/
-	
-	//房源状态 0初始待售 1在售 2 已售 3 已预订
-	public final static int HOUSE_SOURCE_INIT = 0; 
-	public final static int HOUSE_SOURCE_SELLING = 1;	
-	public final static int HOUSE_SOURCE_SELLED = 2;	
-	public final static int HOUSE_SOURCE_BOOKED = 3;	
-	
-	/**楼盘  end**/
-	
 	/**交易 start**/
 	public final static int TRACE_ING = 0; 
 	public final static int TRACE_SUCC = 1;	
 	public final static int TRACE_FAIL = -1;		
 	/**交易 end**/
 	
-	
-	/**订单 start**/
-	//默认限制时间 (毫秒)
-	public final static long LIMIT_TIME_CONFIRM = 2*3600*1000;     //待确认	 
-	public final static long LIMIT_TIME_PAY = 2*3600*1000;         //待付款
-	public final static long LIMIT_TIME_CONTRACT = 7*24*3600*1000; //待线下签约+首付
-	public final static long LIMIT_TIME_DELAY = 2*24*3600*1000;    //线下签约+首付延期申请审核时间
-	public final static long LIMIT_TIME_DEBOOK = 2*24*3600*1000;   //退订等待处理时间
-	public final static long LIMIT_TIME_BOOK = 7*24*3600*1000;     //退订有效期
-	
-	
-	//状态 0 待确认 1 待付款 2 待线下签约+首付  9 交易完成 -1 退订 -9 订单关闭
-	public final static int ORDER_CONFIRM = 0;	
-	public final static int ORDER_PAY = 1;		
-	public final static int ORDER_CONTRACT = 2; 
-	public final static int ORDER_FINISH = 9;	
-	public final static int ORDER_UNSUBSCRIBE = -1;	 
-	public final static int ORDER_CLOSED = -9;	
-	
-	/**
-	 * 当前状态(流程) 
-	 *  交易正常： 21 待签约-申请延期
-	 * 	交易成功： 11 待银行审核 12 银行通知签字 13 银行贷款办理中 14 待银行贷款发放 
-	 *  订单退订：-11取消退订 -12 拒绝退订 -13 同意退订 -14 已退款 -15平台介入
-	 * 	订单关闭：-21 待确认取消预订  -22 商家超时确认 -23 待付款取消预订 -24 超时支付定金 -25 超时签约+付首付 -26 确认不通过
-	 */
-	public final static int FINISH_BANK_AUDIT = 11;	
-	public final static int FINISH_SIGN = 12;	
-	public final static int FINISH_LOAD_HANDLE = 13;	
-	public final static int FINISH_LOAD_GRANT = 14;	
-	
-	public final static int CLOSED_CANCEL = -21;
-	public final static int CLOSED_CONFIRM_REJECT = -26;
-	public final static int CLOSED_OVERTIME_CONFIRM = -22;	
-	public final static int CLOSED_PAY_CANCEL = -23;
-	public final static int CLOSED_OVERTIME_PAY = -24;	
-	public final static int CLOSED_OVERTIME_CONTRACT = -25;
-	
-	public final static int UNSUBSCRIBE_CANCEL = -11;	
-	public final static int UNSUBSCRIBE_REFUSE = -12;	
-	public final static int UNSUBSCRIBE_PASS = -13;	
-	public final static int UNSUBSCRIBE_REFUND = -14;
-	public final static int UNSUBSCRIBE_PLATFORM_INTO = -15;
-	
-	public final static int ORDER_CONTRACT_DELAY = 21;
-	
-	//订单来源 1 预订 2抢购
-	public final static int ORDER_SOURCE_BOOK = 1;	
-	public final static int ORDER_SOURCE_RUSH = 2;	
-	
-	/**订单 end**/
-	
-	
-	
-	/** 楼盘管理 start **/
-	public final static int HOUSES_AUDIT_PASS = 1;//审核通过
-	public final static int HOUSES_AUDIT_NOPASS = -1;//审核不通过
-	/** 楼盘管理 end **/
-
-
-
-/** 消息记录管理 start  xuyongzhen**/
-//消息记录阅读状态 -1未使用 1已使用
-	public final static int NOTICE_RECORD_UNREAD=-1;
-	public final static int NOTICE_RECORD_READ=1;
-/** 消息记录管理 end **/
-	
-/** 站内信管理 start   xuyongzhen**/
-//消息记录阅读状态 -1未使用 1已使用
-	public final static int STATION_LETTER_UNREAD=-1;
-	public final static int STATION_LETTER_READ=1;
-/** 站内信管理 end **/
 }
 
