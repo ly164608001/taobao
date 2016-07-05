@@ -8,38 +8,45 @@
 </head>
 <body>
 
-	<form id="updateform" action="${basePath}admin/seller/shop/updatesave.htm" method="post">
+	<form id="updateform" action="${basePath}admin/seller/receiptaddress/updatesave.htm" method="post">
 		<input name="id" value="${model.id}" type="hidden"/>
 		<div class="contaniner">
 		  	<div class="div-content">
 			<table class="table table-hover" cellpadding="5">
 				<tr>
-					<td>店铺名称:</td>
+					<td>标签:</td>
+					<td>
+						<span>
+							<select name="label.id" class="easyui-validatebox textbox" required="required">
+								<option value="">请选择</option>
+								<c:forEach items="${labelList}" var="label">
+									<option <c:if test="${label.id == model.label.id}">selected="selected"</c:if>
+										 value="${label.id}">${label.name}</option>
+								</c:forEach>
+							</select>
+						</span>
+					</td>
+				</tr>
+				<tr>
+					<td>姓名:</td>
 					<td><input name="name" class="easyui-validatebox textbox"
 								value="${model.name}" required="required"/></td>
 				</tr>
 				<tr>
-					<td>类型:</td>
+					<td>电话:</td>
 					<td>
-						<select name="type">
-							<option value="${fns:getDictValue('淘宝店铺','ShopType','')}" 
-								<c:if test="${fns:getDictValue('淘宝店铺','ShopType','') == model.type}">selected="selected"</c:if>>淘宝店铺</option>
-						</select>
+						<input name="phone" class="easyui-validatebox textbox" 
+								value="${model.phone}" required="required"/>
 					</td>
 				</tr>
 				<tr>
-					<td>品类:</td>
-					<td>${model.goodsType.typename}</td>
+					<td><font>邮编:</td> 
+					<td><input name="code" class="easyui-validatebox textbox" value="${model.code}"/></td>
 				</tr>
 				<tr>
-					<td>掌柜号:</td>
-					<td><input name="manager" class="easyui-validatebox textbox" 
-							value="${model.manager}" required="required"/></td>
-				</tr>
-				<tr>
-					<td>店铺首页地址:</td>
-					<td><input name="indexurl" class="easyui-validatebox textbox" 
-							value="${model.indexurl}" required="required"/></td>
+					<td>收获地址:</td>
+					<td><textarea  class="easyui-validatebox" required="required" 
+								name="address" cols="20" rows="4" id="address">${model.address}</textarea></td>
 				</tr>
 				<tr>
 					<td></td>

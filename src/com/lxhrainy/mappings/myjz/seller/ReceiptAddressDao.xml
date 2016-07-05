@@ -26,6 +26,14 @@
     <sql id="where">
 		<if test="condition!=null">
 			<where>
+				1 = 1
+				<if test="condition.keyword!=null and condition.keyword!=''">
+					AND (
+							T.name LIKE CONCAT('%',#{condition.keyword},'%')
+							OR T.address LIKE CONCAT('%',#{condition.keyword},'%')
+							OR L.name LIKE CONCAT('%',#{condition.keyword},'%')
+					    )
+				</if>
 				<if test="condition.model!=null">
 					<if test="condition.model.name!=null and condition.model.name!=''">
 						AND T.name like CONCAT('%',#{condition.model.name},'%')
@@ -110,7 +118,7 @@
 		WHERE id = #{id}
 	</update>
 	
-	<update id="delete">
+	<update id="deleteById">
 		DELETE FROM seller_receipt_address
 		WHERE id = #{id}
 	</update>

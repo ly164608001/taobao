@@ -6,16 +6,12 @@
 <link rel="stylesheet" type="text/css" href="${basePath}static/js/easyui/themes/bootstrap/easyui.css"/>
 <link rel="stylesheet" type="text/css" href="${basePath}static/js/easyui/themes/icon.css"/>
 <script type="text/javascript" src="${basePath}static/js/admin/global.js"></script>
-<script type="text/javascript" src="${basePath}static/js/select.js"></script>
 
 <script>
 	
 	function formatteradminuserbutton(value,row) {
-		var oprBtn = '<a href="javascript:void(0)" class="easyui-linkbutton" onclick="openDialog(\'编辑\',\'${basePath}admin/seller/receiptaddress/receiptaddressUpdate.htm?id='+row.id+'\',420,320)">编辑</a>&nbsp;'
+		var oprBtn = '<a href="javascript:void(0)" class="easyui-linkbutton" onclick="openDialog(\'编辑\',\'${basePath}admin/seller/receiptaddress/receiptaddressUpdate.htm?id='+row.id+'\',420,420)">编辑</a>&nbsp;'
 		 				+ '<a href="javascript:void(0)" class="easyui-linkbutton" onclick="deleterow(\'${basePath}admin/seller/receiptaddress/receiptaddressDelete.htm?id='+row.id+'\')">删除</a>&nbsp;';
-		if(row.status == 0){
-			oprBtn += '<a href="javascript:void(0)" class="easyui-linkbutton" onclick="activate('+row.id+')">激活</a>&nbsp;';
-		}
 		return  oprBtn;
 	}
 	
@@ -32,7 +28,7 @@
 			<table>
 				<tr>
 					<td>关键字</td>
-					<td><input name="model.name" class="easyui-validatebox textbox" value="${vo.keyword}"></td>
+					<td><input name="keyword" class="easyui-validatebox textbox" value="${vo.keyword}"></td>
 					<td></td>
 					<td></td>
 					<td></td>
@@ -49,10 +45,10 @@
 				<th field="id" width="40">id</th>
 				<th field="label.name" width="80">标签名</th>
 				<th field="name" width="80">姓名</th>
-				<th field="phone" width="80">电话</th>
-				<th field="address" width="120">地址</th>
-				<th field="status" forrmaterStatus width="80">状态</th>
-				<th field="createtime" width="100">添加时间</th>
+				<th field="phone" width="100">电话</th>
+				<th field="address" width="180">地址</th>
+				<th field="status" formatter="forrmaterStatus" width="80">状态</th>
+				<th field="createtime" formatter="formatterDate" width="180">添加时间</th>
 				<th field="isadmin" width="180" formatter="formatteradminuserbutton">操作</th>
 			</tr>
 		</thead>
@@ -63,7 +59,7 @@
 	            text: '添加',  
 	            iconCls: 'icon-add',  
 	            handler: function() {  
-	                openDialog("添加","${basePath}admin/seller/receiptaddress/receiptaddressAdd.htm",380,280);  
+	                openDialog("添加","${basePath}admin/seller/receiptaddress/receiptaddressAdd.htm",380,420);  
 	            }  
 	        }] ;
 	</script>

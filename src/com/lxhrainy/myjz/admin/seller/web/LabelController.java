@@ -142,5 +142,5 @@ public class LabelController extends BaseController {
 		rj.put("msg", "删除成功");
 		return rj;
 	}
-
+	
 }

@@ -7,40 +7,39 @@
 </head>
 <body>
 
-	<form id="addform" action="${basePath}admin/seller/shop/addsave.htm" method="post">
+	<form id="addform" action="${basePath}admin/seller/receiptaddress/addsave.htm" method="post">
 		<table cellpadding="5">
 			<tr>
-				<td>店铺名称:</td>
-				<td><input name="name" class="easyui-validatebox textbox" required="required"/></td>
-			</tr>
-			<tr>
-				<td>店铺类型:</td>
-				<td>
-					<select name="type">
-						<option value="${fns:getDictValue('淘宝店铺','ShopType','')}" selected="selected">淘宝店铺</option>
-					</select>
-				</td>
-			</tr>
-			<tr>
-				<td>店铺品类:</td>
+				<td>标签:</td>
 				<td>
 					<span>
-						<select onchange="_onchange(this);" class="xytSelect"
-								link="${basePath}admin/goods/type/getlistbypid.htm" pid="-1"
-								valuename="id" labelname="typename">
+						<select name="label.id" class="easyui-validatebox textbox" required="required">
+							<option value="">请选择</option>
+							<c:forEach items="${labelList}" var="label">
+								<option value="${label.id}">${label.name}</option>
+							</c:forEach>
 						</select>
-						<input type="hidden" value="" name="goodsType.id" class="easyui-validatebox textbox" 
-								required="required" id="typeid"/>
 					</span>
 				</td>
 			</tr>
 			<tr>
-				<td>掌柜号:</td>
-				<td><input name="manager" class="easyui-validatebox textbox" required="required"/></td>
+				<td>姓名:</td>
+				<td><input name="name" class="easyui-validatebox textbox" required="required"/></td>
 			</tr>
 			<tr>
-				<td>店铺首页地址:</td>
-				<td><input name="indexurl" class="easyui-validatebox textbox" required="required"/></td>
+				<td>电话:</td>
+				<td>
+					<input name="phone" class="easyui-validatebox textbox" required="required"/>
+				</td>
+			</tr>
+			<tr>
+				<td><font>邮编:</td> 
+				<td><input name="code" class="easyui-validatebox textbox" /></td>
+			</tr>
+			<tr>
+				<td>收获地址:</td>
+				<td><textarea  class="easyui-validatebox" required="required"
+							name="address" cols="20" rows="4" id="address"></textarea></td>
 			</tr>
 			<tr>
 				<td></td>
@@ -51,10 +50,5 @@
 		</table>
 	</form>
 	<script src="${basePath}static/js/admin/initdata.js"></script>
-	<script type="text/javascript">
-		$(function(){
-			_initSelect();
-		}) 
-	</script>
 </body>
 </html>

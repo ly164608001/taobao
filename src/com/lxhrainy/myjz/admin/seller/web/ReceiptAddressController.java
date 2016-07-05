@@ -12,28 +12,32 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSONObject;
 import com.lxhrainy.core.common.controller.BaseController;
+import com.lxhrainy.myjz.admin.seller.model.Label;
 import com.lxhrainy.myjz.admin.seller.model.ReceiptAddress;
 import com.lxhrainy.myjz.admin.seller.oe.ReceiptAddressVO;
+import com.lxhrainy.myjz.admin.seller.service.ILabelService;
 import com.lxhrainy.myjz.admin.seller.service.IReceiptAddressService;
 
-@RequestMapping("/admin/seller/receipaddress")
+@RequestMapping("/admin/seller/receiptaddress")
 @Controller
-public class ReceipAddressController extends BaseController {
+public class ReceiptAddressController extends BaseController {
 
 	@Autowired
-	IReceiptAddressService addressService;	
+	IReceiptAddressService addressService;
+	@Autowired
+	ILabelService labelService;
 	
 	/***
 	 * 详情
 	 * @param
 	 */
-	@RequestMapping("/receipaddressDetail")
+	@RequestMapping("/receiptaddressDetail")
 	public ModelAndView detail(Integer id) {
 		if(id!=null){
 			mv.addObject("model", addressService.getById(id));
 		}
 		
-		mv.setViewName("admin/seller/receipaddress/receipaddressDetail");
+		mv.setViewName("admin/seller/receiptaddress/receiptaddressDetail");
 		return mv;
 	}
 	
@@ -41,9 +45,9 @@ public class ReceipAddressController extends BaseController {
 	 * 列表
 	 * @param
 	 */
-	@RequestMapping("/receipaddressList")
+	@RequestMapping("/receiptaddressList")
 	public ModelAndView list() {
-		mv.setViewName("admin/seller/receipaddress/receipaddressList");
+		mv.setViewName("admin/seller/receiptaddress/receiptaddressList");
 		return mv;
 	}
 	
@@ -62,9 +66,11 @@ public class ReceipAddressController extends BaseController {
 	 * 新增
 	 * @param
 	 */
-	@RequestMapping("/receipaddressAdd")
+	@RequestMapping("/receiptaddressAdd")
 	public ModelAndView add(Integer pid) {
-		mv.setViewName("admin/seller/receipaddress/receipaddressAdd");
+		List<Label> labelList = labelService.getAddressListByUser(this.getCurrentUser().getId());
+		mv.addObject("labelList", labelList);
+		mv.setViewName("admin/seller/receiptaddress/receiptaddressAdd");
 		return mv;
 	}
 	
@@ -76,8 +82,8 @@ public class ReceipAddressController extends BaseController {
 	@ResponseBody
 	public JSONObject addsave(ReceiptAddress model) {
 		JSONObject rj = new JSONObject();
-		if(model == null || StringUtils.isEmpty(model.getName())
-				){
+		if(model == null || StringUtils.isEmpty(model.getName()) || StringUtils.isEmpty(model.getAddress())
+				|| StringUtils.isEmpty(model.getPhone()) || model.getLabel() == null){
 			rj.put("success", false);
 			rj.put("msg", "保存失败");
 		}else{
@@ -94,13 +100,15 @@ public class ReceipAddressController extends BaseController {
 	 * 修改
 	 * @param
 	 */
-	@RequestMapping("/receipaddressUpdate")
+	@RequestMapping("/receiptaddressUpdate")
 	public ModelAndView update(Integer id) {
 		if(id != null){
+			List<Label> labelList = labelService.getAddressListByUser(this.getCurrentUser().getId());
+			mv.addObject("labelList", labelList);
 			mv.addObject("model", addressService.getById(id));
 		}
 		
-		mv.setViewName("admin/seller/receipaddress/receipaddressUpdate");
+		mv.setViewName("admin/seller/receiptaddress/receiptaddressUpdate");
 		return mv;
 	}
 	
@@ -112,26 +120,44 @@ public class ReceipAddressController extends BaseController {
 	@ResponseBody
 	public JSONObject updatesave(ReceiptAddress model) {
 		JSONObject rj = new JSONObject();
-		if(model == null || StringUtils.isEmpty(model.getName())
-				){
-			rj.put("success", false);
-			rj.put("msg", "更新失败");
+		rj.put("success", false);
+		rj.put("msg", "更新失败");
+		
+		String name = null;
+		String phone = null;
+		String address = null;
+		Label label = null;
+		
+		if(model != null ){
+			name = model.getName();
+			phone = model.getPhone();
+			address = model.getAddress();
+			label = model.getLabel();
+			if(!StringUtils.isEmpty(name) && !StringUtils.isEmpty(address)
+					&& !StringUtils.isEmpty(phone) && label != null){
+				
+				ReceiptAddress oldInfo = addressService.getById(model.getId());
+				oldInfo.setName(name);
+				oldInfo.setPhone(phone);
+				oldInfo.setCode(model.getCode());
+				oldInfo.setAddress(address);
+				oldInfo.setUpdatetime(new Date());
+				addressService.update(oldInfo);
+				rj.put("success", true);
+				rj.put("msg", "更新成功");
+			}
+			
 		}
-		else{
-			ReceiptAddress oldInfo = addressService.getById(model.getId());
-			oldInfo.setName(model.getName());
-			addressService.update(oldInfo);
-			rj.put("success", true);
-			rj.put("msg", "更新成功");
-		}
+		
 		return rj;
 	}
+	
 	
 	/***
 	 * 删除
 	 * @param ID
 	 */
-	@RequestMapping("/receipaddressDelete")
+	@RequestMapping("/receiptaddressDelete")
 	@ResponseBody
 	public JSONObject delete(Integer id) {
 		JSONObject rj = new JSONObject();

@@ -55,6 +55,15 @@
 		<include refid="where"/>
 	</select>
 	
+	<select id="getListByUserAndType" resultType="Label">
+		SELECT 
+			<include refid="sellerLabelColumns"/>
+		FROM seller_label T
+		<include refid="sellerLabelJoins"/>
+		WHERE T.userid = #{userid}
+			AND T.type = ${type}
+	</select>
+	
 	<select id="getCountByCondition" resultType="int">
 		SELECT 
 			COUNT(1)
