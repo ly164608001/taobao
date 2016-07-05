@@ -8,7 +8,7 @@
 </head>
 <body>
 
-	<form id="updateform" action="${basePath}admin/seller/receiptaddress/updatesave.htm" method="post">
+	<form id="updateform" action="${basePath}admin/seller/praise/updatesave.htm" method="post">
 		<input name="id" value="${model.id}" type="hidden"/>
 		<div class="contaniner">
 		  	<div class="div-content">
@@ -28,25 +28,9 @@
 					</td>
 				</tr>
 				<tr>
-					<td>姓名:</td>
-					<td><input name="name" class="easyui-validatebox textbox"
-								value="${model.name}" required="required"/></td>
-				</tr>
-				<tr>
-					<td>电话:</td>
-					<td>
-						<input name="phone" class="easyui-validatebox textbox" 
-								value="${model.phone}" required="required"/>
-					</td>
-				</tr>
-				<tr>
-					<td><font>邮编:</td> 
-					<td><input name="code" class="easyui-validatebox textbox" value="${model.code}"/></td>
-				</tr>
-				<tr>
-					<td>收获地址:</td>
+					<td>规定好评内容:</td>
 					<td><textarea  class="easyui-validatebox" required="required" 
-								name="address" cols="20" rows="4">${model.address}</textarea></td>
+								name="content" cols="20" rows="4">${model.content}</textarea></td>
 				</tr>
 				<tr>
 					<td></td>

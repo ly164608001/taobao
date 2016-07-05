@@ -24,6 +24,6 @@ public interface ILabelService extends IBaseService<Label, Integer>{
 	 * @param userid
 	 * @return
 	 */
-	public List<Label> getAppraiseListByUser(int userid);
+	public List<Label> getPraiseListByUser(int userid);
 	
 }

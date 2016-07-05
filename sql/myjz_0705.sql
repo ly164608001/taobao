@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50096
 File Encoding         : 65001
 
-Date: 2016-07-03 23:46:19
+Date: 2016-07-05 23:45:20
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -132,13 +132,15 @@ CREATE TABLE `goods_type` (
   `sort` int(11) default NULL COMMENT '排序',
   `deleted` int(1) default '0' COMMENT '删除标识',
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of goods_type
 -- ----------------------------
 INSERT INTO `goods_type` VALUES ('1', '服饰鞋帽', '-1', '1', '1', '0');
 INSERT INTO `goods_type` VALUES ('2', '家用电器', '-1', '1', '2', '0');
+INSERT INTO `goods_type` VALUES ('3', '1', '-1', '1', '1', '1');
+INSERT INTO `goods_type` VALUES ('4', '还有什么', '-1', '1', '23', '1');
 
 -- ----------------------------
 -- Table structure for `help_document`
@@ -154,15 +156,14 @@ CREATE TABLE `help_document` (
   `status` int(1) default NULL COMMENT '状态 (显示隐藏)',
   `content` text COMMENT '文档内容',
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of help_document
 -- ----------------------------
-INSERT INTO `help_document` VALUES ('1', '测试文档', '4', null, '0', '1', '1', null);
-INSERT INTO `help_document` VALUES ('2', '', null, null, '0', null, null, '发达发达<img src=\"/core/upload/image/2016/07/03/20160703232645_743.png\" alt=\"\" />');
-INSERT INTO `help_document` VALUES ('3', '', null, null, '0', null, null, '发放<img src=\"/core/upload/image/2016/07/03/20160703232948_253.png\" alt=\"\" />');
-INSERT INTO `help_document` VALUES ('4', '', null, null, '0', null, null, '<img src=\"/core/upload/image/2016/07/03/20160703233400_263.png\" alt=\"\" />此处进行内容编辑...发送');
+INSERT INTO `help_document` VALUES ('1', '测试文档', '5', null, '0', '1', '1', '<strong>打发</strong>');
+INSERT INTO `help_document` VALUES ('7', '测试', '1', null, '0', '22', null, '<p>\r\n	发达发达<img src=\"http://localhost:8080/core/static/js/kindeditor/plugins/emoticons/images/0.gif\" border=\"0\" alt=\"\" />非发放\r\n</p>\r\n<p>\r\n	<img src=\"/core/upload/image/2016/07/04/20160704213928_885.png\" alt=\"\" /> \r\n</p>');
+INSERT INTO `help_document` VALUES ('8', 'fff222', '1', null, '0', '22', null, 'gaga');
 
 -- ----------------------------
 -- Table structure for `help_menu`
@@ -177,17 +178,18 @@ CREATE TABLE `help_menu` (
   `deleted` int(1) default '0' COMMENT '删除标识',
   `url` varchar(255) character set utf8 default NULL COMMENT '连接',
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1 COMMENT='帮助菜单';
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1 COMMENT='帮助菜单';
 
 -- ----------------------------
 -- Records of help_menu
 -- ----------------------------
 INSERT INTO `help_menu` VALUES ('1', '-1', '1', '买家新手上路', '1', '0', null);
-INSERT INTO `help_menu` VALUES ('2', '-1', '2', '卖家新手上路', '1', '0', null);
+INSERT INTO `help_menu` VALUES ('2', '-1', '2', '卖家新手上路', '2', '0', null);
 INSERT INTO `help_menu` VALUES ('4', '2', '2', '注册', '1', '0', null);
 INSERT INTO `help_menu` VALUES ('5', '2', '2', '登录', '2', '0', null);
 INSERT INTO `help_menu` VALUES ('6', '2', '2', '平台名词', '3', '0', '');
-INSERT INTO `help_menu` VALUES ('7', '6', '2', '测试多级', null, '0', '');
+INSERT INTO `help_menu` VALUES ('7', '6', '2', '测试多级', null, '1', '');
+INSERT INTO `help_menu` VALUES ('8', '-1', '1', '注册', '4', '0', '');
 
 -- ----------------------------
 -- Table structure for `order_basic_properties`
@@ -251,11 +253,13 @@ CREATE TABLE `seller_label` (
   `userid` int(11) default NULL COMMENT '用户ID',
   `createtime` datetime default NULL COMMENT '创建时间',
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='标签表';
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='标签表';
 
 -- ----------------------------
 -- Records of seller_label
 -- ----------------------------
+INSERT INTO `seller_label` VALUES ('1', '很好', '2', '1', '3', '2016-07-05 23:29:34');
+INSERT INTO `seller_label` VALUES ('2', '福州', '1', '1', '3', '2016-07-04 23:16:44');
 
 -- ----------------------------
 -- Table structure for `seller_praise`
@@ -266,15 +270,16 @@ CREATE TABLE `seller_praise` (
   `userid` int(11) default NULL COMMENT '用户ID',
   `createtime` datetime default NULL COMMENT '创建时间',
   `updatetime` datetime default NULL COMMENT '修改时间',
-  `lableid` int(11) default NULL COMMENT '标签ID',
+  `labelid` int(11) default NULL COMMENT '标签ID',
   `content` varchar(255) default NULL COMMENT '好评内容',
   `status` int(1) default NULL COMMENT '状态(0：未使用；1已使用)',
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='好评内容信息表';
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='好评内容信息表';
 
 -- ----------------------------
 -- Records of seller_praise
 -- ----------------------------
+INSERT INTO `seller_praise` VALUES ('1', '3', '2016-07-05 23:28:59', null, '1', '灰常好', '0');
 
 -- ----------------------------
 -- Table structure for `seller_receipt_address`
@@ -292,11 +297,12 @@ CREATE TABLE `seller_receipt_address` (
   `address` varchar(255) default NULL COMMENT '收货地址',
   `status` int(1) default NULL COMMENT '状态(0：未使用；1已使用)',
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='商家收货地址';
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='商家收货地址';
 
 -- ----------------------------
 -- Records of seller_receipt_address
 -- ----------------------------
+INSERT INTO `seller_receipt_address` VALUES ('1', '3', '2016-07-05 21:47:46', '2016-07-05 23:08:47', '2', '云腾2', '13067356400', '350500', '福州闽侯2', '1');
 
 -- ----------------------------
 -- Table structure for `seller_shop`
@@ -312,12 +318,16 @@ CREATE TABLE `seller_shop` (
   `status` int(1) default NULL COMMENT '状态',
   `userid` int(11) default NULL COMMENT '用户ID',
   `createtime` datetime default NULL COMMENT '创建时间',
+  `goodstypeid` int(11) default NULL COMMENT '店铺品类(商品类目)',
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='商家店铺表';
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COMMENT='商家店铺表';
 
 -- ----------------------------
 -- Records of seller_shop
 -- ----------------------------
+INSERT INTO `seller_shop` VALUES ('1', '布衣柜商家', '1', '布衣柜', 'http://www.taobao.com', '10', '1', '1', '2016-07-04 23:50:17', '1');
+INSERT INTO `seller_shop` VALUES ('5', '22', '1', '22', '22', '0', '1', '3', '2016-07-05 00:33:19', '1');
+INSERT INTO `seller_shop` VALUES ('6', '的方法', '1', '22 ', 'www.baodiu.com2', '0', '0', '3', '2016-07-05 21:22:40', '1');
 
 -- ----------------------------
 -- Table structure for `sys_area`
@@ -4132,7 +4142,7 @@ CREATE TABLE `sys_dict` (
   `remarks` varchar(255) default NULL COMMENT '备注信息',
   `deleted` int(1) NOT NULL default '0' COMMENT '删除标记',
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of sys_dict
@@ -4146,6 +4156,9 @@ INSERT INTO `sys_dict` VALUES ('33', '2', '卖家中心', 'HelpCenter', '帮助�
 INSERT INTO `sys_dict` VALUES ('34', '-1', '顶级菜单父id', 'TopMenuPid', '顶级类目菜单父id', null, null, null, null, null, null, null, '0');
 INSERT INTO `sys_dict` VALUES ('35', '1', '显示', 'ShowOrHidden', '隐藏或显示', null, null, null, null, null, null, null, '0');
 INSERT INTO `sys_dict` VALUES ('36', '0', '隐藏', 'ShowOrHidden', '隐藏或显示', null, null, null, null, null, null, null, '0');
+INSERT INTO `sys_dict` VALUES ('37', '1', '收获地址', 'LabelType', '标签类型', null, null, null, null, null, null, null, '0');
+INSERT INTO `sys_dict` VALUES ('38', '2', '好评内容', 'LabelType', '标签类型', null, null, null, null, null, null, null, '0');
+INSERT INTO `sys_dict` VALUES ('39', '1', '淘宝店铺', 'ShopType', '店铺类型', null, null, null, null, null, null, null, '0');
 
 -- ----------------------------
 -- Table structure for `sys_log`
@@ -4211,14 +4224,14 @@ INSERT INTO `sys_menu` VALUES ('26', '1', '-1,1', '基础数据', '160', '', nul
 INSERT INTO `sys_menu` VALUES ('53', '7', '-1,7,1', '数据字典', '50', 'admin/sys/dict/list.htm', null, null, '1', '', '3', '2016-06-12 15:57:10', '3', '2016-06-12 15:57:10', null, '0', '0', '0');
 INSERT INTO `sys_menu` VALUES ('54', '7', '-1,7,1', '地域管理', '80', 'admin/sys/area/list.htm', null, null, '1', '', '3', '2016-06-13 11:42:47', '3', '2016-06-13 11:42:47', null, '0', '0', '0');
 INSERT INTO `sys_menu` VALUES ('67', '1', '-1,1', '用户管理', '370', '', null, null, '1', '', '3', '2016-06-17 09:42:54', '3', '2016-06-17 09:42:54', null, '0', '0', '1');
-INSERT INTO `sys_menu` VALUES ('73', '26', '-1,126,', '帮助菜单', '1', 'admin/helpcenter/menu/list.htm', null, null, '1', '', '3', '2016-06-26 20:39:09', '3', '2016-06-28 21:01:16', null, '0', '0', '0');
-INSERT INTO `sys_menu` VALUES ('74', '26', '-1,126,', '商品类目管理', '31', 'admin/goods/type/list.htm', null, null, '1', '', '3', '2016-06-27 21:10:43', '3', '2016-06-27 21:10:43', null, '0', '0', '0');
+INSERT INTO `sys_menu` VALUES ('73', '26', '-1,126,', '帮助菜单', '1', 'admin/helpcenter/menu/menuList.htm', null, null, '1', '', '3', '2016-06-26 20:39:09', '3', '2016-07-05 20:39:57', null, '0', '0', '0');
+INSERT INTO `sys_menu` VALUES ('74', '26', '-1,126,', '商品类目管理', '31', 'admin/goods/type/typeList.htm', null, null, '1', '', '3', '2016-06-27 21:10:43', '3', '2016-07-05 20:39:47', null, '0', '0', '0');
 INSERT INTO `sys_menu` VALUES ('75', '1', '-11,', '商家管理', '400', '', null, null, '1', '', '3', '2016-06-27 23:07:15', '3', '2016-06-27 23:07:15', null, '0', '0', '0');
-INSERT INTO `sys_menu` VALUES ('76', '75', '-11,75,', '店铺管理', '1', '', null, null, '1', '', '3', '2016-06-27 23:07:34', '3', '2016-06-27 23:07:34', null, '0', '0', '0');
-INSERT INTO `sys_menu` VALUES ('77', '75', '-11,75,', '收获地址管理', '31', '', null, null, '1', '', '3', '2016-06-27 23:08:06', '3', '2016-06-27 23:08:06', null, '0', '0', '0');
-INSERT INTO `sys_menu` VALUES ('78', '75', '-11,75,', '标签管理', '61', '', null, null, '1', '', '3', '2016-06-27 23:08:23', '3', '2016-06-27 23:08:23', null, '0', '0', '0');
-INSERT INTO `sys_menu` VALUES ('79', '75', '-11,75,', ' 好评内容管理', '91', '', null, null, '1', '', '3', '2016-06-27 23:08:36', '3', '2016-06-27 23:08:36', null, '0', '0', '0');
-INSERT INTO `sys_menu` VALUES ('80', '26', '-1,126,', '帮助文档', '1', 'admin/helpcenter/document/list.htm', null, null, '1', '', '3', '2016-06-28 21:02:52', '3', '2016-06-28 21:14:40', null, '0', '0', '0');
+INSERT INTO `sys_menu` VALUES ('76', '75', '-11,75,', '店铺管理', '1', 'admin/seller/shop/shopList.htm', null, null, '1', '', '3', '2016-06-27 23:07:34', '3', '2016-07-05 20:39:33', null, '0', '0', '0');
+INSERT INTO `sys_menu` VALUES ('77', '75', '-11,75,', '收获地址管理', '31', 'admin/seller/receiptaddress/receiptaddressList.htm', null, null, '1', '', '3', '2016-06-27 23:08:06', '3', '2016-07-05 22:10:13', null, '0', '0', '0');
+INSERT INTO `sys_menu` VALUES ('78', '75', '-11,75,', '标签管理', '61', 'admin/seller/label/labelList.htm', null, null, '1', '', '3', '2016-06-27 23:08:23', '3', '2016-07-05 20:39:23', null, '0', '0', '0');
+INSERT INTO `sys_menu` VALUES ('79', '75', '-11,75,', ' 好评内容管理', '91', 'admin/seller/praise/praiseList.htm', null, null, '1', '', '3', '2016-06-27 23:08:36', '3', '2016-07-05 23:26:59', null, '0', '0', '0');
+INSERT INTO `sys_menu` VALUES ('80', '26', '-1,126,', '帮助文档', '1', 'admin/helpcenter/document/documentList.htm', null, null, '1', '', '3', '2016-06-28 21:02:52', '3', '2016-07-05 20:39:07', null, '0', '0', '0');
 
 -- ----------------------------
 -- Table structure for `sys_notice`

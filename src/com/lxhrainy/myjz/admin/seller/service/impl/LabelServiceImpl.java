@@ -42,7 +42,7 @@ implements ILabelService {
 	 * @param userid
 	 * @return
 	 */
-	public List<Label> getAppraiseListByUser(int userid) {
+	public List<Label> getPraiseListByUser(int userid) {
 		return dao.getListByUserAndType(userid,Global.LABEL_TYPE_APPRAISE);
 	}
 	

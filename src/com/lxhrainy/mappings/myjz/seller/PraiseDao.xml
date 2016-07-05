@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lxhrainy.myjz.admin.seller.dao.IPraiseDao">
+    
+	<sql id="sellerPraiseColumns">
+		T.id AS "id",
+		T.userid AS "user.id",
+		T.createtime AS "createtime",
+		T.updatetime AS "updatetime",
+		T.labelid AS "label.id",
+		T.content AS "content",
+		T.status AS "status",
+		
+		L.name AS "label.name",
+		U.username AS "user.username"
+	</sql>
+	
+	<sql id="sellerPraiseJoins">
+		LEFT JOIN user_info U ON U.id = T.userid 
+		LEFT JOIN seller_label L ON L.id = T.labelid
+	</sql>
+	
+	<sql id="where">
+		<if test="condition!=null">
+			<where>
+				1 = 1
+				<if test="condition.keyword!=null and condition.keyword!=''">
+					AND (
+							L.name LIKE CONCAT('%',#{condition.keyword},'%')
+							OR T.content LIKE CONCAT('%',#{condition.keyword},'%')
+					    )
+				</if>
+				<if test="condition.model!=null">
+				</if>
+			</where>
+		</if>
+	</sql>
+    
+	<select id="getById" resultType="Praise">
+		SELECT 
+			<include refid="sellerPraiseColumns"/>
+		FROM seller_praise T
+		<include refid="sellerPraiseJoins"/>
+		WHERE T.id = #{id}
+	</select>
+	
+	<select id="findListByPage" resultType="Praise">
+		SELECT 
+			<include refid="sellerPraiseColumns"/>
+		FROM seller_praise T
+		<include refid="sellerPraiseJoins"/>
+		<include refid="where"/>
+		order by T.ID
+			<include refid="Sql.pager" />
+	</select>
+	
+	<select id="findAllList" resultType="Praise">
+		SELECT 
+			<include refid="sellerPraiseColumns"/>
+		FROM seller_praise T
+		<include refid="sellerPraiseJoins"/>
+		<include refid="where"/>
+	</select>
+	
+	<select id="getCountByCondition" resultType="int">
+		SELECT 
+			COUNT(1)
+		FROM seller_praise T
+		<include refid="sellerPraiseJoins"/>
+		<include refid="where"/>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO seller_praise(
+			id,
+			userid,
+			createtime,
+			updatetime,
+			labelid,
+			content,
+			status
+		) VALUES (
+			#{id},
+			#{user.id},
+			#{createtime},
+			#{updatetime},
+			#{label.id},
+			#{content},
+			#{status}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE seller_praise SET 	
+			userid = #{user.id},
+			createtime = #{createtime},
+			updatetime = #{updatetime},
+			labelid = #{label.id},
+			content = #{content},
+			status = #{status}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="deleteById">
+		DELETE FROM seller_praise
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

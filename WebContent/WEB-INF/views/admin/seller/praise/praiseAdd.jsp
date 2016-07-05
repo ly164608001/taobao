@@ -7,7 +7,7 @@
 </head>
 <body>
 
-	<form id="addform" action="${basePath}admin/seller/receiptaddress/addsave.htm" method="post">
+	<form id="addform" action="${basePath}admin/seller/praise/addsave.htm" method="post">
 		<table cellpadding="5">
 			<tr>
 				<td>标签:</td>
@@ -23,23 +23,9 @@
 				</td>
 			</tr>
 			<tr>
-				<td>姓名:</td>
-				<td><input name="name" class="easyui-validatebox textbox" required="required"/></td>
-			</tr>
-			<tr>
-				<td>电话:</td>
-				<td>
-					<input name="phone" class="easyui-validatebox textbox" required="required"/>
-				</td>
-			</tr>
-			<tr>
-				<td><font>邮编:</td> 
-				<td><input name="code" class="easyui-validatebox textbox" /></td>
-			</tr>
-			<tr>
-				<td>收获地址:</td>
+				<td>规定好评内容:</td>
 				<td><textarea  class="easyui-validatebox" required="required"
-							name="address" cols="20" rows="4"></textarea></td>
+							name="content" cols="20" rows="4"></textarea></td>
 			</tr>
 			<tr>
 				<td></td>

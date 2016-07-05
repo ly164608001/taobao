@@ -13,18 +13,18 @@ import org.springframework.web.servlet.ModelAndView;
 import com.alibaba.fastjson.JSONObject;
 import com.lxhrainy.core.common.controller.BaseController;
 import com.lxhrainy.myjz.admin.seller.model.Label;
-import com.lxhrainy.myjz.admin.seller.model.ReceiptAddress;
-import com.lxhrainy.myjz.admin.seller.oe.ReceiptAddressVO;
+import com.lxhrainy.myjz.admin.seller.model.Praise;
+import com.lxhrainy.myjz.admin.seller.oe.PraiseVO;
 import com.lxhrainy.myjz.admin.seller.service.ILabelService;
-import com.lxhrainy.myjz.admin.seller.service.IReceiptAddressService;
+import com.lxhrainy.myjz.admin.seller.service.IPraiseService;
 import com.lxhrainy.myjz.common.constant.Global;
 
-@RequestMapping("/admin/seller/receiptaddress")
+@RequestMapping("/admin/seller/praise")
 @Controller
-public class ReceiptAddressController extends BaseController {
+public class PraiseController extends BaseController {
 
 	@Autowired
-	IReceiptAddressService addressService;
+	IPraiseService praiseService;
 	@Autowired
 	ILabelService labelService;
 	
@@ -32,13 +32,13 @@ public class ReceiptAddressController extends BaseController {
 	 * 详情
 	 * @param
 	 */
-	@RequestMapping("/receiptaddressDetail")
+	@RequestMapping("/praiseDetail")
 	public ModelAndView detail(Integer id) {
 		if(id!=null){
-			mv.addObject("model", addressService.getById(id));
+			mv.addObject("model", praiseService.getById(id));
 		}
 		
-		mv.setViewName("admin/seller/receiptaddress/receiptaddressDetail");
+		mv.setViewName("admin/seller/praise/praiseDetail");
 		return mv;
 	}
 	
@@ -46,17 +46,17 @@ public class ReceiptAddressController extends BaseController {
 	 * 列表
 	 * @param
 	 */
-	@RequestMapping("/receiptaddressList")
+	@RequestMapping("/praiseList")
 	public ModelAndView list() {
-		mv.setViewName("admin/seller/receiptaddress/receiptaddressList");
+		mv.setViewName("admin/seller/praise/praiseList");
 		return mv;
 	}
 	
 	@RequestMapping("/datalist")
 	@ResponseBody
-	public JSONObject listdata(ReceiptAddressVO vo) {
+	public JSONObject listdata(PraiseVO vo) {
 		JSONObject rj = new JSONObject();
-		List<ReceiptAddress> list = addressService.getListByPage(vo);
+		List<Praise> list = praiseService.getListByPage(vo);
 		rj.put("total", vo.getTotalCount());
 		rj.put("rows",list);
 		rj.put("vo",vo);
@@ -67,11 +67,11 @@ public class ReceiptAddressController extends BaseController {
 	 * 新增
 	 * @param
 	 */
-	@RequestMapping("/receiptaddressAdd")
+	@RequestMapping("/praiseAdd")
 	public ModelAndView add(Integer pid) {
-		List<Label> labelList = labelService.getAddressListByUser(this.getCurrentUser().getId());
+		List<Label> labelList = labelService.getPraiseListByUser(this.getCurrentUser().getId());
 		mv.addObject("labelList", labelList);
-		mv.setViewName("admin/seller/receiptaddress/receiptaddressAdd");
+		mv.setViewName("admin/seller/praise/praiseAdd");
 		return mv;
 	}
 	
@@ -81,17 +81,16 @@ public class ReceiptAddressController extends BaseController {
 	 */
 	@RequestMapping("/addsave")
 	@ResponseBody
-	public JSONObject addsave(ReceiptAddress model) {
+	public JSONObject addsave(Praise model) {
 		JSONObject rj = new JSONObject();
-		if(model == null || StringUtils.isEmpty(model.getName()) || StringUtils.isEmpty(model.getAddress())
-				|| StringUtils.isEmpty(model.getPhone()) || model.getLabel() == null){
+		if(model == null || model.getLabel() == null || StringUtils.isEmpty(model.getContent())){
 			rj.put("success", false);
 			rj.put("msg", "保存失败");
 		}else{
 			model.setStatus(Global.NO);
 			model.setCreatetime(new Date());
 			model.setUser(this.getCurrentUser());
-			addressService.save(model);
+			praiseService.save(model);
 			rj.put("success", true);
 			rj.put("msg", "保存成功");
 		}
@@ -102,15 +101,15 @@ public class ReceiptAddressController extends BaseController {
 	 * 修改
 	 * @param
 	 */
-	@RequestMapping("/receiptaddressUpdate")
+	@RequestMapping("/praiseUpdate")
 	public ModelAndView update(Integer id) {
 		if(id != null){
-			List<Label> labelList = labelService.getAddressListByUser(this.getCurrentUser().getId());
+			List<Label> labelList = labelService.getPraiseListByUser(this.getCurrentUser().getId());
 			mv.addObject("labelList", labelList);
-			mv.addObject("model", addressService.getById(id));
+			mv.addObject("model", praiseService.getById(id));
 		}
 		
-		mv.setViewName("admin/seller/receiptaddress/receiptaddressUpdate");
+		mv.setViewName("admin/seller/praise/praiseUpdate");
 		return mv;
 	}
 	
@@ -120,32 +119,24 @@ public class ReceiptAddressController extends BaseController {
 	 */
 	@RequestMapping("/updatesave")
 	@ResponseBody
-	public JSONObject updatesave(ReceiptAddress model) {
+	public JSONObject updatesave(Praise model) {
 		JSONObject rj = new JSONObject();
 		rj.put("success", false);
 		rj.put("msg", "更新失败");
 		
-		String name = null;
-		String phone = null;
-		String address = null;
+		String content = null;
 		Label label = null;
 		
 		if(model != null ){
-			name = model.getName();
-			phone = model.getPhone();
-			address = model.getAddress();
 			label = model.getLabel();
-			if(!StringUtils.isEmpty(name) && !StringUtils.isEmpty(address)
-					&& !StringUtils.isEmpty(phone) && label != null){
+			content = model.getContent();
+			if(!StringUtils.isEmpty(content) && label != null){
 				
-				ReceiptAddress oldInfo = addressService.getById(model.getId());
-				oldInfo.setName(name);
-				oldInfo.setPhone(phone);
-				oldInfo.setCode(model.getCode());
-				oldInfo.setAddress(address);
-				oldInfo.setUpdatetime(new Date());
+				Praise oldInfo = praiseService.getById(model.getId());
+				oldInfo.setContent(content);
 				oldInfo.setLabel(label);
-				addressService.update(oldInfo);
+				oldInfo.setUpdatetime(new Date());
+				praiseService.update(oldInfo);
 				rj.put("success", true);
 				rj.put("msg", "更新成功");
 			}
@@ -160,11 +151,11 @@ public class ReceiptAddressController extends BaseController {
 	 * 删除
 	 * @param ID
 	 */
-	@RequestMapping("/receiptaddressDelete")
+	@RequestMapping("/praiseDelete")
 	@ResponseBody
 	public JSONObject delete(Integer id) {
 		JSONObject rj = new JSONObject();
-		addressService.deleteById(id);
+		praiseService.deleteById(id);
 		rj.put("success", true);
 		rj.put("msg", "删除成功");
 		return rj;
