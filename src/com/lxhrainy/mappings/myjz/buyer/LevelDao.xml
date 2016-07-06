@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lxhrainy.myjz.admin.buyer.dao.ILevelDao">
+    
+	<sql id="levelColumns">
+		T.id AS "id",
+		T.name AS "name",
+		T.deleted AS "deleted",
+		T.mincredit AS "mincredit",
+		T.maxcredit AS "maxcredit",
+		T.icon AS "icon",
+		T.type AS "type",
+		T.iconnum AS "iconnum"
+	</sql>
+	
+	<sql id="levelJoins">
+	</sql>
+    
+    <sql id="where">
+		<if test="condition!=null">
+			<where>
+				T.deleted = 0
+				<if test="condition.model!=null">
+					<if test="condition.model.name!=null and condition.model.name!=''">
+						AND T.name like CONCAT('%',#{condition.model.name},'%')
+					</if>
+				</if>
+			</where>
+		</if>
+	</sql>
+	
+	<select id="getById" resultType="LevelInfo">
+		SELECT 
+			<include refid="levelColumns"/>
+		FROM basic_level_info T
+		<include refid="levelJoins"/>
+		WHERE T.id = #{id}
+	</select>
+	
+	<select id="findListByPage" resultType="LevelInfo">
+		SELECT 
+			<include refid="levelColumns"/>
+		FROM basic_level_info T
+		<include refid="levelJoins"/>
+		<include refid="where"/>
+		order by T.ID
+			<include refid="Sql.pager" />
+	</select>
+	
+	<select id="findAllList" resultType="LevelInfo">
+		SELECT 
+			<include refid="levelColumns"/>
+		FROM basic_level_info T
+		<include refid="levelJoins"/>
+		<include refid="where"/>
+	</select>
+	
+	
+	<select id="getCountByCondition" resultType="int">
+		SELECT 
+			COUNT(1)
+		FROM basic_level_info T
+		<include refid="levelJoins"/>
+		<include refid="where"/>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO basic_level_info(
+			id,
+			name,
+			deleted,
+			mincredit,
+			maxcredit,
+			icon,
+			iconnum,
+			type
+		) VALUES (
+			#{id},
+			#{name},
+			#{deleted},
+			#{mincredit},
+			#{maxcredit},
+			#{icon},
+			#{iconnum},
+			#{type}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE basic_level_info SET 	
+			name = #{name},
+			deleted = #{deleted},
+			mincredit = #{mincredit},
+			maxcredit = #{maxcredit},
+			icon = #{icon},
+			iconnum = #{iconnum},
+			type = ${type}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="deleteById">
+		UPDATE basic_level_info 
+		SET
+			deleted = 1 
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

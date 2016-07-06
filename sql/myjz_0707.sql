@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50096
 File Encoding         : 65001
 
-Date: 2016-07-05 23:59:00
+Date: 2016-07-07 00:00:17
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -21,14 +21,39 @@ SET FOREIGN_KEY_CHECKS=0;
 DROP TABLE IF EXISTS `basic_level_info`;
 CREATE TABLE `basic_level_info` (
   `id` int(11) NOT NULL auto_increment,
+  `type` int(1) default NULL COMMENT '等级类型 1买家',
   `name` varchar(31) default NULL COMMENT '等级名称',
+  `mincredit` int(11) default NULL COMMENT '等级最低积分',
+  `maxcredit` int(11) default NULL COMMENT '等级最高积分',
+  `icon` varchar(255) default NULL COMMENT '等级对应图标',
+  `iconnum` int(11) default NULL COMMENT '图标数',
   `deleted` int(1) default NULL COMMENT '删除标识',
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='等级信息表';
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8 COMMENT='等级信息表';
 
 -- ----------------------------
 -- Records of basic_level_info
 -- ----------------------------
+INSERT INTO `basic_level_info` VALUES ('1', '1', '一星', '4', '10', null, '1', '0');
+INSERT INTO `basic_level_info` VALUES ('2', '1', '二星', '11', '40', null, '2', '0');
+INSERT INTO `basic_level_info` VALUES ('4', '1', '三星', '41', '90', null, '3', '0');
+INSERT INTO `basic_level_info` VALUES ('5', '1', '四星', '91', '150', null, '4', '0');
+INSERT INTO `basic_level_info` VALUES ('6', '1', '五星', '151', '250', null, '5', '0');
+INSERT INTO `basic_level_info` VALUES ('7', '1', '一钻', '251', '500', null, '1', '0');
+INSERT INTO `basic_level_info` VALUES ('8', '1', '二钻', '501', '1000', null, '2', '0');
+INSERT INTO `basic_level_info` VALUES ('9', '1', '三钻', '1001', '2000', null, '3', '0');
+INSERT INTO `basic_level_info` VALUES ('10', '1', '四钻', '2001', '5000', null, '4', '0');
+INSERT INTO `basic_level_info` VALUES ('11', '1', '五钻', '5001', '10000', null, '5', '0');
+INSERT INTO `basic_level_info` VALUES ('12', '1', '一皇冠', '10001', '20000', null, '1', '0');
+INSERT INTO `basic_level_info` VALUES ('13', '1', '二皇冠', '20001', '50000', null, '2', '0');
+INSERT INTO `basic_level_info` VALUES ('14', '1', '三皇冠', '50001', '100000', null, '3', '0');
+INSERT INTO `basic_level_info` VALUES ('15', '1', '四皇冠', '100001', '200000', null, '4', '0');
+INSERT INTO `basic_level_info` VALUES ('16', '1', '五皇冠', '200001', '500000', null, '5', '0');
+INSERT INTO `basic_level_info` VALUES ('17', '1', '一金冠', '500001', '1000000', null, '1', '0');
+INSERT INTO `basic_level_info` VALUES ('18', '1', '二金冠', '1000001', '2000000', null, '2', '0');
+INSERT INTO `basic_level_info` VALUES ('19', '1', '三金冠', '2000001', '5000000', null, '3', '0');
+INSERT INTO `basic_level_info` VALUES ('20', '1', '四金冠', '5000001', '10000000', null, '4', '0');
+INSERT INTO `basic_level_info` VALUES ('21', '1', '五金冠', '10000001', '-1', null, '5', '0');
 
 -- ----------------------------
 -- Table structure for `buyer_account_basic_info`
@@ -154,7 +179,7 @@ CREATE TABLE `help_document` (
   `status` int(1) default NULL COMMENT '状态 (显示隐藏)',
   `content` text COMMENT '文档内容',
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COMMENT='帮助文档';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='帮助文档';
 
 -- ----------------------------
 -- Records of help_document
@@ -247,7 +272,7 @@ CREATE TABLE `seller_label` (
   `userid` int(11) default NULL COMMENT '用户ID',
   `createtime` datetime default NULL COMMENT '创建时间',
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='标签表';
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='标签表';
 
 -- ----------------------------
 -- Records of seller_label
@@ -268,7 +293,7 @@ CREATE TABLE `seller_praise` (
   `content` varchar(255) default NULL COMMENT '好评内容',
   `status` int(1) default NULL COMMENT '状态(0：未使用；1已使用)',
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='好评内容信息表';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='好评内容信息表';
 
 -- ----------------------------
 -- Records of seller_praise
@@ -291,7 +316,7 @@ CREATE TABLE `seller_receipt_address` (
   `address` varchar(255) default NULL COMMENT '收货地址',
   `status` int(1) default NULL COMMENT '状态(0：未使用；1已使用)',
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='商家收货地址';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='商家收货地址';
 
 -- ----------------------------
 -- Records of seller_receipt_address
@@ -4136,7 +4161,7 @@ CREATE TABLE `sys_dict` (
   `remarks` varchar(255) default NULL COMMENT '备注信息',
   `deleted` int(1) NOT NULL default '0' COMMENT '删除标记',
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of sys_dict
@@ -4153,6 +4178,7 @@ INSERT INTO `sys_dict` VALUES ('36', '0', '隐藏', 'ShowOrHidden', '隐藏或�
 INSERT INTO `sys_dict` VALUES ('37', '1', '收获地址', 'LabelType', '标签类型', null, null, null, null, null, null, null, '0');
 INSERT INTO `sys_dict` VALUES ('38', '2', '好评内容', 'LabelType', '标签类型', null, null, null, null, null, null, null, '0');
 INSERT INTO `sys_dict` VALUES ('39', '1', '淘宝店铺', 'ShopType', '店铺类型', null, null, null, null, null, null, null, '0');
+INSERT INTO `sys_dict` VALUES ('40', '1', '买家信用', 'LevelType', '信用等级类型', null, null, null, null, null, null, null, '0');
 
 -- ----------------------------
 -- Table structure for `sys_log`
@@ -4203,7 +4229,7 @@ CREATE TABLE `sys_menu` (
   PRIMARY KEY  (`id`),
   KEY `sys_menu_parent_id` USING BTREE (`parentid`),
   KEY `sys_menu_del_flag` USING BTREE (`deleted`)
-) ENGINE=InnoDB AUTO_INCREMENT=81 DEFAULT CHARSET=utf8 COMMENT='菜单表';
+) ENGINE=InnoDB AUTO_INCREMENT=84 DEFAULT CHARSET=utf8 COMMENT='菜单表';
 
 -- ----------------------------
 -- Records of sys_menu
@@ -4226,6 +4252,9 @@ INSERT INTO `sys_menu` VALUES ('77', '75', '-11,75,', '收获地址管理', '31'
 INSERT INTO `sys_menu` VALUES ('78', '75', '-11,75,', '标签管理', '61', 'admin/seller/label/labelList.htm', null, null, '1', '', '3', '2016-06-27 23:08:23', '3', '2016-07-05 20:39:23', null, '0', '0', '0');
 INSERT INTO `sys_menu` VALUES ('79', '75', '-11,75,', ' 好评内容管理', '91', 'admin/seller/praise/praiseList.htm', null, null, '1', '', '3', '2016-06-27 23:08:36', '3', '2016-07-05 23:26:59', null, '0', '0', '0');
 INSERT INTO `sys_menu` VALUES ('80', '26', '-1,126,', '帮助文档', '1', 'admin/helpcenter/document/documentList.htm', null, null, '1', '', '3', '2016-06-28 21:02:52', '3', '2016-07-05 20:39:07', null, '0', '0', '0');
+INSERT INTO `sys_menu` VALUES ('81', '1', '-11,', '买家管理', '430', '', null, null, '1', '', '3', '2016-07-06 22:54:32', '3', '2016-07-06 22:54:32', null, '0', '0', '0');
+INSERT INTO `sys_menu` VALUES ('82', '26', '-1,126,', '淘宝等级管理', '61', 'admin/buyer/level/levelList.htm', null, null, '1', '', '3', '2016-07-06 22:55:49', '3', '2016-07-06 22:55:49', null, '0', '0', '0');
+INSERT INTO `sys_menu` VALUES ('83', '81', '-11,81,', '小号管理', '1', '', null, null, '1', '', '3', '2016-07-06 22:56:53', '3', '2016-07-06 22:56:53', null, '0', '0', '0');
 
 -- ----------------------------
 -- Table structure for `sys_notice`
@@ -4310,6 +4339,9 @@ INSERT INTO `sys_role_menu` VALUES ('1', '77');
 INSERT INTO `sys_role_menu` VALUES ('1', '78');
 INSERT INTO `sys_role_menu` VALUES ('1', '79');
 INSERT INTO `sys_role_menu` VALUES ('1', '80');
+INSERT INTO `sys_role_menu` VALUES ('1', '81');
+INSERT INTO `sys_role_menu` VALUES ('1', '82');
+INSERT INTO `sys_role_menu` VALUES ('1', '83');
 
 -- ----------------------------
 -- Table structure for `sys_user_role`
