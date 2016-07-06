@@ -8,6 +8,7 @@ import java.io.Serializable;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -139,6 +140,7 @@ public class UserApiServiceImpl extends AbstractBaseServiceImpl<IUserInfoDao, Us
 					rj.setError_code(ResultJson.ERROR_CODE_INVITER_NOT_EXIST);
 					rj.setMessage("邀请人不存在");
 				} else {
+					//TODO
 					UserInfo mobileUserEntity = new UserInfo();
 					mobileUserEntity.setPassword(PasswordUtil.encrypt(mobileUser.getUsername(), mobileUser.getPassword(), PasswordUtil.getStaticSalt()));
 					mobileUserEntity.setUsername(mobileUser.getUsername());
@@ -172,8 +174,60 @@ public class UserApiServiceImpl extends AbstractBaseServiceImpl<IUserInfoDao, Us
 
 	@Override
 	public ResultJson login(ApiParams mobileUser, HttpServletResponse response) {
-		// TODO Auto-generated method stub
-		return null;
+		ResultJson rj = new ResultJson();
+		rj.setError_code(ResultJson.ERROR_CODE_PARAMETERS);
+		rj.setMessage("参数错误");
+		if (oConvertUtils.isNotEmpty(mobileUser)) {
+			if (oConvertUtils.isNotEmpty(mobileUser.getUsername()) 
+					&& StringUtil.isNotEmpty(mobileUser.getPassword())
+					&& StringUtil.isNotEmpty(mobileUser.getPlatform())
+					&& StringUtil.isNotEmpty(mobileUser.getUuid())) {
+				
+				//Integer type = 2;
+				
+				UserInfo user = userInfoService.getByUsername(mobileUser.getUsername());
+				if (user != null) {
+					if (user.getStatus().intValue() == ApiConstant.API_USER_FORBIDDEN) {
+						rj.setError_code(ResultJson.ERROR_CODE_USER_NO_AUTH);
+						rj.setMessage("用户已被禁用，请联系管理员处理");
+						return rj;
+					}
+					// 判断是否已登录
+					UserInfo existLoginUser = ApiCacheUtil.getLoginUser();
+					if (oConvertUtils.isNotEmpty(existLoginUser)) {
+						if (oConvertUtils.isEmpty(existLoginUser.getUuid())) {
+							ApiCacheUtil.removeUserChache();
+						}
+					}
+					
+					String password = PasswordUtil.encrypt(mobileUser.getUsername(), mobileUser.getPassword(), PasswordUtil.getStaticSalt());
+					if (password.equals(user.getPassword())) {
+						
+						user.setUuid(mobileUser.getUuid());
+						user.setPlatform(mobileUser.getPlatform());
+						user.setLastlogintime(new Date());
+						
+						userInfoService.update(user);
+						
+						ApiCacheUtil.addUserChache(user);
+						
+						rj.setSuccess(true);
+						rj.setError_code(ResultJson.SUCCESS);
+						rj.setMessage("登录成功");
+						Map<String, Object> result = new HashMap<String, Object>();
+						result.put("usertoken", ApiCacheUtil.getUserToken(user));
+						rj.setResult(result);
+					} else {
+						rj.setError_code(ResultJson.ERROR_CODE_PASSWORD);
+						rj.setMessage("密码错误");
+					}
+				} else {
+					rj.setError_code(ResultJson.ERROR_CODE_USER_NOT_EXIST);
+					rj.setMessage("用户不存在，请先注册");
+				}
+			}
+		}
+		return rj;
 	}
 
 	@Override
@@ -190,8 +244,53 @@ public class UserApiServiceImpl extends AbstractBaseServiceImpl<IUserInfoDao, Us
 
 	@Override
 	public ResultJson resetPwd(ApiParams params) {
-		// TODO Auto-generated method stub
-		return null;
+		ResultJson rj = new ResultJson();
+		if (oConvertUtils.isNotEmpty(params)) {
+			if (oConvertUtils.isNotEmpty(params.getPhone()) 
+					&& StringUtil.isNotEmpty(params.getPassword())
+					&& StringUtil.isNotEmpty(params.getCaptcha())) {
+				// 验证验证码
+				String captcha = ApiCacheUtil.getCaptchaChache(params.getPhone());
+				if (StringUtil.isEmpty(captcha)) {
+					rj.setError_code(ResultJson.ERROR_CODE_CAPTCHA);
+					rj.setMessage("请获取验证码");
+					return rj;
+				} else {
+					String[] captchaArray =  captcha.split("-");
+					if (captchaArray.length == 2 ) {
+						long a = (new Date().getTime() - Long.parseLong(captchaArray[1])) / 1000;
+						if (!captchaArray[0].equals(params.getCaptcha())) {
+							rj.setError_code(ResultJson.ERROR_CODE_CAPTCHA);
+							rj.setMessage("验证码错误");
+							return rj;
+						} else if ( a > 180) {
+							rj.setError_code(ResultJson.ERROR_CODE_CAPTCHA);
+							rj.setMessage("验证码超时，请重新获取");
+							return rj;
+						}
+					}
+				}
+				ApiCacheUtil.removeCaptchaChache(params.getUsername());
+				Integer type = 2;
+				UserInfo mobileUser = userInfoService.getByPhone(params.getPhone());
+				if (oConvertUtils.isNotEmpty(mobileUser)) {
+					mobileUser.setPassword(PasswordUtil.encrypt(mobileUser.getUsername(), params.getPassword(), PasswordUtil.getStaticSalt()));
+					userInfoService.update(mobileUser);
+					ApiCacheUtil.updateUserChache(mobileUser);
+					rj.setSuccess(true);
+					rj.setError_code(ResultJson.SUCCESS);
+					rj.setMessage("修改成功");
+				} else {
+					rj.setError_code(ResultJson.ERROR_CODE_USER_NOT_EXIST);
+					rj.setMessage("用户不存在");
+				} 
+				
+			} else {
+				rj.setError_code(ResultJson.ERROR_CODE_PARAMETERS);
+				rj.setMessage("参数错误");
+			}
+		}
+		return rj;
 	}
 
 	@Override
@@ -202,32 +301,52 @@ public class UserApiServiceImpl extends AbstractBaseServiceImpl<IUserInfoDao, Us
 
 	@Override
 	public ResultJson userInfo(ApiParams user) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ResultJson certifiedDriver(Map<String, String> params) {
-		// TODO Auto-generated method stub
-		return null;
+		ResultJson rj = new ResultJson();
+		rj.setError_code(ResultJson.ERROR_CODE_PARAMETERS);
+		rj.setMessage("参数错误");
+		// 当前登录用户
+		UserInfo loginUser = ApiCacheUtil.getLoginUser();
+		if (oConvertUtils.isEmpty(loginUser)) {
+			rj.setError_code(ResultJson.ERROR_CODE_USER_NOT_LOGIN);
+			rj.setMessage("用户未登录");
+			return rj;
+		}
+		UserInfo mobileUser = userInfoService.getPersonInfo(loginUser.getId());
+		if (oConvertUtils.isNotEmpty(mobileUser)) {
+			
+			UserMoney account = userMoneyService.getByUserId(mobileUser.getId());
+			
+			JSONObject result = new JSONObject();
+			//基本信息
+			result.put("QQ", mobileUser.getDetailInfo().getQq());
+			result.put("address", mobileUser.getDetailInfo().getApartment());
+			result.put("avatarurl", mobileUser.getIcon());
+			result.put("birthday", mobileUser.getDetailInfo().getBirthday());
+			result.put("gender", mobileUser.getDetailInfo().getSex().intValue()==1?"男":"女");
+			result.put("name", mobileUser.getDetailInfo().getRealname());
+			result.put("phone", mobileUser.getPhone());
+			// 账户信息
+			Map<String,Object> accountMap = new HashMap<String,Object>();
+			accountMap.put("balance", account.getAllbalance());
+			//TODO 今日预计 收益
+			accountMap.put("earnings", 0.00);
+			accountMap.put("withdraw", account.getFrozenbalance());
+			result.put("account", accountMap);
+			rj.setSuccess(true);
+			rj.setError_code(ResultJson.SUCCESS);
+			rj.setMessage("");
+			rj.setResult(result);
+		} else {
+			rj.setError_code(ResultJson.ERROR_CODE_USER_NOT_EXIST);
+			rj.setMessage("用户不存在");
+		}
+		return rj;
 	}
 
 	@Override
 	public ResultJson certifiedUser(Map<String, String> params) {
 		// TODO Auto-generated method stub
 		return null;
-	}
-
-	@Override
-	public ResultJson certifiedCar(ApiParams params) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void getimg(String id, HttpServletResponse response) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override

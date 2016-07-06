@@ -63,7 +63,6 @@ public class ApiController {
 	 */
 	@RequestMapping("/Sigin" )
 	public void register(InputStream inputStream, HttpServletResponse response) {
-		ApiCacheUtil.getLoginUser();
 		ApiParams params =	ApiJSONUtil.decryptJSON(inputStream, ApiParams.class);
 		ResultJson rj = userApiService.register(params);
 		this.writeJsonToResponse(rj, response);
@@ -75,7 +74,7 @@ public class ApiController {
 	 * 		password 密码（必须）
 	 * @param response
 	 */
-	@RequestMapping("/login" )
+	@RequestMapping("/Login" )
 	public void login(InputStream inputStream, HttpServletResponse response) {
 		ApiParams params =	ApiJSONUtil.decryptJSON(inputStream, ApiParams.class);
 		ResultJson rj = userApiService.login(params,response);
@@ -121,12 +120,12 @@ public class ApiController {
 		this.writeJsonToResponse(rj, response);
 	}
 	/**
-	 * 重置密码
-	 * @param params  电话号码,验证码,身份证号,新密码
+	 * 忘记密码
+	 * @param params  电话号码,验证码,新密码
 	 * @param response
 	 * @throws IOException 
 	 */
-	@RequestMapping("/resetPwd")
+	@RequestMapping("/ForgetPassword")
 	public void resetPwd(InputStream inputStream, HttpServletResponse response){
 		ApiParams params =	ApiJSONUtil.decryptJSON(inputStream, ApiParams.class);
 		ResultJson rj = userApiService.resetPwd(params);
@@ -152,7 +151,7 @@ public class ApiController {
 	 * 		    rule 用户身份（必须）0:货主,1:车主
 	 * @param response
 	 */
-	@RequestMapping("/userInfo" )
+	@RequestMapping("/UserInfo" )
 	public void userInfo(InputStream inputStream, HttpServletResponse response) {
 		ApiParams params =	ApiJSONUtil.decryptJSON(inputStream, ApiParams.class);
 		ResultJson rj = userApiService.userInfo(params);
@@ -169,30 +168,6 @@ public class ApiController {
 	public void updateInfo(InputStream inputStream, HttpServletResponse response) {
 		ApiParams params =	ApiJSONUtil.decryptJSON(inputStream, ApiParams.class);
 		ResultJson rj = userApiService.updateInfo(params);
-		this.writeJsonToResponse(rj, response);
-	}
-	/**
-	 * 认证司机信息
-	 * @param json :
-	 * 		   userid 用户id(必须）
-	 * 		1、  修改用户联系方式跟姓名
-	 * 		   name 真实姓名
-	 * 		   contact 联系电话
-	 * 		   driving_company 驾驶员所在公司
-	 *  	2、用户修改头像信息
-	 * 		   iconid 头像图片id
-	 * 		3、用户提交身份认证信息
-	 * 		   driving_licence 驾驶证号
-	 * 		   driving_licence_iconid 驾驶证号图片id
-	 * 		   identity 身份证号
-	 * 		   identity_iconid 身份证照片id
-	 * 		   identity_back_iconid 身份证背面照片id
-	 * @param response
-	 */
-	@RequestMapping("/certifiedDriver" )
-	public void certifiedDriver(InputStream inputStream, HttpServletResponse response) {
-		Map<String, String> params = ApiJSONUtil.decryptJSON(inputStream, Map.class);
-		ResultJson rj = userApiService.certifiedDriver(params);
 		this.writeJsonToResponse(rj, response);
 	}
 	/**
@@ -219,35 +194,6 @@ public class ApiController {
 	public void certifiedUser(InputStream inputStream, HttpServletResponse response) {
 		Map<String, String> params = ApiJSONUtil.decryptJSON(inputStream, Map.class);
 		ResultJson rj = userApiService.certifiedUser(params);
-		this.writeJsonToResponse(rj, response);
-	}
-	/**
-	 * 认证车辆信息
-	 * 	功能 ： 
-	 * 		1、提交车辆信息（必填:plate，model,conductor）
-	 *  	2、提交车辆附属信息
-	 *  	3、用户提交车辆认证信息（必填：license_iconid，选填：operacert_iconid）	 
-	 * @param userid 用户id(必须）
-	 * @param plate 车牌号
-	 * @param model 车型
-	 * @param conductor 车长
-	 * @param party 体积
-	 * @param tons 重量
-	 * @param diver_cell  随车电话
-	 * @param owner_cell  车主电话
-	 * @param enterprise  企业名称
-	 * @param diver_cell  随车电话
-	 * @param address  所在地
-	 * @param certified 车辆认证状态 : 0:未认证 1:已认证行驶证 2:已认证营运证
-	 * @param operacert_iconid 身份证照片id
-	 * @param car_iconid 身份证背面照片id
-	 * @param license_iconid 行驶证照片照片id
-	 * @param response
-	 */
-	@RequestMapping("/certifiedCar" )
-	public void certifiedCar(InputStream inputStream, HttpServletResponse response) {
-		ApiParams params = ApiJSONUtil.decryptJSON(inputStream, ApiParams.class);
-		ResultJson rj = userApiService.certifiedCar(params);
 		this.writeJsonToResponse(rj, response);
 	}
 	/**

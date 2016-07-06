@@ -201,4 +201,10 @@ implements IUserInfoService {
 		}
 		return false;
 	}
+
+	@Override
+	public UserInfo getByPhone(String phone) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

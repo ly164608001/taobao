@@ -30,7 +30,7 @@ public class UserInfo extends BaseModel {
 	private String inviter; //邀请者
 	private UserDetailInfo detailInfo; // 用户详细信息
 	
-	private String app;
+	private String platform;
 	
 	private String uuid;
 
@@ -136,12 +136,12 @@ public class UserInfo extends BaseModel {
 		this.channel = channel;
 	}
 
-	public String getApp() {
-		return app;
+	public String getPlatform() {
+		return platform;
 	}
 
-	public void setApp(String app) {
-		this.app = app;
+	public void setPlatform(String platform) {
+		this.platform = platform;
 	}
 
 	public String getUuid() {

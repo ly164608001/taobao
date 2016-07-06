@@ -29,57 +29,43 @@ public class ApiCacheUtil {
 		}
 	}
 	
-	public static String getKey(UserInfo loginUser) {
-		return PasswordUtil.encrypt("user" + loginUser.getApp() , "userid" + loginUser.getId(), PasswordUtil.getStaticSalt());
+	public static String getUserToken(UserInfo loginUser) {
+		return PasswordUtil.encrypt("user" + loginUser.getPlatform() , "userid" + loginUser.getId(), PasswordUtil.getStaticSalt());
 	}
 	
 	public static void addUserChache(UserInfo loginUser) {
 		if (oConvertUtils.isNotEmpty(loginUser)) {
-			Element element = new Element(getKey(loginUser), loginUser);
+			Element element = new Element(getUserToken(loginUser), loginUser);
 			userCache.put(element);
 		}
 	}
 	
-	public static void removeUserChache(UserInfo loginUser) {
-		userCache.remove(getKey(loginUser));
+	public static void removeUserChache() {
+		String usertoken = ContextHolderUtils.getRequest().getHeader("usertoken");
+		userCache.remove(usertoken);
 	}
 	
 	public static void updateUserChache(UserInfo loginUser) {
-		removeUserChache(loginUser);
+		removeUserChache();
 		addUserChache(loginUser);
 	}
 	
-	public static UserInfo getUserChache(UserInfo loginUser) {
-		Element element = userCache.get(getKey(loginUser));
+	public static UserInfo getUserChache() {
+		String usertoken = ContextHolderUtils.getRequest().getHeader("usertoken");
+		Element element = userCache.get(usertoken);
 		if (oConvertUtils.isNotEmpty(element)) {
 			return (UserInfo) element.getObjectValue();
 		}
 		return null;
 	}
 	public static UserInfo getLoginUser() {
-		UserInfo loginUser = getLoginMobileUser();
-		if (oConvertUtils.isNotEmpty(loginUser)) {
-			UserInfo chacheUser= getUserChache(loginUser);
-			if (oConvertUtils.isNotEmpty(chacheUser) 
-					&& oConvertUtils.isNotEmpty(chacheUser.getUuid())
-					&& chacheUser.getUuid().equals(loginUser.getUuid())) {
-				return chacheUser;
-			}
+		UserInfo chacheUser= getUserChache();
+		if (oConvertUtils.isNotEmpty(chacheUser)) {
+			return chacheUser;
 		}
 		return null;
 	}
 	
-	private static UserInfo getLoginMobileUser() {
-		String userid = ContextHolderUtils.getRequest().getHeader("userid");
-	    String app = ContextHolderUtils.getRequest().getHeader("app");
-	    String uuid = ContextHolderUtils.getRequest().getHeader("uuid");
-	    UserInfo loginUser = new UserInfo();
-	    loginUser.setId(oConvertUtils.getInt(userid));
-	    loginUser.setApp(app);
-	    loginUser.setUuid(uuid);
-		return loginUser;
-	}
-
 	public static void addCaptchaChache(String key, String value) {
 		if (StringUtil.isNotEmpty(key) && StringUtil.isNotEmpty(value)) {
 			Element element = new Element(key, value);
@@ -100,9 +86,9 @@ public class ApiCacheUtil {
 	}
 
 	public static void logoutUser() {
-		UserInfo loginUser = getLoginMobileUser();
+		UserInfo loginUser = getUserChache();
 		if (oConvertUtils.isNotEmpty(loginUser)) {
-			removeUserChache(getLoginMobileUser());
+			removeUserChache();
 		}
 	}
 }

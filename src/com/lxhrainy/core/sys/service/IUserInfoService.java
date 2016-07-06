@@ -85,4 +85,11 @@ public interface IUserInfoService extends IBaseService<UserInfo, Integer>{
 	 * @return
 	 */
 	boolean isExistUserName(String username, Integer type);
+
+	/**
+	 * 根据电话号码获取用户
+	 * @param phone
+	 * @return
+	 */
+	UserInfo getByPhone(String phone);
 }

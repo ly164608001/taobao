@@ -60,11 +60,6 @@ public interface IUserApiService extends IBaseService<UserInfo, Integer>{
 	 */
 	public ResultJson userInfo(ApiParams user);
 	/**
-	 * 认证司机信息
-	 * @param user
-	 */
-	public ResultJson certifiedDriver(Map<String, String> params);
-	/**
 	 * 认证用户/公司信息
 	 * @param userid 用户id(必须）
 	 * 		   name 真实姓名
@@ -78,20 +73,6 @@ public interface IUserApiService extends IBaseService<UserInfo, Integer>{
 	 * 		   identity_back_iconid 身份证背面照片id
 	 */
 	public ResultJson certifiedUser(Map<String, String> params);
-	/**
-	 * 认证车辆信息
-	 * 	功能 ： 
-	 * 		1、提交车辆信息（必填:plate，model,conductor）
-	 *  	2、提交车辆附属信息
-	 *  	3、用户提交车辆认证信息（必填：license_iconid，选填：operacert_iconid）	 
-	 */
-	public ResultJson certifiedCar(ApiParams params);
-	/**
-	 * GET方式 二进制图片数据
-	 * @param request id
-	 * @param response
-	 */
-	public void getimg(String id, HttpServletResponse response);
 	/**
 	 * 更新用户信息
 	  * @param params : 
