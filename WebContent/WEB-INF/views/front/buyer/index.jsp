@@ -1,100 +1,15 @@
-<!DOCTYPE HTML>
-<html>
+<%@ page language="java" pageEncoding="UTF-8"%>
+<%@include file="/tagDeclare.jsp"%>
+<%@include file="/frontHeadDeclare.jsp"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-	<meta charset="utf-8">
-	<meta name="renderer" content="webkit|ie-comp|ie-stand">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
-	<meta http-equiv="Cache-Control" content="no-siteapp" />
-	<!--[if lt IE 9]>
-	<script type="text/javascript" src="lib/html5.js"></script>
-	<script type="text/javascript" src="lib/respond.min.js"></script>
-	<script type="text/javascript" src="lib/PIE_IE678.js"></script>
-	<![endif]-->
-	<link rel="stylesheet" type="text/css" href="static/h-ui/css/H-ui.css" />
-	<link rel="stylesheet" type="text/css" href="lib/Hui-iconfont/1.0.7/iconfont.css" />
-	<link rel="stylesheet" type="text/css" href="css/style.css" />
-	<!--[if lt IE 9]>
-	<link href="static/h-ui/css/H-ui.ie.css" rel="stylesheet" type="text/css" />
-	<![endif]-->
-	<!--[if IE 6]>
-	<script type="text/javascript" src="lib/DD_belatedPNG_0.0.8a-min.js" ></script>
-	<script>DD_belatedPNG.fix('*');</script>
-	<![endif]-->
 	<title>首页</title>
-	<meta name="keywords" content="关键词,5个左右,单个8汉字以内">
-	<meta name="description" content="网站描述，字数尽量空制在80个汉字，160个字符以内！">
 </head>
 <body>
-	<!-- <header class="navbar-wrapper">
-	<div class="navbar navbar-black navbar-fixed-top">
-		<div class="container cl">
-			<h5>
-				你好，
-				<span>布衣柜商家</span>
-				<a href="#" class="login-out">退出</a>
-			</h5>
-		</div>
-	</div>
-</header>
--->
-<header class="navbar-wrapper">
-	<div class="navbar navbar-black navbar-orange navbar-fixed-top">
-		<div class="container cl">
-			<div class="logo">
-				<img src="images/logo.png"></div>
-			<nav class="nav navbar-nav nav-collapse" role="navigation" id="Hui-navbar">
-				<ul class="cl">
-					<li class="current">
-						<a href="/">首页</a>
-					</li>
-					<li>
-						<a href="#">任务大厅</a>
-					</li>
-					<li>
-						<a href="#">任务管理</a>
-					</li>
-					<!-- <li>
-					<a href="#">账号充值</a>
-				</li>
-				<li>
-					<a href="#">申请提现</a>
-				</li>
-				<li>
-					<a href="#">账户明细</a>
-				</li>
-				<li>
-					<a href="#">帮助中心</a>
-				</li>
-				-->
-			</ul>
-		</nav>
-		<nav class="navbar-userbar hidden-xs nav navbar-nav">
-			<ul class="cr">
-				<li class="dropDown dropDown_hover">
-					<a href="#" class="dropDown_A">
-						用户中心 <i class="Hui-iconfont">&#xe6d5;</i>
-					</a>
-					<ul class="dropDown-menu menu radius box-shadow">
-						<li>
-							<a href="#">账号充值</a>
-						</li>
-						<li>
-							<a href="#">申请提现</a>
-						</li>
-						<li>
-							<a href="#">账号明细</a>
-						</li>
-					</ul>
-				</li>
-				<li>
-					<a href="#">帮助中心</a>
-				</li>
-			</ul>
-		</nav>
-	</div>
-</div>
-</header>
+
+<%@include file="/WEB-INF/views/front/buyer/header.jsp" %>
+
 <section class="container mt50">
 <div class="panel panel-default panel-tips mt20">
 	<div class="panel-header">重要说明</div>
@@ -428,28 +343,12 @@
 
 	</div>
 </section>
-<footer class="footer mt-20">
-	<div class="container">
 
-		<p>
-			Copyright &copy;2013-2016
-			<br>
-			<a rel="nofollow" target="_blank" href="#">京ICP备15015336号-1</a>
-			<br>
-			未经允许，禁止转载、抄袭、镜像
-			<br>用心做站，做不一样的站</p>
-	</div>
-</footer>
+<%@include file="/WEB-INF/views/front/buyer/footer.jsp" %>
 <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=270863798&site=qq&menu=yes" id="QQ-link">
 	<img border="0" src="http://wpa.qq.com/pa?p=2:270863798:53" alt="点击这里给我发消息" title="点击这里给我发消息"/>
 </a>
-<script type="text/javascript" src="lib/jquery/1.9.1/jquery.min.js"></script>
-<script type="text/javascript" src="lib/layer/2.1/layer.js"></script>
-<script type="text/javascript" src="lib/My97DatePicker/WdatePicker.js"></script>
-<script type="text/javascript" src="lib/layer/layer.js"></script>
-<script type="text/javascript" src="static/h-ui/js/H-ui.js"></script>
-<script type="text/javascript" src="js/page.js"></script>
-<script type="text/javascript" src="js/style.js"></script>
+
 <script>
 
 
@@ -467,17 +366,12 @@ $(function(){
 		}
 	});
 
-	layer.config({
-	    extend: ['skin/layerSkinExtend.css'], //加载新皮肤
-	    skin: 'layer-ext-myskin' //一旦设定，所有弹层风格都采用此主题。
-	});
 	// 弹出提示
-        $(window).on('load',function(){
-		indexAgency= top.layer.open({
+    indexAgency= top.layer.open({
             type:2,
             area:['900px','550px'],
             shadeClose:true,
-            content:['./提示弹窗.html','no'],
+            content:['${basePath}front/buyer/tip.htm','no'],
             btn:'确定',
             title:'重点说明(30秒后自动关闭)',
             time:30000,
@@ -485,8 +379,7 @@ $(function(){
                 layer.close(indexAgency);
             }
         }); 
-	}) 
-
+	
 });
 </script>
 </body>

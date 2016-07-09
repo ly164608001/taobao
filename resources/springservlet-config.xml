@@ -134,7 +134,7 @@
 					<list>
 						<value>front/index.htm</value>
 						<value>front/login.htm</value>
-						<value>front/tologin.json</value>
+						<value>front/tologin.htm</value>
 						<value>front/register.htm</value>
 						<value>front/doRegister.htm</value>
 						<value>front/forgetPwd.htm</value>
@@ -142,6 +142,24 @@
 						<value>front/toValidateInfo.htm</value>
 						<value>front/toResetPwd.htm</value>
 						<value>front/resetResult.htm</value>
+						
+						<!-- 首页 -->
+						<value>front/buyer/index.htm</value>
+						<value>front/buyer/tip.htm</value>
+						<value>front/buyer/main.htm</value>
+						<!-- 任务管理 -->
+						<value>front/buyer/task/taskList.htm</value>
+						<value>front/buyer/task/taskHall.htm</value>
+						<value>front/buyer/taskappeal/appealList.htm</value>
+						<!-- 我的账户 -->
+						<value>front/buyer/money/withdrawals.htm</value>
+						<value>front/buyer/money/moneyDetail.htm</value>
+						<!-- 小号管理-->
+						<value>front/buyer/account/accountList.htm</value>
+						
+						<!-- 帮助中心 -->
+						<value>front/helpcenter/main.htm</value>
+						
 					</list>
 				</property>
 	    	</bean> 
