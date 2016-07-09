@@ -2,6 +2,9 @@ package com.lxhrainy.myjz.common.constant;
 
 public class Global {
 	
+	//session中的登录者key
+	public final static String SESSION_USERNAME = "loginUser";
+	
 	/** 商家管理 start**/
 	//标签管理类型 1 收货类型 2 好评内容
 	public final static int LABEL_TYPE_ADDR = 1;
