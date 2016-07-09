@@ -6,6 +6,10 @@
 	function changeMenu(activeUrl){
 		$("#external-frame").attr("src",activeUrl);
 	}
+	
+	function loginout(){
+		top.location.href = '${basePath}front/loginout.htm';
+	}
 	</script>
 </head>
 <body>
@@ -72,7 +76,7 @@
 					<a href="javascript:void(0);" onclick="changeMenu('${basePath}');">修改密码</a>
 				</dd>
 				<dd class="last">
-					<a href="#">退出登入</a>
+					<a href="javascript:void(0);" onclick="loginout();">退出登入</a>
 				</dd>
 			</dl>
 		</div>
