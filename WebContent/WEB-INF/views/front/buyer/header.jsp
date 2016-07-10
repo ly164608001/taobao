@@ -33,7 +33,7 @@
 						<a href="${basePath}front/buyer/task/taskHall.htm">任务大厅</a>
 					</li>
 					<li >
-						<a href="javascript:void(0);" onclick="changeMenu('front/buyer/task/taskList.htm');">任务管理</a>
+						<a href="javascript:void(0);" onclick="changeMenu('front/buyer/task/taskTaobaoList.htm');">任务管理</a>
 					</li>
 			</ul>
 		</nav>

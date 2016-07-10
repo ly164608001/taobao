@@ -6,29 +6,23 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.lxhrainy.core.common.controller.BaseController;
 
-
-@RequestMapping("/front/buyer/task")
+/**
+ * 流量任务申诉控制层
+ * @author xueyunteng
+ *
+ */
+@RequestMapping("/front/buyer/taskappeal")
 @Controller
-public class TaskController extends BaseController {
+public class TaskFlowAppealController extends BaseController {
 	
 	/**
-	 * 任务管理列表
+	 * 任务申诉列表
 	 * @return
 	 */
-	@RequestMapping("/taskList")
+	@RequestMapping("/flowAppealList")
 	public ModelAndView list(){
-		mv.setViewName("front/buyer/task/taskList");
+		mv.setViewName("front/buyer/task/appeal/flowAppealList");
 		return mv;
 	}
 	
-	/**
-	 * 任务大厅
-	 * @return
-	 */
-	@RequestMapping("/taskHall")
-	public ModelAndView hall(){
-		mv.setViewName("front/buyer/task/taskHall");
-		return mv;
-	}
-
 }

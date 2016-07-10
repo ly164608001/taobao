@@ -4,11 +4,12 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-	<title>淘宝任务申诉</title>
+	<title>流量任务申诉</title>
+</head>
 <body>
 	<div class="workContent ml20">
 		<h4>
-			<span class="title">淘宝任务申诉</span>
+			<span class="title">流量任务申诉</span>
 		</h4>
 		<div class="header">
 			<div class="panel panel-default">
@@ -22,18 +23,18 @@
 		<div class="workDoing mt20">
 			<div id="tab_demo" class="HuiTab">
 				<div class="tabBar cl">
-					<span>发起的申诉</span>
-					<span>收到的申诉</span>
+					<span>发起的流量申诉</span>
+					<span>收到的流量申诉</span>
 				</div>
 				<div class="tabCon">
 					<div class="workTable mt30 appealTable">
 						<table class="table table-border table-bg">
 							<thead>
 								<tr>
-									<th>任务ID</th>
+									<th>子任务ID</th>
 									<th>申诉类型</th>
 									<th>申诉时间</th>
-									<th>处理结构</th>
+									<th>处理结果</th>
 									<th>操作</th>
 								</tr>
 							</thead>

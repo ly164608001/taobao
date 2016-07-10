@@ -7,22 +7,19 @@ import org.springframework.web.servlet.ModelAndView;
 import com.lxhrainy.core.common.controller.BaseController;
 
 /**
- * 提现控制层
+ * 账户-基本资料控制层
  * @author xueyunteng
  *
  */
 @RequestMapping("/front/buyer/money")
 @Controller
-public class WithdrawalsController extends BaseController {
+public class MoneyBaseInfoController extends BaseController {
 	
-	/**
-	 * 提现
-	 * @return
-	 */
-	@RequestMapping("/withdrawals")
-	public ModelAndView withdrawals(){
-		mv.setViewName("front/buyer/money/withdrawals");
+	@RequestMapping("/baseinfo")
+	public ModelAndView detail(){
+		mv.setViewName("front/buyer/money/moneyBaseinfo");
 		return mv;
 	}
+	
 
 }

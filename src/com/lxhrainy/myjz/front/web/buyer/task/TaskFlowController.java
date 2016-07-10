@@ -7,21 +7,21 @@ import org.springframework.web.servlet.ModelAndView;
 import com.lxhrainy.core.common.controller.BaseController;
 
 /**
- * 任务申诉控制层
+ * 流量任务控制层
  * @author xueyunteng
  *
  */
-@RequestMapping("/front/buyer/taskappeal")
+@RequestMapping("/front/buyer/task")
 @Controller
-public class TaskAppealController extends BaseController {
+public class TaskFlowController extends BaseController {
 	
 	/**
-	 * 任务申诉列表
+	 * 任务列表
 	 * @return
 	 */
-	@RequestMapping("/appealList")
-	public ModelAndView list(){
-		mv.setViewName("front/buyer/task/appeal/appealList");
+	@RequestMapping("/taskFlowList")
+	public ModelAndView flowList(){
+		mv.setViewName("front/buyer/task/taskFlowList");
 		return mv;
 	}
 	

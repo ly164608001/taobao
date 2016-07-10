@@ -93,5 +93,15 @@ public class BuyerAccountController extends BaseController {
 		return rj;
 	}
 	
+	/**
+	 * 基础信息
+	 * @return
+	 */
+	@RequestMapping("/baseinfo")
+	public ModelAndView baseInfo(){
+		mv.setViewName("front/buyer/account/baseinfo");
+		return mv;
+	}
+	
 	
 }

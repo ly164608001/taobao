@@ -5,6 +5,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 	<title>账户明细</title>
+	<script type="text/javascript" src="${basePath}static/js/My97DatePicker/WdatePicker.js"></script>
+</head>
 <body>
 <div class="workContent ml20">
 	<h4>

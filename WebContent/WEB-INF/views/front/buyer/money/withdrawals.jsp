@@ -5,6 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 	<title>申请提现</title>
+</head>
 <body>
 	<div class="workContent f-r ml20">
 	<h4>

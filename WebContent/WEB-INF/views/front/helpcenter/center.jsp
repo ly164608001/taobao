@@ -3,9 +3,14 @@
 <html>
 <head>
 	<script type="text/javascript">
-	function changeMenu(activeUrl){
-		$("#external-frame").attr("src",activeUrl);
-	}
+		$(function(){
+			 $.Huitab("#tab_user .tabBar span","#tab_user .tabCon","current","click","0");
+			 $.Huifold("#Huifold1 .item h4","#Huifold1 .item .info","fast",1,"click");
+		})
+		
+		function changeMenu(activeUrl){
+			$("#external-frame").attr("src",activeUrl);
+		}
 	</script>
 </head>
 <body>
@@ -293,4 +298,5 @@
 	</section>
 
 </body>
+
 </html>

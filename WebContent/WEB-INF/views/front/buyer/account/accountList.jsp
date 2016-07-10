@@ -5,6 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 	<title>淘宝小号</title>
+</head>
 <body>
 		<div class="workContent ml20">
 			<h4>
@@ -210,7 +211,7 @@
 	                area:['800px','500px'],
 	                closeBtn:1,
 	                shadeClose:true,
-	                content:['./设置买号收货地址(弹窗).html','no'],
+	                content:['${basePath}front/buyer/account/address.htm','no'],
 	                title:'添加买家收货地址',
 	                btn:['确定','取消'],
 	                yes:function(index){
@@ -218,6 +219,7 @@
 	                }
 	            });  
 	        });
+	    
 		// VPN设置
 		$('.btnVPN').on('click',function(){
 	            indexAgency=top.layer.open({
@@ -225,7 +227,7 @@
 	                area:['900px','500px'],
 	                closeBtn:1,
 	                shadeClose:true,
-	                content:'./淘宝小号设置(弹窗).html',
+	                content:'${basePath}front/buyer/account/vpn.htm',
 	                title:'VPN设置',
 	                btn:['确定','取消'],
 	                yes:function(index){
@@ -233,6 +235,7 @@
 	                }
 	            });  
 	        });
+		
 		// 基本信息
 		$('.btnBase').on('click',function(){
 	            indexAgency=top.layer.open({
@@ -240,8 +243,8 @@
 	                area:['600px','400px'],
 	                closeBtn:1,
 	                shadeClose:true,
-	                content:['./淘宝小号-基本信息(弹窗).html','no'],
-	                title:'基本信息',
+	                content:['${basePath}front/buyer/account/baseinfo.htm','no'],
+	                title:'基础信息',
 	                btn:['确定','取消'],
 	                yes:function(index){
 	                    console.log('这里执行提交操作');

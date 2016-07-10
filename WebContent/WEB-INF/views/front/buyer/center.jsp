@@ -4,11 +4,15 @@
 <head>
 	<script type="text/javascript">
 	function changeMenu(activeUrl){
-		$("#external-frame").attr("src",activeUrl);
+		$("#external-frame").attr("src",'${basePath}' + activeUrl);
 	}
 	
 	function loginout(){
 		top.location.href = '${basePath}front/loginout.htm';
+	}
+	
+	function toTopWindow(url){
+		top.location.href = '${basePath}' + url;
 	}
 	</script>
 </head>
@@ -23,67 +27,69 @@
 		<div class="menuSidebar f-l">
 			<dl>
 				<dt>
-					<i></i>
-					任务大厅
+					<i></i>任务大厅
 				</dt>
 				<dd>
-					<a href="#">大厅任务</a>
+					<a href="javascript:void(0);" onclick="toTopWindow('front/buyer/task/taskHall.htm');">大厅任务</a>
 				</dd>
+				
 				<dt>
-					<i class="n3"></i>
-					淘宝任务
+					<i class="n3"></i>淘宝任务
 				</dt>
 				<dd>
-					<a href="javascript:void(0);" onclick="changeMenu('${basePath}front/buyer/task/taskList.htm');">淘宝精刷任务</a>
+					<a href="javascript:void(0);" onclick="changeMenu('front/buyer/task/taskTaobaoList.htm');">淘宝精刷任务</a>
 				</dd>
 				<dd>
-					<a href="javascript:void(0);">淘宝普通任务</a>
+					<a href="javascript:void(0);" onclick="changeMenu('front/buyer/task/taskTaobaoNormalList.htm');" >淘宝普通任务</a>
 				</dd>
 				<dd>
-					<a href="javascript:void(0);" onclick="changeMenu('${basePath}front/buyer/taskappeal/appealList.htm');">任务申述</a>
+					<a href="javascript:void(0);" onclick="changeMenu('front/buyer/taskappeal/taobaoAppealList.htm');">任务申述</a>
 				</dd>
+				
 				<dt>
-					<i class="n3"></i>
-					流量任务
+					<i class="n3"></i>流量任务
 				</dt>
 				<dd>
-					<a href="javascript:void(0);">淘宝流量任务</a>
+					<a href="javascript:void(0);" onclick="changeMenu('front/buyer/task/taskFlowList.htm');" >淘宝流量任务</a>
 				</dd>
 				<dd>
-					<a href="javascript:void(0);">任务申述</a>
+					<a href="javascript:void(0);" onclick="changeMenu('front/buyer/taskappeal/flowAppealList.htm');" >任务申述</a>
 				</dd>
+				
 				<dt>
 					<i class="n5"></i>
 					小号管理
 				</dt>
 				<dd>
-					<a href="javascript:void(0);" onclick="changeMenu('${basePath}front/buyer/account/accountList.htm');">淘宝小号</a>
+					<a href="javascript:void(0);" onclick="changeMenu('front/buyer/account/accountList.htm');">淘宝小号</a>
 				</dd>
+				
 				<dt>
 					<i class="n4"></i>
 					我的账户
 				</dt>
 				<dd>
-					<a href="javascript:void(0);" onclick="changeMenu('${basePath}front/buyer/money/withdrawals.htm');">申请提现</a>
+					<a href="javascript:void(0);" onclick="changeMenu('front/buyer/money/withdrawals.htm');">申请提现</a>
 				</dd>
 				<dd>
-					<a href="javascript:void(0);" onclick="changeMenu('${basePath}front/buyer/money/moneyDetail.htm');">账户明细</a>
+					<a href="javascript:void(0);" onclick="changeMenu('front/buyer/money/moneyDetail.htm');">账户明细</a>
 				</dd>
 				<dd>
-					<a href="javascript:void(0);">基本资料</a>
+					<a href="javascript:void(0);" onclick="changeMenu('front/buyer/money/baseinfo.htm');">基本资料</a>
 				</dd>
 				<dd>
-					<a href="javascript:void(0);" onclick="changeMenu('${basePath}');">修改密码</a>
+					<a href="javascript:void(0);" onclick="changeMenu('front/buyer/money/modifyPassword.htm');">修改密码</a>
 				</dd>
 				<dd class="last">
 					<a href="javascript:void(0);" onclick="loginout();">退出登入</a>
 				</dd>
 			</dl>
+			
 		</div>
 		
 		<!-- iframe嵌入 -->
 		<iframe 
-			<c:if test="${empty initUrl}">src="${basePath}front/buyer/task/taskList.htm" </c:if>
+			<c:if test="${empty initUrl}">src="${basePath}front/buyer/task/taskTaobaoList.htm" </c:if>
 			<c:if test="${not empty initUrl}">src="${basePath}${initUrl}" </c:if>
 			 frameborder="0" scrolling="no" id="external-frame" onload="setIframeHeight(this)" name="external-frame" class="taobaoIframe"></iframe>
 		
