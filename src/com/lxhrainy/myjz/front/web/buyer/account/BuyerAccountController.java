@@ -21,7 +21,7 @@ import com.lxhrainy.myjz.admin.buyer.service.IAccountService;
  */
 @RequestMapping("/front/buyer/account")
 @Controller
-public class FrontAccountController extends BaseController {
+public class BuyerAccountController extends BaseController {
 	
 	@Autowired
 	private IAccountService accountService;
@@ -73,4 +73,25 @@ public class FrontAccountController extends BaseController {
 		rj.put("success", true);
 		return rj;
 	}
+	
+	/***
+	 * 更新顺序
+	 * @param ID
+	 */
+	@RequestMapping("/updatesort")
+	@ResponseBody
+	public JSONObject updateSort(Integer id,Integer sort) {
+		JSONObject rj = new JSONObject();
+		if(id != null && sort != null){
+			accountService.updateSort(id,sort);
+			rj.put("success", true);
+		}else{
+			rj.put("success", false);
+			rj.put("msg", "参数不全");
+		}
+		
+		return rj;
+	}
+	
+	
 }

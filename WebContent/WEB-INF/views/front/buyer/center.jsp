@@ -82,7 +82,10 @@
 		</div>
 		
 		<!-- iframe嵌入 -->
-		<iframe src="${basePath}${initUrl}"  frameborder="0" scrolling="no" id="external-frame" onload="setIframeHeight(this)" name="external-frame" class="taobaoIframe"></iframe>
+		<iframe 
+			<c:if test="${empty initUrl}">src="${basePath}front/buyer/task/taskList.htm" </c:if>
+			<c:if test="${not empty initUrl}">src="${basePath}${initUrl}" </c:if>
+			 frameborder="0" scrolling="no" id="external-frame" onload="setIframeHeight(this)" name="external-frame" class="taobaoIframe"></iframe>
 		
 	</section>
 

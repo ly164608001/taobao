@@ -26,4 +26,10 @@ public interface IAccountService extends IBaseService<AccountInfo, Integer>{
 	 */
 	public int able(int id);
 
+	/***
+	 * 更新顺序
+	 * @param ID
+	 */
+	public int updateSort(int id,int sort);
+
 }

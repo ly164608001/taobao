@@ -26,6 +26,14 @@ implements IAccountService  {
 	@Autowired
 	IAccountInfoDao dao;
 	
+	/***
+	 * 更新顺序
+	 */
+	@Transactional(readOnly = false)
+	public int updateSort(int id,int sort){
+		return dao.updateSort(id,sort);
+	}
+	
 	/**
 	 * 禁用
 	 * @param id
@@ -64,5 +72,6 @@ implements IAccountService  {
 		dao.updateStatus(id,updateSataus);
 		return 1;
 	}
+	
 	
 }

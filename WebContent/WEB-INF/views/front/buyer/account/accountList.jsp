@@ -106,13 +106,14 @@
 												</c:choose>
 											</td>
 											<td>
-												<input class="input-text"></input>
+												<input class="input-text" onblur="updateSort(this,${item.id});" value="${item.sort}"/>
 											</td>
 											<td>
 												<span>
 													<div class="check-box">
-														<input type="checkbox" onclick="isAble(this,${item.id});" id="checkbox-1">
-														<label for="checkbox-1">是否启用</label>
+														<input <c:if test="${fns:getDictValue('是','YesOrNo','') == item.status}">checked="checked"</c:if>
+															type="checkbox" onclick="isAble(this,${item.id});" />
+														<label>是否启用</label>
 													</div>
 												</span>
 											</td>
@@ -155,11 +156,34 @@
 </div>
 	<script>
 	/**
+	 * 更新排序
+	*/
+	function updateSort(obj,id){
+		var sort = obj.value;
+		if(sort == ''){
+			sort = 0;
+		}
+		$.ajax({  
+			url : '${basePath}front/buyer/account/updatesort.htm',
+			data : {'id':id,'sort':sort},
+			dataType : 'json',
+			success : function(result){
+				if(result.success){
+					$('#searchForm').submit();  
+				}else{
+					alert(result.msg);
+				}
+				
+			}  
+		}); 
+	}
+	
+	/**
 	 * 是否启用
 	 */
 	function isAble(checkBoxObj,id){
 		var tipMsg = '';
-		var url = '${basePath}admin/buyer/account/';
+		var url = '${basePath}front/buyer/account/';
 		
 		if (checkBoxObj.checked == true){
 			tipMsg = '确认启用该小号?';
@@ -169,30 +193,12 @@
 			url += 'unable.htm?id=' + id;
 		}
 		
-		var ableIndex = top.layer.open({
-            type:2,
-            area:['900px','500px'],
-            closeBtn:1,
-            shadeClose:true,
-            content:'./淘宝小号设置(弹窗).html',
-            title:'VPN设置',
-            btn:['确定','取消'],
-            yes:function(index){
-                console.log('这里执行提交操作');
-            }
-        });  
-        
-		$.messager.confirm('确认',tipMsg,function(a){  
-			if(a) {
-				$.ajax({  
-					url : url,    
-					success : function(){
-						$('#searchForm').submit();  
-					}  
-				});
-			}          
-		});
-		
+		$.ajax({  
+			url : url,    
+			success : function(){
+				$('#searchForm').submit();  
+			}  
+		}); 
 	}
 	
 	$(function(){
@@ -243,7 +249,7 @@
 	            });  
 	        });
 	    $.Huitab("#tab_demo .tabBar span","#tab_demo .tabCon","current","click","0");
-	});
+	}); 
 	</script>
 </body>
 </html>

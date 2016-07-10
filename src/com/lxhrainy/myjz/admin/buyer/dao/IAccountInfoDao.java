@@ -21,5 +21,12 @@ public interface IAccountInfoDao extends IBaseDao<AccountInfo> {
 	 * @param status
 	 */
 	void updateStatus(@Param("id")int id, @Param("status")int status);
+
+	/**
+	 * 更新顺序
+	 * @param id
+	 * @param status
+	 */
+	int updateSort(@Param("id")int id, @Param("sort")int sort);
 	
 }

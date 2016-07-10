@@ -156,6 +156,9 @@
 						<value>front/buyer/money/moneyDetail.htm</value>
 						<!-- 小号管理-->
 						<value>front/buyer/account/accountList.htm</value>
+						<value>front/buyer/account/updatesort.htm</value>
+						<value>front/buyer/account/able.htm</value>
+						<value>front/buyer/account/unable.htm</value>
 						
 						<!-- 帮助中心 -->
 						<value>front/helpcenter/main.htm</value>

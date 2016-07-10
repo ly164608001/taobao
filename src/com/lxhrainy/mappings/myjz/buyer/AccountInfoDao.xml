@@ -131,6 +131,12 @@
 		WHERE id = #{id}
 	</update>
 	
+	<update id="updateSort">
+		UPDATE buyer_account_info
+		SET sort = #{sort}
+		WHERE id = #{id}
+	</update>
+	
 	<update id="delete">
 		DELETE FROM buyer_account_info
 		WHERE id = #{id}
