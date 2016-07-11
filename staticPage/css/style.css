@@ -63,6 +63,22 @@ a{color: #333; text-decoration: none;font-size: 14px;}
 .mt30{margin-top: 30px;}
 .mt10{margin-top: 10px;}
 
+/*刷手首页*/
+.count6 li{width: 250px;}
+.count6 .count_block{width: 240px;margin: 0 auto;}
+.count6 .count_block p.blue{background: #3bb4f2;}
+.count6 .count_block p{text-align: center;padding: 20px 0;color: #fff;}
+.count6 .count_block p span{display: block;font-size: 16px;margin-bottom: 10px;}
+.count6 .count_block p{text-align: center;padding: 20px 0;color: #fff;margin-bottom: 0}
+.count6 .count_block p b, .taobao .count_block dl b{font-size: 24px;font-weight: 500;}
+.count6 .count_block dl{height: 45px;border-top: none;text-align: center;color: #666666;background: #fafafa;}
+.count6 .count_block dl dt{width: 33.3%;}
+.count6 .count_block.count_block50 dl dt{width: 50%;}
+.count6 .count_block dl dt, .count6 .count_block dl dd{float: left;display: inline-block;background: url('../images/count_bg.png') repeat-y right 0;}
+.count6 .count_block dl label{display: block;line-height: 24px;}
+.count6 .count_block p.orange{background: #FF5A09;}
+.count6 .count_block dl dd{width: 100%;}
+
 /*任务大厅*/
 .tabBar span.current{background: #ff5a09;}
 .tabBar span{padding: 0 25px;height: 40px;line-height: 40px;}
