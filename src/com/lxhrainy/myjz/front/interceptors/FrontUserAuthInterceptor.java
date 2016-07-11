@@ -69,7 +69,9 @@ public class FrontUserAuthInterceptor extends HandlerInterceptorAdapter {
 			client = ClientManager.getInstance().getClient(
 					request.getParameter("sessionId"));
 		}
-		if (excludeUrls.contains(requestPath)) {
+		
+		return true;
+		/*if (excludeUrls.contains(requestPath)) {
 			//如果该请求不在拦截范围内，直接返回true
 			return true;
 		} else {
@@ -85,7 +87,7 @@ public class FrontUserAuthInterceptor extends HandlerInterceptorAdapter {
 				forward(request, response);
 				return false;
 			}
-		}
+		}*/
 	}
 	
 	/**
