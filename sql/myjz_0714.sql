@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50096
 File Encoding         : 65001
 
-Date: 2016-07-07 00:00:17
+Date: 2016-07-14 22:22:09
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -34,26 +34,26 @@ CREATE TABLE `basic_level_info` (
 -- ----------------------------
 -- Records of basic_level_info
 -- ----------------------------
-INSERT INTO `basic_level_info` VALUES ('1', '1', '一星', '4', '10', null, '1', '0');
-INSERT INTO `basic_level_info` VALUES ('2', '1', '二星', '11', '40', null, '2', '0');
-INSERT INTO `basic_level_info` VALUES ('4', '1', '三星', '41', '90', null, '3', '0');
-INSERT INTO `basic_level_info` VALUES ('5', '1', '四星', '91', '150', null, '4', '0');
-INSERT INTO `basic_level_info` VALUES ('6', '1', '五星', '151', '250', null, '5', '0');
-INSERT INTO `basic_level_info` VALUES ('7', '1', '一钻', '251', '500', null, '1', '0');
-INSERT INTO `basic_level_info` VALUES ('8', '1', '二钻', '501', '1000', null, '2', '0');
-INSERT INTO `basic_level_info` VALUES ('9', '1', '三钻', '1001', '2000', null, '3', '0');
-INSERT INTO `basic_level_info` VALUES ('10', '1', '四钻', '2001', '5000', null, '4', '0');
-INSERT INTO `basic_level_info` VALUES ('11', '1', '五钻', '5001', '10000', null, '5', '0');
-INSERT INTO `basic_level_info` VALUES ('12', '1', '一皇冠', '10001', '20000', null, '1', '0');
-INSERT INTO `basic_level_info` VALUES ('13', '1', '二皇冠', '20001', '50000', null, '2', '0');
-INSERT INTO `basic_level_info` VALUES ('14', '1', '三皇冠', '50001', '100000', null, '3', '0');
-INSERT INTO `basic_level_info` VALUES ('15', '1', '四皇冠', '100001', '200000', null, '4', '0');
-INSERT INTO `basic_level_info` VALUES ('16', '1', '五皇冠', '200001', '500000', null, '5', '0');
-INSERT INTO `basic_level_info` VALUES ('17', '1', '一金冠', '500001', '1000000', null, '1', '0');
-INSERT INTO `basic_level_info` VALUES ('18', '1', '二金冠', '1000001', '2000000', null, '2', '0');
-INSERT INTO `basic_level_info` VALUES ('19', '1', '三金冠', '2000001', '5000000', null, '3', '0');
-INSERT INTO `basic_level_info` VALUES ('20', '1', '四金冠', '5000001', '10000000', null, '4', '0');
-INSERT INTO `basic_level_info` VALUES ('21', '1', '五金冠', '10000001', '-1', null, '5', '0');
+INSERT INTO `basic_level_info` VALUES ('1', '1', '一星', '4', '10', 'static/images/admin/buyerlevel/icon-level-star.png', '1', '0');
+INSERT INTO `basic_level_info` VALUES ('2', '1', '二星', '11', '40', 'static/images/admin/buyerlevel/icon-level-star.png', '2', '0');
+INSERT INTO `basic_level_info` VALUES ('4', '1', '三星', '41', '90', 'static/images/admin/buyerlevel/icon-level-star.png', '3', '0');
+INSERT INTO `basic_level_info` VALUES ('5', '1', '四星', '91', '150', 'static/images/admin/buyerlevel/icon-level-star.png', '4', '0');
+INSERT INTO `basic_level_info` VALUES ('6', '1', '五星', '151', '250', 'static/images/admin/buyerlevel/icon-level-star.png', '5', '0');
+INSERT INTO `basic_level_info` VALUES ('7', '1', '一钻', '251', '500', 'static/images/admin/buyerlevel/icon-level-diamonds.png', '1', '0');
+INSERT INTO `basic_level_info` VALUES ('8', '1', '二钻', '501', '1000', 'static/images/admin/buyerlevel/icon-level-diamonds.png', '2', '0');
+INSERT INTO `basic_level_info` VALUES ('9', '1', '三钻', '1001', '2000', 'static/images/admin/buyerlevel/icon-level-diamonds.png', '3', '0');
+INSERT INTO `basic_level_info` VALUES ('10', '1', '四钻', '2001', '5000', 'static/images/admin/buyerlevel/icon-level-diamonds.png', '4', '0');
+INSERT INTO `basic_level_info` VALUES ('11', '1', '五钻', '5001', '10000', 'static/images/admin/buyerlevel/icon-level-diamonds.png', '5', '0');
+INSERT INTO `basic_level_info` VALUES ('12', '1', '一皇冠', '10001', '20000', 'static/images/admin/buyerlevel/icon-level-crown.png', '1', '0');
+INSERT INTO `basic_level_info` VALUES ('13', '1', '二皇冠', '20001', '50000', 'static/images/admin/buyerlevel/icon-level-crown.png', '2', '0');
+INSERT INTO `basic_level_info` VALUES ('14', '1', '三皇冠', '50001', '100000', 'static/images/admin/buyerlevel/icon-level-crown.png', '3', '0');
+INSERT INTO `basic_level_info` VALUES ('15', '1', '四皇冠', '100001', '200000', 'static/images/admin/buyerlevel/icon-level-crown.png', '4', '0');
+INSERT INTO `basic_level_info` VALUES ('16', '1', '五皇冠', '200001', '500000', 'static/images/admin/buyerlevel/icon-level-crown.png', '5', '0');
+INSERT INTO `basic_level_info` VALUES ('17', '1', '一金冠', '500001', '1000000', 'static/images/admin/buyerlevel/icon-level-top-crown.png', '1', '0');
+INSERT INTO `basic_level_info` VALUES ('18', '1', '二金冠', '1000001', '2000000', 'static/images/admin/buyerlevel/icon-level-top-crown.png', '2', '0');
+INSERT INTO `basic_level_info` VALUES ('19', '1', '三金冠', '2000001', '5000000', 'static/images/admin/buyerlevel/icon-level-top-crown.png', '3', '0');
+INSERT INTO `basic_level_info` VALUES ('20', '1', '四金冠', '5000001', '10000000', 'static/images/admin/buyerlevel/icon-level-top-crown.png', '4', '0');
+INSERT INTO `basic_level_info` VALUES ('21', '1', '五金冠', '10000001', '-1', 'static/images/admin/buyerlevel/icon-level-top-crown.png', '5', '0');
 
 -- ----------------------------
 -- Table structure for `buyer_account_basic_info`
@@ -91,11 +91,13 @@ CREATE TABLE `buyer_account_info` (
   `audituser` int(11) default NULL COMMENT '审核人',
   `audittime` datetime default NULL COMMENT '审核时间',
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='淘宝小号信息表';
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='淘宝小号信息表';
 
 -- ----------------------------
 -- Records of buyer_account_info
 -- ----------------------------
+INSERT INTO `buyer_account_info` VALUES ('1', '雨亭漫步', '1', '5', '1', null, '10', '0', '0', '2', '2016-07-09 13:42:33', '1', null, null);
+INSERT INTO `buyer_account_info` VALUES ('2', '孤云道人', '1', '255', '7', null, '520', '0', '1', '1', '2016-07-09 16:07:57', '1', null, null);
 
 -- ----------------------------
 -- Table structure for `buyer_account_receipt_address`
@@ -4229,7 +4231,7 @@ CREATE TABLE `sys_menu` (
   PRIMARY KEY  (`id`),
   KEY `sys_menu_parent_id` USING BTREE (`parentid`),
   KEY `sys_menu_del_flag` USING BTREE (`deleted`)
-) ENGINE=InnoDB AUTO_INCREMENT=84 DEFAULT CHARSET=utf8 COMMENT='菜单表';
+) ENGINE=InnoDB AUTO_INCREMENT=85 DEFAULT CHARSET=utf8 COMMENT='菜单表';
 
 -- ----------------------------
 -- Records of sys_menu
@@ -4254,7 +4256,8 @@ INSERT INTO `sys_menu` VALUES ('79', '75', '-11,75,', ' 好评内容管理', '91
 INSERT INTO `sys_menu` VALUES ('80', '26', '-1,126,', '帮助文档', '1', 'admin/helpcenter/document/documentList.htm', null, null, '1', '', '3', '2016-06-28 21:02:52', '3', '2016-07-05 20:39:07', null, '0', '0', '0');
 INSERT INTO `sys_menu` VALUES ('81', '1', '-11,', '买家管理', '430', '', null, null, '1', '', '3', '2016-07-06 22:54:32', '3', '2016-07-06 22:54:32', null, '0', '0', '0');
 INSERT INTO `sys_menu` VALUES ('82', '26', '-1,126,', '淘宝等级管理', '61', 'admin/buyer/level/levelList.htm', null, null, '1', '', '3', '2016-07-06 22:55:49', '3', '2016-07-06 22:55:49', null, '0', '0', '0');
-INSERT INTO `sys_menu` VALUES ('83', '81', '-11,81,', '小号管理', '1', '', null, null, '1', '', '3', '2016-07-06 22:56:53', '3', '2016-07-06 22:56:53', null, '0', '0', '0');
+INSERT INTO `sys_menu` VALUES ('83', '81', '-11,81,', '小号管理', '1', 'admin/buyer/account/accountList.htm', null, null, '1', '', '3', '2016-07-06 22:56:53', '3', '2016-07-09 14:00:02', null, '0', '0', '0');
+INSERT INTO `sys_menu` VALUES ('84', '81', '-11,81,', '刷手首页', '31', 'front/buyer/index.htm', null, null, '1', '', '3', '2016-07-09 18:00:24', '3', '2016-07-09 18:00:24', null, '0', '0', '1');
 
 -- ----------------------------
 -- Table structure for `sys_notice`
