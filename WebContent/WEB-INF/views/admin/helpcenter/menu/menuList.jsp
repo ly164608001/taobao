@@ -26,8 +26,6 @@
 					return true;
 				}
 			});
-	    	
-	        openDialog("添加","${basePath}admin/helpcenter/menu/menuAdd.htm",300,270);  
 	    }  
 	}] ;
 

@@ -5,10 +5,46 @@
 <html>
 <head>
 <script type="text/javascript" src="${basePath}static/js/admin/global.js"></script>
+<script src="${basePath}static/js/admin/initdata.js"></script>
+<script type="text/javascript">
+	$(function(){
+		_initSelect();
+	}) 
+
+	function checkSubmit() {
+		//TODO验证数据有效性
+		var isvalid = $("#addform").form('validate');
+		if(isvalid){
+			submitForm();
+		}
+	}
+	function submitForm(){
+		var url = "${basePath}admin/buyer/level/addsave.htm";
+		$.ajax({
+			type : "POST",
+			url : url,
+			dataType : "text",
+			data : $("#addform").serialize(),
+			success : function(result) {
+				var res = JSON.parse(result);
+				if (res.success) {
+					//ldDialog.tips("新增成功");
+					lrDialog.close(res.msg);
+				} else {
+					lrDialog.alert(res.msg);
+					lrDialog.unmask();
+				}
+			},
+			error : function() {
+	
+			}
+		});
+	}
+</script>
 </head>
 <body>
 
-	<form id="addform" action="${basePath}admin/buyer/level/addsave.htm" method="post">
+	<form id="addform" method="post">
 		<table cellpadding="5">
 			<tr>
 				<td>等级名称:</td>
@@ -37,16 +73,11 @@
 			<tr>
 				<td></td>
 				<td>
-				 	<a href="javascript:void(0)" class="easyui-linkbutton" id="addsubmit">提 交</a>
+				 	<a href="javascript:void(0)" class="easyui-linkbutton" onclick="return checkSubmit();">提 交</a>
 				 </td>
 			</tr>
 		</table>
 	</form>
-	<script src="${basePath}static/js/admin/initdata.js"></script>
-	<script type="text/javascript">
-		$(function(){
-			_initSelect();
-		}) 
-	</script>
+	
 </body>
 </html>

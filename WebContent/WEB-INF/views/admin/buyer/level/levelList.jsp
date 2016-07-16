@@ -7,13 +7,34 @@
 <link rel="stylesheet" type="text/css" href="${basePath}static/js/easyui/themes/bootstrap/easyui.css"/>
 <link rel="stylesheet" type="text/css" href="${basePath}static/js/easyui/themes/icon.css"/>
 <script type="text/javascript" src="${basePath}static/js/admin/global.js"></script>
+<script type="text/javascript" src="${basePath}static/js/admin/initdata.js"></script>
 <script type="text/javascript" src="${basePath}static/js/select.js"></script>
 
 <script>
+	toolbardata = [{  
+	    text: '添加',  
+	    iconCls: 'icon-add',  
+	    handler: function() {
+	    	openLrDialog('添加','${basePath}admin/buyer/level/levelAdd.htm');
+	    }  
+	}] ;
 	
 	function formatteradminuserbutton(value,row) {
-		return '<a href="javascript:void(0)" class="easyui-linkbutton" onclick="openDialog(\'编辑\',\'${basePath}admin/buyer/level/levelUpdate.htm?id='+row.id+'\',420,320)">编辑</a>&nbsp;'
+		return '<a href="javascript:void(0)" class="easyui-linkbutton" onclick="openLrDialog(\'编辑\',\'${basePath}admin/buyer/level/levelUpdate.htm?id='+row.id+'\',420,320)">编辑</a>&nbsp;'
 		 				+ '<a href="javascript:void(0)" class="easyui-linkbutton" onclick="deleterow(\'${basePath}admin/buyer/level/levelDelete.htm?id='+row.id+'\')">删除</a>&nbsp;';
+	}
+	
+	function openLrDialog(title, url){
+		lrDialog.openMini(url, title, function(window) {
+			var returnValue = window.returnValue;
+			if (returnValue == undefined) {//无返回值 直接关闭 
+				return true;
+			} else {//有返回值 处理一些事
+				lrDialog.tips(returnValue);
+				$('#dg').datagrid('reload');
+				return true;
+			}
+		});
 	}
 	
 	function formatterType(value,row){
@@ -59,23 +80,12 @@
 				<th field="type" formatter="formatterType" width="80">等级类型</th>
 				<th field="mincredit" width="80">最低积分</th>
 				<th field="maxcredit" width="80">最高积分</th>
-				<th field="icon" width="120">图标</th>
+				<th field="icon" width="290">图标</th>
 				<th field="iconnum" width="60">图标数</th>
 				<th field="isadmin" width="180" formatter="formatteradminuserbutton">操作</th>
 			</tr>
 		</thead>
 	</table>
 	
-	<script>
-	toolbardata = [{  
-	            text: '添加',  
-	            iconCls: 'icon-add',  
-	            handler: function() {  
-	                openDialog("添加","${basePath}admin/buyer/level/levelAdd.htm",380,280);  
-	            }  
-	        }] ;
-	</script>
-	<script type="text/javascript" src="${basePath}static/js/admin/initdata.js"></script>
-	<div id="mydialog"></div>
 </body>
 </html>
