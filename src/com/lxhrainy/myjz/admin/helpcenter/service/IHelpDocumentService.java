@@ -10,4 +10,10 @@ import com.lxhrainy.myjz.admin.helpcenter.model.HelpDocument;
  */
 public interface IHelpDocumentService extends IBaseService<HelpDocument, Integer>{
 
+	/**
+	 * 根据文档菜单id批量删除文档
+	 * @param childids
+	 */
+	void deleteByMenuids(String menuids);
+
 }

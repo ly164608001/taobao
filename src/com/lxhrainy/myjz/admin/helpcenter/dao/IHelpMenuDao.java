@@ -23,5 +23,18 @@ public interface IHelpMenuDao extends IBaseDao<HelpMenu> {
 	 * @return
 	 */
 	List<HelpMenu> getListByPid(@Param("pid")int pid);
+
+	/**
+	 * 获取所有子集
+	 * @param pids 格式为：',pid,'
+	 * @return
+	 */
+	List<HelpMenu> getAllChildren(@Param("pids")String pids);
+
+	/**
+	 * 删除所有子集
+	 * @param pids 格式为：',pid,' 
+	 */
+	void deleteAllChildren(@Param("pids")String pids);
 	
 }

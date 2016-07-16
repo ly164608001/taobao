@@ -5,11 +5,43 @@
 <html>
 <head>
 <script type="text/javascript" src="${basePath}static/js/admin/global.js"></script>
+<script src="${basePath}static/js/admin/initdata.js"></script>
+<script type="text/javascript">
+	function checkSubmit() {
+		//TODO验证数据有效性
+		var isvalid = $("#updateform").form('validate');
+		if(isvalid){
+			submitForm();
+		}
+	}
+	function submitForm(){
+		var url = "${basePath}admin/helpcenter/menu/updatesave.htm";
+		$.ajax({
+			type : "POST",
+			url : url,
+			dataType : "text",
+			data : $("#updateform").serialize(),
+			success : function(result) {
+				var res = JSON.parse(result);
+				if (res.success) {
+					//ldDialog.tips("新增成功");
+					lrDialog.close('编辑成功');
+				} else {
+					lrDialog.alert(res.msg);
+					lrDialog.unmask();
+				}
+			},
+			error : function() {
+
+			}
+		});
+	}
+
+</script>
 
 </head>
 <body>
-
-	<form id="updateform" action="${basePath}admin/helpcenter/menu/updatesave.htm" method="post">
+	<form id="updateform" method="post">
 		<input name="id" value="${model.id}" type="hidden"/>
 		<div class="contaniner">
 		  	<div class="div-content">
@@ -40,7 +72,7 @@
 				<tr>
 					<td></td>
 					<td>
-					 	<a href="javascript:void(0)" class="easyui-linkbutton" id="updatesubmit">提 交</a>
+					 	<a href="javascript:void(0)" class="easyui-linkbutton" onclick="return checkSubmit();">提 交</a>
 					 </td>
 				</tr>
 	
@@ -48,6 +80,5 @@
 		</div></div>
 	</form>
 	
-	<script src="${basePath}static/js/admin/initdata.js"></script>
 </body>
 </html>

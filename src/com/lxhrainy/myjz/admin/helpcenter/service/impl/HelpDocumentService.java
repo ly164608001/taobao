@@ -1,6 +1,7 @@
 package com.lxhrainy.myjz.admin.helpcenter.service.impl;
 
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,5 +22,16 @@ public class HelpDocumentService extends
 AbstractBaseServiceImpl<IHelpDocumentDao, HelpDocument, Integer>
 implements IHelpDocumentService  {
 
+	@Autowired
+	IHelpDocumentDao dao;
+	
+	/**
+	 * 根据文档菜单id批量删除文档
+	 * @param Menuids
+	 */
+	@Transactional(readOnly = false)
+	public void deleteByMenuids(String menuids) {
+		dao.deleteByMenuids(menuids);
+	}
 	
 }

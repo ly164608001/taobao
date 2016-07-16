@@ -7,12 +7,48 @@
 <link rel="stylesheet" type="text/css" href="${basePath}static/js/easyui/themes/bootstrap/easyui.css"/>
 <link rel="stylesheet" type="text/css" href="${basePath}static/js/easyui/themes/icon.css"/>
 <script type="text/javascript" src="${basePath}static/js/admin/global.js"></script>
+<script type="text/javascript" src="${basePath}static/js/admin/initdata.js"></script>
 
 <script>
-	
+	toolbardata = [{  
+	    text: '添加',  
+	    iconCls: 'icon-add',  
+	    handler: function() {
+	    	lrDialog.openMini("${basePath}admin/helpcenter/menu/menuAdd.htm?parent.id=${vo.parentid}", "菜单新增", function(window) {
+				var returnValue = window.returnValue;
+				if (returnValue == undefined) {//无返回值 直接关闭 
+					return true;
+				} else {//有返回值 处理一些事
+					lrDialog.tips(returnValue);
+					var win = art.dialog.open.origin;
+					win.parent.rightTree.location.reload();
+					$('#dg').datagrid('reload');
+					return true;
+				}
+			});
+	    	
+	        openDialog("添加","${basePath}admin/helpcenter/menu/menuAdd.htm",300,270);  
+	    }  
+	}] ;
+
+	function openLrDialog(title, url){
+		lrDialog.openMini(url, title, function(window) {
+			var returnValue = window.returnValue;
+			if (returnValue == undefined) {//无返回值 直接关闭 
+				return true;
+			} else {//有返回值 处理一些事
+				lrDialog.tips(returnValue);
+				var win = art.dialog.open.origin;
+				win.parent.rightTree.location.reload();
+				$('#dg').datagrid('reload');
+				return true;
+			}
+		});
+	}
+
 	function formatteradminuserbutton(value,row) {
-		return  '<a href="javascript:void(0)" class="easyui-linkbutton" onclick="openDialog(\'编辑\',\'${basePath}admin/helpcenter/menu/menuUpdate.htm?id='+row.id+'\',300,300)">编辑</a>&nbsp;'
-			 + '<a href="javascript:void(0)" class="easyui-linkbutton" onclick="openDialog(\'添加\',\'${basePath}admin/helpcenter/menu/menuAdd.htm?pid='+row.id+'\',300,270)">添加子菜单</a>&nbsp;'
+		return  '<a href="javascript:void(0)" class="easyui-linkbutton" onclick="openLrDialog(\'编辑\',\'${basePath}admin/helpcenter/menu/menuUpdate.htm?id='+row.id+'\',300,300)">编辑</a>&nbsp;'
+			 + '<a href="javascript:void(0)" class="easyui-linkbutton" onclick="openLrDialog(\'添加\',\'${basePath}admin/helpcenter/menu/menuAdd.htm?pid='+row.id+'\',300,270)">添加子菜单</a>&nbsp;'
 			 + '<a href="javascript:void(0)" class="easyui-linkbutton" onclick="deleterow(\'${basePath}admin/helpcenter/menu/menuDelete.htm?id='+row.id+'\')">删除</a>';
 	}
 	
@@ -45,7 +81,7 @@
 
 		</form>
 	</div>
-	<table id="dg" cellspacing="0" cellpadding="0" url="datalist.json">
+	<table id="dg" cellspacing="0" cellpadding="0" url="datalist.json?parentid=${vo.parentid}">
 		<thead>
 			<tr>
 				<th field="id" width="40">id</th>
@@ -57,17 +93,5 @@
 			</tr>
 		</thead>
 	</table>
-	
-	<script>
-	toolbardata = [{  
-	            text: '添加',  
-	            iconCls: 'icon-add',  
-	            handler: function() {  
-	                openDialog("添加","${basePath}admin/helpcenter/menu/menuAdd.htm",300,270);  
-	            }  
-	        }] ;
-	</script>
-	<script type="text/javascript" src="${basePath}static/js/admin/initdata.js"></script>
-	<div id="mydialog"></div>
 </body>
 </html>

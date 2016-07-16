@@ -3,6 +3,7 @@ package com.lxhrainy.myjz.admin.helpcenter.service;
 import java.util.List;
 
 import com.lxhrainy.core.common.service.IBaseService;
+import com.lxhrainy.core.oe.TreeNode;
 import com.lxhrainy.myjz.admin.helpcenter.model.HelpMenu;
 
 /**
@@ -25,4 +26,10 @@ public interface IHelpMenuService extends IBaseService<HelpMenu, Integer>{
 	 * @return
 	 */
 	String getFullnameById(Integer id);
+
+	/**
+	 * 获取菜单树节点
+	 * @return
+	 */
+	List<TreeNode> findTreeNodes();
 }

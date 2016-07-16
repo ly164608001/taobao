@@ -4,6 +4,7 @@
     
 	<sql id="helpMenuColumns">
 		T.id AS "id",
+		T.pids AS "pids",
 		T.name AS "name",
 		T.type AS "type",
 		T.url AS "url",
@@ -21,7 +22,9 @@
 	<sql id="where">
 		<if test="condition!=null">
 			<where>
-				T.deleted = 0
+				<if test="condition.parentid!=null">
+					AND T.pid = #{condition.parentid}
+				</if>
 				<if test="condition.model!=null">
 					<if test="condition.model.name!=null and condition.model.name!=''">
 						AND T.name like CONCAT('%',#{condition.model.name},'%')
@@ -46,6 +49,14 @@
 		FROM help_menu T
 		<include refid="helpMenuJoins"/>
 		WHERE T.pid = #{pid}
+	</select>
+	
+	<select id="getAllChildren" resultType="HelpMenu">
+		SELECT 
+			<include refid="helpMenuColumns"/>
+		FROM help_menu T
+		<include refid="helpMenuJoins"/>
+		WHERE T.pids like CONCAT('%',#{pids},'%')
 	</select>
 	
 	<select id="findListByPage" resultType="HelpMenu">
@@ -79,6 +90,7 @@
 			id,
 			name,
 			pid,
+			pids,
 			type,
 			url,
 			sort,
@@ -87,6 +99,7 @@
 			#{id},
 			#{name},
 			#{parent.id},
+			#{pids},
 			#{type},
 			#{url},
 			#{sort},
@@ -101,6 +114,9 @@
 			</if>	
 			<if test="parent!=null and parent.id !=null">
 				pid = #{parent.id},
+			</if>
+			<if test="pids !=null">
+				pids = #{pids},
 			</if>	
 			<if test="type !=null">
 				type = #{type},
@@ -119,9 +135,13 @@
 	</update>
 	
 	<update id="deleteById">
-		update help_menu set 
-			deleted=1
+		DELETE FROM help_menu  
 		WHERE id = #{id}
+	</update>
+	
+	<update id="deleteAllChildren">
+		DELETE FROM help_menu  
+		WHERE pids like CONCAT('%',#{pids},'%')
 	</update>
 	
 </mapper>

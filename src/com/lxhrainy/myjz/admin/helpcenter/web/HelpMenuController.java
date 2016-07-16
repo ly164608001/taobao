@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.lxhrainy.core.common.controller.BaseController;
+import com.lxhrainy.core.oe.TreeNode;
 import com.lxhrainy.myjz.admin.helpcenter.model.HelpMenu;
 import com.lxhrainy.myjz.admin.helpcenter.oe.HelpMenuVO;
 import com.lxhrainy.myjz.admin.helpcenter.service.IHelpMenuService;
@@ -25,18 +27,26 @@ public class HelpMenuController extends BaseController {
 	@Autowired
 	IHelpMenuService helpMenuService;	
 	
-	/***
-	 * 详情
-	 * @param
-	 */
-	@RequestMapping("/menuDetail")
-	public ModelAndView detail(Integer id) {
-		if(id!=null){
-			mv.addObject("model", helpMenuService.getById(id));
-		}
-		
-		mv.setViewName("admin/helpcenter/menu/menuDetail");
+	@RequestMapping("/menuManageFrame")
+	public ModelAndView manageFrame(){
+		mv = new ModelAndView("admin/helpcenter/menu/menuManageFrame");
 		return mv;
+	}
+	
+	@RequestMapping("/menutree")
+	public ModelAndView menutree() {
+		mv = new ModelAndView("admin/helpcenter/menu/menutree");
+		return mv;
+	}
+	
+	@RequestMapping("/datamenutree")
+	@ResponseBody
+	public JSONObject datemenutree() {
+		JSONObject rj = new JSONObject();
+		List<TreeNode> menuTree = helpMenuService.findTreeNodes();
+		rj.put("success", true);
+		rj.put("menuJson", JSON.toJSONString(menuTree));
+		return rj;
 	}
 	
 	/***
@@ -44,8 +54,9 @@ public class HelpMenuController extends BaseController {
 	 * @param
 	 */
 	@RequestMapping("/menuList")
-	public ModelAndView list() {
+	public ModelAndView list(HelpMenuVO vo) {
 		mv.setViewName("admin/helpcenter/menu/menuList");
+		mv.addObject("vo", vo);
 		return mv;
 	}
 	
@@ -60,6 +71,20 @@ public class HelpMenuController extends BaseController {
 		return rj;
 	}
 
+	/***
+	 * 详情
+	 * @param
+	 */
+	@RequestMapping("/menuDetail")
+	public ModelAndView detail(Integer id) {
+		if(id!=null){
+			mv.addObject("model", helpMenuService.getById(id));
+		}
+		
+		mv.setViewName("admin/helpcenter/menu/menuDetail");
+		return mv;
+	}
+	
 	/***
 	 * 新增
 	 * @param

@@ -16,6 +16,8 @@ public class HelpMenu extends BaseModel {
 	private String name;
 	/** 上级类目 **/
 	private HelpMenu parent;
+	/** 所有父类目id 以，分割 **/
+	private String pids;
 	/** 文档类型 **/
 	private Integer type;
 	/** 文档链接 **/
@@ -24,6 +26,14 @@ public class HelpMenu extends BaseModel {
 	private Integer sort;
 	/** 删除标识 **/
 	private Integer deleted;
+
+	public String getPids() {
+		return pids;
+	}
+
+	public void setPids(String pids) {
+		this.pids = pids;
+	}
 
 	public String getName() {
 		return name;
