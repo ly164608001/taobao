@@ -1,6 +1,7 @@
 <%@ page language="java"  pageEncoding="UTF-8"%>
 <%@include file="/headDeclare.jsp" %>
 <%@include file="/tagDeclare.jsp"%>
+<%@include file="/adminHeadDeclare.jsp"%>
 <html>
 <head>
 	<script type="text/javascript" src="${basePath}static/js/admin/global.js"></script>

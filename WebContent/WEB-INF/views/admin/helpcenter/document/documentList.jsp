@@ -1,6 +1,7 @@
 <%@ page language="java"  pageEncoding="UTF-8"%>
 <%@include file="/headDeclare.jsp" %>
 <%@include file="/tagDeclare.jsp"%>
+<%@include file="/adminHeadDeclare.jsp"%>
 <html>
 <head>
 	<link rel="stylesheet" type="text/css" href="${basePath}static/js/easyui/themes/bootstrap/easyui.css"/>
