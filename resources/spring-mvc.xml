@@ -188,5 +188,4 @@
 
 	<bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver" />
 
-	<import resource="mysqlapplicationcontext.xml"/>
 </beans>
