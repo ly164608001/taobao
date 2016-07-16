@@ -1,7 +1,7 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : localhost
+Source Server         : 127.0.0.1
 Source Server Version : 50096
 Source Host           : localhost:3306
 Source Database       : myjz
@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50096
 File Encoding         : 65001
 
-Date: 2016-07-14 22:22:09
+Date: 2016-07-16 14:30:15
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -194,23 +194,24 @@ DROP TABLE IF EXISTS `help_menu`;
 CREATE TABLE `help_menu` (
   `id` int(11) NOT NULL auto_increment COMMENT '唯一标示',
   `pid` int(11) default NULL COMMENT '上级id',
+  `pids` varchar(255) default NULL COMMENT '所有父id 格式：“，1,2，”',
   `type` int(1) default NULL COMMENT '文档类型 ',
-  `name` varchar(128) default NULL COMMENT '文档名称',
+  `name` varchar(128) default NULL COMMENT '菜单名称',
   `sort` int(11) default NULL COMMENT '排序',
   `deleted` int(1) default '0' COMMENT '删除标识',
   `url` varchar(255) default NULL COMMENT '连接',
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COMMENT='帮助菜单';
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8 COMMENT='帮助菜单';
 
 -- ----------------------------
 -- Records of help_menu
 -- ----------------------------
-INSERT INTO `help_menu` VALUES ('1', '-1', '1', '买家新手上路', '1', '0', null);
-INSERT INTO `help_menu` VALUES ('2', '-1', '2', '卖家新手上路', '2', '0', null);
-INSERT INTO `help_menu` VALUES ('4', '2', '2', '注册', '1', '0', null);
-INSERT INTO `help_menu` VALUES ('5', '2', '2', '登录', '2', '0', null);
-INSERT INTO `help_menu` VALUES ('6', '2', '2', '平台名词', '3', '0', '');
-INSERT INTO `help_menu` VALUES ('8', '-1', '1', '注册', '4', '0', '');
+INSERT INTO `help_menu` VALUES ('1', '-1', null, '1', '买家新手上路', '1', '0', null);
+INSERT INTO `help_menu` VALUES ('2', '-1', ',-1,', '2', '卖家新手上路', '2', '0', null);
+INSERT INTO `help_menu` VALUES ('4', '2', ',-1,', '2', '注册', '1', '0', null);
+INSERT INTO `help_menu` VALUES ('5', '2', ',-1,', '2', '登录', '2', '0', null);
+INSERT INTO `help_menu` VALUES ('6', '2', ',-1,', '2', '平台名词', '3', '0', '');
+INSERT INTO `help_menu` VALUES ('19', '15', ',-1,', '1', '出错2', '3', '0', '');
 
 -- ----------------------------
 -- Table structure for `order_basic_properties`
@@ -4231,33 +4232,35 @@ CREATE TABLE `sys_menu` (
   PRIMARY KEY  (`id`),
   KEY `sys_menu_parent_id` USING BTREE (`parentid`),
   KEY `sys_menu_del_flag` USING BTREE (`deleted`)
-) ENGINE=InnoDB AUTO_INCREMENT=85 DEFAULT CHARSET=utf8 COMMENT='菜单表';
+) ENGINE=InnoDB AUTO_INCREMENT=87 DEFAULT CHARSET=utf8 COMMENT='菜单表';
 
 -- ----------------------------
 -- Records of sys_menu
 -- ----------------------------
-INSERT INTO `sys_menu` VALUES ('1', '-1', '-1', '所有菜单', '-10', null, null, null, '0', null, '0', '2016-06-02 11:59:13', '0', '2016-06-02 11:59:16', null, '0', '0', '0');
-INSERT INTO `sys_menu` VALUES ('7', '1', '-1,1', '系统设置', '10', '', null, null, '1', null, null, '2016-06-06 15:47:43', null, '2016-06-06 15:47:47', null, '0', '0', '0');
-INSERT INTO `sys_menu` VALUES ('8', '7', '-1,1,7', '菜单管理', '10', 'admin/sys/menu/list.htm', null, null, '1', null, null, '2016-06-06 15:49:17', null, '2016-06-06 15:49:20', null, '0', '0', '0');
-INSERT INTO `sys_menu` VALUES ('9', '7', '-1,1,7', '角色管理', '20', 'admin/sys/role/list.htm', null, null, '1', null, null, '2016-06-06 15:50:22', null, '2016-06-06 15:50:24', null, '0', '0', '0');
-INSERT INTO `sys_menu` VALUES ('10', '1', '-1,1', '用户管理', '70', '', null, null, '1', '', null, '2016-06-06 17:01:14', null, '2016-06-06 17:01:14', null, '0', '0', '0');
-INSERT INTO `sys_menu` VALUES ('11', '10', '-1,1,10', '会员中心', '1', 'admin/user/member/list.htm', null, null, '1', '', null, '2016-06-06 17:02:27', null, '2016-06-06 17:02:27', null, '0', '0', '0');
-INSERT INTO `sys_menu` VALUES ('26', '1', '-1,1', '基础数据', '160', '', null, null, '1', '', null, '2016-06-06 19:33:08', null, '2016-06-06 19:33:08', null, '0', '0', '0');
-INSERT INTO `sys_menu` VALUES ('53', '7', '-1,7,1', '数据字典', '50', 'admin/sys/dict/list.htm', null, null, '1', '', '3', '2016-06-12 15:57:10', '3', '2016-06-12 15:57:10', null, '0', '0', '0');
-INSERT INTO `sys_menu` VALUES ('54', '7', '-1,7,1', '地域管理', '80', 'admin/sys/area/list.htm', null, null, '1', '', '3', '2016-06-13 11:42:47', '3', '2016-06-13 11:42:47', null, '0', '0', '0');
+INSERT INTO `sys_menu` VALUES ('1', '-1', '-1', '所有菜单', '-10', null, 'admin', null, '0', null, '0', '2016-06-02 11:59:13', '0', '2016-06-02 11:59:16', null, '0', '0', '0');
+INSERT INTO `sys_menu` VALUES ('7', '1', '-1,1', '系统设置', '10', '', 'admin', null, '1', null, null, '2016-06-06 15:47:43', null, '2016-06-06 15:47:47', null, '0', '0', '0');
+INSERT INTO `sys_menu` VALUES ('8', '7', '-1,1,7', '菜单管理', '10', 'admin/sys/menu/menuManageFrame.htm', 'admin', null, '1', null, null, '2016-06-06 15:49:17', null, '2016-06-06 15:49:20', null, '0', '0', '0');
+INSERT INTO `sys_menu` VALUES ('9', '7', '-1,1,7', '角色管理', '20', 'admin/sys/role/roleList.htm', 'admin', null, '1', null, null, '2016-06-06 15:50:22', null, '2016-06-06 15:50:24', null, '0', '0', '0');
+INSERT INTO `sys_menu` VALUES ('10', '1', '-1,1', '用户管理', '70', '', 'admin', null, '1', '', null, '2016-06-06 17:01:14', null, '2016-06-06 17:01:14', null, '0', '0', '0');
+INSERT INTO `sys_menu` VALUES ('11', '10', '-1,1,10', '会员中心', '1', 'admin/user/member/list.htm', 'admin', null, '1', '', null, '2016-06-06 17:02:27', null, '2016-06-06 17:02:27', null, '0', '0', '0');
+INSERT INTO `sys_menu` VALUES ('26', '1', '-1,1', '基础数据', '160', '', 'admin', null, '1', '', null, '2016-06-06 19:33:08', null, '2016-06-06 19:33:08', null, '0', '0', '0');
+INSERT INTO `sys_menu` VALUES ('53', '7', '-1,7,1', '数据字典', '50', 'admin/sys/dict/list.htm', 'admin', null, '1', '', '3', '2016-06-12 15:57:10', '3', '2016-06-12 15:57:10', null, '0', '0', '0');
+INSERT INTO `sys_menu` VALUES ('54', '7', '-1,7,1', '地域管理', '80', 'admin/sys/area/list.htm', 'admin', null, '1', '', '3', '2016-06-13 11:42:47', '3', '2016-06-13 11:42:47', null, '0', '0', '0');
 INSERT INTO `sys_menu` VALUES ('67', '1', '-1,1', '用户管理', '370', '', null, null, '1', '', '3', '2016-06-17 09:42:54', '3', '2016-06-17 09:42:54', null, '0', '0', '1');
-INSERT INTO `sys_menu` VALUES ('73', '26', '-1,126,', '帮助菜单', '1', 'admin/helpcenter/menu/menuList.htm', null, null, '1', '', '3', '2016-06-26 20:39:09', '3', '2016-07-05 20:39:57', null, '0', '0', '0');
-INSERT INTO `sys_menu` VALUES ('74', '26', '-1,126,', '商品类目管理', '31', 'admin/goods/type/typeList.htm', null, null, '1', '', '3', '2016-06-27 21:10:43', '3', '2016-07-05 20:39:47', null, '0', '0', '0');
-INSERT INTO `sys_menu` VALUES ('75', '1', '-11,', '商家管理', '400', '', null, null, '1', '', '3', '2016-06-27 23:07:15', '3', '2016-06-27 23:07:15', null, '0', '0', '0');
-INSERT INTO `sys_menu` VALUES ('76', '75', '-11,75,', '店铺管理', '1', 'admin/seller/shop/shopList.htm', null, null, '1', '', '3', '2016-06-27 23:07:34', '3', '2016-07-05 20:39:33', null, '0', '0', '0');
-INSERT INTO `sys_menu` VALUES ('77', '75', '-11,75,', '收获地址管理', '31', 'admin/seller/receiptaddress/receiptaddressList.htm', null, null, '1', '', '3', '2016-06-27 23:08:06', '3', '2016-07-05 22:10:13', null, '0', '0', '0');
-INSERT INTO `sys_menu` VALUES ('78', '75', '-11,75,', '标签管理', '61', 'admin/seller/label/labelList.htm', null, null, '1', '', '3', '2016-06-27 23:08:23', '3', '2016-07-05 20:39:23', null, '0', '0', '0');
-INSERT INTO `sys_menu` VALUES ('79', '75', '-11,75,', ' 好评内容管理', '91', 'admin/seller/praise/praiseList.htm', null, null, '1', '', '3', '2016-06-27 23:08:36', '3', '2016-07-05 23:26:59', null, '0', '0', '0');
-INSERT INTO `sys_menu` VALUES ('80', '26', '-1,126,', '帮助文档', '1', 'admin/helpcenter/document/documentList.htm', null, null, '1', '', '3', '2016-06-28 21:02:52', '3', '2016-07-05 20:39:07', null, '0', '0', '0');
-INSERT INTO `sys_menu` VALUES ('81', '1', '-11,', '买家管理', '430', '', null, null, '1', '', '3', '2016-07-06 22:54:32', '3', '2016-07-06 22:54:32', null, '0', '0', '0');
-INSERT INTO `sys_menu` VALUES ('82', '26', '-1,126,', '淘宝等级管理', '61', 'admin/buyer/level/levelList.htm', null, null, '1', '', '3', '2016-07-06 22:55:49', '3', '2016-07-06 22:55:49', null, '0', '0', '0');
-INSERT INTO `sys_menu` VALUES ('83', '81', '-11,81,', '小号管理', '1', 'admin/buyer/account/accountList.htm', null, null, '1', '', '3', '2016-07-06 22:56:53', '3', '2016-07-09 14:00:02', null, '0', '0', '0');
+INSERT INTO `sys_menu` VALUES ('73', '26', '-1,126,', '帮助菜单', '1', 'admin/helpcenter/menu/menuManageFrame.htm', 'admin', null, '1', '', '3', '2016-06-26 20:39:09', '3', '2016-07-05 20:39:57', null, '0', '0', '0');
+INSERT INTO `sys_menu` VALUES ('74', '26', '-1,126,', '商品类目管理', '31', 'admin/goods/type/typeList.htm', 'admin', null, '1', '', '3', '2016-06-27 21:10:43', '3', '2016-07-05 20:39:47', null, '0', '0', '0');
+INSERT INTO `sys_menu` VALUES ('75', '1', '-11,', '商家管理', '400', '', 'admin', null, '1', '', '3', '2016-06-27 23:07:15', '3', '2016-06-27 23:07:15', null, '0', '0', '0');
+INSERT INTO `sys_menu` VALUES ('76', '75', '-11,75,', '店铺管理', '1', 'admin/seller/shop/shopList.htm', 'admin', null, '1', '', '3', '2016-06-27 23:07:34', '3', '2016-07-05 20:39:33', null, '0', '0', '0');
+INSERT INTO `sys_menu` VALUES ('77', '75', '-11,75,', '收获地址管理', '31', 'admin/seller/receiptaddress/receiptaddressList.htm', 'admin', null, '1', '', '3', '2016-06-27 23:08:06', '3', '2016-07-05 22:10:13', null, '0', '0', '0');
+INSERT INTO `sys_menu` VALUES ('78', '75', '-11,75,', '标签管理', '61', 'admin/seller/label/labelList.htm', 'admin', null, '1', '', '3', '2016-06-27 23:08:23', '3', '2016-07-05 20:39:23', null, '0', '0', '0');
+INSERT INTO `sys_menu` VALUES ('79', '75', '-11,75,', ' 好评内容管理', '91', 'admin/seller/praise/praiseList.htm', 'admin', null, '1', '', '3', '2016-06-27 23:08:36', '3', '2016-07-16 09:39:12', null, '0', '0', '1');
+INSERT INTO `sys_menu` VALUES ('80', '26', '-1,126,', '帮助文档', '1', 'admin/helpcenter/document/documentList.htm', 'admin', null, '1', '', '3', '2016-06-28 21:02:52', '3', '2016-07-05 20:39:07', null, '0', '0', '0');
+INSERT INTO `sys_menu` VALUES ('81', '1', '-11,', '买家管理', '430', '', 'admin', null, '1', '', '3', '2016-07-06 22:54:32', '3', '2016-07-06 22:54:32', null, '0', '0', '0');
+INSERT INTO `sys_menu` VALUES ('82', '26', '-1,126,', '淘宝等级管理', '61', 'admin/buyer/level/levelList.htm', 'admin', null, '1', '', '3', '2016-07-06 22:55:49', '3', '2016-07-06 22:55:49', null, '0', '0', '0');
+INSERT INTO `sys_menu` VALUES ('83', '81', '-11,81,', '小号管理', '1', 'admin/buyer/account/accountList.htm', 'admin', null, '1', '', '3', '2016-07-06 22:56:53', '3', '2016-07-09 14:00:02', null, '0', '0', '0');
 INSERT INTO `sys_menu` VALUES ('84', '81', '-11,81,', '刷手首页', '31', 'front/buyer/index.htm', null, null, '1', '', '3', '2016-07-09 18:00:24', '3', '2016-07-09 18:00:24', null, '0', '0', '1');
+INSERT INTO `sys_menu` VALUES ('85', '1', '-1,1', '我的账户', '431', '', 'admin', null, '1', '', '3', '2016-07-16 09:41:22', '3', '2016-07-16 09:41:22', null, '0', '0', '1');
+INSERT INTO `sys_menu` VALUES ('86', '85', '-1,1,85', '出错', '1', '才', 'admin', null, '1', '', '3', '2016-07-16 09:41:43', '3', '2016-07-16 09:41:43', null, '1', '0', '0');
 
 -- ----------------------------
 -- Table structure for `sys_notice`
@@ -4305,12 +4308,14 @@ CREATE TABLE `sys_role` (
   PRIMARY KEY  (`id`),
   KEY `sys_role_del_flag` USING BTREE (`deleted`),
   KEY `sys_role_enname` USING BTREE (`enname`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='角色表';
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='角色表';
 
 -- ----------------------------
 -- Records of sys_role
 -- ----------------------------
 INSERT INTO `sys_role` VALUES ('1', '后台管理者', null, null, null, '1', null, '2016-06-06 15:43:31', null, '2016-06-06 15:43:33', null, '0', null);
+INSERT INTO `sys_role` VALUES ('2', '刷手', null, null, null, '1', '3', '2016-07-16 09:42:47', '3', '2016-07-16 09:42:47', null, '0', null);
+INSERT INTO `sys_role` VALUES ('3', '商家', null, null, null, '1', '3', '2016-07-16 09:43:08', '3', '2016-07-16 09:43:08', null, '0', null);
 
 -- ----------------------------
 -- Table structure for `sys_role_menu`
@@ -4536,16 +4541,19 @@ CREATE TABLE `user_info` (
   `deleted` int(1) default NULL COMMENT '删除标识',
   `channel` int(1) default NULL COMMENT '来源',
   `icon` varchar(128) default NULL COMMENT '头像',
+  `memo` varchar(255) default NULL,
+  `updatetime` datetime default NULL COMMENT '更新时间',
+  `creditscore` int(11) default NULL COMMENT '信用分',
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='账号信息';
 
 -- ----------------------------
 -- Records of user_info
 -- ----------------------------
-INSERT INTO `user_info` VALUES ('1', 'yun', 'ifS7tw1E6a7Yx0lPE3rcSw==', '13067356435', '2016-05-20 11:37:27', '2016-05-20 11:37:30', '127.0.0.1', '1', '1', '0', '1', null);
-INSERT INTO `user_info` VALUES ('2', 'estate', 'ifS7tw1E6a7Yx0lPE3rcSw==', '18050804169', '2016-05-18 11:38:15', '2016-05-20 11:38:19', '127.0.0.1', '2', '2', '0', '1', null);
-INSERT INTO `user_info` VALUES ('3', 'admin', 'ifS7tw1E6a7Yx0lPE3rcSw==', null, '2016-06-06 15:34:26', '2016-06-06 15:34:28', '127.0.0.1', '0', '1', '0', '0', null);
-INSERT INTO `user_info` VALUES ('4', 'luoxh', 'ifS7tw1E6a7Yx0lPE3rcSw==', '15980267262', '2016-06-08 10:10:34', null, null, '1', '1', '0', '1', null);
+INSERT INTO `user_info` VALUES ('1', 'yun', 'ifS7tw1E6a7Yx0lPE3rcSw==', '13067356435', '2016-05-20 11:37:27', '2016-05-20 11:37:30', '127.0.0.1', '1', '1', '0', '1', null, null, null, null);
+INSERT INTO `user_info` VALUES ('2', 'estate', 'ifS7tw1E6a7Yx0lPE3rcSw==', '18050804169', '2016-05-18 11:38:15', '2016-05-20 11:38:19', '127.0.0.1', '2', '2', '0', '1', null, null, null, null);
+INSERT INTO `user_info` VALUES ('3', 'admin', 'ifS7tw1E6a7Yx0lPE3rcSw==', null, '2016-06-06 15:34:26', '2016-06-06 15:34:28', '127.0.0.1', '0', '1', '0', '0', null, null, null, null);
+INSERT INTO `user_info` VALUES ('4', 'luoxh', 'ifS7tw1E6a7Yx0lPE3rcSw==', '15980267262', '2016-06-08 10:10:34', null, null, '1', '1', '0', '1', null, null, null, null);
 
 -- ----------------------------
 -- Table structure for `user_money`
