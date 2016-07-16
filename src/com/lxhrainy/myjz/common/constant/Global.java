@@ -4,6 +4,23 @@ public class Global {
 	
 	//session中的登录者key
 	public final static String SESSION_USERNAME = "loginUser";
+	//默认地域
+	public final static String DEFAULT_LOCATION = "福州";
+	//登录者所在地
+	public final static String USER_LOCATION = "user_location";
+	
+	public final static String TARGET_ADMIN = "admin";
+	
+	/**
+	 * 账号状态
+	 */
+	public final static int NORMAL = 1;
+	public final static int BLACK = 2;
+	/**
+	 * 账户状态
+	 */
+	public final static int ACCOUNT_FROZEN = 2;
+	public final static int ACCOUNT_NORMAL = 1;
 	
 	/** 商家管理 start**/
 	//标签管理类型 1 收货类型 2 好评内容
@@ -27,10 +44,16 @@ public class Global {
 	
 	public final static String PROJECT_NAME = "core";
 	
+	/**顶级菜单ID**/
 	public final static int ROOT_MENU_ID = 1;
+	/**顶级菜单名称**/
+	public final static String ROOT_MENU_NAME = "所有菜单";
 	
 	//会员角色ID
-	public final static int ROLE_MEMBER = 1;
+	public final static int ROLE_ADMIN = 1;
+	public final static int ROLE_MEMBER = 2;
+	public final static int ROLE_ESTATE = 3;
+	public final static int ROLE_AGENT = 4;
 	
 	//成功失败进行中
 	public final static int INIT = 0;
@@ -60,6 +83,7 @@ public class Global {
 	public final static int USER_MEMBER = 10 ;  
 	public final static int USER_ESTATE = 30 ;  
 	public final static int USER_AGENT = 20 ;  
+	public final static int USER_ADMIN = 0 ;
 	
 	//用户状态:1 启用 2 禁用
 	public final static int ENABLE = 1 ;  
