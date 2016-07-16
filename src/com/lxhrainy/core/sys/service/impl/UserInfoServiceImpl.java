@@ -1,5 +1,8 @@
 package com.lxhrainy.core.sys.service.impl;
 
+import java.util.Date;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,6 +19,7 @@ import com.lxhrainy.myjz.admin.user.dao.IUserMoneyDao;
 import com.lxhrainy.myjz.admin.user.model.UserAuthInfo;
 import com.lxhrainy.myjz.admin.user.model.UserDetailInfo;
 import com.lxhrainy.myjz.admin.user.model.UserMoney;
+import com.lxhrainy.myjz.admin.user.oe.UserInfoVO;
 import com.lxhrainy.myjz.common.constant.Global;
 
 
@@ -52,24 +56,6 @@ implements IUserInfoService {
 		return userInfo;
 	}
 	
-	/**
-	 * 启用用户
-	 */
-	@Transactional(readOnly = false)
-	public int ableUser(int id) {
-		userInfoDao.updateStatus(id,Global.ENABLE);
-		return 1;
-	}
-
-	/**
-	 * 禁用用户
-	 */
-	@Transactional(readOnly = false)
-	public int disableUser(int id) {
-		userInfoDao.updateStatus(id,Global.DISABLE);
-		return 1;
-	}
-
 	/**
 	 * 重置用户密码
 	 */
@@ -141,7 +127,7 @@ implements IUserInfoService {
 				//创建用户认证信息
 				UserAuthInfo authInfo = new UserAuthInfo();
 				authInfo.setDeleted(Global.NO);
-				authInfo.setUserid(result);
+				authInfo.setUser(new UserInfo(result));
 				userAuthInfoDao.insert(authInfo);
 				
 				//分配用户权限
@@ -161,12 +147,16 @@ implements IUserInfoService {
 	/**
 	 * 更新用户个人信息
 	 * @param userInfo
-	 * @return
+	 * @return -1 失败 1成功
 	 */
 	@Transactional(readOnly = false)
-	public void updateUserInfo(UserInfo userInfo) {
-		this.update(userInfo);
-		userDetailInfoDao.update(userInfo.getDetailInfo());
+	public int updateUserInfo(UserInfo userInfo) {
+		int updateRst = this.update(userInfo);
+		if(updateRst == -1){
+			return -1;
+		}
+		updateRst = userDetailInfoDao.update(userInfo.getDetailInfo());
+		return updateRst;
 	}
 
 	@Override
@@ -193,6 +183,52 @@ implements IUserInfoService {
 	}
 
 	@Override
+	@Transactional(readOnly=false)
+	public int save(UserInfo model) {
+		model.setRegistertime(new Date());
+		model.setChannel(Global.ADMIN);
+		model.setType(Global.USER_ADMIN);
+		model.setDeleted(Global.NO);
+		model.setStatus(Global.ENABLE);
+		model.setPassword(encrptPassword(Global.DEFAULT_PASSWORD));
+		return super.save(model);
+	}
+
+	@Override
+	public List<UserInfo> getMemberListByPage(UserInfoVO vo) {
+		int total = getMemberCountByCondition(vo);
+		vo.setTotalCount(total);
+		return dao.findMemberListByPage(vo);
+	}
+	
+	@Override
+	public int getMemberCountByCondition(UserInfoVO vo) {
+		return dao.getMemberCountByCondition(vo);
+	}
+
+	@Override
+	@Transactional(readOnly=false)
+	public boolean updateUserStatus(UserInfo user) {
+		int result = dao.updateUserStatus(user);
+		if(result != -1){
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public List<UserInfo> getEstateListByPage(UserInfoVO vo) {
+		int total = getEstateCountByCondition(vo);
+		vo.setTotalCount(total);
+		return dao.findEstateListByPage(vo);
+	}
+	
+	@Override
+	public int getEstateCountByCondition(UserInfoVO vo) {
+		return dao.getEstateCountByCondition(vo);
+	}
+	
+	@Override
 	public boolean isExistUserName(String username, Integer type) {
 		//判断用户名是否存在
 		UserInfo exsitUser = dao.getByName(username);
@@ -207,4 +243,5 @@ implements IUserInfoService {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
 }

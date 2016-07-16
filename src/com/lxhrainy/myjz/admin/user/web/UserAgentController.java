@@ -14,6 +14,7 @@ import com.lxhrainy.core.common.controller.BaseController;
 import com.lxhrainy.core.sys.model.UserInfo;
 import com.lxhrainy.core.sys.service.IUserInfoService;
 import com.lxhrainy.myjz.admin.user.oe.UserInfoVO;
+import com.lxhrainy.myjz.common.constant.Global;
 
 @RequestMapping("/admin/user/agent")
 @Controller
@@ -26,9 +27,9 @@ public class UserAgentController extends BaseController {
 	 * 详情
 	 * @param
 	 */
-	@RequestMapping("/view")
+	@RequestMapping("/agentDetail")
 	public ModelAndView detail(Integer id) {
-		mv = new ModelAndView("admin/user/agent/view");
+		mv = new ModelAndView("admin/user/agent/agentDetail");
 		if(id!=null){
 			mv.addObject("model", userInfoService.getById(id));
 		}
@@ -39,9 +40,9 @@ public class UserAgentController extends BaseController {
 	 * 列表
 	 * @param
 	 */
-	@RequestMapping("/list")
+	@RequestMapping("/agentList")
 	public ModelAndView list() {
-		mv = new ModelAndView("admin/user/agent/list");
+		mv = new ModelAndView("admin/user/agent/agentList");
 		return mv;
 	}
 	
@@ -59,9 +60,9 @@ public class UserAgentController extends BaseController {
 	 * 修改
 	 * @param
 	 */
-	@RequestMapping("/update")
+	@RequestMapping("/agentUpdate")
 	public ModelAndView update(Integer id) {
-		mv = new ModelAndView("admin/user/agent/update");
+		mv = new ModelAndView("admin/user/agent/agentUpdate");
 		if(id != null){
 			mv.addObject("model", userInfoService.getById(id));
 		}
@@ -94,7 +95,7 @@ public class UserAgentController extends BaseController {
 	 * 删除
 	 * @param ID
 	 */
-	@RequestMapping("/delete")
+	@RequestMapping("/agentDelete")
 	@ResponseBody
 	public JSONObject delete(Integer id) {
 		JSONObject rj = new JSONObject();
@@ -108,32 +109,24 @@ public class UserAgentController extends BaseController {
 	 * 启用用户
 	 * @param ID
 	 */
-	@RequestMapping("/able")
+	@RequestMapping("/addBlack")
 	@ResponseBody
-	public JSONObject able(Integer id) {
+	public JSONObject addBlack(UserInfo model) {
 		JSONObject rj = new JSONObject();
-		userInfoService.ableUser(id);
-		rj.put("success", true);
-		rj.put("msg", "");
+		model.setStatus(Global.BLACK);
+		boolean result = userInfoService.updateUserStatus(model);
+		if(result){
+			rj.put("success", true);
+			rj.put("msg", "成功将用户加入黑名单");
+		}else{
+			rj.put("success", false);
+			rj.put("msg", "加入黑名单失败");
+		}
 		return rj;
 	}
 	
 	/***
-	 * 禁用用户
-	 * @param ID
-	 */
-	@RequestMapping("/disable")
-	@ResponseBody
-	public JSONObject disable(Integer id) {
-		JSONObject rj = new JSONObject();
-		userInfoService.disableUser(id);
-		rj.put("success", true);
-		rj.put("msg", "");
-		return rj;
-	}
-	
-	/***
-	 * 禁用用户
+	 * 重置密码
 	 * @param ID
 	 */
 	@RequestMapping("/resetPassword")

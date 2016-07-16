@@ -20,7 +20,7 @@ public interface ISysMenuDao extends IBaseDao<SysMenu> {
 
 	public List<SysMenu> findByParentIdsLike(SysMenu menu);
 
-	public List<SysMenu> findByUserIdWithType(@Param("userId")Integer userId, @Param("belong")Integer belong, @Param("isShow")Integer isShow);
+	public List<SysMenu> findByUserIdWithType(@Param("userId")Integer userId, @Param("belong")Integer belong, @Param("isShow")Integer isShow, @Param("target")String target);
 	
 	public int updateParentIds(SysMenu menu);
 	

@@ -68,7 +68,7 @@ function submitForm()
 	<div class="loginbox">
 		<div class="title">
 			<div class="logo">
-				<i class="icon-cloud"></i>lxhrainyNet.Com
+				<i class="icon-cloud"></i>WeiTaiNet.Com
 			</div>
 			<div class='info'>————万万楼.后台管理</div>
 		</div>

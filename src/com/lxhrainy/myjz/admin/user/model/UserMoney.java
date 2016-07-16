@@ -18,8 +18,14 @@ public class UserMoney extends BaseModel
 	private Double usablebalance;
 	/**冻结金额**/
 	private Double frozenbalance;
+	/**支付密码**/
+	private String paypassword;
 	/**删除标识**/
 	private Integer deleted;
+	/**账号状态**/
+	private Integer status;
+	/**备注**/
+	private String memo;
 
 	public Integer getUserid()
 	{
@@ -61,4 +67,23 @@ public class UserMoney extends BaseModel
 	{
 		this.deleted = deleted;
 	}
+	public String getPaypassword() {
+		return paypassword;
+	}
+	public void setPaypassword(String paypassword) {
+		this.paypassword = paypassword;
+	}
+	public Integer getStatus() {
+		return status;
+	}
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
+	public String getMemo() {
+		return memo;
+	}
+	public void setMemo(String memo) {
+		this.memo = memo;
+	}
+	
 }

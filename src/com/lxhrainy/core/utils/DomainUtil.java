@@ -4,7 +4,7 @@ public class DomainUtil {
 	
 	public static String getDomain()
 	{
-		return "lxhrainynet.com";
+		return "weitainet.com";
 	}
 	
 }

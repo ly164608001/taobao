@@ -368,7 +368,7 @@ artDialog.prompt = function (content, yes, value) {
 	return _proxyDialog({
 		id: 'Prompt',
 		zIndex: _zIndex(),
-		icon: 'question',
+		icon: '',
 		fixed: true,
 		lock: true,
 		opacity: .1,
@@ -377,13 +377,11 @@ artDialog.prompt = function (content, yes, value) {
 				content,
 			'</div>',
 			'<div>',
-				'<input value="',
-					value,
-				'" style="width:18em;padding:6px 4px" />',
+				'<textarea cols=30 rows=5>'+ value +'</textarea>',
 			'</div>'
 			].join(''),
 		init: function () {
-			input = this.DOM.content.find('input')[0];
+			input = this.DOM.content.find('textarea')[0];
 			input.select();
 			input.focus();
 		},

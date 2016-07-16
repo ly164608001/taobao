@@ -20,4 +20,14 @@ public interface IUserMoneyService extends IBaseService<UserMoney, Integer>{
 	 */
 	UserMoney getByUserId(Integer id);
 
+	/**
+	 * @Title: updateStatusByUserId 
+	 * @Description: 根据用户ID更新账户状态
+	 * @param model
+	 * @return    设定文件 
+	 * @return boolean    返回类型 
+	 * @throws
+	 */
+	boolean updateStatusByUserId(UserMoney model);
+
 }

@@ -6,10 +6,14 @@
 		T.id,
 		T.pid AS "parent.id",
 		T.name,
-		T.depth
+		T.depth,
+		
+		P.name AS "parent.name" ,
+		P.depth AS "parent.depth" 
 	</sql>
 	
 	<sql id="areaJoins">
+	LEFT JOIN sys_address P ON P.id = T.pid
     </sql>
     
 	<select id="getById" resultType="SysAddress">

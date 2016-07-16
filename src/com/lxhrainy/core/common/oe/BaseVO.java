@@ -6,6 +6,8 @@ public class BaseVO {
 	private Integer rows = 10;//行数
 	private Integer totalCount = 0;
 	private Integer totalPage = 0;
+	private Integer region;
+	private Integer gloal_housesid;
 
 	public Integer getTotalPage() {
 		return totalPage;
@@ -56,6 +58,22 @@ public class BaseVO {
 			}
 			
 		}
+	}
+
+	public Integer getRegion() {
+		return region;
+	}
+
+	public void setRegion(Integer region) {
+		this.region = region;
+	}
+
+	public Integer getGloal_housesid() {
+		return gloal_housesid;
+	}
+
+	public void setGloal_housesid(Integer gloal_housesid) {
+		this.gloal_housesid = gloal_housesid;
 	}
 
 }

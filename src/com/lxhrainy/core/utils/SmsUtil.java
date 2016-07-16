@@ -54,6 +54,7 @@ public class SmsUtil {
 	{
 		if(mobile.length()!=11)
 			return false;
+		
 		String result = SmsUtil.sendSms(url, userid,account,password,mobile,content);
 		try{
 			Document document = DocumentHelper.parseText(result);
@@ -101,9 +102,9 @@ public class SmsUtil {
 	 */
 	public static String sendSms(String url, String userid, String account,
 			String password, String mobile, String content) {
-
 		return sendSms(url, userid, account, password, mobile, content, null,
 				null, null, null, null, null, null, "POST", "UTF-8", "UTF-8");
+		
 	}
 
 	/**

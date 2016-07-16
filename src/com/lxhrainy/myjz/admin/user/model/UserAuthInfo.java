@@ -1,8 +1,9 @@
 package com.lxhrainy.myjz.admin.user.model;
 
-import java.sql.Timestamp;
+import java.util.Date;
 
 import com.lxhrainy.core.common.model.BaseModel;
+import com.lxhrainy.core.sys.model.UserInfo;
 /**
  * 个人认证信息
  * @author xueyunteng
@@ -13,31 +14,35 @@ public class UserAuthInfo extends BaseModel
 	*/ 
 	private static final long serialVersionUID = 1L;
 	/**账号ID**/
-	private Integer userid;
-	/**支付密码**/
-	private String paypassword;
+	private UserInfo user;
 	/**认证手机**/
 	private String authphone;
 	/**手机认证时间**/
-	private Timestamp authphonetime;
+	private Date authphonetime;
 	/**密保邮箱**/
 	private String authemail;
 	/**邮箱认证时间**/
-	private Timestamp authemailtime;
+	private Date authemailtime;
 	/**绑定的QQ号码**/
 	private String bindqq;
 	/**绑定QQ时间**/
-	private Timestamp bindqqtime;
+	private Date bindqqtime;
 	/**实名认证状态**/
 	private Integer certificationstatus;
 	/**实名认证时间**/
-	private Timestamp certificationtime;
+	private Date certificationtime;
 	/**实名认证处理时间**/
-	private Timestamp handletime;
+	private Date handletime;
 	/**实名认证处理人**/
-	private Integer handler;
+	private UserInfo handler;
 	/**实名认证处理意见**/
 	private String handlememo;
+	/**打款信息处理时间**/
+	private Date payhandletime;
+	/**打款信息处理人**/
+	private UserInfo payhandler;
+	/**打款信息处理意见**/
+	private String payhandlememo;
 	/**删除标识**/
 	private Integer deleted;
 	/**真实姓名**/
@@ -54,23 +59,16 @@ public class UserAuthInfo extends BaseModel
 	private String openingbank;
 	/**银行卡卡号**/
 	private String bankno;
+	/**打款时间**/
+	private Date paidtime;
 	
-
-	public Integer getUserid()
+	public UserInfo getUser()
 	{
-		return this.userid;
+		return this.user;
 	}
-	public void setUserid(Integer userid)
+	public void setUser(UserInfo user)
 	{
-		this.userid = userid;
-	}
-	public String getPaypassword()
-	{
-		return this.paypassword;
-	}
-	public void setPaypassword(String paypassword)
-	{
-		this.paypassword = paypassword;
+		this.user = user;
 	}
 	public String getAuthphone()
 	{
@@ -80,11 +78,11 @@ public class UserAuthInfo extends BaseModel
 	{
 		this.authphone = authphone;
 	}
-	public Timestamp getAuthphonetime()
+	public Date getAuthphonetime()
 	{
 		return this.authphonetime;
 	}
-	public void setAuthphonetime(Timestamp authphonetime)
+	public void setAuthphonetime(Date authphonetime)
 	{
 		this.authphonetime = authphonetime;
 	}
@@ -96,11 +94,11 @@ public class UserAuthInfo extends BaseModel
 	{
 		this.authemail = authemail;
 	}
-	public Timestamp getAuthemailtime()
+	public Date getAuthemailtime()
 	{
 		return this.authemailtime;
 	}
-	public void setAuthemailtime(Timestamp authemailtime)
+	public void setAuthemailtime(Date authemailtime)
 	{
 		this.authemailtime = authemailtime;
 	}
@@ -112,11 +110,11 @@ public class UserAuthInfo extends BaseModel
 	{
 		this.bindqq = bindqq;
 	}
-	public Timestamp getBindqqtime()
+	public Date getBindqqtime()
 	{
 		return this.bindqqtime;
 	}
-	public void setBindqqtime(Timestamp bindqqtime)
+	public void setBindqqtime(Date bindqqtime)
 	{
 		this.bindqqtime = bindqqtime;
 	}
@@ -128,27 +126,27 @@ public class UserAuthInfo extends BaseModel
 	{
 		this.certificationstatus = certificationstatus;
 	}
-	public Timestamp getCertificationtime()
+	public Date getCertificationtime()
 	{
 		return this.certificationtime;
 	}
-	public void setCertificationtime(Timestamp certificationtime)
+	public void setCertificationtime(Date certificationtime)
 	{
 		this.certificationtime = certificationtime;
 	}
-	public Timestamp getHandletime()
+	public Date getHandletime()
 	{
 		return this.handletime;
 	}
-	public void setHandletime(Timestamp handletime)
+	public void setHandletime(Date handletime)
 	{
 		this.handletime = handletime;
 	}
-	public Integer getHandler()
+	public UserInfo getHandler()
 	{
 		return this.handler;
 	}
-	public void setHandler(Integer handler)
+	public void setHandler(UserInfo handler)
 	{
 		this.handler = handler;
 	}
@@ -210,9 +208,32 @@ public class UserAuthInfo extends BaseModel
 	public void setBankno(String bankno) {
 		this.bankno = bankno;
 	}
-	public static long getSerialversionuid() {
-		return serialVersionUID;
+	public Date getPayhandletime() {
+		return payhandletime;
 	}
-	
+	public void setPayhandletime(Date payhandletime) {
+		this.payhandletime = payhandletime;
+	}
+	public UserInfo getPayhandler() {
+		return payhandler;
+	}
+	public void setPayhandler(UserInfo payhandler) {
+		this.payhandler = payhandler;
+	}
+	public String getPayhandlememo() {
+		return payhandlememo;
+	}
+	public void setPayhandlememo(String payhandlememo) {
+		this.payhandlememo = payhandlememo;
+	}
+	public void setType(Integer type) {
+		this.type = type;
+	}
+	public Date getPaidtime() {
+		return paidtime;
+	}
+	public void setPaidtime(Date paidtime) {
+		this.paidtime = paidtime;
+	}
 	
 }

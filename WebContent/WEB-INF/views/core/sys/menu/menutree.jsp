@@ -1,61 +1,57 @@
 <%@ page language="java"  pageEncoding="UTF-8"%>
 <%@include file="/headDeclare.jsp" %>
 <%@include file="/tagDeclare.jsp"%>
+<%@include file="/adminHeadDeclare.jsp"%>
 <html>
 <head>
-<script type="text/javascript" src="/js/admin/global.js"></script>
+<link rel="stylesheet" href="${basePath}static/ztree/skin/zTree.css" type="text/css" />
+<link rel="stylesheet" href="${basePath}static/ztree/skin/zTreeStyle/zTreeStyle.css" type="text/css" />
+<script type="text/javascript" src="${basePath}static/ztree/jquery.ztree.core-3.5.js"></script>
 </head>
-<body>
-	<script type="text/javascript">
-        function getChecked(){
-        	var result = "";
-            var inodes = $('#tt').tree('getChecked','indeterminate');
-            var nodes =  $('#tt').tree('getChecked');
-            for(var i=0; i<nodes.length; i++){
-                if (result != '') result += ',';
-               		result += nodes[i].id;
-            }
-            for(var i=0; i<inodes.length; i++){
-                if (result != '') result += ',';
-               		result += inodes[i].id;
-            }
-            $.ajax({
-            	url:'${basePath}admin/sys/menu/menutreesave.htm',
-            	method:'post',
-            	data:'roleid=${roleid}&menuids='+result,
-            	dataType:'json',
-            	success:function(json)
-            	{
-            		if(json.success)
-    				{	
-    					$.messager.alert("提示","提交成功");
-    					closeDialog();
-    				}
-    				else
-    				{
-    					$.messager.alert("提示",json.msg);
-    				}  
-            	}
-            });
-        }
-        
-        $(function(){
-        	$('#tt').tree({
-        	    url:'${basePath}admin/sys/menu/datamenutree.htm?roleid=${roleid}&${radom}',
-        	    checkbox : true,
-        	    cache : false,
-        	    method:'get',
-        	    animate:true
-        	    
-        	});
-        })
-    </script>
-	<div class="easyui-panel" style="padding: 5px">
-		<ul id="tt"></ul>
-	</div>
-	<div style="margin: 20px 0;">
-		<a href="#" class="easyui-linkbutton" onclick="getChecked()">确 定</a>&nbsp;
-		<a href="#" class="easyui-linkbutton" onclick="closeDialog()">取 消</a>
+<script type="text/javascript">
+var setting = {
+	view : {
+		dblClickExpand : dblClickExpand
+	},
+	data : {
+		simpleData : {
+			enable : true,
+			pIdKey : "upId"
+		}
+	}
+};
+
+function dblClickExpand(treeId, treeNode) {
+	return treeNode.level > 0;
+}
+
+$(document).ready(function() {
+	var url = "${basePath}admin/sys/menu/datamenutree.htm";
+	$.ajax({
+		type : "GET",
+		url : url,
+		datatype : "json",
+		async:false,
+		success : function(result) {
+			var res = JSON.parse(result);
+			if (res.success) {
+				var zNodes = JSON.parse(res.menuJson);
+				$.fn.zTree.init($("#treeDemo"), setting, zNodes);
+				lrDialog.unmask();
+			} else {
+				lrDialog.alert(res.reason);
+				lrDialog.unmask();
+			}
+		},
+		error : function() {
+		}
+	});
+});
+</script>
+<body style="min-width: 0px;background-color: #fff;">
+	<div>
+		<ul id="treeDemo" class="ztree"
+			style="width:210px;border:1px solid #ccc;background-color: rgb(250, 250, 250);"></ul>
 	</div>
 </body>
 </html>

@@ -65,14 +65,14 @@ public interface ISysMenuService extends IBaseService<SysMenu, Integer>{
 	public List<TreeNode> getMenuTreeByRoleId(Integer roleid);
 	
 	/**
-	 * @Title: findTreeNodesByParentId 
+	 * @Title: findTreeNodesForRole 
 	 * @Description: 获取子级树形列表
 	 * @param @param parentId
 	 * @param @return    设定文件 
 	 * @return List<TreeNode>    返回类型 
 	 * @throws
 	 */
-	public List<TreeNode> findTreeNodesByParentId(Integer parentId);
+	public List<TreeNode> findTreeNodesForRole();
 	
 	/**
 	 * @Title: findByParentId 
@@ -95,6 +95,7 @@ public interface ISysMenuService extends IBaseService<SysMenu, Integer>{
 	public void saveRoleMenu(Integer roleid, String menuids);
 
 	/**
+	 * @param target 
 	 * @param admin 
 	 * @Title: getTreeByUserId 
 	 * @Description: 根据用户ID获取权限树
@@ -104,6 +105,15 @@ public interface ISysMenuService extends IBaseService<SysMenu, Integer>{
 	 * @return List<SysMenu>    返回类型 
 	 * @throws
 	 */
-	List<SysMenu> getTreeByUserId(Integer userId, Integer type);
+	List<SysMenu> getTreeByUserId(Integer userId, Integer type, String target);
+	
+	/**
+	 * @Title: findTreeNodes 
+	 * @Description: 获取菜单树形列表
+	 * @return    设定文件 
+	 * @return List<TreeNode>    返回类型 
+	 * @throws
+	 */
+	List<TreeNode> findTreeNodes();
 
 }

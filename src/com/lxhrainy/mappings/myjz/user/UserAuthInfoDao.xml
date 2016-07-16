@@ -5,7 +5,7 @@
     <resultMap id="UserAuthInfo" type="com.lxhrainy.myjz.admin.user.model.UserAuthInfo">
 		<id property="id" column="id" />
 		<result property="paypassword" column="paypassword" />
-		<result property="userid" column="userid" />
+		<result property="user.id" column="user.id" />
 		<result property="paypassword" column="paypassword" />
 		<result property="authphone" column="authphone" />
 		<result property="authphonetime" column="authphonetime" />
@@ -16,14 +16,14 @@
 		<result property="certificationstatus" column="certificationstatus" />
 		<result property="certificationtime" column="certificationtime" />
 		<result property="handletime" column="handletime" />
-		<result property="handler" column="handler" />
+		<result property="handler.id" column="handlerhandler.id" />
 		<result property="handlememo" column="handlememo" />
 		<result property="deleted" column="deleted" />
 	</resultMap>
 	
 	<sql id="userAuthInfoColumns">
 		T.id AS "id",
-		T.userid AS "userid",
+		T.userid AS "user.id",
 		T.paypassword AS "paypassword",
 		T.authphone AS "authphone",
 		T.authphonetime AS "authphonetime",
@@ -34,7 +34,7 @@
 		T.certificationstatus AS "certificationstatus",
 		T.certificationtime AS "certificationtime",
 		T.handletime AS "handletime",
-		T.handler AS "handler",
+		T.handler AS "handler.id",
 		T.handlememo AS "handlememo",
 		T.deleted AS "deleted",
 		T.realname AS "realname",
@@ -67,6 +67,14 @@
 		FROM user_auth_info T
 		<include refid="userAuthInfoJoins"/>
 		WHERE T.id = #{id}
+	</select>
+	
+	<select id="getByUserId" resultType="UserAuthInfo">
+		SELECT 
+			<include refid="userAuthInfoColumns"/>
+		FROM user_auth_info T
+		<include refid="userAuthInfoJoins"/>
+		WHERE T.userid = #{userid}
 	</select>
 	
 	<select id="findListByPage" resultType="UserAuthInfo">
@@ -116,7 +124,7 @@
 			deleted
 		) VALUES (
 			#{id},
-			#{userid},
+			#{user.id},
 			#{paypassword},
 			#{authphone},
 			#{authphonetime},
@@ -127,7 +135,7 @@
 			#{certificationstatus},
 			#{certificationtime},
 			#{handletime},
-			#{handler},
+			#{handler.id},
 			#{handlememo},
 			#{deleted}
 		)
@@ -136,8 +144,8 @@
 	<update id="update">
 		UPDATE user_auth_info 
 		<set>
-		<if test="userid!=null">
-			userid = #{userid},
+		<if test="user!=null and user.id!=null">
+			userid = #{user.id},
 		</if>
 		<if test="paypassword!=null and paypassword!=''">
 			paypassword = #{paypassword},
@@ -169,8 +177,8 @@
 		<if test="handletime !=null">
 			handletime = #{handletime},
 			</if>
-		<if test="handler !=null">
-			handler = #{handler},
+		<if test="handler !=null and handler.id!=null">
+			handler = #{handler.id},
 			</if>
 		<if test="handlememo !=null and handlememo !=''">
 			handlememo = #{handlememo},
@@ -208,13 +216,5 @@
 			deleted=1
 		WHERE id = #{id}
 	</update>
-	
-	<select id="getByUserId" resultType="UserAuthInfo">
-		SELECT 
-			<include refid="userAuthInfoColumns"/>
-		FROM user_auth_info T
-		<include refid="userAuthInfoJoins"/>
-		WHERE T.userid = #{userid}
-	</select>
 	
 </mapper>

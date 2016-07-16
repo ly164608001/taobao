@@ -51,8 +51,8 @@ public class FrontMainController extends BaseController {
 			//房地产商
 			mv = new ModelAndView("front/estate/main");
 		}
-		//获取用户权限列表
-		List<SysMenu> menuList = sysMenuservice.getTreeByUserId(currentUser.getId(), Global.FRONT);
+		//TODO:获取用户权限列表
+		List<SysMenu> menuList = null ;//sysMenuservice.getTreeByUserId(currentUser.getId(), Global.FRONT);
 		mv.addObject("frontUser", currentUser);
 		mv.addObject("menuList", menuList);
 		return mv;

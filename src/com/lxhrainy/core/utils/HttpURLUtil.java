@@ -19,8 +19,8 @@ public class HttpURLUtil {
     public static String readContentFromGet(String GET_UTL) throws IOException{
     	
         // 拼凑get请求的URL字串，使用URLEncoder.encode对特殊和不可见字符进行编码
-        String getURL = GET_UTL + "&activatecode=" + URLEncoder.encode("中国聚龙", "utf-8");
-        URL getUrl = new URL(getURL);
+        //String getURL = GET_UTL + "&activatecode=" + URLEncoder.encode("中国聚龙", "utf-8");
+        URL getUrl = new URL(GET_UTL);
         // 根据拼凑的URL，打开连接，URL.openConnection函数会根据URL的类型，
         // 返回不同的URLConnection子类的对象，这里URL是一个http，因此实际返回的是HttpURLConnection
         HttpURLConnection connection = (HttpURLConnection) getUrl

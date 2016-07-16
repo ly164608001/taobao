@@ -29,5 +29,14 @@ implements IUserMoneyService {
 	public UserMoney getByUserId(Integer userid) {
 		return userMoneyDao.getByUserId(userid);
 	}
+
+	@Override
+	public boolean updateStatusByUserId(UserMoney model) {
+		int result = userMoneyDao.updateStatusByUserId(model);
+		if(result != -1){
+			return true;
+		}
+		return false;
+	}
 	
 }

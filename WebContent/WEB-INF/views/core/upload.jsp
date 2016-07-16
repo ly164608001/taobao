@@ -18,8 +18,7 @@
 	<link href="${basePath}/static/swfupload/css/default.css" rel="stylesheet" type="text/css" />
 	
   <script type="text/javascript">
-  function uploadsuc(data)
-  {
+  function uploadsuc(data) {
 	  var json = JSON.parse(JSON.parse(data));
 	  if(json.success){
 		  parent.uploadsuc(json);
@@ -27,8 +26,8 @@
   }
 
   
-  function uploadfalse(data){
-	  window.location.href="http://${domainname}/upload/return.htm?cid=${cid}&framename=${framename}&size=${size}&extnames=${extnames}&json='false:"+data+"'"; 
+ function uploadfalse(data){
+	  parent.uploadfalse(data);
   }
   
   var upload;

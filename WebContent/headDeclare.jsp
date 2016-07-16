@@ -7,17 +7,12 @@
 			+ request.getContextPath() + "/";
 	pageContext.setAttribute("basePath", basePath);
 %>
-<link href="${basePath}static/ace/css/bootstrap.min.css" rel="stylesheet" />
-<link rel="stylesheet" href="${basePath}static/ace/css/font-awesome.min.css" />
-<link rel="stylesheet" href="${basePath}static/ace/css/ace.min.css" />
-<link rel="stylesheet" href="${basePath}static/ace/css/ace-rtl.min.css" />
-<link rel="stylesheet" href="${basePath}static/ace/css/ace-skins.min.css" />
-<link rel="stylesheet" href="${basePath}static/css/admin/base.css" />
-<script type="text/javascript" src="${basePath}static/js/easyui/jquery.min.js"></script>
-<script type="text/javascript" src="${basePath}static/js/easyui/jquery.easyui.min.js"></script>
-<script type="text/javascript" src="${basePath}static/js/easyui/jquery.edatagrid.js"></script>
-<script type="text/javascript" src="${basePath}static/js/easyui/datagrid-detailview.js"></script>
+<script type="text/javascript" src="${basePath}static/js/jquery.min.js"></script>
 <script type="text/javascript" src="${basePath}static/js/jquery.validate.js"></script>
-<script type="text/javascript" src="${basePath}static/js/My97DatePicker/WdatePicker.js"></script>
 <script type="text/javascript" src="${basePath}static/js/common.js"></script>
-<script type="text/javascript" src="${basePath}static/js/easyui.extends.js"></script>
+<script type="text/javascript" src="${basePath}static/js/validator.js"></script>
+<script type="text/javascript" src="${basePath}static/js/layer/layer.js"></script>
+<script type="text/javascript" src="${basePath}static/js/util.js"></script>
+<script type="text/javascript">
+var basePath = "${basePath}";
+</script>

@@ -4,7 +4,9 @@ import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.lxhrainy.core.common.model.BaseModel;
+import com.lxhrainy.myjz.admin.user.model.UserAuthInfo;
 import com.lxhrainy.myjz.admin.user.model.UserDetailInfo;
+import com.lxhrainy.myjz.admin.user.model.UserMoney;
 
 /**
  * 用户信息Entity
@@ -27,12 +29,42 @@ public class UserInfo extends BaseModel {
 	private Integer status; // 状态
 	private Integer deleted; // 删除标识
 	private Integer channel; // 来源
-	private String inviter; //邀请者
+	private String memo;
+	private Date updatetime;
+	private UserInfo updateuser;
+	private Integer creditscore;
 	private UserDetailInfo detailInfo; // 用户详细信息
-	
-	private String platform;
-	
-	private String uuid;
+	private UserAuthInfo authInfo;
+	private UserMoney account;
+	private String rolenames;
+
+	private String uuid; // api认证需要的用户唯一标示
+	private String platform;// api认证需要
+	private String inviter; // apiService需要
+
+	public String getInviter() {
+		return inviter;
+	}
+
+	public void setInviter(String inviter) {
+		this.inviter = inviter;
+	}
+
+	public String getUuid() {
+		return uuid;
+	}
+
+	public void setUuid(String uuid) {
+		this.uuid = uuid;
+	}
+
+	public String getPlatform() {
+		return platform;
+	}
+
+	public void setPlatform(String platform) {
+		this.platform = platform;
+	}
 
 	public String getIcon() {
 		return icon;
@@ -52,6 +84,10 @@ public class UserInfo extends BaseModel {
 
 	public UserInfo() {
 		super();
+	}
+
+	public UserInfo(int id) {
+		this.id = id;
 	}
 
 	public String getUsername() {
@@ -136,28 +172,60 @@ public class UserInfo extends BaseModel {
 		this.channel = channel;
 	}
 
-	public String getPlatform() {
-		return platform;
+	public String getMemo() {
+		return memo;
 	}
 
-	public void setPlatform(String platform) {
-		this.platform = platform;
+	public void setMemo(String memo) {
+		this.memo = memo;
 	}
 
-	public String getUuid() {
-		return uuid;
+	public Date getUpdatetime() {
+		return updatetime;
 	}
 
-	public void setUuid(String uuid) {
-		this.uuid = uuid;
+	public void setUpdatetime(Date updatetime) {
+		this.updatetime = updatetime;
 	}
 
-	public String getInviter() {
-		return inviter;
+	public UserInfo getUpdateuser() {
+		return updateuser;
 	}
 
-	public void setInviter(String inviter) {
-		this.inviter = inviter;
+	public void setUpdateuser(UserInfo updateuser) {
+		this.updateuser = updateuser;
+	}
+
+	public String getRolenames() {
+		return rolenames;
+	}
+
+	public void setRolenames(String rolenames) {
+		this.rolenames = rolenames;
+	}
+
+	public UserAuthInfo getAuthInfo() {
+		return authInfo;
+	}
+
+	public void setAuthInfo(UserAuthInfo authInfo) {
+		this.authInfo = authInfo;
+	}
+
+	public UserMoney getAccount() {
+		return account;
+	}
+
+	public void setAccount(UserMoney account) {
+		this.account = account;
+	}
+
+	public Integer getCreditscore() {
+		return creditscore;
+	}
+
+	public void setCreditscore(Integer creditscore) {
+		this.creditscore = creditscore;
 	}
 
 }

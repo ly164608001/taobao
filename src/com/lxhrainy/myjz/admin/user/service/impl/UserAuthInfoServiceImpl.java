@@ -29,5 +29,25 @@ implements IUserAuthInfoService {
 	public UserAuthInfo getByUserId(Integer userid) {
 		return dao.getByUserId(userid);
 	}
+
+	@Override
+	@Transactional(readOnly=false)
+	public boolean auditUser(UserAuthInfo model) {
+		int result = dao.auditUser(model);
+		if(result != -1){
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	@Transactional(readOnly=false)
+	public boolean auditUserPaid(UserAuthInfo model) {
+		int result = dao.auditUserPaid(model);
+		if(result != -1){
+			return true;
+		}
+		return false;
+	}
 	
 }

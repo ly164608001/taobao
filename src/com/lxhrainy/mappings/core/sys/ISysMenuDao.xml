@@ -59,17 +59,10 @@
 		<include refid="menuJoins"/>
 		<if test="condition!=null">
 			<where>
-				<!-- <if test="condition.model!=null">
-					<if test="condition.model.serialno!=null and condition.model.serialno!=''">
-						T.serialno LIKE '${condition.model.serialno}%'
-					</if>
+				T.deleted = 0
+				<if test="condition.parentid != null">
+					AND T.parentid = #{condition.parentid}
 				</if>
-				<if test="condition.createtime_start != null">
-					T.createtime > #{condition.createtime_start}
-				</if>
-				<if test="condition.createtime_end != null">
-					T.createtime > #{condition.createtime_end}
-				</if> -->
 			</where>
 			order by T.ID DESC
 			<include refid="Sql.pager" />
@@ -82,17 +75,10 @@
 		<include refid="menuJoins"/>
 		<if test="condition!=null">
 			<where>
-				<!-- <if test="condition.model!=null">
-					<if test="condition.model.serialno!=null and condition.model.serialno!=''">
-						T.serialno LIKE '${condition.model.serialno}%'
-					</if>
+				T.deleted = 0
+				<if test="condition.parentid != null">
+					AND T.parentid = #{condition.parentid}
 				</if>
-				<if test="condition.createtime_start != null">
-					T.createtime > #{condition.createtime_start}
-				</if>
-				<if test="condition.createtime_end != null">
-					T.createtime > #{condition.createtime_end}
-				</if> -->
 			</where>
 		</if>
 	</select>
@@ -122,6 +108,9 @@
 		</if>
 		<if test="isShow != null">
 			and T.isshow = #{isShow}
+		</if>
+		<if test="target != null">
+			and T.target = #{target}
 		</if>
 		ORDER BY T.sort
 	</select>
@@ -217,7 +206,7 @@
 	<update id="updateParentIds">
 		UPDATE sys_menu SET 
 			parentid = #{parent.id}, 
-			parentids = #{parentIds}
+			parentids = #{parentids}
 		WHERE id = #{id}
 	</update>
 	

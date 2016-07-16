@@ -24,5 +24,25 @@ public interface IUserAuthInfoDao extends IBaseDao<UserAuthInfo> {
 	 * @throws
 	 */
 	UserAuthInfo getByUserId(@Param("userid")Integer userid);
+
+	/**
+	 * @Title: auditUser 
+	 * @Description:实名认证身份信息审核
+	 * @param model
+	 * @return    设定文件 
+	 * @return int    返回类型 
+	 * @throws
+	 */
+	int auditUser(@Param("model")UserAuthInfo model);
+
+	/**
+	 * @Title: auditUserPaid 
+	 * @Description: 审核用户的打款信息
+	 * @param model
+	 * @return    设定文件 
+	 * @return int    返回类型 
+	 * @throws
+	 */
+	int auditUserPaid(@Param("model")UserAuthInfo model);
 	
 }

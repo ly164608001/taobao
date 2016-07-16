@@ -58,6 +58,12 @@ public class SysMenu extends BaseModel
 		this();
 		this.id = id;
 	}
+	
+	public SysMenu(Integer id, String name){
+		this();
+		this.id = id;
+		this.name = name;
+	}
 
 	public SysMenu getParent()
 	{

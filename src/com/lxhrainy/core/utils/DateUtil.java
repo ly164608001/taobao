@@ -1,7 +1,5 @@
 package com.lxhrainy.core.utils;
 
-import java.sql.Timestamp;
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -262,6 +260,21 @@ public class DateUtil {
 		calendar.add(calendar.MONTH, -3); //设置为前3月
 		return calendar.getTime(); //得到前3月的时间
 	}
+	
+	/**
+	 * 获取12个月开始时间
+	 * @return
+	 */
+	@SuppressWarnings("static-access")
+	public static Date getCurrentYearStart() {
+		Calendar calendar = Calendar.getInstance(); //得到日历
+		Date dNow = new Date(); //当前时间
+		calendar.setTime(dNow);//把当前时间赋给日历
+		calendar.add(calendar.MONTH, -12); //设置为前12月
+		return calendar.getTime(); //得到前12月的时间
+	}
+	
+	
 
 	/**
 	 * 根据给定Calendar给出当月初始时间
@@ -862,14 +875,6 @@ public class DateUtil {
 	 */
 	public static long getMillis() {
 		return new Date().getTime();
-	}
-	
-	public static Timestamp gettimestamp() {
-		Date dt = new Date();
-		DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		String nowTime = df.format(dt);
-		java.sql.Timestamp buydate = java.sql.Timestamp.valueOf(nowTime);
-		return buydate;
 	}
 	
 }

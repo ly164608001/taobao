@@ -36,8 +36,6 @@ public class SysRole extends BaseModel
 	private String remarks;
 	/**删除标记**/
 	private Integer deleted = 0;
-	/**公司ID**/
-	private Integer companyid;
 	
 	private List<SysMenu> menuList = Lists.newArrayList(); // 拥有菜单列表
 
@@ -128,12 +126,6 @@ public class SysRole extends BaseModel
 	public void setDeleted(Integer deleted)
 	{
 		this.deleted = deleted;
-	}
-	public Integer getCompanyid() {
-		return companyid;
-	}
-	public void setCompanyid(Integer companyid) {
-		this.companyid = companyid;
 	}
 	public List<SysMenu> getMenuList() {
 		return menuList;

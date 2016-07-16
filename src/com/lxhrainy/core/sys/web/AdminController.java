@@ -42,7 +42,7 @@ public class AdminController extends BaseController {
 	{
 		HttpSession session = ContextHolderUtils.getSession();
 		UserInfo currentUser = ClientManager.getInstance().getClient(session.getId()).getUser();
-		List<SysMenu> menuList = sysMenuService.getTreeByUserId(currentUser.getId(), Global.ADMIN);
+		List<SysMenu> menuList = sysMenuService.getTreeByUserId(currentUser.getId(), Global.ADMIN, Global.TARGET_ADMIN);
 		ModelAndView mv = new ModelAndView("core/main");
 		mv.addObject("model", currentUser);
 		mv.addObject("menuList", menuList);

@@ -1,6 +1,7 @@
 package com.lxhrainy.myjz.admin.user.model;
 
 import java.sql.Timestamp;
+import java.util.Date;
 
 import com.lxhrainy.core.common.model.BaseModel;
 
@@ -15,8 +16,6 @@ public class UserDetailInfo extends BaseModel {
 	private static final long serialVersionUID = 1L;
 	/** 账号ID **/
 	private Integer userid;
-	/** 头像 **/
-	private String icon;
 	/** 性别 **/
 	private Integer sex;
 	/** 生日 **/
@@ -50,7 +49,7 @@ public class UserDetailInfo extends BaseModel {
 	/** 证件号 **/
 	private String certificateno;
 	/** 更新时间 **/
-	private Timestamp modifytime;
+	private Date modifytime;
 	/** 删除标识 **/
 	private Integer deleted;
 
@@ -68,14 +67,6 @@ public class UserDetailInfo extends BaseModel {
 
 	public void setUserid(Integer userid) {
 		this.userid = userid;
-	}
-
-	public String getIcon() {
-		return this.icon;
-	}
-
-	public void setIcon(String icon) {
-		this.icon = icon;
 	}
 
 	public Integer getSex() {
@@ -198,8 +189,12 @@ public class UserDetailInfo extends BaseModel {
 		this.certificateno = certificateno;
 	}
 
-	public Timestamp getModifytime() {
-		return this.modifytime;
+	public Date getModifytime() {
+		return modifytime;
+	}
+
+	public void setModifytime(Date modifytime) {
+		this.modifytime = modifytime;
 	}
 
 	public void setModifytime(Timestamp modifytime) {

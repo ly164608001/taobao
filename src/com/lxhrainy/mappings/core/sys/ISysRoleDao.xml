@@ -16,7 +16,6 @@
 	
     <sql id="roleColumns">
     	T.id,
-    	T.companyid,
     	T.name,
     	T.enname,
 		T.datascope AS datascope,
@@ -28,6 +27,9 @@
 		T.deleted,
     	T.useable AS useable,
     	T.issys AS issys
+    </sql>
+    
+     <sql id="roleJoins">
     </sql>
     
 	<select id="getById" resultMap="roleResult">
@@ -71,19 +73,14 @@
 		SELECT 
 			<include refid="roleColumns"/>
 		FROM sys_role T
+		<include refid="roleJoins"/>
 		<if test="condition!=null">
 			<where>
-				<!-- <if test="condition.model!=null">
-					<if test="condition.model.serialno!=null and condition.model.serialno!=''">
-						T.serialno LIKE '${condition.model.serialno}%'
+				<if test="condition.model!=null">
+					<if test="condition.model.name!=null and condition.model.name!=''">
+						T.name LIKE '${condition.model.name}%'
 					</if>
 				</if>
-				<if test="condition.createtime_start != null">
-					T.createtime > #{condition.createtime_start}
-				</if>
-				<if test="condition.createtime_end != null">
-					T.createtime > #{condition.createtime_end}
-				</if> -->
 			</where>
 			order by T.ID DESC
 			<include refid="Sql.pager" />
@@ -93,19 +90,14 @@
 		SELECT 
 			count(*)
 		FROM sys_role T
+		<include refid="roleJoins"/>
 		<if test="condition!=null">
 			<where>
-				<!-- <if test="condition.model!=null">
-					<if test="condition.model.serialno!=null and condition.model.serialno!=''">
-						T.serialno LIKE '${condition.model.serialno}%'
+				<if test="condition.model!=null">
+					<if test="condition.model.name!=null and condition.model.name!=''">
+						T.name LIKE '${condition.model.name}%'
 					</if>
 				</if>
-				<if test="condition.createtime_start != null">
-					T.createtime > #{condition.createtime_start}
-				</if>
-				<if test="condition.createtime_end != null">
-					T.createtime > #{condition.createtime_end}
-				</if> -->
 			</where>
 		</if>
 	</select>
@@ -113,7 +105,6 @@
 	<insert id="insert">
 		INSERT INTO sys_role(
 			id, 
-			companyid, 
 			name, 
 			enname, 
 			datascope, 
@@ -127,7 +118,6 @@
 			useable
 		) VALUES (
 			#{id}, 
-			#{companyid}, 
 			#{name}, 
 			#{enname}, 
 			#{datascope}, 
@@ -153,7 +143,6 @@
 	
 	<update id="update">
 		UPDATE sys_role SET 
-			companyid = #{companyid}, 
 			name = #{name}, 
 			enname = #{enname}, 
 			datascope = #{datascope}, 

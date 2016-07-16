@@ -3,30 +3,21 @@ package com.lxhrainy.core.sys.web;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
-
-import javax.servlet.http.HttpServletResponse;
-
-import net.sf.json.JSONArray;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 import com.lxhrainy.core.common.controller.BaseController;
 import com.lxhrainy.core.oe.TreeNode;
 import com.lxhrainy.core.sys.model.SysMenu;
 import com.lxhrainy.core.sys.oe.SysMenuVO;
 import com.lxhrainy.core.sys.service.ISysMenuService;
-import com.lxhrainy.core.utils.StringUtils;
 import com.lxhrainy.myjz.common.constant.Global;
 
 /**
@@ -42,9 +33,32 @@ public class SysMenuController extends BaseController {
 	@Autowired
 	private ISysMenuService sysMenuService;
 	
-	@RequestMapping("/list")
-	public ModelAndView list() {
-		mv = new ModelAndView("core/sys/menu/list");
+	@RequestMapping("/menuManageFrame")
+	public ModelAndView manageFrame(){
+		mv = new ModelAndView("core/sys/menu/menuManageFrame");
+		return mv;
+	}
+	
+	@RequestMapping("/menutree")
+	public ModelAndView menutree() {
+		mv = new ModelAndView("core/sys/menu/menutree");
+		return mv;
+	}
+	
+	@RequestMapping("/datamenutree")
+	@ResponseBody
+	public JSONObject datemenutree() {
+		JSONObject rj = new JSONObject();
+		List<TreeNode> menuTree = sysMenuService.findTreeNodes();
+		rj.put("success", true);
+		rj.put("menuJson", JSON.toJSONString(menuTree));
+		return rj;
+	}
+	
+	@RequestMapping("/menuList")
+	public ModelAndView list(SysMenuVO vo) {
+		mv = new ModelAndView("core/sys/menu/menuList");
+		mv.addObject("vo", vo);
 		return mv;
 	}
 	
@@ -63,7 +77,7 @@ public class SysMenuController extends BaseController {
 	 * 新增
 	 * @param
 	 */
-	@RequestMapping("/add")
+	@RequestMapping("/menuAdd")
 	public ModelAndView add(SysMenu menu)
 	{
 		if(menu == null ){
@@ -72,20 +86,22 @@ public class SysMenuController extends BaseController {
 			menu = sysMenuService.getById(menu.getId());
 		}
 		if (menu.getParent()==null || menu.getParent().getId()==null){
-			menu.setParent(new SysMenu(Global.ROOT_MENU_ID));
+			menu.setParent(new SysMenu(Global.ROOT_MENU_ID, Global.ROOT_MENU_NAME));
 		}
 		menu.setParent(sysMenuService.getById(menu.getParent().getId()));
-		// 获取排序号，最末节点排序号+30
+		// 获取排序号，最末节点排序号+1
 		if (menu.getId() == null){
 			List<SysMenu> list = Lists.newArrayList();
 			List<SysMenu> sourcelist = sysMenuService.getAllList(null);
 			SysMenu.sortList(list, sourcelist, menu.getParentId(), false);
 			if (list.size() > 0){
-				menu.setSort(list.get(list.size()-1).getSort() + 30);
+				menu.setSort(list.get(list.size()-1).getSort() + 1);
+			}else{
+				menu.setSort(1);
 			}
 		}
 		mv.addObject("model", menu);
-		mv.setViewName("core/sys/menu/add");
+		mv.setViewName("core/sys/menu/menuAdd");
 		return mv;
 	}
 	
@@ -93,7 +109,7 @@ public class SysMenuController extends BaseController {
 	 * 查看
 	 * @param
 	 */
-	@RequestMapping("/view")
+	@RequestMapping("/menuDetail")
 	public ModelAndView view(Integer id)
 	{
 		if(id != null){
@@ -135,13 +151,13 @@ public class SysMenuController extends BaseController {
 	 * 修改
 	 * @param
 	 */
-	@RequestMapping("/update")
+	@RequestMapping("/menuUpdate")
 	public ModelAndView update(Integer id)
 	{
 		if(id != null){
 			mv.addObject("model", sysMenuService.getById(id));
 		}
-		mv.setViewName("core/sys/menu/update");
+		mv.setViewName("core/sys/menu/menuUpdate");
 		return mv;
 	}
 	
@@ -154,6 +170,8 @@ public class SysMenuController extends BaseController {
 	public JSONObject updatesave(SysMenu model)
 	{
 		JSONObject rj = new JSONObject();
+		model.setUpdatetime(new Date());
+		model.setUpdateuser(getCurrentUser());
 		int result = sysMenuService.update(model);	
 		if(result != -1){
 			//成功
@@ -170,7 +188,7 @@ public class SysMenuController extends BaseController {
 	 * 删除
 	 * @param ID
 	 */
-	@RequestMapping("/delete")
+	@RequestMapping("/menuDelete")
 	@ResponseBody
 	public JSONObject delete(Integer id)
 	{
@@ -181,23 +199,26 @@ public class SysMenuController extends BaseController {
 		return rj;
 	}
 
-	@RequestMapping("/menutree")
-	public ModelAndView menutree(Integer roleid) {
+	@RequestMapping("/rolemenutree")
+	public ModelAndView rolemenutree(Integer roleid) {
+		mv = new ModelAndView("core/sys/menu/rolemenutree");
 		mv.addObject("radom", Math.random());
 		mv.addObject("roleid", roleid);
-		mv.setViewName("core/sys/menu/menutree");
 		return mv;
 	}
 	
-	@RequestMapping("/datamenutree")
+	@RequestMapping("/datarolemenutree")
 	@ResponseBody
-	public JSONArray datamenutree(Integer roleid)
+	public JSONObject datarolemenutree(Integer roleid)
 	{
+		JSONObject rj = new JSONObject();
 		List<TreeNode> result = new ArrayList<TreeNode>();
 		if(roleid != null){
 			result = sysMenuService.getMenuTreeByRoleId(roleid);
 		}
-		return JSONArray.fromObject(result);
+		rj.put("success", true);
+		rj.put("menuJson", JSON.toJSONString(result));
+		return rj;
 	}
 	
 	/**
@@ -207,9 +228,9 @@ public class SysMenuController extends BaseController {
 	 * @param menuids	权限ID列表
 	 * @return
 	 */
-	@RequestMapping("/menutreesave")
+	@RequestMapping("/rolemenusave")
 	@ResponseBody
-	public JSONObject menutreesave(Integer roleid,String menuids)
+	public JSONObject rolemenusave(Integer roleid,String menuids)
 	{
 		JSONObject rj = new JSONObject();
 		sysMenuService.saveRoleMenu(roleid,menuids);
@@ -218,53 +239,4 @@ public class SysMenuController extends BaseController {
 		return rj;
 	}
 
-	@RequestMapping("/treeselect")
-	public String treeselect(String parentId, Model model) {
-		model.addAttribute("parentId", parentId);
-		return "core/sys/menu/menuTreeselect";
-	}
-	
-	/**
-	 * 批量修改菜单排序
-	 */
-	@RequestMapping("/updateSort")
-	public JSONObject updateSort(Integer[] ids, Integer[] sorts, RedirectAttributes redirectAttributes) {
-    	for (int i = 0; i < ids.length; i++) {
-    		SysMenu menu = new SysMenu(ids[i]);
-    		menu.setSort(sorts[i]);
-    		sysMenuService.updateSort(menu);
-    	}
-    	JSONObject rj = new JSONObject();
-    	rj.put("success", true);
-		rj.put("msg", "保存菜单排序成功!");
-		return rj;
-	}
-	
-	/**
-	 * isShowHide是否显示隐藏菜单
-	 * @param extId
-	 * @param isShowHidden
-	 * @param response
-	 * @return
-	 */
-	@ResponseBody
-	@RequestMapping("/treeData")
-	public List<Map<String, Object>> treeData(@RequestParam(required=false) String extId, SysMenuVO vo, @RequestParam(required=false) String isShowHide, HttpServletResponse response) {
-		List<Map<String, Object>> mapList = Lists.newArrayList();
-		List<SysMenu> list = sysMenuService.getAllList(vo);
-		for (int i=0; i<list.size(); i++){
-			SysMenu e = list.get(i);
-			if (StringUtils.isBlank(extId) || (extId!=null && !extId.equals(e.getId()) && e.getParentids().indexOf(","+extId+",")==-1)){
-				if(isShowHide != null && isShowHide.equals("0") && e.getIsshow().intValue()==0){
-					continue;
-				}
-				Map<String, Object> map = Maps.newHashMap();
-				map.put("id", e.getId());
-				map.put("pId", e.getParent().getId());
-				map.put("name", e.getName());
-				mapList.add(map);
-			}
-		}
-		return mapList;
-	}
 }

@@ -1,10 +1,13 @@
 package com.lxhrainy.core.sys.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 
 import com.lxhrainy.core.annotation.MyBatisDao;
 import com.lxhrainy.core.common.dao.IBaseDao;
 import com.lxhrainy.core.sys.model.UserInfo;
+import com.lxhrainy.myjz.admin.user.oe.UserInfoVO;
 
 /**
  * 用户DAO接口
@@ -14,12 +17,6 @@ import com.lxhrainy.core.sys.model.UserInfo;
  */
 @MyBatisDao
 public interface IUserInfoDao extends IBaseDao<UserInfo> {
-
-	/**
-	 * 更新状态
-	 * @param id
-	 */
-	void updateStatus(@Param("id") int id,@Param("status")int status);
 
 	/**
 	 * 根据用户名获取用户信息
@@ -53,5 +50,55 @@ public interface IUserInfoDao extends IBaseDao<UserInfo> {
 	 * @return
 	 */
 	UserInfo getPersonInfo(@Param("id")int id);
+
+	/**
+	 * @Title: getMemberCountByCondition 
+	 * @Description: 获取会员总数 
+	 * @param vo
+	 * @return    设定文件 
+	 * @return int    返回类型 
+	 * @throws
+	 */
+	int getMemberCountByCondition(@Param("condition")UserInfoVO vo);
+
+	/**
+	 * @Title: findMemberListByPage 
+	 * @Description: 获取会员信息列表 
+	 * @param vo
+	 * @return    设定文件 
+	 * @return List<UserInfo>    返回类型 
+	 * @throws
+	 */
+	List<UserInfo> findMemberListByPage(@Param("condition")UserInfoVO vo);
+
+	/**
+	 * @Title: updateUserStatus 
+	 * @Description: 更新用户状态
+	 * @param user
+	 * @return    设定文件 
+	 * @return int    返回类型 
+	 * @throws
+	 */
+	int updateUserStatus(@Param("user")UserInfo user);
+
+	/**
+	 * @Title: findEstateListByPage 
+	 * @Description: 获取房地产商用户列表
+	 * @param vo
+	 * @return    设定文件 
+	 * @return List<UserInfo>    返回类型 
+	 * @throws
+	 */
+	List<UserInfo> findEstateListByPage(@Param("condition")UserInfoVO vo);
+
+	/**
+	 * @Title: getEstateCountByCondition 
+	 * @Description: 获取房地产商用户总数
+	 * @param vo
+	 * @return    设定文件 
+	 * @return int    返回类型 
+	 * @throws
+	 */
+	int getEstateCountByCondition(@Param("condition")UserInfoVO vo);
 	
 }

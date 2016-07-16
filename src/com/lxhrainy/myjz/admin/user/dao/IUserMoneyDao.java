@@ -16,5 +16,7 @@ import com.lxhrainy.myjz.admin.user.model.UserMoney;
 public interface IUserMoneyDao extends IBaseDao<UserMoney> {
 
 	UserMoney getByUserId(@Param("userid")Integer userid);
+
+	int updateStatusByUserId(@Param("model")UserMoney model);
 	
 }

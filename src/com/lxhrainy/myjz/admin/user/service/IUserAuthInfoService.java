@@ -20,4 +20,24 @@ public interface IUserAuthInfoService extends IBaseService<UserAuthInfo, Integer
 	 */
 	UserAuthInfo getByUserId(Integer userid);
 
+	/**
+	 * @Title: auditUser 
+	 * @Description: 实名认证身份信息审核
+	 * @param model
+	 * @return    设定文件 
+	 * @return boolean    返回类型 
+	 * @throws
+	 */
+	boolean auditUser(UserAuthInfo model);
+
+	/**
+	 * @Title: auditUserPaid 
+	 * @Description: 审核用户的打款信息
+	 * @param model
+	 * @return    设定文件 
+	 * @return boolean    返回类型 
+	 * @throws
+	 */
+	boolean auditUserPaid(UserAuthInfo model);
+
 }
