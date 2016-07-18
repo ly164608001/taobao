@@ -4,12 +4,12 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-	<title>添加收货地址</title>
+	<title>添加好评内容</title>
 </head>
 <body>
 	<section>
 		<div class="addCar">
-			<form action="${basePath}front/seller/address/addsave.htm" method="post" class="form form-horizontal">
+			<form action="${basePath}front/seller/praise/addsave.htm" method="post" class="form form-horizontal">
 
 				<div class="row cl">
 					<label class="form-label col-xs-4 col-sm-3">
@@ -28,42 +28,16 @@
 					</div>
 
 				</div>
+
 				<div class="row cl">
 					<label class="form-label col-xs-4 col-sm-3">
 						<span class="c-red">*</span>
-						姓名：
+						规定好评内容：
 					</label>
 					<div class="formControls col-xs-4 col-sm-3">
-						<input type="text" name="name" class="input-text" /></div>
-
+						<textarea name="content"></textarea>
+					</div>
 				</div>
-			<div class="row cl">
-				<label class="form-label col-xs-4 col-sm-3">
-					<span class="c-red">*</span>
-					电话：
-				</label>
-				<div class="formControls col-xs-4 col-sm-3">
-					<input type="text" class="input-text" name="phone" /></div>
-
-			</div>
-			
-			<div class="row cl">
-				<label class="form-label col-xs-4 col-sm-3">邮编：</label>
-				<div class="formControls col-xs-4 col-sm-3">
-					<input type="text" class="input-text" name=""/></div>
-	
-			</div>
-
-			<div class="row cl">
-				<label class="form-label col-xs-4 col-sm-3">
-					<span class="c-red">*</span>
-					收货地址：
-				</label>
-				<div class="formControls col-xs-4 col-sm-3">
-					<textarea name="address"></textarea>
-				</div>
-			</div>
-			
 		</form>
 	</div>
 </section>

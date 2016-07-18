@@ -14,47 +14,18 @@ import com.alibaba.fastjson.JSONObject;
 import com.lxhrainy.core.common.controller.BaseController;
 import com.lxhrainy.myjz.admin.seller.model.Label;
 import com.lxhrainy.myjz.admin.seller.model.ReceiptAddress;
-import com.lxhrainy.myjz.admin.seller.oe.ReceiptAddressVO;
 import com.lxhrainy.myjz.admin.seller.service.ILabelService;
 import com.lxhrainy.myjz.admin.seller.service.IReceiptAddressService;
 import com.lxhrainy.myjz.common.constant.Global;
 
 @RequestMapping("/front/seller/address")
 @Controller
-public class SellerAddressController extends BaseController {
+public class SellerAddressAddController extends BaseController {
 
 	@Autowired
 	IReceiptAddressService addressService;
 	@Autowired
 	ILabelService labelService;
-	
-	/***
-	 * 详情
-	 * @param
-	 */
-	@RequestMapping("/addressDetail")
-	public ModelAndView detail(Integer id) {
-		if(id!=null){
-			mv.addObject("model", addressService.getById(id));
-		}
-		
-		mv.setViewName("front/seller/address/addressDetail");
-		return mv;
-	}
-	
-	/***
-	 * 列表
-	 * @param
-	 */
-	@RequestMapping("/addressList")
-	public ModelAndView list(ReceiptAddressVO vo) {
-		List<ReceiptAddress> list = addressService.getListByPage(vo);
-		
-		mv.addObject("list",list);
-		mv.addObject("vo",vo);
-		mv.setViewName("front/seller/address/addressList");
-		return mv;
-	}
 	
 	/***
 	 * 新增
@@ -91,35 +62,4 @@ public class SellerAddressController extends BaseController {
 		return rj;
 	}
 	
-	/***
-	 * 删除
-	 * @param ID
-	 */
-	@RequestMapping("/deleteById")
-	@ResponseBody
-	public JSONObject deleteById(Integer id) {
-		JSONObject rj = new JSONObject();
-		addressService.deleteById(id);
-		rj.put("success", true);
-		rj.put("msg", "删除成功");
-		return rj;
-	}
-	
-	@RequestMapping("/deleteByStatus")
-	@ResponseBody
-	public JSONObject delete(Integer status) {
-		JSONObject rj = new JSONObject();
-		rj.put("success", true);
-		rj.put("msg", "删除成功");
-		
-		if(status != null){
-			addressService.deleteByStatus(status);
-		}else{
-			rj.put("success", false);
-			rj.put("msg", "无状态值");
-		}
-		
-		return rj;
-	}
-
 }

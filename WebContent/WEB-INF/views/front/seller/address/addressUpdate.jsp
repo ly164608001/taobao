@@ -38,30 +38,33 @@
 						<input type="text" name="name" value="${model.name}" class="input-text" /></div>
 
 				</div>
-			<div class="row cl">
-				<label class="form-label col-xs-4 col-sm-3">
-					<span class="c-red">*</span>
-					电话：
-				</label>
-				<div class="formControls col-xs-4 col-sm-3">
-					<input type="text" class="input-text" name="phone" value="${model.phone}"/></div>
+				
+				<div class="row cl">
+					<label class="form-label col-xs-4 col-sm-3">
+						<span class="c-red">*</span>
+						电话：
+					</label>
+					<div class="formControls col-xs-4 col-sm-3">
+						<input type="text" class="input-text" name="phone" value="${model.phone}"/></div>
+	
+				</div>
+				
+				<div class="row cl">
+					<label class="form-label col-xs-4 col-sm-3">邮编：</label>
+					<div class="formControls col-xs-4 col-sm-3">
+						<input type="text" class="input-text" name="code" value="${model.code}"/></div>
+		
+				</div>
 
-			</div>
-		<div class="row cl">
-			<label class="form-label col-xs-4 col-sm-3">邮编：</label>
-			<div class="formControls col-xs-4 col-sm-3">
-				<input type="text" class="input-text" name="code" value="${model.code}"/></div>
-
-		</div>
-
-		<div class="row cl">
-			<label class="form-label col-xs-4 col-sm-3">
-				<span class="c-red">*</span>
-				收货地址：
-			</label>
-			<div class="formControls col-xs-4 col-sm-3">
-				<textarea name="address">${model.address}</textarea>
-			</div>
+				<div class="row cl">
+					<label class="form-label col-xs-4 col-sm-3">
+						<span class="c-red">*</span>
+						收货地址：
+					</label>
+					<div class="formControls col-xs-4 col-sm-3">
+						<textarea name="address">${model.address}</textarea>
+					</div>
+				</div>
 
 		</form>
 	</div>
