@@ -10,4 +10,10 @@ import com.lxhrainy.myjz.admin.seller.model.Praise;
  */
 public interface IPraiseService extends IBaseService<Praise, Integer>{
 
+	/**
+	 * 删除指定状态好评内容
+	 * @param status
+	 */
+	int deleteByStatus(int status);
+
 }

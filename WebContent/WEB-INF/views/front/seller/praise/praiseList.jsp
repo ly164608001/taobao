@@ -133,8 +133,8 @@
 	             area:['600px','450px'],
 	             closeBtn:1,
 	             shadeClose:true,
-	             content:['${basePath}front/seller/address/addressUpdate.htm?id='+id,'no'],
-	             title:'修改收货地址',
+	             content:['${basePath}front/seller/praise/praiseUpdate.htm?id='+id,'no'],
+	             title:'修改好评内容',
 	             btn:['确定','取消'],
 	             yes:function(index){
 	                 console.log('这里执行提交操作');
@@ -150,7 +150,7 @@
 		                area:['600px','450px'],
 		                closeBtn:1,
 		                shadeClose:true,
-		                content:['${basePath}front/seller/address/addressAdd.htm','no'],
+		                content:['${basePath}front/seller/praise/praiseAdd.htm','no'],
 		                title:'添加收货地址',
 		                btn:['确定','取消'],
 		                yes:function(index){
@@ -166,7 +166,7 @@
 		                area:['600px','400px'],
 		                closeBtn:1,
 		                shadeClose:true,
-		                content:['${basePath}front/seller/address/addressImport.htm','no'],
+		                content:['${basePath}front/seller/praise/praiseImport.htm','no'],
 		                title:'批量导入',
 		                btn:['确定','取消'],
 		                yes:function(index){

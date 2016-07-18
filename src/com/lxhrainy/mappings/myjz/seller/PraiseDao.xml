@@ -106,4 +106,9 @@
 		WHERE id = #{id}
 	</update>
 	
+	<update id="deleteByStatus">
+		DELETE FROM seller_praise
+		WHERE status = #{status}
+	</update>
+	
 </mapper>
