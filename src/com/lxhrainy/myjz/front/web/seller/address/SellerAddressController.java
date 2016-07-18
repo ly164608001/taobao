@@ -19,40 +19,14 @@ import com.lxhrainy.myjz.admin.seller.service.ILabelService;
 import com.lxhrainy.myjz.admin.seller.service.IReceiptAddressService;
 import com.lxhrainy.myjz.common.constant.Global;
 
-/**
- * 收获地址控制层
- * @author xueyunteng
- *
- */
 @RequestMapping("/front/seller/address")
 @Controller
 public class SellerAddressController extends BaseController {
-	
+
 	@Autowired
 	IReceiptAddressService addressService;
 	@Autowired
 	ILabelService labelService;
-	
-	/***
-	 * 列表
-	 * @param
-	 */
-	@RequestMapping("/addressList")
-	public ModelAndView list(ReceiptAddressVO vo) {
-		ReceiptAddress model = vo.getModel();
-		if(model == null){
-			model = new ReceiptAddress();
-		}
-		model.setUser(this.getCurrentUser());
-		vo.setModel(model);
-		
-		List<ReceiptAddress> list = addressService.getListByPage(vo);
-		
-		mv.addObject("vo", vo);
-		mv.addObject("list", list);
-		mv.setViewName("front/seller/address/addressList");
-		return mv;
-	}
 	
 	/***
 	 * 详情
@@ -68,6 +42,26 @@ public class SellerAddressController extends BaseController {
 		return mv;
 	}
 	
+	/***
+	 * 列表
+	 * @param
+	 */
+	@RequestMapping("/addressList")
+	public ModelAndView list() {
+		mv.setViewName("front/seller/address/addressList");
+		return mv;
+	}
+	
+	@RequestMapping("/datalist")
+	@ResponseBody
+	public JSONObject listdata(ReceiptAddressVO vo) {
+		JSONObject rj = new JSONObject();
+		List<ReceiptAddress> list = addressService.getListByPage(vo);
+		rj.put("total", vo.getTotalCount());
+		rj.put("rows",list);
+		rj.put("vo",vo);
+		return rj;
+	}
 
 	/***
 	 * 新增
@@ -80,6 +74,17 @@ public class SellerAddressController extends BaseController {
 		mv.setViewName("front/seller/address/addressAdd");
 		return mv;
 	}
+	
+	/***
+	 * 导入
+	 * @param
+	 */
+	@RequestMapping("/addressImport")
+	public ModelAndView addressImport() {
+		mv.setViewName("front/seller/address/addressImport");
+		return mv;
+	}
+	
 	
 	/***
 	 * 新增保存
@@ -121,7 +126,7 @@ public class SellerAddressController extends BaseController {
 	}
 	
 	/***
-	 * 保存
+	 * 更新保存
 	 * @param
 	 */
 	@RequestMapping("/updatesave")
@@ -166,9 +171,9 @@ public class SellerAddressController extends BaseController {
 	 * 删除
 	 * @param ID
 	 */
-	@RequestMapping("/addressDelete")
+	@RequestMapping("/deleteById")
 	@ResponseBody
-	public JSONObject delete(Integer id) {
+	public JSONObject deleteById(Integer id) {
 		JSONObject rj = new JSONObject();
 		addressService.deleteById(id);
 		rj.put("success", true);
@@ -176,4 +181,21 @@ public class SellerAddressController extends BaseController {
 		return rj;
 	}
 	
+	@RequestMapping("/deleteByStatus")
+	@ResponseBody
+	public JSONObject delete(Integer status) {
+		JSONObject rj = new JSONObject();
+		rj.put("success", true);
+		rj.put("msg", "删除成功");
+		
+		if(status != null){
+			addressService.deleteByStatus(status);
+		}else{
+			rj.put("success", false);
+			rj.put("msg", "无状态值");
+		}
+		
+		return rj;
+	}
+
 }

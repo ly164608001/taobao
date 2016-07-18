@@ -10,4 +10,10 @@ import com.lxhrainy.myjz.admin.seller.model.ReceiptAddress;
  */
 public interface IReceiptAddressService extends IBaseService<ReceiptAddress, Integer>{
 
+	/**
+	 * 删除指定状态地址
+	 * @param status
+	 */
+	int deleteByStatus(int status);
+
 }

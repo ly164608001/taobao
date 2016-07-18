@@ -126,4 +126,9 @@
 		WHERE id = #{id}
 	</update>
 	
+	<update id="deleteByStatus">
+		DELETE FROM seller_receipt_address
+		WHERE status = #{status}
+	</update>
+	
 </mapper>

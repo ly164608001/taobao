@@ -34,8 +34,10 @@
 							</li>
 							<li class="tab02">
 								<input class="btn radius btn-secondary btn-addAddress" type="button" value="+添加收货地址" />
-								<input class="btn radius btn-secondary btn-deleteAddress1" type="button" value="-删除所有已使用过地址" />
-								<input class="btn radius btn-secondary btn-deleteAddress2" type="button" value="-删除所有未使用过地址" />
+								<input class="btn radius btn-secondary btn-deleteAddress1" type="button" 
+											value="-删除所有已使用过地址" onclick="del(1);"/>
+								<input class="btn radius btn-secondary btn-deleteAddress2" type="button"
+											value="-删除所有未使用过地址" onclick="del(0);"/>
 								<input class="btn radius btn-secondary btn-addAddressAll" type="button" value="+批量导入收货地址" />
 							</li>
 						</ul>
@@ -60,7 +62,14 @@
 										<td><span>${item.name}</span></td>
 										<td><span>${item.phone}</span></td>
 										<td><span>${item.address}</span></td>
-										<td><span>${fns:getDictLabel(model.status,'AddressStatus','')}</span></td>
+										<td>
+											<span>
+												<c:choose>
+													<c:when test="${item.status == 0}">未使用</c:when>
+													<c:when test="${item.status == 1}">已使用</c:when>
+												</c:choose>
+											</span>
+										</td>
 										<td>
 											<span>
 												<f:formatDate value="${item.createtime}" pattern="yyyy-MM-dd HH:mm:ss"/> 
@@ -84,85 +93,92 @@
 		</div>
 
 	</div>
-	<script>
 	
-	function update(id){
-		 var indexUpdate = top.layer.open({
-             type:2,
-             area:['600px','450px'],
-             closeBtn:1,
-             shadeClose:true,
-             content:['${basePath}front/seller/address/addressUpdate.htm?id='+id,'no'],
-             title:'修改收货地址',
-             btn:['确定','取消'],
-             yes:function(index){
-                 console.log('这里执行提交操作');
-             }
-         }); 
-	}
-	
-	$(function(){
-		// 添加收货地址
-		$('.btn-addAddress').on('click',function(){
-	            var indexAdd = top.layer.open({
-	                type:2,
-	                area:['600px','450px'],
-	                closeBtn:1,
-	                shadeClose:true,
-	                content:['${basePath}front/seller/address/addressAdd.htm','no'],
-	                title:'添加收货地址',
-	                btn:['确定','取消'],
-	                yes:function(index){
-	                    console.log('这里执行提交操作');
-	                }
-	            });  
+	<script type="text/javascript">
+		function del(status){
+			var tipMsg = '';
+			var url = '${basePath}front/seller/address/deleteByStatus.htm';
+			
+			if(status == 0){
+				tipMsg = '您确定要删除所有未使用过的收货地址吗?';
+			}else{
+				tipMsg = '您确定要删除所有已使用过的收货地址吗?';
+			}
+			
+			var indexDel = top.layer.open({
+	            type:1,
+	            content: tipMsg,
+	            shadeClose:true,
+	            title:'信息',
+	            btn:['确认','取消'],
+	            yes:function(){
+	            	$.ajax({
+	    				type : "POST",
+	    				url : url,
+	    				data : {'status':status},
+	    				dataType : "json",
+	    				success : function(result) {
+	    					if (result.success) {
+	    						top.layer.close(indexDel);
+	    					} else {
+	    						top.layer.alert(res.msg);
+	    					}
+	    				}
+	    			});
+	            }
 	        });
-	   // 确认删除
-	        $('.btn-deleteAddress1').on('click',function(){
-	            indexOk = top.layer.open({
-	                type:1,
-	                content:'您确定要删除所有已使用过的收货地址吗?',
-	                shadeClose:true,
-	                title:'信息',
-	                btn:['确认','取消'],
-	                yes:function(){
-	                   console.log('成功回调');
-	                    
-	                }
-	            });
-	            return false;
-	        });
-	         $('.btn-deleteAddress2').on('click',function(){
-	            indexOk = top.layer.open({
-	                type:1,
-	                content:'您确定要删除所有已使用过的收货地址吗?',
-	                shadeClose:true,
-	                title:'信息',
-	                btn:['确认','取消'],
-	                yes:function(){
-	                   console.log('成功回调');
-	                    
-	                }
-	            });
-	            return false;
-	        });
-	         // 批量上传文件
-		$('.btn-addAddressAll').on('click',function(){
-	            indexAgency=top.layer.open({
-	                type:2,
-	                area:['600px','400px'],
-	                closeBtn:1,
-	                shadeClose:true,
-	                content:['./批量导入收货地址(弹窗).html','no'],
-	                title:'添加收货地址',
-	                btn:['确定','取消'],
-	                yes:function(index){
-	                    console.log('这里执行提交操作');
-	                }
-	            });  
-	        });
-	    $.Huitab("#tab_demo .tabBar span","#tab_demo .tabCon","current","click","0");
-	});
-</script>
+		}
+		
+		function update(id){
+			 var indexUpdate = top.layer.open({
+	             type:2,
+	             area:['600px','450px'],
+	             closeBtn:1,
+	             shadeClose:true,
+	             content:['${basePath}front/seller/address/addressUpdate.htm?id='+id,'no'],
+	             title:'修改收货地址',
+	             btn:['确定','取消'],
+	             yes:function(index){
+	                 console.log('这里执行提交操作');
+	             }
+	         }); 
+		}
+		
+		$(function(){
+			// 添加收货地址
+			$('.btn-addAddress').on('click',function(){
+		            var indexAdd = top.layer.open({
+		                type:2,
+		                area:['600px','450px'],
+		                closeBtn:1,
+		                shadeClose:true,
+		                content:['${basePath}front/seller/address/addressAdd.htm','no'],
+		                title:'添加收货地址',
+		                btn:['确定','取消'],
+		                yes:function(index){
+		                    console.log('这里执行提交操作');
+		                }
+		            });  
+		        });
+			
+		         // 批量上传文件
+			$('.btn-addAddressAll').on('click',function(){
+				indexImport = top.layer.open({
+		                type:2,
+		                area:['600px','400px'],
+		                closeBtn:1,
+		                shadeClose:true,
+		                content:['${basePath}front/seller/address/addressImport.htm','no'],
+		                title:'批量导入',
+		                btn:['确定','取消'],
+		                yes:function(index){
+		                    console.log('这里执行提交操作');
+		                }
+		            });  
+		        });
+		         
+		    $.Huitab("#tab_demo .tabBar span","#tab_demo .tabCon","current","click","0");
+		});
+	</script>
 </body>
 </html>

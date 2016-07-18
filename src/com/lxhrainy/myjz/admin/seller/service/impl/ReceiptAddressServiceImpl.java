@@ -1,5 +1,6 @@
 package com.lxhrainy.myjz.admin.seller.service.impl;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,4 +22,16 @@ public class ReceiptAddressServiceImpl extends
 AbstractBaseServiceImpl<IReceiptAddressDao, ReceiptAddress, Integer>
 implements IReceiptAddressService {
 
+	@Autowired 
+	IReceiptAddressDao dao;
+	
+	/**
+	 * 删除指定状态地址
+	 * @param status
+	 */
+	@Transactional(readOnly = false)
+	public int deleteByStatus(int status) {
+		return dao.deleteByStatus(status);
+	}
+	
 }
