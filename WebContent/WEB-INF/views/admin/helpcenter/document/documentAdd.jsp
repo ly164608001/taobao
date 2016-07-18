@@ -129,10 +129,6 @@
 			prettyPrint();
 		});
 	
-		$(function(){
-			_initSelect();
-		}) 
-		
 	</script>
 </body>
 </html>

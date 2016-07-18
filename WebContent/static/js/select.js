@@ -53,10 +53,8 @@
 		//设置所选的值到input中
 		$this.parent().children('input').val(pid);
 		
-		if(pid == null || pid == ''){
-			//清空后面所有select
-			$this.nextAll('select').remove();
-		}else{
+		$this.nextAll('select').remove();
+		if(pid != null || pid != ''){
 			//获取下级数据 若有则进行select填充
 			$.ajax({
 				type : 'POST',
@@ -73,8 +71,8 @@
 						var appendSel = '<select onchange="_onchange(this);" class="xytSelect" link="'+ link
 											+'" labelname="'+labelname+'" valuename="'+valuename
 											+'"><option value="">请选择</option>';
-						for (var index in arr) {
-							var item = arr[index];
+						for(var i = 0; i < arr.length ; i++){
+							var item = arr[i];
 							var opt = '<option value="'+item[valuename]+'">'+item[labelname]+'</option>';
 							appendSel += opt;
 						}

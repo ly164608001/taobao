@@ -6,7 +6,6 @@
 <link rel="stylesheet" type="text/css" href="${basePath}static/js/easyui/themes/bootstrap/easyui.css"/>
 <link rel="stylesheet" type="text/css" href="${basePath}static/js/easyui/themes/icon.css"/>
 <script type="text/javascript" src="${basePath}static/js/admin/global.js"></script>
-<script type="text/javascript" src="${basePath}static/js/select.js"></script>
 
 <script>
 	function updateStatus(id,opr){
