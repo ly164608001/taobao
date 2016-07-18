@@ -5,10 +5,18 @@
 <html>
 <head>
 	<script type="text/javascript" src="${basePath}static/js/admin/global.js"></script>
+	<script type="text/javascript" src="${basePath}static/js/select.js"></script>
+	
+	<link rel="stylesheet" href="${basePath}static/js/kindeditor/themes/default/default.css" />
+	<link rel="stylesheet" href="${basePath}static/js/kindeditor/plugins/code/prettify.css" />
+	
+	<script charset="utf-8" src="${basePath}static/js/kindeditor/kindeditor-all.js"></script>
+	<script charset="utf-8" src="${basePath}static/js/kindeditor/lang/zh-CN.js"></script>
+	<script charset="utf-8" src="${basePath}static/js/kindeditor/plugins/code/prettify.js"></script>
 </head>
 <body>
 
-	<form id="updateform" action="${basePath}admin/helpcenter/menu/updatesave.htm" method="post">
+	<form id="updateform" method="post">
 		<input name="id" value="${model.id}" type="hidden"/>
 		<div class="contaniner">
 		  	<div class="div-content">
@@ -46,88 +54,103 @@
 							name="content">${model.content}</textarea>
 					</td>
 				</tr>
-				<tr>
-					<td colspan="4" align="right">
-						<a href="javascript:void(0)" class="easyui-linkbutton" onclick="checkForm();">更 新</a>
-					</td>
-				</tr>
-	
 			</table>
 		</div></div>
 	</form>
 	
-	<script src="${basePath}static/js/admin/initdata.js"></script>
+	<div class="dialogBottom">
+		<div class="btns">
+			<input type="button" value="确 定" class="lrBtnGreen"
+				onclick="return checkSubmit();" />
+			<input type="button" value="关 闭" class="lrBtnGray"
+				onclick="lrDialog.close();" />
+		</div>
+	</div>
+	
 	
 	<script type="text/javascript">
+	
+	$(function(){
+		_initSelect();
+	}) 
+	
+	KindEditor.ready(function(K) {
+		var editor1 = K.create('textarea[name="content"]', {
+			cssPath : '${basePath}static/js/kindeditor/plugins/code/prettify.css',
+			uploadJson : '${basePath}admin/common/fileupload/upload.htm',
+			fileManagerJson : '${basePath}admin/common/fileupload/upload2.htm',
+			allowFileManager : true,
+			allowImageRemote : false,
+			afterCreate : function() {
+				var self = this;
+				K.ctrl(document, 13, function() {
+					self.sync();
+				});
+			},
+			
+			afterFocus : function(){
+				this.sync();
+				if(editor1.html() == '此处进行内容编辑...'){
+					editor1.html('');
+				}
+			},
+			afterBlur : function(){
+				this.sync();
+				if(editor1.html() == ''){
+					editor1.html('此处进行内容编辑...');
+				}
+				
+			}
+		});
+		prettyPrint();
+	});
+	
 	function modifyMenu(){
 		$('#selMenuSpan').show();
 	}
 	
-	function checkForm(){
+	function checkSubmit() {
+		//TODO验证数据有效性
 		var menuid = $('#menuid').val();
 		var content = $.trim($('#content').val());
 		if(menuid == ''){
-			$.messager.alert("提示", "请选择菜单!");
+			lrDialog.alert("提示", "请选择菜单!");
 			return;
 		} 
-		if(content == ''){
-			$.messager.alert("提示", "请输入文档内容!");
+		if(content == ''  || '此处进行内容编辑...' == content){
+			lrDialog.alert("请输入文档内容!");
 			return;
 		}
 		
-		if( $("#updateform").form('validate')){
-			$.ajax({
-				type : 'post',
-				url : '${basePath}admin/helpcenter/document/updatesave.htm',
-				data : $('#updateform').serialize(),
-				dataType : 'json',
-				success : function(result){
-					if(result.success){
-						window.location.href = '${basePath}admin/helpcenter/document/documentList.htm';
-					}else{
-						$.messager.alert("提示", result.msg);
-					}
-				}
-			});
-			
+		var isvalid = $("#updateform").form('validate');
+		if(isvalid){
+			submitForm();
 		}
-		
 	}
 	
-		KindEditor.ready(function(K) {
-			var editor1 = K.create('textarea[name="content"]', {
-				cssPath : '${basePath}static/js/kindeditor/plugins/code/prettify.css',
-				uploadJson : '${basePath}admin/common/fileupload/upload.htm',
-				fileManagerJson : '${basePath}admin/common/fileupload/upload2.htm',
-				allowFileManager : true,
-				allowImageRemote : false,
-				afterCreate : function() {
-					var self = this;
-					K.ctrl(document, 13, function() {
-						self.sync();
-					});
-				},
-				
-				afterFocus : function(){
-					this.sync();
-					if(editor1.html() == '此处进行内容编辑...'){
-						editor1.html('');
-					}
-				},
-				afterBlur : function(){
-					this.sync();
-					if(editor1.html() == ''){
-						editor1.html('此处进行内容编辑...');
-					}
-					
+	function submitForm(){
+		var url = "${basePath}admin/helpcenter/document/updatesave.htm";
+		$.ajax({
+			type : "POST",
+			url : url,
+			dataType : "text",
+			data : $("#updateform").serialize(),
+			success : function(result) {
+				var res = JSON.parse(result);
+				if (res.success) {
+					//ldDialog.tips("新增成功");
+					lrDialog.close(res.msg);
+				} else {
+					lrDialog.alert(res.msg);
+					lrDialog.unmask();
 				}
-			});
-			prettyPrint();
-		});
+			},
+			error : function() {
 	
-		$(function(){
-			_initSelect();
-		}) 
+			}
+		});
+	}
+	
 	</script>
 </body>
 </html>

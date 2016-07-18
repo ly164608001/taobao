@@ -5,10 +5,44 @@
 <html>
 <head>
 <script type="text/javascript" src="${basePath}static/js/admin/global.js"></script>
+
+<script type="text/javascript">
+	function checkSubmit() {
+		//TODO验证数据有效性
+		var isvalid = $("#addform").form('validate');
+		if(isvalid){
+			submitForm();
+		}
+	}
+	
+	function submitForm(){
+		var url = "${basePath}admin/goods/type/addsave.htm";
+		$.ajax({
+			type : "POST",
+			url : url,
+			dataType : "text",
+			data : $("#addform").serialize(),
+			success : function(result) {
+				var res = JSON.parse(result);
+				if (res.success) {
+					//ldDialog.tips("新增成功");
+					lrDialog.close(res.msg);
+				} else {
+					lrDialog.alert(res.msg);
+					lrDialog.unmask();
+				}
+			},
+			error : function() {
+	
+			}
+		});
+	}
+
+</script>
 </head>
 <body>
 
-	<form id="addform" action="${basePath}admin/goods/type/addsave.htm" method="post">
+	<form id="addform" method="post">
 		<input type="hidden" value="${parent.id}" name="parent.id" />
 		<table cellpadding="5">
 			<tr>
@@ -30,14 +64,17 @@
 					<input type="radio" value="0" name="status" />隐藏
 				</td>
 			</tr>
-			<tr>
-				<td></td>
-				<td>
-				 	<a href="javascript:void(0)" class="easyui-linkbutton" id="addsubmit">提 交</a>
-				 </td>
-			</tr>
 		</table>
 	</form>
-	<script src="${basePath}static/js/admin/initdata.js"></script>
+	
+	<div class="dialogBottom">
+		<div class="btns">
+			<input type="button" value="确 定" class="lrBtnGreen"
+				onclick="return checkSubmit();" />
+			<input type="button" value="关 闭" class="lrBtnGray"
+				onclick="lrDialog.close();" />
+		</div>
+	</div>
+	
 </body>
 </html>

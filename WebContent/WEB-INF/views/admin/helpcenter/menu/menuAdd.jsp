@@ -5,6 +5,7 @@
 <html>
 <head>
 <script type="text/javascript" src="${basePath}static/js/admin/global.js"></script>
+<script src="${basePath}static/js/admin/initdata.js"></script>
 
 <script type="text/javascript">
 	function checkSubmit() {
@@ -76,14 +77,17 @@
 				<td>排序:</td>
 				<td><input name="sort" class="easyui-validatebox textbox" /></td>
 			</tr>
-			<tr>
-				<td></td>
-				<td>
-				 	<a href="javascript:void(0)" class="easyui-linkbutton" onclick="checkSubmit();">提 交</a>
-				 </td>
-			</tr>
 		</table>
 	</form>
-	<script src="${basePath}static/js/admin/initdata.js"></script>
+	
+	<div class="dialogBottom">
+		<div class="btns">
+			<input type="button" value="确 定" class="lrBtnGreen"
+				onclick="return checkSubmit();" />
+			<input type="button" value="关 闭" class="lrBtnGray"
+				onclick="lrDialog.close();" />
+		</div>
+	</div>
+	
 </body>
 </html>

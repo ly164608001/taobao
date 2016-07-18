@@ -5,11 +5,43 @@
 <html>
 <head>
 <script type="text/javascript" src="${basePath}static/js/admin/global.js"></script>
+<script type="text/javascript">
+	function checkSubmit() {
+		//TODO验证数据有效性
+		var isvalid = $("#updateform").form('validate');
+		if(isvalid){
+			submitForm();
+		}
+	}
+	
+	function submitForm(){
+		var url = "${basePath}admin/goods/type/updatesave.htm";
+		$.ajax({
+			type : "POST",
+			url : url,
+			dataType : "text",
+			data : $("#updateform").serialize(),
+			success : function(result) {
+				var res = JSON.parse(result);
+				if (res.success) {
+					//ldDialog.tips("新增成功");
+					lrDialog.close(res.msg);
+				} else {
+					lrDialog.alert(res.msg);
+					lrDialog.unmask();
+				}
+			},
+			error : function() {
+	
+			}
+		});
+	}
 
+</script>
 </head>
 <body>
 
-	<form id="updateform" action="${basePath}admin/goods/type/updatesave.htm" method="post">
+	<form id="updateform" method="post">
 		<input name="id" value="${model.id}" type="hidden"/>
 		<input name="parent.id" value="${parent.id}" type="hidden"/>
 		<div class="contaniner">
@@ -17,7 +49,7 @@
 			<table class="table table-hover" cellpadding="5">
 				<tr>
 					<td>上级菜单:</td>
-					<td>${model.parent.name}</td>
+					<td>${model.parent.typename}</td>
 				</tr>
 				<tr>
 					<td>名称:</td>
@@ -50,17 +82,18 @@
 						</c:if>
 					</td>
 				</tr>
-				<tr>
-					<td></td>
-					<td>
-					 	<a href="javascript:void(0)" class="easyui-linkbutton" id="updatesubmit">提 交</a>
-					 </td>
-				</tr>
 	
 			</table>
 		</div></div>
 	</form>
 	
-	<script src="${basePath}static/js/admin/initdata.js"></script>
+	<div class="dialogBottom">
+		<div class="btns">
+			<input type="button" value="确 定" class="lrBtnGreen"
+				onclick="return checkSubmit();" />
+			<input type="button" value="关 闭" class="lrBtnGray"
+				onclick="lrDialog.close();" />
+		</div>
+	</div>
 </body>
 </html>

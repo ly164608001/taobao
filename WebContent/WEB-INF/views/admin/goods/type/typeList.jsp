@@ -7,18 +7,27 @@
 <link rel="stylesheet" type="text/css" href="${basePath}static/js/easyui/themes/bootstrap/easyui.css"/>
 <link rel="stylesheet" type="text/css" href="${basePath}static/js/easyui/themes/icon.css"/>
 <script type="text/javascript" src="${basePath}static/js/admin/global.js"></script>
+<script type="text/javascript" src="${basePath}static/js/admin/initdata.js"></script>
 
 <script>
 	
 	function formatteradminuserbutton(value,row) {
-		return  '<a href="javascript:void(0)" class="easyui-linkbutton" onclick="openDialog(\'编辑\',\'${basePath}admin/goods/type/typeUpdate.htm?id='+row.id+'\',300,300)">编辑</a>&nbsp;'
-			 + '<a href="javascript:void(0)" class="easyui-linkbutton" onclick="openDialog(\'添加\',\'${basePath}admin/goods/type/typeAdd.htm?pid='+row.id+'\',300,270)">添加子菜单</a>&nbsp;'
+		return  '<a href="javascript:void(0)" class="easyui-linkbutton" onclick="openLrDialog(\'编辑\',\'${basePath}admin/goods/type/typeUpdate.htm?id='+row.id+'\',300,300)">编辑</a>&nbsp;'
+			 + '<a href="javascript:void(0)" class="easyui-linkbutton" onclick="openLrDialog(\'添加\',\'${basePath}admin/goods/type/typeAdd.htm?pid='+row.id+'\',300,270)">添加子菜单</a>&nbsp;'
 			 + '<a href="javascript:void(0)" class="easyui-linkbutton" onclick="deleterow(\'${basePath}admin/goods/type/typeDelete.htm?id='+row.id+'\')">删除</a>';
 	}
 	
 	function forrmaterStatus(value,row){
 		return (value == 1 ? '显示':'隐藏');
 	}
+	
+	toolbardata = [{  
+        text: '添加',  
+        iconCls: 'icon-add',  
+        handler: function() {  
+        	openLrDialog("添加","${basePath}admin/goods/type/typeAdd.htm",300,270);  
+        }  
+    }] ;
 	
 </script>
 </head>
@@ -54,16 +63,5 @@
 		</thead>
 	</table>
 	
-	<script>
-	toolbardata = [{  
-	            text: '添加',  
-	            iconCls: 'icon-add',  
-	            handler: function() {  
-	                openDialog("添加","${basePath}admin/goods/type/typeAdd.htm",300,270);  
-	            }  
-	        }] ;
-	</script>
-	<script type="text/javascript" src="${basePath}static/js/admin/initdata.js"></script>
-	<div id="mydialog"></div>
 </body>
 </html>

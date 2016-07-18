@@ -70,14 +70,17 @@
 				<td>图标数:</td>
 				<td><input name="iconnum" class="easyui-validatebox textbox" required="required"/></td>
 			</tr>
-			<tr>
-				<td></td>
-				<td>
-				 	<a href="javascript:void(0)" class="easyui-linkbutton" onclick="return checkSubmit();">提 交</a>
-				 </td>
-			</tr>
 		</table>
 	</form>
+	
+	<div class="dialogBottom">
+		<div class="btns">
+			<input type="button" value="确 定" class="lrBtnGreen"
+				onclick="return checkSubmit();" />
+			<input type="button" value="关 闭" class="lrBtnGray"
+				onclick="lrDialog.close();" />
+		</div>
+	</div>
 	
 </body>
 </html>
