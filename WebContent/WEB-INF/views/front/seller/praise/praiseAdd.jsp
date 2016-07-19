@@ -9,7 +9,7 @@
 <body>
 	<section>
 		<div class="addCar">
-			<form action="${basePath}front/seller/praise/addsave.htm" method="post" class="form form-horizontal">
+			<form id="submitForm" action="${basePath}front/seller/praise/addsave.htm" method="post" class="form form-horizontal">
 
 				<div class="row cl">
 					<label class="form-label col-xs-4 col-sm-3">

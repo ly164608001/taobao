@@ -9,8 +9,8 @@
 <body>
 	<section>
 		<div class="addCar">
-			<form action="${basePath}front/seller/address/updatesave.htm" method="post" class="form form-horizontal">
-
+			<form id="submitForm" action="${basePath}front/seller/address/updatesave.htm" method="post" class="form form-horizontal">
+				<input name="id" value="${model.id}" type="hidden"/>
 				<div class="row cl">
 					<label class="form-label col-xs-4 col-sm-3">
 						<span class="c-red">*</span>

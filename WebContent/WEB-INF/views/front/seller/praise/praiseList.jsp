@@ -22,7 +22,7 @@
 					<div class="search-tab mt20 search-tab-mini">
 						<ul>
 							<li class="tab02">
-							  <form action="${basePath}front/seller/praise/praiseList.htm">
+							  <form id="searchForm" action="${basePath}front/seller/praise/praiseList.htm">
 						   		<input type="hidden" name="page" value="${vo.page}"/>
 						   		<input type="hidden" name="totalPage" value="${vo.totalPage}"/>
 						   		
@@ -75,7 +75,7 @@
 										</td>
 										<td>
 											<a href="javascript:void(0);" onclick="update(${item.id});" class="btn btn-link">编辑</a>
-											<a href="#" class="btn btn-link">删除</a>
+											<a href="javascript:void(0);" onclick="delById(${item.id});" class="btn btn-link">删除</a>
 										</td>
 									</tr>
 							   </c:forEach>
@@ -93,9 +93,24 @@
 	
 	
 	<script type="text/javascript">
+		function update(id){
+			var url = '${basePath}front/seller/praise/praiseUpdate.htm?id='+id;
+			layerPromptIframe(url, '编辑好评内容', oprSuccess);
+		}
+		
+		function delById(id){
+			var url = '${basePath}front/seller/praise/deleteById.htm?id='+id;
+			layerConfirm(url ,'确认删除该好评内容?', oprSuccess);
+		}
+		
+		function oprSuccess(){
+			top.layer.alert('操作成功');
+			$('#searchForm').submit();
+		}
+	
 		function del(status){
 			var tipMsg = '';
-			var url = '${basePath}front/seller/praise/deleteByStatus.htm';
+			var url = '${basePath}front/seller/praise/deleteByStatus.htm?status='+status;
 			
 			if(status == 0){
 				tipMsg = '您确定要删除所有未使用过的好评内容吗?';
@@ -103,61 +118,15 @@
 				tipMsg = '您确定要删除所有已使用过的好评内容吗?';
 			}
 			
-			var indexDel = top.layer.open({
-	            type:1,
-	            content: tipMsg,
-	            shadeClose:true,
-	            title:'信息',
-	            btn:['确认','取消'],
-	            yes:function(){
-	            	$.ajax({
-	    				type : "POST",
-	    				url : url,
-	    				data : {'status':status},
-	    				dataType : "json",
-	    				success : function(result) {
-	    					if (result.success) {
-	    						top.layer.close(indexDel);
-	    					} else {
-	    						top.layer.alert(res.msg);
-	    					}
-	    				}
-	    			});
-	            }
-	        });
+			layerConfirm(url, tipMsg, oprSuccess);
 		}
-		
-		function update(id){
-			 var indexUpdate = top.layer.open({
-	             type:2,
-	             area:['600px','450px'],
-	             closeBtn:1,
-	             shadeClose:true,
-	             content:['${basePath}front/seller/praise/praiseUpdate.htm?id='+id,'no'],
-	             title:'修改好评内容',
-	             btn:['确定','取消'],
-	             yes:function(index){
-	                 console.log('这里执行提交操作');
-	             }
-	         }); 
-		}
-		
+	
 		$(function(){
 			// 添加收货地址
 			$('.btn-addAddress').on('click',function(){
-		            var indexAdd = top.layer.open({
-		                type:2,
-		                area:['600px','450px'],
-		                closeBtn:1,
-		                shadeClose:true,
-		                content:['${basePath}front/seller/praise/praiseAdd.htm','no'],
-		                title:'添加收货地址',
-		                btn:['确定','取消'],
-		                yes:function(index){
-		                    console.log('这里执行提交操作');
-		                }
-		            });  
-		        });
+				var url = '${basePath}front/seller/praise/praiseAdd.htm';
+				layerPromptIframe(url, '添加好评内容', oprSuccess);
+		    });
 			
 		         // 批量上传文件
 			$('.btn-addAddressAll').on('click',function(){

@@ -21,7 +21,7 @@
 					<div class="search-tab mt20 search-tab-mini">
 						<ul>
 							<li class="tab02">
-							  <form action="${basePath}front/seller/address/addressList.htm">
+							  <form id="searchForm" action="${basePath}front/seller/address/addressList.htm">
 						   		<input type="hidden" name="page" value="${vo.page}"/>
 						   		<input type="hidden" name="totalPage" value="${vo.totalPage}"/>
 						   		
@@ -77,7 +77,7 @@
 										</td>
 										<td>
 											<a href="javascript:void(0);" onclick="update(${item.id});" class="btn btn-link">编辑</a>
-											<a href="#" class="btn btn-link">删除</a>
+											<a href="javascript:void(0);" onclick="delById(${item.id})" class="btn btn-link">删除</a>
 										</td>
 									</tr>
 							   </c:forEach>
@@ -95,9 +95,24 @@
 	</div>
 	
 	<script type="text/javascript">
+		function update(id){
+			var url = '${basePath}front/seller/address/addressUpdate.htm?id='+id;
+			layerPromptIframe(url, '编辑收获地址', oprSuccess);
+		}
+		
+		function delById(id){
+			var url = '${basePath}front/seller/address/deleteById.htm?id='+id;
+			layerConfirm(url ,'确认删除该收获地址?', oprSuccess);
+		}
+		
+		function oprSuccess(){
+			top.layer.alert('操作成功');
+			$('#searchForm').submit();
+		}
+	
 		function del(status){
 			var tipMsg = '';
-			var url = '${basePath}front/seller/address/deleteByStatus.htm';
+			var url = '${basePath}front/seller/address/deleteByStatus.htm?status='+status;
 			
 			if(status == 0){
 				tipMsg = '您确定要删除所有未使用过的收货地址吗?';
@@ -105,61 +120,15 @@
 				tipMsg = '您确定要删除所有已使用过的收货地址吗?';
 			}
 			
-			var indexDel = top.layer.open({
-	            type:1,
-	            content: tipMsg,
-	            shadeClose:true,
-	            title:'信息',
-	            btn:['确认','取消'],
-	            yes:function(){
-	            	$.ajax({
-	    				type : "POST",
-	    				url : url,
-	    				data : {'status':status},
-	    				dataType : "json",
-	    				success : function(result) {
-	    					if (result.success) {
-	    						top.layer.close(indexDel);
-	    					} else {
-	    						top.layer.alert(res.msg);
-	    					}
-	    				}
-	    			});
-	            }
-	        });
-		}
-		
-		function update(id){
-			 var indexUpdate = top.layer.open({
-	             type:2,
-	             area:['600px','450px'],
-	             closeBtn:1,
-	             shadeClose:true,
-	             content:['${basePath}front/seller/address/addressUpdate.htm?id='+id,'no'],
-	             title:'修改收货地址',
-	             btn:['确定','取消'],
-	             yes:function(index){
-	                 console.log('这里执行提交操作');
-	             }
-	         }); 
+			layerConfirm(url, tipMsg, oprSuccess);
 		}
 		
 		$(function(){
 			// 添加收货地址
 			$('.btn-addAddress').on('click',function(){
-		            var indexAdd = top.layer.open({
-		                type:2,
-		                area:['600px','450px'],
-		                closeBtn:1,
-		                shadeClose:true,
-		                content:['${basePath}front/seller/address/addressAdd.htm','no'],
-		                title:'添加收货地址',
-		                btn:['确定','取消'],
-		                yes:function(index){
-		                    console.log('这里执行提交操作');
-		                }
-		            });  
-		        });
+				var url = '${basePath}front/seller/address/addressAdd.htm';
+				layerPromptIframe(url, '添加收获地址', oprSuccess);
+		    });
 			
 		         // 批量上传文件
 			$('.btn-addAddressAll').on('click',function(){

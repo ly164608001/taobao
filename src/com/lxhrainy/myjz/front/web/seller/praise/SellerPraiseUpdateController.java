@@ -54,16 +54,12 @@ public class SellerPraiseUpdateController extends BaseController {
 		rj.put("msg", "更新失败");
 		
 		String content = null;
-		String phone = null;
-		String praise = null;
 		Label label = null;
 		
 		if(model != null ){
 			content = model.getContent();
 			label = model.getLabel();
-			if(!StringUtils.isEmpty(content) && !StringUtils.isEmpty(praise)
-					&& !StringUtils.isEmpty(phone) && label != null){
-				
+			if(!StringUtils.isEmpty(content) && label != null){
 				Praise oldInfo = praiseService.getById(model.getId());
 				oldInfo.setContent(content);
 				oldInfo.setUpdatetime(new Date());

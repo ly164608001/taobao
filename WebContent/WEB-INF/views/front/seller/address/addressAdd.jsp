@@ -9,7 +9,7 @@
 <body>
 	<section>
 		<div class="addCar">
-			<form action="${basePath}front/seller/address/addsave.htm" method="post" class="form form-horizontal">
+			<form id="submitForm" action="${basePath}front/seller/address/addsave.htm" method="post" class="form form-horizontal">
 
 				<div class="row cl">
 					<label class="form-label col-xs-4 col-sm-3">
@@ -50,7 +50,7 @@
 			<div class="row cl">
 				<label class="form-label col-xs-4 col-sm-3">邮编：</label>
 				<div class="formControls col-xs-4 col-sm-3">
-					<input type="text" class="input-text" name=""/></div>
+					<input type="text" class="input-text" name="code"/></div>
 	
 			</div>
 
