@@ -1,4 +1,4 @@
-package com.lxhrainy.myjz.front.web.seller.praise;
+package com.lxhrainy.myjz.front.web.seller.shop;
 
 import java.util.Date;
 import java.util.List;
@@ -12,30 +12,30 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSONObject;
 import com.lxhrainy.core.common.controller.BaseController;
-import com.lxhrainy.myjz.admin.seller.model.Label;
-import com.lxhrainy.myjz.admin.seller.model.Praise;
-import com.lxhrainy.myjz.admin.seller.service.ILabelService;
-import com.lxhrainy.myjz.admin.seller.service.IPraiseService;
+import com.lxhrainy.myjz.admin.goods.model.GoodsType;
+import com.lxhrainy.myjz.admin.goods.service.IGoodsTypeService;
+import com.lxhrainy.myjz.admin.seller.model.Shop;
+import com.lxhrainy.myjz.admin.seller.service.IShopService;
 import com.lxhrainy.myjz.common.constant.Global;
 
-@RequestMapping("/front/seller/praise")
+@RequestMapping("/front/seller/shop")
 @Controller
-public class SellerPraiseAddController extends BaseController {
+public class ShopAddController extends BaseController {
 
 	@Autowired
-	IPraiseService praiseService;
+	IShopService shopService;
 	@Autowired
-	ILabelService labelService;
+	IGoodsTypeService goodsTypeService;
 	
 	/***
 	 * 新增
 	 * @param
 	 */
-	@RequestMapping("/praiseAdd")
+	@RequestMapping("/shopAdd")
 	public ModelAndView add() {
-		List<Label> labelList = labelService.getAddressListByUser(this.getCurrentUser().getId());
-		mv.addObject("labelList", labelList);
-		mv.setViewName("front/seller/praise/praiseAdd");
+		List<GoodsType> goodsTypeList = goodsTypeService.getAllList(null);
+		mv.addObject("goodsTypeList", goodsTypeList);
+		mv.setViewName("front/seller/shop/shopAdd");
 		return mv;
 	}
 	
@@ -45,16 +45,18 @@ public class SellerPraiseAddController extends BaseController {
 	 */
 	@RequestMapping("/addsave")
 	@ResponseBody
-	public JSONObject addsave(Praise model) {
+	public JSONObject addsave(Shop model) {
 		JSONObject rj = new JSONObject();
-		if(model == null || StringUtils.isEmpty(model.getContent()) || model.getLabel() == null){
+		if(model == null || StringUtils.isEmpty(model.getName()) || StringUtils.isEmpty(model.getIndexurl())
+				|| StringUtils.isEmpty(model.getManager()) ){
 			rj.put("success", false);
 			rj.put("msg", "保存失败");
 		}else{
+			model.setAlltasknum(0);
 			model.setStatus(Global.NO);
 			model.setCreatetime(new Date());
 			model.setUser(this.getCurrentUser());
-			praiseService.save(model);
+			shopService.save(model);
 			rj.put("success", true);
 			rj.put("msg", "保存成功");
 		}

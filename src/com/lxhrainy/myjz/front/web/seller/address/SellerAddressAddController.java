@@ -32,7 +32,7 @@ public class SellerAddressAddController extends BaseController {
 	 * @param
 	 */
 	@RequestMapping("/addressAdd")
-	public ModelAndView add(Integer pid) {
+	public ModelAndView add() {
 		List<Label> labelList = labelService.getAddressListByUser(this.getCurrentUser().getId());
 		mv.addObject("labelList", labelList);
 		mv.setViewName("front/seller/address/addressAdd");

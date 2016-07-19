@@ -27,6 +27,9 @@
 		<if test="condition!=null">
 			<where>
 				<if test="condition.model!=null">
+					<if test="condition.model.user!=null and condition.model.user.id!=null">
+						AND T.userid = #{condition.model.user.id}
+					</if>
 					<if test="condition.model.name!=null and condition.model.name!=''">
 						AND T.name like CONCAT('%',#{condition.model.name},'%')
 					</if>

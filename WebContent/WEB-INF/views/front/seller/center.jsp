@@ -33,7 +33,7 @@
 			店铺管理
 		</dt>
 		<dd>
-			<a href="#">淘宝店铺</a>
+			<a href="javascript:void(0);" onclick="changeMenu('front/seller/shop/shopList.htm');">淘宝店铺</a>
 		</dd>
 		<dt>
 			<i class="n3"></i>

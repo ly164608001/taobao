@@ -13,7 +13,19 @@ public interface IShopService extends IBaseService<Shop, Integer>{
 	/**
 	 * 激活店铺
 	 * @param id
+	 * @return 1 成功
+	 *        -1 无该店铺
+	 *        -2 非未激活状态
 	 */
-	void activate(int id);
+	int activate(int id);
+	
+	/**
+	 * 取消激活店铺
+	 * @param id
+	 * @return 1 成功
+	 *        -1 无该店铺
+	 *        -2 非激活状态
+	 */
+	public int cancelActivate(int id);
 
 }
