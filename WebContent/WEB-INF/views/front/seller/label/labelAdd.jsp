@@ -9,8 +9,8 @@
 <body>
 	<section>
 		<div class="addCar">
-			<form action="${basePath}front/seller/label/addsave.htm" method="post" class="form form-horizontal">
-
+			<form id="submitForm" method="post" action="${basePath}front/seller/label/addsave.htm" class="form form-horizontal">
+				<input name="type" value="${type}" type="hidden"/>
 				<div class="row cl">
 					<label class="form-label col-xs-4 col-sm-3">
 						<span class="c-red">*</span>
@@ -19,19 +19,19 @@
 					<div class="formControls col-xs-4 col-sm-3">
 						<input type="text" class="input-text" name="name" />
 					</div>
-
+	
 				</div>
-			<div class="row cl">
-				<label class="form-label col-xs-4 col-sm-3">
-					<span class="c-red">*</span>
-					排序值：
-				</label>
-				<div class="formControls col-xs-4 col-sm-3">
-					<input type="text" class="input-text" name="sort"/></div>
-
-			</div>
-	</form>
-</div>
+				<div class="row cl">
+					<label class="form-label col-xs-4 col-sm-3">
+						<span class="c-red">*</span>
+						排序值：
+					</label>
+					<div class="formControls col-xs-4 col-sm-3">
+						<input type="text" class="input-text" name="sort"/>
+					</div>
+				</div>
+		</form>
+	</div>
 </section>
 
 </body>

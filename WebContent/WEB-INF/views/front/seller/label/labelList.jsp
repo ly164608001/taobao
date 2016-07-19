@@ -21,7 +21,7 @@
 				<div class="search-tab mt20 search-tab-mini">
 				<ul>
 					<li class="tab02">
-					   <form action="${basePath}front/seller/label/labelList.htm">
+					   <form id="searchForm" action="${basePath}front/seller/label/labelList.htm">
 					   		<input type="hidden" name="page" value="${vo.page}"/>
 					   		<input type="hidden" name="totalPage" value="${vo.totalPage}"/>
 					   		<input type="hidden" name="model.type" value="${vo.model.type}"/>
@@ -72,55 +72,27 @@
 </div>
 <script>
 	function update(id){
-		var url = '${basePath}front/seller/label/labelUpdate.htm?id='+id;
-		var indexUpdate = top.layer.open({
-            type:2,
-            area:['600px','400px'],
-            closeBtn:1,
-            shadeClose:true,
-            content:[url,'no'],
-            title:'添加标签',
-            btn:['确定','取消'],
-            yes:function(index){
-                console.log('这里执行提交操作');
-            }
-        });
+		var url = '${basePath}front/seller/label/labelUpdate.htm?id=' + id;
+		layerPromptIframe(url, '编辑标签', oprSuccess);
 	}
 	
 	function del(id){
+		var url = '${basePath}front/seller/label/labelDelete.htm?id='+id;
+		layerConfirm(url ,'确认删除该标签?', oprSuccess);
+	}
+	
+	function oprSuccess(){
+		top.layer.alert('操作成功');
+		$('#searchForm').submit();
 	}
 	
 	$(function(){
 		
 		$('#addBtn').click(function(){
 			var url = '${basePath}front/seller/label/labelAdd.htm?type=${vo.model.type}';
-			var indexAdd = top.layer.open({
-	            type:2,
-	            area:['600px','400px'],
-	            closeBtn:1,
-	            shadeClose:true,
-	            content:[url,'no'],
-	            title:'添加标签',
-	            btn:['确定','取消'],
-	            yes:function(index){
-	                console.log('这里执行提交操作');
-	            }
-	        });
+			layerPromptIframe(url, '添加标签', oprSuccess);
 		});
 		
-		// 收缩
-		$('.open-btn').on('click',function(){
-			$(this).parent('.tiro-control').siblings('.panel').find('.showHide').slideToggle();
-			$(this).toggleClass('active');
-			if ($(this).hasClass('active')) {
-				$(this).text('展开');
-				// $(this).find('i').css('background-position','4px -28px')
-			}else{
-				$(this).text('收缩');
-				// $(this).find('i').css('background-position','4px 7px')
-			}
-		});
-	  
 	    $.Huitab("#tab_demo .tabBar span","#tab_demo .tabCon","current","click","0");
 	});
 </script>

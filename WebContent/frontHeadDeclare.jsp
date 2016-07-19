@@ -24,6 +24,7 @@
 <script type="text/javascript" src="${basePath }static/js/front/common/page.js"></script>
 <script type="text/javascript" src="${basePath}static/h-ui/js/H-ui.js"></script>
 <script type="text/javascript" src="${basePath}static/js/front/style.js"></script>
+<script type="text/javascript" src="${basePath}static/js/popup-layer.js"></script>
 <script type="text/javascript">
 var basePath = "${basePath}";
 

@@ -105,7 +105,7 @@ public class SellerLabelController extends BaseController {
 	public JSONObject updatesave(Label model) {
 		JSONObject rj = new JSONObject();
 		if(model == null || StringUtils.isEmpty(model.getName())
-				|| model.getSort() == null || model.getType() == null){
+				|| model.getSort() == null){
 			rj.put("success", false);
 			rj.put("msg", "更新失败");
 		}

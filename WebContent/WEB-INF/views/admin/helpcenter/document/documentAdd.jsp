@@ -38,7 +38,8 @@
 				<td><input name="sort" required="required" class="easyui-validatebox textbox" width="40px;"/></td>
 			</tr>
 			<tr>
-				<td colspan="4">
+				<td>文档内容:</td>
+				<td colspan="3">
 					<textarea cols="180" rows="8" style="width:720px;height:300px;" id="content"
 						name="content">此处进行内容编辑...</textarea>
 				</td>

@@ -49,7 +49,8 @@
 							class="easyui-validatebox textbox" width="40px;"/></td>
 				</tr>
 				<tr>
-					<td colspan="4">
+					<td>文档内容:</td>
+					<td colspan="3">
 						<textarea cols="180" rows="8" style="width:680px;height:300px;" id="content"
 							name="content">${model.content}</textarea>
 					</td>
