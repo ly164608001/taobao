@@ -8,7 +8,7 @@ import com.lxhrainy.core.common.model.BaseModel;
 
 /**
  * 小号基础信息Entity
- * @author sending
+ * @author xueyunteng
  * @version 2016-07-06
  */
 public class AccountBasicInfo extends BaseModel {

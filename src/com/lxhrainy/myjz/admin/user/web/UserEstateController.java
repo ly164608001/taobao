@@ -183,7 +183,6 @@ public class UserEstateController extends BaseController {
 	@ResponseBody
 	public JSONObject frozenAccount(UserMoney model) {
 		JSONObject rj = new JSONObject();
-		model.setStatus(Global.ACCOUNT_FROZEN);
 		boolean result = userMoneyService.updateStatusByUserId(model);
 		if(result){
 			rj.put("success", true);
@@ -203,7 +202,6 @@ public class UserEstateController extends BaseController {
 	@ResponseBody
 	public JSONObject releaseAccount(UserMoney model) {
 		JSONObject rj = new JSONObject();
-		model.setStatus(Global.ACCOUNT_FROZEN);
 		boolean result = userMoneyService.updateStatusByUserId(model);
 		if(result){
 			rj.put("success", true);

@@ -29,5 +29,13 @@ public interface IUserMoneyService extends IBaseService<UserMoney, Integer>{
 	 * @throws
 	 */
 	boolean updateStatusByUserId(UserMoney model);
+	
+	/**
+	 * @Description: 验证交易密码是否正确
+	 * @param userid 用户
+	 * @param paypassword 交易密码
+	 * @return boolean    返回类型 
+	 */
+	boolean validatePaypassword(int userid, String paypassword);
 
 }

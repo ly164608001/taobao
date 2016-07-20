@@ -514,7 +514,7 @@ function onlyNum() {
 	if (keycode == 8 || keycode == 9 || keycode == 35 || keycode == 36 || keycode == 37 || keycode == 39 || keycode == 46) {
 		return true;
 	}
-	if (!((window.event.keyCode >= 48 && window.event.keyCode <= 57) || (window.event.keyCode >= 96 && window.event.keyCode <= 105))) {
+	if (!((window.event.keyCode >= 48 && window.event.keyCode <= 57) )) {
 		window.event.returnValue = false;
 	}
 }

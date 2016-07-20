@@ -4,11 +4,12 @@
     
 	<sql id="userMoneyColumns">
 		T.id AS "id",
-		T.userid AS "userid",
+		T.userid AS "user.id",
 		T.allbalance AS "allbalance",
 		T.usablebalance AS "usablebalance",
 		T.frozenbalance AS "frozenbalance",
-		T.deleted AS "deleted"
+		T.deleted AS "deleted",
+		T.paypassword AS "paypassword"
 	</sql>
 	
 	<sql id="userMoneyJoins">
@@ -67,21 +68,23 @@
 			allbalance,
 			usablebalance,
 			frozenbalance,
-			deleted
+			deleted,
+			paypassword
 		) VALUES (
 			#{id},
-			#{userid},
+			#{user.id},
 			#{allbalance},
 			#{usablebalance},
 			#{frozenbalance},
-			#{deleted}
+			#{deleted},
+			#{paypassword}
 		)
 	</insert>
 	
 	<update id="update">
 		UPDATE user_money SET 	
 			<if test="userid !=null">
-			userid = #{userid},
+			userid = #{user.id},
 			</if>	
 			<if test="allbalance !=null">
 			allbalance = #{allbalance},
@@ -92,9 +95,12 @@
 			<if test="frozenbalance !=null ">
 			frozenbalance = #{frozenbalance},
 			</if>	
-			<if test="deleted !=null and deleted !=''">
-			deleted = #{deleted}
+			<if test="deleted !=null">
+			deleted = #{deleted},
 			</if>	
+			<if test="paypassword !=null">
+			paypassword = #{paypassword}
+			</if>
 		WHERE id = #{id}
 	</update>
 	

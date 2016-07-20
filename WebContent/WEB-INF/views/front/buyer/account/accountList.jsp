@@ -107,7 +107,8 @@
 												</c:choose>
 											</td>
 											<td>
-												<input class="input-text" onblur="updateSort(this,${item.id});" value="${item.sort}"/>
+												<input class="input-text" onblur="updateSort(this,${item.id});" maxlength="3"
+														 value="${item.sort}" style="width:76px;" onkeydown="onlyNum();" />
 											</td>
 											<td>
 												<span>
@@ -120,9 +121,10 @@
 											</td>
 											<td>
 												<span>
-													<a href="#"  class="btn btn-secondary radius btnUserAddress">收货地址</a>
-													<a href="#" class="btn btn-secondary radius btnVPN">VPN设置</a>
-													<a href="#" class="btn btn-secondary radius btnBase">基础信息</a>
+													<a href="javascript:void(0);"  class="btn btn-secondary radius btnUserAddress">收货地址</a>
+													<a href="javascript:void(0);" class="btn btn-secondary radius btnVPN">VPN设置</a>
+													<a href="javascript:void(0);" onclick="basicInfo(${item.id});"
+														class="btn btn-secondary radius btnBase">基础信息</a>
 												</span>
 											</td>
 										</tr>
@@ -155,7 +157,22 @@
 </div>
 
 </div>
+
+
 	<script>
+	/*
+	* 基础信息
+	*/
+	function basicInfo(accountid){
+		var url = '${basePath}front/buyer/account/basicinfo.htm?accountid='+accountid;
+		layerPromptIframe(url, '基础信息', oprSuccess);
+	}
+	
+	function oprSuccess(){
+		top.layer.alert('操作成功');
+		$('#searchForm').submit();
+	}
+	
 	/**
 	 * 更新排序
 	*/
@@ -236,21 +253,6 @@
 	            });  
 	        });
 		
-		// 基本信息
-		$('.btnBase').on('click',function(){
-	            indexAgency=top.layer.open({
-	                type:2,
-	                area:['600px','400px'],
-	                closeBtn:1,
-	                shadeClose:true,
-	                content:['${basePath}front/buyer/account/baseinfo.htm','no'],
-	                title:'基础信息',
-	                btn:['确定','取消'],
-	                yes:function(index){
-	                    console.log('这里执行提交操作');
-	                }
-	            });  
-	        });
 	    $.Huitab("#tab_demo .tabBar span","#tab_demo .tabCon","current","click","0");
 	}); 
 	</script>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lxhrainy.myjz.admin.buyer.dao.IAccountBasicInfoDao">
+    
+	<sql id="buyerAccountBasicInfoColumns">
+		T.id AS "id",
+		T.accountid AS "account.id",
+		T.sex AS "sex",
+		T.birthday AS "birthday"
+	</sql>
+	
+	<sql id="buyerAccountBasicInfoJoins">
+	</sql>
+    
+	<select id="getById" resultType="AccountBasicInfo">
+		SELECT 
+			<include refid="buyerAccountBasicInfoColumns"/>
+		FROM buyer_account_basic_info T
+		<include refid="buyerAccountBasicInfoJoins"/>
+		WHERE T.id = #{id}
+	</select>
+	
+	<select id="getByAccountid" resultType="AccountBasicInfo">
+		SELECT 
+			<include refid="buyerAccountBasicInfoColumns"/>
+		FROM buyer_account_basic_info T
+		WHERE T.accountid = #{accountid}
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO buyer_account_basic_info(
+			id,
+			accountid,
+			sex,
+			birthday
+		) VALUES (
+			#{id},
+			#{account.id},
+			#{sex},
+			#{birthday}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE buyer_account_basic_info SET 	
+			accountid = #{account.id},
+			sex = #{sex},
+			birthday = #{birthday}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		DELETE FROM buyer_account_basic_info
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

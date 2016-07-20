@@ -111,13 +111,14 @@ implements IUserInfoService {
 			//保存用户
 			result = userInfoDao.insert(user);
 			if(result != -1){
+				user.setId(result);
 				//创建用户的账户信息
 				UserMoney money = new UserMoney();
 				money.setAllbalance(0.00);
 				money.setFrozenbalance(0.00);
 				money.setDeleted(Global.NO);
 				money.setUsablebalance(0.00);
-				money.setUserid(result);
+				money.setUser(user);
 				userMoneyDao.insert(money);
 				//创建用户详细信息
 				UserDetailInfo detail = new UserDetailInfo();

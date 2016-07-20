@@ -156,7 +156,7 @@ public class UserApiServiceImpl extends AbstractBaseServiceImpl<IUserInfoDao, Us
 					} else {
 						ApiCacheUtil.removeCaptchaChache(mobileUser.getUsername());
 						UserMoney account = new UserMoney();
-						account.setUserid(mobileUserEntity.getId());
+						account.setUser(mobileUserEntity);
 						account.setAllbalance(0d);
 						account.setFrozenbalance(0d);
 						account.setUsablebalance(0d);
