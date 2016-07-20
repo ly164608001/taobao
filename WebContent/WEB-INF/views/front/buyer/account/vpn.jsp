@@ -27,7 +27,7 @@
 						旺旺号登入密码：
 					</label>
 					<div class="formControls col-xs-4 col-sm-3">
-						<input type="text" class="input-text" autocomplete="off" placeholder="收货人详细地址" ></div>	
+						<input type="text" class="input-text" autocomplete="off" /></div>	
 				</div>
 				<div class="row cl">
 					<label class="form-label col-xs-4 col-sm-3">
@@ -35,7 +35,7 @@
 						旺旺号绑定的支付宝账号：
 					</label>
 					<div class="formControls col-xs-4 col-sm-3">
-						<input type="text" class="input-text" autocomplete="off" placeholder="收货人详细地址" ></div>	
+						<input type="text" class="input-text" autocomplete="off" /></div>	
 				</div>
 				<div class="row cl">
 					<label class="form-label col-xs-4 col-sm-3">
@@ -43,7 +43,7 @@
 						旺旺号绑定的支付宝支付密码：
 					</label>
 					<div class="formControls col-xs-4 col-sm-3">
-						<input type="text" class="input-text" autocomplete="off" placeholder="收货人详细地址" ></div>	
+						<input type="text" class="input-text" autocomplete="off" /></div>	
 				</div>
 				<div class="row cl">
 					<label class="form-label col-xs-4 col-sm-3">
@@ -51,7 +51,7 @@
 						旺旺号绑定的手机卡：
 					</label>
 					<div class="formControls col-xs-4 col-sm-3">
-						<input type="text" class="input-text" autocomplete="off" placeholder="收货人详细地址" ></div>	
+						<input type="text" class="input-text" autocomplete="off" /></div>	
 				</div>
 				<div class="row cl">
 					<label class="form-label col-xs-4 col-sm-3">
@@ -59,7 +59,7 @@
 						VPN名称：
 					</label>
 					<div class="formControls col-xs-4 col-sm-3">
-						<input type="text" class="input-text" autocomplete="off" placeholder="收货人详细地址" ></div>	
+						<input type="text" class="input-text" autocomplete="off" /></div>	
 				</div>
 				<div class="row cl">
 					<label class="form-label col-xs-4 col-sm-3">
@@ -67,7 +67,7 @@
 						VPN接点/线路：
 					</label>
 					<div class="formControls col-xs-4 col-sm-3">
-						<input type="text" class="input-text" autocomplete="off" placeholder="收货人详细地址" ></div>	
+						<input type="text" class="input-text" autocomplete="off" /></div>	
 				</div>
 				<div class="row cl">
 					<label class="form-label col-xs-4 col-sm-3">
@@ -75,7 +75,7 @@
 						旺旺号登录IP<IPspan class="red">*</IPspan> ：
 					</label>
 					<div class="formControls col-xs-4 col-sm-3">
-						<input type="text" class="input-text" autocomplete="off" placeholder="收货人详细地址" ></div>
+						<input type="text" class="input-text" autocomplete="off" /></div>
 						<div id="ipTip" class="onShow">请输入旺旺号登录的IP.<span class="c_f0">一般为VPN切换IP后，小号登录时的IP</span></div>
 
 				</div>
@@ -122,7 +122,7 @@
 						旺旺号/VPN所在电脑名称：
 					</label>
 					<div class="formControls col-xs-4 col-sm-3">
-						<input type="text" class="input-text" autocomplete="off" placeholder="收货人详细地址" ></div>	
+						<input type="text" class="input-text" autocomplete="off" /></div>	
 				</div>
 				<div class="row cl">
 					<label class="form-label col-xs-4 col-sm-3">
@@ -130,7 +130,7 @@
 						旺旺号/VPN所在电脑MAC：
 					</label>
 					<div class="formControls col-xs-4 col-sm-3">
-						<input type="text" class="input-text" autocomplete="off" placeholder="收货人详细地址" ></div>	
+						<input type="text" class="input-text" autocomplete="off" /></div>	
 				</div>
 				<div class="row cl">
 					<label class="form-label col-xs-4 col-sm-3">
@@ -138,7 +138,7 @@
 						旺旺号登录详细地址：
 					</label>
 					<div class="formControls col-xs-4 col-sm-3">
-						<input type="text" class="input-text" autocomplete="off" placeholder="收货人详细地址" ></div>
+						<input type="text" class="input-text" autocomplete="off" /></div>
 						<div id="addressTip" class="onShow">无需重复填写省/市。<span class="c_f0">防止一个旺旺号出现在不同地区登录导致号异常</span></div>
 
 				</div>

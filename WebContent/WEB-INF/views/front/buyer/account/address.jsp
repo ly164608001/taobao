@@ -14,60 +14,51 @@
 				<div class="row cl">
 					<label class="form-label col-xs-4 col-sm-3">
 						<span class="c-red">*</span>
-						标签：
+						省/市/区县：
 					</label>
 					<div class="formControls col-xs-4 col-sm-3">
 						<span class="select-box">
-							<select class="select" size="1" name="demo1">
-								<option value="" selected="">省</option>
-								<option value="1">菜单一</option>
-								<option value="2">菜单二</option>
-								<option value="3">菜单三</option>
-							</select>
+							<span>
+								<select onchange="_onchange(this);" class="xytSelect"
+										link="${basePath}admin/helpcenter/menu/getlistbypid.htm" pid="-1"
+										valuename="id" labelname="name">
+								</select>
+								<input type="hidden" value="" name="menu.id" required="required" id="menuid"/>
+							</span>
 						</span>
 					</div>
 
 				</div>
 				<div class="row cl">
 					<label class="form-label col-xs-4 col-sm-3">
-						<span class="c-red">*</span>
-						姓名：
+						<span class="c-red">*</span>收货人：
 					</label>
 					<div class="formControls col-xs-4 col-sm-3">
-						<input type="text" class="input-text" autocomplete="off" placeholder="银行开户姓名"></div>
+						<input type="text" class="input-text" autocomplete="off" placeholder="必须与淘宝上收货人姓名相同"></div>
 
 				</div>
-				<!-- <div class="cl">
-						<span class="wrong-tips">此姓名必须与银行卡的开户姓名一致，否则后果自负！</span>
-					</div>
-					-->
 			<div class="row cl">
 				<label class="form-label col-xs-4 col-sm-3">
 					<span class="c-red">*</span>
-					电话：
+					收货人手机号码：
 				</label>
 				<div class="formControls col-xs-4 col-sm-3">
-					<input type="text" class="input-text" autocomplete="off" placeholder="请输入你的银行账号"></div>
+					<input type="text" class="input-text" autocomplete="off" placeholder="必须和淘宝上登记的收货人信息一致"></div>
 
 			</div>
-			<!-- <div class="cl">
-			<span class="wrong-tips">请输入您的银行卡号，银行账户口需与身份证上的一致</span>
-		</div>
-		-->
 		<div class="row cl">
-			<label class="form-label col-xs-4 col-sm-3">邮编：</label>
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>交易密码：</label>
 			<div class="formControls col-xs-4 col-sm-3">
-				<input type="text" class="input-text" autocomplete="off" placeholder="请输入支行名称"></div>
+				<input type="text" class="input-text" autocomplete="off" placeholder="请输入交易密码"></div>
 
 		</div>
 
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-3">
-				<span class="c-red">*</span>
-				收货地址：
+				<span class="c-red">*</span>详细地址：
 			</label>
 			<div class="formControls col-xs-4 col-sm-3">
-				<textarea></textarea>
+				<textarea>必须要与淘宝上的地址一致</textarea>
 
 			</div>
 

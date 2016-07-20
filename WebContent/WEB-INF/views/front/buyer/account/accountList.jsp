@@ -121,8 +121,10 @@
 											</td>
 											<td>
 												<span>
-													<a href="javascript:void(0);"  class="btn btn-secondary radius btnUserAddress">收货地址</a>
-													<a href="javascript:void(0);" class="btn btn-secondary radius btnVPN">VPN设置</a>
+													<a href="javascript:void(0);"  
+														onclick="address(${item.id});" class="btn btn-secondary radius btnUserAddress">收货地址</a>
+													<a href="javascript:void(0);" 
+														onclick="vpn(${item.id});" class="btn btn-secondary radius btnVPN">VPN设置</a>
 													<a href="javascript:void(0);" onclick="basicInfo(${item.id});"
 														class="btn btn-secondary radius btnBase">基础信息</a>
 												</span>
@@ -160,12 +162,22 @@
 
 
 	<script>
-	/*
-	* 基础信息
-	*/
+	// 基础信息
 	function basicInfo(accountid){
 		var url = '${basePath}front/buyer/account/basicinfo.htm?accountid='+accountid;
 		layerPromptIframe(url, '基础信息', oprSuccess);
+	}
+	
+	// vpn信息
+	function vpn(accountid){
+		var url = '${basePath}front/buyer/account/vpn.htm?accountid='+accountid;
+		layerPromptIframe(url, 'vpn设置', oprSuccess);
+	}
+	
+	// 收获地址信息
+	function address(accountid){
+		var url = '${basePath}front/buyer/account/address.htm?accountid='+accountid;
+		layerPromptIframe(url, '设置收获地址', oprSuccess);
 	}
 	
 	function oprSuccess(){
@@ -173,9 +185,7 @@
 		$('#searchForm').submit();
 	}
 	
-	/**
-	 * 更新排序
-	*/
+	//  更新排序
 	function updateSort(obj,id){
 		var sort = obj.value;
 		if(sort == ''){
@@ -196,9 +206,7 @@
 		}); 
 	}
 	
-	/**
-	 * 是否启用
-	 */
+	// 是否启用
 	function isAble(checkBoxObj,id){
 		var tipMsg = '';
 		var url = '${basePath}front/buyer/account/';
@@ -220,39 +228,6 @@
 	}
 	
 	$(function(){
-		
-	    // 添加买家收货地址
-		$('.btnUserAddress').on('click',function(){
-	            indexAgency=top.layer.open({
-	                type:2,
-	                area:['800px','500px'],
-	                closeBtn:1,
-	                shadeClose:true,
-	                content:['${basePath}front/buyer/account/address.htm','no'],
-	                title:'添加买家收货地址',
-	                btn:['确定','取消'],
-	                yes:function(index){
-	                    console.log('这里执行提交操作');
-	                }
-	            });  
-	        });
-	    
-		// VPN设置
-		$('.btnVPN').on('click',function(){
-	            indexAgency=top.layer.open({
-	                type:2,
-	                area:['900px','500px'],
-	                closeBtn:1,
-	                shadeClose:true,
-	                content:'${basePath}front/buyer/account/vpn.htm',
-	                title:'VPN设置',
-	                btn:['确定','取消'],
-	                yes:function(index){
-	                    console.log('这里执行提交操作');
-	                }
-	            });  
-	        });
-		
 	    $.Huitab("#tab_demo .tabBar span","#tab_demo .tabCon","current","click","0");
 	}); 
 	</script>
