@@ -21,15 +21,8 @@
 		<div class="contaniner">
 		  	<div class="div-content">
 			<table class="table table-hover" cellpadding="5">
-				<tr>
+				<tr id="selMenuSpan">
 					<td>菜单类目:</td>
-					<td colspan="3">
-						<span>${menuname}</span>&nbsp;
-						<a href="javascript:void(0);" onclick="modifyMenu();">修改</a>
-					</td>
-				</tr>
-				<tr id="selMenuSpan" style="display:none;">
-					<td>修改菜单:</td>
 					<td colspan="3">
 						<span>
 							<select onchange="_onchange(this);" class="xytSelect" valuename="id" labelname="name"
@@ -71,10 +64,6 @@
 	
 	<script type="text/javascript">
 	
-	$(function(){
-		_initSelect();
-	}) 
-	
 	KindEditor.ready(function(K) {
 		var editor1 = K.create('textarea[name="content"]', {
 			cssPath : '${basePath}static/js/kindeditor/plugins/code/prettify.css',
@@ -105,10 +94,6 @@
 		});
 		prettyPrint();
 	});
-	
-	function modifyMenu(){
-		$('#selMenuSpan').show();
-	}
 	
 	function checkSubmit() {
 		//TODO验证数据有效性
