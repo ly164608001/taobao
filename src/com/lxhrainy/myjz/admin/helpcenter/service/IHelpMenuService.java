@@ -32,4 +32,5 @@ public interface IHelpMenuService extends IBaseService<HelpMenu, Integer>{
 	 * @return
 	 */
 	List<TreeNode> findTreeNodes();
+
 }

@@ -32,9 +32,9 @@
 					<td>修改菜单:</td>
 					<td colspan="3">
 						<span>
-							<select onchange="_onchange(this);" class="xytSelect"
+							<select onchange="_onchange(this);" class="xytSelect" valuename="id" labelname="name"
 									link="${basePath}admin/helpcenter/menu/getlistbypid.htm" pid="-1"
-									valuename="id" labelname="name">
+									uplink="${basePath}admin/helpcenter/menu/getsilinglistbyid.htm" initvalue="${model.menu.id}">
 							</select>
 							<input type="hidden" value="${model.menu.id}" name="menu.id" required="required" id="menuid"/>
 						</span>

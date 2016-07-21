@@ -177,6 +177,11 @@ public class HelpMenuController extends BaseController {
 		return rj;
 	}
 
+	/**
+	 * 获取直接下级菜单列表
+	 * @param pid
+	 * @return
+	 */
 	@RequestMapping("/getlistbypid")
 	@ResponseBody
 	public JSONObject getListByPid(Integer pid) {
@@ -189,5 +194,37 @@ public class HelpMenuController extends BaseController {
 		rj.put("list", list);
 		return rj;
 	}
+	
+	/**
+	 * 获取同级菜单列表
+	 * @param pid
+	 * @return
+	 */
+	@RequestMapping("/getsilinglistbyid")
+	@ResponseBody
+	public JSONObject getsiling(Integer id) {
+		JSONObject rj = new JSONObject();
+		String pidStr = "";
+		
+		//获取同级列表
+		List<HelpMenu> list = new ArrayList<HelpMenu>();
+		if(id != null){
+			HelpMenu model = helpMenuService.getById(id);
+			if(model != null && model.getParent()!=null && model.getParent().getId() != null){
+				int pid =  model.getParent().getId();
+				list = helpMenuService.getListByPid(pid);
+				if(pid != Global.ROOT_HELPMENU_ID){
+					pidStr = "" + pid;
+				}
+				
+			}
+			
+		}
+		
+		rj.put("pid", pidStr);
+		rj.put("list", list);
+		return rj;
+	}
+	
 	
 }
