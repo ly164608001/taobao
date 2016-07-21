@@ -204,6 +204,7 @@ public class HelpMenuController extends BaseController {
 	@ResponseBody
 	public JSONObject getsiling(Integer id) {
 		JSONObject rj = new JSONObject();
+		String pidStr = "";
 		
 		//获取同级列表
 		List<HelpMenu> list = new ArrayList<HelpMenu>();
@@ -213,13 +214,14 @@ public class HelpMenuController extends BaseController {
 				int pid =  model.getParent().getId();
 				list = helpMenuService.getListByPid(pid);
 				if(pid != Global.ROOT_HELPMENU_ID){
-					rj.put("pid", pid);
+					pidStr = "" + pid;
 				}
 				
 			}
 			
 		}
 		
+		rj.put("pid", pidStr);
 		rj.put("list", list);
 		return rj;
 	}

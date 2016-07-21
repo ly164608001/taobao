@@ -85,7 +85,6 @@
 							}
 							
 							pid = json2.pid; //继续上一级id
-							alert(pid);
 						}
 						
 					});
