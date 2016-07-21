@@ -41,7 +41,8 @@ function layerConfirm(url,timMsg,succssFn){
 
 /**
  * 信息输入框Prompt，使用iframe复杂表单(一个单独页面)数据填写
- *   *要求：子页面中表单id为submitForm，且要有action属性
+ *   *要求：1 子页面中表单id为submitForm，且要有action属性
+ *        2 子页面中要有checkForm方法，对验证失败结果的样式处理提示，并返回验证结果
  * @param iframeUrl iframe访问地址
  * @param title 标题
  * @param width 宽度(单位px)
@@ -57,7 +58,7 @@ function layerPromptIframe(iframeUrl,title,succssFn,width,height){
 		height = 400;
 	}
 	
-	var indexIframe = top.layer.open({
+	var indexIframe = layer.open({
         type : 2,
         area : [ width + 'px', height + 'px'],
         closeBtn : 1,
@@ -69,7 +70,13 @@ function layerPromptIframe(iframeUrl,title,succssFn,width,height){
         	//获取弹出框DOM的body元素
         	var body = top.layer.getChildFrame('body', index);
         	var url = body.find('#submitForm').attr('action');
-        	//TODO:验证表单(获取元素例子和jq相似var reason = body.find('#submitForm').val());
+        	//验证表单(需要子页面定义个checkForm方法，处理验证失败的消息提示并返回验证结果)
+        	var iframeWin = window[layero.find('iframe')[0]['name']]; 
+        	var isValid = iframeWin.checkForm();
+        	if(!isValid){
+        		return;
+        	}
+        	//提交
             $.ajax({
 				type : 'post',
 				 url : url,
@@ -88,4 +95,5 @@ function layerPromptIframe(iframeUrl,title,succssFn,width,height){
             
         }
     });
+    
 }

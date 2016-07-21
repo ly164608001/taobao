@@ -13,11 +13,11 @@
 				<input name="type" value="${type}" type="hidden"/>
 				<div class="row cl">
 					<label class="form-label col-xs-4 col-sm-3">
-						<span class="c-red">*</span>
-						标签：
+						<span class="c-red">*</span>标签：
 					</label>
 					<div class="formControls col-xs-4 col-sm-3">
-						<input type="text" class="input-text" name="name" />
+						<input type="text" class="input-text" name="name"
+							 validator="{required:true}"/>
 					</div>
 	
 				</div>
@@ -27,12 +27,25 @@
 						排序值：
 					</label>
 					<div class="formControls col-xs-4 col-sm-3">
-						<input type="text" class="input-text" name="sort"/>
+						<input type="text" class="input-text" name="sort" label="排序值"
+							validator="{required:true}"/>
 					</div>
 				</div>
-		</form>
-	</div>
-</section>
-
+			</form>
+		</div>
+	</section>
+	
+	<script type="text/javascript">
+		function checkForm(){
+			var validResult = validateForm('submitForm');
+			if(!validResult.success){
+				layer.tips(validResult.msg, validResult.validElem);
+				return false;
+			}else{
+				return true;
+			} 
+		}
+	</script>
+	
 </body>
 </html>
