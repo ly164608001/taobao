@@ -123,6 +123,12 @@ public interface IUserApiService extends IBaseService<UserInfo, Integer>{
 	 */
 	public ResultJson adlist(ApiParams params);
 	/**
+	 * 获取滚动通知列表
+	 * @param params
+	 * @return
+	 */
+	public ResultJson noticelist(ApiParams params);
+	/**
 	 * 获取消息列表
 	 * @param params
 	 * @param response
@@ -152,5 +158,10 @@ public interface IUserApiService extends IBaseService<UserInfo, Integer>{
 	 * @return
 	 */
 	public ResultJson getSysConfig(ApiParams params);
+	public ResultJson bankcardList(ApiParams params);
+	public ResultJson bankcardAdd(ApiParams params);
+	public ResultJson bankcardDele(ApiParams params);
+	public ResultJson withdrawFee(ApiParams params);
+	public ResultJson incomeList(ApiParams params);
 	
 }

@@ -208,47 +208,50 @@ public class ApiController {
 		this.writeJsonToResponse(rj, response);
 	}
 	/**
-	 * 绑定支付账号信息
+	 * 银行卡列表
 	 * @param params
 	 * @param response
 	 */
-	@RequestMapping("/bindPay" )
-	public void bindPay(InputStream inputStream, HttpServletResponse response) {
+	@RequestMapping("/BankcardList" )
+	public void bankcardList(InputStream inputStream, HttpServletResponse response) {
 		ApiParams params = ApiJSONUtil.decryptJSON(inputStream, ApiParams.class);
-		ResultJson rj = userApiService.bindPay(params);
+		//TODO
+		ResultJson rj = userApiService.bankcardList(params);
 		this.writeJsonToResponse(rj, response);
 	}
 	/**
-	* 解除绑定支付账号信息
+	 * 绑定银行卡
+	 * @param params
+	 * @param response
+	 */
+	@RequestMapping("/BankcardAdd" )
+	public void bankcardAdd(InputStream inputStream, HttpServletResponse response) {
+		ApiParams params = ApiJSONUtil.decryptJSON(inputStream, ApiParams.class);
+		//TODO
+		ResultJson rj = userApiService.bankcardAdd(params);
+		this.writeJsonToResponse(rj, response);
+	}
+	/**
+	* 解除银行卡
 	* @param params
 	* @param response
 	*/
-	@RequestMapping("/unbindPay" )
-	public void unbindPay(InputStream inputStream, HttpServletResponse response) {
+	@RequestMapping("/BankcardDele" )
+	public void bankcardDele(InputStream inputStream, HttpServletResponse response) {
 		ApiParams params = ApiJSONUtil.decryptJSON(inputStream, ApiParams.class);
-		ResultJson rj = userApiService.unbindPay(params);
+		//TODO
+		ResultJson rj = userApiService.bankcardDele(params);
 		this.writeJsonToResponse(rj, response);
 	}
 	/**
-	 * 申请充值
+	 * 获取提现手续费
 	 * @param params
 	 * @param response
 	 */
-	@RequestMapping("/topup" )
-	public void topup(InputStream inputStream, HttpServletResponse response) {
+	@RequestMapping("/WithdrawFee" )
+	public void withdrawFee(InputStream inputStream, HttpServletResponse response) {
 		ApiParams params = ApiJSONUtil.decryptJSON(inputStream, ApiParams.class);
-		ResultJson rj = userApiService.topup(params);
-		this.writeJsonToResponse(rj, response);
-	}
-	/**
-	 * 订单支付请求
-	 * @param params
-	 * @param response
-	 */
-	@RequestMapping("/payOrder" )
-	public void payOrder(InputStream inputStream, HttpServletResponse response) {
-		ApiParams params = ApiJSONUtil.decryptJSON(inputStream, ApiParams.class);
-		ResultJson rj = userApiService.payOrder(params);
+		ResultJson rj = userApiService.withdrawFee(params);
 		this.writeJsonToResponse(rj, response);
 	}
 	/**
@@ -256,21 +259,34 @@ public class ApiController {
 	 * @param params
 	 * @param response
 	 */
-	@RequestMapping("/withdrawal" )
+	@RequestMapping("/Withdraw" )
 	public void withdrawal(InputStream inputStream, HttpServletResponse response) {
 		ApiParams params = ApiJSONUtil.decryptJSON(inputStream, ApiParams.class);
 		ResultJson rj = userApiService.withdrawal(params);
 		this.writeJsonToResponse(rj, response);
 	}
 	/**
-	 * 账单列表
+	 * 提现列表
 	 * @param params
 	 * @param response
 	 */
-	@RequestMapping("/billList" )
+	@RequestMapping("/WithdrawList" )
 	public void billList(InputStream inputStream, HttpServletResponse response) {
 		ApiParams params = ApiJSONUtil.decryptJSON(inputStream, ApiParams.class);
+		//TODO
 		ResultJson rj = userApiService.billList(params);
+		this.writeJsonToResponse(rj, response);
+	}
+	/**
+	 * 收入列表
+	 * @param params
+	 * @param response
+	 */
+	@RequestMapping("/IncomeList" )
+	public void incomeList(InputStream inputStream, HttpServletResponse response) {
+		ApiParams params = ApiJSONUtil.decryptJSON(inputStream, ApiParams.class);
+		//TODO
+		ResultJson rj = userApiService.incomeList(params);
 		this.writeJsonToResponse(rj, response);
 	}
 	/**
@@ -278,10 +294,21 @@ public class ApiController {
 	 * @param params
 	 * @param response
 	 */
-	@RequestMapping("/adlist" )
+	@RequestMapping("/AdList" )
 	public void adlist(InputStream inputStream, HttpServletResponse response) {
 		ApiParams params = ApiJSONUtil.decryptJSON(inputStream, ApiParams.class);
 		ResultJson rj = userApiService.adlist(params);
+		this.writeJsonToResponse(rj, response);
+	}
+	/**
+	 * 获取滚动通知列表
+	 * @param params
+	 * @param response
+	 */
+	@RequestMapping("/NoticeList")
+	public void noticelist(InputStream inputStream, HttpServletResponse response) {
+		ApiParams params = ApiJSONUtil.decryptJSON(inputStream, ApiParams.class);
+		ResultJson rj = userApiService.noticelist(params);
 		this.writeJsonToResponse(rj, response);
 	}
 	/**
