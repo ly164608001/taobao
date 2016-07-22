@@ -37,8 +37,10 @@
 								<img src="${basePath}static/css/front/images/wangwang.png" alt=""></div>
 							<div class="taobaoTxt f-l">
 								淘宝买手账号：
-								<input type="text" class="taobaoTxt-ipt input-text" placeholder="输入旺旺名称进行绑定">
-								<a href="#" class="btn btn-secondary radius">绑定淘宝买号</a>
+								<input type="text" id="accountno" placeholder="输入旺旺名称进行绑定"
+										class="taobaoTxt-ipt input-text" >
+								<a href="javascript:void(0);" onclick="add();" 
+									class="btn btn-secondary radius">绑定淘宝买号</a>
 								<div class="tips mt10">
 									<p>
 										<span class="red">重要提示：</span>
@@ -138,6 +140,8 @@
 			</div>
 
 		</div>
+		
+		
 		<div class="tabCon">
 			<div class="taobaoTips clearfix mt10">
 				<div class="taobaoImg f-l">
@@ -147,7 +151,7 @@
 					<a href="#" class="btn btn-secondary radius">导入Excel文件</a>
 					<div class="tips mt10">
 						<p>
-							模板下载： <em class="red">请先点击这里</em>
+							模板下载： <em class="red" onclick="downloadTemplate();" style="cursor:pointer;">请先点击这里</em>
 							下载Excel文件模板,下载后按模板里的格式填写相应的旺旺号名称，再上传!
 						</p>
 
@@ -155,6 +159,7 @@
 				</div>
 			</div>
 		</div>
+		
 	</div>
 </div>
 
@@ -162,6 +167,18 @@
 
 
 	<script>
+	//下载批量导入模板
+	function downloadTemplate(){
+		window.location.href = '${basePath}front/buyer/account/downloadTemplate.htm';
+	}
+	
+	// 绑定淘宝买号
+	function add(){
+		var accountno = $('#accountno').val();
+		var url = '${basePath}front/buyer/account/accountAdd.htm?accountno='+accountno;
+		layerPromptIframe(url, '绑定淘宝买号', oprSuccess);
+	}
+	
 	// 基础信息
 	function basicInfo(accountid){
 		var url = '${basePath}front/buyer/account/basicinfo.htm?accountid='+accountid;

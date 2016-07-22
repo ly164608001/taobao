@@ -76,6 +76,7 @@ function layerPromptIframe(iframeUrl,title,succssFn,width,height){
         	if(!isValid){
         		return;
         	}
+        	
         	//提交
             $.ajax({
 				type : 'post',

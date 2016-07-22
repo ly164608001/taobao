@@ -9,7 +9,56 @@
        _initSelect();
     });
     
-    /*
+	/*
+	 * 初始化下拉框
+	 */
+	function _initSelect(){
+		//遍历初始化相应级联下拉框
+		$('.xytSelect').each(function(){
+			var $this = $(this);
+			
+			//获取输入框的值,有则表示回显数据
+			var initValue = $this.attr('initvalue');
+			if(initValue != undefined && initValue != ''){
+				_echo(initValue,this);
+				return;
+			}
+			
+			var link = $this.attr('link');
+			var pid = $this.attr('pid');
+			var valuename = $this.attr('valuename');
+			var labelname = $this.attr('labelname');
+			
+			//获取下级数据 若有则进行select填充
+			$.ajax({
+				type : 'POST',
+				data : {'pid':pid},
+				url : link,
+				dateType : 'json',
+				success : function(result){
+					var json = eval('('+result+')');
+					var arr = json.list;
+					
+					var options = '<option value="">请选择</option>';
+					if(arr != null && arr.length > 0){
+						for (var index in arr) {
+							var item = arr[index];
+							var itemValue = item[valuename];
+							if(itemValue != undefined){
+								var opt = '<option value="'+item[valuename]+'">'+item[labelname]+'</option>';
+								options += opt;
+							}
+							
+						}
+					}
+					
+					$this.html(options);
+				}
+			});
+		});
+	}
+	
+	/*
 	 * 下拉框回显
 	 * @param initValue 初始值
 	 * @param selectObj 下拉框元素
@@ -97,51 +146,6 @@
 		
 	}
 	
-	/*
-	 * 初始化下拉框
-	 */
-	function _initSelect(){
-		//遍历初始化相应级联下拉框
-		$('.xytSelect').each(function(){
-			var $this = $(this);
-			
-			//获取输入框的值,有则表示回显数据
-			var initValue = $this.attr('initvalue');
-			if(initValue != undefined && initValue != ''){
-				_echo(initValue,this);
-				return;
-			}
-			
-			var link = $this.attr('link');
-			var pid = $this.attr('pid');
-			var valuename = $this.attr('valuename');
-			var labelname = $this.attr('labelname');
-			
-			//获取下级数据 若有则进行select填充
-			$.ajax({
-				type : 'POST',
-				data : {'pid':pid},
-				url : link,
-				dateType : 'json',
-				success : function(result){
-					var json = eval('('+result+')');
-					var arr = json.list;
-					
-					var options = '<option value="">请选择</option>';
-					if(arr != null && arr.length > 0){
-						for (var index in arr) {
-							var item = arr[index];
-							var opt = '<option value="'+item[valuename]+'">'+item[labelname]+'</option>';
-							options += opt;
-						}
-					}
-					
-					$this.html(options);
-				}
-			});
-		});
-	}
-	
 	//select点击选项事件
 	function _onchange(obj){
 		var $this = $(obj);
@@ -173,8 +177,12 @@
 											+'"><option value="">请选择</option>';
 						for(var i = 0; i < arr.length ; i++){
 							var item = arr[i];
-							var opt = '<option value="'+item[valuename]+'">'+item[labelname]+'</option>';
-							appendSel += opt;
+							var itemValue = item[valuename];
+							if(itemValue != undefined){
+								var opt = '<option value="'+item[valuename]+'">'+item[labelname]+'</option>';
+								appendSel += opt;
+							}
+							
 						}
 						
 						appendSel += '</select>';

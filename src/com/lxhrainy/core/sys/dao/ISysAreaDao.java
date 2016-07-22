@@ -1,5 +1,9 @@
 package com.lxhrainy.core.sys.dao;
 
+import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
+
 import com.lxhrainy.core.annotation.MyBatisDao;
 import com.lxhrainy.core.common.dao.IBaseDao;
 import com.lxhrainy.core.sys.model.SysArea;
@@ -12,6 +16,13 @@ import com.lxhrainy.core.sys.model.SysArea;
  */
 @MyBatisDao
 public interface ISysAreaDao extends IBaseDao<SysArea> {
+
+	/**
+	 * 获取直接下级区域
+	 * @param pid
+	 * @return
+	 */
+	List<SysArea> getListByPid(@Param("pid")int pid);
 	
 	/**
 	 * 找到所有子节点

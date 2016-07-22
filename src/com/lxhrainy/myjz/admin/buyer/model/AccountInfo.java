@@ -16,7 +16,7 @@ public class AccountInfo extends BaseModel {
 	private static final long serialVersionUID = 1L;
 	private String accountno; // 淘宝旺旺号
 	private Integer identification; // 是否实名认证(0：否；1：是)
-	private String credit; // 信誉等级
+	private String credit; // 信誉值
 	private LevelInfo level; // 买号等级
 	private String levelpic; // 等级截图图片地址
 	private Integer receivednum; // 已接任务数

@@ -3,6 +3,7 @@ package com.lxhrainy.myjz.admin.buyer.model;
 import java.util.Date;
 
 import com.lxhrainy.core.common.model.BaseModel;
+import com.lxhrainy.core.sys.model.SysArea;
 
 /**
  * 小号收获地址Entity
@@ -20,6 +21,15 @@ public class AccountReceiptAddress extends BaseModel {
 	private String receiptphone; // 收货人手机号
 	private Date createtime; // 创建时间
 	private Date updatetime; // 修改时间
+	private SysArea area; // 所选最低层次的区域id
+
+	public SysArea getArea() {
+		return area;
+	}
+
+	public void setArea(SysArea area) {
+		this.area = area;
+	}
 
 	public AccountInfo getAccount() {
 		return account;

@@ -8,14 +8,15 @@
  * @param formid
  * @returns 返回结果对象
  */
-var validResult = new Object();
-validResult.success = true;
-validResult.msg = '通过';
-
 function validateForm(formid){
+	var validResult = new Object();
+	validResult.success = true;
+	validResult.msg = '通过';
+	
     var selectForm = '#' + formid;
     //验证表单输入框
     $(selectForm + ' input[type=text]').each(function(){
+    	
         var $inputObj = $(this);
         var validateType = $inputObj.attr('validator');
         var value = $.trim($inputObj.val());
@@ -92,6 +93,7 @@ function validateForm(formid){
  * @param validObj 验证失败元素
  */
 function validFail(errMsg,validObj){
+	var validResult = new Object();
     validResult.success = false;
     validResult.msg = errMsg;
     validResult.validElem = validObj;
@@ -109,8 +111,7 @@ function validFail(errMsg,validObj){
  * 返回:true 或 flase; true表示为空
  */
 function isNull(value) {
-    if ((value == null) || (value == undefined) || (value == "")
-            || (value == "")) {
+    if ((value == null) || (value == undefined) || (value == '')) {
         return true;
     } else {
         return false;

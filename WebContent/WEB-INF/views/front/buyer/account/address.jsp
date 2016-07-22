@@ -5,11 +5,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 	<title>添加收货地址</title>
+	<script type="text/javascript" src="${basePath}static/js/select.js"></script>
 </head>
 <body>
 	<section>
 		<div class="addCar">
-			<form action="" method="post" class="form form-horizontal" id="demoform-1">
+			<form action="${basePath}front/buyer/account/addressSave.htm" method="post" class="form form-horizontal" id="submitForm">
 
 				<div class="row cl">
 					<label class="form-label col-xs-4 col-sm-3">
@@ -20,10 +21,10 @@
 						<span class="select-box">
 							<span>
 								<select onchange="_onchange(this);" class="xytSelect"
-										link="${basePath}admin/helpcenter/menu/getlistbypid.htm" pid="-1"
-										valuename="id" labelname="name">
+										link="${basePath}front/buyer/account/getAreasByPid.htm" pid="100000"
+										valuename="id" labelname="areaname">
 								</select>
-								<input type="hidden" value="" name="menu.id" required="required" id="menuid"/>
+								<input type="hidden" value="" name="region.id" id="menuid"/>
 							</span>
 						</span>
 					</div>
@@ -34,7 +35,7 @@
 						<span class="c-red">*</span>收货人：
 					</label>
 					<div class="formControls col-xs-4 col-sm-3">
-						<input type="text" class="input-text" autocomplete="off" placeholder="必须与淘宝上收货人姓名相同"></div>
+						<input type="text" class="input-text" placeholder="必须与淘宝上收货人姓名相同"></div>
 
 				</div>
 			<div class="row cl">
@@ -43,13 +44,13 @@
 					收货人手机号码：
 				</label>
 				<div class="formControls col-xs-4 col-sm-3">
-					<input type="text" class="input-text" autocomplete="off" placeholder="必须和淘宝上登记的收货人信息一致"></div>
+					<input type="text" class="input-text" placeholder="必须和淘宝上登记的收货人信息一致"></div>
 
 			</div>
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>交易密码：</label>
 			<div class="formControls col-xs-4 col-sm-3">
-				<input type="text" class="input-text" autocomplete="off" placeholder="请输入交易密码"></div>
+				<input type="text" class="input-text" placeholder="请输入交易密码"></div>
 
 		</div>
 

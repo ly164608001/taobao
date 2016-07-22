@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lxhrainy.myjz.admin.buyer.dao.IAccountReceiptAddressDao">
+    
+	<sql id="buyerAccountReceiptAddressColumns">
+		T.id AS "id",
+		T.accountid AS "accountid",
+		T.region AS "region",
+		T.address AS "address",
+		T.receiptname AS "receiptname",
+		T.receiptphone AS "receiptphone",
+		T.createtime AS "createtime",
+		T.updatetime AS "updatetime"
+	</sql>
+	
+	<sql id="buyerAccountReceiptAddressJoins">
+	</sql>
+	
+	<sql id="where">
+		<if test="condition!=null">
+			<where>
+				<if test="condition.model!=null">
+					<if test="condition.model.receiptname!=null and condition.model.receiptname!=''">
+						AND T.receiptname like CONCAT('%',#{condition.model.receiptname},'%')
+					</if>
+				</if>
+			</where>
+		</if>
+	</sql>
+    
+	<select id="getById" resultType="AccountReceiptAddress">
+		SELECT 
+			<include refid="buyerAccountReceiptAddressColumns"/>
+		FROM buyer_account_receipt_address T
+		<include refid="buyerAccountReceiptAddressJoins"/>
+		WHERE T.id = #{id}
+	</select>
+	
+	<select id="findListByPage" resultType="AccountReceiptAddress">
+		SELECT 
+			<include refid="buyerAccountReceiptAddressColumns"/>
+		FROM buyer_account_receipt_address T
+		<include refid="buyerAccountReceiptAddressJoins"/>
+		<include refid="where"/>
+		order by T.ID
+			<include refid="Sql.pager" />
+	</select>
+	
+	<select id="findAllList" resultType="AccountReceiptAddress">
+		SELECT 
+			<include refid="buyerAccountReceiptAddressColumns"/>
+		FROM buyer_account_receipt_address T
+		<include refid="buyerAccountReceiptAddressJoins"/>
+		<include refid="where"/>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO buyer_account_receipt_address(
+			id,
+			accountid,
+			region,
+			address,
+			receiptname,
+			receiptphone,
+			createtime,
+			updatetime,
+			areaid
+		) VALUES (
+			#{id},
+			#{accountid},
+			#{region},
+			#{address},
+			#{receiptname},
+			#{receiptphone},
+			#{createtime},
+			#{updatetime},
+			#{area.id}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE buyer_account_receipt_address SET 	
+			accountid = #{accountid},
+			region = #{region},
+			address = #{address},
+			receiptname = #{receiptname},
+			receiptphone = #{receiptphone},
+			createtime = #{createtime},
+			updatetime = #{updatetime},
+			areaid = #{area.id}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		DELETE FROM buyer_account_receipt_address
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

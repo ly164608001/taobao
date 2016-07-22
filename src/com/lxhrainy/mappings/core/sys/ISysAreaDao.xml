@@ -31,6 +31,14 @@
 		WHERE T.id = #{id}
 	</select>
 	
+	<select id="getListByPid" resultType="SysArea">
+		SELECT
+			<include refid="areaColumns"/>
+		FROM sys_area T
+		<include refid="areaJoins"/>
+		WHERE T.uppk = #{pid}
+	</select>
+	
 	<select id="findAllList" resultType="SysArea">
 		SELECT
 			<include refid="areaColumns"/>
