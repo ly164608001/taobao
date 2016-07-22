@@ -1,7 +1,7 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : 127.0.0.1
+Source Server         : localhost
 Source Server Version : 50096
 Source Host           : localhost:3306
 Source Database       : myjz
@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50096
 File Encoding         : 65001
 
-Date: 2016-07-16 14:30:15
+Date: 2016-07-23 00:50:36
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -63,13 +63,14 @@ CREATE TABLE `buyer_account_basic_info` (
   `id` int(11) NOT NULL auto_increment,
   `accountid` int(11) default NULL,
   `sex` int(1) default NULL COMMENT '性别',
-  `birthday` datetime default NULL COMMENT '生日',
+  `birthday` date default NULL COMMENT '生日',
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='小号基础信息';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='小号基础信息';
 
 -- ----------------------------
 -- Records of buyer_account_basic_info
 -- ----------------------------
+INSERT INTO `buyer_account_basic_info` VALUES ('1', '2', '2', '2016-06-30');
 
 -- ----------------------------
 -- Table structure for `buyer_account_info`
@@ -96,8 +97,8 @@ CREATE TABLE `buyer_account_info` (
 -- ----------------------------
 -- Records of buyer_account_info
 -- ----------------------------
-INSERT INTO `buyer_account_info` VALUES ('1', '雨亭漫步', '1', '5', '1', null, '10', '0', '0', '2', '2016-07-09 13:42:33', '1', null, null);
-INSERT INTO `buyer_account_info` VALUES ('2', '孤云道人', '1', '255', '7', null, '520', '0', '1', '1', '2016-07-09 16:07:57', '1', null, null);
+INSERT INTO `buyer_account_info` VALUES ('1', '雨亭漫步', '1', '5', '1', null, '10', '0', '0', '233', '2016-07-09 13:42:33', '3', null, null);
+INSERT INTO `buyer_account_info` VALUES ('2', '孤云道人', '1', '255', '7', null, '520', '0', '0', '133', '2016-07-09 16:07:57', '3', null, null);
 
 -- ----------------------------
 -- Table structure for `buyer_account_receipt_address`
@@ -112,6 +113,7 @@ CREATE TABLE `buyer_account_receipt_address` (
   `receiptphone` varchar(32) default NULL COMMENT '收货人手机号',
   `createtime` datetime default NULL COMMENT '创建时间',
   `updatetime` datetime default NULL COMMENT '修改时间',
+  `areaid` int(11) default NULL COMMENT '省市区所选最低层次id',
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='小号收货地址';
 
@@ -181,11 +183,13 @@ CREATE TABLE `help_document` (
   `status` int(1) default NULL COMMENT '状态 (显示隐藏)',
   `content` text COMMENT '文档内容',
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='帮助文档';
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='帮助文档';
 
 -- ----------------------------
 -- Records of help_document
 -- ----------------------------
+INSERT INTO `help_document` VALUES ('1', '男啊 ', '1', null, '0', '1', null, '破电脑 我草');
+INSERT INTO `help_document` VALUES ('2', '二级的2', '4', null, '0', '2', null, '渣电脑');
 
 -- ----------------------------
 -- Table structure for `help_menu`
@@ -201,7 +205,7 @@ CREATE TABLE `help_menu` (
   `deleted` int(1) default '0' COMMENT '删除标识',
   `url` varchar(255) default NULL COMMENT '连接',
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8 COMMENT='帮助菜单';
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8 COMMENT='帮助菜单';
 
 -- ----------------------------
 -- Records of help_menu
@@ -280,7 +284,6 @@ CREATE TABLE `seller_label` (
 -- ----------------------------
 -- Records of seller_label
 -- ----------------------------
-INSERT INTO `seller_label` VALUES ('1', '很好', '2', '1', '3', '2016-07-05 23:29:34');
 INSERT INTO `seller_label` VALUES ('2', '福州', '1', '1', '3', '2016-07-04 23:16:44');
 
 -- ----------------------------
@@ -296,12 +299,12 @@ CREATE TABLE `seller_praise` (
   `content` varchar(255) default NULL COMMENT '好评内容',
   `status` int(1) default NULL COMMENT '状态(0：未使用；1已使用)',
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='好评内容信息表';
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='好评内容信息表';
 
 -- ----------------------------
 -- Records of seller_praise
 -- ----------------------------
-INSERT INTO `seller_praise` VALUES ('1', '3', '2016-07-05 23:28:59', null, '1', '灰常好', '0');
+INSERT INTO `seller_praise` VALUES ('3', '3', '2016-07-19 22:34:21', null, '2', 'fff', '0');
 
 -- ----------------------------
 -- Table structure for `seller_receipt_address`
@@ -319,12 +322,11 @@ CREATE TABLE `seller_receipt_address` (
   `address` varchar(255) default NULL COMMENT '收货地址',
   `status` int(1) default NULL COMMENT '状态(0：未使用；1已使用)',
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='商家收货地址';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='商家收货地址';
 
 -- ----------------------------
 -- Records of seller_receipt_address
 -- ----------------------------
-INSERT INTO `seller_receipt_address` VALUES ('1', '3', '2016-07-05 21:47:46', '2016-07-05 23:08:47', '2', '云腾2', '13067356400', '350500', '福州闽侯2', '1');
 
 -- ----------------------------
 -- Table structure for `seller_shop`
@@ -342,14 +344,15 @@ CREATE TABLE `seller_shop` (
   `createtime` datetime default NULL COMMENT '创建时间',
   `goodstypeid` int(11) default NULL COMMENT '店铺品类(商品类目)',
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COMMENT='商家店铺表';
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COMMENT='商家店铺表';
 
 -- ----------------------------
 -- Records of seller_shop
 -- ----------------------------
 INSERT INTO `seller_shop` VALUES ('1', '布衣柜商家', '1', '布衣柜', 'http://www.taobao.com', '10', '1', '1', '2016-07-04 23:50:17', '1');
-INSERT INTO `seller_shop` VALUES ('5', '22', '1', '22', '22', '0', '1', '3', '2016-07-05 00:33:19', '1');
-INSERT INTO `seller_shop` VALUES ('6', '的方法', '1', '22 ', 'www.baodiu.com2', '0', '0', '3', '2016-07-05 21:22:40', '1');
+INSERT INTO `seller_shop` VALUES ('5', '腾达店', '1', '22', '22', '0', '1', '3', '2016-07-05 00:33:19', '1');
+INSERT INTO `seller_shop` VALUES ('6', '天使街23号', '1', '22 ', 'www.baodiu.com2', '0', '0', '3', '2016-07-05 21:22:40', '1');
+INSERT INTO `seller_shop` VALUES ('7', '云店', null, 'yun', 'www.yun.com', '0', '0', '3', '2016-07-19 22:33:15', '1');
 
 -- ----------------------------
 -- Table structure for `sys_area`
@@ -4446,7 +4449,6 @@ DROP TABLE IF EXISTS `user_auth_info`;
 CREATE TABLE `user_auth_info` (
   `id` int(11) NOT NULL auto_increment,
   `userid` int(11) default NULL COMMENT '账号ID',
-  `paypassword` varchar(128) default NULL COMMENT '支付密码',
   `authphone` varchar(32) default NULL COMMENT '认证手机',
   `authphonetime` datetime default NULL COMMENT '手机认证时间',
   `authemail` varchar(128) default NULL COMMENT '密保邮箱',
@@ -4472,7 +4474,7 @@ CREATE TABLE `user_auth_info` (
 -- ----------------------------
 -- Records of user_auth_info
 -- ----------------------------
-INSERT INTO `user_auth_info` VALUES ('1', '4', null, null, null, null, null, null, null, null, null, null, null, null, '0', null, null, null, null, null, null, null);
+INSERT INTO `user_auth_info` VALUES ('1', '4', null, null, null, null, null, null, null, null, null, null, null, '0', null, null, null, null, null, null, null);
 
 -- ----------------------------
 -- Table structure for `user_config`
@@ -4562,6 +4564,7 @@ DROP TABLE IF EXISTS `user_money`;
 CREATE TABLE `user_money` (
   `id` int(11) NOT NULL auto_increment,
   `userid` int(11) default NULL COMMENT '账号ID',
+  `paypassword` varchar(32) default NULL COMMENT '交易密码',
   `allbalance` double(20,2) default NULL COMMENT '总余额',
   `usablebalance` double(20,2) default NULL COMMENT '可用余额',
   `frozenbalance` double(20,2) default NULL COMMENT '冻结金额',
@@ -4572,4 +4575,4 @@ CREATE TABLE `user_money` (
 -- ----------------------------
 -- Records of user_money
 -- ----------------------------
-INSERT INTO `user_money` VALUES ('1', '4', '0.00', '0.00', '0.00', '0');
+INSERT INTO `user_money` VALUES ('1', '3', 'ifS7tw1E6a7Yx0lPE3rcSw==', '0.00', '0.00', '0.00', '0');
