@@ -271,7 +271,6 @@ public class UserApiServiceImpl extends AbstractBaseServiceImpl<IUserInfoDao, Us
 					}
 				}
 				ApiCacheUtil.removeCaptchaChache(params.getUsername());
-				Integer type = 2;
 				UserInfo mobileUser = userInfoService.getByPhone(params.getPhone());
 				if (oConvertUtils.isNotEmpty(mobileUser)) {
 					mobileUser.setPassword(PasswordUtil.encrypt(mobileUser.getUsername(), params.getPassword(), PasswordUtil.getStaticSalt()));
@@ -387,8 +386,68 @@ public class UserApiServiceImpl extends AbstractBaseServiceImpl<IUserInfoDao, Us
 
 	@Override
 	public ResultJson withdrawal(ApiParams params) {
-		// TODO Auto-generated method stub
-		return null;
+		ResultJson rj = new ResultJson();
+		rj.setError_code(ResultJson.ERROR_CODE_PARAMETERS);
+		rj.setMessage("参数错误");
+		if (oConvertUtils.isNotEmpty(params) 
+				&& StringUtil.isNotEmpty(params.getBankid())
+				&& StringUtil.isNotEmpty(params.getFee())
+				&& StringUtil.isNotEmpty(params.getMoney())
+				&& StringUtil.isNotEmpty(params.getPassword())
+				&& StringUtil.isNotEmpty(params.getCosttime())){
+			double money = oConvertUtils.getDouble(params.getMoney(), 0);
+			if (money == 0) {
+				rj.setError_code(ResultJson.ERROR_CODE_PARAMETERS);
+				rj.setMessage("提款金额错误");
+				return rj;
+			}
+			UserInfo loginUser = ApiCacheUtil.getLoginUser();
+			if (oConvertUtils.isNotEmpty(loginUser)) {
+				//TODO 获取用户支付密码进行验证
+				UserMoney userMoney = userMoneyService.getByUserId(loginUser.getId());
+				if (oConvertUtils.isNotEmpty(userMoney)) {
+					/*String password = PasswordUtil.encrypt(mobileUser.getUsername(), params.getPassword(), PasswordUtil.getStaticSalt());
+					if (!password.equals(account.getPaypassword())) {
+						rj.setError_code(ResultJson.ERROR_CODE_PASSWORD);
+						rj.setMessage("支付密码错误");
+						return rj;
+					}*/
+					/*TraceEntity traceEntity = mobileAccountService.withdrawal(account, type, money);
+					if (oConvertUtils.isNotEmpty(traceEntity)) {
+						
+						WithdrawalEntity withdrawalEntity = new WithdrawalEntity();
+						withdrawalEntity.setAccount(params.getAccount());
+						withdrawalEntity.setCreatetime(DateUtils.getDate());
+						withdrawalEntity.setMemo(params.getName());
+						withdrawalEntity.setMobileuser(mobileUser);
+						withdrawalEntity.setMoney(money);
+						withdrawalEntity.setStatus(1);
+						//withdrawalEntity.setSerial(WithdrawalEntity.getNo());
+						withdrawalEntity.setType(type);
+						withdrawalEntity.setTraceEntity(traceEntity);
+						save(withdrawalEntity);
+						
+						if (oConvertUtils.isNotEmpty(withdrawalEntity)) {
+							traceEntity.setMemo("提现账号：" + params.getAccount() + "   姓名：" + params.getName());
+							JSONObject jsonObject = new JSONObject();
+							jsonObject.put("serial_num", traceEntity.getTraceno());
+						    jsonObject.put("product", "提现");
+							rj.addSuccessMsg("申请成功，请等待管理员处理", jsonObject);
+							return rj;
+						}
+					}*/
+					rj.setError_code(ResultJson.ERROR_CODE_GENERAL);
+					rj.setMessage("申请失败");
+				} else {
+					rj.setError_code(ResultJson.ERROR_CODE_USER_NOT_EXIST);
+					rj.setMessage("账号不存在");
+				}
+			} else {
+				rj.setError_code(ResultJson.ERROR_CODE_USER_NOT_EXIST);
+				rj.setMessage("用户不存在");
+			} 
+		}
+		return rj;
 	}
 
 	@Override
@@ -399,8 +458,59 @@ public class UserApiServiceImpl extends AbstractBaseServiceImpl<IUserInfoDao, Us
 
 	@Override
 	public ResultJson adlist(ApiParams params) {
-		// TODO Auto-generated method stub
-		return null;
+		ResultJson rj = new ResultJson();
+		rj.setError_code(ResultJson.ERROR_CODE_PARAMETERS);
+		rj.setMessage("参数错误");
+		JSONObject result = new JSONObject();
+		List<JSONObject> list = new ArrayList<JSONObject>();
+		//TODO 获取广告列表
+		List<Object> adlist = new ArrayList<>();
+		for(Object advert : adlist){
+			JSONObject item = new JSONObject();
+			item.put("content", "");
+			item.put("adid", "");
+			item.put("title", "");
+			item.put("time", "");
+			item.put("url", "");
+			list.add(item);
+		}
+		result.put("list", list);
+		result.put("isend", false);
+		rj.addSuccessMsg("",result);
+		return rj;
+	}
+
+	@Override
+	public ResultJson noticelist(ApiParams params) {
+		ResultJson rj = new ResultJson();
+		rj.setError_code(ResultJson.ERROR_CODE_PARAMETERS);
+		rj.setMessage("参数错误");
+				
+		SysNoticeVO vo = new SysNoticeVO();
+		SysNotice model = new SysNotice();
+		model.setType(ApiConstant.MSG_WEB);
+		vo.setCount(ApiConstant.MSG_WEB_NUM);
+		
+		List<SysNotice> notices = sysNoticeService.getListForMobile(vo);
+		
+		JSONObject result = new JSONObject();
+		List<JSONObject> list = new ArrayList<JSONObject>();
+		if (oConvertUtils.isNotEmpty(notices) && notices.size() > 0) {
+			for (SysNotice notice : notices) {
+				JSONObject noticeObject = new JSONObject();
+				noticeObject.put("content", notice.getContent());
+				noticeObject.put("time", notice.getCreatetime());
+				noticeObject.put("title", notice.getTitle());
+				noticeObject.put("noticid", notice.getId());
+				noticeObject.put("url", notice.getUrl());
+				list.add(noticeObject);
+			}
+		}
+		result.put("isend", false);
+		result.put("list", list);
+		rj.addSuccessMsg("成功",result);
+		
+		return rj;
 	}
 
 	/**
@@ -445,9 +555,9 @@ public class UserApiServiceImpl extends AbstractBaseServiceImpl<IUserInfoDao, Us
 					}
 				}
 				if(list.size() == count){
-					result.put("isend", "no");
+					result.put("isend", false);
 				}else{
-					result.put("isend", "yes");
+					result.put("isend", true);
 				}
 				result.put("list", list);
 				rj.addSuccessMsg("成功",result);
@@ -559,9 +669,57 @@ public class UserApiServiceImpl extends AbstractBaseServiceImpl<IUserInfoDao, Us
 
 	@Override
 	public ResultJson getSysConfig(ApiParams params) {
-		//TODO 获取小号等级列表信息
-		//TODO 投诉类型
-		//TODO 提示信息
+
+		ResultJson rj = new ResultJson();
+		rj.setError_code(ResultJson.ERROR_CODE_PARAMETERS);
+		rj.setMessage("参数错误");
+		if (oConvertUtils.isNotEmpty(params) 
+				&& oConvertUtils.isNotEmpty(params.getPlatform())){
+			JSONObject complainttype = new JSONObject();
+			JSONObject tbtypelist = new JSONObject();
+			//TODO 获取小号等级列表信息
+			complainttype.put("0", tbtypelist);
+			//TODO 投诉类型
+			JSONObject buyerlevel = new JSONObject();
+			//TODO 提示信息
+			JSONObject tips = new JSONObject();
+			tips.put("withdrawnotice", "周一至周六上午11:00前申请，100元起提现在提现预计12点到账，首次提现不收取手续费，当日第二次以后每次收取1元手续费");
+			JSONObject rs = new JSONObject();
+			rs.put("complainttype", complainttype);
+			rs.put("tips", tips);
+			rs.put("buyerlevel", buyerlevel);
+			rj.addSuccessMsg("成功",rs);
+		}
+		return rj;
+	}
+
+	@Override
+	public ResultJson bankcardList(ApiParams params) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ResultJson bankcardAdd(ApiParams params) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ResultJson bankcardDele(ApiParams params) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ResultJson withdrawFee(ApiParams params) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ResultJson incomeList(ApiParams params) {
+		// TODO Auto-generated method stub
 		return null;
 	}
 

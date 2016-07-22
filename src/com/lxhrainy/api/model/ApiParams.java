@@ -65,6 +65,41 @@ public class ApiParams {
 	private String username;
 	/**end 用户信息**/
 	
+	/**start提现**/
+	//到账时间0:正常到账(24小时);1:快速到账(2小时);
+	private String costtime;
+	//手续费
+	private String fee;
+	//提现金额
+	private String money;
+	//提现银行卡
+	private String bankid;
+	/**end提现**/
+	
+	public String getCosttime() {
+		return costtime;
+	}
+	public void setCosttime(String costtime) {
+		this.costtime = costtime;
+	}
+	public String getFee() {
+		return fee;
+	}
+	public void setFee(String fee) {
+		this.fee = fee;
+	}
+	public String getMoney() {
+		return money;
+	}
+	public void setMoney(String money) {
+		this.money = money;
+	}
+	public String getBankid() {
+		return bankid;
+	}
+	public void setBankid(String bankid) {
+		this.bankid = bankid;
+	}
 	public String getQQ() {
 		return QQ;
 	}
