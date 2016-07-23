@@ -10,10 +10,12 @@
 		T.receiptname AS "receiptname",
 		T.receiptphone AS "receiptphone",
 		T.createtime AS "createtime",
-		T.updatetime AS "updatetime"
+		T.updatetime AS "updatetime",
+		T.areaid AS "area.id"
 	</sql>
 	
 	<sql id="buyerAccountReceiptAddressJoins">
+		LEFT JOIN sys_area SA ON SA.id = T.areaid
 	</sql>
 	
 	<sql id="where">
@@ -34,6 +36,14 @@
 		FROM buyer_account_receipt_address T
 		<include refid="buyerAccountReceiptAddressJoins"/>
 		WHERE T.id = #{id}
+	</select>
+	
+	<select id="getByAccountid" resultType="AccountReceiptAddress">
+		SELECT 
+			<include refid="buyerAccountReceiptAddressColumns"/>
+		FROM buyer_account_receipt_address T
+		<include refid="buyerAccountReceiptAddressJoins"/>
+		WHERE T.accountid = #{accountid}
 	</select>
 	
 	<select id="findListByPage" resultType="AccountReceiptAddress">

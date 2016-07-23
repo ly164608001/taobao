@@ -21,5 +21,13 @@ public class AccountReceiptAddressService extends
 AbstractBaseServiceImpl<IAccountReceiptAddressDao, AccountReceiptAddress, Integer>
 implements IAccountReceiptAddressService  {
 
+	/**
+	 * 获取买号收获地址
+	 * @param accountid
+	 * @return
+	 */
+	public AccountReceiptAddress getByAccountid(int accountid){
+		return dao.getByAccountid(accountid);
+	}
 	
 }

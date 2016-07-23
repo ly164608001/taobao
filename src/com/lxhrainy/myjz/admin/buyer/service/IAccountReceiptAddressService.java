@@ -10,4 +10,10 @@ import com.lxhrainy.myjz.admin.buyer.model.AccountReceiptAddress;
  */
 public interface IAccountReceiptAddressService extends IBaseService<AccountReceiptAddress, Integer>{
 
+	/**
+	 * 获取买号收获地址
+	 * @param accountid
+	 * @return
+	 */
+	public AccountReceiptAddress getByAccountid(int accountid);
 }

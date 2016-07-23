@@ -1,19 +1,15 @@
 package com.lxhrainy.myjz.front.web.buyer.account;
 
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSONObject;
 import com.lxhrainy.core.common.controller.BaseController;
-import com.lxhrainy.core.sys.model.SysArea;
-import com.lxhrainy.core.sys.service.ISysAreaService;
+import com.lxhrainy.myjz.admin.buyer.model.AccountReceiptAddress;
+import com.lxhrainy.myjz.admin.buyer.service.IAccountReceiptAddressService;
 import com.lxhrainy.myjz.admin.buyer.service.IAccountService;
 
 /**
@@ -28,14 +24,17 @@ public class AccountAddressController extends BaseController {
 	@Autowired
 	private IAccountService accountService;
 	@Autowired
-	ISysAreaService sysAreaService;
+	private IAccountReceiptAddressService addressService;
 	
 	/**
 	 * 收获地址
 	 * @return
 	 */
 	@RequestMapping("/address")
-	public ModelAndView address(){
+	public ModelAndView address(int accountid){
+		AccountReceiptAddress model = addressService.getByAccountid(accountid);
+		
+		mv.addObject("model", model);
 		mv.setViewName("front/buyer/account/address");
 		return mv;
 	}
@@ -45,27 +44,11 @@ public class AccountAddressController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping("/addressSave")
-	public JSONObject addressSave(){
+	public JSONObject addressSave(AccountReceiptAddress model){
 		JSONObject rj = new JSONObject();
-		return rj;
-	}
-	
-	/**
-	 * 获取区域直接下级菜单列表
-	 * @param pid
-	 * @return
-	 */
-	@RequestMapping("/getAreasByPid")
-	@ResponseBody
-	public JSONObject getChilds(Integer pid) {
-		JSONObject rj = new JSONObject();
-		List<SysArea> list = new ArrayList<SysArea>();
-		if(pid == null){
-			pid = 100000; //中国id
+		if(model == null ){
+			
 		}
-		list = sysAreaService.getListByPid(pid);
-		
-		rj.put("list", list);
 		return rj;
 	}
 	

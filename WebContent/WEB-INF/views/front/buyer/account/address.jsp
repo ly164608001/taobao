@@ -21,10 +21,11 @@
 						<span class="select-box">
 							<span>
 								<select onchange="_onchange(this);" class="xytSelect"
-										link="${basePath}front/buyer/account/getAreasByPid.htm" pid="100000"
+										link="${basePath}common/area/getAreasByPid.htm" pid="100000"
+										uplink="${basePath}common/area/getSiblingsById.htm" initvalue="${model.area.id}"
 										valuename="id" labelname="areaname">
 								</select>
-								<input type="hidden" value="" name="region.id" id="menuid"/>
+								<input type="hidden" value="${model.area.id}" name="area.id" />
 							</span>
 						</span>
 					</div>
@@ -35,7 +36,8 @@
 						<span class="c-red">*</span>收货人：
 					</label>
 					<div class="formControls col-xs-4 col-sm-3">
-						<input type="text" class="input-text" placeholder="必须与淘宝上收货人姓名相同"></div>
+						<input type="text" class="input-text" name="receiptname"
+								placeholder="必须与淘宝上收货人姓名相同" value="${model.receiptname}"></div>
 
 				</div>
 			<div class="row cl">
@@ -44,14 +46,15 @@
 					收货人手机号码：
 				</label>
 				<div class="formControls col-xs-4 col-sm-3">
-					<input type="text" class="input-text" placeholder="必须和淘宝上登记的收货人信息一致"></div>
+					<input type="text" class="input-text" name="receiptphone"
+							placeholder="必须和淘宝上登记的收货人信息一致" value="${model.receiptphone}"></div>
 
 			</div>
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>交易密码：</label>
 			<div class="formControls col-xs-4 col-sm-3">
-				<input type="text" class="input-text" placeholder="请输入交易密码"></div>
-
+				<input type="text" name="paypassword" class="input-text" placeholder="请输入交易密码">
+			</div>
 		</div>
 
 		<div class="row cl">
@@ -59,7 +62,7 @@
 				<span class="c-red">*</span>详细地址：
 			</label>
 			<div class="formControls col-xs-4 col-sm-3">
-				<textarea>必须要与淘宝上的地址一致</textarea>
+				<textarea name="address">${model.address}</textarea>
 
 			</div>
 
