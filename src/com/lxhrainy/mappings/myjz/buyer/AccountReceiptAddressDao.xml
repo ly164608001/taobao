@@ -4,7 +4,7 @@
     
 	<sql id="buyerAccountReceiptAddressColumns">
 		T.id AS "id",
-		T.accountid AS "accountid",
+		T.accountid AS "account.id",
 		T.region AS "region",
 		T.address AS "address",
 		T.receiptname AS "receiptname",
@@ -77,7 +77,7 @@
 			areaid
 		) VALUES (
 			#{id},
-			#{accountid},
+			#{account.id},
 			#{region},
 			#{address},
 			#{receiptname},
@@ -90,7 +90,7 @@
 	
 	<update id="update">
 		UPDATE buyer_account_receipt_address SET 	
-			accountid = #{accountid},
+			accountid = #{account.id},
 			region = #{region},
 			address = #{address},
 			receiptname = #{receiptname},

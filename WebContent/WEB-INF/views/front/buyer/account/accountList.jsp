@@ -188,7 +188,7 @@
 	// vpn信息
 	function vpn(accountid){
 		var url = '${basePath}front/buyer/account/vpn.htm?accountid='+accountid;
-		layerPromptIframe(url, 'vpn设置', oprSuccess);
+		layerPromptIframe(url, 'vpn设置', oprSuccess,986);
 	}
 	
 	// 收获地址信息

@@ -68,7 +68,7 @@ function layerPromptIframe(iframeUrl,title,succssFn,width,height){
         btn : ['确定','取消'],
         yes : function(index, layero){
         	//获取弹出框DOM的body元素
-        	var body = top.layer.getChildFrame('body', index);
+        	var body = layer.getChildFrame('body', index);
         	var url = body.find('#submitForm').attr('action');
         	//验证表单(需要子页面定义个checkForm方法，处理验证失败的消息提示并返回验证结果)
         	var iframeWin = window[layero.find('iframe')[0]['name']]; 

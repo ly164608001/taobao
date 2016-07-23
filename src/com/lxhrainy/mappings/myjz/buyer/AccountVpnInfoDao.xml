@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lxhrainy.myjz.admin.buyer.dao.IAccountVpnInfoDao">
+    
+	<sql id="buyerAccountVpnInfoColumns">
+		T.id AS "id",
+		T.password AS "password",
+		T.alipayaccount AS "alipayaccount",
+		T.paypassword AS "paypassword",
+		T.phone AS "phone",
+		T.name AS "name",
+		T.line AS "line",
+		T.loginip AS "loginip",
+		T.region AS "region",
+		T.computername AS "computername",
+		T.mcs AS "mcs",
+		T.address AS "address",
+		T.memo AS "memo",
+		T.createtime AS "createtime",
+		T.updatetime AS "updatetime",
+		T.areaid AS "area.id",
+		
+		T.accountid AS "account.id",
+		A.accountno AS "account.accountno"
+	</sql>
+	
+	<sql id="buyerAccountVpnInfoJoins">
+		LEFT JOIN buyer_account_info A ON A.id = T.accountid
+	</sql>
+    
+    <sql id="where">
+		<if test="condition!=null">
+			<where>
+				<if test="condition.model!=null">
+				</if>
+			</where>
+		</if>
+	</sql>
+	
+	<select id="getByAccountid" resultType="AccountVpnInfo">
+		SELECT 
+			<include refid="buyerAccountVpnInfoColumns"/>
+		FROM buyer_account_vpn_info T
+		<include refid="buyerAccountVpnInfoJoins"/>
+		WHERE T.accountid = #{accountid}
+	</select>
+	
+	<select id="getById" resultType="AccountVpnInfo">
+		SELECT 
+			<include refid="buyerAccountVpnInfoColumns"/>
+		FROM buyer_account_vpn_info T
+		<include refid="buyerAccountVpnInfoJoins"/>
+		WHERE T.id = #{id}
+	</select>
+	
+	<select id="findListByPage" resultType="AccountVpnInfo">
+		SELECT 
+			<include refid="buyerAccountVpnInfoColumns"/>
+		FROM buyer_account_vpn_info T
+		<include refid="buyerAccountVpnInfoJoins"/>
+			<include refid="where"/>
+		order by T.ID
+			<include refid="Sql.pager" />
+	</select>
+	
+	<select id="findAllList" resultType="AccountVpnInfo">
+		SELECT 
+			<include refid="buyerAccountVpnInfoColumns"/>
+		FROM buyer_account_vpn_info T
+		<include refid="buyerAccountVpnInfoJoins"/>
+		<include refid="where"/>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO buyer_account_vpn_info(
+			id,
+			accountid,
+			password,
+			alipayaccount,
+			paypassword,
+			phone,
+			name,
+			line,
+			loginip,
+			region,
+			computername,
+			mcs,
+			address,
+			memo,
+			createtime,
+			updatetime
+		) VALUES (
+			#{id},
+			#{account.id},
+			#{password},
+			#{alipayaccount},
+			#{paypassword},
+			#{phone},
+			#{name},
+			#{line},
+			#{loginip},
+			#{region},
+			#{computername},
+			#{mcs},
+			#{address},
+			#{memo},
+			#{createtime},
+			#{updatetime}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE buyer_account_vpn_info SET 	
+			accountid = #{account.id},
+			areaid = #{area.id},
+			password = #{password},
+			alipayaccount = #{alipayaccount},
+			paypassword = #{paypassword},
+			phone = #{phone},
+			name = #{name},
+			line = #{line},
+			loginip = #{loginip},
+			region = #{region},
+			computername = #{computername},
+			mcs = #{mcs},
+			address = #{address},
+			memo = #{memo},
+			createtime = #{createtime},
+			updatetime = #{updatetime}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		DELETE FROM buyer_account_vpn_info
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

@@ -11,7 +11,7 @@
 	<section>
 		<div class="addCar">
 			<form action="${basePath}front/buyer/account/addressSave.htm" method="post" class="form form-horizontal" id="submitForm">
-
+				<input type="hidden" name="id" value="${model.id}"/>
 				<div class="row cl">
 					<label class="form-label col-xs-4 col-sm-3">
 						<span class="c-red">*</span>
@@ -53,7 +53,7 @@
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>交易密码：</label>
 			<div class="formControls col-xs-4 col-sm-3">
-				<input type="text" name="paypassword" class="input-text" placeholder="请输入交易密码">
+				<input type="password" name="paypassword" class="input-text" placeholder="请输入交易密码">
 			</div>
 		</div>
 
@@ -69,6 +69,18 @@
 		</form>
 	</div>
 </section>
+
+<script type="text/javascript">
+		function checkForm(){
+			var validResult = validateForm('submitForm');
+			if(!validResult.success){
+				layer.tips(validResult.msg, validResult.validElem);
+				return false;
+			}else{
+				return true;
+			} 
+		}
+	</script>
 
 </body>
 </html>

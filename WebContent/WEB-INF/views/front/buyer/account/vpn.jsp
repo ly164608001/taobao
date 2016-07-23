@@ -10,16 +10,14 @@
 	<section>
 		
 		<div class="addCar pob-addBuySddress pobMinitaobao">
-			<form action="" method="post" class="form form-horizontal" id="demoform-1">
+			<form action="${basePath}front/buyer/account/vpnSave.htm" method="post" class="form form-horizontal" id="submitForm">
 				<div class="row cl">
 					<label class="form-label col-xs-4 col-sm-3">
-						<span class="c-red">*</span>
-						淘宝号/旺旺号：
+						<span class="c-red">*</span>淘宝号/旺旺号：
 					</label>
 					<div class="formControls col-xs-4 col-sm-3">
-						<span class="red">于庭漫步</span>
-						</div>
-
+						<span class="red">${model.account.accountno}</span>
+					</div>
 				</div>
 				<div class="row cl">
 					<label class="form-label col-xs-4 col-sm-3">

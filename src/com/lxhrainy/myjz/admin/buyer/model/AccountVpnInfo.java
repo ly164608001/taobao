@@ -1,8 +1,9 @@
 package com.lxhrainy.myjz.admin.buyer.model;
 
-
 import java.util.Date;
+
 import com.lxhrainy.core.common.model.BaseModel;
+import com.lxhrainy.core.sys.model.SysArea;
 
 /**
  * 小号vpn信息Entity
@@ -22,12 +23,21 @@ public class AccountVpnInfo extends BaseModel {
 	private String line; // VPN接点/线路
 	private String loginip; // 旺旺号登录Ip
 	private String region; // 旺旺号登录省市区
+	private SysArea area; // 旺旺号登录省市区id
 	private String computername; // 旺旺号/VPN所在电脑名称
 	private String mcs; // 旺旺号/VPN所在电脑MAC
 	private String address; // 旺旺号登录详细地址
 	private String memo; // 备注
 	private Date createtime; // 创建时间
 	private Date updatetime; // 修改时间
+
+	public SysArea getArea() {
+		return area;
+	}
+
+	public void setArea(SysArea area) {
+		this.area = area;
+	}
 
 	public AccountInfo getAccount() {
 		return account;

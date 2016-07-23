@@ -1,14 +1,22 @@
 package com.lxhrainy.myjz.admin.buyer.service.impl;
 
 
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.lxhrainy.core.common.service.AbstractBaseServiceImpl;
 import com.lxhrainy.myjz.admin.buyer.dao.IAccountInfoDao;
+import com.lxhrainy.myjz.admin.buyer.model.AccountBasicInfo;
 import com.lxhrainy.myjz.admin.buyer.model.AccountInfo;
+import com.lxhrainy.myjz.admin.buyer.model.AccountReceiptAddress;
+import com.lxhrainy.myjz.admin.buyer.model.AccountVpnInfo;
+import com.lxhrainy.myjz.admin.buyer.service.IAccountBasicInfoService;
+import com.lxhrainy.myjz.admin.buyer.service.IAccountReceiptAddressService;
 import com.lxhrainy.myjz.admin.buyer.service.IAccountService;
+import com.lxhrainy.myjz.admin.buyer.service.IAccountVpnInfoService;
 import com.lxhrainy.myjz.common.constant.Global;
 
 
@@ -25,6 +33,40 @@ implements IAccountService  {
 
 	@Autowired
 	IAccountInfoDao dao;
+	@Autowired
+	IAccountBasicInfoService basicInfoService;
+	@Autowired
+	IAccountReceiptAddressService addressService;
+	@Autowired
+	IAccountVpnInfoService vpnService;
+	
+	@Override
+	@Transactional(readOnly = false)
+	public int save(AccountInfo account) {
+		Date currentDate = new Date();
+		
+		//新增收获地址
+		AccountReceiptAddress address = new AccountReceiptAddress();
+		address.setAccount(account);
+		address.setCreatetime(currentDate);
+		addressService.save(address);
+		
+		//新增vpn
+		AccountVpnInfo vpn = new AccountVpnInfo();
+		vpn.setCreatetime(currentDate);
+		vpn.setAccount(account);
+		vpnService.save(vpn);
+		
+		//新增基础信息
+		AccountBasicInfo basicInfo = new AccountBasicInfo();
+		basicInfo.setAccount(account);
+		basicInfoService.save(basicInfo);
+		
+		//新增小号信息
+		int result = super.save(account);
+		
+		return result;
+	}
 	
 	/***
 	 * 更新顺序
@@ -72,6 +114,5 @@ implements IAccountService  {
 		dao.updateStatus(id,updateSataus);
 		return 1;
 	}
-	
-	
+
 }

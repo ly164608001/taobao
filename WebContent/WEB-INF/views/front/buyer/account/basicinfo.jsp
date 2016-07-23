@@ -43,7 +43,7 @@
 					<div class="formControls col-xs-4 col-sm-3">
 						<span>
 							<input class="Wdate write-time input-text radius size-M"  type="text" 
-									name="birthday" value="${model.birthday}"
+									name="birthday" value="<f:formatDate value="${model.birthday}" pattern="yyyy-MM-dd"/>"
 								 onFocus="WdatePicker({dateFmt:&quot;yyyy-MM-dd&quot;,isShowClear:false,readOnly:true});"/>
 						</span>
 					</div>
@@ -63,5 +63,16 @@
 		</div>
 	</section>
 
+	<script type="text/javascript">
+		function checkForm(){
+			var validResult = validateForm('submitForm');
+			if(!validResult.success){
+				layer.tips(validResult.msg, validResult.validElem);
+				return false;
+			}else{
+				return true;
+			} 
+		}
+	</script>
 </body>
 </html>
