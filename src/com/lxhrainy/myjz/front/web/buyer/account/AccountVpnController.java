@@ -73,9 +73,6 @@ public class AccountVpnController extends BaseController {
 			oldModel.setArea(model.getArea());
 			oldModel.setCreatetime(model.getCreatetime());
 			vpnService.update(oldModel);
-		}else{
-			model.setCreatetime(new Date());
-			vpnService.save(model);
 		}
 		
 		rj.put("success", true);

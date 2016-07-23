@@ -72,7 +72,7 @@ public class AccountAddressController extends BaseController {
 			return rj;
 		}
 		
-		//更新或新增
+		//更新
 		Integer id = model.getId();
 		if(id != null){
 			AccountReceiptAddress oldModel = addressService.getById(model.getId());
@@ -83,9 +83,6 @@ public class AccountAddressController extends BaseController {
 			oldModel.setReceiptname(model.getReceiptname());
 			oldModel.setReceiptphone(model.getReceiptphone());
 			addressService.update(oldModel);
-		}else{
-			model.setCreatetime(new Date());
-			addressService.save(model);
 		}
 		
 		rj.put("success", true);

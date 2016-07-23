@@ -11,6 +11,7 @@
 		
 		<div class="addCar pob-addBuySddress pobMinitaobao">
 			<form action="${basePath}front/buyer/account/vpnSave.htm" method="post" class="form form-horizontal" id="submitForm">
+				<input type="hidden" name="id" value="${model.id}"/>
 				<div class="row cl">
 					<label class="form-label col-xs-4 col-sm-3">
 						<span class="c-red">*</span>淘宝号/旺旺号：
