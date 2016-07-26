@@ -50,12 +50,16 @@ function layerConfirm(url,timMsg,succssFn){
  * @Param succssFn 操作成功回调的方法名(无参方法名)
  * 				   在调用的页面上自定义succssFn的方法
  */
-function layerPromptIframe(iframeUrl,title,succssFn,width,height){
+function layerPromptIframe(iframeUrl,title,succssFn,isScoll,width,height){
+	var showScoll = 'no';
 	if(width == null || width == undefined){
 		width = 600;
 	}
 	if(height == null || height == undefined){
 		height = 400;
+	}
+	if(isScoll != null && isScoll != undefined ){
+		showScoll = isScoll;
 	}
 	
 	var indexIframe = layer.open({
@@ -63,7 +67,7 @@ function layerPromptIframe(iframeUrl,title,succssFn,width,height){
         area : [ width + 'px', height + 'px'],
         closeBtn : 1,
         shadeClose : true,
-        content : [ iframeUrl,'no'],
+        content : [ iframeUrl,showScoll],
         title : title,
         btn : ['确定','取消'],
         yes : function(index, layero){

@@ -47,32 +47,30 @@ public class AccountVpnController extends BaseController {
 	 */
 	@RequestMapping("/vpnSave")
 	@ResponseBody
-	public JSONObject addressSave(AccountVpnInfo model,String paypassword){
+	public JSONObject addressSave(AccountVpnInfo model,String platPaypassword){
 		JSONObject rj = new JSONObject();
 		rj.put("success", false);
 		
-		if(StringUtils.isEmpty(paypassword) || model == null || model.getArea() == null  ){
+		if(StringUtils.isEmpty(platPaypassword) || model == null || model.getArea() == null  ){
 			rj.put("msg", "信息填写不完整");
 			return rj;
 		}
 		
 		//验证交易密码
 		int userid = this.getCurrentUser().getId();
-		boolean isValidPsw = moneyService.validatePaypassword(userid, paypassword);
+		boolean isValidPsw = moneyService.validatePaypassword(userid, platPaypassword);
 		if(!isValidPsw){
 			rj.put("msg", "交易密码不正确");
 			return rj;
 		}
 		
-		//更新或新增
+		//更新
 		Integer id = model.getId();
 		if(id != null){
 			AccountVpnInfo oldModel = vpnService.getById(model.getId());
-			oldModel.setUpdatetime(new Date());
-			oldModel.setAddress(model.getAddress());
-			oldModel.setArea(model.getArea());
-			oldModel.setCreatetime(model.getCreatetime());
-			vpnService.update(oldModel);
+			model.setUpdatetime(new Date());
+			model.setCreatetime(oldModel.getCreatetime());
+			vpnService.update(model);
 		}
 		
 		rj.put("success", true);
