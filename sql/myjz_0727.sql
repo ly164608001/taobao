@@ -10,10 +10,31 @@ Target Server Type    : MYSQL
 Target Server Version : 50096
 File Encoding         : 65001
 
-Date: 2016-07-23 00:50:36
+Date: 2016-07-27 00:49:54
 */
 
 SET FOREIGN_KEY_CHECKS=0;
+
+-- ----------------------------
+-- Table structure for `advert_info`
+-- ----------------------------
+DROP TABLE IF EXISTS `advert_info`;
+CREATE TABLE `advert_info` (
+  `id` int(11) NOT NULL auto_increment,
+  `title` varchar(100) default NULL COMMENT '广告标题',
+  `content` varchar(255) default NULL COMMENT '广告内容描述',
+  `time` datetime default NULL COMMENT '创建时间',
+  `url` varchar(255) default NULL COMMENT '跳转url',
+  `img` varchar(255) default NULL COMMENT '背景图片',
+  `status` int(1) default NULL COMMENT '状态(0:未发布；1：已发布)',
+  `createuser` int(11) default NULL COMMENT '创建人',
+  `deleted` int(1) default NULL COMMENT '删除标识',
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of advert_info
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for `basic_level_info`
@@ -70,7 +91,7 @@ CREATE TABLE `buyer_account_basic_info` (
 -- ----------------------------
 -- Records of buyer_account_basic_info
 -- ----------------------------
-INSERT INTO `buyer_account_basic_info` VALUES ('1', '2', '2', '2016-06-30');
+INSERT INTO `buyer_account_basic_info` VALUES ('1', '1', '1', '2016-06-15');
 
 -- ----------------------------
 -- Table structure for `buyer_account_info`
@@ -92,13 +113,12 @@ CREATE TABLE `buyer_account_info` (
   `audituser` int(11) default NULL COMMENT '审核人',
   `audittime` datetime default NULL COMMENT '审核时间',
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='淘宝小号信息表';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='淘宝小号信息表';
 
 -- ----------------------------
 -- Records of buyer_account_info
 -- ----------------------------
-INSERT INTO `buyer_account_info` VALUES ('1', '雨亭漫步', '1', '5', '1', null, '10', '0', '0', '233', '2016-07-09 13:42:33', '3', null, null);
-INSERT INTO `buyer_account_info` VALUES ('2', '孤云道人', '1', '255', '7', null, '520', '0', '0', '133', '2016-07-09 16:07:57', '3', null, null);
+INSERT INTO `buyer_account_info` VALUES ('1', '孤云道人', '1', '255', '7', null, '520', '0', '0', '133', '2016-07-09 16:07:57', '3', null, null);
 
 -- ----------------------------
 -- Table structure for `buyer_account_receipt_address`
@@ -115,11 +135,12 @@ CREATE TABLE `buyer_account_receipt_address` (
   `updatetime` datetime default NULL COMMENT '修改时间',
   `areaid` int(11) default NULL COMMENT '省市区所选最低层次id',
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='小号收货地址';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='小号收货地址';
 
 -- ----------------------------
 -- Records of buyer_account_receipt_address
 -- ----------------------------
+INSERT INTO `buyer_account_receipt_address` VALUES ('1', '1', null, '福州闽侯2', '薛云腾2', '18067356435', null, '2016-07-23 11:01:20', '110102');
 
 -- ----------------------------
 -- Table structure for `buyer_account_vpn_info`
@@ -142,12 +163,14 @@ CREATE TABLE `buyer_account_vpn_info` (
   `memo` varchar(255) default NULL COMMENT '备注',
   `createtime` datetime default NULL COMMENT '创建时间',
   `updatetime` datetime default NULL COMMENT '修改时间',
+  `areaid` int(11) default NULL COMMENT '旺旺号登录省市区',
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='小号VPN信息';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='小号VPN信息';
 
 -- ----------------------------
 -- Records of buyer_account_vpn_info
 -- ----------------------------
+INSERT INTO `buyer_account_vpn_info` VALUES ('1', '1', '1111', '111', '111', '11', '232', '3232', '32', null, '发放', '2132', '1232', '发达发达', '2016-07-18 21:38:59', '2016-07-26 21:41:16', '220000');
 
 -- ----------------------------
 -- Table structure for `goods_type`
