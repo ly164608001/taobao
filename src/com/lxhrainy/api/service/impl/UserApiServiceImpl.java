@@ -34,6 +34,13 @@ import com.lxhrainy.core.utils.DateUtil;
 import com.lxhrainy.core.utils.PasswordUtil;
 import com.lxhrainy.core.utils.StringUtil;
 import com.lxhrainy.core.utils.oConvertUtils;
+import com.lxhrainy.myjz.admin.buyer.model.LevelInfo;
+import com.lxhrainy.myjz.admin.buyer.oe.LevelVO;
+import com.lxhrainy.myjz.admin.buyer.service.IAccountService;
+import com.lxhrainy.myjz.admin.buyer.service.ILevelService;
+import com.lxhrainy.myjz.admin.task.model.ComplainType;
+import com.lxhrainy.myjz.admin.task.model.TaskStatistics;
+import com.lxhrainy.myjz.admin.task.model.Tips;
 import com.lxhrainy.myjz.admin.user.model.UserConfig;
 import com.lxhrainy.myjz.admin.user.model.UserMoney;
 import com.lxhrainy.myjz.admin.user.service.IUserConfigService;
@@ -56,6 +63,10 @@ public class UserApiServiceImpl extends AbstractBaseServiceImpl<IUserInfoDao, Us
 	private IUserInfoService userInfoService;
 	@Autowired
 	private IUserMoneyService userMoneyService;
+	@Autowired
+	private ILevelService levelService;
+	@Autowired
+	private IAccountService accountService;
 	@Override
 	public ResultJson adlist(ApiParams params) {
 		ResultJson rj = new ResultJson();
@@ -226,10 +237,54 @@ public class UserApiServiceImpl extends AbstractBaseServiceImpl<IUserInfoDao, Us
 		}
 		return rj;
 	}
+	/**
+	 * {
+	    "result":{
+	        "message":0,用户未读消息条数
+	        "task":[
+	            {
+	                "number":0,任务条数
+	                "targetsubtype":0,任务平台类型	0:手机单;1:电脑单;
+	                "targetplatfrom":0,任务目标副类型	0:常规单;1:流量单;
+	                "targettype":0任务目标类型，targettype可与targetsubtype、targetplatfrom和用，允许组合	0:淘宝;1:京东;
+	            }
+	        ]
+	    },
+	    "message":"",
+	    "code":0,
+	    "success":false
+	}
+	 */
 	@Override
 	public ResultJson getNumbers(ApiParams params) {
-		// TODO Auto-generated method stub
-		return null;
+		ResultJson rj = new ResultJson();
+		rj.setError_code(ResultJson.ERROR_CODE_PARAMETERS);
+		rj.setMessage("参数错误");
+		if (oConvertUtils.isNotEmpty(params) 
+				&& oConvertUtils.isNotEmpty(params.getPlatform())){
+			UserInfo loginUser = ApiCacheUtil.getLoginUser();
+			if (oConvertUtils.isNotEmpty(loginUser)) {
+				JSONObject rs = new JSONObject();
+				//用户未读消息条数
+				SysNoticeVO vo = new SysNoticeVO();
+				SysNotice model = new SysNotice();
+				model.setType(ApiConstant.MSG_USER);
+				model.setUser(loginUser);
+				model.setStatus(ApiConstant.MSG_UNREAD);
+				int message = sysNoticeService.getCountByCondition(vo);
+				rs.put("message", message);
+				JSONObject task = new JSONObject();
+				//TODO 获取任务数
+				TaskStatistics taskStatistics = new TaskStatistics();
+				task.put("number", taskStatistics.getNumber());
+				task.put("targetsubtype", taskStatistics.getTargetsubtype());
+				task.put("targetplatfrom", taskStatistics.getTargetplatfrom());
+				task.put("targettype", taskStatistics.getTargettype());
+				rs.put("task", task);
+				rj.addSuccessMsg("成功",rs);
+			}
+		}
+		return rj;
 	}
 	@Override
 	public ResultJson getSysConfig(ApiParams params) {
@@ -239,15 +294,42 @@ public class UserApiServiceImpl extends AbstractBaseServiceImpl<IUserInfoDao, Us
 		rj.setMessage("参数错误");
 		if (oConvertUtils.isNotEmpty(params) 
 				&& oConvertUtils.isNotEmpty(params.getPlatform())){
-			JSONObject complainttype = new JSONObject();
-			JSONObject tbtypelist = new JSONObject();
-			//TODO 获取小号等级列表信息
-			complainttype.put("0", tbtypelist);
-			//TODO 投诉类型
 			JSONObject buyerlevel = new JSONObject();
-			//TODO 提示信息
+			List<JSONObject> tbtypelist = new ArrayList<JSONObject>();
+			List<JSONObject> jdtypelist = new ArrayList<JSONObject>();
+			//获取小号等级列表信息
+			LevelVO levelVo = new LevelVO();
+			List<LevelInfo> levelList = levelService.getAllList(levelVo);
+			for(LevelInfo levelInfo : levelList){
+				JSONObject level = new JSONObject();
+				if(levelInfo.getType().intValue() == 1){
+					level.put("id", levelInfo.getId());
+					level.put("name", levelInfo.getName());
+					tbtypelist.add(level);
+				}else{
+					level.put("id", levelInfo.getId());
+					level.put("name", levelInfo.getName());
+					jdtypelist.add(level);
+				}
+			}
+			buyerlevel.put("0", tbtypelist);
+			buyerlevel.put("1", jdtypelist);
+			//TODO 获取投诉类型
+			List<ComplainType> complainTypeList = new ArrayList<>();
+			List<JSONObject> complainttype = new ArrayList<>();
+			for(ComplainType complainType : complainTypeList){
+				JSONObject complain = new JSONObject();
+				complain.put("id", complainType.getId());
+				complain.put("name", complainType.getName());
+				complainttype.add(complain);
+			}
+			//TODO 获取提示信息
 			JSONObject tips = new JSONObject();
-			tips.put("withdrawnotice", "周一至周六上午11:00前申请，100元起提现在提现预计12点到账，首次提现不收取手续费，当日第二次以后每次收取1元手续费");
+			List<Tips> tipList = new ArrayList<>();
+			for(Tips tip : tipList){
+				//tips.put("withdrawnotice", "周一至周六上午11:00前申请，100元起提现在提现预计12点到账，首次提现不收取手续费，当日第二次以后每次收取1元手续费");
+				tips.put(tip.getKeyword(), tip.getContent());
+			}
 			JSONObject rs = new JSONObject();
 			rs.put("complainttype", complainttype);
 			rs.put("tips", tips);
@@ -290,7 +372,7 @@ public class UserApiServiceImpl extends AbstractBaseServiceImpl<IUserInfoDao, Us
 	}
 	@Override
 	public ResultJson buyerAccountList(ApiParams params) {
-		// TODO Auto-generated method stub
+		// TODO accountService
 		return null;
 	}
 	@Override
