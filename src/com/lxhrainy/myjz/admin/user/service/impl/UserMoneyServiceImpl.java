@@ -33,12 +33,29 @@ implements IUserMoneyService {
 	}
 
 	@Override
+	@Transactional(readOnly = false)
 	public boolean updateStatusByUserId(UserMoney model) {
 		int result = userMoneyDao.updateStatusByUserId(model);
 		if(result != -1){
 			return true;
 		}
 		return false;
+	}
+	
+	/**
+	 * @Description: 更新交易密码
+	 * @param userid
+	 * @param newPassword
+	 * @return 1 成功 -1密码错误
+	 */
+	@Transactional(readOnly = false)
+	public int updatePaypassword(int userid ,String oldPassword , String newPassword) {
+		if(!this.validatePaypassword(userid,oldPassword)){
+			return -1;
+		}
+		
+		userMoneyDao.updatePaypassword(userid,encrptPassword(newPassword));
+		return 1;
 	}
 	
 	/**

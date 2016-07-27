@@ -15,6 +15,7 @@
 		T.deleted AS "deleted",
 		T.memo AS "memo",
 		T.updatetime AS "updatetime",
+		T.password AS "password",
 		T.creditscore AS "creditscore"
     </sql>
     <sql id="roleColumns">
@@ -24,7 +25,6 @@
 	<sql id="detailInfoColumns">
 		D.id AS "detailInfo.id",
 		D.userid AS "detailInfo.userid",
-		D.zipcode AS "detailInfo.zipcode",		
 		D.sex AS "detailInfo.sex",
 		D.birthday AS "detailInfo.birthday",
 		D.bloodtype AS "detailInfo.bloodtype",
@@ -113,7 +113,7 @@
 			<include refid="userInfoColumns"/>,
 			<include refid="detailInfoColumns"/>
 		FROM user_info T
-		<include refid="userInfoJoins"/>
+		LEFT JOIN user_detail_info D ON D.userid = T.id
 		WHERE T.id = #{id}
 	</select>
 	

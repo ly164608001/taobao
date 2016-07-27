@@ -28,7 +28,7 @@
 							<label class="form-label col-xs-4 col-sm-3">用户名：</label>
 							<div class="formControls col-xs-2 col-sm-3">
 								<span class="text">
-									<span class="orange">布衣柜商家</span>
+									<span class="orange">${model.username}</span>
 								</span>
 							</div>
 						</div>
@@ -36,7 +36,7 @@
 							<label class="form-label col-xs-4 col-sm-3">姓名：</label>
 							<div class="formControls col-xs-2 col-sm-3">
 								<span class="text">
-									<span class="orange">黄建群</span>
+									<span class="orange">${model.detailInfo.realname}</span>
 								</span>
 							</div>
 						</div>
@@ -44,7 +44,7 @@
 							<label class="form-label col-xs-4 col-sm-3">手机：</label>
 							<div class="formControls col-xs-2 col-sm-3">
 								<span class="text">
-									<span class="orange">186647686456</span>
+									<span class="orange">${model.phone}</span>
 								</span>
 							</div>
 						</div>
@@ -52,15 +52,15 @@
 							<label class="form-label col-xs-4 col-sm-3">性别：</label>
 							<div class="formControls col-xs-6 col-sm-6">
 								<div class="radio-box">
-									<input type="radio" id="radio-1" name="demo-radio1">
+									<input type="radio" name="detailInfo.sex">
 									<label for="radio-1">男</label>
 								</div>
 								<div class="radio-box">
-									<input type="radio" id="radio-2" name="demo-radio1">
+									<input type="radio" name="detailInfo.sex">
 									<label for="radio-2">女</label>
 								</div>
 								<div class="radio-box">
-									<input type="radio" id="radio-3" name="demo-radio1">
+									<input type="radio" name="detailInfo.sex">
 									<label for="radio-3">保密</label>
 								</div>
 							</div>
@@ -68,14 +68,14 @@
 						<div class="row cl">
 							<label class="form-label col-xs-4 col-sm-3">出生日期：</label>
 							<div class="formControls col-xs-2 col-sm-3">
-								<input class="Wdate write-time input-text radius size-M"  type="text" 
-								 	onFocus="WdatePicker({dateFmt:&quot;yyyy-MM-dd HH:mm:ss&quot;,isShowClear:false,readOnly:true});"/>
+								<input class="Wdate write-time input-text radius size-M"  type="text" value="${model.detailInfo.birthday}" 
+								 	onFocus="WdatePicker({dateFmt:&quot;yyyy-MM-dd&quot;,isShowClear:false,readOnly:true});"/>
 							</div>
 						</div>
 						<div class="row cl">
 							<label class="form-label col-xs-4 col-sm-3">QQ：</label>
 							<div class="formControls col-xs-2 col-sm-3">
-								<input type="text" class="input-text" autocomplete="off" placeholder="布衣柜商家" value="布衣柜商家"></div>
+								<input type="text" class="input-text" value="${model.detailInfo.qq}"></div>
 							<div class="formControls col-xs-2 col-sm-3">
 								<span class="onShow">请输入联系QQ</span>
 							</div>

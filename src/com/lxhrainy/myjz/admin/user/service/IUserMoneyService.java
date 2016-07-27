@@ -38,4 +38,12 @@ public interface IUserMoneyService extends IBaseService<UserMoney, Integer>{
 	 */
 	boolean validatePaypassword(int userid, String paypassword);
 
+	/**
+	 * @Description: 更新交易密码
+	 * @param userid
+	 * @param newPassword
+	 * @return 1 成功 -1密码错误
+	 */
+	int updatePaypassword(int userid, String oldPassword, String newPassword);
+
 }

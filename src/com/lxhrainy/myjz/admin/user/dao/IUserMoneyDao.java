@@ -15,8 +15,25 @@ import com.lxhrainy.myjz.admin.user.model.UserMoney;
 @MyBatisDao
 public interface IUserMoneyDao extends IBaseDao<UserMoney> {
 
+	/**
+	 * 根据用户获取账户
+	 * @param userid
+	 * @return
+	 */
 	UserMoney getByUserId(@Param("userid")Integer userid);
 
+	/**
+	 * 更新状态
+	 * @param model
+	 * @return
+	 */
 	int updateStatusByUserId(@Param("model")UserMoney model);
+
+	/**
+	 * 更新交易密码
+	 * @param userid
+	 * @param newPassword 加密后的新密码
+	 */
+	void updatePaypassword(@Param("userid")int userid, @Param("newPassword")String newPassword);
 	
 }

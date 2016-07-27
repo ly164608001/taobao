@@ -86,6 +86,7 @@ implements IUserInfoService {
 	 * @param password
 	 * @return
 	 */
+	@Transactional(readOnly = false)
 	public int modifyPassword(int userid, String oldpassword, String password) {
 		UserInfo user = this.getById(userid);
 		if(!encrptPassword(oldpassword).equals(user.getPassword())){

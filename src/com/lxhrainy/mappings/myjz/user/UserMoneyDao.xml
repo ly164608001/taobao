@@ -110,6 +110,12 @@
 		WHERE id = #{id}
 	</update>
 	
+	<update id="updatePaypassword">
+		update user_money set 
+			paypassword = #{newPassword}
+ 		WHERE userid = #{userid}
+	</update>
+	
 	<select id="getByUserId" resultType="UserMoney">
 		SELECT 
 			<include refid="userMoneyColumns"/>
@@ -117,4 +123,5 @@
 			<include refid="userMoneyJoins"/>
 		WHERE T.userid = #{userid}
 	</select>
+	
 </mapper>
