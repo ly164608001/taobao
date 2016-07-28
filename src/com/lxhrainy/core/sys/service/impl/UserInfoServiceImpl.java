@@ -123,7 +123,7 @@ implements IUserInfoService {
 				userMoneyDao.insert(money);
 				//创建用户详细信息
 				UserDetailInfo detail = new UserDetailInfo();
-				detail.setUserid(result);
+				detail.setUser(user);
 				detail.setDeleted(Global.NO);
 				userDetailInfoDao.insert(detail);
 				//创建用户认证信息
