@@ -58,6 +58,7 @@
 		});
 	}
 	
+
 	/*
 	 * 下拉框回显
 	 * @param initValue 初始值
@@ -88,13 +89,15 @@
 						var item = arr[index];
 						var itemValue = item[valuename];
 						var opt = '';
-						if(itemValue == initValue){
-							opt = '<option selected="selected" value="'+itemValue+'">'+item[labelname]+'</option>';
-						}else{
-							opt = '<option value="'+itemValue+'">'+item[labelname]+'</option>';
+						if(itemValue != undefined){
+							if(itemValue == initValue){
+								opt = '<option selected="selected" value="'+itemValue+'">'+item[labelname]+'</option>';
+							}else{
+								opt = '<option value="'+itemValue+'">'+item[labelname]+'</option>';
+							}
+							options += opt;
 						}
 						
-						options += opt;
 					}
 				}
 				$this.html(options);
@@ -115,7 +118,7 @@
 							if(arr2 == null || arr2.length == 0){
 								$this.nextAll('select').remove();
 							}else{
-								var appendSel = '<select onchange="_onchange(this);" class="xytSelect" link="'+ link
+								var appendSel = '<select onchange="_onchange(this);" class="lrSelect" link="'+ link
 													+'" labelname="'+labelname+'" valuename="'+valuename
 													+'"><option value="">请选择</option>';
 								for(var i = 0; i < arr2.length ; i++){
