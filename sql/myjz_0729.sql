@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50096
 File Encoding         : 65001
 
-Date: 2016-07-27 00:49:54
+Date: 2016-07-29 00:47:39
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -4446,6 +4446,47 @@ CREATE TABLE `task_properties` (
 -- ----------------------------
 
 -- ----------------------------
+-- Table structure for `trace_record`
+-- ----------------------------
+DROP TABLE IF EXISTS `trace_record`;
+CREATE TABLE `trace_record` (
+  `id` int(11) NOT NULL auto_increment COMMENT '唯一标示',
+  `userid` int(11) default NULL COMMENT '所属用户',
+  `type` int(1) default NULL COMMENT '交易类型 1收入(任务奖金) 2支出(提现)',
+  `money` double(12,2) default NULL COMMENT '交易金额',
+  `tracetime` datetime default NULL COMMENT '交易时间',
+  `orderid` int(11) default NULL COMMENT '订单(金额增加变动关联任务)',
+  `memo` varchar(255) default NULL COMMENT '备注',
+  `traceno` varchar(64) default NULL COMMENT '交易编号',
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='交易记录表';
+
+-- ----------------------------
+-- Records of trace_record
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `trace_withdrawls`
+-- ----------------------------
+DROP TABLE IF EXISTS `trace_withdrawls`;
+CREATE TABLE `trace_withdrawls` (
+  `id` int(11) NOT NULL COMMENT '唯一标示',
+  `money` double(12,2) default NULL COMMENT '提现金额',
+  `commission` double(12,2) default NULL COMMENT '手续费',
+  `arrivalmoney` double(12,2) default NULL COMMENT '到账金额',
+  `withdrawalsaccount` varchar(128) default NULL COMMENT '提现账户',
+  `status` int(11) default NULL COMMENT '提现状态',
+  `createtime` datetime default NULL COMMENT '提现时间',
+  `finishtime` datetime default NULL COMMENT '提现转账完成时间',
+  `withdrawalno` varchar(64) default NULL COMMENT '交易提现编号',
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='交易提现表';
+
+-- ----------------------------
+-- Records of trace_withdrawls
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for `user_account`
 -- ----------------------------
 DROP TABLE IF EXISTS `user_account`;
@@ -4547,7 +4588,7 @@ CREATE TABLE `user_detail_info` (
 -- Records of user_detail_info
 -- ----------------------------
 INSERT INTO `user_detail_info` VALUES ('1', '4', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '0');
-INSERT INTO `user_detail_info` VALUES ('2', '1', null, null, '2016-06-17', null, null, null, '1', null, null, '1', null, null, '1', null, null, null, null, null);
+INSERT INTO `user_detail_info` VALUES ('2', '3', null, '1', '2016-06-07', null, null, null, '1', null, null, '1', null, null, '464380730', '薛云腾', null, null, null, '1');
 
 -- ----------------------------
 -- Table structure for `user_info`
@@ -4577,7 +4618,7 @@ CREATE TABLE `user_info` (
 -- ----------------------------
 INSERT INTO `user_info` VALUES ('1', 'yun', 'ifS7tw1E6a7Yx0lPE3rcSw==', '13067356435', '2016-05-20 11:37:27', '2016-05-20 11:37:30', '127.0.0.1', '1', '1', '0', '1', null, null, null, null);
 INSERT INTO `user_info` VALUES ('2', 'estate', 'ifS7tw1E6a7Yx0lPE3rcSw==', '18050804169', '2016-05-18 11:38:15', '2016-05-20 11:38:19', '127.0.0.1', '2', '2', '0', '1', null, null, null, null);
-INSERT INTO `user_info` VALUES ('3', 'admin', 'ifS7tw1E6a7Yx0lPE3rcSw==', null, '2016-06-06 15:34:26', '2016-06-06 15:34:28', '127.0.0.1', '0', '1', '0', '0', null, null, null, null);
+INSERT INTO `user_info` VALUES ('3', 'admin', 'ifS7tw1E6a7Yx0lPE3rcSw==', '13067356435', '2016-06-06 15:34:26', '2016-06-06 15:34:28', '127.0.0.1', '0', '1', '0', '0', null, null, null, null);
 INSERT INTO `user_info` VALUES ('4', 'luoxh', 'ifS7tw1E6a7Yx0lPE3rcSw==', '15980267262', '2016-06-08 10:10:34', null, null, '1', '1', '0', '1', null, null, null, null);
 
 -- ----------------------------
