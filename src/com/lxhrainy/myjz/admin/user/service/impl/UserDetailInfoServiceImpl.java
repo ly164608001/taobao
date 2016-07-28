@@ -25,4 +25,12 @@ implements IUserDetailInfoService {
 	@Autowired
 	IUserDetailInfoDao userDetailInfoDao;
 	
+	/**
+	 * 根据用户id获取详细信息
+	 * @param userid
+	 * @return
+	 */
+	public UserDetailInfo getByUserid(int userid) {
+		return userDetailInfoDao.getByUserid(userid);
+	}
 }

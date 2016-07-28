@@ -1,5 +1,7 @@
 package com.lxhrainy.myjz.admin.user.dao;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.lxhrainy.core.annotation.MyBatisDao;
 import com.lxhrainy.core.common.dao.IBaseDao;
 import com.lxhrainy.myjz.admin.user.model.UserDetailInfo;
@@ -12,5 +14,12 @@ import com.lxhrainy.myjz.admin.user.model.UserDetailInfo;
  */
 @MyBatisDao
 public interface IUserDetailInfoDao extends IBaseDao<UserDetailInfo> {
+
+	/**
+	 * 根据用户id获取详细信息
+	 * @param userid
+	 * @return
+	 */
+	UserDetailInfo getByUserid(@Param("userid")int userid);
 	
 }

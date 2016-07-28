@@ -28,8 +28,7 @@
 	
 	<sql id="userDetailInfoColumns">
 		T.id AS "id",
-		T.userid AS "userid",
-		T.zipcode AS "zipcode",
+		T.userid AS "user.id",
 		T.sex AS "sex",
 		T.birthday AS "birthday",
 		T.bloodtype AS "bloodtype",
@@ -72,6 +71,14 @@
 		WHERE T.id = #{id}
 	</select>
 	
+	<select id="getByUserid" resultType="UserDetailInfo">
+		SELECT 
+			<include refid="userDetailInfoColumns"/>
+		FROM user_detail_info T
+		<include refid="userDetailInfoJoins"/>
+		WHERE T.userid = #{userid}
+	</select>
+	
 	<select id="findListByPage" resultType="UserDetailInfo">
 		SELECT 
 			<include refid="userDetailInfoColumns"/>
@@ -102,7 +109,6 @@
 		INSERT INTO user_detail_info(
 			id,
 			userid,
-			zipcode,
 			sex,
 			birthday,
 			bloodtype,
@@ -122,8 +128,7 @@
 			deleted
 		) VALUES (
 			#{id},
-			#{userid},
-			#{zipcode},
+			#{user.id},
 			#{sex},
 			#{birthday},
 			#{bloodtype},
@@ -146,15 +151,10 @@
 	
 	<update id="update">
 		UPDATE user_detail_info SET 	
-			<if test="idcard !=null">
-			userid = #{userid},
+			<if test="user !=null and user.id != null">
+			userid = #{user.id},
 			</if>
-			<if test="zipcode !=null and zipcode !=''">
-			zipcode = #{zipcode},
-			</if>
-			<if test="sex !=null">
 			sex = #{sex},
-			</if>
 			<if test="birthday !=null and birthday !=''">
 			birthday = #{birthday},
 			</if>
@@ -201,8 +201,9 @@
 			modifytime = #{modifytime},
 			</if>
 			<if test="deleted !=null">
-			deleted = #{deleted}
+			deleted = #{deleted},
 			</if>
+			id = #{id}
 		WHERE id = #{id}
 	</update>
 	

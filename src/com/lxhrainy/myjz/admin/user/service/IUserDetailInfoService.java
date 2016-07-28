@@ -10,4 +10,11 @@ import com.lxhrainy.myjz.admin.user.model.UserDetailInfo;
  */
 public interface IUserDetailInfoService extends IBaseService<UserDetailInfo, Integer>{
 
+	/**
+	 * 根据用户id获取详细信息
+	 * @param userid
+	 * @return
+	 */
+	UserDetailInfo getByUserid(int userid);
+
 }

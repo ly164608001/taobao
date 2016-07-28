@@ -4,6 +4,7 @@ import java.sql.Timestamp;
 import java.util.Date;
 
 import com.lxhrainy.core.common.model.BaseModel;
+import com.lxhrainy.core.sys.model.UserInfo;
 
 /**
  * 个人信息
@@ -15,11 +16,11 @@ public class UserDetailInfo extends BaseModel {
 	*/
 	private static final long serialVersionUID = 1L;
 	/** 账号ID **/
-	private Integer userid;
+	private UserInfo user;
 	/** 性别 **/
 	private Integer sex;
 	/** 生日 **/
-	private String birthday;
+	private Date birthday;
 	/** 血型 **/
 	private String bloodtype;
 	/** 出生地 **/
@@ -61,12 +62,12 @@ public class UserDetailInfo extends BaseModel {
 		this.zipcode = zipcode;
 	}
 
-	public Integer getUserid() {
-		return this.userid;
+	public UserInfo getUser() {
+		return user;
 	}
 
-	public void setUserid(Integer userid) {
-		this.userid = userid;
+	public void setUser(UserInfo user) {
+		this.user = user;
 	}
 
 	public Integer getSex() {
@@ -77,11 +78,11 @@ public class UserDetailInfo extends BaseModel {
 		this.sex = sex;
 	}
 
-	public String getBirthday() {
-		return this.birthday;
+	public Date getBirthday() {
+		return birthday;
 	}
 
-	public void setBirthday(String birthday) {
+	public void setBirthday(Date birthday) {
 		this.birthday = birthday;
 	}
 
