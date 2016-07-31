@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50096
 File Encoding         : 65001
 
-Date: 2016-07-29 00:47:39
+Date: 2016-07-31 22:43:28
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -241,20 +241,6 @@ INSERT INTO `help_menu` VALUES ('6', '2', ',-1,', '2', '平台名词', '3', '0',
 INSERT INTO `help_menu` VALUES ('19', '15', ',-1,', '1', '出错2', '3', '0', '');
 
 -- ----------------------------
--- Table structure for `order_basic_properties`
--- ----------------------------
-DROP TABLE IF EXISTS `order_basic_properties`;
-CREATE TABLE `order_basic_properties` (
-  `id` int(11) NOT NULL auto_increment,
-  `orderid` int(11) default NULL COMMENT '订单ID',
-  PRIMARY KEY  (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='订单基本属性';
-
--- ----------------------------
--- Records of order_basic_properties
--- ----------------------------
-
--- ----------------------------
 -- Table structure for `order_info`
 -- ----------------------------
 DROP TABLE IF EXISTS `order_info`;
@@ -283,6 +269,8 @@ DROP TABLE IF EXISTS `order_other_properties`;
 CREATE TABLE `order_other_properties` (
   `id` int(11) NOT NULL auto_increment,
   `orderid` int(11) default NULL COMMENT '订单ID',
+  `propertiesid` int(11) default NULL COMMENT '属性ID',
+  `propertiesvalue` int(11) default NULL COMMENT '属性值',
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='订单其他属性';
 
@@ -4190,7 +4178,7 @@ CREATE TABLE `sys_dict` (
   `remarks` varchar(255) default NULL COMMENT '备注信息',
   `deleted` int(1) NOT NULL default '0' COMMENT '删除标记',
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of sys_dict
@@ -4208,6 +4196,8 @@ INSERT INTO `sys_dict` VALUES ('37', '1', '收获地址', 'LabelType', '标签�
 INSERT INTO `sys_dict` VALUES ('38', '2', '好评内容', 'LabelType', '标签类型', null, null, null, null, null, null, null, '0');
 INSERT INTO `sys_dict` VALUES ('39', '1', '淘宝店铺', 'ShopType', '店铺类型', null, null, null, null, null, null, null, '0');
 INSERT INTO `sys_dict` VALUES ('40', '1', '买家信用', 'LevelType', '信用等级类型', null, null, null, null, null, null, null, '0');
+INSERT INTO `sys_dict` VALUES ('41', '1', '收入', 'TraceType', '交易类型', null, null, null, null, null, null, null, '0');
+INSERT INTO `sys_dict` VALUES ('42', '2', '支出', 'TraceType', '交易类型', null, null, null, null, null, null, null, '0');
 
 -- ----------------------------
 -- Table structure for `sys_log`
@@ -4421,6 +4411,7 @@ CREATE TABLE `task_combo_properties` (
   `id` int(11) NOT NULL auto_increment,
   `templateid` int(11) default NULL COMMENT '模板ID',
   `propertiesid` int(11) default NULL COMMENT '属性ID',
+  `propertiesvalue` int(11) default NULL COMMENT '属性值',
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='任务套餐属性';
 
@@ -4435,9 +4426,14 @@ DROP TABLE IF EXISTS `task_properties`;
 CREATE TABLE `task_properties` (
   `id` int(11) NOT NULL auto_increment,
   `name` varchar(128) default NULL COMMENT '属性名称',
-  `status` int(1) default NULL COMMENT '状态(0,1)',
+  `status` int(1) default NULL COMMENT '使用状态(0,1)',
   `type` int(1) default NULL COMMENT '属性类别',
   `price` int(11) default NULL COMMENT '所需蚂蚁币',
+  `elementtype` varchar(255) default NULL COMMENT '元素类型',
+  `elementnum` int(11) default NULL COMMENT '元素个数',
+  `needtype` varchar(255) default NULL COMMENT '所需类型',
+  `neednum` int(11) default NULL COMMENT '所需个数',
+  `sort` int(11) default NULL COMMENT '任务完成排序',
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='任务属性';
 
@@ -4459,11 +4455,12 @@ CREATE TABLE `trace_record` (
   `memo` varchar(255) default NULL COMMENT '备注',
   `traceno` varchar(64) default NULL COMMENT '交易编号',
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='交易记录表';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='交易记录表';
 
 -- ----------------------------
 -- Records of trace_record
 -- ----------------------------
+INSERT INTO `trace_record` VALUES ('1', '3', '1', '100.00', '2016-07-31 17:37:07', null, '测试收入100', '2016007311737001');
 
 -- ----------------------------
 -- Table structure for `trace_withdrawls`
