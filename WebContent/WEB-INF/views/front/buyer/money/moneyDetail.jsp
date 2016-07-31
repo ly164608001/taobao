@@ -43,26 +43,20 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<td>2016/6/28 16:04:16</td>
-							<td><span class="orange">+1.38</span></td>
-							<td>申诉任务TB201606261028389194710调整，扣保证金(原为138.00元)1.38元，返1.38元</td>
-						</tr>
-						<tr>
-							<td>2016/6/28 16:04:16</td>
-							<td><span class="orange">+1.38</span></td>
-							<td>申诉任务TB201606261028389194710调整，扣保证金(原为138.00元)1.38元，返1.38元</td>
-						</tr>
-						<tr>
-							<td>2016/6/28 16:04:16</td>
-							<td><span class="orange">+1.38</span></td>
-							<td>申诉任务TB201606261028389194710调整，扣保证金(原为138.00元)1.38元，返1.38元</td>
-						</tr>
-						<tr>
-							<td>2016/6/28 16:04:16</td>
-							<td><span class="orange">+1.38</span></td>
-							<td>申诉任务TB201606261028389194710调整，扣保证金(原为138.00元)1.38元，返1.38元</td>
-						</tr>
+						<c:forEach items="${list}" var="item">
+							<tr>
+								<td><f:formatDate value="${item.tracetime}" pattern="yyyy/MM/dd HH:mm:ss"/></td>
+								<td>
+									<c:if test="${item.type == 1}">
+										<span class="orange">+${item.money}</span>
+									</c:if>
+									<c:if test="${item.type == 2}">
+										<span class="orange">+${item.money}</span>
+									</c:if>
+								</td>
+								<td>${item.memo}</td>
+							</tr>
+						</c:forEach>
 					</tbody>
 				</table>
 			</div>

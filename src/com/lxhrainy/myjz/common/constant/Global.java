@@ -22,6 +22,12 @@ public class Global {
 	public final static int ACCOUNT_FROZEN = 2;
 	public final static int ACCOUNT_NORMAL = 1;
 	
+	/**
+	 * 交易类型 1 收入 2支出
+	 */
+	public final static int INCOME = 1;
+	public final static int PAY = 2;
+	
 	/** 商家管理 start**/
 	//标签管理类型 1 收货类型 2 好评内容
 	public final static int LABEL_TYPE_ADDR = 1;
