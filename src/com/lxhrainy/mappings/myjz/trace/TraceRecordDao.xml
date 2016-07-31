@@ -19,9 +19,19 @@
     <sql id="where">
 		<if test="condition!=null">
 			<where>
+				1 = 1
+				<if test="condition.beginTime!=null">
+					AND T.tracetime &gt;= #{condition.beginTime}
+				</if>
+				<if test="condition.endTime!=null">
+					AND T.tracetime &lt;= #{condition.endTime}
+				</if>
 				<if test="condition.model!=null">
 					<if test="condition.model.traceno!=null and condition.model.traceno!=''">
 						AND T.traceno like CONCAT('%',#{condition.model.traceno},'%')
+					</if>
+					<if test="condition.model.user!=null and condition.model.user.id!=null">
+						AND T.userid = #{condition.model.user.id}
 					</if>
 				</if>
 			</where>

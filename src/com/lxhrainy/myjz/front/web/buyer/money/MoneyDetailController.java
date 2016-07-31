@@ -30,6 +30,12 @@ public class MoneyDetailController extends BaseController {
 	 */
 	@RequestMapping("/moneyDetail")
 	public ModelAndView detail(TraceRecordVO vo){
+		TraceRecord model = vo.getModel();
+		if(model == null){
+			model = new TraceRecord();
+			model.setUser(getCurrentUser());
+			vo.setModel(model);
+		}
 		List<TraceRecord> list = recordService.getListByPage(vo);
 		
 		mv.addObject("list", list);
