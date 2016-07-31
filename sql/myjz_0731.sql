@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50096
 File Encoding         : 65001
 
-Date: 2016-07-31 22:43:28
+Date: 2016-07-31 23:45:03
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -255,6 +255,9 @@ CREATE TABLE `order_info` (
   `bond` double(10,2) default NULL COMMENT '担保金',
   `receiveruser` int(11) default NULL COMMENT '接单人',
   `receivetime` datetime default NULL COMMENT '接单时间',
+  `shopid` int(11) default NULL COMMENT '店铺ID',
+  `searchroad` int(11) default NULL COMMENT '搜索入口',
+  `type` int(11) default NULL COMMENT '手机/电脑单类型',
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='订单基本信息';
 
@@ -269,8 +272,8 @@ DROP TABLE IF EXISTS `order_other_properties`;
 CREATE TABLE `order_other_properties` (
   `id` int(11) NOT NULL auto_increment,
   `orderid` int(11) default NULL COMMENT '订单ID',
-  `propertiesid` int(11) default NULL COMMENT '属性ID',
-  `propertiesvalue` int(11) default NULL COMMENT '属性值',
+  `propertiesvalueid` int(11) default NULL COMMENT '属性值ID',
+  `propertiesvalue` varchar(255) default NULL COMMENT '属性值',
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='订单其他属性';
 
@@ -4427,18 +4430,36 @@ CREATE TABLE `task_properties` (
   `id` int(11) NOT NULL auto_increment,
   `name` varchar(128) default NULL COMMENT '属性名称',
   `status` int(1) default NULL COMMENT '使用状态(0,1)',
-  `type` int(1) default NULL COMMENT '属性类别',
+  `type` int(1) default NULL COMMENT '展示区域',
   `price` int(11) default NULL COMMENT '所需蚂蚁币',
   `elementtype` varchar(255) default NULL COMMENT '元素类型',
   `elementnum` int(11) default NULL COMMENT '元素个数',
   `needtype` varchar(255) default NULL COMMENT '所需类型',
   `neednum` int(11) default NULL COMMENT '所需个数',
   `sort` int(11) default NULL COMMENT '任务完成排序',
+  `elementname` varchar(255) default NULL COMMENT '别名',
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='任务属性';
 
 -- ----------------------------
 -- Records of task_properties
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `task_properties_value`
+-- ----------------------------
+DROP TABLE IF EXISTS `task_properties_value`;
+CREATE TABLE `task_properties_value` (
+  `id` int(11) NOT NULL auto_increment,
+  `propertiesid` int(11) default NULL COMMENT '属性ID',
+  `label` varchar(50) default NULL COMMENT '选项名称',
+  `keyvalue` varchar(255) default NULL COMMENT '值',
+  `memo` varchar(255) default NULL COMMENT '备注',
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of task_properties_value
 -- ----------------------------
 
 -- ----------------------------
