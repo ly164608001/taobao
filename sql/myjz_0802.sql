@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50096
 File Encoding         : 65001
 
-Date: 2016-07-31 23:45:03
+Date: 2016-08-02 00:12:00
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -4181,7 +4181,7 @@ CREATE TABLE `sys_dict` (
   `remarks` varchar(255) default NULL COMMENT '备注信息',
   `deleted` int(1) NOT NULL default '0' COMMENT '删除标记',
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of sys_dict
@@ -4201,6 +4201,8 @@ INSERT INTO `sys_dict` VALUES ('39', '1', '淘宝店铺', 'ShopType', '店铺类
 INSERT INTO `sys_dict` VALUES ('40', '1', '买家信用', 'LevelType', '信用等级类型', null, null, null, null, null, null, null, '0');
 INSERT INTO `sys_dict` VALUES ('41', '1', '收入', 'TraceType', '交易类型', null, null, null, null, null, null, null, '0');
 INSERT INTO `sys_dict` VALUES ('42', '2', '支出', 'TraceType', '交易类型', null, null, null, null, null, null, null, '0');
+INSERT INTO `sys_dict` VALUES ('43', '1', '正常到账(24小时)', 'WithdrawlsType', '提现类型', null, null, null, null, null, null, null, '0');
+INSERT INTO `sys_dict` VALUES ('44', '2', '快速到账(2小时)', 'WithdrawlsType', '提现类型', null, null, null, null, null, null, null, '0');
 
 -- ----------------------------
 -- Table structure for `sys_log`
@@ -4492,11 +4494,12 @@ CREATE TABLE `trace_withdrawls` (
   `money` double(12,2) default NULL COMMENT '提现金额',
   `commission` double(12,2) default NULL COMMENT '手续费',
   `arrivalmoney` double(12,2) default NULL COMMENT '到账金额',
-  `withdrawalsaccount` varchar(128) default NULL COMMENT '提现账户',
+  `withdrawalsaccount` int(11) default NULL COMMENT '提现用户银行卡账户',
   `status` int(11) default NULL COMMENT '提现状态',
   `createtime` datetime default NULL COMMENT '提现时间',
   `finishtime` datetime default NULL COMMENT '提现转账完成时间',
   `withdrawalno` varchar(64) default NULL COMMENT '交易提现编号',
+  `type` int(1) default NULL COMMENT '提现类型 1正常到账 2快速到账',
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='交易提现表';
 
@@ -4517,6 +4520,7 @@ CREATE TABLE `user_account` (
   `accountno` varchar(32) default NULL COMMENT '银行账号',
   `region` varchar(255) default NULL COMMENT '开户行(省/市)',
   `bankname` varchar(255) default NULL COMMENT '支行名称',
+  `regionid` int(11) default NULL COMMENT '开户地区id',
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户银行卡';
 
@@ -4657,4 +4661,4 @@ CREATE TABLE `user_money` (
 -- ----------------------------
 -- Records of user_money
 -- ----------------------------
-INSERT INTO `user_money` VALUES ('1', '3', 'ifS7tw1E6a7Yx0lPE3rcSw==', '0.00', '0.00', '0.00', '0');
+INSERT INTO `user_money` VALUES ('1', '3', 'ifS7tw1E6a7Yx0lPE3rcSw==', '100.00', '10.00', '90.00', '0');
