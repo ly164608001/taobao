@@ -14,15 +14,24 @@ import com.lxhrainy.core.sys.model.UserInfo;
 public class TraceWithdrawls extends BaseModel {
 
 	private static final long serialVersionUID = 1L;
-	private UserInfo user; 				// 提现人
-	private Double money; 				// 提现金额
-	private Double commission; 			// 手续费
-	private Double arrivalmoney; 		// 到账金额
-	private String withdrawalsaccount;  // 提现账户
-	private Integer status; 			// 提现状态
-	private Date createtime; 			// 提现时间
-	private Date finishtime; 			// 提现转账完成时间
-	private String withdrawalno; 		// 交易提现编号
+	private UserInfo user; // 提现人
+	private Double money; // 提现金额
+	private Double commission; // 手续费
+	private Double arrivalmoney; // 到账金额
+	private String withdrawalsaccount; // 提现账户
+	private Integer status; // 提现状态
+	private Date createtime; // 提现时间
+	private Date finishtime; // 提现转账完成时间
+	private String withdrawalno; // 交易提现编号
+	private Integer type; // 交易提现类型
+
+	public Integer getType() {
+		return type;
+	}
+
+	public void setType(Integer type) {
+		this.type = type;
+	}
 
 	public Double getMoney() {
 		return money;

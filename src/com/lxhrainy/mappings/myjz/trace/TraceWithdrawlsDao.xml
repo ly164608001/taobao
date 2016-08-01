@@ -12,7 +12,8 @@
 		T.createtime AS "createtime",
 		T.finishtime AS "finishtime",
 		T.withdrawalno AS "withdrawalno",
-		T.userid AS "user.id"
+		T.userid AS "user.id",
+		T.type AS "type"
 	</sql>
 	
 	<sql id="traceWithdrawlsJoins">
@@ -75,7 +76,8 @@
 			createtime,
 			finishtime,
 			withdrawalno.
-			userid
+			userid,
+			type
 		) VALUES (
 			#{id},
 			#{money},
@@ -86,12 +88,14 @@
 			#{createtime},
 			#{finishtime},
 			#{withdrawalno},
-			#{user.id}
+			#{user.id},
+			#{type}
 		)
 	</insert>
 	
 	<update id="update">
-		UPDATE trace_withdrawls SET 	
+		UPDATE trace_withdrawls SET 
+			type = #{type},
 			money = #{money},
 			commission = #{commission},
 			arrivalmoney = #{arrivalmoney},
