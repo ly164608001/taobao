@@ -63,6 +63,15 @@ public class ApiParams {
 	private String phone;
 	//用户名
 	private String username;
+	
+	//性别
+	private String gender;
+	//头像
+	private String avatarurl;
+	//生日
+	private String birthday;
+	//地址
+	private String address;
 	/**end 用户信息**/
 	
 	/**start提现**/
@@ -76,6 +85,48 @@ public class ApiParams {
 	private String bankid;
 	/**end提现**/
 	
+	/**start密码**/
+	private String oldpassword;
+	//类型  0:登录密码;1:交易密码;
+	private String type;
+	/**end密码**/
+	
+	public String getOldpassword() {
+		return oldpassword;
+	}
+	public void setOldpassword(String oldpassword) {
+		this.oldpassword = oldpassword;
+	}
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
+	}
+	public String getGender() {
+		return gender;
+	}
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+	public String getAvatarurl() {
+		return avatarurl;
+	}
+	public void setAvatarurl(String avatarurl) {
+		this.avatarurl = avatarurl;
+	}
+	public String getBirthday() {
+		return birthday;
+	}
+	public void setBirthday(String birthday) {
+		this.birthday = birthday;
+	}
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
 	public String getCosttime() {
 		return costtime;
 	}

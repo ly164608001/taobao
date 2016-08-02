@@ -30,6 +30,7 @@ import com.lxhrainy.core.sys.model.SysNotice;
 import com.lxhrainy.core.sys.model.UserInfo;
 import com.lxhrainy.core.sys.service.ISysNoticeService;
 import com.lxhrainy.core.sys.service.IUserInfoService;
+import com.lxhrainy.core.utils.AESUtil;
 import com.lxhrainy.core.utils.DateUtil;
 import com.lxhrainy.core.utils.PasswordUtil;
 import com.lxhrainy.core.utils.StringUtil;
@@ -45,6 +46,7 @@ import com.lxhrainy.myjz.admin.user.model.UserConfig;
 import com.lxhrainy.myjz.admin.user.model.UserMoney;
 import com.lxhrainy.myjz.admin.user.service.IUserConfigService;
 import com.lxhrainy.myjz.admin.user.service.IUserMoneyService;
+import com.lxhrainy.myjz.common.constant.Global;
 
 /**
  * 用户数据
@@ -517,7 +519,7 @@ public class UserApiServiceImpl extends AbstractBaseServiceImpl<IUserInfoDao, Us
 				ApiCacheUtil.removeCaptchaChache(params.getUsername());
 				UserInfo mobileUser = userInfoService.getByPhone(params.getPhone());
 				if (oConvertUtils.isNotEmpty(mobileUser)) {
-					mobileUser.setPassword(PasswordUtil.encrypt(mobileUser.getUsername(), params.getPassword(), PasswordUtil.getStaticSalt()));
+					mobileUser.setPassword(encrptPassword(params.getPassword()));
 					userInfoService.update(mobileUser);
 					ApiCacheUtil.updateUserChache(mobileUser);
 					rj.setSuccess(true);
@@ -587,7 +589,7 @@ public class UserApiServiceImpl extends AbstractBaseServiceImpl<IUserInfoDao, Us
 				} else {
 					//TODO
 					UserInfo mobileUserEntity = new UserInfo();
-					mobileUserEntity.setPassword(PasswordUtil.encrypt(mobileUser.getUsername(), mobileUser.getPassword(), PasswordUtil.getStaticSalt()));
+					mobileUserEntity.setPassword(encrptPassword(mobileUser.getPassword()));
 					mobileUserEntity.setUsername(mobileUser.getUsername());
 					mobileUserEntity.setInviter(mobileUser.getInviter());
 					mobileUserEntity.setType(type);
@@ -605,6 +607,7 @@ public class UserApiServiceImpl extends AbstractBaseServiceImpl<IUserInfoDao, Us
 						account.setAllbalance(0d);
 						account.setFrozenbalance(0d);
 						account.setUsablebalance(0d);
+						account.setPaypassword(encrptPassword(mobileUser.getPassword()));
 						userMoneyService.save(account);
 						
 						rj.setSuccess(true);
@@ -718,18 +721,42 @@ public class UserApiServiceImpl extends AbstractBaseServiceImpl<IUserInfoDao, Us
 	}
 	@Override
 	public ResultJson editUserInfo(ApiParams params) {
-		// TODO Auto-generated method stub
-		return null;
+		ResultJson rj = new ResultJson(ResultJson.ERROR_CODE_PARAMETERS,"参数错误");
+		// 当前登录用户
+		UserInfo loginUser = ApiCacheUtil.getLoginUser();
+		if (oConvertUtils.isEmpty(loginUser)) {
+			rj.setError_code(ResultJson.ERROR_CODE_USER_NOT_LOGIN);
+			rj.setMessage("用户未登录");
+			return rj;
+		}
+		if (oConvertUtils.isNotEmpty(params)) {
+			UserInfo user = new UserInfo();
+			user.setId(loginUser.getId());
+			user.setIcon(params.getAvatarurl());
+			user.getDetailInfo().setUser(loginUser);
+			user.getDetailInfo().setSex("男".equals(params.getGender())?1:2);
+			user.getDetailInfo().setApartment(params.getAddress());
+			user.getDetailInfo().setBirthday(DateUtil.str2Date(params.getBirthday(), DateUtil.date_sdf));
+			int result = userInfoService.updateUserInfo(user);
+			if(result != -1){
+				rj.setError_code(ResultJson.SUCCESS);
+				rj.setSuccess(true);
+				rj.setMessage("");
+			}else{
+				rj.setError_code(ResultJson.ERROR_CODE_GENERAL);
+				rj.setSuccess(false);
+				rj.setMessage("用户信息修改失败");
+			}
+		}
+		return rj;
 	}
 	@Override
 	public ResultJson getVerity(ApiParams params) {
 		ResultJson rj = new ResultJson(ResultJson.ERROR_CODE_PARAMETERS,"参数错误");
 		if (oConvertUtils.isNotEmpty(params) && StringUtil.isNotEmpty(params.getPhone())) {
 			String phone = params.getPhone();
-			//int length = oConvertUtils.getInt(sysconfigService.getValueByKey("captcha.lenght"), 6);
 			int length = 6;
 			String captcha = StringUtil.numRandom(length);
-			//String content = sysconfigService.getValueByKey("captcha.content");
 			String content = "[蚂蚁兼职]亲，您的验证码是{0}，在3分钟内有效。如非本人操作请忽略本短信。";
 			String msg = MessageFormat.format(content, captcha);
 			try {
@@ -753,8 +780,75 @@ public class UserApiServiceImpl extends AbstractBaseServiceImpl<IUserInfoDao, Us
 	}
 	@Override
 	public ResultJson setPassword(ApiParams params) {
-		// TODO Auto-generated method stub
-		return null;
+		ResultJson rj = new ResultJson(ResultJson.ERROR_CODE_PARAMETERS,"参数错误");
+		// 当前登录用户
+		UserInfo loginUser = ApiCacheUtil.getLoginUser();
+		if (oConvertUtils.isEmpty(loginUser)) {
+			rj.setError_code(ResultJson.ERROR_CODE_USER_NOT_LOGIN);
+			rj.setMessage("用户未登录");
+			return rj;
+		}
+		if (oConvertUtils.isNotEmpty(params) 
+				&& StringUtil.isNotEmpty(params.getOldpassword())
+				&& StringUtil.isNotEmpty(params.getPassword())
+				&& StringUtil.isNotEmpty(params.getType())) {
+			//0:登录密码;1:交易密码;
+			if(params.getType().equals("0")){
+				//验证密码是否正确
+				UserInfo user = userInfoService.checkUserLogin(loginUser.getUsername(), params.getOldpassword(), Global.FRONT);
+				if(user != null){
+					int result = userInfoService.updateUserPwd(user.getId(), params.getPassword());
+					if(result != -1){
+						rj.setError_code(ResultJson.SUCCESS);
+						rj.setSuccess(true);
+						rj.setMessage("登录密码修改成功");
+					}else{
+						rj.setError_code(ResultJson.ERROR_CODE_GENERAL);
+						rj.setSuccess(false);
+						rj.setMessage("登录密码修改失败");
+					}
+				}else{
+					rj.setError_code(ResultJson.ERROR_CODE_GENERAL);
+					rj.setMessage("旧密码填写错误");
+				}
+			}else if(params.getType().equals("1")){
+				//验证密码是否正确
+				UserMoney money =userMoneyService.getByUserId(loginUser.getId());
+				if(encrptPassword(params.getOldpassword()).equals(money.getPaypassword())){
+					UserMoney userMoney = new UserMoney();
+					userMoney.setId(money.getId());
+					userMoney.setPaypassword(encrptPassword(params.getPassword()));
+					int result = userMoneyService.update(userMoney);
+					if(result != -1){
+						rj.setError_code(ResultJson.SUCCESS);
+						rj.setSuccess(true);
+						rj.setMessage("交易密码修改成功");
+					}else{
+						rj.setError_code(ResultJson.ERROR_CODE_GENERAL);
+						rj.setSuccess(false);
+						rj.setMessage("交易密码修改失败");
+					}
+				}else{
+					rj.setError_code(ResultJson.ERROR_CODE_GENERAL);
+					rj.setMessage("旧密码填写错误");
+				}
+			}
+		}
+		return rj;
+	}
+	
+	/**
+	 * 加密密码
+	 * @param password
+	 * @return
+	 */
+	private String encrptPassword(String password) {
+		try {
+			return AESUtil.encrptString(password, "1234567812345678");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "";
 	}
 
 }
