@@ -133,7 +133,7 @@
 								}
 								
 								appendSel += '</select>';
-								$this.before(appendSel);
+								$this.parent().prepend(appendSel);
 							}
 							
 							pid = json2.pid; //继续上一级id

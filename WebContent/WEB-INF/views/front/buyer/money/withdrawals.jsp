@@ -9,7 +9,7 @@
 		
 		$(function(){
 			//默认24小时到账
-			changeTime(1);
+			change24Time();
 			
 			//到账时间点击显示
 			$('.typeSpan').click(function(){
@@ -19,7 +19,7 @@
 				//显示提示
 				if(value == 1){
 					$('#moneyLimitSpan').html('请输入提现金额，金额要100元起');
-					changeTime(value);
+					change24Time();
 				}else{
 					$('#moneyLimitSpan').html('请输入提现金额，金额至少5元起');
 					$('#typeTips').html('“选择快速到账” 提现时请在工作时间（周一至周五 9：00-17：00）内申请，否则不能2小时到账，金额5元起。快速到账规则看本页面下方！');
@@ -74,34 +74,27 @@
 				$('#arrivalmoneyInput').val(arrivalmoney);
 			});
 			
-			 $('#addCar').on('click',function(){
-		            indexAgency=top.layer.open({
-		                type:2,
-		                area:['600px','600px'],
-		                closeBtn:1,
-		                shadeClose:true,
-		                content:['./添加银行卡(弹窗).html','no'],
-		                title:'添加银行卡',
-		                btn:['确定','取消'],
-		                yes:function(index){
-		                    console.log('这里执行提交操作');
-		                }
-		            });  
-		        });
 		});
+		
+		function addAccountCard(){
+			var url = '${basePath}front/buyer/money/addBankCard.htm';
+			layerPromptIframe(url, '添加银行卡', oprSuccess,'no',800,640);
+		}
+		
+		function oprSuccess(){
+			top.layer.alert('操作成功');
+			$('#searchForm').submit();
+		}
 		
 		/**
 		* 显示提现到账预计时间 type:1 24小时   2 2小时
 		*/
-		function changeTime(type){
+		function change24Time(){
 			var addtime = 24*3600*1000; //24小时毫秒数  
 			var curtime = new Date().getTime();
-			if(type == 2){
-				addtime = 2*3600*1000;
-			}
-			
 			var showtime = parseInt(curtime + addtime);
 			var showDate = new Date(showtime);
+			$('#typeTips').html('“选择正常到账” 当天首次提现不收取手续费，金额100元起，当日第二次以后每次收取1元手续费，现在提现预计<span class="orange" id="showTimeSpan">2016年06月28日12点</span>到账。另：周日不处理提现。');
 			$('#showTimeSpan').html(showDate.format('yyyy年MM月dd日HH点'));
 		}
 		
@@ -117,7 +110,7 @@
 		请确认姓名与您申请提现的银行卡的开户姓名是否一致，若不一致提现会失败！
 	</p>
 	<div class="btnWrap clearfix">
-		<input class="btn radius btn-secondary f-r" type="button" value="添加提现银行卡" id="addCar"></div>
+		<input class="btn radius btn-secondary f-r" type="button" value="添加提现银行卡" onclick="addAccountCard();"></div>
 	<div class="moneyOrder mt10">
 		<form action="" method="post" class="form form-horizontal" id="demoform-1">
 			<legend></legend>
@@ -133,7 +126,7 @@
 			<div class="row cl">
 				<label class="form-label col-xs-4 col-sm-3">提现类型：</label>
 				<div class="formControls col-xs-4 col-sm-6">
-					<span class="tab-tip typeSpan active" name="${fns:getDictValue('正常到账(24小时)','withdrawlsType','')}">正常到账（24小时）</span>
+					<span class="tab-tip typeSpan active" name="${fns:getDictValue('正常到账(24小时)','WithdrawlsType','')}">正常到账（24小时）</span>
 					<span class="tab-tip typeSpan" name="${fns:getDictValue('快速到账(2小时)','WithdrawlsType','')}">快速到账（2小时）</span>
 					<input type="hidden" name="type" id="type" value="${fns:getDictValue('正常到账(24小时)','WithdrawlsType','')}" />
 				</div>

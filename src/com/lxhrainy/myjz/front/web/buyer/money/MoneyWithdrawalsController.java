@@ -27,6 +27,17 @@ public class MoneyWithdrawalsController extends BaseController {
 	private IUserMoneyService moneyService;
 	
 	/**
+	 * 添加银行卡
+	 * @return
+	 */
+	@RequestMapping("/addBankCard")
+	public ModelAndView addBankCard(){
+		
+		mv.setViewName("front/buyer/money/addBankCard");
+		return mv;
+	}
+	
+	/**
 	 * 提现
 	 * @return
 	 */

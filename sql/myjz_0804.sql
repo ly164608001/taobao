@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50096
 File Encoding         : 65001
 
-Date: 2016-08-02 00:12:00
+Date: 2016-08-04 00:02:14
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -35,6 +35,30 @@ CREATE TABLE `advert_info` (
 -- ----------------------------
 -- Records of advert_info
 -- ----------------------------
+
+-- ----------------------------
+-- Table structure for `basic_bank`
+-- ----------------------------
+DROP TABLE IF EXISTS `basic_bank`;
+CREATE TABLE `basic_bank` (
+  `id` int(11) NOT NULL auto_increment,
+  `bankname` varchar(128) default NULL COMMENT '银行名称',
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of basic_bank
+-- ----------------------------
+INSERT INTO `basic_bank` VALUES ('1', '中国建设银行');
+INSERT INTO `basic_bank` VALUES ('2', '中国工商银行');
+INSERT INTO `basic_bank` VALUES ('3', '中国农业银行');
+INSERT INTO `basic_bank` VALUES ('4', '中国银行');
+INSERT INTO `basic_bank` VALUES ('5', '中国交通银行');
+INSERT INTO `basic_bank` VALUES ('6', '中国兴业银行');
+INSERT INTO `basic_bank` VALUES ('7', '中国民生银行');
+INSERT INTO `basic_bank` VALUES ('8', '招商银行');
+INSERT INTO `basic_bank` VALUES ('9', '广发银行');
+INSERT INTO `basic_bank` VALUES ('10', '中国邮政储蓄银行');
 
 -- ----------------------------
 -- Table structure for `basic_level_info`
