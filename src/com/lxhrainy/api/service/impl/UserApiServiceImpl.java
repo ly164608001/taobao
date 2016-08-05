@@ -35,6 +35,8 @@ import com.lxhrainy.core.utils.DateUtil;
 import com.lxhrainy.core.utils.PasswordUtil;
 import com.lxhrainy.core.utils.StringUtil;
 import com.lxhrainy.core.utils.oConvertUtils;
+import com.lxhrainy.myjz.admin.adv.model.AdvertInfo;
+import com.lxhrainy.myjz.admin.adv.service.IAdvertInfoService;
 import com.lxhrainy.myjz.admin.buyer.model.LevelInfo;
 import com.lxhrainy.myjz.admin.buyer.oe.LevelVO;
 import com.lxhrainy.myjz.admin.buyer.service.IAccountService;
@@ -69,6 +71,8 @@ public class UserApiServiceImpl extends AbstractBaseServiceImpl<IUserInfoDao, Us
 	private ILevelService levelService;
 	@Autowired
 	private IAccountService accountService;
+	@Autowired
+	private IAdvertInfoService advertInfoService;
 	@Override
 	public ResultJson adlist(ApiParams params) {
 		ResultJson rj = new ResultJson();
@@ -76,15 +80,15 @@ public class UserApiServiceImpl extends AbstractBaseServiceImpl<IUserInfoDao, Us
 		rj.setMessage("参数错误");
 		JSONObject result = new JSONObject();
 		List<JSONObject> list = new ArrayList<JSONObject>();
-		//TODO 获取广告列表
-		List<Object> adlist = new ArrayList<>();
-		for(Object advert : adlist){
+		List<AdvertInfo> adlist = advertInfoService.getAllList(null);
+		for(AdvertInfo advert : adlist){
 			JSONObject item = new JSONObject();
-			item.put("content", "");
-			item.put("adid", "");
-			item.put("title", "");
-			item.put("time", "");
-			item.put("url", "");
+			item.put("content", advert.getContent());
+			item.put("adid", advert.getId());
+			item.put("title", advert.getTitle());
+			item.put("time", advert.getTime());
+			item.put("url", advert.getUrl());
+			item.put("bgimgurl", advert.getImg());
 			list.add(item);
 		}
 		result.put("list", list);
