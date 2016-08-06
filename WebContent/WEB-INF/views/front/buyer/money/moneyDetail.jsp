@@ -11,6 +11,12 @@
 			$('#btnSearch').click(function(){
 				$('#searchForm').submit();
 			});
+			
+			//提现记录
+			$('#withdrawlsRecordSpan').click(function(){
+				window.location.href = basePath + 'front/buyer/money/withdrawlsRecord.htm';
+			});
+			
 		});
 	</script>
 </head>
@@ -22,7 +28,7 @@
 	<div id="tab_detail" class="HuiTab">
 		<div class="tabBar cl">
 			<span class="current">账户明细</span>
-			<span class="">提现记录</span>
+			<span id="withdrawlsRecordSpan">提现记录</span>
 		</div>
 		<div class="tabCon" style="display: block;">
 			<div class="search-tab mt20">
