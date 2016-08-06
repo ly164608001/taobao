@@ -133,4 +133,11 @@ public interface IUserInfoService extends IBaseService<UserInfo, Integer>{
 	 * @return
 	 */
 	public UserInfo getByPhone(String phone) ;
+
+	/**
+	 * 修改用户密码
+	 * @param userid
+	 * @param password
+	 */
+	int updateUserPwd(Integer userid, String password);
 }

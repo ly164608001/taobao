@@ -245,5 +245,13 @@ implements IUserInfoService {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public int updateUserPwd(Integer userid, String password) {
+		UserInfo user = new UserInfo();
+		user.setId(userid);
+		user.setPassword(encrptPassword(password));
+		return this.update(user);
+	}
 	
 }
