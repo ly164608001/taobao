@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50096
 File Encoding         : 65001
 
-Date: 2016-08-04 00:02:14
+Date: 2016-08-06 17:04:56
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -4514,7 +4514,7 @@ INSERT INTO `trace_record` VALUES ('1', '3', '1', '100.00', '2016-07-31 17:37:07
 -- ----------------------------
 DROP TABLE IF EXISTS `trace_withdrawls`;
 CREATE TABLE `trace_withdrawls` (
-  `id` int(11) NOT NULL COMMENT '唯一标示',
+  `id` int(11) NOT NULL auto_increment COMMENT '唯一标示',
   `money` double(12,2) default NULL COMMENT '提现金额',
   `commission` double(12,2) default NULL COMMENT '手续费',
   `arrivalmoney` double(12,2) default NULL COMMENT '到账金额',
@@ -4524,12 +4524,17 @@ CREATE TABLE `trace_withdrawls` (
   `finishtime` datetime default NULL COMMENT '提现转账完成时间',
   `withdrawalno` varchar(64) default NULL COMMENT '交易提现编号',
   `type` int(1) default NULL COMMENT '提现类型 1正常到账 2快速到账',
+  `userid` int(11) default NULL COMMENT '提现申请人',
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='交易提现表';
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='交易提现表';
 
 -- ----------------------------
 -- Records of trace_withdrawls
 -- ----------------------------
+INSERT INTO `trace_withdrawls` VALUES ('1', '6.00', '4.00', '2.00', '4', '0', '2016-08-06 16:45:51', null, null, '2', '3');
+INSERT INTO `trace_withdrawls` VALUES ('2', '100.00', '4.00', '96.00', '4', '0', '2016-08-06 16:54:49', null, null, '1', '3');
+INSERT INTO `trace_withdrawls` VALUES ('3', '8.00', '4.00', '4.00', '4', '0', '2016-08-06 16:55:45', null, null, '2', '3');
+INSERT INTO `trace_withdrawls` VALUES ('4', '9.00', '4.00', '5.00', '4', '0', '2016-08-06 17:02:12', null, null, '2', '3');
 
 -- ----------------------------
 -- Table structure for `user_account`
@@ -4546,11 +4551,15 @@ CREATE TABLE `user_account` (
   `bankname` varchar(255) default NULL COMMENT '支行名称',
   `regionid` int(11) default NULL COMMENT '开户地区id',
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户银行卡';
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='用户银行卡';
 
 -- ----------------------------
 -- Records of user_account
 -- ----------------------------
+INSERT INTO `user_account` VALUES ('1', '3', '2016-08-06 11:31:01', '1', '热', '让人', null, 'bb', '110100');
+INSERT INTO `user_account` VALUES ('2', '3', '2016-08-06 12:40:05', '2', '信息', '21554012454535353', null, '嘎嘎', '110100');
+INSERT INTO `user_account` VALUES ('3', '3', '2016-08-06 12:56:08', '3', '日3额', '热 ', null, '放大', '120101');
+INSERT INTO `user_account` VALUES ('4', '3', '2016-08-06 14:05:48', '10', 'gg', '1252465235656323', null, '支行个', '421200');
 
 -- ----------------------------
 -- Table structure for `user_auth_info`
@@ -4685,4 +4694,4 @@ CREATE TABLE `user_money` (
 -- ----------------------------
 -- Records of user_money
 -- ----------------------------
-INSERT INTO `user_money` VALUES ('1', '3', 'ifS7tw1E6a7Yx0lPE3rcSw==', '100.00', '10.00', '90.00', '0');
+INSERT INTO `user_money` VALUES ('1', '3', 'ifS7tw1E6a7Yx0lPE3rcSw==', '100.00', '283.00', '213.00', '0');
