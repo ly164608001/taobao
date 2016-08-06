@@ -1,6 +1,7 @@
 package com.lxhrainy.myjz.admin.trace.service.impl;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.lxhrainy.core.common.service.AbstractBaseServiceImpl;
 import com.lxhrainy.myjz.admin.trace.dao.ITraceWithdrawlsDao;
 import com.lxhrainy.myjz.admin.trace.model.TraceWithdrawls;
+import com.lxhrainy.myjz.admin.trace.oe.TraceWithdrawlsVO;
 import com.lxhrainy.myjz.admin.trace.service.ITraceWithdrawlsService;
 import com.lxhrainy.myjz.admin.user.model.UserMoney;
 import com.lxhrainy.myjz.admin.user.service.IUserMoneyService;
@@ -52,6 +54,11 @@ public class TraceWithdrawlsServiceImpl extends
 		model.setStatus(Global.AUDIT_INIT);
 		dao.insert(model);
 		return 1;
+	}
+
+	@Override
+	public List<TraceWithdrawls> getListForMobile(TraceWithdrawlsVO vo) {
+		return dao.getListForMobile(vo);
 	}
 	
 }

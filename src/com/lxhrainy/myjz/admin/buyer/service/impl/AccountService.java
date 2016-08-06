@@ -2,6 +2,7 @@ package com.lxhrainy.myjz.admin.buyer.service.impl;
 
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,6 +14,7 @@ import com.lxhrainy.myjz.admin.buyer.model.AccountBasicInfo;
 import com.lxhrainy.myjz.admin.buyer.model.AccountInfo;
 import com.lxhrainy.myjz.admin.buyer.model.AccountReceiptAddress;
 import com.lxhrainy.myjz.admin.buyer.model.AccountVpnInfo;
+import com.lxhrainy.myjz.admin.buyer.oe.AccountVO;
 import com.lxhrainy.myjz.admin.buyer.service.IAccountBasicInfoService;
 import com.lxhrainy.myjz.admin.buyer.service.IAccountReceiptAddressService;
 import com.lxhrainy.myjz.admin.buyer.service.IAccountService;
@@ -113,6 +115,11 @@ implements IAccountService  {
 		
 		dao.updateStatus(id,updateSataus);
 		return 1;
+	}
+
+	@Override
+	public List<AccountInfo> getListForMobile(AccountVO vo) {
+		return dao.getListForMobile(vo);
 	}
 
 }

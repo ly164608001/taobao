@@ -37,13 +37,19 @@ import com.lxhrainy.core.utils.StringUtil;
 import com.lxhrainy.core.utils.oConvertUtils;
 import com.lxhrainy.myjz.admin.adv.model.AdvertInfo;
 import com.lxhrainy.myjz.admin.adv.service.IAdvertInfoService;
+import com.lxhrainy.myjz.admin.buyer.model.AccountInfo;
 import com.lxhrainy.myjz.admin.buyer.model.LevelInfo;
+import com.lxhrainy.myjz.admin.buyer.oe.AccountVO;
 import com.lxhrainy.myjz.admin.buyer.oe.LevelVO;
 import com.lxhrainy.myjz.admin.buyer.service.IAccountService;
 import com.lxhrainy.myjz.admin.buyer.service.ILevelService;
 import com.lxhrainy.myjz.admin.task.model.ComplainType;
 import com.lxhrainy.myjz.admin.task.model.TaskStatistics;
 import com.lxhrainy.myjz.admin.task.model.Tips;
+import com.lxhrainy.myjz.admin.trace.model.TraceWithdrawls;
+import com.lxhrainy.myjz.admin.trace.oe.TraceWithdrawlsVO;
+import com.lxhrainy.myjz.admin.trace.service.ITraceWithdrawlsService;
+import com.lxhrainy.myjz.admin.user.model.UserAccount;
 import com.lxhrainy.myjz.admin.user.model.UserConfig;
 import com.lxhrainy.myjz.admin.user.model.UserMoney;
 import com.lxhrainy.myjz.admin.user.service.IUserConfigService;
@@ -73,6 +79,9 @@ public class UserApiServiceImpl extends AbstractBaseServiceImpl<IUserInfoDao, Us
 	private IAccountService accountService;
 	@Autowired
 	private IAdvertInfoService advertInfoService;
+	@Autowired
+	private ITraceWithdrawlsService withdrawlsService;
+	
 	@Override
 	public ResultJson adlist(ApiParams params) {
 		ResultJson rj = new ResultJson();
@@ -146,6 +155,7 @@ public class UserApiServiceImpl extends AbstractBaseServiceImpl<IUserInfoDao, Us
 		return rj;
 	}
 	@Override
+	@Transactional(readOnly = false)
 	public ResultJson msgread(ApiParams params) {
 		ResultJson rj = new ResultJson();
 		rj.setError_code(ResultJson.ERROR_CODE_PARAMETERS);
@@ -181,6 +191,7 @@ public class UserApiServiceImpl extends AbstractBaseServiceImpl<IUserInfoDao, Us
 		return rj;
 	}
 	@Override
+	@Transactional(readOnly = false)
 	public ResultJson msgdel(ApiParams params) {
 		ResultJson rj = new ResultJson();
 		rj.setError_code(ResultJson.ERROR_CODE_PARAMETERS);
@@ -217,6 +228,7 @@ public class UserApiServiceImpl extends AbstractBaseServiceImpl<IUserInfoDao, Us
 		return rj;
 	}
 	@Override
+	@Transactional(readOnly = false)
 	public ResultJson msgset(ApiParams params) {
 		ResultJson rj = new ResultJson();
 		rj.setError_code(ResultJson.ERROR_CODE_PARAMETERS);
@@ -378,88 +390,213 @@ public class UserApiServiceImpl extends AbstractBaseServiceImpl<IUserInfoDao, Us
 	}
 	@Override
 	public ResultJson buyerAccountList(ApiParams params) {
-		// TODO accountService
-		return null;
+		ResultJson rj = new ResultJson();
+		rj.setError_code(ResultJson.ERROR_CODE_PARAMETERS);
+		rj.setMessage("参数错误");
+		if (oConvertUtils.isNotEmpty(params)) {
+			UserInfo loginUser = ApiCacheUtil.getLoginUser();
+			if (oConvertUtils.isNotEmpty(loginUser)) {
+				int offsetid = oConvertUtils.getInt(params.getOffsetid());
+				int count = oConvertUtils.getInt(params.getCount(),20);
+				
+				AccountVO vo = new AccountVO();
+				AccountInfo model = new AccountInfo();
+				model.setCreateuser(loginUser);
+				vo.setOffsetid(offsetid);
+				vo.setCount(count);
+				
+				List<AccountInfo> accountList = accountService.getListForMobile(vo);
+				
+				JSONObject result = new JSONObject();
+				List<JSONObject> list = new ArrayList<JSONObject>();
+				if (oConvertUtils.isNotEmpty(accountList) && accountList.size() > 0) {
+					for (AccountInfo account : accountList) {
+						JSONObject accountObject = new JSONObject();
+						accountObject.put("account", account.getAccountno());
+						accountObject.put("accountid", account.getId());
+						accountObject.put("accounttype", ApiConstant.TAOBAO);
+						accountObject.put("status", account.getStatus());
+						if(account.getLevel() != null){
+							String tags = account.getLevel().getName();
+							if(account.getIdentification().intValue() == ApiConstant.YES){
+								tags += ",实名";
+							}
+							accountObject.put("tags", tags);
+						}else{
+							accountObject.put("tags", "未实名");
+						}
+						list.add(accountObject);
+					}
+				}
+				if(list.size() == count){
+					result.put("isend", false);
+				}else{
+					result.put("isend", true);
+				}
+				result.put("list", list);
+				rj.addSuccessMsg("成功",result);
+			}
+		}
+		return rj;
 	}
 	@Override
+	@Transactional(readOnly = false)
 	public ResultJson buyerAccountAdd(ApiParams params) {
-		// TODO Auto-generated method stub
-		return null;
+		ResultJson rj = new ResultJson();
+		rj.setError_code(ResultJson.ERROR_CODE_PARAMETERS);
+		rj.setMessage("参数错误");
+		if (oConvertUtils.isNotEmpty(params)
+				&& oConvertUtils.isNotEmpty(params.getAccount())
+				&& oConvertUtils.isNotEmpty(params.getLevel())
+				&& oConvertUtils.isNotEmpty(params.getLevelimage())) {
+			UserInfo loginUser = ApiCacheUtil.getLoginUser();
+			if (oConvertUtils.isNotEmpty(loginUser)) {
+				AccountInfo accountInfo = new AccountInfo();
+				accountInfo.setCreateuser(loginUser);
+				accountInfo.setCreatetime(new Date());
+				accountInfo.setAuditstatus(ApiConstant.AUDIT_INIT);
+				accountInfo.setLevelpic(params.getLevelimage());
+				LevelInfo level = new LevelInfo();
+				level.setId(oConvertUtils.getInt(params.getLevel()));
+				accountInfo.setLevel(level);
+				accountInfo.setAccountno(params.getAccount());
+				
+				int result = -1;
+				if(oConvertUtils.isNotEmpty(params.getAccountid())){
+					accountInfo.setId(oConvertUtils.getInt(params.getAccountid()));
+					result = accountService.update(accountInfo);
+				}else{
+					result = accountService.save(accountInfo);
+				}
+				if(result != -1){
+					rj.setSuccess(true);
+					rj.setError_code(ResultJson.SUCCESS);
+					rj.setMessage("操作成功");
+				}else{
+					rj.setError_code(ResultJson.ERROR_CODE_GENERAL);
+					rj.setSuccess(false);
+					rj.setMessage("操作失败");
+				}
+			}
+		}
+		return rj;
 	}
 	@Override
 	public ResultJson withdrawFee(ApiParams params) {
-		// TODO Auto-generated method stub
-		return null;
+		ResultJson rj = new ResultJson();
+		rj.setError_code(ResultJson.ERROR_CODE_PARAMETERS);
+		rj.setMessage("参数错误");
+		if (oConvertUtils.isNotEmpty(params)
+				&& oConvertUtils.isNotEmpty(params.getBank())
+				&& oConvertUtils.isNotEmpty(params.getCosttime())
+				&& oConvertUtils.isNotEmpty(params.getMoney())) {
+			JSONObject result = new JSONObject();
+			if((oConvertUtils.getInt(params.getCosttime()) + 1) == ApiConstant.WITHDRAWLS_TYPE_NORMAL){
+				//TODO 正常提现
+				result.put("fee", "0.00");
+			}else{
+				//快速提现
+				result.put("fee", "1.00");
+			}
+			rj.addSuccessMsg("成功",result);
+		}
+		return rj;
 	}
 	@Override
 	public ResultJson withdrawal(ApiParams params) {
 		ResultJson rj = new ResultJson();
 		rj.setError_code(ResultJson.ERROR_CODE_PARAMETERS);
 		rj.setMessage("参数错误");
-		if (oConvertUtils.isNotEmpty(params) 
-				&& StringUtil.isNotEmpty(params.getBankid())
-				&& StringUtil.isNotEmpty(params.getFee())
-				&& StringUtil.isNotEmpty(params.getMoney())
-				&& StringUtil.isNotEmpty(params.getPassword())
-				&& StringUtil.isNotEmpty(params.getCosttime())){
-			double money = oConvertUtils.getDouble(params.getMoney(), 0);
-			if (money == 0) {
-				rj.setError_code(ResultJson.ERROR_CODE_PARAMETERS);
-				rj.setMessage("提款金额错误");
-				return rj;
-			}
+		if (oConvertUtils.isNotEmpty(params)
+				&& oConvertUtils.isNotEmpty(params.getBankid())
+				&& oConvertUtils.isNotEmpty(params.getCosttime())
+				&& oConvertUtils.isNotEmpty(params.getFee())
+				&& oConvertUtils.isNotEmpty(params.getMoney())
+				&& oConvertUtils.isNotEmpty(params.getPassword())) {
 			UserInfo loginUser = ApiCacheUtil.getLoginUser();
 			if (oConvertUtils.isNotEmpty(loginUser)) {
-				//TODO 获取用户支付密码进行验证
+				//验证密码
 				UserMoney userMoney = userMoneyService.getByUserId(loginUser.getId());
-				if (oConvertUtils.isNotEmpty(userMoney)) {
-					/*String password = PasswordUtil.encrypt(mobileUser.getUsername(), params.getPassword(), PasswordUtil.getStaticSalt());
-					if (!password.equals(account.getPaypassword())) {
-						rj.setError_code(ResultJson.ERROR_CODE_PASSWORD);
-						rj.setMessage("支付密码错误");
-						return rj;
-					}*/
-					/*TraceEntity traceEntity = mobileAccountService.withdrawal(account, type, money);
-					if (oConvertUtils.isNotEmpty(traceEntity)) {
-						
-						WithdrawalEntity withdrawalEntity = new WithdrawalEntity();
-						withdrawalEntity.setAccount(params.getAccount());
-						withdrawalEntity.setCreatetime(DateUtils.getDate());
-						withdrawalEntity.setMemo(params.getName());
-						withdrawalEntity.setMobileuser(mobileUser);
-						withdrawalEntity.setMoney(money);
-						withdrawalEntity.setStatus(1);
-						//withdrawalEntity.setSerial(WithdrawalEntity.getNo());
-						withdrawalEntity.setType(type);
-						withdrawalEntity.setTraceEntity(traceEntity);
-						save(withdrawalEntity);
-						
-						if (oConvertUtils.isNotEmpty(withdrawalEntity)) {
-							traceEntity.setMemo("提现账号：" + params.getAccount() + "   姓名：" + params.getName());
-							JSONObject jsonObject = new JSONObject();
-							jsonObject.put("serial_num", traceEntity.getTraceno());
-						    jsonObject.put("product", "提现");
-							rj.addSuccessMsg("申请成功，请等待管理员处理", jsonObject);
-							return rj;
-						}
-					}*/
+				if(encrptPassword(params.getPassword()).equals(userMoney.getPaypassword())){
+					TraceWithdrawls withdrawls = new TraceWithdrawls();
+					UserAccount account = new UserAccount();
+					account.setId(oConvertUtils.getInt(params.getBankid()));
+					withdrawls.setAccount(account);
+					//withdrawls.setFinishtime(DateUtil.str2Date(params.getCosttime(), DateUtil.date_sdf));
+					withdrawls.setMoney(oConvertUtils.getDouble(params.getMoney(),0.0));
+					withdrawls.setCommission(oConvertUtils.getDouble(params.getFee(),0.0));
+					withdrawls.setArrivalmoney(oConvertUtils.getDouble(params.getMoney(),0.0));
+					withdrawls.setStatus(ApiConstant.WITHDRAWLS_STATUS_INIT);
+					withdrawls.setUser(loginUser);
+					withdrawls.setType(oConvertUtils.getInt(params.getCosttime()+1));
+					withdrawls.setWithdrawalno(StringUtil.getRandomString(16));
+					
+					int result = withdrawlsService.save(withdrawls);
+					
+					if(result != -1){
+						rj.setSuccess(true);
+						rj.setError_code(ResultJson.SUCCESS);
+						rj.setMessage("提现成功");
+					}else{
+						rj.setError_code(ResultJson.ERROR_CODE_GENERAL);
+						rj.setSuccess(false);
+						rj.setMessage("提现失败");
+					}
+					
+				}else{
 					rj.setError_code(ResultJson.ERROR_CODE_GENERAL);
-					rj.setMessage("申请失败");
-				} else {
-					rj.setError_code(ResultJson.ERROR_CODE_USER_NOT_EXIST);
-					rj.setMessage("账号不存在");
+					rj.setSuccess(false);
+					rj.setMessage("密码错误");
 				}
-			} else {
-				rj.setError_code(ResultJson.ERROR_CODE_USER_NOT_EXIST);
-				rj.setMessage("用户不存在");
-			} 
+			}
 		}
 		return rj;
 	}
 	@Override
 	public ResultJson withdrawList(ApiParams params) {
-		// TODO Auto-generated method stub
-		return null;
+		ResultJson rj = new ResultJson();
+		rj.setError_code(ResultJson.ERROR_CODE_PARAMETERS);
+		rj.setMessage("参数错误");
+		if (oConvertUtils.isNotEmpty(params)) {
+			UserInfo loginUser = ApiCacheUtil.getLoginUser();
+			if (oConvertUtils.isNotEmpty(loginUser)) {
+				int offsetid = oConvertUtils.getInt(params.getOffsetid());
+				int count = oConvertUtils.getInt(params.getCount(),20);
+				
+				TraceWithdrawlsVO vo = new TraceWithdrawlsVO();
+				TraceWithdrawls model = new TraceWithdrawls();
+				model.setUser(loginUser);
+				vo.setOffsetid(offsetid);
+				vo.setCount(count);
+				
+				List<TraceWithdrawls> withdrawlsList = withdrawlsService.getListForMobile(vo);
+				
+				JSONObject result = new JSONObject();
+				List<JSONObject> list = new ArrayList<JSONObject>();
+				if (oConvertUtils.isNotEmpty(withdrawlsList) && withdrawlsList.size() > 0) {
+					for (TraceWithdrawls withdrawls : withdrawlsList) {
+						JSONObject withdrawlsObject = new JSONObject();
+						withdrawlsObject.put("account", withdrawls.getAccount().getAccountno());
+						withdrawlsObject.put("desc", "");
+						withdrawlsObject.put("fee", withdrawls.getCommission());
+						withdrawlsObject.put("money", withdrawls.getMoney());
+						withdrawlsObject.put("profit", withdrawls.getArrivalmoney());
+						withdrawlsObject.put("status", withdrawls.getStatus());
+						withdrawlsObject.put("time", withdrawls.getCreatetime());
+						withdrawlsObject.put("withdrawid", withdrawls.getId());
+						list.add(withdrawlsObject);
+					}
+				}
+				if(list.size() == count){
+					result.put("isend", false);
+				}else{
+					result.put("isend", true);
+				}
+				result.put("list", list);
+				rj.addSuccessMsg("成功",result);
+			}
+		}
+		return rj;
 	}
 	@Override
 	public ResultJson incomeList(ApiParams params) {

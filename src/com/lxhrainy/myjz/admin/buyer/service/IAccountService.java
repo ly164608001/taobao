@@ -1,7 +1,10 @@
 package com.lxhrainy.myjz.admin.buyer.service;
 
+import java.util.List;
+
 import com.lxhrainy.core.common.service.IBaseService;
 import com.lxhrainy.myjz.admin.buyer.model.AccountInfo;
+import com.lxhrainy.myjz.admin.buyer.oe.AccountVO;
 
 /**
  * 买家小号服务接口
@@ -31,5 +34,12 @@ public interface IAccountService extends IBaseService<AccountInfo, Integer>{
 	 * @param ID
 	 */
 	public int updateSort(int id,int sort);
+
+	/**
+	 * 手机端获取买号列表
+	 * @param vo
+	 * @return
+	 */
+	List<AccountInfo> getListForMobile(AccountVO vo);
 
 }

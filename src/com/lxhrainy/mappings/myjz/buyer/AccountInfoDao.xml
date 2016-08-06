@@ -19,7 +19,8 @@
 		T.audittime AS "audittime",
 		
 		L.icon AS "level.icon",
-		L.iconnum AS "level.iconnum"
+		L.iconnum AS "level.iconnum",
+		L.name AS "level.name"
 	</sql>
 	
 	<sql id="buyerAccountInfoJoins">
@@ -141,5 +142,29 @@
 		DELETE FROM buyer_account_info
 		WHERE id = #{id}
 	</update>
+	
+	<!-- 手机端获取买号列表 -->
+	<select id="getListForMobile" resultType="AccountInfo">
+		SELECT 
+			<include refid="buyerAccountInfoColumns"/>
+		FROM buyer_account_info T
+			<include refid="buyerAccountInfoJoins"/>
+		<if test="condition!=null">
+			<where>
+				<if test="condition.model != null">
+					<if test="condition.model.user != null">
+						<if test="condition.model.user.id != null">
+							AND T.userid = #{condition.model.user.id}
+						</if>
+					</if>
+				</if>
+				<if test="condition.offsetid != null">
+					AND T.id &lt; #{condition.offsetid}
+				</if>
+			</where>
+		order by T.id desc
+		limit 0,${condition.count}
+		</if>
+	</select>
 	
 </mapper>

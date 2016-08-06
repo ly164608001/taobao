@@ -83,6 +83,9 @@ public class ApiParams {
 	private String money;
 	//提现银行卡
 	private String bankid;
+	//银行0:中国建设银行;1:中国工商银行;2:中国农业银行;3:中国银行;4:招商银行;5:中国交通银行;
+	//6:兴业银行;7:广发银行;8:中国民生银行;9:中国邮政储蓄银行;
+	private String bank;
 	/**end提现**/
 	
 	/**start密码**/
@@ -91,6 +94,49 @@ public class ApiParams {
 	private String type;
 	/**end密码**/
 	
+	/**start 买号**/
+	//买号名称
+	private String account;
+	//买号ID
+	private String accountid;
+	//买号类型 0:淘宝买号;1:京东买号
+	private String accounttype;
+	//买号等级，有配置接口获取可选项
+	private String level;
+	//等级图片
+	private String levelimage;
+	/**end 买号**/
+	
+	public String getAccount() {
+		return account;
+	}
+	public void setAccount(String account) {
+		this.account = account;
+	}
+	public String getAccountid() {
+		return accountid;
+	}
+	public void setAccountid(String accountid) {
+		this.accountid = accountid;
+	}
+	public String getAccounttype() {
+		return accounttype;
+	}
+	public void setAccounttype(String accounttype) {
+		this.accounttype = accounttype;
+	}
+	public String getLevel() {
+		return level;
+	}
+	public void setLevel(String level) {
+		this.level = level;
+	}
+	public String getLevelimage() {
+		return levelimage;
+	}
+	public void setLevelimage(String levelimage) {
+		this.levelimage = levelimage;
+	}
 	public String getOldpassword() {
 		return oldpassword;
 	}
@@ -144,6 +190,12 @@ public class ApiParams {
 	}
 	public void setMoney(String money) {
 		this.money = money;
+	}
+	public String getBank() {
+		return bank;
+	}
+	public void setBank(String bank) {
+		this.bank = bank;
 	}
 	public String getBankid() {
 		return bankid;

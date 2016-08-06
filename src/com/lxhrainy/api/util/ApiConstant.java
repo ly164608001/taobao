@@ -21,6 +21,11 @@ public class ApiConstant {
 	
 	public static final int MSG_READ = 1;
 	
+	
+	public static final int TAOBAO = 0;
+	
+	public static final int JINGDONG = 1;
+	
 	/** 
 	 * 用户启用
 	 *  value : 1
@@ -31,4 +36,22 @@ public class ApiConstant {
 	 *  value : 2
 	 */
 	public static final int API_USER_FORBIDDEN = 2;
+	
+	public static final int YES = 1;
+	
+	public static final int NO = 0;
+	
+	//审核状态 0 初始待审核  -2 取消 1通过 -1不通过
+	public final static int AUDIT_INIT = 0;
+	public final static int AUDIT_CANCEL = -2;
+	public final static int AUDIT_PASS = 1;
+	public final static int AUDIT_REJECT = -1;
+	
+	//提现状态
+	public final static int WITHDRAWLS_STATUS_INIT = 0;
+	public final static int WITHDRAWLS_STATUS_SUCC = 1;//成功
+	public final static int WITHDRAWLS_STATUS_FAIL = -1;//失败
+	//1正常到账 2快速到账
+	public final static int WITHDRAWLS_TYPE_NORMAL = 1;
+	public final static int WITHDRAWLS_TYPE_QUICK = 2;
 }
