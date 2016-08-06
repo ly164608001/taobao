@@ -92,4 +92,28 @@ implements IUserMoneyService {
 		return "";
 	}
 	
+	/**
+	 * 冻结金额
+	 * @param money 提现金额
+	 * @param moneyInfo
+	 * @return 1 成功
+	 * 		-1 可用余额不足
+	 */
+	@Transactional(readOnly = false)
+	public int frozonMoney(UserMoney moneyInfo,double money) {
+		
+		Double useableMoney = moneyInfo.getUsablebalance();
+		//可用金额判断
+		if(useableMoney < money){
+			return -1;
+		}
+		
+		//更新可用金额
+		useableMoney = useableMoney - money;
+		moneyInfo.setUsablebalance(useableMoney);
+		moneyInfo.setFrozenbalance(moneyInfo.getFrozenbalance()+money);
+		this.update(moneyInfo);
+		return 1;
+	}
+	
 }

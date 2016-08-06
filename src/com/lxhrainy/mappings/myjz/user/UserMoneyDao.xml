@@ -83,7 +83,7 @@
 	
 	<update id="update">
 		UPDATE user_money SET 	
-			<if test="userid !=null">
+			<if test="user !=null and user.id !=null">
 			userid = #{user.id},
 			</if>	
 			<if test="allbalance !=null">
@@ -99,8 +99,9 @@
 			deleted = #{deleted},
 			</if>	
 			<if test="paypassword !=null">
-			paypassword = #{paypassword}
+			paypassword = #{paypassword},
 			</if>
+			id = #{id}
 		WHERE id = #{id}
 	</update>
 	

@@ -6,15 +6,18 @@
 		T.id AS "id",
 		T.userid AS "user.id",
 		T.createtime AS "createtime",
-		T.bankid AS "bankid",
+		T.bankid AS "bank.id",
 		T.accountname AS "accountname",
 		T.accountno AS "accountno",
 		T.region AS "region",
-		T.regionid AS "regionid",
-		T.bankname AS "bankname"
+		T.regionid AS "area.id",
+		T.bankname AS "bankname",
+		
+		B.bankname AS "bank.bankname"
 	</sql>
 	
 	<sql id="userAccountJoins">
+		LEFT JOIN basic_bank B ON B.id = T.bankid
 	</sql>
     
     <sql id="where">
@@ -61,6 +64,14 @@
 		<include refid="where"/>
 	</select>
 	
+	<select id="getListByUser" resultType="UserAccount">
+		SELECT 
+			<include refid="userAccountColumns"/>
+		FROM user_account T
+		<include refid="userAccountJoins"/>
+		WHERE T.userid = #{userid}
+	</select>
+	
 	<insert id="insert">
 		INSERT INTO user_account(
 			id,
@@ -76,11 +87,11 @@
 			#{id},
 			#{user.id},
 			#{createtime},
-			#{bankid},
+			#{bank.id},
 			#{accountname},
 			#{accountno},
 			#{region},
-			#{region.id},
+			#{area.id},
 			#{bankname}
 		)
 	</insert>
@@ -89,7 +100,7 @@
 		UPDATE user_account SET 	
 			userid = #{userid},
 			createtime = #{createtime},
-			bankid = #{bankid},
+			bankid = #{bank.id},
 			accountname = #{accountname},
 			accountno = #{accountno},
 			region = #{region},

@@ -74,6 +74,23 @@
 				$('#arrivalmoneyInput').val(arrivalmoney);
 			});
 			
+			
+			$('#btn-submit').click(function(){
+				$.ajax({
+					type : 'get',
+					 url : basePath + 'front/buyer/money/doWithdrawals.htm',
+					data : $('#submitForm').serialize(),
+					dataType : 'json',
+					success : function(result){
+						if(result.success){
+							top.layer.msg('提现申请已提交');
+							$('#submitForm')[0].reset();
+						}else{
+							top.layer.msg(result.msg);
+						}
+					}
+				}); 
+			});
 		});
 		
 		function addAccountCard(){
@@ -109,10 +126,17 @@
 		<span class="orange">重要提示：</span>
 		请确认姓名与您申请提现的银行卡的开户姓名是否一致，若不一致提现会失败！
 	</p>
+	
+	<form method="post" class="form form-horizontal" id="submitForm">
+	
 	<div class="btnWrap clearfix">
-		<input class="btn radius btn-secondary f-r" type="button" value="添加提现银行卡" onclick="addAccountCard();"></div>
+		<input class="btn radius btn-secondary f-r" type="button" value="添加提现银行卡" onclick="addAccountCard();" />
+		<c:forEach items="${bankcardlist}" var="bankcard">
+			<input type="radio" name="account.id" value="${bankcard.id}"/>${bankcard.bank.bankname}&nbsp;${bankcard.accountno}<br/>
+		</c:forEach>
+	</div>
+	
 	<div class="moneyOrder mt10">
-		<form action="" method="post" class="form form-horizontal" id="demoform-1">
 			<legend></legend>
 			<div class="row cl">
 				<label class="form-label col-xs-4 col-sm-3">当前账户余额：</label>
@@ -178,9 +202,9 @@
 			</div>
 			<div class="row cl">
 				<div class="col-xs-2 col-sm-4 btnWrap">
-					<input class="btn radius btn-secondary btn-ti" type="submit" value="提现"></div>
+					<input class="btn radius btn-secondary btn-ti" id="btn-submit" type="button" value="提现"></div>
 			</div>
-		</form>
+		
 		<div class="moneyTips black-remind">
 			<i></i>
 			<h5>温馨提示：</h5>
@@ -203,6 +227,8 @@
 			<p>5000元以上：每次1元；</p>
 		</div>
 	</div>
+	
+	</form>
 </div>
 </body>
 </html>

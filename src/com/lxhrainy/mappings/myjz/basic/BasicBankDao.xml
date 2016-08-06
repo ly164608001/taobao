@@ -10,7 +10,7 @@
     <select id="findAllList" resultType="BasicBank">
 		SELECT 
 			<include refid="basicBankColumns"/>
-		FROM trace_record T
+		FROM basic_bank T
 	</select>
 	
 	<insert id="insert">

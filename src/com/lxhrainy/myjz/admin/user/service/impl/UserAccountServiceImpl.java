@@ -1,5 +1,8 @@
 package com.lxhrainy.myjz.admin.user.service.impl;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,4 +24,15 @@ public class UserAccountServiceImpl extends
 		AbstractBaseServiceImpl<IUserAccountDao, UserAccount, Integer>
 		implements IUserAccountService {
 
+	@Autowired
+	private IUserAccountDao dao;
+	
+	/**
+	 * 获取用户银行卡列表
+	 * @param userid
+	 * @return
+	 */
+	public List<UserAccount> getListByUser(int userid) {
+		return dao.getListByUser(userid);
+	}
 }

@@ -1,5 +1,9 @@
 package com.lxhrainy.myjz.admin.user.dao;
 
+import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
+
 import com.lxhrainy.core.annotation.MyBatisDao;
 import com.lxhrainy.core.common.dao.IBaseDao;
 import com.lxhrainy.myjz.admin.user.model.UserAccount;
@@ -12,5 +16,7 @@ import com.lxhrainy.myjz.admin.user.model.UserAccount;
  */
 @MyBatisDao
 public interface IUserAccountDao extends IBaseDao<UserAccount> {
+
+	List<UserAccount> getListByUser(@Param("userid")int userid);
 	
 }

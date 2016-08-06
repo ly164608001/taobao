@@ -10,4 +10,12 @@ import com.lxhrainy.myjz.admin.trace.model.TraceWithdrawls;
  */
 public interface ITraceWithdrawlsService extends IBaseService<TraceWithdrawls, Integer>{
 
+	/**
+	 * 提现申请
+	 * @param model
+	 * @return 1 成功
+	 *        -1 可用余额不足
+	 */
+	int applyWithdrawls(TraceWithdrawls model);
+
 }

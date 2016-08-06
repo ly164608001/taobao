@@ -7,16 +7,19 @@
 		T.money AS "money",
 		T.commission AS "commission",
 		T.arrivalmoney AS "arrivalmoney",
-		T.withdrawalsaccount AS "withdrawalsaccount",
+		T.withdrawalsaccount AS "account.id",
 		T.status AS "status",
 		T.createtime AS "createtime",
 		T.finishtime AS "finishtime",
 		T.withdrawalno AS "withdrawalno",
 		T.userid AS "user.id",
-		T.type AS "type"
+		T.type AS "type",
+		
+		A.accountno AS "account.accountno"
 	</sql>
 	
 	<sql id="traceWithdrawlsJoins">
+		LEFT JOIN user_account A ON A.id = T.withdrawalsaccount
 	</sql>
 	
 	<sql id="where">
@@ -75,7 +78,7 @@
 			status,
 			createtime,
 			finishtime,
-			withdrawalno.
+			withdrawalno,
 			userid,
 			type
 		) VALUES (
@@ -83,7 +86,7 @@
 			#{money},
 			#{commission},
 			#{arrivalmoney},
-			#{withdrawalsaccount},
+			#{account.id},
 			#{status},
 			#{createtime},
 			#{finishtime},
@@ -99,7 +102,7 @@
 			money = #{money},
 			commission = #{commission},
 			arrivalmoney = #{arrivalmoney},
-			withdrawalsaccount = #{withdrawalsaccount},
+			withdrawalsaccount = #{account.id},
 			status = #{status},
 			createtime = #{createtime},
 			finishtime = #{finishtime},

@@ -46,4 +46,12 @@ public interface IUserMoneyService extends IBaseService<UserMoney, Integer>{
 	 */
 	int updatePaypassword(int userid, String oldPassword, String newPassword);
 
+	/**
+	 * 冻结金额
+	 * @param money 提现金额
+	 * @param moneyInfo
+	 * @return 1 成功
+	 * 		-1 可用余额不足
+	 */
+	public int frozonMoney(UserMoney moneyInfo,double money);
 }

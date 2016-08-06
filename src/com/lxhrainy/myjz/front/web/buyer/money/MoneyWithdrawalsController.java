@@ -1,5 +1,7 @@
 package com.lxhrainy.myjz.front.web.buyer.money;
 
+import java.util.List;
+
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,7 +13,10 @@ import com.alibaba.fastjson.JSONObject;
 import com.lxhrainy.core.common.controller.BaseController;
 import com.lxhrainy.core.sys.model.UserInfo;
 import com.lxhrainy.myjz.admin.trace.model.TraceWithdrawls;
+import com.lxhrainy.myjz.admin.trace.service.ITraceWithdrawlsService;
+import com.lxhrainy.myjz.admin.user.model.UserAccount;
 import com.lxhrainy.myjz.admin.user.model.UserMoney;
+import com.lxhrainy.myjz.admin.user.service.IUserAccountService;
 import com.lxhrainy.myjz.admin.user.service.IUserMoneyService;
 
 /**
@@ -25,17 +30,10 @@ public class MoneyWithdrawalsController extends BaseController {
 	
 	@Autowired
 	private IUserMoneyService moneyService;
-	
-	/**
-	 * 添加银行卡
-	 * @return
-	 */
-	@RequestMapping("/addBankCard")
-	public ModelAndView addBankCard(){
-		
-		mv.setViewName("front/buyer/money/addBankCard");
-		return mv;
-	}
+	@Autowired
+	private IUserAccountService accountServcie;
+	@Autowired
+	private ITraceWithdrawlsService withdrawlsService;
 	
 	/**
 	 * 提现
@@ -43,8 +41,14 @@ public class MoneyWithdrawalsController extends BaseController {
 	 */
 	@RequestMapping("/withdrawals")
 	public ModelAndView withdrawals(){
-		UserMoney moneyModel = moneyService.getByUserId(this.getCurrentUser().getId());
+		UserInfo loginUser = this.getCurrentUser();
+		int userid = loginUser.getId();
+		//账户信息
+		UserMoney moneyModel = moneyService.getByUserId(userid);
+		//获取银行卡列表
+		List<UserAccount> bankcardlist = accountServcie.getListByUser(userid);
 		
+		mv.addObject("bankcardlist", bankcardlist);
 		mv.addObject("moneyInfo", moneyModel);
 		mv.setViewName("front/buyer/money/withdrawals");
 		return mv;
@@ -58,7 +62,7 @@ public class MoneyWithdrawalsController extends BaseController {
 	@ResponseBody
 	public JSONObject doWithdrawals(String paypassword,TraceWithdrawls model){
 		JSONObject rj = new JSONObject();
-		rj.put("seccess", false);
+		rj.put("success", false);
 		UserInfo loginUser = this.getCurrentUser();
 		
 		if(StringUtils.isEmpty(paypassword) || model == null || model.getMoney() == null){
@@ -72,6 +76,16 @@ public class MoneyWithdrawalsController extends BaseController {
 			return rj;
 		}
 		
+		//提现申请
+		model.setUser(loginUser);
+		int result = withdrawlsService.applyWithdrawls(model);
+		if(result == -1){
+			rj.put("msg", "可用余额不足，不可提现");
+			return rj;
+		}
+		
+		rj.put("success", true);
+		rj.put("msg", "提现申请已提交");
 		return rj;
 	}
 	

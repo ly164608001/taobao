@@ -3,7 +3,9 @@ package com.lxhrainy.myjz.admin.user.model;
 import java.util.Date;
 
 import com.lxhrainy.core.common.model.BaseModel;
+import com.lxhrainy.core.sys.model.SysArea;
 import com.lxhrainy.core.sys.model.UserInfo;
+import com.lxhrainy.myjz.admin.basic.model.BasicBank;
 
 /**
  * 用户银行卡Entity
@@ -16,19 +18,19 @@ public class UserAccount extends BaseModel {
 	private static final long serialVersionUID = 1L;
 	private UserInfo user; // 用户ID
 	private Date createtime; // 创建时间
-	private Integer bankid; // 所属银行
+	private BasicBank bank; // 所属银行
 	private String accountname; // 银行开户名
 	private String accountno; // 银行账号
 	private String region; // 开户行(省/市)
-	private Integer regionid; // 开户行(省/市id)
+	private SysArea area; // 开户行(省/市id)
 	private String bankname; // 支行名称
 
-	public Integer getRegionid() {
-		return regionid;
+	public SysArea getArea() {
+		return area;
 	}
 
-	public void setRegionid(Integer regionid) {
-		this.regionid = regionid;
+	public void setArea(SysArea area) {
+		this.area = area;
 	}
 
 	public UserInfo getUser() {
@@ -47,12 +49,12 @@ public class UserAccount extends BaseModel {
 		this.createtime = createtime;
 	}
 
-	public Integer getBankid() {
-		return bankid;
+	public BasicBank getBank() {
+		return bank;
 	}
 
-	public void setBankid(Integer bankid) {
-		this.bankid = bankid;
+	public void setBank(BasicBank bank) {
+		this.bank = bank;
 	}
 
 	public String getAccountname() {

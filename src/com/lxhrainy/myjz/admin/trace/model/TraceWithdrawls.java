@@ -4,6 +4,7 @@ import java.util.Date;
 
 import com.lxhrainy.core.common.model.BaseModel;
 import com.lxhrainy.core.sys.model.UserInfo;
+import com.lxhrainy.myjz.admin.user.model.UserAccount;
 
 /**
  * 交易提现Entity
@@ -18,12 +19,20 @@ public class TraceWithdrawls extends BaseModel {
 	private Double money; // 提现金额
 	private Double commission; // 手续费
 	private Double arrivalmoney; // 到账金额
-	private String withdrawalsaccount; // 提现账户
+	private UserAccount account; // 提现账户
 	private Integer status; // 提现状态
 	private Date createtime; // 提现时间
 	private Date finishtime; // 提现转账完成时间
 	private String withdrawalno; // 交易提现编号
 	private Integer type; // 交易提现类型
+
+	public UserAccount getAccount() {
+		return account;
+	}
+
+	public void setAccount(UserAccount account) {
+		this.account = account;
+	}
 
 	public Integer getType() {
 		return type;
@@ -55,14 +64,6 @@ public class TraceWithdrawls extends BaseModel {
 
 	public void setArrivalmoney(Double arrivalmoney) {
 		this.arrivalmoney = arrivalmoney;
-	}
-
-	public String getWithdrawalsaccount() {
-		return withdrawalsaccount;
-	}
-
-	public void setWithdrawalsaccount(String withdrawalsaccount) {
-		this.withdrawalsaccount = withdrawalsaccount;
 	}
 
 	public Integer getStatus() {
