@@ -15,6 +15,7 @@
 			//提现记录
 			$('#withdrawlsRecordSpan').click(function(){
 				window.location.href = basePath + 'front/buyer/money/withdrawlsRecord.htm';
+				$(this).addClass('current');
 			});
 			
 		});
@@ -30,7 +31,7 @@
 			<span class="current">账户明细</span>
 			<span id="withdrawlsRecordSpan">提现记录</span>
 		</div>
-		<div class="tabCon" style="display: block;">
+		<div>
 			<div class="search-tab mt20">
 				<ul>
 					<form id="searchForm" action="${basePath}front/buyer/money/moneyDetail.htm">
@@ -76,46 +77,6 @@
 								<td>${item.memo}</td>
 							</tr>
 						</c:forEach>
-					</tbody>
-				</table>
-			</div>
-			<div class="clearfix page-wrap"></div>
-		</div>
-		<div class="tabCon" style="display: none;">
-			<div class="search-tab mt20">
-				<ul>
-					<li class="tab02">
-
-						<span class="tab-title">时间范围：</span>
-						<span>
-							<input id="d4311" placeholder="请输入开始时间" class="Wdate write-time input-text radius size-M" type="text" onFocus="WdatePicker({dateFmt:&quot;yyyy-MM-dd HH:mm&quot;,maxDate:&quot;#F{$dp.$D(\'d4312\')||\'2020-10-01\'}&quot;})"/> 
-         					<span class="sprite">-</span>
-         					<input id="d4312" placeholder="请输入结束时间" class="Wdate write-time input-text radius size-M" type="text" onFocus="WdatePicker({dateFmt:&quot;yyyy-MM-dd HH:mm&quot;,minDate:&quot;#F{$dp.$D(\'d4311\')}&quot;,maxDate:&quot;2020-10-01&quot;})"/>
-						</span>
-						<input class="btn radius btn-secondary" type="button" value="查询"></li>
-				</ul>
-			</div>
-			<div class="workTable mt30">
-				<table class="table table-border table-bg">
-					<thead>
-						<tr>
-							<th>时间</th>
-							<th>提现金额</th>
-							<th>手续费</th>
-							<th>到账金额</th>
-							<th>体现账号</th>
-							<th>状态</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td>1</td>
-							<td>2</td>
-							<td>3</td>
-							<td>3</td>
-							<td>3</td>
-							<td>3</td>
-						</tr>
 					</tbody>
 				</table>
 			</div>
