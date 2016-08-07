@@ -4,15 +4,7 @@
     
     <resultMap id="UserAuthInfo" type="com.lxhrainy.myjz.admin.user.model.UserAuthInfo">
 		<id property="id" column="id" />
-		<result property="paypassword" column="paypassword" />
 		<result property="user.id" column="user.id" />
-		<result property="paypassword" column="paypassword" />
-		<result property="authphone" column="authphone" />
-		<result property="authphonetime" column="authphonetime" />
-		<result property="authemail" column="authemail" />
-		<result property="authemailtime" column="authemailtime" />
-		<result property="bindqq" column="bindqq" />
-		<result property="bindqqtime" column="bindqqtime" />
 		<result property="certificationstatus" column="certificationstatus" />
 		<result property="certificationtime" column="certificationtime" />
 		<result property="handletime" column="handletime" />
@@ -24,13 +16,6 @@
 	<sql id="userAuthInfoColumns">
 		T.id AS "id",
 		T.userid AS "user.id",
-		T.paypassword AS "paypassword",
-		T.authphone AS "authphone",
-		T.authphonetime AS "authphonetime",
-		T.authemail AS "authemail",
-		T.authemailtime AS "authemailtime",
-		T.bindqq AS "bindqq",
-		T.bindqqtime AS "bindqqtime",
 		T.certificationstatus AS "certificationstatus",
 		T.certificationtime AS "certificationtime",
 		T.handletime AS "handletime",
@@ -42,8 +27,10 @@
 		T.cardphoto AS "cardphoto",
 		T.handcardphoto AS "handcardphoto",
 		T.type AS "type",
-		T.openingbank AS "openingbank",
-		T.bankno AS "bankno"
+		
+		T.lifephoto AS "lifephoto",
+		T.stucardphoto AS "stucardphoto",
+		T.handstucardphoto AS "handstucardphoto"
 	</sql>
 	
 	<sql id="userAuthInfoJoins">
@@ -109,35 +96,35 @@
 		INSERT INTO user_auth_info(
 			id,
 			userid,
-			paypassword,
-			authphone,
-			authphonetime,
-			authemail,
-			authemailtime,
-			bindqq,
-			bindqqtime,
 			certificationstatus,
 			certificationtime,
 			handletime,
 			handler,
 			handlememo,
-			deleted
+			deleted,
+			realname,
+			certificateno,
+			cardphoto,
+			handcardphoto,
+			lifephoto,
+			stucardphoto,
+			handstucardphoto
 		) VALUES (
 			#{id},
 			#{user.id},
-			#{paypassword},
-			#{authphone},
-			#{authphonetime},
-			#{authemail},
-			#{authemailtime},
-			#{bindqq},
-			#{bindqqtime},
 			#{certificationstatus},
 			#{certificationtime},
 			#{handletime},
 			#{handler.id},
 			#{handlememo},
-			#{deleted}
+			#{deleted},
+			#{realname},
+			#{certificateno},
+			#{cardphoto},
+			#{handcardphoto},
+			#{lifephoto},
+			#{stucardphoto},
+			#{handstucardphoto}
 		)
 	</insert>
 	
@@ -147,27 +134,6 @@
 		<if test="user!=null and user.id!=null">
 			userid = #{user.id},
 		</if>
-		<if test="paypassword!=null and paypassword!=''">
-			paypassword = #{paypassword},
-		</if>
-		<if test="authphone!=null and authphone !='' ">
-			authphone = #{authphone},
-		</if>
-		<if test="authphonetime!=null">
-			authphonetime = #{authphonetime},
-			</if>
-		<if test="authemail !=null">
-			authemail = #{authemail},
-			</if>
-		<if test="authemailtime !=null" >
-			authemailtime = #{authemailtime},
-			</if>
-		<if test="bindqq !=null and bindqq !='' ">
-			bindqq = #{bindqq},
-			</if>
-		<if test="bindqqtime !=null">
-			bindqqtime = #{bindqqtime},
-			</if>
 		<if test="certificationstatus !=null">
 			certificationstatus = #{certificationstatus},
 			</if>
@@ -201,11 +167,15 @@
 		<if test="type!=null">
 			type = #{type},
 		</if>
-		<if test="openingbank!=null">
-			openingbank = #{openingbank},
+		
+		<if test="lifephoto!=null">
+			lifephoto = #{lifephoto},
 		</if>
-		<if test="bankno!=null">
-			bankno = #{bankno},
+		<if test="stucardphoto!=null">
+			stucardphoto = #{stucardphoto},
+		</if>
+		<if test="handstucardphoto!=null">
+			handstucardphoto = #{handstucardphoto},
 		</if>
 	</set>
 		WHERE id = #{id}

@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50096
 File Encoding         : 65001
 
-Date: 2016-08-06 17:04:56
+Date: 2016-08-07 23:53:33
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -4526,7 +4526,7 @@ CREATE TABLE `trace_withdrawls` (
   `type` int(1) default NULL COMMENT '提现类型 1正常到账 2快速到账',
   `userid` int(11) default NULL COMMENT '提现申请人',
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='交易提现表';
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COMMENT='交易提现表';
 
 -- ----------------------------
 -- Records of trace_withdrawls
@@ -4535,6 +4535,7 @@ INSERT INTO `trace_withdrawls` VALUES ('1', '6.00', '4.00', '2.00', '4', '0', '2
 INSERT INTO `trace_withdrawls` VALUES ('2', '100.00', '4.00', '96.00', '4', '0', '2016-08-06 16:54:49', null, null, '1', '3');
 INSERT INTO `trace_withdrawls` VALUES ('3', '8.00', '4.00', '4.00', '4', '0', '2016-08-06 16:55:45', null, null, '2', '3');
 INSERT INTO `trace_withdrawls` VALUES ('4', '9.00', '4.00', '5.00', '4', '0', '2016-08-06 17:02:12', null, null, '2', '3');
+INSERT INTO `trace_withdrawls` VALUES ('5', '11.00', '4.00', '7.00', '4', '0', '2016-08-07 22:33:32', null, null, '2', '3');
 
 -- ----------------------------
 -- Table structure for `user_account`
@@ -4567,13 +4568,8 @@ INSERT INTO `user_account` VALUES ('4', '3', '2016-08-06 14:05:48', '10', 'gg', 
 DROP TABLE IF EXISTS `user_auth_info`;
 CREATE TABLE `user_auth_info` (
   `id` int(11) NOT NULL auto_increment,
+  `type` varchar(11) default NULL COMMENT '证件类型(0:身份证，(身份证正面照、手持身份证照、生活照);1:学生证，(学生证正面照、手持学生证照);)',
   `userid` int(11) default NULL COMMENT '账号ID',
-  `authphone` varchar(32) default NULL COMMENT '认证手机',
-  `authphonetime` datetime default NULL COMMENT '手机认证时间',
-  `authemail` varchar(128) default NULL COMMENT '密保邮箱',
-  `authemailtime` datetime default NULL COMMENT '邮箱认证时间',
-  `bindqq` varchar(32) default NULL COMMENT '绑定的QQ号码',
-  `bindqqtime` datetime default NULL COMMENT '绑定QQ时间',
   `certificationstatus` int(1) default NULL COMMENT '实名认证状态',
   `certificationtime` datetime default NULL COMMENT '实名认证时间',
   `handletime` datetime default NULL COMMENT '实名认证处理时间',
@@ -4583,17 +4579,17 @@ CREATE TABLE `user_auth_info` (
   `realname` varchar(128) default NULL COMMENT '真实姓名',
   `certificateno` varchar(128) default NULL COMMENT '身份证号',
   `cardphoto` varchar(128) default NULL COMMENT '身份证正面照',
+  `lifephoto` varchar(128) default NULL COMMENT '生活照',
   `handcardphoto` varchar(128) default NULL COMMENT '手持身份证正面照',
-  `type` varchar(11) default NULL COMMENT '证件类型',
-  `openingbank` varchar(11) default NULL COMMENT '开户行',
-  `bankno` varchar(128) default NULL COMMENT '银行卡卡号',
+  `stucardphoto` varchar(128) default NULL COMMENT '学生证正面照',
+  `handstucardphoto` varchar(128) default NULL COMMENT '手持学生证照',
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='个人认证信息';
 
 -- ----------------------------
 -- Records of user_auth_info
 -- ----------------------------
-INSERT INTO `user_auth_info` VALUES ('1', '4', null, null, null, null, null, null, null, null, null, null, null, '0', null, null, null, null, null, null, null);
+INSERT INTO `user_auth_info` VALUES ('1', null, '4', null, null, null, null, null, '0', null, null, null, null, null, null, null);
 
 -- ----------------------------
 -- Table structure for `user_config`
@@ -4694,4 +4690,4 @@ CREATE TABLE `user_money` (
 -- ----------------------------
 -- Records of user_money
 -- ----------------------------
-INSERT INTO `user_money` VALUES ('1', '3', 'ifS7tw1E6a7Yx0lPE3rcSw==', '100.00', '283.00', '213.00', '0');
+INSERT INTO `user_money` VALUES ('1', '3', 'ifS7tw1E6a7Yx0lPE3rcSw==', '100.00', '272.00', '224.00', '0');
