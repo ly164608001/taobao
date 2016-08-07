@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.lxhrainy.core.common.service.AbstractBaseServiceImpl;
 import com.lxhrainy.myjz.admin.user.dao.IUserAccountDao;
 import com.lxhrainy.myjz.admin.user.model.UserAccount;
+import com.lxhrainy.myjz.admin.user.oe.UserAccountVO;
 import com.lxhrainy.myjz.admin.user.service.IUserAccountService;
 
 /**
@@ -35,4 +36,10 @@ public class UserAccountServiceImpl extends
 	public List<UserAccount> getListByUser(int userid) {
 		return dao.getListByUser(userid);
 	}
+
+	@Override
+	public List<UserAccount> getListForMobile(UserAccountVO vo) {
+		return dao.getListForMobile(vo);
+	}
+	
 }

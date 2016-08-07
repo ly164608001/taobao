@@ -53,7 +53,7 @@ public interface IBaseService<T extends BaseModel, PK extends Serializable> {
 	 * @return void    返回类型 
 	 * @throws
 	 */
-	public void deleteById(Integer id);
+	public int deleteById(Integer id);
 	
 	/**
 	 * @Title: getListByCondition 

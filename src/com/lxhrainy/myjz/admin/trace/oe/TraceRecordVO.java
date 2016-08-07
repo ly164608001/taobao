@@ -10,6 +10,10 @@ public class TraceRecordVO extends BaseVO {
 	private TraceRecord model;
 	private Date beginTime;
 	private Date endTime;
+	
+	private Integer offsetid;
+	
+	private Integer count;
 
 	public Date getBeginTime() {
 		return beginTime;
@@ -33,6 +37,22 @@ public class TraceRecordVO extends BaseVO {
 
 	public void setModel(TraceRecord model) {
 		this.model = model;
+	}
+
+	public Integer getOffsetid() {
+		return offsetid;
+	}
+
+	public void setOffsetid(Integer offsetid) {
+		this.offsetid = offsetid;
+	}
+
+	public Integer getCount() {
+		return count;
+	}
+
+	public void setCount(Integer count) {
+		this.count = count;
 	}
 
 }

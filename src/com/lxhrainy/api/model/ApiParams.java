@@ -107,6 +107,17 @@ public class ApiParams {
 	private String levelimage;
 	/**end 买号**/
 	
+	/**start 银行卡**/
+	//持卡人，默认与账户真实姓名一致
+	private String holder;
+	//支行名称
+	private String branch;
+	//卡号
+	private String card;
+	//开户地区具体到县/区
+	private String place;
+	/**end 银行卡**/
+	
 	public String getAccount() {
 		return account;
 	}
@@ -292,6 +303,30 @@ public class ApiParams {
 	}
 	public void setMessagetype(String messagetype) {
 		this.messagetype = messagetype;
+	}
+	public String getHolder() {
+		return holder;
+	}
+	public void setHolder(String holder) {
+		this.holder = holder;
+	}
+	public String getBranch() {
+		return branch;
+	}
+	public void setBranch(String branch) {
+		this.branch = branch;
+	}
+	public String getCard() {
+		return card;
+	}
+	public void setCard(String card) {
+		this.card = card;
+	}
+	public String getPlace() {
+		return place;
+	}
+	public void setPlace(String place) {
+		this.place = place;
 	}
 	
 }

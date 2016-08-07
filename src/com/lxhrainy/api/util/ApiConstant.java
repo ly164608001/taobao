@@ -54,4 +54,8 @@ public class ApiConstant {
 	//1正常到账 2快速到账
 	public final static int WITHDRAWLS_TYPE_NORMAL = 1;
 	public final static int WITHDRAWLS_TYPE_QUICK = 2;
+	//交易类型 1收入(任务奖金 YES) 2支出(提现NO)
+	public final static int TRACE_TYPE_OUT = 2;
+	public final static int TRACE_TYPE_IN = 1;
+	
 }

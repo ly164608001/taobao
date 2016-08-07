@@ -48,8 +48,8 @@ public abstract class AbstractBaseServiceImpl<D extends IBaseDao<T>, T extends B
 
 	@Override
 	@Transactional(readOnly = false)
-	public void deleteById(Integer id) {
-		dao.deleteById(id);
+	public int deleteById(Integer id) {
+		return dao.deleteById(id);
 	}
 
 	@Override

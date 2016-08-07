@@ -35,6 +35,6 @@ public interface IHelpMenuDao extends IBaseDao<HelpMenu> {
 	 * 删除所有子集
 	 * @param pids 格式为：',pid,' 
 	 */
-	void deleteAllChildren(@Param("pids")String pids);
+	int deleteAllChildren(@Param("pids")String pids);
 	
 }

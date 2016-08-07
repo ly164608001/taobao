@@ -37,6 +37,7 @@ import com.lxhrainy.core.utils.StringUtil;
 import com.lxhrainy.core.utils.oConvertUtils;
 import com.lxhrainy.myjz.admin.adv.model.AdvertInfo;
 import com.lxhrainy.myjz.admin.adv.service.IAdvertInfoService;
+import com.lxhrainy.myjz.admin.basic.model.BasicBank;
 import com.lxhrainy.myjz.admin.buyer.model.AccountInfo;
 import com.lxhrainy.myjz.admin.buyer.model.LevelInfo;
 import com.lxhrainy.myjz.admin.buyer.oe.AccountVO;
@@ -46,12 +47,17 @@ import com.lxhrainy.myjz.admin.buyer.service.ILevelService;
 import com.lxhrainy.myjz.admin.task.model.ComplainType;
 import com.lxhrainy.myjz.admin.task.model.TaskStatistics;
 import com.lxhrainy.myjz.admin.task.model.Tips;
+import com.lxhrainy.myjz.admin.trace.model.TraceRecord;
 import com.lxhrainy.myjz.admin.trace.model.TraceWithdrawls;
+import com.lxhrainy.myjz.admin.trace.oe.TraceRecordVO;
 import com.lxhrainy.myjz.admin.trace.oe.TraceWithdrawlsVO;
+import com.lxhrainy.myjz.admin.trace.service.ITraceRecordService;
 import com.lxhrainy.myjz.admin.trace.service.ITraceWithdrawlsService;
 import com.lxhrainy.myjz.admin.user.model.UserAccount;
 import com.lxhrainy.myjz.admin.user.model.UserConfig;
 import com.lxhrainy.myjz.admin.user.model.UserMoney;
+import com.lxhrainy.myjz.admin.user.oe.UserAccountVO;
+import com.lxhrainy.myjz.admin.user.service.IUserAccountService;
 import com.lxhrainy.myjz.admin.user.service.IUserConfigService;
 import com.lxhrainy.myjz.admin.user.service.IUserMoneyService;
 import com.lxhrainy.myjz.common.constant.Global;
@@ -81,6 +87,10 @@ public class UserApiServiceImpl extends AbstractBaseServiceImpl<IUserInfoDao, Us
 	private IAdvertInfoService advertInfoService;
 	@Autowired
 	private ITraceWithdrawlsService withdrawlsService;
+	@Autowired
+	private ITraceRecordService traceRecordService;
+	@Autowired
+	private IUserAccountService userAccountService;
 	
 	@Override
 	public ResultJson adlist(ApiParams params) {
@@ -600,23 +610,159 @@ public class UserApiServiceImpl extends AbstractBaseServiceImpl<IUserInfoDao, Us
 	}
 	@Override
 	public ResultJson incomeList(ApiParams params) {
-		// TODO Auto-generated method stub
-		return null;
+		ResultJson rj = new ResultJson();
+		rj.setError_code(ResultJson.ERROR_CODE_PARAMETERS);
+		rj.setMessage("参数错误");
+		if (oConvertUtils.isNotEmpty(params)) {
+			UserInfo loginUser = ApiCacheUtil.getLoginUser();
+			if (oConvertUtils.isNotEmpty(loginUser)) {
+				int offsetid = oConvertUtils.getInt(params.getOffsetid());
+				int count = oConvertUtils.getInt(params.getCount(),20);
+				
+				TraceRecordVO vo = new TraceRecordVO();
+				TraceRecord model = new TraceRecord();
+				model.setUser(loginUser);
+				vo.setOffsetid(offsetid);
+				vo.setCount(count);
+				List<TraceRecord> traceRecordList = traceRecordService.getListForMobile(vo);
+				JSONObject result = new JSONObject();
+				List<JSONObject> list = new ArrayList<JSONObject>();
+				if (oConvertUtils.isNotEmpty(traceRecordList) && traceRecordList.size() > 0) {
+					for (TraceRecord traceRecord : traceRecordList) {
+						JSONObject traceRecordObject = new JSONObject();
+						//交易类型 1收入(任务奖金) 2支出(提现)
+						traceRecordObject.put("iscost", traceRecord.getType().intValue()==ApiConstant.TRACE_TYPE_IN?true:false);
+						traceRecordObject.put("incomeid", traceRecord.getId());
+						traceRecordObject.put("money", traceRecord.getMoney());
+						traceRecordObject.put("desc", traceRecord.getMemo());
+						traceRecordObject.put("time", traceRecord.getTracetime());
+						list.add(traceRecordObject);
+					}
+				}
+				if(list.size() == count){
+					result.put("isend", false);
+				}else{
+					result.put("isend", true);
+				}
+				result.put("list", list);
+				rj.addSuccessMsg("成功",result);
+			}
+		}
+		return rj;
 	}
 	@Override
 	public ResultJson bankcardList(ApiParams params) {
-		// TODO Auto-generated method stub
-		return null;
+		ResultJson rj = new ResultJson();
+		rj.setError_code(ResultJson.ERROR_CODE_PARAMETERS);
+		rj.setMessage("参数错误");
+		if (oConvertUtils.isNotEmpty(params)) {
+			UserInfo loginUser = ApiCacheUtil.getLoginUser();
+			if (oConvertUtils.isNotEmpty(loginUser)) {
+				int offsetid = oConvertUtils.getInt(params.getOffsetid());
+				int count = oConvertUtils.getInt(params.getCount(),20);
+				
+				UserAccountVO vo = new UserAccountVO();
+				UserAccount model = new UserAccount();
+				model.setUser(loginUser);
+				vo.setOffsetid(offsetid);
+				vo.setCount(count);
+				List<UserAccount> userAccountList = userAccountService.getListForMobile(vo);
+				JSONObject result = new JSONObject();
+				List<JSONObject> list = new ArrayList<JSONObject>();
+				if (oConvertUtils.isNotEmpty(userAccountList) && userAccountList.size() > 0) {
+					for (UserAccount userAccount : userAccountList) {
+						JSONObject userAccountObject = new JSONObject();
+						userAccountObject.put("bankid", userAccount.getId());
+						userAccountObject.put("holder", userAccount.getAccountname());
+						userAccountObject.put("bank", userAccount.getBank().getId());
+						userAccountObject.put("card", userAccount.getAccountno());
+						list.add(userAccountObject);
+					}
+				}
+				if(list.size() == count){
+					result.put("isend", false);
+				}else{
+					result.put("isend", true);
+				}
+				result.put("list", list);
+				rj.addSuccessMsg("成功",result);
+			}
+		}
+		return rj;
 	}
 	@Override
 	public ResultJson bankcardAdd(ApiParams params) {
-		// TODO Auto-generated method stub
-		return null;
+		ResultJson rj = new ResultJson();
+		rj.setError_code(ResultJson.ERROR_CODE_PARAMETERS);
+		rj.setMessage("参数错误");
+		if (oConvertUtils.isNotEmpty(params)
+				&& oConvertUtils.isNotEmpty(params.getBank())
+				&& oConvertUtils.isNotEmpty(params.getBranch())
+				&& oConvertUtils.isNotEmpty(params.getCard())
+				&& oConvertUtils.isNotEmpty(params.getHolder())
+				&& oConvertUtils.isNotEmpty(params.getPassword())
+				&& oConvertUtils.isNotEmpty(params.getPlace())) {
+			UserInfo loginUser = ApiCacheUtil.getLoginUser();
+			if (oConvertUtils.isNotEmpty(loginUser)) {
+				//验证密码
+				UserMoney userMoney = userMoneyService.getByUserId(loginUser.getId());
+				if(encrptPassword(params.getPassword()).equals(userMoney.getPaypassword())){
+					UserAccount userAccount = new UserAccount();
+					
+					userAccount.setUser(loginUser);
+					userAccount.setCreatetime(new Date());
+					userAccount.setAccountname(params.getHolder());
+					userAccount.setAccountno(params.getCard());
+					userAccount.setRegion(params.getPlace());
+					userAccount.setBankname(params.getBranch());
+					BasicBank bank = new BasicBank();
+					bank.setId(oConvertUtils.getInt(params.getBank()));
+					userAccount.setBank(bank);
+					
+					int result = userAccountService.save(userAccount);
+					
+					if(result != -1){
+						rj.setSuccess(true);
+						rj.setError_code(ResultJson.SUCCESS);
+						rj.setMessage("添加成功");
+					}else{
+						rj.setError_code(ResultJson.ERROR_CODE_GENERAL);
+						rj.setSuccess(false);
+						rj.setMessage("添加失败");
+					}
+					
+				}else{
+					rj.setError_code(ResultJson.ERROR_CODE_GENERAL);
+					rj.setSuccess(false);
+					rj.setMessage("密码错误");
+				}
+			}
+		}
+		return rj;
 	}
 	@Override
 	public ResultJson bankcardDele(ApiParams params) {
-		// TODO Auto-generated method stub
-		return null;
+		ResultJson rj = new ResultJson();
+		rj.setError_code(ResultJson.ERROR_CODE_PARAMETERS);
+		rj.setMessage("参数错误");
+		if (oConvertUtils.isNotEmpty(params)
+				&& oConvertUtils.isNotEmpty(params.getBankid())) {
+			UserInfo loginUser = ApiCacheUtil.getLoginUser();
+			if (oConvertUtils.isNotEmpty(loginUser)) {
+				
+				int result = userAccountService.deleteById(oConvertUtils.getInt(params.getBankid()));
+				if(result != -1){
+					rj.setSuccess(true);
+					rj.setError_code(ResultJson.SUCCESS);
+					rj.setMessage("删除成功");
+				}else{
+					rj.setError_code(ResultJson.ERROR_CODE_GENERAL);
+					rj.setSuccess(false);
+					rj.setMessage("删除失败");
+				}
+			}
+		}
+		return rj;
 	}
 	
 	@Override

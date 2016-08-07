@@ -114,15 +114,18 @@ implements IHelpMenuService {
 	
 	@Override
 	@Transactional(readOnly = false)
-	public void deleteById(Integer id) {
+	public int deleteById(Integer id) {
 		//删除所有子集文档
 		String childids = this.getAllChildid(id);
 		documenetService.deleteByMenuids(childids);
 		//删除所有子集菜单
 		String deletePids = "," + id + ",";
-		dao.deleteAllChildren(deletePids);
+		int result = dao.deleteAllChildren(deletePids);
+		if(result != -1){
+			result = dao.deleteById(id);
+		}
 		//删除本身菜单
-		dao.deleteById(id);
+		return result;
 	}
 	
 	/**
