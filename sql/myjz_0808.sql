@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50096
 File Encoding         : 65001
 
-Date: 2016-08-08 16:43:19
+Date: 2016-08-08 18:56:05
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -4622,13 +4622,14 @@ CREATE TABLE `user_auth_info` (
   `handcardphoto` varchar(128) default NULL COMMENT '手持身份证正面照',
   `stucardphoto` varchar(128) default NULL COMMENT '学生证正面照',
   `handstucardphoto` varchar(128) default NULL COMMENT '手持学生证照',
+  `stuno` varchar(32) default NULL COMMENT '学生证号',
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='个人认证信息';
 
 -- ----------------------------
 -- Records of user_auth_info
 -- ----------------------------
-INSERT INTO `user_auth_info` VALUES ('1', null, '4', null, null, null, null, null, '0', null, null, null, null, null, null, null);
+INSERT INTO `user_auth_info` VALUES ('1', null, '4', null, null, null, null, null, '0', null, null, null, null, null, null, null, null);
 
 -- ----------------------------
 -- Table structure for `user_config`

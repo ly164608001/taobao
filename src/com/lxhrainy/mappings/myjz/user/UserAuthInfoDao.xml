@@ -30,7 +30,9 @@
 		
 		T.lifephoto AS "lifephoto",
 		T.stucardphoto AS "stucardphoto",
-		T.handstucardphoto AS "handstucardphoto"
+		T.handstucardphoto AS "handstucardphoto",
+		T.stuno AS "stuno"
+		
 	</sql>
 	
 	<sql id="userAuthInfoJoins">
@@ -108,7 +110,8 @@
 			handcardphoto,
 			lifephoto,
 			stucardphoto,
-			handstucardphoto
+			handstucardphoto,
+			stuno
 		) VALUES (
 			#{id},
 			#{user.id},
@@ -124,7 +127,8 @@
 			#{handcardphoto},
 			#{lifephoto},
 			#{stucardphoto},
-			#{handstucardphoto}
+			#{handstucardphoto},
+			#{stuno}
 		)
 	</insert>
 	
@@ -167,7 +171,6 @@
 		<if test="type!=null">
 			type = #{type},
 		</if>
-		
 		<if test="lifephoto!=null">
 			lifephoto = #{lifephoto},
 		</if>
@@ -177,6 +180,10 @@
 		<if test="handstucardphoto!=null">
 			handstucardphoto = #{handstucardphoto},
 		</if>
+		<if test="stuno!=null and stuno!=''">
+			stuno = #{stuno},
+		</if>
+		id = #{id}
 	</set>
 		WHERE id = #{id}
 	</update>

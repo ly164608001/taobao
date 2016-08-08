@@ -40,10 +40,20 @@ public class UserAuthInfo extends BaseModel {
 	private Integer type;
 	/** 生活照 **/
 	private String lifephoto;
+	/** 学生证号 **/
+	private String stuno;
 	/** 学生证正面照 **/
 	private String stucardphoto;
 	/** 手持学生证正面照 **/
 	private String handstucardphoto;
+
+	public String getStuno() {
+		return stuno;
+	}
+
+	public void setStuno(String stuno) {
+		this.stuno = stuno;
+	}
 
 	public String getLifephoto() {
 		return lifephoto;
