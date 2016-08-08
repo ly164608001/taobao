@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lxhrainy.myjz.admin.trace.dao.ITraceRechargeDao">
+    
+	<sql id="traceRechargeColumns">
+		T.id AS "id",
+		T.money AS "money",
+		T.status AS "status",
+		T.createtime AS "createtime",
+		T.handletime AS "handletime",
+		T.payaccount AS "payaccount",
+		T.payno AS "payno",
+		T.createuser AS "createuser.id",
+		T.handleuser AS "handleuser.id",
+		T.memo AS "memo",
+		T.channel AS "channel"
+	</sql>
+	
+	<sql id="traceRechargeJoins">
+		LEFT JOIN user_account A ON A.id = T.withdrawalsaccount
+	</sql>
+	
+	<sql id="where">
+		<if test="condition!=null">
+			<where>
+				1 = 1
+				<if test="condition.beginTime!=null">
+					AND T.createtime &gt;= #{condition.beginTime}
+				</if>
+				<if test="condition.endTime!=null">
+					AND T.createtime &lt;= #{condition.endTime}
+				</if>
+				<if test="condition.model!=null">
+					<if test="condition.model.createuser!=null and condition.model.createuser.id!=null">
+						AND T.createuser = #{condition.model.createuser.id}
+					</if>
+				</if>
+			</where>
+		</if>
+	</sql>
+    
+	<select id="getById" resultType="TraceRecharge">
+		SELECT 
+			<include refid="traceRechargeColumns"/>
+		FROM trace_recharge T
+		<include refid="traceRechargeJoins"/>
+		WHERE T.id = #{id}
+	</select>
+	
+	<select id="findListByPage" resultType="TraceRecharge">
+		SELECT 
+			<include refid="traceRechargeColumns"/>
+		FROM trace_recharge T
+		<include refid="traceRechargeJoins"/>
+		<include refid="where"/>
+		order by T.ID
+			<include refid="Sql.pager" />
+	</select>
+	
+	<select id="findAllList" resultType="TraceRecharge">
+		SELECT 
+			<include refid="traceRechargeColumns"/>
+		FROM trace_recharge T
+		<include refid="traceRechargeJoins"/>
+		<include refid="where"/>
+	</select>
+	
+	<select id="getCountByCondition" resultType="int">
+		SELECT 
+			COUNT(1)
+		FROM trace_recharge T
+		<include refid="traceRechargeJoins"/>
+		<include refid="where"/>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO trace_recharge(
+			id,
+			money,
+			status,
+			createtime,
+			handletime,
+			payaccount,
+			payno,
+			memo,
+			createuser,
+			handleuser,
+			channel
+		) VALUES (
+			#{id},
+			#{money},
+			#{status},
+			#{createtime},
+			#{handletime},
+			#{payaccount},
+			#{payno},
+			#{memo},
+			#{createuser.id},
+			#{handleuser.id},
+			#{channel}
+		)
+	</insert>
+	
+	<update id="delete">
+		DELETE FROM trace_recharge
+		WHERE id = #{id}
+	</update>
+	
+</mapper>
