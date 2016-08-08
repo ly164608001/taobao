@@ -107,19 +107,19 @@
 			我的账户
 		</dt>
 		<dd>
-			<a href="#">账号充值</a>
+			<a href="javascript:void(0);">账号充值</a>
 		</dd>
 		<dd>
-			<a href="#">申请提现</a>
+			<a href="javascript:void(0);" onclick="changeMenu('front/seller/money/withdrawals.htm');">申请提现</a>
 		</dd>
 		<dd>
-			<a href="#">账户明细</a>
+			<a href="javascript:void(0);" onclick="changeMenu('front/seller/money/moneyDetail.htm');">账户明细</a>
 		</dd>
 		<dd>
-			<a href="#">基本资料</a>
+			<a href="javascript:void(0);" onclick="changeMenu('front/seller/money/baseinfo.htm');">基本资料</a>
 		</dd>
 		<dd>
-			<a href="#">修改密码</a>
+			<a href="javascript:void(0);" onclick="changeMenu('front/seller/money/modifyPassword.htm');">修改密码</a>
 		</dd>
 		<dd class="last">
 			<a href="javascript:void(0);" onclick="loginout();">退出登入</a>
