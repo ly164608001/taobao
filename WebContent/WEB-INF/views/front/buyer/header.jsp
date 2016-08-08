@@ -32,8 +32,11 @@
 					<li>
 						<a href="${basePath}front/buyer/task/taskHall.htm">任务大厅</a>
 					</li>
-					<li >
+					<li>
 						<a href="javascript:void(0);" onclick="changeMenu('front/buyer/task/taskTaobaoList.htm');">任务管理</a>
+					</li>
+					<li>
+						<a href="javascript:void(0);" onclick="changeMenu('front/buyer/certification/prepare.htm');">实名认证</a>
 					</li>
 			</ul>
 		</nav>
