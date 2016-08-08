@@ -1,6 +1,9 @@
 package com.lxhrainy.myjz.common.constant;
 
 public class Global {
+	//平台支付宝充值收款账号和名称
+	public final static String PLAT_ALIPAY_ACCOUNT = "mayi@qq.com";
+	public final static String PLAT_ALIPAY_NAME = "蚂蚁兼职";
 	
 	//session中的登录者key
 	public final static String SESSION_USERNAME = "loginUser";
@@ -10,6 +13,12 @@ public class Global {
 	public final static String USER_LOCATION = "user_location";
 	
 	public final static String TARGET_ADMIN = "admin";
+	
+	/**
+	 * 交易通道 1 支付宝 2财付通
+	 */
+	public final static int PAY_CHANNEL_ALIPAY = 1;
+	public final static int PAY_CHANNEL_CFT = 2;
 	
 	/**
 	 * 账号状态

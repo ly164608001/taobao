@@ -107,7 +107,7 @@
 			我的账户
 		</dt>
 		<dd>
-			<a href="javascript:void(0);">账号充值</a>
+			<a href="javascript:void(0);" onclick="changeMenu('front/seller/money/recharge.htm');">账号充值</a>
 		</dd>
 		<dd>
 			<a href="javascript:void(0);" onclick="changeMenu('front/seller/money/withdrawals.htm');">申请提现</a>

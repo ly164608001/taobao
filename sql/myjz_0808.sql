@@ -1,7 +1,7 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : localhost
+Source Server         : 127.0.0.1
 Source Server Version : 50096
 Source Host           : localhost:3306
 Source Database       : myjz
@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50096
 File Encoding         : 65001
 
-Date: 2016-08-07 23:53:33
+Date: 2016-08-08 16:43:19
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -30,7 +30,7 @@ CREATE TABLE `advert_info` (
   `createuser` int(11) default NULL COMMENT '创建人',
   `deleted` int(1) default NULL COMMENT '删除标识',
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='广告表';
 
 -- ----------------------------
 -- Records of advert_info
@@ -44,7 +44,7 @@ CREATE TABLE `basic_bank` (
   `id` int(11) NOT NULL auto_increment,
   `bankname` varchar(128) default NULL COMMENT '银行名称',
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COMMENT='银行信息表';
 
 -- ----------------------------
 -- Records of basic_bank
@@ -263,6 +263,20 @@ INSERT INTO `help_menu` VALUES ('4', '2', ',-1,', '2', '注册', '1', '0', null)
 INSERT INTO `help_menu` VALUES ('5', '2', ',-1,', '2', '登录', '2', '0', null);
 INSERT INTO `help_menu` VALUES ('6', '2', ',-1,', '2', '平台名词', '3', '0', '');
 INSERT INTO `help_menu` VALUES ('19', '15', ',-1,', '1', '出错2', '3', '0', '');
+
+-- ----------------------------
+-- Table structure for `order_basic_properties`
+-- ----------------------------
+DROP TABLE IF EXISTS `order_basic_properties`;
+CREATE TABLE `order_basic_properties` (
+  `id` int(11) NOT NULL auto_increment,
+  `orderid` int(11) default NULL COMMENT '订单ID',
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='订单基本属性';
+
+-- ----------------------------
+-- Records of order_basic_properties
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for `order_info`
@@ -4489,13 +4503,38 @@ CREATE TABLE `task_properties_value` (
 -- ----------------------------
 
 -- ----------------------------
+-- Table structure for `trace_recharge`
+-- ----------------------------
+DROP TABLE IF EXISTS `trace_recharge`;
+CREATE TABLE `trace_recharge` (
+  `id` int(11) NOT NULL auto_increment,
+  `payaccount` varchar(128) default NULL COMMENT '支付账号',
+  `payno` varchar(128) default NULL COMMENT '交易号',
+  `createtime` datetime default NULL COMMENT '充值时间',
+  `createuser` int(11) default NULL COMMENT '充值申请人',
+  `handleuser` int(11) default NULL COMMENT '充值审核人',
+  `handletime` datetime default NULL COMMENT '审核时间',
+  `money` decimal(12,2) default NULL COMMENT '充值金额',
+  `status` int(1) default NULL COMMENT '充值状态 0初始待审核 1 充值成功 -1充值失败',
+  `memo` varchar(128) default NULL COMMENT '备注',
+  `channel` int(1) default NULL COMMENT '充值渠道 1 支付宝 2财付通',
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='交易充值表';
+
+-- ----------------------------
+-- Records of trace_recharge
+-- ----------------------------
+INSERT INTO `trace_recharge` VALUES ('1', '46438730@qq.com', '20160808164121', '2016-08-08 00:00:00', '3', null, null, '110.00', '0', 'admin', '1');
+INSERT INTO `trace_recharge` VALUES ('2', '464380730', '201608081644112', '2016-08-08 00:00:00', '3', null, null, '100.00', '0', 'admin', '2');
+
+-- ----------------------------
 -- Table structure for `trace_record`
 -- ----------------------------
 DROP TABLE IF EXISTS `trace_record`;
 CREATE TABLE `trace_record` (
   `id` int(11) NOT NULL auto_increment COMMENT '唯一标示',
   `userid` int(11) default NULL COMMENT '所属用户',
-  `type` int(1) default NULL COMMENT '交易类型 1收入(任务奖金) 2支出(提现)',
+  `type` int(1) default NULL COMMENT '交易类型 1收入(任务奖金/充值) 2支出(提现)',
   `money` double(12,2) default NULL COMMENT '交易金额',
   `tracetime` datetime default NULL COMMENT '交易时间',
   `orderid` int(11) default NULL COMMENT '订单(金额增加变动关联任务)',

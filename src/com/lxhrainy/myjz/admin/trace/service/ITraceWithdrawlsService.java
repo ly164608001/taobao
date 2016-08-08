@@ -7,7 +7,7 @@ import com.lxhrainy.myjz.admin.trace.model.TraceWithdrawls;
 import com.lxhrainy.myjz.admin.trace.oe.TraceWithdrawlsVO;
 
 /**
- * 交易记录服务接口
+ * 交易提现服务接口
  * @author xueyunteng
  * @date 2016-07-31
  */
