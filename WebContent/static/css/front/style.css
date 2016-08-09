@@ -427,3 +427,8 @@ p{font-size: 14px;}
 /*iframe*/
 .taobaoIframe{width:85%;min-height: 900px}
 .ml20{margin-left: 20px}
+
+/*银行卡提现*/
+.moneyCardList{margin-top:20px}
+.moneyCardList .idCard{font-size:14px;margin:0 20px 10px 0;float:left}
+.moneyCardList .idCard input[type=radio]{margin-right:10px}

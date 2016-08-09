@@ -130,12 +130,13 @@
 	<form method="post" class="form form-horizontal" id="submitForm">
 	
 	<div class="btnWrap clearfix">
-		<input class="btn radius btn-secondary f-r" type="button" value="添加提现银行卡" onclick="addAccountCard();" />
+		<input class="btn radius btn-secondary f-l" type="button" value="添加提现银行卡" onclick="addAccountCard();" />
+	</div>
+	<div class="moneyCardList clearfix">
 		<c:forEach items="${bankcardlist}" var="bankcard">
-			<input type="radio" name="account.id" value="${bankcard.id}"/>${bankcard.bank.bankname}&nbsp;${bankcard.accountno}<br/>
+			<label for="idCard" class="idCard"><input type="radio" name="account.id" value="${bankcard.id}"/>${bankcard.bank.bankname}&nbsp;${bankcard.accountno}<br/></label>
 		</c:forEach>
 	</div>
-	
 	<div class="moneyOrder mt10">
 			<legend></legend>
 			<div class="row cl">
