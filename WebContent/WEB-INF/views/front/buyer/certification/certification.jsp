@@ -72,9 +72,9 @@
 								身份证正面照：
 							</label>
 							<div class="upload">
-								<span class="btn-upload">
-									<a href="javascript:void();" class="btn radius btn-upload">图片上传</a>
-									<input type="file" multiple name="file_0" class="input-file"></span>
+								<iframe src="${basePath}/upload/index.htm?extnames=*.jpg;*.jpeg;*.png;*.gif;" frameborder="0"
+										scrolling="no" height="20" width="70"></iframe>
+								<input type="hidden" name="cardphoto" id="cardphoto" />
 								<span>注：图片上的文字需清晰可见</span>
 							</div>
 						</li>
@@ -84,9 +84,9 @@
 								学生证正面照：
 							</label>
 							<div class="upload">
-								<span class="btn-upload">
-									<a href="javascript:void();" class="btn radius btn-upload">图片上传</a>
-									<input type="file" multiple name="file_0" class="input-file"></span>
+								<iframe src="${basePath}/upload/index.htm?extnames=*.jpg;*.jpeg;*.png;*.gif;" frameborder="0"
+										scrolling="no" height="20" width="70"></iframe>
+								<input type="hidden" name="stucardphoto" id="stucardphoto" />
 								<span>注：图片上的文字需清晰可见</span>
 							</div>
 						</li>
@@ -102,9 +102,9 @@
 								手持身份证正照：
 							</label>
 							<div class="upload">
-								<span class="btn-upload">
-									<a href="javascript:void();" class="btn radius btn-upload">图片上传</a>
-									<input type="file" multiple name="file_0" class="input-file"></span>
+								<iframe src="${basePath}/upload/index.htm?extnames=*.jpg;*.jpeg;*.png;*.gif;" frameborder="0"
+										scrolling="no" height="20" width="70"></iframe>
+								<input type="hidden" name="handcardphoto" id="handcardphoto" />
 								<span>注：图片上的文字需清晰可见</span>
 							</div>
 						</li>
@@ -114,9 +114,9 @@
 								手持学生证正照：
 							</label>
 							<div class="upload">
-								<span class="btn-upload">
-									<a href="javascript:void();" class="btn radius btn-upload">图片上传</a>
-									<input type="file" multiple name="file_0" class="input-file"></span>
+								<iframe src="${basePath}/upload/index.htm?extnames=*.jpg;*.jpeg;*.png;*.gif;" frameborder="0"
+										scrolling="no" height="20" width="70"></iframe>
+								<input type="hidden" name="handstucardphoto" id="handstucardphoto" />
 								<span>注：图片上的文字需清晰可见</span>
 							</div>
 						</li>
@@ -132,9 +132,9 @@
 								生活照：
 							</label>
 							<div class="upload">
-								<span class="btn-upload">
-									<a href="javascript:void();" class="btn radius btn-upload">图片上传</a>
-									<input type="file" multiple name="file_0" class="input-file"></span>
+								<iframe src="${basePath}/upload/index.htm?extnames=*.jpg;*.jpeg;*.png;*.gif;" frameborder="0"
+										scrolling="no" height="20" width="70"></iframe>
+								<input type="hidden" name="lifephoto" id="lifephoto" />
 								<span>注：图片上的文字需清晰可见</span>
 							</div>
 						</li>
