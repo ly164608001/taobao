@@ -141,7 +141,7 @@
 						<li class="clearfix IDCard">
 							<label>实例：</label>
 							<div class="now-head f-l now-head-other">
-								<img src="${basePath}static/css/front/images/idCard.png"></div>
+								<img src="${basePath}static/css/front/images/life.jpg"></div>
 						</li>
 						
 						<div class="clear"></div>
