@@ -34,7 +34,7 @@
   window.onload = function() {
 	upload = new SWFUpload({
 	// 处理文件上传的url
-	upload_url:     <%=request.getContextPath() + "/"%>+"/upload/upload.htm?cid=${cid}&framename=${framename}&ttPath=${ttPath}",	// 路径写全，否则Firefox下会出现404错误。自由修改处一：处理文件上传的url路径，注意还要写全部
+	upload_url: "${basePath}/upload/upload.htm?cid=${cid}&framename=${framename}&ttPath=${ttPath}",	// 路径写全，否则Firefox下会出现404错误。自由修改处一：处理文件上传的url路径，注意还要写全部
 
 	// 上传文件限制设置
 	file_size_limit : "${size}",	// 10MB

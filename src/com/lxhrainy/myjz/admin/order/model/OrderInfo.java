@@ -1,4 +1,4 @@
-package com.lxhrainy.myjz.admin.order;
+package com.lxhrainy.myjz.admin.order.model;
 
 import java.util.Date;
 

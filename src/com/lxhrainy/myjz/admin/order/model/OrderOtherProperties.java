@@ -1,4 +1,4 @@
-package com.lxhrainy.myjz.admin.order;
+package com.lxhrainy.myjz.admin.order.model;
 
 import com.lxhrainy.core.common.model.BaseModel;
 import com.lxhrainy.myjz.admin.task.model.TaskPropertiesValue;
