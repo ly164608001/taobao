@@ -24,7 +24,7 @@ public class OrderInfo extends BaseModel {
 	private Double bond; // 担保金
 	private UserInfo receiveruser; // 接单人
 	private Date receivetime; // 接单时间
-	private Shop shopid; // 店铺ID
+	private Shop shop; // 店铺ID
 	private Integer searchroad; // 搜索入口
 	private String type; // 手机/电脑单类型
 
@@ -44,12 +44,12 @@ public class OrderInfo extends BaseModel {
 		this.receiveruser = receiveruser;
 	}
 
-	public Shop getShopid() {
-		return shopid;
+	public Shop getShop() {
+		return shop;
 	}
 
-	public void setShopid(Shop shopid) {
-		this.shopid = shopid;
+	public void setShop(Shop shop) {
+		this.shop = shop;
 	}
 
 	public String getOrderno() {

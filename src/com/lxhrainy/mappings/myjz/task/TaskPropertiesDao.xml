@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lxhrainy.myjz.admin.task.dao.ITaskPropertiesDao">
+    
+	<sql id="taskPropertiesColumns">
+		T.id AS "id",
+		T.name AS "name",
+		T.status AS "status",
+		T.type AS "type",
+		T.price AS "price",
+		T.elementtype AS "elementtype",
+		T.elementnum AS "elementnum",
+		T.needtype AS "needtype",
+		T.neednum AS "neednum",
+		T.sort AS "sort",
+		T.elementname AS "elementname"
+	</sql>
+	
+	<sql id="taskPropertiesJoins">
+	</sql>
+    
+    <sql id="where">
+		<if test="condition!=null">
+			<where>
+				<if test="condition.model!=null">
+				</if>
+			</where>
+		</if>
+	</sql>
+	
+	<select id="getById" resultType="TaskProperties">
+		SELECT 
+			<include refid="taskPropertiesColumns"/>
+		FROM task_properties T
+		<include refid="taskPropertiesJoins"/>
+		WHERE T.id = #{id}
+	</select>
+	
+	<select id="findListByPage" resultType="TaskProperties">
+		SELECT 
+			<include refid="taskPropertiesColumns"/>
+		FROM task_properties T
+		<include refid="taskPropertiesJoins"/>
+		<include refid="where"/>
+		order by T.ID DESC
+			<include refid="Sql.pager" />
+	</select>
+	
+	<select id="findAllList" resultType="TaskProperties">
+		SELECT 
+			<include refid="taskPropertiesColumns"/>
+		FROM task_properties T
+		<include refid="taskPropertiesJoins"/>
+		<include refid="where"/>
+	</select>
+	
+	<select id="getCountByCondition" resultType="int">
+		SELECT 
+			COUNT(1)
+		FROM task_properties T
+		<include refid="taskPropertiesJoins"/>
+		<include refid="where"/>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO task_properties(
+			id,
+			name,
+			status,
+			type,
+			price,
+			elementtype,
+			elementnum,
+			needtype,
+			neednum,
+			sort,
+			elementname
+		) VALUES (
+			#{id},
+			#{name},
+			#{status},
+			#{type},
+			#{price},
+			#{elementtype},
+			#{elementnum},
+			#{needtype},
+			#{neednum},
+			#{sort},
+			#{elementname}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE task_properties SET 	
+			name = #{name},
+			status = #{status},
+			type = #{type},
+			price = #{price},
+			elementtype = #{elementtype},
+			elementnum = #{elementnum},
+			needtype = #{needtype},
+			neednum = #{neednum},
+			sort = #{sort},
+			elementname = #{elementname}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="deleteById">
+		DELETE FROM task_properties
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

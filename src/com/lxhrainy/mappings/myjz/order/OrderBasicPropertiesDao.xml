@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lxhrainy.myjz.admin.order.dao.IOrderBasicPropertiesDao">
+    
+	<sql id="orderBasicPropertiesColumns">
+		T.id AS "id",
+		T.orderid AS "order.id"
+	</sql>
+	
+	<sql id="orderBasicPropertiesJoins">
+	</sql>
+    
+    <sql id="where">
+		<if test="condition!=null">
+			<where>
+				<if test="condition.model!=null">
+				</if>
+			</where>
+		</if>
+	</sql>
+	
+	<select id="getById" resultType="OrderBasicProperties">
+		SELECT 
+			<include refid="orderBasicPropertiesColumns"/>
+		FROM order_basic_properties T
+		<include refid="orderBasicPropertiesJoins"/>
+		WHERE T.id = #{id}
+	</select>
+	
+	<select id="findListByPage" resultType="OrderBasicProperties">
+		SELECT 
+			<include refid="orderBasicPropertiesColumns"/>
+		FROM order_basic_properties T
+		<include refid="orderBasicPropertiesJoins"/>
+		<include refid="where"/>
+		order by T.ID DESC
+			<include refid="Sql.pager" />
+	</select>
+	
+	<select id="findAllList" resultType="OrderBasicProperties">
+		SELECT 
+			<include refid="orderBasicPropertiesColumns"/>
+		FROM order_basic_properties T
+		<include refid="orderBasicPropertiesJoins"/>
+		<include refid="where"/>
+	</select>
+	
+	<select id="getCountByCondition" resultType="int">
+		SELECT 
+			COUNT(1)
+		FROM order_basic_properties T
+		<include refid="orderBasicPropertiesJoins"/>
+		<include refid="where"/>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO order_basic_properties(
+			id,
+			orderid
+		) VALUES (
+			#{id},
+			#{order.id}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE order_basic_properties SET 	
+			orderid = #{order.id}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="deleteById">
+		DELETE FROM order_basic_properties
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lxhrainy.myjz.admin.order.dao.IOrderInfoDao">
+    
+	<sql id="orderInfoColumns">
+		T.id AS "id",
+		T.orderno AS "orderno",
+		T.createtime AS "createtime",
+		T.createuser AS "createuser.id",
+		T.publictime AS "publictime",
+		T.istime AS "istime",
+		T.status AS "status",
+		T.bond AS "bond",
+		T.receiveruser AS "receiveruser.id",
+		T.receivetime AS "receivetime",
+		T.shopid AS "shop.id",
+		T.searchroad AS "searchroad",
+		T.type AS "type"
+	</sql>
+	
+	<sql id="orderInfoJoins">
+	</sql>
+    
+    <sql id="where">
+		<if test="condition!=null">
+			<where>
+				<if test="condition.model!=null">
+				</if>
+			</where>
+		</if>
+	</sql>
+	
+	<select id="getById" resultType="OrderInfo">
+		SELECT 
+			<include refid="orderInfoColumns"/>
+		FROM order_info T
+		<include refid="orderInfoJoins"/>
+		WHERE T.id = #{id}
+	</select>
+	
+	<select id="findListByPage" resultType="OrderInfo">
+		SELECT 
+			<include refid="orderInfoColumns"/>
+		FROM order_info T
+		<include refid="orderInfoJoins"/>
+		<include refid="where"/>
+		order by T.ID DESC
+			<include refid="Sql.pager" />
+	</select>
+	
+	<select id="findAllList" resultType="OrderInfo">
+		SELECT 
+			<include refid="orderInfoColumns"/>
+		FROM order_info T
+		<include refid="orderInfoJoins"/>
+		<include refid="where"/>
+	</select>
+	
+	<select id="getCountByCondition" resultType="int">
+		SELECT 
+			COUNT(1)
+		FROM order_info T
+		<include refid="orderInfoJoins"/>
+		<include refid="where"/>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO order_info(
+			id,
+			orderno,
+			createtime,
+			createuser,
+			publictime,
+			istime,
+			status,
+			bond,
+			receiveruser,
+			receivetime,
+			shopid,
+			searchroad,
+			type
+		) VALUES (
+			#{id},
+			#{orderno},
+			#{createtime},
+			#{createuser.id},
+			#{publictime},
+			#{istime},
+			#{status},
+			#{bond},
+			#{receiveruser.id},
+			#{receivetime},
+			#{shop.id},
+			#{searchroad},
+			#{type}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE order_info SET 	
+			orderno = #{orderno},
+			createtime = #{createtime},
+			createuser = #{createuser.id},
+			publictime = #{publictime},
+			istime = #{istime},
+			status = #{status},
+			bond = #{bond},
+			receiveruser = #{receiveruser.id},
+			receivetime = #{receivetime},
+			shopid = #{shop.id},
+			searchroad = #{searchroad},
+			type = #{type}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="deleteById">
+		DELETE FROM order_info
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

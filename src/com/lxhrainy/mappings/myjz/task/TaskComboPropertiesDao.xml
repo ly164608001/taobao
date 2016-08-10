@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lxhrainy.myjz.admin.task.dao.ITaskComboPropertiesDao">
+    
+	<sql id="taskComboPropertiesColumns">
+		T.id AS "id",
+		T.templateid AS "templateid",
+		T.propertiesid AS "properties.id",
+		T.propertiesvalue AS "propertiesvalue.id"
+	</sql>
+	
+	<sql id="taskComboPropertiesJoins">
+	</sql>
+	
+	<sql id="where">
+		<if test="condition!=null">
+			<where>
+				<if test="condition.model!=null">
+				</if>
+			</where>
+		</if>
+	</sql>
+    
+	<select id="getById" resultType="TaskComboProperties">
+		SELECT 
+			<include refid="taskComboPropertiesColumns"/>
+		FROM task_combo_properties T
+		<include refid="taskComboPropertiesJoins"/>
+		WHERE T.id = #{id}
+	</select>
+	
+	<select id="findListByPage" resultType="TaskComboProperties">
+		SELECT 
+			<include refid="taskComboPropertiesColumns"/>
+		FROM task_combo_properties T
+		<include refid="taskComboPropertiesJoins"/>
+		<include refid="where"/>
+		order by T.ID DESC
+			<include refid="Sql.pager" />
+	</select>
+	
+	<select id="findAllList" resultType="TaskComboProperties">
+		SELECT 
+			<include refid="taskComboPropertiesColumns"/>
+		FROM task_combo_properties T
+		<include refid="taskComboPropertiesJoins"/>
+		<include refid="where"/>
+	</select>
+	
+	<select id="getCountByCondition" resultType="int">
+		SELECT 
+			COUNT(1)
+		FROM task_combo_properties T
+		<include refid="taskComboPropertiesJoins"/>
+		<include refid="where"/>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO task_combo_properties(
+			id,
+			templateid,
+			propertiesid,
+			propertiesvalue
+		) VALUES (
+			#{id},
+			#{templateid},
+			#{properties.id},
+			#{propertiesvalue.id}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE task_combo_properties SET 	
+			templateid = #{templateid},
+			propertiesid = #{properties.id},
+			propertiesvalue = #{propertiesvalue.id}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="deleteById">
+		DELETE FROM task_combo_properties
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

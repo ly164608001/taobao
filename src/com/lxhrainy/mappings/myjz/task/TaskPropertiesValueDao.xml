@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lxhrainy.myjz.admin.task.dao.ITaskPropertiesValueDao">
+    
+	<sql id="taskPropertiesValueColumns">
+		T.id AS "id",
+		T.propertiesid AS "properties.id",
+		T.label AS "label",
+		T.keyvalue AS "keyvalue",
+		T.memo AS "memo"
+	</sql>
+	
+	<sql id="taskPropertiesValueJoins">
+	</sql>
+    
+    <sql id="where">
+		<if test="condition!=null">
+			<where>
+				<if test="condition.model!=null">
+				</if>
+			</where>
+		</if>
+	</sql>
+	
+	<select id="getById" resultType="TaskPropertiesValue">
+		SELECT 
+			<include refid="taskPropertiesValueColumns"/>
+		FROM task_properties_value T
+		<include refid="taskPropertiesValueJoins"/>
+		WHERE T.id = #{id}
+	</select>
+	
+	<select id="findListByPage" resultType="TaskPropertiesValue">
+		SELECT 
+			<include refid="taskPropertiesValueColumns"/>
+		FROM task_properties_value T
+		<include refid="taskPropertiesValueJoins"/>
+		<include refid="where"/>
+		order by T.ID DESC
+			<include refid="Sql.pager" />
+	</select>
+	
+	<select id="findAllList" resultType="TaskPropertiesValue">
+		SELECT 
+			<include refid="taskPropertiesValueColumns"/>
+		FROM task_properties_value T
+		<include refid="taskPropertiesValueJoins"/>
+		<include refid="where"/>
+	</select>
+	
+	<select id="getCountByCondition" resultType="int">
+		SELECT 
+			COUNT(1)
+		FROM task_properties_value T
+		<include refid="taskPropertiesValueJoins"/>
+		<include refid="where"/>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO task_properties_value(
+			id,
+			propertiesid,
+			label,
+			keyvalue,
+			memo
+		) VALUES (
+			#{id},
+			#{properties.id},
+			#{label},
+			#{keyvalue},
+			#{memo}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE task_properties_value SET 	
+			propertiesid = #{properties.id},
+			label = #{label},
+			keyvalue = #{keyvalue},
+			memo = #{memo}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="deleteById">
+		DELETE FROM task_properties_value
+		WHERE id = #{id}
+	</update>
+	
+</mapper>
