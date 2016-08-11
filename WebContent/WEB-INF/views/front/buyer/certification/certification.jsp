@@ -7,10 +7,12 @@
 	<title>实名认证</title>
 	<script type="text/javascript">
 		function uploadsuc(data) {
+			alert('uploadsuc');
 		  if(data.success){
-			  var str = '${basePath}'+data.path;
-			  $('#'+data.ttPath).val(data.path);
-			  $('#'+data.ttPath+'Img').attr("src",str);
+			  alert(fullPath);
+			  var fullPath = '${basePath}'+data.path;
+			  $('#'+data.ttPath).val(fullPath);
+			  $('#'+data.ttPath+'Img').attr("src",fullPath);
 		  }
 		}
 		

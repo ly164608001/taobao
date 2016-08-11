@@ -19,8 +19,10 @@
 	
   <script type="text/javascript">
   function uploadsuc(data) {
-	  var json = JSON.parse(JSON.parse(data));
+	  console.log(data);
+	  var json = JSON.parse(data);
 	  if(json.success){
+		  alert('uploadsuccess');
 		  parent.uploadsuc(json);
 	  }
   }
