@@ -7,9 +7,7 @@
 	<title>实名认证</title>
 	<script type="text/javascript">
 		function uploadsuc(data) {
-			alert('uploadsuc');
 		  if(data.success){
-			  alert(fullPath);
 			  var fullPath = '${basePath}'+data.path;
 			  $('#'+data.ttPath).val(fullPath);
 			  $('#'+data.ttPath+'Img').attr("src",fullPath);

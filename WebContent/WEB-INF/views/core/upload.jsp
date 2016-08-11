@@ -19,7 +19,6 @@
 	
   <script type="text/javascript">
   function uploadsuc(data) {
-	  console.log(data);
 	  var json = JSON.parse(data);
 	  if(json.success){
 		  alert('uploadsuccess');
