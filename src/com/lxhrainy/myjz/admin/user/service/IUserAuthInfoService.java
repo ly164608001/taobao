@@ -11,6 +11,15 @@ import com.lxhrainy.myjz.admin.user.model.UserAuthInfo;
 public interface IUserAuthInfoService extends IBaseService<UserAuthInfo, Integer>{
 
 	/**
+	 * 认证提交申请
+	 * @param model
+	 * @return 1 成功
+	 * 			-1 已有认证信息
+	 */
+	public int applyCertification(UserAuthInfo model);
+	
+	
+	/**
 	 * @Title: getByUserId 
 	 * @Description: 获取用户的认证信息
 	 * @param userid

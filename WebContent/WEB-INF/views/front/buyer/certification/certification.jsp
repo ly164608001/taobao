@@ -18,6 +18,22 @@
 		  top.layer.msg(data)
 		}
 	
+		function submitCertification(){
+			//TODO:表单验证
+			$.ajax({
+				type : "POST",
+				url : basePath + 'front/buyer/certification/certification.htm',
+				dataType : "json",
+				data : $('#submitForm').serialize(),
+				success : function(result) {
+					top.layer.msg(result.msg);
+					if(result.success){
+						$('#submitForm')[0].reset();
+					}
+				}
+			});
+		}
+		
 		$(function(){
 			//默认身份证
 			$('.StuCard').hide();
@@ -172,7 +188,7 @@
 					</ul>
 				</div>
 				<div class="btnWrap btnWrap-ren">
-					<a href="#" class="btn btn-secondary radius">提交实名认证</a>
+					<a href="javascript:void(0);" onclick="submitCertification();" class="btn btn-secondary radius">提交实名认证</a>
 				</div>
 			</div>
 			

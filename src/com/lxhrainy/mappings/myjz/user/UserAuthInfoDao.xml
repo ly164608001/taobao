@@ -2,17 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lxhrainy.myjz.admin.user.dao.IUserAuthInfoDao">
     
-    <resultMap id="UserAuthInfo" type="com.lxhrainy.myjz.admin.user.model.UserAuthInfo">
-		<id property="id" column="id" />
-		<result property="user.id" column="user.id" />
-		<result property="certificationstatus" column="certificationstatus" />
-		<result property="certificationtime" column="certificationtime" />
-		<result property="handletime" column="handletime" />
-		<result property="handler.id" column="handlerhandler.id" />
-		<result property="handlememo" column="handlememo" />
-		<result property="deleted" column="deleted" />
-	</resultMap>
-	
 	<sql id="userAuthInfoColumns">
 		T.id AS "id",
 		T.userid AS "user.id",
@@ -97,6 +86,7 @@
 	<insert id="insert">
 		INSERT INTO user_auth_info(
 			id,
+			type,
 			userid,
 			certificationstatus,
 			certificationtime,
@@ -114,6 +104,7 @@
 			stuno
 		) VALUES (
 			#{id},
+			#{type},
 			#{user.id},
 			#{certificationstatus},
 			#{certificationtime},

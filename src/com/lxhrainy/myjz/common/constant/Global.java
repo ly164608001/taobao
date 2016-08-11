@@ -32,6 +32,12 @@ public class Global {
 	public final static int ACCOUNT_NORMAL = 1;
 	
 	/**
+	 * 证件类型 1身份证 2学生证
+	 */
+	public final static int AUTH_IDCARD = 1;
+	public final static int AUTH_STU = 2;
+	
+	/**
 	 * 交易类型 1 收入 2支出
 	 */
 	public final static int INCOME = 1;

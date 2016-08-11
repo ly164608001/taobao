@@ -171,10 +171,6 @@ public class UserAuthInfo extends BaseModel {
 		return type;
 	}
 
-	public void setIdtype(Integer type) {
-		this.type = type;
-	}
-
 
 	public void setType(Integer type) {
 		this.type = type;

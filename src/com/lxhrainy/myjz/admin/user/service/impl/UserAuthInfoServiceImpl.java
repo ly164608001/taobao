@@ -25,6 +25,22 @@ implements IUserAuthInfoService {
 	@Autowired
 	IUserAuthInfoDao dao;
 
+	/**
+	 * 认证提交申请
+	 * @param model
+	 * @return 1 成功
+	 * 			-1 已有认证信息
+	 */
+	@Transactional(readOnly = false)
+	public int applyCertification(UserAuthInfo model) {
+		if(getByUserId(model.getUser().getId()) != null){
+			return -1;
+		}
+		
+		dao.insert(model);
+		return 1;
+	}
+	
 	@Override
 	public UserAuthInfo getByUserId(Integer userid) {
 		return dao.getByUserId(userid);

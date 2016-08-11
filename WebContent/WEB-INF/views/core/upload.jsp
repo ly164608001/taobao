@@ -21,7 +21,6 @@
   function uploadsuc(data) {
 	  var json = JSON.parse(data);
 	  if(json.success){
-		  alert('uploadsuccess');
 		  parent.uploadsuc(json);
 	  }
   }
