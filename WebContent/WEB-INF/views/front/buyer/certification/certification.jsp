@@ -6,6 +6,18 @@
 <head>
 	<title>实名认证</title>
 	<script type="text/javascript">
+		function uploadsuc(data) {
+		  if(data.success){
+			  var str = '${basePath}'+data.path;
+			  $('#'+data.ttPath).val(data.path);
+			  $('#'+data.ttPath+'Img').attr("src",str);
+		  }
+		}
+		
+		function uploadfalse(data){
+		  top.layer.msg(data)
+		}
+	
 		$(function(){
 			//默认身份证
 			$('.StuCard').hide();
@@ -72,28 +84,34 @@
 								身份证正面照：
 							</label>
 							<div class="upload">
-								<iframe src="${basePath}/upload/index.htm?extnames=*.jpg;*.jpeg;*.png;*.gif;" frameborder="0"
+								<iframe src="${basePath}/upload/index.htm?ttPath=cardphoto&extnames=*.jpg;*.jpeg;*.png;*.gif;" frameborder="0"
 										scrolling="no" height="20" width="70"></iframe>
 								<input type="hidden" name="cardphoto" id="cardphoto" />
 								<span>注：图片上的文字需清晰可见</span>
 							</div>
 						</li>
+						<li class="clearfix IDCard">
+							<label>实例：</label>
+							<div class="now-head f-l">
+								<img id="cardphotoImg" src="${basePath}static/css/front/images/cd.jpg"></div>
+						</li>
+						
 						<li class="clearfix StuCard">
 							<label>
 								<span class="red">*</span>
 								学生证正面照：
 							</label>
 							<div class="upload">
-								<iframe src="${basePath}/upload/index.htm?extnames=*.jpg;*.jpeg;*.png;*.gif;" frameborder="0"
+								<iframe src="${basePath}/upload/index.htm?ttPath=stucardphoto&extnames=*.jpg;*.jpeg;*.png;*.gif;" frameborder="0"
 										scrolling="no" height="20" width="70"></iframe>
 								<input type="hidden" name="stucardphoto" id="stucardphoto" />
 								<span>注：图片上的文字需清晰可见</span>
 							</div>
 						</li>
-						<li class="clearfix">
+						<li class="clearfix StuCard">
 							<label>实例：</label>
 							<div class="now-head f-l">
-								<img src="${basePath}static/css/front/images/cd.jpg"></div>
+								<img id="stucardphotoImg" src="${basePath}static/css/front/images/cd.jpg"></div>
 						</li>
 						
 						<li class="clearfix IDCard">
@@ -102,28 +120,34 @@
 								手持身份证正照：
 							</label>
 							<div class="upload">
-								<iframe src="${basePath}/upload/index.htm?extnames=*.jpg;*.jpeg;*.png;*.gif;" frameborder="0"
+								<iframe src="${basePath}/upload/index.htm?ttPath=handcardphoto&extnames=*.jpg;*.jpeg;*.png;*.gif;" frameborder="0"
 										scrolling="no" height="20" width="70"></iframe>
 								<input type="hidden" name="handcardphoto" id="handcardphoto" />
 								<span>注：图片上的文字需清晰可见</span>
 							</div>
 						</li>
+						<li class="clearfix IDCard">
+							<label>实例：</label>
+							<div class="now-head f-l now-head-other">
+								<img id="handcardphotoImg" src="${basePath}static/css/front/images/idCard.png"></div>
+						</li>
+						
 						<li class="clearfix StuCard">
 							<label>
 								<span class="red">*</span>
 								手持学生证正照：
 							</label>
 							<div class="upload">
-								<iframe src="${basePath}/upload/index.htm?extnames=*.jpg;*.jpeg;*.png;*.gif;" frameborder="0"
+								<iframe src="${basePath}/upload/index.htm?ttPath=handstucardphoto&extnames=*.jpg;*.jpeg;*.png;*.gif;" frameborder="0"
 										scrolling="no" height="20" width="70"></iframe>
 								<input type="hidden" name="handstucardphoto" id="handstucardphoto" />
 								<span>注：图片上的文字需清晰可见</span>
 							</div>
 						</li>
-						<li class="clearfix">
+						<li class="clearfix StuCard">
 							<label>实例：</label>
 							<div class="now-head f-l now-head-other">
-								<img src="${basePath}static/css/front/images/idCard.png"></div>
+								<img id="handstucardphotoImg" src="${basePath}static/css/front/images/idCard.png"></div>
 						</li>
 						
 						<li class="clearfix IDCard">
@@ -132,7 +156,7 @@
 								生活照：
 							</label>
 							<div class="upload">
-								<iframe src="${basePath}/upload/index.htm?extnames=*.jpg;*.jpeg;*.png;*.gif;" frameborder="0"
+								<iframe src="${basePath}/upload/index.htm?ttPath=lifephoto&extnames=*.jpg;*.jpeg;*.png;*.gif;" frameborder="0"
 										scrolling="no" height="20" width="70"></iframe>
 								<input type="hidden" name="lifephoto" id="lifephoto" />
 								<span>注：图片上的文字需清晰可见</span>
@@ -141,7 +165,7 @@
 						<li class="clearfix IDCard">
 							<label>实例：</label>
 							<div class="now-head f-l now-head-other">
-								<img src="${basePath}static/css/front/images/life.jpg"></div>
+								<img id="lifephotoImg" src="${basePath}static/css/front/images/life.jpg"></div>
 						</li>
 						
 						<div class="clear"></div>
