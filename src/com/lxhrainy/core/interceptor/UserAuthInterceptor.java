@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -122,7 +123,8 @@ public class UserAuthInterceptor extends HandlerInterceptorAdapter {
         boolean flag = false;
         if(menuList != null && menuList.size() > 0){
         	for(SysMenu menu : menuList){
-        		if(menu.getHref().contains(requestPath)){
+        		String href = menu.getHref();
+        		if( !StringUtils.isEmpty(href) && href.contains(requestPath)){
         			flag = true;
         			break;
         		}
