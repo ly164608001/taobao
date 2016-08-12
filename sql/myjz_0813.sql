@@ -1,7 +1,7 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : 127.0.0.1
+Source Server         : localhost
 Source Server Version : 50096
 Source Host           : localhost:3306
 Source Database       : myjz
@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50096
 File Encoding         : 65001
 
-Date: 2016-08-12 22:02:29
+Date: 2016-08-13 00:54:25
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -4291,7 +4291,7 @@ CREATE TABLE `sys_menu` (
   PRIMARY KEY  (`id`),
   KEY `sys_menu_parent_id` USING BTREE (`parentid`),
   KEY `sys_menu_del_flag` USING BTREE (`deleted`)
-) ENGINE=InnoDB AUTO_INCREMENT=93 DEFAULT CHARSET=utf8 COMMENT='菜单表';
+) ENGINE=InnoDB AUTO_INCREMENT=94 DEFAULT CHARSET=utf8 COMMENT='菜单表';
 
 -- ----------------------------
 -- Records of sys_menu
@@ -4326,6 +4326,7 @@ INSERT INTO `sys_menu` VALUES ('89', '88', '-1,1,88', '账户充值处理', '1',
 INSERT INTO `sys_menu` VALUES ('90', '88', '-1,1,88', '账户提现处理', '2', '', 'admin', null, '1', '', '3', '2016-08-11 17:43:55', '3', '2016-08-11 17:43:55', null, '0', '0', '0');
 INSERT INTO `sys_menu` VALUES ('91', '1', '-1,1', '任务管理', '433', '', 'admin', null, '1', '', '3', '2016-08-12 21:57:32', '3', '2016-08-12 21:57:32', null, '0', '0', '0');
 INSERT INTO `sys_menu` VALUES ('92', '91', '-1,1,91', '任务属性管理', '1', '', 'admin', null, '1', '', '3', '2016-08-12 21:58:01', '3', '2016-08-12 21:58:01', null, '0', '0', '0');
+INSERT INTO `sys_menu` VALUES ('93', '91', '-1,1,91', '任务属性值管理', '2', 'admin/task/propertiesvalue/propertiesValueList.htm', 'admin', null, '1', '', '3', '2016-08-13 00:09:53', '3', '2016-08-13 00:10:29', null, '0', '0', '0');
 
 -- ----------------------------
 -- Table structure for `sys_notice`
@@ -4412,10 +4413,15 @@ INSERT INTO `sys_role_menu` VALUES ('1', '76');
 INSERT INTO `sys_role_menu` VALUES ('1', '80');
 INSERT INTO `sys_role_menu` VALUES ('1', '81');
 INSERT INTO `sys_role_menu` VALUES ('1', '82');
+INSERT INTO `sys_role_menu` VALUES ('1', '84');
+INSERT INTO `sys_role_menu` VALUES ('1', '85');
 INSERT INTO `sys_role_menu` VALUES ('1', '87');
 INSERT INTO `sys_role_menu` VALUES ('1', '88');
 INSERT INTO `sys_role_menu` VALUES ('1', '89');
 INSERT INTO `sys_role_menu` VALUES ('1', '90');
+INSERT INTO `sys_role_menu` VALUES ('1', '91');
+INSERT INTO `sys_role_menu` VALUES ('1', '92');
+INSERT INTO `sys_role_menu` VALUES ('1', '93');
 
 -- ----------------------------
 -- Table structure for `sys_user_role`
@@ -4486,11 +4492,12 @@ CREATE TABLE `task_properties` (
   `sort` int(11) default NULL COMMENT '任务完成排序',
   `elementname` varchar(255) default NULL COMMENT '别名',
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='任务属性';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='任务属性';
 
 -- ----------------------------
 -- Records of task_properties
 -- ----------------------------
+INSERT INTO `task_properties` VALUES ('1', '是否手机下单', '1', '1', '2', 'radio', '2', null, null, null, '选项提示信息');
 
 -- ----------------------------
 -- Table structure for `task_properties_value`
@@ -4503,11 +4510,13 @@ CREATE TABLE `task_properties_value` (
   `keyvalue` varchar(255) default NULL COMMENT '值',
   `memo` varchar(255) default NULL COMMENT '备注',
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of task_properties_value
 -- ----------------------------
+INSERT INTO `task_properties_value` VALUES ('1', '1', '是', '1', '完美测试');
+INSERT INTO `task_properties_value` VALUES ('2', '1', '否', '0', '');
 
 -- ----------------------------
 -- Table structure for `trace_recharge`
