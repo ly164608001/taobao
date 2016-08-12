@@ -7,16 +7,25 @@
 		T.propertiesid AS "properties.id",
 		T.label AS "label",
 		T.keyvalue AS "keyvalue",
-		T.memo AS "memo"
+		T.memo AS "memo",
+		P.name AS "properties.name"
 	</sql>
 	
 	<sql id="taskPropertiesValueJoins">
+		LEFT JOIN task_properties P ON P.id = T.propertiesid
 	</sql>
     
     <sql id="where">
 		<if test="condition!=null">
 			<where>
+				1=1
 				<if test="condition.model!=null">
+					<if test="condition.model.keyvalue!=null and condition.model.keyvalue!=''">
+						AND T.keyvalue LIKE '${condition.model.keyvalue}%'
+					</if>
+					<if test="condition.model.label!=null and condition.model.label!=''">
+						AND T.label LIKE '${condition.model.label}%'
+					</if>
 				</if>
 			</where>
 		</if>
