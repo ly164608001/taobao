@@ -54,10 +54,12 @@ import com.lxhrainy.myjz.admin.trace.oe.TraceWithdrawlsVO;
 import com.lxhrainy.myjz.admin.trace.service.ITraceRecordService;
 import com.lxhrainy.myjz.admin.trace.service.ITraceWithdrawlsService;
 import com.lxhrainy.myjz.admin.user.model.UserAccount;
+import com.lxhrainy.myjz.admin.user.model.UserAuthInfo;
 import com.lxhrainy.myjz.admin.user.model.UserConfig;
 import com.lxhrainy.myjz.admin.user.model.UserMoney;
 import com.lxhrainy.myjz.admin.user.oe.UserAccountVO;
 import com.lxhrainy.myjz.admin.user.service.IUserAccountService;
+import com.lxhrainy.myjz.admin.user.service.IUserAuthInfoService;
 import com.lxhrainy.myjz.admin.user.service.IUserConfigService;
 import com.lxhrainy.myjz.admin.user.service.IUserMoneyService;
 import com.lxhrainy.myjz.common.constant.Global;
@@ -91,6 +93,8 @@ public class UserApiServiceImpl extends AbstractBaseServiceImpl<IUserInfoDao, Us
 	private ITraceRecordService traceRecordService;
 	@Autowired
 	private IUserAccountService userAccountService;
+	@Autowired
+	private IUserAuthInfoService authInfoService;
 	
 	@Override
 	public ResultJson adlist(ApiParams params) {
@@ -766,14 +770,112 @@ public class UserApiServiceImpl extends AbstractBaseServiceImpl<IUserInfoDao, Us
 	}
 	
 	@Override
+	@Transactional(readOnly = false)
 	public ResultJson certificate(ApiParams params) {
-		// TODO Auto-generated method stub
-		return null;
+		ResultJson rj = new ResultJson();
+		rj.setError_code(ResultJson.ERROR_CODE_PARAMETERS);
+		rj.setMessage("参数错误");
+		if (oConvertUtils.isNotEmpty(params)
+				&& oConvertUtils.isNotEmpty(params.getCertificate())
+				&& oConvertUtils.isNotEmpty(params.getName())
+				&& oConvertUtils.isNotEmpty(params.getType())) {
+			UserInfo loginUser = ApiCacheUtil.getLoginUser();
+			if (oConvertUtils.isNotEmpty(loginUser)) {
+				int type = oConvertUtils.getInt(params.getType());
+				if(type == ApiConstant.AUTH_TYPE_ID
+						&& oConvertUtils.isNotEmpty(params.getIdentityfront())
+						&& oConvertUtils.isNotEmpty(params.getIdentityhand())
+						&& oConvertUtils.isNotEmpty(params.getLiveimage())){
+					//身份证认证
+					UserAuthInfo authInfo = new UserAuthInfo();
+					authInfo.setUser(loginUser);
+					authInfo.setCertificationtime(new Date());
+					authInfo.setCertificationstatus(ApiConstant.AUDIT_INIT);
+					authInfo.setType(ApiConstant.AUTH_TYPE_ID);
+					authInfo.setDeleted(ApiConstant.NO);
+					authInfo.setRealname(params.getName());
+					authInfo.setCertificateno(params.getCertificate());
+					authInfo.setCardphoto(params.getIdentityfront());
+					authInfo.setHandcardphoto(params.getIdentityhand());
+					authInfo.setLifephoto(params.getLiveimage());
+					int result = authInfoService.save(authInfo);
+					if(result != -1){
+						rj.setSuccess(true);
+						rj.setError_code(ResultJson.SUCCESS);
+						rj.setMessage("认证信息提交成功");
+					}else{
+						rj.setError_code(ResultJson.ERROR_CODE_GENERAL);
+						rj.setSuccess(false);
+						rj.setMessage("认证信息提交失败");
+					}
+				}else if(type == ApiConstant.AUTH_TYPE_STU
+						&& oConvertUtils.isNotEmpty(params.getStudentIdfront())
+						&& oConvertUtils.isNotEmpty(params.getStudentIdhand())){
+					//学生证
+					UserAuthInfo authInfo = new UserAuthInfo();
+					authInfo.setUser(loginUser);
+					authInfo.setCertificationtime(new Date());
+					authInfo.setCertificationstatus(ApiConstant.AUDIT_INIT);
+					authInfo.setType(ApiConstant.AUTH_TYPE_STU);
+					authInfo.setDeleted(ApiConstant.NO);
+					authInfo.setRealname(params.getName());
+					authInfo.setCertificateno(params.getCertificate());
+					authInfo.setStuno(params.getCertificate());
+					authInfo.setStucardphoto(params.getStudentIdfront());
+					authInfo.setHandstucardphoto(params.getStudentIdhand());
+					
+					int result = authInfoService.save(authInfo);
+					if(result != -1){
+						rj.setSuccess(true);
+						rj.setError_code(ResultJson.SUCCESS);
+						rj.setMessage("认证信息提交成功");
+					}else{
+						rj.setError_code(ResultJson.ERROR_CODE_GENERAL);
+						rj.setSuccess(false);
+						rj.setMessage("认证信息提交失败");
+					}
+				}
+			}
+		}
+		return rj;
 	}
 	@Override
 	public ResultJson certificateInfo(ApiParams params) {
-		// TODO Auto-generated method stub
-		return null;
+		ResultJson rj = new ResultJson();
+		rj.setError_code(ResultJson.ERROR_CODE_PARAMETERS);
+		rj.setMessage("参数错误");
+		// 当前登录用户
+		UserInfo loginUser = ApiCacheUtil.getLoginUser();
+		if (oConvertUtils.isEmpty(loginUser)) {
+			rj.setError_code(ResultJson.ERROR_CODE_USER_NOT_LOGIN);
+			rj.setMessage("用户未登录");
+			return rj;
+		}
+		UserAuthInfo authInfo = authInfoService.getByUserId(loginUser.getId());
+		if (oConvertUtils.isNotEmpty(authInfo)) {
+			
+			JSONObject result = new JSONObject();
+			//认证信息
+			result.put("certificate", authInfo.getCertificateno());
+			result.put("status", authInfo.getCertificationstatus());
+			result.put("studentIdfront", authInfo.getStucardphoto());
+			result.put("identityfront", authInfo.getCardphoto());
+			result.put("studentIdhand", authInfo.getHandstucardphoto());
+			result.put("type", authInfo.getType());
+			result.put("identityhand", authInfo.getHandcardphoto());
+			result.put("liveimage", authInfo.getLifephoto());
+			result.put("name", authInfo.getRealname());
+			result.put("desc", authInfo.getHandlememo());
+			
+			rj.setSuccess(true);
+			rj.setError_code(ResultJson.SUCCESS);
+			rj.setMessage("");
+			rj.setResult(result);
+		} else {
+			rj.setError_code(ResultJson.ERROR_CODE_USER_NOT_EXIST);
+			rj.setMessage("用户不存在");
+		}
+		return rj;
 	}
 	@Override
 	public ResultJson forgetPassword(ApiParams params) {
@@ -959,8 +1061,6 @@ public class UserApiServiceImpl extends AbstractBaseServiceImpl<IUserInfoDao, Us
 					&& StringUtil.isNotEmpty(mobileUser.getPassword())
 					&& StringUtil.isNotEmpty(mobileUser.getPlatform())
 					&& StringUtil.isNotEmpty(mobileUser.getUuid())) {
-				
-				//Integer type = 2;
 				
 				UserInfo user = userInfoService.getByUsername(mobileUser.getUsername());
 				if (user != null) {

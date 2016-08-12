@@ -58,4 +58,7 @@ public class ApiConstant {
 	public final static int TRACE_TYPE_OUT = 2;
 	public final static int TRACE_TYPE_IN = 1;
 	
+	public final static int AUTH_TYPE_ID = 0;
+	public final static int AUTH_TYPE_STU = 0;
+	
 }

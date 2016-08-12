@@ -118,6 +118,36 @@ public class ApiParams {
 	private String place;
 	/**end 银行卡**/
 	
+	/**start 实名认证**/
+	//证件号码
+	private String certificate;
+	//身份证正面照
+	private String identityfront;
+	//手持身份证照
+	private String identityhand;
+	//生活照
+	private String liveimage;
+	//学生证正面照
+	private String studentIdfront;
+	//手持学生证照
+	private String studentIdhand;
+	/**end 实名认证**/
+	
+	/**start 任务列表**/
+	//0:大厅的任务列表;1:我的任务列表;
+	private String ismine;
+	//0:进行中;1:已完成;2:全部;
+	private String status;
+	//0:手机单;1:电脑单;
+	private String targetplatfrom;
+	//0:常规单;1:流量单;
+	private String targetsubtype;
+	//0:淘宝;1:京东;
+	private String targettype;
+	//0:普通任务;1:超级任务;2:全部;
+	private String tasktype;
+	/**end 任务**/
+	
 	public String getAccount() {
 		return account;
 	}
@@ -327,6 +357,78 @@ public class ApiParams {
 	}
 	public void setPlace(String place) {
 		this.place = place;
+	}
+	public String getCertificate() {
+		return certificate;
+	}
+	public void setCertificate(String certificate) {
+		this.certificate = certificate;
+	}
+	public String getIdentityfront() {
+		return identityfront;
+	}
+	public void setIdentityfront(String identityfront) {
+		this.identityfront = identityfront;
+	}
+	public String getIdentityhand() {
+		return identityhand;
+	}
+	public void setIdentityhand(String identityhand) {
+		this.identityhand = identityhand;
+	}
+	public String getLiveimage() {
+		return liveimage;
+	}
+	public void setLiveimage(String liveimage) {
+		this.liveimage = liveimage;
+	}
+	public String getStudentIdfront() {
+		return studentIdfront;
+	}
+	public void setStudentIdfront(String studentIdfront) {
+		this.studentIdfront = studentIdfront;
+	}
+	public String getStudentIdhand() {
+		return studentIdhand;
+	}
+	public void setStudentIdhand(String studentIdhand) {
+		this.studentIdhand = studentIdhand;
+	}
+	public String getIsmine() {
+		return ismine;
+	}
+	public void setIsmine(String ismine) {
+		this.ismine = ismine;
+	}
+	public String getTargetplatfrom() {
+		return targetplatfrom;
+	}
+	public void setTargetplatfrom(String targetplatfrom) {
+		this.targetplatfrom = targetplatfrom;
+	}
+	public String getTargetsubtype() {
+		return targetsubtype;
+	}
+	public void setTargetsubtype(String targetsubtype) {
+		this.targetsubtype = targetsubtype;
+	}
+	public String getTargettype() {
+		return targettype;
+	}
+	public void setTargettype(String targettype) {
+		this.targettype = targettype;
+	}
+	public String getTasktype() {
+		return tasktype;
+	}
+	public void setTasktype(String tasktype) {
+		this.tasktype = tasktype;
+	}
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
 	}
 	
 }
