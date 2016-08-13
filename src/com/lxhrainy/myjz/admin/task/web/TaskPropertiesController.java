@@ -77,23 +77,25 @@ public class TaskPropertiesController extends BaseController {
 	@ResponseBody
 	public JSONObject addsave(TaskProperties model) {
 		JSONObject rj = new JSONObject();
+		rj.put("success", false);
 		
-		if(model == null){
-			rj.put("success", false);
-			rj.put("msg", "保存失败");
-		}else{
-			if(StringUtils.isEmpty(model.getName()) || StringUtils.isEmpty(model.getNeedtype())
-					|| StringUtils.isEmpty(model.getNeedtype()) ){
-				rj.put("success", false);
-				rj.put("msg", "保存失败");
-			}else{
-				model.setStatus(Global.YES);
-				propertiesService.save(model);
-				rj.put("success", true);
-				rj.put("msg", "保存成功");
-			}
-			
+		if(model == null || StringUtils.isEmpty(model.getName()) || StringUtils.isEmpty(model.getNeedtype())
+				|| StringUtils.isEmpty(model.getNeedtype()) || model.getType() == null
+				|| model.getPrice() == null){
+			rj.put("msg", "信息填写不完整");
+			return rj;
 		}
+		
+		boolean isExist = propertiesService.isExistName(model.getName());
+		if(isExist){
+			rj.put("msg", "该属性已存在");
+			return rj;
+		}
+		
+		model.setStatus(Global.NO);
+		propertiesService.save(model);
+		rj.put("success", true);
+		rj.put("msg", "保存成功");
 		return rj;
 	}
 	
@@ -119,31 +121,28 @@ public class TaskPropertiesController extends BaseController {
 	@ResponseBody
 	public JSONObject updatesave(TaskProperties model) {
 		JSONObject rj = new JSONObject();
+		rj.put("success", false);
 		String name = null;
 		String elemtype = null;
 		String elemname = null;
 		
-		if(model == null ){
-			rj.put("success", false);
-			rj.put("msg", "更新失败");
+		if(model == null || StringUtils.isEmpty(name) || StringUtils.isEmpty(elemtype)
+				|| StringUtils.isEmpty(elemname) ){
+			rj.put("msg", "信息填写不完整");
+			return rj;
 		}
-		else{
-			name = model.getName();
-			elemtype = model.getElementtype();
-			elemname = model.getElementname();
-			if(StringUtils.isEmpty(name) || StringUtils.isEmpty(elemtype)
-					|| StringUtils.isEmpty(elemname) ){
-				rj.put("success", false);
-				rj.put("msg", "保存失败");
-			}else{
-				TaskProperties oldInfo = propertiesService.getById(model.getId());
-				oldInfo.setName(name);
-				propertiesService.update(oldInfo);
-				rj.put("success", true);
-				rj.put("msg", "更新成功");
-			}
-			
+		
+		boolean isExist = propertiesService.isExistName(model.getId(),model.getName());
+		if(isExist){
+			rj.put("msg", "该属性已存在");
+			return rj;
 		}
+		
+		
+		propertiesService.update(model);
+		rj.put("success", true);
+		rj.put("msg", "更新成功");
+		
 		return rj;
 	}
 	
@@ -155,29 +154,21 @@ public class TaskPropertiesController extends BaseController {
 	@ResponseBody
 	public JSONObject delete(Integer id) {
 		JSONObject rj = new JSONObject();
-		propertiesService.deleteById(id);
+		rj.put("success", false);
+		
+		if(id == null){
+			rj.put("msg", "请选择要删除的属性");
+			return rj;
+		}
+		
+		int result = propertiesService.delById(id);
+		if(result == -1){
+			rj.put("msg", "该属性已删除或已被使用,不可删除");
+			return rj;
+		}
+		
 		rj.put("success", true);
 		rj.put("msg", "删除成功");
 		return rj;
 	}
-	
-	/***
-	 * 激活
-	 * @param ID
-	 */
-	@RequestMapping("/activate")
-	@ResponseBody
-	public JSONObject activate(Integer id) {
-		JSONObject rj = new JSONObject();
-		if(id == null){
-			rj.put("success", false);
-			rj.put("msg", "激活失败");
-		}else{
-			//propertiesService.activate(id);
-			rj.put("success", true);
-		}
-		
-		return rj;
-	}
-
 }

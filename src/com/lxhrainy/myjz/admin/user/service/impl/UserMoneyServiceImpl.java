@@ -116,4 +116,15 @@ implements IUserMoneyService {
 		return 1;
 	}
 	
+	/**
+	 * 对应用户账户进行加指定金额
+	 * @param userid
+	 * @param money
+	 * @return
+	 */
+	@Transactional(readOnly = false)
+	public void recharge(int userid,double money) {
+		dao.addMoney(userid,money);
+	}
+	
 }

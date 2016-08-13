@@ -1,5 +1,7 @@
 package com.lxhrainy.myjz.admin.trace.dao;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.lxhrainy.core.annotation.MyBatisDao;
 import com.lxhrainy.core.common.dao.IBaseDao;
 import com.lxhrainy.myjz.admin.trace.model.TraceRecharge;
@@ -12,5 +14,7 @@ import com.lxhrainy.myjz.admin.trace.model.TraceRecharge;
  */
 @MyBatisDao
 public interface ITraceRechargeDao extends IBaseDao<TraceRecharge> {
+
+	void updateStatus(@Param("model")TraceRecharge model);
 
 }

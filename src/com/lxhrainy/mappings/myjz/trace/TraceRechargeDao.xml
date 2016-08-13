@@ -13,11 +13,13 @@
 		T.createuser AS "createuser.id",
 		T.handleuser AS "handleuser.id",
 		T.memo AS "memo",
-		T.channel AS "channel"
+		T.channel AS "channel",
+		
+		CU.username AS "createuser.username"
 	</sql>
 	
 	<sql id="traceRechargeJoins">
-		LEFT JOIN user_account A ON A.id = T.withdrawalsaccount
+		LEFT JOIN user_info CU ON CU.id = T.createuser
 	</sql>
 	
 	<sql id="where">
@@ -30,7 +32,17 @@
 				<if test="condition.endTime!=null">
 					AND T.createtime &lt;= #{condition.endTime}
 				</if>
+				<if test="condition.searchkey!=null">
+					AND (
+						T.payaccount LIKE '%${condition.searchkey}%'
+						OR T.payno LIKE '%${condition.searchkey}%'
+						OR CU.username LIKE '%${condition.searchkey}%'
+						)
+				</if>
 				<if test="condition.model!=null">
+					<if test="condition.model.status!=null">
+						AND T.status = #{condition.model.status}
+					</if>
 					<if test="condition.model.createuser!=null and condition.model.createuser.id!=null">
 						AND T.createuser = #{condition.model.createuser.id}
 					</if>
@@ -100,6 +112,14 @@
 			#{channel}
 		)
 	</insert>
+	
+	<update id="updateStatus">
+		UPDATE trace_recharge SET 
+			status = #{model.status},
+			handletime = #{model.handletime},
+			handleuser = #{model.handleuser.id}
+		WHERE id = #{model.id}
+	</update>
 	
 	<update id="delete">
 		DELETE FROM trace_recharge

@@ -35,5 +35,13 @@ public interface IUserMoneyDao extends IBaseDao<UserMoney> {
 	 * @param newPassword 加密后的新密码
 	 */
 	void updatePaypassword(@Param("userid")int userid, @Param("newPassword")String newPassword);
+
+	/**
+	 * 添加指定用户的账户金额
+	 * @param userid
+	 * @param money
+	 */
+	void addMoney(@Param("userid")int userid, @Param("money")double money);
+
 	
 }

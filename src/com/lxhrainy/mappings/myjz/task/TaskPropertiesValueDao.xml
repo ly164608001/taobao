@@ -8,7 +8,8 @@
 		T.label AS "label",
 		T.keyvalue AS "keyvalue",
 		T.memo AS "memo",
-		P.name AS "properties.name"
+		P.name AS "properties.name",
+		P.status AS "properties.status"
 	</sql>
 	
 	<sql id="taskPropertiesValueJoins">
@@ -93,6 +94,11 @@
 	<update id="deleteById">
 		DELETE FROM task_properties_value
 		WHERE id = #{id}
+	</update>
+	
+	<update id="deleteByProperties">
+		DELETE FROM task_properties_value
+		WHERE propertiesid = #{propertiesid}
 	</update>
 	
 </mapper>

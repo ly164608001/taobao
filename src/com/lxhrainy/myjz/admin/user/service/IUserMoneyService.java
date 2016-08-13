@@ -54,4 +54,12 @@ public interface IUserMoneyService extends IBaseService<UserMoney, Integer>{
 	 * 		-1 可用余额不足
 	 */
 	public int frozonMoney(UserMoney moneyInfo,double money);
+	
+	/**
+	 * 对应用户账户进行加指定金额
+	 * @param userid
+	 * @param money
+	 * @return
+	 */
+	public void recharge(int userid,double money);
 }

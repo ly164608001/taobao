@@ -1,17 +1,17 @@
 package com.lxhrainy.myjz.admin.task.oe;
 
 import com.lxhrainy.core.common.oe.BaseVO;
-import com.lxhrainy.myjz.admin.seller.model.Label;
+import com.lxhrainy.myjz.admin.task.model.TaskProperties;
 
 public class TaskPropertiesVO extends BaseVO {
 
-	private Label model;
+	private TaskProperties model;
 
-	public Label getModel() {
+	public TaskProperties getModel() {
 		return model;
 	}
 
-	public void setModel(Label model) {
+	public void setModel(TaskProperties model) {
 		this.model = model;
 	}
 

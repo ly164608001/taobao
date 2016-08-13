@@ -165,29 +165,23 @@ public class PropertiesValueController extends BaseController {
 	@ResponseBody
 	public JSONObject delete(Integer id) {
 		JSONObject rj = new JSONObject();
-		propertiesValueService.deleteById(id);
+		rj.put("success", false);
+		
+		if(id == null){
+			rj.put("msg", "请选择要删除的属性值");
+			return rj;
+		}
+		
+		int result = propertiesValueService.delById(id);
+		if(result == -1){
+			rj.put("msg", "该属性值已删除或已被使用,不可删除");
+			return rj;
+		}
+		
 		rj.put("success", true);
 		rj.put("msg", "删除成功");
 		return rj;
 	}
 	
-	/***
-	 * 激活
-	 * @param ID
-	 */
-	@RequestMapping("/activate")
-	@ResponseBody
-	public JSONObject activate(Integer id) {
-		JSONObject rj = new JSONObject();
-		if(id == null){
-			rj.put("success", false);
-			rj.put("msg", "激活失败");
-		}else{
-			//propertiesValueService.activate(id);
-			rj.put("success", true);
-		}
-		
-		return rj;
-	}
 
 }

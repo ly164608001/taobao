@@ -16,7 +16,7 @@
 	}
 	
 	function submitForm(){
-		var url = "${basePath}admin/task/propertiesvalue/addsave.htm";
+		var url = "${basePath}admin/task/properties/addsave.htm";
 		$.ajax({
 			type : "POST",
 			url : url,
@@ -46,26 +46,56 @@
 		<table cellpadding="5">
 			<tr>
 				<td>属性名:</td>
+				<td><input name="name" class="easyui-validatebox textbox" /></td>
+			</tr>
+			<tr>
+				<td>别名:</td>
+				<td><input name="elementname" class="easyui-validatebox textbox" /></td>
+			</tr>
+			<tr>
+				<td>显示区域:</td>
 				<td>
-					<select name="properties.id">
+					<select name="type">
 						<option value="">请选择</option>
-						<c:forEach items="${propertiesList}" var="properties">
-							<option value="${properties.id}">${properties.name}</option>
-						</c:forEach>
+						<option value="1">任务基本信息</option>
+						<option value="2">任务需求设置</option>
+						<option value="3">买手身份验证</option>
+						<option value="4">发布任务设置</option>
 					</select>
 				</td>
 			</tr>
 			<tr>
-				<td>属性值选项:</td>
-				<td><input name="label" class="easyui-validatebox textbox" /></td>
+				<td>所需蚂蚁币:</td>
+				<td><input name="price" class="easyui-validatebox textbox" /></td>
 			</tr>
 			<tr>
-				<td>属性值:</td>
-				<td><input name="keyvalue" class="easyui-validatebox textbox" /></td>
+				<td>元素类型:</td>
+				<td>
+					<select name="elementtype">
+						<option value="">请选择</option>
+						<option value="text">输入框</option>
+						<option value="radio">单选框</option>
+						<option value="checkbox">多选框</option>
+						<option value="select">下拉选择框</option>
+						<option value="img">图片</option>
+					</select>
+				</td>
 			</tr>
 			<tr>
-				<td>备注:</td>
-				<td><input name="memo" class="easyui-validatebox textbox" /></td>
+				<td>元素个数:</td>
+				<td><input name="elementnum" class="easyui-validatebox textbox" /></td>
+			</tr>
+			<tr>
+				<td>所需类型:</td>
+				<td><input name="needtype" class="easyui-validatebox textbox" /></td>
+			</tr>
+			<tr>
+				<td>所需个数:</td>
+				<td><input name="neednum" class="easyui-validatebox textbox" /></td>
+			</tr>
+			<tr>
+				<td>完成排序:</td>
+				<td><input name="sort" class="easyui-validatebox textbox" /></td>
 			</tr>
 		</table>
 	</form>

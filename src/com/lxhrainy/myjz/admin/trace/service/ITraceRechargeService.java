@@ -10,4 +10,12 @@ import com.lxhrainy.myjz.admin.trace.model.TraceRecharge;
  */
 public interface ITraceRechargeService extends IBaseService<TraceRecharge, Integer>{
 
+	/**
+	 * 审核并处理充值申请
+	 * @param id
+	 * @return 1 成功
+	 *  	-1 无该充值申请记录或不为待处理状态
+	 */
+	int passRecharge(TraceRecharge model);
+
 }

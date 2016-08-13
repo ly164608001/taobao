@@ -10,47 +10,26 @@
 <script type="text/javascript" src="${basePath}static/js/admin/initdata.js"></script>
 
 <script>
-	toolbardata = [{  
-	    text: '添加',  
-	    iconCls: 'icon-add',  
-	    handler: function() {  
-	        openDialog("添加","${basePath}admin/task/properties/propertiesAdd.htm",380,280);  
-	    }  
-	}] ;
-
 	function formatteradminuserbutton(value,row) {
-		var oprBtn = '<a href="javascript:void(0)" class="easyui-linkbutton" onclick="openDialog(\'编辑\',\'${basePath}admin/task/properties/propertiesUpdate.htm?id='+row.id+'\',420,320)">编辑</a>&nbsp;'
-		 				+ '<a href="javascript:void(0)" class="easyui-linkbutton" onclick="deleterow(\'${basePath}admin/task/properties/propertiesDelete.htm?id='+row.id+'\')">删除</a>&nbsp;';
+		var oprBtn = '<a href="javascript:void(0)" class="easyui-linkbutton" onclick="openLrDialog(\'编辑\',\'${basePath}admin/task/properties/propertiesUpdate.htm?id='+row.id+'\',420,320)">编辑</a>&nbsp;';
+		
 		if(row.status == 0){
-			oprBtn += '<a href="javascript:void(0)" class="easyui-linkbutton" onclick="activate('+row.id+')">启用</a>&nbsp;';
-		}else{
-			oprBtn += '<a href="javascript:void(0)" class="easyui-linkbutton" onclick="activate('+row.id+')">禁用</a>&nbsp;';
-		}
+			oprBtn += '<a href="javascript:void(0)" class="easyui-linkbutton" onclick="deleterowByTips(\'对应的属性值也将被删除,是否继续?\',\'${basePath}admin/task/properties/propertiesDelete.htm?id='+row.id+'\')">删除</a>&nbsp;';
+		} 				
 		return  oprBtn;
 	}
 	
 	function forrmaterStatus(value,row){
-		return (value == 1 ? '启用':'禁用');
+		return (value == 1 ? '已使用':'未使用');
 	}
 	
-	function activate(id){
-		$.messager.confirm("提示", "您确定要启用该属性吗？", function (data) {
-            if (data) {
-                $.ajax({
-                	type : 'POST',
-                	url : '${basePath}admin/task/properties/activate.htm',
-                	data : {'id':id},
-                	dataType : 'json',
-                	success : function(result){
-                		if(result.success){
-                			$('#dgquery').submit();
-                		}
-                	}
-               
-                });
-            }
-        });
-	}
+	toolbardata = [{  
+	    text: '添加',  
+	    iconCls: 'icon-add',  
+	    handler: function() {  
+	    	openLrDialog("添加","${basePath}admin/task/properties/propertiesAdd.htm",380,280);  
+	    }  
+	}] ;
 </script>
 </head>
 <body>

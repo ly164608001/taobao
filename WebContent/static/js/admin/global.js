@@ -57,20 +57,32 @@ var defaultpagesize = 10;			//默认分页数
 /**全局数据函数**/
 
 //删除行数据
-function deleterow(_url)
+function deleterowByTips(msg,_url)
 {
 	defaultdeleteurl = _url;
-	$.messager.confirm('确认','确认删除?',function(a){  
+	$.messager.confirm('确认',msg,function(a){  
 		if(a)
 		{
 			$.ajax({  
-				url:defaultdeleteurl,    
-				success:function(){
-					$('#dg').datagrid('reload');  
+				url:defaultdeleteurl,
+				dataType:'json',
+				success:function(result){
+					if(result.success){
+						$('#dg').datagrid('reload');  
+					}else{
+						$.messager.alert('删除失败',result.msg);
+					}
+					
 				}  
 			});
 		}          
 	});  
+}
+
+//删除行数据
+function deleterow(_url)
+{
+	deleterowByTips('确认删除?',_url);
 }
 
 //删除行数据

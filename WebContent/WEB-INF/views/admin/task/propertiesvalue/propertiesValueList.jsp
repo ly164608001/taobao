@@ -14,6 +14,12 @@
 	function formatteradminuserbutton(value,row) {
 		return  '<a href="javascript:void(0)" class="easyui-linkbutton" onclick="openLrDialog(\'编辑\',\'${basePath}admin/task/propertiesvalue/propertiesValueUpdate.htm?id='+row.id+'\',300,300)">编辑</a>&nbsp;'
 			 + '<a href="javascript:void(0)" class="easyui-linkbutton" onclick="deleterow(\'${basePath}admin/task/propertiesvalue/propertiesValueDelete.htm?id='+row.id+'\')">删除</a>';
+		
+		return  oprBtn;
+	}
+	
+	function formatterStatus(value,row){
+		return (value == 1 ? '已使用':'未使用');
 	}
 	
 	toolbardata = [{  
@@ -48,7 +54,8 @@
 		<thead>
 			<tr>
 				<th field="id" width="40">id</th>
-				<th field="properties.name" width="120">任务属性</th>
+				<th field="properties.name" width="120">属性</th>
+				<th field="properties.status" formatter="formatterStatus" width="80">使用状态</th>
 				<th field="keyvalue" width="120">属性值名</th>
 				<th field="label" width="120">选项名</th>
 				<th field="memo" width="120">备注</th>

@@ -23,6 +23,12 @@
 		<if test="condition!=null">
 			<where>
 				<if test="condition.model!=null">
+					<if test="condition.model.name!=null and condition.model.name!=''">
+						AND T.name LIKE '%${condition.model.name}%'
+					</if>
+					<if test="condition.model.elementtype!=null and condition.model.elementtype!=''">
+						AND T.elementtype LIKE '%${condition.model.elementtype}%'
+					</if>
 				</if>
 			</where>
 		</if>
@@ -60,6 +66,24 @@
 		FROM task_properties T
 		<include refid="taskPropertiesJoins"/>
 		<include refid="where"/>
+	</select>
+	
+	<select id="getCountByName" resultType="int">
+		SELECT 
+			COUNT(1)
+		FROM task_properties T
+		WHERE
+			T.name = #{name}
+	</select>
+	
+	<!-- 获取非指定id的同名个数 -->
+	<select id="getCountByOtherName" resultType="int">
+		SELECT 
+			COUNT(1)
+		FROM task_properties T
+		WHERE
+			T.name = #{name}
+			AND T.id != #{id}
 	</select>
 	
 	<insert id="insert">

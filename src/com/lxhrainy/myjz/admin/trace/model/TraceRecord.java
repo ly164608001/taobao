@@ -16,7 +16,7 @@ public class TraceRecord extends BaseModel {
 	private static final long serialVersionUID = 1L;
 	private String traceno; // 交易编号
 	private UserInfo user; // 所属用户
-	private Integer type; // 交易类型 1收入(任务奖金) 2支出(提现)
+	private Integer type; // 交易类型 1收入(任务奖金、充值) 2支出(提现、任务支出)
 	private Double money; // 交易金额
 	private Date tracetime; // 交易时间
 	private Integer orderid; // 订单(金额增加变动关联任务)

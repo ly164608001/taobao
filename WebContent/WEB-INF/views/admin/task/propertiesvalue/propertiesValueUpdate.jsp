@@ -63,7 +63,8 @@
 			</tr>
 			<tr>
 				<td>属性值:</td>
-				<td><input name="keyvalue" value="${model.keyvalue}" class="easyui-validatebox textbox" /></td>
+				<td><input name="keyvalue" value="${model.keyvalue}" class="easyui-validatebox textbox"
+						<c:if test="${model.properties.status == 1}">readonly="readonly"</c:if> /></td>
 			</tr>
 			<tr>
 				<td>备注:</td>
