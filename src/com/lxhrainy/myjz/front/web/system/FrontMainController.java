@@ -41,15 +41,12 @@ public class FrontMainController extends BaseController {
 	{
 		HttpSession session = ContextHolderUtils.getSession();
 		UserInfo currentUser = ClientManager.getInstance().getClient(session.getId()).getUser();
-		if(currentUser.getType().intValue() == Global.USER_MEMBER){
-			//个人中心
-			mv = new ModelAndView("front/member/main");
-		}else if(currentUser.getType().intValue() == Global.USER_AGENT){
-			//中介代理
-			mv = new ModelAndView("front/agency/main");
-		}else if(currentUser.getType().intValue() == Global.USER_ESTATE){
-			//房地产商
-			mv = new ModelAndView("front/estate/main");
+		if(currentUser.getType().intValue() == Global.USER_BUYER){
+			//刷手首页
+			mv = new ModelAndView("front/buyer/main");
+		}else if(currentUser.getType().intValue() == Global.USER_SELLER){
+			//商家首页
+			mv = new ModelAndView("front/seller/main");
 		}
 		//TODO:获取用户权限列表
 		List<SysMenu> menuList = null ;//sysMenuservice.getTreeByUserId(currentUser.getId(), Global.FRONT);

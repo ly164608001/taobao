@@ -33,8 +33,7 @@
 						var rj = JSON.parse(result);
 						console.info(rj);
 						if(rj.success){
-							//window.location.href = basePath + 'front/buyer/index.htm';
-							window.location.href = basePath + 'front/seller/index.htm';
+							window.location.href = basePath + 'front/main.htm';
 						}else{
 							$msg.html(rj.msg);
 		    				$msg.show(); 

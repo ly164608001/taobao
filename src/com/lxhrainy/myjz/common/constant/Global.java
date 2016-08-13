@@ -100,10 +100,9 @@ public class Global {
 	//重置的用户密码
 	public final static String DEFAULT_PASSWORD = "123456";
 	
-	//用户类型：1 购买者 2 房地产 3 经纪人
-	public final static int USER_MEMBER = 10 ;  
-	public final static int USER_ESTATE = 30 ;  
-	public final static int USER_AGENT = 20 ;  
+	//用户类型：1 刷手 2 商家
+	public final static int USER_BUYER = 1 ;  
+	public final static int USER_SELLER = 2 ;  
 	public final static int USER_ADMIN = 0 ;
 	
 	//用户状态:1 启用 2 禁用

@@ -22,7 +22,9 @@
 		var oprBtn = '<a href="javascript:void(0)" class="easyui-linkbutton" onclick="openDialog(\'编辑\',\'${basePath}admin/task/properties/propertiesUpdate.htm?id='+row.id+'\',420,320)">编辑</a>&nbsp;'
 		 				+ '<a href="javascript:void(0)" class="easyui-linkbutton" onclick="deleterow(\'${basePath}admin/task/properties/propertiesDelete.htm?id='+row.id+'\')">删除</a>&nbsp;';
 		if(row.status == 0){
-			oprBtn += '<a href="javascript:void(0)" class="easyui-linkbutton" onclick="activate('+row.id+')">激活</a>&nbsp;';
+			oprBtn += '<a href="javascript:void(0)" class="easyui-linkbutton" onclick="activate('+row.id+')">启用</a>&nbsp;';
+		}else{
+			oprBtn += '<a href="javascript:void(0)" class="easyui-linkbutton" onclick="activate('+row.id+')">禁用</a>&nbsp;';
 		}
 		return  oprBtn;
 	}

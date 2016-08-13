@@ -108,7 +108,7 @@ implements IUserInfoService {
 			result = -2;
 		}else{
 			user.setPassword(encrptPassword(user.getPassword()));
-			user.setType(Global.USER_MEMBER);
+			user.setType(Global.USER_BUYER);
 			//保存用户
 			result = userInfoDao.insert(user);
 			if(result != -1){

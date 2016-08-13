@@ -143,7 +143,7 @@ public class LoginController extends BaseController {
 		user.setDeleted(Global.NO);
 		user.setRegistertime(new Date());
 		user.setStatus(Global.ENABLE);
-		user.setType(Global.USER_MEMBER);
+		user.setType(Global.USER_BUYER);
 		user.setChannel(Global.FRONT);
 		int result = userInfoService.registerMember(user);
 		if(result == -2){

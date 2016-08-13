@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50096
 File Encoding         : 65001
 
-Date: 2016-08-13 00:54:25
+Date: 2016-08-13 12:04:26
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -4325,7 +4325,7 @@ INSERT INTO `sys_menu` VALUES ('88', '1', '-1,1', '账户管理', '432', '', 'ad
 INSERT INTO `sys_menu` VALUES ('89', '88', '-1,1,88', '账户充值处理', '1', '', 'admin', null, '1', '', '3', '2016-08-11 17:43:38', '3', '2016-08-11 17:44:16', null, '0', '0', '0');
 INSERT INTO `sys_menu` VALUES ('90', '88', '-1,1,88', '账户提现处理', '2', '', 'admin', null, '1', '', '3', '2016-08-11 17:43:55', '3', '2016-08-11 17:43:55', null, '0', '0', '0');
 INSERT INTO `sys_menu` VALUES ('91', '1', '-1,1', '任务管理', '433', '', 'admin', null, '1', '', '3', '2016-08-12 21:57:32', '3', '2016-08-12 21:57:32', null, '0', '0', '0');
-INSERT INTO `sys_menu` VALUES ('92', '91', '-1,1,91', '任务属性管理', '1', '', 'admin', null, '1', '', '3', '2016-08-12 21:58:01', '3', '2016-08-12 21:58:01', null, '0', '0', '0');
+INSERT INTO `sys_menu` VALUES ('92', '91', '-1,1,91', '任务属性管理', '1', 'admin/task/properties/propertiesList.htm', 'admin', null, '1', '', '3', '2016-08-12 21:58:01', '3', '2016-08-13 10:56:57', null, '0', '0', '0');
 INSERT INTO `sys_menu` VALUES ('93', '91', '-1,1,91', '任务属性值管理', '2', 'admin/task/propertiesvalue/propertiesValueList.htm', 'admin', null, '1', '', '3', '2016-08-13 00:09:53', '3', '2016-08-13 00:10:29', null, '0', '0', '0');
 
 -- ----------------------------
@@ -4725,7 +4725,7 @@ CREATE TABLE `user_info` (
 -- Records of user_info
 -- ----------------------------
 INSERT INTO `user_info` VALUES ('1', 'yun', 'ifS7tw1E6a7Yx0lPE3rcSw==', '13067356435', '2016-05-20 11:37:27', '2016-05-20 11:37:30', '127.0.0.1', '1', '1', '0', '1', null, null, null, null);
-INSERT INTO `user_info` VALUES ('2', 'estate', 'ifS7tw1E6a7Yx0lPE3rcSw==', '18050804169', '2016-05-18 11:38:15', '2016-05-20 11:38:19', '127.0.0.1', '2', '2', '0', '1', null, null, null, null);
+INSERT INTO `user_info` VALUES ('2', 'seller', 'ifS7tw1E6a7Yx0lPE3rcSw==', '18050804169', '2016-05-18 11:38:15', '2016-05-20 11:38:19', '127.0.0.1', '2', '2', '0', '1', null, null, null, null);
 INSERT INTO `user_info` VALUES ('3', 'admin', 'ifS7tw1E6a7Yx0lPE3rcSw==', '13067356435', '2016-06-06 15:34:26', '2016-06-06 15:34:28', '127.0.0.1', '0', '1', '0', '0', null, null, null, null);
 INSERT INTO `user_info` VALUES ('4', 'luoxh', 'ifS7tw1E6a7Yx0lPE3rcSw==', '15980267262', '2016-06-08 10:10:34', null, null, '1', '1', '0', '1', null, null, null, null);
 
