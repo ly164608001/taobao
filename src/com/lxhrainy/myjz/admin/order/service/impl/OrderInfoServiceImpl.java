@@ -1,11 +1,14 @@
 package com.lxhrainy.myjz.admin.order.service.impl;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.lxhrainy.core.common.service.AbstractBaseServiceImpl;
 import com.lxhrainy.myjz.admin.order.dao.IOrderInfoDao;
 import com.lxhrainy.myjz.admin.order.model.OrderInfo;
+import com.lxhrainy.myjz.admin.order.oe.OrderInfoVO;
 import com.lxhrainy.myjz.admin.order.service.IOrderInfoService;
 
 
@@ -20,5 +23,10 @@ import com.lxhrainy.myjz.admin.order.service.IOrderInfoService;
 public class OrderInfoServiceImpl extends
 AbstractBaseServiceImpl<IOrderInfoDao, OrderInfo, Integer>
 implements IOrderInfoService {
+
+	@Override
+	public List<OrderInfo> getListForMobile(OrderInfoVO vo) {
+		return dao.getListForMobile(vo);
+	}
 
 }
