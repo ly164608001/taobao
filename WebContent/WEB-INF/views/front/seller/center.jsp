@@ -14,7 +14,7 @@
 	function toTopWindow(url){
 		top.location.href = '${basePath}' + url;
 	}
-	</script
+	</script>
 </head>
 <body>
 <section class="container mt50 clearfix">
