@@ -43,5 +43,11 @@ public interface IUserMoneyDao extends IBaseDao<UserMoney> {
 	 */
 	void addMoney(@Param("userid")int userid, @Param("money")double money);
 
+	/**
+	 * 扣除指定用户的账户金额(总金额和冻结金额)
+	 * @param userid
+	 * @param money
+	 */
+	void subBothMoney(@Param("userid")int userid, @Param("money")double money);
 	
 }

@@ -3,6 +3,7 @@ package com.lxhrainy.myjz.admin.trace.web;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +15,7 @@ import com.lxhrainy.core.common.controller.BaseController;
 import com.lxhrainy.myjz.admin.trace.model.TraceWithdrawls;
 import com.lxhrainy.myjz.admin.trace.oe.TraceWithdrawlsVO;
 import com.lxhrainy.myjz.admin.trace.service.ITraceWithdrawlsService;
+import com.lxhrainy.myjz.common.constant.Global;
 
 @RequestMapping("/admin/trace/withdrawls")
 @Controller
@@ -63,19 +65,18 @@ public class TraceWithdrawlsController extends BaseController {
 	 */
 	@RequestMapping("/passWithdrawls")
 	@ResponseBody
-	public JSONObject passWithdrawls(Integer id) {
+	public JSONObject passWithdrawls(TraceWithdrawls withdrawls) {
 		JSONObject rj = new JSONObject();
 		rj.put("success", false);
 		
-		if(id == null){
-			rj.put("msg", "请选择要标记为已处理的提现申请记录");
+		if(withdrawls == null || withdrawls.getId() == null || StringUtils.isEmpty(withdrawls.getWithdrawalno())){
+			rj.put("msg", "未有选择记录或交易号未填写");
 			return rj;
 		}
 		
-		TraceWithdrawls model = new TraceWithdrawls();
-		model.setId(id);
-		model.setFinishtime(new Date());
-		int result = withdrawlsService.passWithdrawls(model);
+		withdrawls.setFinishtime(new Date());
+		withdrawls.setStatus(Global.AUDIT_PASS);
+		int result = withdrawlsService.passWithdrawls(withdrawls);
 		
 		if(result == -1){
 			rj.put("msg", "无该提现申请记录或该记录不为待处理状态");

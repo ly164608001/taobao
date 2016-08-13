@@ -124,6 +124,14 @@
 		WHERE id = #{id}
 	</update>
 	
+	<update id="updateStatus">
+		UPDATE trace_withdrawls SET 
+			status = #{model.status},
+			finishtime = #{model.finishtime},
+			withdrawalno = #{model.withdrawalno}
+		WHERE id = #{model.id}
+	</update>
+	
 	<update id="delete">
 		DELETE FROM trace_withdrawls
 		WHERE id = #{id}

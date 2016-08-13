@@ -61,8 +61,24 @@ public class TraceWithdrawlsServiceImpl extends
 		return dao.getListForMobile(vo);
 	}
 
-	@Override
+	/**
+	 * 提现处理
+	 * @param model
+	 * @return 1 成功
+	 *        -1 无该提现申请记录或不为待处理状态
+	 */
+	@Transactional(readOnly = false)
 	public int passWithdrawls(TraceWithdrawls model) {
+		TraceWithdrawls withdrawlsInfo = this.getById(model.getId());
+		if(withdrawlsInfo == null || withdrawlsInfo.getStatus().intValue() != Global.AUDIT_INIT){
+			return -1;
+		}
+		
+		//扣除金额
+		moneyService.withdrawls(withdrawlsInfo.getUser().getId(),withdrawlsInfo.getMoney());
+		
+		//更新提现记录状态
+		dao.updateStatus(model);
 		return 1;
 	}
 	

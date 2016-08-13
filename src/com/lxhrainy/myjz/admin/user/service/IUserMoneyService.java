@@ -62,4 +62,12 @@ public interface IUserMoneyService extends IBaseService<UserMoney, Integer>{
 	 * @return
 	 */
 	public void recharge(int userid,double money);
+
+	/**
+	 * 对应用户账户进行扣除指定金额(扣除总金额和冻结金额)
+	 * @param userid
+	 * @param money
+	 * @return
+	 */
+	void withdrawls(int userid, double money);
 }

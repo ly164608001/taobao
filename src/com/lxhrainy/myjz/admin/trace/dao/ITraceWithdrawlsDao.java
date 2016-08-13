@@ -24,5 +24,7 @@ public interface ITraceWithdrawlsDao extends IBaseDao<TraceWithdrawls> {
 	 * @return
 	 */
 	List<TraceWithdrawls> getListForMobile(@Param("condition")TraceWithdrawlsVO vo);
+
+	void updateStatus(@Param("model")TraceWithdrawls model);
 	
 }

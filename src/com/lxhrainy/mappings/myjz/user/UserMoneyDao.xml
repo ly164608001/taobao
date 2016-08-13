@@ -118,6 +118,13 @@
 		WHERE userid = #{userid}
 	</update>
 	
+	<update id="subBothMoney">
+		UPDATE user_money SET 	
+			allbalance = allbalance - #{money},
+			frozenbalance = frozenbalance - #{money}
+		WHERE userid = #{userid}
+	</update>
+	
 	<update id="updatePaypassword">
 		update user_money set 
 			paypassword = #{newPassword}

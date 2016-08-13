@@ -127,4 +127,14 @@ implements IUserMoneyService {
 		dao.addMoney(userid,money);
 	}
 	
+	/**
+	 * 对应用户账户进行扣除指定金额(扣除总金额和冻结金额)
+	 * @param userid
+	 * @param money
+	 * @return
+	 */
+	@Transactional(readOnly = false)
+	public void withdrawls(int userid, double money){
+		dao.subBothMoney(userid,money);
+	}
 }

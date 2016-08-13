@@ -14,18 +14,20 @@
 		var oprBtn = '';
 		
 		if(row.status == 0){
-			oprBtn += '<a href="javascript:void(0)" class="easyui-linkbutton" onclick="passRecharge('+row.id+');">标记已处理</a>&nbsp;'
+			oprBtn += '<a href="javascript:void(0)" class="easyui-linkbutton" onclick="doWithdrawls('+row.id+');">处理</a>&nbsp;'
 				+ '<a href="javascript:void(0)" class="easyui-linkbutton" onclick="openLrDialog(\'驳回说明\',\'${basePath}admin/task/properties/propertiesUpdate.htm?id='+row.id+'\',420,320)">驳回</a>&nbsp;';
 		} 				
 		
 		return  oprBtn;
 	}
 	
-	function passRecharge(id){
-		$.messager.confirm('确认','确认将该提现标记为已处理?',function(a){  
-			if(a) {
+	function doWithdrawls(id){
+		$.messager.prompt('处理验证', '请输入交易号:', function(withdrawlsNo){
+			if(withdrawlsNo){
+				var url = '${basePath}admin/trace/withdrawls/passWithdrawls.htm?id='
+				 				+ id + '&withdrawalno='+withdrawlsNo;
 				$.ajax({  
-					url: '${basePath}admin/trace/recharge/passRecharge.htm?id='+id,
+					url: url,
 					dataType:'json',
 					success:function(result){
 						if(result.success){
@@ -36,8 +38,8 @@
 						
 					}  
 				});
-			}          
-		});  
+			}
+		});
 	}
 	
 	function forrmaterStatus(value,row){
