@@ -280,7 +280,9 @@
 		SELECT 
 			T.id,
 			T.username,
-			T.phone
+			T.phone,
+			T.status,
+			T.password
 		FROM user_info T
 		WHERE T.username = #{username}
 	</select>

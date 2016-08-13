@@ -5,7 +5,6 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -13,8 +12,6 @@ import com.lxhrainy.api.util.ApiCacheUtil;
 import com.lxhrainy.api.util.ApiJSONUtil;
 import com.lxhrainy.api.util.ResultJson;
 import com.lxhrainy.core.sys.model.UserInfo;
-import com.lxhrainy.core.sys.service.IUserInfoService;
-import com.lxhrainy.core.utils.ContextHolderUtils;
 import com.lxhrainy.core.utils.ResourceUtil;
 import com.lxhrainy.core.utils.oConvertUtils;
 
@@ -29,8 +26,8 @@ public class AuthInterceptor implements HandlerInterceptor {
 	 
 	private List<String> excludeUrls;
 	
-	@Autowired
-	private IUserInfoService mobileUserService;
+	/*@Autowired
+	private IUserInfoService mobileUserService;*/
 	/**
 	 * 在controller后拦截
 	 */
@@ -51,8 +48,12 @@ public class AuthInterceptor implements HandlerInterceptor {
 		} else {
 			UserInfo loginUser = ApiCacheUtil.getLoginUser();
 			if (oConvertUtils.isEmpty(loginUser)) {
-				String userid = ContextHolderUtils.getRequest().getHeader("userid");
+				ApiJSONUtil.writeJsonToResponse(new ResultJson(ResultJson.ERROR_CODE_USER_NOT_LOGIN,"用户未登录"), response);
+				return false;
+				/*String userid = ContextHolderUtils.getRequest().getHeader("usertoken");
 			    String uuid = ContextHolderUtils.getRequest().getHeader("uuid");
+			    ApiCacheUtil.getLoginUser()
+			    
 			    UserInfo user = mobileUserService.getById(oConvertUtils.getInt(userid));
 			    if(oConvertUtils.isNotEmpty(userid) && oConvertUtils.isNotEmpty(uuid)){
 			    	if(oConvertUtils.isNotEmpty(user)){
@@ -69,7 +70,7 @@ public class AuthInterceptor implements HandlerInterceptor {
 			    }else{
 			    	ApiJSONUtil.writeJsonToResponse(new ResultJson(ResultJson.ERROR_CODE_PARAMETERS,"cookie参数传递错误"), response);
 			    	return false;
-			    }
+			    }*/
 			}
 		}
 		return true;

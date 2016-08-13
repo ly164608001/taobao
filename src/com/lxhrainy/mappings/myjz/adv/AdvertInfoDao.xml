@@ -51,7 +51,7 @@
 	<select id="findAllList" resultType="AdvertInfo">
 		SELECT 
 			<include refid="advertInfoColumns"/>
-		FROM trace_record T
+		FROM advert_info T
 		<include refid="advertInfoJoins"/>
 		<include refid="where"/>
 	</select>

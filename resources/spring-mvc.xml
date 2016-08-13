@@ -184,6 +184,9 @@
 	    		<property name="excludeUrls">
 					<list>
 						<value>api/uploadimg.htm</value>
+						<value>api/AdList.htm</value>
+						<value>api/MessageList.htm</value>
+						<value>api/Login.htm</value>
 					</list>
 				</property>
 	    	</bean> 

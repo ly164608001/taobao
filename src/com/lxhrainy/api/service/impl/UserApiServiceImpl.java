@@ -32,7 +32,6 @@ import com.lxhrainy.core.sys.service.ISysNoticeService;
 import com.lxhrainy.core.sys.service.IUserInfoService;
 import com.lxhrainy.core.utils.AESUtil;
 import com.lxhrainy.core.utils.DateUtil;
-import com.lxhrainy.core.utils.PasswordUtil;
 import com.lxhrainy.core.utils.StringUtil;
 import com.lxhrainy.core.utils.oConvertUtils;
 import com.lxhrainy.myjz.admin.adv.model.AdvertInfo;
@@ -1077,7 +1076,7 @@ public class UserApiServiceImpl extends AbstractBaseServiceImpl<IUserInfoDao, Us
 						}
 					}
 					
-					String password = PasswordUtil.encrypt(mobileUser.getUsername(), mobileUser.getPassword(), PasswordUtil.getStaticSalt());
+					String password = encrptPassword(mobileUser.getPassword());
 					if (password.equals(user.getPassword())) {
 						
 						user.setUuid(mobileUser.getUuid());

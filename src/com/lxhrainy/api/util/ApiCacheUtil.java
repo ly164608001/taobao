@@ -34,7 +34,7 @@ public class ApiCacheUtil {
 	}
 	
 	public static void addUserChache(UserInfo loginUser) {
-		if (oConvertUtils.isNotEmpty(loginUser)) {
+		if (loginUser != null) {
 			Element element = new Element(getUserToken(loginUser), loginUser);
 			userCache.put(element);
 		}

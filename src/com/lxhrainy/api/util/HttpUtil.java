@@ -40,7 +40,8 @@ public final class HttpUtil {
 	public static String postHttpReq(String url, String json) throws UnsupportedEncodingException {
 		HttpClient httpClient = new HttpClient();
 
-		byte b[] = AES.encrypt(json.getBytes("UTF-8")); //json.getBytes("UTF-8");// 把字符串转换为二进制数据
+		byte b[] = json.getBytes("UTF-8");
+		//byte b[] = AES.encrypt(json.getBytes("UTF-8")); //json.getBytes("UTF-8");// 把字符串转换为二进制数据
 		RequestEntity requestEntity = new ByteArrayRequestEntity(b);
 		
 		EntityEnclosingMethod postMethod = new PostMethod();
@@ -51,6 +52,7 @@ public final class HttpUtil {
 		postMethod.setRequestHeader("userid", ApiHttpTest.USERID);
 		postMethod.setRequestHeader("uuid", ApiHttpTest.UUID);
 		postMethod.setRequestHeader("app", ApiHttpTest.ID);
+		postMethod.setRequestHeader("usertoken", "7680128300f51881bea3e78b035d5090");
 
 		// 设置连接超时
 		httpClient.getHttpConnectionManager().getParams().setConnectionTimeout(20 * 1000);

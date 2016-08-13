@@ -11,8 +11,8 @@ import com.lxhrainy.core.utils.StringUtil;
 public class ApiHttpTest {
 	public static final String UUID = "123456";
 	
-	public static final String URL = "http://hyll.haoyunll.cn/api.do";
-
+	//public static final String URL = "http://hyll.haoyunll.cn/api.do";
+	public static final String URL = "http://127.0.0.1:8080/core/api";
 	/*public static final String USERID = "4";
 	public static final String ID = "driver";*/
 	
@@ -30,6 +30,31 @@ public class ApiHttpTest {
 	public static final String ID = "user";*/
 	
 	@Test
+	public void getAdertList() throws Exception{
+		String url = URL+"/AdList.htm";
+		String params = "{}";
+		String result = HttpUtil.postHttpReq(url, params);
+		Assert.assertTrue(paserRsult(result));
+	}
+	
+	@Test
+	public void MessageList() throws Exception{
+		String url = URL+"/MessageList.htm";
+		String params = "{\"count\":10,\"messagetype\":0,\"offsetid\":0}";
+		String result = HttpUtil.postHttpReq(url, params);
+		Assert.assertTrue(paserRsult(result));
+	}
+	@Test
+	public void Login() throws Exception{
+		String url = URL+"/Login.htm";
+		String params = "{\"username\":\"yun\",\"password\":\"123456\",\"uuid\":\"adkalsjdfl\",\"platform\":\"android\"}";
+		String result = HttpUtil.postHttpReq(url, params);
+		Assert.assertTrue(paserRsult(result));
+	}
+	
+	
+	
+	/*@Test
 	public void getVerity() throws Exception {
 		String url = URL+"?getVerity";
 		String params = "{\"phone\":\"15806090483\"}";
@@ -433,7 +458,7 @@ public class ApiHttpTest {
 				+ "}";
 		String result = HttpUtil.postHttpReq(url, params);
 		Assert.assertTrue(paserRsult(result));
-	}
+	}*/
 	private boolean paserRsult(String result) {
 		if (StringUtil.isNotEmpty(result)) {
 			ResultJson rj = JSONHelper.fromJsonToObject(result,ResultJson.class);

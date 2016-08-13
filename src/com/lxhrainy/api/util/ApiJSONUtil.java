@@ -73,7 +73,8 @@ public class ApiJSONUtil {
 				while ((count = inputStream.read(data, 0, 4096)) != -1)  
 					outStream.write(data, 0, count);  
 				if (StringUtil.isNotEmpty(outStream)) {
-					byte[] result = AES.decrypt(outStream.toByteArray());
+					byte[] result = outStream.toByteArray();
+					//byte[] result = AES.decrypt(outStream.toByteArray());
 					if (StringUtil.isNotEmpty(result) && result.length > 0) {
 						String str = new String(result,"UTF-8");
 						if (StringUtil.isNotEmpty(str)) {
