@@ -27,7 +27,7 @@
 						AND T.name LIKE '%${condition.model.name}%'
 					</if>
 					<if test="condition.model.elementtype!=null and condition.model.elementtype!=''">
-						AND T.elementtype LIKE '%${condition.model.elementtype}%'
+						AND T.elementtype = #{condition.model.elementtype}
 					</if>
 					<if test="condition.model.type!=null">
 						AND T.type = #{condition.model.type}

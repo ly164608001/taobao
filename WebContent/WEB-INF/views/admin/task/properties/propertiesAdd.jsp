@@ -66,7 +66,7 @@
 			</tr>
 			<tr>
 				<td>所需蚂蚁币:</td>
-				<td><input name="price" class="easyui-validatebox textbox" /></td>
+				<td><input name="price" class="easyui-validatebox textbox" value="0"/></td>
 			</tr>
 			<tr>
 				<td>元素类型:</td>

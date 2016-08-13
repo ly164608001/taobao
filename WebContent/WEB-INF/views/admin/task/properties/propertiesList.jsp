@@ -19,6 +19,25 @@
 		return  oprBtn;
 	}
 	
+	function formatterElementtype(value,row){
+		if(value == 'radio'){
+			return '单选框';
+		}
+		if(value == 'select'){
+			return '下拉选择框';
+		}
+		if(value == 'checkbox'){
+			return '多选框';
+		}
+		if(value == 'text'){
+			return '输入框';
+		}
+		if(value == 'img'){
+			return '图片';
+		}
+		return '';
+	}
+	
 	function formatterType(value,row){
 		var result = '';
 		switch (value) {
@@ -62,7 +81,16 @@
 					<td>属性名</td>
 					<td><input name="model.name" class="easyui-validatebox textbox" value="${vo.model.name}" /></td>
 					<td>元素类型</td>
-					<td><input name="model.elementtype" class="easyui-validatebox textbox" value="${vo.model.elementtype}" /></td>
+					<td>
+						<select name="model.elementtype" id="elementtype">
+							<option value="">全部</option>
+							<option value="text">输入框</option>
+							<option value="radio">单选框</option>
+							<option value="checkbox">多选框</option>
+							<option value="select">下拉选择框</option>
+							<option value="img">图片</option>
+						</select>
+					</td>
 					<td>显示区域</td>
 					<td>
 						<select name="model.type" id="type">
@@ -86,7 +114,7 @@
 				<th field="id" width="40">id</th>
 				<th field="name" width="120">属性名</th>
 				<th field="elementname" width="120">别名</th>
-				<th field="elementtype" width="80">元素类型</th>
+				<th field="elementtype" formatter="formatterElementtype" width="80">元素类型</th>
 				<th field="elementnum" width="60">元素个数</th>
 				<th field="neednum" width="60">所需个数</th>
 				<th field="sort" width="60">完成排序</th>

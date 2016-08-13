@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50096
 File Encoding         : 65001
 
-Date: 2016-08-13 12:04:26
+Date: 2016-08-13 23:01:49
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -4322,8 +4322,8 @@ INSERT INTO `sys_menu` VALUES ('85', '1', '-1,1', '我的账户', '431', '', 'ad
 INSERT INTO `sys_menu` VALUES ('86', '85', '-1,1,85', '出错', '1', '才', 'admin', null, '1', '', '3', '2016-07-16 09:41:43', '3', '2016-07-16 09:41:43', null, '1', '0', '0');
 INSERT INTO `sys_menu` VALUES ('87', '81', '-11,,81', '实名认证审核', '32', '', 'admin', null, '1', '', '3', '2016-08-11 17:42:14', '3', '2016-08-11 17:42:14', null, '0', '0', '0');
 INSERT INTO `sys_menu` VALUES ('88', '1', '-1,1', '账户管理', '432', '', 'admin', null, '1', '', '3', '2016-08-11 17:42:56', '3', '2016-08-11 17:42:56', null, '0', '0', '0');
-INSERT INTO `sys_menu` VALUES ('89', '88', '-1,1,88', '账户充值处理', '1', '', 'admin', null, '1', '', '3', '2016-08-11 17:43:38', '3', '2016-08-11 17:44:16', null, '0', '0', '0');
-INSERT INTO `sys_menu` VALUES ('90', '88', '-1,1,88', '账户提现处理', '2', '', 'admin', null, '1', '', '3', '2016-08-11 17:43:55', '3', '2016-08-11 17:43:55', null, '0', '0', '0');
+INSERT INTO `sys_menu` VALUES ('89', '88', '-1,1,88', '账户充值处理', '1', 'admin/trace/recharge/rechargeList.htm', 'admin', null, '1', '', '3', '2016-08-11 17:43:38', '3', '2016-08-13 14:43:01', null, '0', '0', '0');
+INSERT INTO `sys_menu` VALUES ('90', '88', '-1,1,88', '账户提现处理', '2', 'admin/trace/withdrawls/withdrawlsList.htm', 'admin', null, '1', '', '3', '2016-08-11 17:43:55', '3', '2016-08-13 17:00:26', null, '0', '0', '0');
 INSERT INTO `sys_menu` VALUES ('91', '1', '-1,1', '任务管理', '433', '', 'admin', null, '1', '', '3', '2016-08-12 21:57:32', '3', '2016-08-12 21:57:32', null, '0', '0', '0');
 INSERT INTO `sys_menu` VALUES ('92', '91', '-1,1,91', '任务属性管理', '1', 'admin/task/properties/propertiesList.htm', 'admin', null, '1', '', '3', '2016-08-12 21:58:01', '3', '2016-08-13 10:56:57', null, '0', '0', '0');
 INSERT INTO `sys_menu` VALUES ('93', '91', '-1,1,91', '任务属性值管理', '2', 'admin/task/propertiesvalue/propertiesValueList.htm', 'admin', null, '1', '', '3', '2016-08-13 00:09:53', '3', '2016-08-13 00:10:29', null, '0', '0', '0');
@@ -4492,12 +4492,19 @@ CREATE TABLE `task_properties` (
   `sort` int(11) default NULL COMMENT '任务完成排序',
   `elementname` varchar(255) default NULL COMMENT '别名',
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='任务属性';
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COMMENT='任务属性';
 
 -- ----------------------------
 -- Records of task_properties
 -- ----------------------------
 INSERT INTO `task_properties` VALUES ('1', '是否手机下单', '1', '1', '2', 'radio', '2', null, null, null, '选项提示信息');
+INSERT INTO `task_properties` VALUES ('2', '拍单方式', '1', '1', '0', 'radio', '3', 'img', '1', '1', '别名');
+INSERT INTO `task_properties` VALUES ('4', '搜索进店方式', '0', '1', '0', 'radio', '4', 'img', '1', '2', '');
+INSERT INTO `task_properties` VALUES ('5', '要求确认时间', '0', '2', '0', 'select', '2', 'img', '1', '1', '');
+INSERT INTO `task_properties` VALUES ('6', '设置买号限制', '0', '3', '1', 'radio', '2', 'img', '1', '1', '');
+INSERT INTO `task_properties` VALUES ('7', '设置定时发布', '0', '4', '0', 'radio', '2', 'null', '0', '1', '');
+INSERT INTO `task_properties` VALUES ('8', '指定接手地区', '0', '3', '5', 'checkbox', '31', 'null', '0', '0', '');
+INSERT INTO `task_properties` VALUES ('9', '商品链接位置截图', '0', '1', '0', 'img', '0', 'null', '0', '0', '');
 
 -- ----------------------------
 -- Table structure for `task_properties_value`
@@ -4510,7 +4517,7 @@ CREATE TABLE `task_properties_value` (
   `keyvalue` varchar(255) default NULL COMMENT '值',
   `memo` varchar(255) default NULL COMMENT '备注',
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of task_properties_value
@@ -4540,8 +4547,8 @@ CREATE TABLE `trace_recharge` (
 -- ----------------------------
 -- Records of trace_recharge
 -- ----------------------------
-INSERT INTO `trace_recharge` VALUES ('1', '46438730@qq.com', '20160808164121', '2016-08-08 00:00:00', '3', null, null, '110.00', '0', 'admin', '1');
-INSERT INTO `trace_recharge` VALUES ('2', '464380730', '201608081644112', '2016-08-08 00:00:00', '3', null, null, '100.00', '0', 'admin', '2');
+INSERT INTO `trace_recharge` VALUES ('1', '46438730@qq.com', '20160808164121', '2016-08-08 12:33:00', '3', '3', '2016-08-13 16:08:39', '110.00', '1', 'admin', '1');
+INSERT INTO `trace_recharge` VALUES ('2', '464380730', '201608081644112', '2016-08-08 00:23:30', '3', '3', '2016-08-13 16:10:04', '100.00', '1', 'admin', '2');
 
 -- ----------------------------
 -- Table structure for `trace_record`
@@ -4586,11 +4593,11 @@ CREATE TABLE `trace_withdrawls` (
 -- ----------------------------
 -- Records of trace_withdrawls
 -- ----------------------------
-INSERT INTO `trace_withdrawls` VALUES ('1', '6.00', '4.00', '2.00', '4', '0', '2016-08-06 16:45:51', null, null, '2', '3');
-INSERT INTO `trace_withdrawls` VALUES ('2', '100.00', '4.00', '96.00', '4', '0', '2016-08-06 16:54:49', null, null, '1', '3');
-INSERT INTO `trace_withdrawls` VALUES ('3', '8.00', '4.00', '4.00', '4', '0', '2016-08-06 16:55:45', null, null, '2', '3');
-INSERT INTO `trace_withdrawls` VALUES ('4', '9.00', '4.00', '5.00', '4', '0', '2016-08-06 17:02:12', null, null, '2', '3');
-INSERT INTO `trace_withdrawls` VALUES ('5', '11.00', '4.00', '7.00', '4', '0', '2016-08-07 22:33:32', null, null, '2', '3');
+INSERT INTO `trace_withdrawls` VALUES ('1', '6.00', '4.00', '2.00', '4', '1', '2016-08-06 16:45:51', '2016-08-13 21:11:50', '1235457', '2', '3');
+INSERT INTO `trace_withdrawls` VALUES ('2', '100.00', '4.00', '96.00', '4', '1', '2016-08-06 16:54:49', '2016-08-13 21:23:12', '123456', '1', '3');
+INSERT INTO `trace_withdrawls` VALUES ('3', '8.00', '4.00', '4.00', '4', '1', '2016-08-06 16:55:45', '2016-08-13 21:31:23', '43434343', '2', '3');
+INSERT INTO `trace_withdrawls` VALUES ('4', '9.00', '4.00', '5.00', '4', '1', '2016-08-06 17:02:12', '2016-08-13 21:32:23', '1213', '2', '3');
+INSERT INTO `trace_withdrawls` VALUES ('5', '11.00', '4.00', '7.00', '4', '1', '2016-08-07 22:33:32', '2016-08-13 21:31:51', '232', '2', '3');
 
 -- ----------------------------
 -- Table structure for `user_account`
@@ -4747,4 +4754,4 @@ CREATE TABLE `user_money` (
 -- ----------------------------
 -- Records of user_money
 -- ----------------------------
-INSERT INTO `user_money` VALUES ('1', '3', 'ifS7tw1E6a7Yx0lPE3rcSw==', '100.00', '272.00', '224.00', '0');
+INSERT INTO `user_money` VALUES ('1', '3', 'ifS7tw1E6a7Yx0lPE3rcSw==', '768.00', '702.00', '278.00', '0');
