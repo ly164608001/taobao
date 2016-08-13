@@ -18,26 +18,11 @@
 				+ '<a href="javascript:void(0)" class="easyui-linkbutton" onclick="openLrDialog(\'驳回说明\',\'${basePath}admin/task/properties/propertiesUpdate.htm?id='+row.id+'\',420,320)">驳回</a>&nbsp;';
 		} 				
 		
-		return oprBtn;
-	}
-	
-	function formatterChannel(value,row){
-		var result = '';
-		switch (value) {
-		case 1:
-			result = '支付宝';
-			break;
-		case 2:
-			result = '财付通';
-			break;
-		default:
-			break;
-		}
-		return result;
+		return  oprBtn;
 	}
 	
 	function passRecharge(id){
-		$.messager.confirm('确认','确认将该充值标记为已处理?',function(a){  
+		$.messager.confirm('确认','确认将该提现标记为已处理?',function(a){  
 			if(a) {
 				$.ajax({  
 					url: '${basePath}admin/trace/recharge/passRecharge.htm?id='+id,
@@ -65,7 +50,7 @@
 			result = '已处理';
 			break;
 		case -1:
-			result = '充值驳回';
+			result = '提现驳回';
 			break;
 		default:
 			break;
@@ -76,33 +61,22 @@
 </script>
 </head>
 <body>
-	<div class="easyui-panel" title="充值列表"
+	<div class="easyui-panel" title="提现列表"
 		data-options="striped: true,collapsible:true,iconCls:'icon-search'">
 		<form id="dgquery">
 			<table>
 				<tr>
 					<td>关键字</td>
 					<td><input name="searchkey" class="easyui-validatebox textbox" value="${vo.searchkey}" placeholder="账号/交易号/用户" /></td>
-					<td></td>
 					<td>状态</td>
 					<td>
 						<select name="model.status" id="status">
 							<option value="">全部</option>
 							<option value="0">待处理</option>
 							<option value="1">已处理</option>
-							<option value="-1">充值驳回</option>
+							<option value="-1">提现驳回</option>
 						</select>
 					</td>
-					<td></td>
-					<td>充值方式</td>
-					<td>
-						<select name="model.channel" id="channel">
-							<option value="">全部</option>
-							<option value="1">支付宝</option>
-							<option value="2">盛付通</option>
-						</select>
-					</td>
-					<td></td>
 					<td></td>
 					<td><a href="#" id="btn-search" class="easyui-linkbutton"
 						iconCls="icon-search" onclick="$('#dgquery').submit();">搜索</a></td>
@@ -115,13 +89,15 @@
 		<thead>
 			<tr>
 				<th field="id" width="40">id</th>
-				<th field="payaccount" width="120">充值账号</th>
-				<th field="payno" width="120">充值交易号</th>
-				<th field="createuser.username" width="80">充值用户</th>
-				<th field="money" width="60">充值金额</th>
-				<th field="channel" formatter="formatterChannel" width="60">充值方式</th>
+				<th field="account.accountno" width="120">提现账号</th>
+				<th field="account.accountname" width="80">开户名</th>
+				<th field="user.username" width="80">提现用户</th>
+				<th field="money" width="80">提现金额</th>
+				<th field="commission" width="80">手续费</th>
+				<th field="arrivalmoney" width="80">到账金额</th>
+				<th field="type" width="60">提现类型</th>
 				<th field="status" formatter="forrmaterStatus" width="60">状态</th>
-				<th field="createtime" formatter="formatterDate" width="120">充值时间</th>
+				<th field="createtime" formatter="formatterDate" width="120">提现时间</th>
 				<th field="memo" width="80">备注</th>
 				<th field="isadmin" width="180" formatter="formatteradminuserbutton">操作</th>
 			</tr>

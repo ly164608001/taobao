@@ -43,6 +43,9 @@
 					<if test="condition.model.status!=null">
 						AND T.status = #{condition.model.status}
 					</if>
+					<if test="condition.model.channel!=null">
+						AND T.channel = #{condition.model.channel}
+					</if>
 					<if test="condition.model.createuser!=null and condition.model.createuser.id!=null">
 						AND T.createuser = #{condition.model.createuser.id}
 					</if>

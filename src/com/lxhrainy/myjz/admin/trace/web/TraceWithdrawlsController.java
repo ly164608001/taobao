@@ -11,29 +11,28 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSONObject;
 import com.lxhrainy.core.common.controller.BaseController;
-import com.lxhrainy.myjz.admin.trace.model.TraceRecharge;
-import com.lxhrainy.myjz.admin.trace.oe.TraceRechargeVO;
-import com.lxhrainy.myjz.admin.trace.service.ITraceRechargeService;
-import com.lxhrainy.myjz.common.constant.Global;
+import com.lxhrainy.myjz.admin.trace.model.TraceWithdrawls;
+import com.lxhrainy.myjz.admin.trace.oe.TraceWithdrawlsVO;
+import com.lxhrainy.myjz.admin.trace.service.ITraceWithdrawlsService;
 
-@RequestMapping("/admin/trace/recharge")
+@RequestMapping("/admin/trace/withdrawls")
 @Controller
-public class TraceRechargeController extends BaseController {
+public class TraceWithdrawlsController extends BaseController {
 
 	@Autowired
-	ITraceRechargeService rechargeService;	
+	ITraceWithdrawlsService withdrawlsService;	
 	
 	/***
 	 * 详情
 	 * @param
 	 */
-	@RequestMapping("/rechargeDetail")
+	@RequestMapping("/withdrawlsDetail")
 	public ModelAndView detail(Integer id) {
 		if(id!=null){
-			mv.addObject("model", rechargeService.getById(id));
+			mv.addObject("model", withdrawlsService.getById(id));
 		}
 		
-		mv.setViewName("admin/trace/recharge/rechargeDetail");
+		mv.setViewName("admin/trace/withdrawls/withdrawlsDetail");
 		return mv;
 	}
 	
@@ -41,17 +40,17 @@ public class TraceRechargeController extends BaseController {
 	 * 列表
 	 * @param
 	 */
-	@RequestMapping("/rechargeList")
+	@RequestMapping("/withdrawlsList")
 	public ModelAndView list() {
-		mv.setViewName("admin/trace/recharge/rechargeList");
+		mv.setViewName("admin/trace/withdrawls/withdrawlsList");
 		return mv;
 	}
 	
 	@RequestMapping("/datalist")
 	@ResponseBody
-	public JSONObject listdata(TraceRechargeVO vo) {
+	public JSONObject listdata(TraceWithdrawlsVO vo) {
 		JSONObject rj = new JSONObject();
-		List<TraceRecharge> list = rechargeService.getListByPage(vo);
+		List<TraceWithdrawls> list = withdrawlsService.getListByPage(vo);
 		rj.put("total", vo.getTotalCount());
 		rj.put("rows",list);
 		rj.put("vo",vo);
@@ -59,29 +58,27 @@ public class TraceRechargeController extends BaseController {
 	}
 	
 	/***
-	 * 审核通过充值
+	 * 审核通过提现
 	 * @param
 	 */
-	@RequestMapping("/passRecharge")
+	@RequestMapping("/passWithdrawls")
 	@ResponseBody
-	public JSONObject passRecharge(Integer id) {
+	public JSONObject passWithdrawls(Integer id) {
 		JSONObject rj = new JSONObject();
 		rj.put("success", false);
 		
 		if(id == null){
-			rj.put("msg", "请选择要标记为已处理的充值申请记录");
+			rj.put("msg", "请选择要标记为已处理的提现申请记录");
 			return rj;
 		}
 		
-		TraceRecharge model = new TraceRecharge();
+		TraceWithdrawls model = new TraceWithdrawls();
 		model.setId(id);
-		model.setHandletime(new Date());
-		model.setHandleuser(getCurrentUser());
-		model.setStatus(Global.AUDIT_PASS);
-		int result = rechargeService.passRecharge(model);
+		model.setFinishtime(new Date());
+		int result = withdrawlsService.passWithdrawls(model);
 		
 		if(result == -1){
-			rj.put("msg", "无该充值申请记录或该记录不为待处理状态");
+			rj.put("msg", "无该提现申请记录或该记录不为待处理状态");
 			return rj;
 		}
 	

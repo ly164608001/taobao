@@ -60,5 +60,10 @@ public class TraceWithdrawlsServiceImpl extends
 	public List<TraceWithdrawls> getListForMobile(TraceWithdrawlsVO vo) {
 		return dao.getListForMobile(vo);
 	}
+
+	@Override
+	public int passWithdrawls(TraceWithdrawls model) {
+		return 1;
+	}
 	
 }

@@ -22,10 +22,20 @@ public interface ITraceWithdrawlsService extends IBaseService<TraceWithdrawls, I
 	int applyWithdrawls(TraceWithdrawls model);
 
 	/**
+	 * 提现处理
+	 * @param model
+	 * @return 1 成功
+	 *        -1 可用余额不足
+	 */
+	int passWithdrawls(TraceWithdrawls model);
+	
+	/**
 	 * 手机端获取提现列表
 	 * @param vo
 	 * @return
 	 */
 	List<TraceWithdrawls> getListForMobile(TraceWithdrawlsVO vo);
+
+	
 
 }

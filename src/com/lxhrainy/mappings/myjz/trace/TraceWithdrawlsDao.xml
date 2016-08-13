@@ -15,11 +15,14 @@
 		T.userid AS "user.id",
 		T.type AS "type",
 		
-		A.accountno AS "account.accountno"
+		A.accountno AS "account.accountno",
+		A.accountname AS "account.accountname",
+		U.username AS "user.username"
 	</sql>
 	
 	<sql id="traceWithdrawlsJoins">
 		LEFT JOIN user_account A ON A.id = T.withdrawalsaccount
+		LEFT JOIN user_info U ON U.id = T.userid
 	</sql>
 	
 	<sql id="where">
