@@ -118,4 +118,27 @@
 		WHERE id = #{id}
 	</update>
 	
+	<select id="getListForMobile" resultType="OrderInfo">
+		SELECT 
+			<include refid="orderInfoColumns"/>
+		FROM sys_notice T
+			<include refid="orderInfoJoins"/>
+		<if test="condition!=null">
+			<where>
+				<if test="condition.model != null">
+					<if test="condition.model.user != null">
+						<if test="condition.model.user.id != null">
+							AND T.userid = #{condition.model.user.id}
+						</if>
+					</if>
+				</if>
+				<if test="condition.offsetid != null">
+					AND T.id &lt; #{condition.offsetid}
+				</if>
+			</where>
+		order by T.id desc
+		limit 0,${condition.count}
+		</if>
+	</select>
+	
 </mapper>
