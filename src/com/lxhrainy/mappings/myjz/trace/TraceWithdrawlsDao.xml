@@ -42,6 +42,9 @@
 					<if test="condition.model.user!=null and condition.model.user.id!=null">
 						AND T.userid = #{condition.model.user.id}
 					</if>
+					<if test="condition.model.type!=null and condition.model.type!=null">
+						AND T.type = #{condition.model.type}
+					</if>
 				</if>
 			</where>
 		</if>

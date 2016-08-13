@@ -42,6 +42,10 @@
 		});
 	}
 	
+	function forrmaterType(value,row){
+		return (value == 1 ? '正常到账(24小时)':'快速到账(2小时)');
+	}
+	
 	function forrmaterStatus(value,row){
 		var result = '';
 		switch (value) {
@@ -70,13 +74,23 @@
 				<tr>
 					<td>关键字</td>
 					<td><input name="searchkey" class="easyui-validatebox textbox" value="${vo.searchkey}" placeholder="账号/交易号/用户" /></td>
+					<td>&nbsp;</td>
 					<td>状态</td>
 					<td>
 						<select name="model.status" id="status">
 							<option value="">全部</option>
-							<option value="0">待处理</option>
-							<option value="1">已处理</option>
+							<option value="1">待处理</option>
+							<option value="2">已处理</option>
 							<option value="-1">提现驳回</option>
+						</select>
+					</td>
+					<td>&nbsp;</td>
+					<td>提现类型</td>
+					<td>
+						<select name="model.type" id="type">
+							<option value="">全部</option>
+							<option value="1">正常到账</option>
+							<option value="2">快速到账</option>
 						</select>
 					</td>
 					<td></td>
@@ -97,7 +111,7 @@
 				<th field="money" width="80">提现金额</th>
 				<th field="commission" width="80">手续费</th>
 				<th field="arrivalmoney" width="80">到账金额</th>
-				<th field="type" width="60">提现类型</th>
+				<th field="type" formatter="forrmaterType" width="60">提现类型</th>
 				<th field="status" formatter="forrmaterStatus" width="60">状态</th>
 				<th field="createtime" formatter="formatterDate" width="120">提现时间</th>
 				<th field="memo" width="80">备注</th>

@@ -29,6 +29,9 @@
 					<if test="condition.model.elementtype!=null and condition.model.elementtype!=''">
 						AND T.elementtype LIKE '%${condition.model.elementtype}%'
 					</if>
+					<if test="condition.model.type!=null">
+						AND T.type = #{condition.model.type}
+					</if>
 				</if>
 			</where>
 		</if>
