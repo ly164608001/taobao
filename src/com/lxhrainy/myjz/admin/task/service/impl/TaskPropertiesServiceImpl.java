@@ -1,5 +1,8 @@
 package com.lxhrainy.myjz.admin.task.service.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -7,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.lxhrainy.core.common.service.AbstractBaseServiceImpl;
 import com.lxhrainy.myjz.admin.task.dao.ITaskPropertiesDao;
 import com.lxhrainy.myjz.admin.task.model.TaskProperties;
+import com.lxhrainy.myjz.admin.task.model.TaskPublish;
 import com.lxhrainy.myjz.admin.task.service.ITaskPropertiesService;
 import com.lxhrainy.myjz.admin.task.service.ITaskPropertiesValueService;
 import com.lxhrainy.myjz.common.constant.Global;
@@ -66,6 +70,16 @@ implements ITaskPropertiesService {
 		valueService.deleteByProperties(id);
 		dao.deleteById(id);
 		return 1;
+	}
+	
+	/**
+	 * 获取任务发布属性集合实体列表
+	 */
+	public List<TaskPublish> getTaskPublishList(){
+		List<TaskPublish> resultList = new ArrayList<TaskPublish>();
+		//获取所有属性及属性的值列表
+		//然后对属性进行分类返回结果
+		return resultList;
 	}
 	
 }
