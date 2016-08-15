@@ -234,7 +234,7 @@ implements IUserInfoService {
 	public boolean isExistUserName(String username, Integer type) {
 		//判断用户名是否存在
 		UserInfo exsitUser = dao.getByName(username);
-		if(exsitUser == null){
+		if(exsitUser != null){
 			return true;
 		}
 		return false;

@@ -61,4 +61,9 @@ public class ApiConstant {
 	public final static int AUTH_TYPE_ID = 0;
 	public final static int AUTH_TYPE_STU = 0;
 	
+	//用户类型：1 刷手 2 商家
+	public final static int USER_BUYER = 1 ;  
+	public final static int USER_SELLER = 2 ;  
+	public final static int USER_ADMIN = 0 ;
+	
 }

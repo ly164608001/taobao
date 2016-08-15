@@ -1,6 +1,5 @@
 package com.lxhrainy.myjz.admin.user.model;
 
-import java.sql.Timestamp;
 import java.util.Date;
 
 import com.lxhrainy.core.common.model.BaseModel;
@@ -195,10 +194,6 @@ public class UserDetailInfo extends BaseModel {
 	}
 
 	public void setModifytime(Date modifytime) {
-		this.modifytime = modifytime;
-	}
-
-	public void setModifytime(Timestamp modifytime) {
 		this.modifytime = modifytime;
 	}
 

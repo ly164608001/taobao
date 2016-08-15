@@ -43,7 +43,6 @@ public final class HttpUtil {
 		byte b[] = json.getBytes("UTF-8");
 		//byte b[] = AES.encrypt(json.getBytes("UTF-8")); //json.getBytes("UTF-8");// 把字符串转换为二进制数据
 		RequestEntity requestEntity = new ByteArrayRequestEntity(b);
-		
 		EntityEnclosingMethod postMethod = new PostMethod();
 		postMethod.setRequestEntity(requestEntity);// 设置数据
 		postMethod.setPath(url);// 设置服务的url

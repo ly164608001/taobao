@@ -52,11 +52,13 @@ import com.lxhrainy.myjz.admin.trace.service.ITraceWithdrawlsService;
 import com.lxhrainy.myjz.admin.user.model.UserAccount;
 import com.lxhrainy.myjz.admin.user.model.UserAuthInfo;
 import com.lxhrainy.myjz.admin.user.model.UserConfig;
+import com.lxhrainy.myjz.admin.user.model.UserDetailInfo;
 import com.lxhrainy.myjz.admin.user.model.UserMoney;
 import com.lxhrainy.myjz.admin.user.oe.UserAccountVO;
 import com.lxhrainy.myjz.admin.user.service.IUserAccountService;
 import com.lxhrainy.myjz.admin.user.service.IUserAuthInfoService;
 import com.lxhrainy.myjz.admin.user.service.IUserConfigService;
+import com.lxhrainy.myjz.admin.user.service.IUserDetailInfoService;
 import com.lxhrainy.myjz.admin.user.service.IUserMoneyService;
 import com.lxhrainy.myjz.common.constant.Global;
 
@@ -91,6 +93,8 @@ public class UserApiServiceImpl extends AbstractBaseServiceImpl<IUserInfoDao, Us
 	private IUserAccountService userAccountService;
 	@Autowired
 	private IUserAuthInfoService authInfoService;
+	@Autowired
+	private IUserDetailInfoService detailInfoService;
 	
 	@Override
 	public ResultJson adlist(ApiParams params) {
@@ -967,25 +971,35 @@ public class UserApiServiceImpl extends AbstractBaseServiceImpl<IUserInfoDao, Us
 					return rj;
 				}
 				
-				if (StringUtil.isNotEmpty(mobileUser.getInviter()) 
-						&& !userInfoService.isExistUserName(mobileUser.getInviter(),type)) {
+				if (StringUtil.isNotEmpty(mobileUser.getInvitation()) 
+						&& !userInfoService.isExistUserName(mobileUser.getInvitation(),type)) {
 					rj.setError_code(ResultJson.ERROR_CODE_INVITER_NOT_EXIST);
 					rj.setMessage("邀请人不存在");
 				} else {
 					UserInfo mobileUserEntity = new UserInfo();
 					mobileUserEntity.setPassword(encrptPassword(mobileUser.getPassword()));
 					mobileUserEntity.setUsername(mobileUser.getUsername());
-					mobileUserEntity.setInviter(mobileUser.getInviter());
-					mobileUserEntity.setType(type);
+					mobileUserEntity.setInviter(mobileUser.getInvitation());
+					mobileUserEntity.setType(ApiConstant.USER_BUYER);
 					mobileUserEntity.setPhone(mobileUser.getUsername());
 					mobileUserEntity.setStatus(ApiConstant.API_USER_ALLOW);
 					mobileUserEntity.setRegistertime(new Date());
+					mobileUserEntity.setUuid(mobileUser.getUuid());
+					mobileUserEntity.setPlatform(mobileUser.getPlatform());
 					userInfoService.save(mobileUserEntity);
 					if (oConvertUtils.isEmpty(mobileUserEntity.getId())) {
 						rj.setError_code(ResultJson.ERROR_CODE_API);
 						rj.setMessage("注册失败");
 					} else {
 						ApiCacheUtil.removeCaptchaChache(mobileUser.getUsername());
+						UserDetailInfo detail = new UserDetailInfo();
+						detail.setQq(mobileUser.getQQ());
+						detail.setUser(mobileUserEntity);
+						detail.setModifytime(new Date());
+						detail.setDeleted(ApiConstant.NO);
+						detail.setRealname(mobileUser.getName());
+						detailInfoService.save(detail);
+						
 						UserMoney account = new UserMoney();
 						account.setUser(mobileUserEntity);
 						account.setAllbalance(0d);
@@ -1140,7 +1154,7 @@ public class UserApiServiceImpl extends AbstractBaseServiceImpl<IUserInfoDao, Us
 			int length = 6;
 			String captcha = StringUtil.numRandom(length);
 			try {
-				String result = UcsSmsUtil.templateSMS("27994", phone, captcha);
+				String result = UcsSmsUtil.templateSMS("27994", phone, captcha+",2");
 				if (oConvertUtils.isNotEmpty(result) && result.equals("000000")) {
 					ApiCacheUtil.addCaptchaChache(phone, captcha + "-" + DateUtil.getMillis());
 					rj.setError_code(ResultJson.SUCCESS);

@@ -19,7 +19,7 @@ public class ApiParams {
 	/**
 	 * 邀请人
 	 */
-	private String inviter;
+	private String invitation;
 	/**
 	 * 友盟需要用到的token
 	 */
@@ -63,7 +63,6 @@ public class ApiParams {
 	private String phone;
 	//用户名
 	private String username;
-	
 	//性别
 	private String gender;
 	//头像
@@ -304,11 +303,11 @@ public class ApiParams {
 	public void setUuid(String uuid) {
 		this.uuid = uuid;
 	}
-	public String getInviter() {
-		return inviter;
+	public String getInvitation() {
+		return invitation;
 	}
-	public void setInviter(String inviter) {
-		this.inviter = inviter;
+	public void setInvitation(String invitation) {
+		this.invitation = invitation;
 	}
 	public String getToken() {
 		return token;
