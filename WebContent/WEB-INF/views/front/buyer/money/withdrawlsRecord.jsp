@@ -26,7 +26,7 @@
 	<h4>
 		<span class="title">账户明细</span>
 	</h4>
-	<div id="tab_detail" class="HuiTab">
+	<div id="" class="HuiTab">
 		<div class="tabBar cl">
 			<span id="moneyDetailSpan">账户明细</span>
 			<span class="current">提现记录</span>

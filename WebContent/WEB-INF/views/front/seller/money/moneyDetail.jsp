@@ -15,7 +15,6 @@
 			//提现记录
 			$('#withdrawlsRecordSpan').click(function(){
 				window.location.href = basePath + 'front/buyer/money/withdrawlsRecord.htm';
-				$(this).addClass('current');
 			});
 			
 		});
@@ -26,7 +25,7 @@
 	<h4>
 		<span class="title">账户明细</span>
 	</h4>
-	<div id="tab_detail" class="HuiTab">
+	<div id="" class="HuiTab">
 		<div class="tabBar cl">
 			<span class="current">账户明细</span>
 			<span id="withdrawlsRecordSpan">提现记录</span>

@@ -370,11 +370,11 @@ p{font-size: 14px;}
     filter: alpha(opacity=0);
 }
 .personalTrust .now-head {
-    height: 200px;
+    
     width: 300px
 }
 .personalTrust .now-head-other{width: 600px}
-.personalTrust .now-head img{width: 100%}
+.personalTrust .now-head img{width: 100%;max-width:100%}
 .item-select {
     width: 128px;
     height: 40px;
