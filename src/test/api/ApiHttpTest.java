@@ -52,6 +52,30 @@ public class ApiHttpTest {
 		Assert.assertTrue(paserRsult(result));
 	}
 	
+	@Test
+	public void Sigin() throws Exception{
+		String url = URL+"/Sigin.htm";
+		String params = "{\"phone\":\"17750310332\",";
+		params += "\"password\":\"123456\",";
+		params += "\"invitation\":\"12344\",";
+		params += "\"platform\":\"android\",";
+		params += "\"captcha\":\"12344\",";
+		params += "\"uuid\":\"adkalsjdfl\",";
+		params += "\"username\":\"新刷手\",";
+		params += "\"QQ\":\"234345555\",";
+		params += "\"name\":\"罗鑫辉\"}";
+		String result = HttpUtil.postHttpReq(url, params);
+		Assert.assertTrue(paserRsult(result));
+	}
+	
+	@Test
+	public void GetInvitation() throws Exception{
+		String url = URL+"/GetInvitation.htm";
+		String params = "{\"phone\":\"13489184949\"}";
+		String result = HttpUtil.postHttpReq(url, params);
+		Assert.assertTrue(paserRsult(result));
+	}
+	
 	
 	
 	/*@Test

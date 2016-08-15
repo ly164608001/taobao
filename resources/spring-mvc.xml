@@ -187,6 +187,8 @@
 						<value>api/AdList.htm</value>
 						<value>api/MessageList.htm</value>
 						<value>api/Login.htm</value>
+						<value>api/Sigin.htm</value>
+						<value>api/GetInvitation.htm</value>
 					</list>
 				</property>
 	    	</bean> 

@@ -3,7 +3,6 @@
  */
 package com.lxhrainy.api.service.impl;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -938,7 +937,7 @@ public class UserApiServiceImpl extends AbstractBaseServiceImpl<IUserInfoDao, Us
 					&& StringUtil.isNotEmpty(mobileUser.getUuid())
 					&& StringUtil.isNotEmpty(mobileUser.getPlatform())) {
 				// 验证验证码
-				String captcha = ApiCacheUtil.getCaptchaChache(mobileUser.getUsername());
+				String captcha = ApiCacheUtil.getCaptchaChache(mobileUser.getPhone());
 				if (StringUtil.isEmpty(captcha)) {
 					rj.setError_code(ResultJson.ERROR_CODE_CAPTCHA);
 					rj.setMessage("请获取验证码");
@@ -973,7 +972,6 @@ public class UserApiServiceImpl extends AbstractBaseServiceImpl<IUserInfoDao, Us
 					rj.setError_code(ResultJson.ERROR_CODE_INVITER_NOT_EXIST);
 					rj.setMessage("邀请人不存在");
 				} else {
-					//TODO
 					UserInfo mobileUserEntity = new UserInfo();
 					mobileUserEntity.setPassword(encrptPassword(mobileUser.getPassword()));
 					mobileUserEntity.setUsername(mobileUser.getUsername());
@@ -982,8 +980,8 @@ public class UserApiServiceImpl extends AbstractBaseServiceImpl<IUserInfoDao, Us
 					mobileUserEntity.setPhone(mobileUser.getUsername());
 					mobileUserEntity.setStatus(ApiConstant.API_USER_ALLOW);
 					mobileUserEntity.setRegistertime(new Date());
-					Serializable id = userInfoService.save(mobileUserEntity);
-					if (oConvertUtils.isEmpty(id)) {
+					userInfoService.save(mobileUserEntity);
+					if (oConvertUtils.isEmpty(mobileUserEntity.getId())) {
 						rj.setError_code(ResultJson.ERROR_CODE_API);
 						rj.setMessage("注册失败");
 					} else {
@@ -1142,7 +1140,7 @@ public class UserApiServiceImpl extends AbstractBaseServiceImpl<IUserInfoDao, Us
 			int length = 6;
 			String captcha = StringUtil.numRandom(length);
 			try {
-				String result = UcsSmsUtil.templateSMS("27994", phone, captcha + ",3");
+				String result = UcsSmsUtil.templateSMS("27994", phone, captcha);
 				if (oConvertUtils.isNotEmpty(result) && result.equals("000000")) {
 					ApiCacheUtil.addCaptchaChache(phone, captcha + "-" + DateUtil.getMillis());
 					rj.setError_code(ResultJson.SUCCESS);

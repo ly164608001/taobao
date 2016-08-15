@@ -16,7 +16,10 @@
 		T.memo AS "memo",
 		T.updatetime AS "updatetime",
 		T.password AS "password",
-		T.creditscore AS "creditscore"
+		T.creditscore AS "creditscore",
+		T.uuid AS "uuid",
+		T.platform AS "platform",
+		T.inviter AS "inviter"
     </sql>
     <sql id="roleColumns">
     	GROUP_CONCAT(R.name) AS "rolenames"
@@ -183,7 +186,10 @@
 			memo,
 			updatetime,
 			updateuser,
-			creditscore
+			creditscore,
+			uuid,
+			platform,
+			inviter
 		) VALUES (
 			#{id},
 			#{username},
@@ -200,12 +206,16 @@
 			#{memo},
 			#{updatetime},
 			#{updateuser.id},
-			#{creditscore}
+			#{creditscore},
+			#{uuid},
+			#{platform},
+			#{inviter}
 		)
 	</insert>
 	
 	<update id="update">
-		UPDATE user_info SET 	
+		UPDATE user_info
+		<set>
 			<if test="username !=null and username !=''">
 			username = #{username},
 			</if>	
@@ -246,9 +256,18 @@
 			updateuser = #{updateuser.id},
 			</if>
 			<if test="creditscore != null">
-			creditscore = #{creditscore}
+			creditscore = #{creditscore},
 			</if>
-			id = #{id}
+			<if test="uuid != null and uuid != ''">
+			uuid = #{uuid},
+			</if>
+			<if test="platform != null and platform != ''">
+			platform = #{platform},
+			</if>
+			<if test="inviter != null and inviter != ''">
+			inviter = #{inviter},
+			</if>
+		</set>
 		WHERE id = #{id}
 	</update>
 	
