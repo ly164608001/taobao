@@ -3,9 +3,7 @@
  */
 package com.lxhrainy.api.service.impl;
 
-import java.io.IOException;
 import java.io.Serializable;
-import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -22,7 +20,7 @@ import com.lxhrainy.api.service.IUserApiService;
 import com.lxhrainy.api.util.ApiCacheUtil;
 import com.lxhrainy.api.util.ApiConstant;
 import com.lxhrainy.api.util.ResultJson;
-import com.lxhrainy.api.util.SmsUtil;
+import com.lxhrainy.api.util.UcsSmsUtil;
 import com.lxhrainy.core.common.service.AbstractBaseServiceImpl;
 import com.lxhrainy.core.oe.SysNoticeVO;
 import com.lxhrainy.core.sys.dao.IUserInfoDao;
@@ -1143,10 +1141,9 @@ public class UserApiServiceImpl extends AbstractBaseServiceImpl<IUserInfoDao, Us
 			String phone = params.getPhone();
 			int length = 6;
 			String captcha = StringUtil.numRandom(length);
-			String content = "[蚂蚁兼职]亲，您的验证码是{0}，在3分钟内有效。如非本人操作请忽略本短信。";
-			String msg = MessageFormat.format(content, captcha);
 			try {
-				if (SmsUtil.send(msg, phone)) {
+				String result = UcsSmsUtil.templateSMS("27994", phone, captcha + ",3");
+				if (oConvertUtils.isNotEmpty(result) && result.equals("000000")) {
 					ApiCacheUtil.addCaptchaChache(phone, captcha + "-" + DateUtil.getMillis());
 					rj.setError_code(ResultJson.SUCCESS);
 					rj.setSuccess(true);
@@ -1155,7 +1152,7 @@ public class UserApiServiceImpl extends AbstractBaseServiceImpl<IUserInfoDao, Us
 					rj.setError_code(ResultJson.ERROR_CODE_GENERAL);
 					rj.setMessage("验证码发送失败，请稍后再试");
 				}
-			} catch (IOException e) {
+			} catch (Exception e) {
 				e.printStackTrace();
 				rj.setError_code(ResultJson.ERROR_CODE_GENERAL);
 				rj.setMessage("验证码发送失败，请稍后再试");

@@ -115,5 +115,4 @@ public interface ISysMenuService extends IBaseService<SysMenu, Integer>{
 	 * @throws
 	 */
 	List<TreeNode> findTreeNodes();
-
 }
