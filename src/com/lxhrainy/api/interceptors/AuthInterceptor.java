@@ -13,7 +13,6 @@ import com.lxhrainy.api.util.ApiJSONUtil;
 import com.lxhrainy.api.util.ResultJson;
 import com.lxhrainy.core.sys.model.UserInfo;
 import com.lxhrainy.core.utils.ResourceUtil;
-import com.lxhrainy.core.utils.oConvertUtils;
 
 
 /**
@@ -47,7 +46,7 @@ public class AuthInterceptor implements HandlerInterceptor {
 			return true;
 		} else {
 			UserInfo loginUser = ApiCacheUtil.getLoginUser();
-			if (oConvertUtils.isEmpty(loginUser)) {
+			if (loginUser == null) {
 				ApiJSONUtil.writeJsonToResponse(new ResultJson(ResultJson.ERROR_CODE_USER_NOT_LOGIN,"用户未登录"), response);
 				return false;
 				/*String userid = ContextHolderUtils.getRequest().getHeader("usertoken");

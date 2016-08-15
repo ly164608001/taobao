@@ -51,7 +51,7 @@ public final class HttpUtil {
 		postMethod.setRequestHeader("userid", ApiHttpTest.USERID);
 		postMethod.setRequestHeader("uuid", ApiHttpTest.UUID);
 		postMethod.setRequestHeader("app", ApiHttpTest.ID);
-		postMethod.setRequestHeader("usertoken", "7680128300f51881bea3e78b035d5090");
+		postMethod.setRequestHeader("usertoken", "20c0c93b3731c402e78390ba0ee0e125");
 
 		// 设置连接超时
 		httpClient.getHttpConnectionManager().getParams().setConnectionTimeout(20 * 1000);

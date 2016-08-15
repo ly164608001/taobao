@@ -124,13 +124,13 @@ public class UserApiServiceImpl extends AbstractBaseServiceImpl<IUserInfoDao, Us
 		ResultJson rj = new ResultJson();
 		rj.setError_code(ResultJson.ERROR_CODE_PARAMETERS);
 		rj.setMessage("参数错误");
-		if (oConvertUtils.isNotEmpty(params) 
+		if (params != null 
 				&& oConvertUtils.isNotEmpty(params.getMessagetype())
 				&& StringUtil.isNumeric(params.getMessagetype())){
 			int offsetid = oConvertUtils.getInt(params.getOffsetid());
 			int count = oConvertUtils.getInt(params.getCount(),20);
 			UserInfo loginUser = ApiCacheUtil.getLoginUser();
-			if (oConvertUtils.isNotEmpty(loginUser)) {
+			if (loginUser != null) {
 				
 				SysNoticeVO vo = new SysNoticeVO();
 				SysNotice model = new SysNotice();
@@ -143,7 +143,7 @@ public class UserApiServiceImpl extends AbstractBaseServiceImpl<IUserInfoDao, Us
 				
 				JSONObject result = new JSONObject();
 				List<JSONObject> list = new ArrayList<JSONObject>();
-				if (oConvertUtils.isNotEmpty(notices) && notices.size() > 0) {
+				if (notices != null && notices.size() > 0) {
 					for (SysNotice notice : notices) {
 						JSONObject noticeObject = new JSONObject();
 						boolean isread = notice.getStatus().intValue() == 0? false:true;
@@ -174,14 +174,14 @@ public class UserApiServiceImpl extends AbstractBaseServiceImpl<IUserInfoDao, Us
 		ResultJson rj = new ResultJson();
 		rj.setError_code(ResultJson.ERROR_CODE_PARAMETERS);
 		rj.setMessage("参数错误");
-		if (oConvertUtils.isNotEmpty(params) 
+		if (params != null 
 				&& oConvertUtils.isNotEmpty(params.getMessagetype())
 				&& StringUtil.isNumeric(params.getMessagetype())){
 			int offsetid = oConvertUtils.getInt(params.getOffsetid());
 			int messageid = oConvertUtils.getInt(params.getMessageid());
 
 			UserInfo loginUser = ApiCacheUtil.getLoginUser();
-			if (oConvertUtils.isNotEmpty(loginUser)) {
+			if (loginUser != null) {
 				
 				SysNoticeVO vo = new SysNoticeVO();
 				SysNotice model = new SysNotice();
@@ -210,7 +210,7 @@ public class UserApiServiceImpl extends AbstractBaseServiceImpl<IUserInfoDao, Us
 		ResultJson rj = new ResultJson();
 		rj.setError_code(ResultJson.ERROR_CODE_PARAMETERS);
 		rj.setMessage("参数错误");
-		if (oConvertUtils.isNotEmpty(params) 
+		if (params != null 
 				&& oConvertUtils.isNotEmpty(params.getMessagetype())
 				&& StringUtil.isNumeric(params.getMessagetype())
 				&& (oConvertUtils.isNotEmpty(params.getMessageid()) || oConvertUtils.isNotEmpty(params.getOffsetid()))){
@@ -218,7 +218,7 @@ public class UserApiServiceImpl extends AbstractBaseServiceImpl<IUserInfoDao, Us
 			int messageid = oConvertUtils.getInt(params.getMessageid());
 
 			UserInfo loginUser = ApiCacheUtil.getLoginUser();
-			if (oConvertUtils.isNotEmpty(loginUser)) {
+			if (loginUser != null) {
 				
 				SysNoticeVO vo = new SysNoticeVO();
 				SysNotice model = new SysNotice();
@@ -247,12 +247,12 @@ public class UserApiServiceImpl extends AbstractBaseServiceImpl<IUserInfoDao, Us
 		ResultJson rj = new ResultJson();
 		rj.setError_code(ResultJson.ERROR_CODE_PARAMETERS);
 		rj.setMessage("参数错误");
-		if (oConvertUtils.isNotEmpty(params) 
+		if (params != null 
 				&& oConvertUtils.isNotEmpty(params.getEnable())){
 			boolean enable = params.getEnable();
 			UserInfo loginUser = ApiCacheUtil.getLoginUser();
 			
-			if (oConvertUtils.isNotEmpty(loginUser)) {
+			if (loginUser != null) {
 				UserConfig config = new UserConfig();
 				config.setUser(loginUser);
 				config.setMessage(enable?"YES":"NO");
@@ -292,10 +292,10 @@ public class UserApiServiceImpl extends AbstractBaseServiceImpl<IUserInfoDao, Us
 		ResultJson rj = new ResultJson();
 		rj.setError_code(ResultJson.ERROR_CODE_PARAMETERS);
 		rj.setMessage("参数错误");
-		if (oConvertUtils.isNotEmpty(params) 
+		if (params != null 
 				&& oConvertUtils.isNotEmpty(params.getPlatform())){
 			UserInfo loginUser = ApiCacheUtil.getLoginUser();
-			if (oConvertUtils.isNotEmpty(loginUser)) {
+			if (loginUser != null) {
 				JSONObject rs = new JSONObject();
 				//用户未读消息条数
 				SysNoticeVO vo = new SysNoticeVO();
@@ -324,7 +324,7 @@ public class UserApiServiceImpl extends AbstractBaseServiceImpl<IUserInfoDao, Us
 		ResultJson rj = new ResultJson();
 		rj.setError_code(ResultJson.ERROR_CODE_PARAMETERS);
 		rj.setMessage("参数错误");
-		if (oConvertUtils.isNotEmpty(params) 
+		if (params != null 
 				&& oConvertUtils.isNotEmpty(params.getPlatform())){
 			JSONObject buyerlevel = new JSONObject();
 			List<JSONObject> tbtypelist = new ArrayList<JSONObject>();
@@ -385,7 +385,7 @@ public class UserApiServiceImpl extends AbstractBaseServiceImpl<IUserInfoDao, Us
 		
 		JSONObject result = new JSONObject();
 		List<JSONObject> list = new ArrayList<JSONObject>();
-		if (oConvertUtils.isNotEmpty(notices) && notices.size() > 0) {
+		if (notices != null && notices.size() > 0) {
 			for (SysNotice notice : notices) {
 				JSONObject noticeObject = new JSONObject();
 				noticeObject.put("content", notice.getContent());
@@ -407,9 +407,9 @@ public class UserApiServiceImpl extends AbstractBaseServiceImpl<IUserInfoDao, Us
 		ResultJson rj = new ResultJson();
 		rj.setError_code(ResultJson.ERROR_CODE_PARAMETERS);
 		rj.setMessage("参数错误");
-		if (oConvertUtils.isNotEmpty(params)) {
+		if (params != null) {
 			UserInfo loginUser = ApiCacheUtil.getLoginUser();
-			if (oConvertUtils.isNotEmpty(loginUser)) {
+			if (loginUser != null) {
 				int offsetid = oConvertUtils.getInt(params.getOffsetid());
 				int count = oConvertUtils.getInt(params.getCount(),20);
 				
@@ -423,7 +423,7 @@ public class UserApiServiceImpl extends AbstractBaseServiceImpl<IUserInfoDao, Us
 				
 				JSONObject result = new JSONObject();
 				List<JSONObject> list = new ArrayList<JSONObject>();
-				if (oConvertUtils.isNotEmpty(accountList) && accountList.size() > 0) {
+				if (accountList != null && accountList.size() > 0) {
 					for (AccountInfo account : accountList) {
 						JSONObject accountObject = new JSONObject();
 						accountObject.put("account", account.getAccountno());
@@ -459,12 +459,12 @@ public class UserApiServiceImpl extends AbstractBaseServiceImpl<IUserInfoDao, Us
 		ResultJson rj = new ResultJson();
 		rj.setError_code(ResultJson.ERROR_CODE_PARAMETERS);
 		rj.setMessage("参数错误");
-		if (oConvertUtils.isNotEmpty(params)
+		if (params != null
 				&& oConvertUtils.isNotEmpty(params.getAccount())
 				&& oConvertUtils.isNotEmpty(params.getLevel())
 				&& oConvertUtils.isNotEmpty(params.getLevelimage())) {
 			UserInfo loginUser = ApiCacheUtil.getLoginUser();
-			if (oConvertUtils.isNotEmpty(loginUser)) {
+			if (loginUser != null) {
 				AccountInfo accountInfo = new AccountInfo();
 				accountInfo.setCreateuser(loginUser);
 				accountInfo.setCreatetime(new Date());
@@ -500,7 +500,7 @@ public class UserApiServiceImpl extends AbstractBaseServiceImpl<IUserInfoDao, Us
 		ResultJson rj = new ResultJson();
 		rj.setError_code(ResultJson.ERROR_CODE_PARAMETERS);
 		rj.setMessage("参数错误");
-		if (oConvertUtils.isNotEmpty(params)
+		if (params != null
 				&& oConvertUtils.isNotEmpty(params.getBank())
 				&& oConvertUtils.isNotEmpty(params.getCosttime())
 				&& oConvertUtils.isNotEmpty(params.getMoney())) {
@@ -521,14 +521,14 @@ public class UserApiServiceImpl extends AbstractBaseServiceImpl<IUserInfoDao, Us
 		ResultJson rj = new ResultJson();
 		rj.setError_code(ResultJson.ERROR_CODE_PARAMETERS);
 		rj.setMessage("参数错误");
-		if (oConvertUtils.isNotEmpty(params)
+		if (params != null
 				&& oConvertUtils.isNotEmpty(params.getBankid())
 				&& oConvertUtils.isNotEmpty(params.getCosttime())
 				&& oConvertUtils.isNotEmpty(params.getFee())
 				&& oConvertUtils.isNotEmpty(params.getMoney())
 				&& oConvertUtils.isNotEmpty(params.getPassword())) {
 			UserInfo loginUser = ApiCacheUtil.getLoginUser();
-			if (oConvertUtils.isNotEmpty(loginUser)) {
+			if (loginUser != null) {
 				//验证密码
 				UserMoney userMoney = userMoneyService.getByUserId(loginUser.getId());
 				if(encrptPassword(params.getPassword()).equals(userMoney.getPaypassword())){
@@ -571,9 +571,9 @@ public class UserApiServiceImpl extends AbstractBaseServiceImpl<IUserInfoDao, Us
 		ResultJson rj = new ResultJson();
 		rj.setError_code(ResultJson.ERROR_CODE_PARAMETERS);
 		rj.setMessage("参数错误");
-		if (oConvertUtils.isNotEmpty(params)) {
+		if (params != null) {
 			UserInfo loginUser = ApiCacheUtil.getLoginUser();
-			if (oConvertUtils.isNotEmpty(loginUser)) {
+			if (loginUser != null) {
 				int offsetid = oConvertUtils.getInt(params.getOffsetid());
 				int count = oConvertUtils.getInt(params.getCount(),20);
 				
@@ -587,7 +587,7 @@ public class UserApiServiceImpl extends AbstractBaseServiceImpl<IUserInfoDao, Us
 				
 				JSONObject result = new JSONObject();
 				List<JSONObject> list = new ArrayList<JSONObject>();
-				if (oConvertUtils.isNotEmpty(withdrawlsList) && withdrawlsList.size() > 0) {
+				if (withdrawlsList != null && withdrawlsList.size() > 0) {
 					for (TraceWithdrawls withdrawls : withdrawlsList) {
 						JSONObject withdrawlsObject = new JSONObject();
 						withdrawlsObject.put("account", withdrawls.getAccount().getAccountno());
@@ -617,9 +617,9 @@ public class UserApiServiceImpl extends AbstractBaseServiceImpl<IUserInfoDao, Us
 		ResultJson rj = new ResultJson();
 		rj.setError_code(ResultJson.ERROR_CODE_PARAMETERS);
 		rj.setMessage("参数错误");
-		if (oConvertUtils.isNotEmpty(params)) {
+		if (params != null) {
 			UserInfo loginUser = ApiCacheUtil.getLoginUser();
-			if (oConvertUtils.isNotEmpty(loginUser)) {
+			if (loginUser != null) {
 				int offsetid = oConvertUtils.getInt(params.getOffsetid());
 				int count = oConvertUtils.getInt(params.getCount(),20);
 				
@@ -631,7 +631,7 @@ public class UserApiServiceImpl extends AbstractBaseServiceImpl<IUserInfoDao, Us
 				List<TraceRecord> traceRecordList = traceRecordService.getListForMobile(vo);
 				JSONObject result = new JSONObject();
 				List<JSONObject> list = new ArrayList<JSONObject>();
-				if (oConvertUtils.isNotEmpty(traceRecordList) && traceRecordList.size() > 0) {
+				if (traceRecordList != null && traceRecordList.size() > 0) {
 					for (TraceRecord traceRecord : traceRecordList) {
 						JSONObject traceRecordObject = new JSONObject();
 						//交易类型 1收入(任务奖金) 2支出(提现)
@@ -659,9 +659,9 @@ public class UserApiServiceImpl extends AbstractBaseServiceImpl<IUserInfoDao, Us
 		ResultJson rj = new ResultJson();
 		rj.setError_code(ResultJson.ERROR_CODE_PARAMETERS);
 		rj.setMessage("参数错误");
-		if (oConvertUtils.isNotEmpty(params)) {
+		if (params != null) {
 			UserInfo loginUser = ApiCacheUtil.getLoginUser();
-			if (oConvertUtils.isNotEmpty(loginUser)) {
+			if (loginUser != null) {
 				int offsetid = oConvertUtils.getInt(params.getOffsetid());
 				int count = oConvertUtils.getInt(params.getCount(),20);
 				
@@ -673,7 +673,7 @@ public class UserApiServiceImpl extends AbstractBaseServiceImpl<IUserInfoDao, Us
 				List<UserAccount> userAccountList = userAccountService.getListForMobile(vo);
 				JSONObject result = new JSONObject();
 				List<JSONObject> list = new ArrayList<JSONObject>();
-				if (oConvertUtils.isNotEmpty(userAccountList) && userAccountList.size() > 0) {
+				if (userAccountList != null && userAccountList.size() > 0) {
 					for (UserAccount userAccount : userAccountList) {
 						JSONObject userAccountObject = new JSONObject();
 						userAccountObject.put("bankid", userAccount.getId());
@@ -699,7 +699,7 @@ public class UserApiServiceImpl extends AbstractBaseServiceImpl<IUserInfoDao, Us
 		ResultJson rj = new ResultJson();
 		rj.setError_code(ResultJson.ERROR_CODE_PARAMETERS);
 		rj.setMessage("参数错误");
-		if (oConvertUtils.isNotEmpty(params)
+		if (params != null
 				&& oConvertUtils.isNotEmpty(params.getBank())
 				&& oConvertUtils.isNotEmpty(params.getBranch())
 				&& oConvertUtils.isNotEmpty(params.getCard())
@@ -707,7 +707,7 @@ public class UserApiServiceImpl extends AbstractBaseServiceImpl<IUserInfoDao, Us
 				&& oConvertUtils.isNotEmpty(params.getPassword())
 				&& oConvertUtils.isNotEmpty(params.getPlace())) {
 			UserInfo loginUser = ApiCacheUtil.getLoginUser();
-			if (oConvertUtils.isNotEmpty(loginUser)) {
+			if (loginUser != null) {
 				//验证密码
 				UserMoney userMoney = userMoneyService.getByUserId(loginUser.getId());
 				if(encrptPassword(params.getPassword()).equals(userMoney.getPaypassword())){
@@ -749,10 +749,10 @@ public class UserApiServiceImpl extends AbstractBaseServiceImpl<IUserInfoDao, Us
 		ResultJson rj = new ResultJson();
 		rj.setError_code(ResultJson.ERROR_CODE_PARAMETERS);
 		rj.setMessage("参数错误");
-		if (oConvertUtils.isNotEmpty(params)
+		if (params != null
 				&& oConvertUtils.isNotEmpty(params.getBankid())) {
 			UserInfo loginUser = ApiCacheUtil.getLoginUser();
-			if (oConvertUtils.isNotEmpty(loginUser)) {
+			if (loginUser != null) {
 				
 				int result = userAccountService.deleteById(oConvertUtils.getInt(params.getBankid()));
 				if(result != -1){
@@ -775,12 +775,12 @@ public class UserApiServiceImpl extends AbstractBaseServiceImpl<IUserInfoDao, Us
 		ResultJson rj = new ResultJson();
 		rj.setError_code(ResultJson.ERROR_CODE_PARAMETERS);
 		rj.setMessage("参数错误");
-		if (oConvertUtils.isNotEmpty(params)
+		if (params != null
 				&& oConvertUtils.isNotEmpty(params.getCertificate())
 				&& oConvertUtils.isNotEmpty(params.getName())
 				&& oConvertUtils.isNotEmpty(params.getType())) {
 			UserInfo loginUser = ApiCacheUtil.getLoginUser();
-			if (oConvertUtils.isNotEmpty(loginUser)) {
+			if (loginUser != null) {
 				int type = oConvertUtils.getInt(params.getType());
 				if(type == ApiConstant.AUTH_TYPE_ID
 						&& oConvertUtils.isNotEmpty(params.getIdentityfront())
@@ -852,7 +852,7 @@ public class UserApiServiceImpl extends AbstractBaseServiceImpl<IUserInfoDao, Us
 			return rj;
 		}
 		UserAuthInfo authInfo = authInfoService.getByUserId(loginUser.getId());
-		if (oConvertUtils.isNotEmpty(authInfo)) {
+		if (authInfo != null) {
 			
 			JSONObject result = new JSONObject();
 			//认证信息
@@ -880,7 +880,7 @@ public class UserApiServiceImpl extends AbstractBaseServiceImpl<IUserInfoDao, Us
 	@Override
 	public ResultJson forgetPassword(ApiParams params) {
 		ResultJson rj = new ResultJson();
-		if (oConvertUtils.isNotEmpty(params)) {
+		if (params != null) {
 			if (oConvertUtils.isNotEmpty(params.getPhone()) 
 					&& StringUtil.isNotEmpty(params.getPassword())
 					&& StringUtil.isNotEmpty(params.getCaptcha())) {
@@ -907,7 +907,7 @@ public class UserApiServiceImpl extends AbstractBaseServiceImpl<IUserInfoDao, Us
 				}
 				ApiCacheUtil.removeCaptchaChache(params.getUsername());
 				UserInfo mobileUser = userInfoService.getByPhone(params.getPhone());
-				if (oConvertUtils.isNotEmpty(mobileUser)) {
+				if (mobileUser != null) {
 					mobileUser.setPassword(encrptPassword(params.getPassword()));
 					userInfoService.update(mobileUser);
 					ApiCacheUtil.updateUserChache(mobileUser);
@@ -931,7 +931,7 @@ public class UserApiServiceImpl extends AbstractBaseServiceImpl<IUserInfoDao, Us
 		ResultJson rj = new ResultJson();
 		rj.setError_code(ResultJson.ERROR_CODE_PARAMETERS);
 		rj.setMessage("参数错误");
-		if (oConvertUtils.isNotEmpty(mobileUser)) {
+		if (mobileUser != null) {
 			if (oConvertUtils.isNotEmpty(mobileUser.getUsername()) 
 					&& StringUtil.isNotEmpty(mobileUser.getPassword())
 					&& StringUtil.isNotEmpty(mobileUser.getName())
@@ -986,6 +986,7 @@ public class UserApiServiceImpl extends AbstractBaseServiceImpl<IUserInfoDao, Us
 					mobileUserEntity.setRegistertime(new Date());
 					mobileUserEntity.setUuid(mobileUser.getUuid());
 					mobileUserEntity.setPlatform(mobileUser.getPlatform());
+					mobileUserEntity.setChannel(Global.FRONT);
 					userInfoService.save(mobileUserEntity);
 					if (oConvertUtils.isEmpty(mobileUserEntity.getId())) {
 						rj.setError_code(ResultJson.ERROR_CODE_API);
@@ -1024,13 +1025,13 @@ public class UserApiServiceImpl extends AbstractBaseServiceImpl<IUserInfoDao, Us
 		rj.setMessage("参数错误");
 		// 当前登录用户
 		UserInfo loginUser = ApiCacheUtil.getLoginUser();
-		if (oConvertUtils.isEmpty(loginUser)) {
+		if (loginUser == null) {
 			rj.setError_code(ResultJson.ERROR_CODE_USER_NOT_LOGIN);
 			rj.setMessage("用户未登录");
 			return rj;
 		}
 		UserInfo mobileUser = userInfoService.getPersonInfo(loginUser.getId());
-		if (oConvertUtils.isNotEmpty(mobileUser)) {
+		if (mobileUser != null) {
 			
 			UserMoney account = userMoneyService.getByUserId(mobileUser.getId());
 			
@@ -1065,7 +1066,7 @@ public class UserApiServiceImpl extends AbstractBaseServiceImpl<IUserInfoDao, Us
 		ResultJson rj = new ResultJson();
 		rj.setError_code(ResultJson.ERROR_CODE_PARAMETERS);
 		rj.setMessage("参数错误");
-		if (oConvertUtils.isNotEmpty(mobileUser)) {
+		if (mobileUser != null) {
 			if (oConvertUtils.isNotEmpty(mobileUser.getUsername()) 
 					&& StringUtil.isNotEmpty(mobileUser.getPassword())
 					&& StringUtil.isNotEmpty(mobileUser.getPlatform())
@@ -1080,7 +1081,7 @@ public class UserApiServiceImpl extends AbstractBaseServiceImpl<IUserInfoDao, Us
 					}
 					// 判断是否已登录
 					UserInfo existLoginUser = ApiCacheUtil.getLoginUser();
-					if (oConvertUtils.isNotEmpty(existLoginUser)) {
+					if (existLoginUser != null) {
 						if (oConvertUtils.isEmpty(existLoginUser.getUuid())) {
 							ApiCacheUtil.removeUserChache();
 						}
@@ -1116,23 +1117,26 @@ public class UserApiServiceImpl extends AbstractBaseServiceImpl<IUserInfoDao, Us
 		return rj;
 	}
 	@Override
+	@Transactional(readOnly = false)
 	public ResultJson editUserInfo(ApiParams params) {
 		ResultJson rj = new ResultJson(ResultJson.ERROR_CODE_PARAMETERS,"参数错误");
 		// 当前登录用户
 		UserInfo loginUser = ApiCacheUtil.getLoginUser();
-		if (oConvertUtils.isEmpty(loginUser)) {
+		if (loginUser == null) {
 			rj.setError_code(ResultJson.ERROR_CODE_USER_NOT_LOGIN);
 			rj.setMessage("用户未登录");
 			return rj;
 		}
-		if (oConvertUtils.isNotEmpty(params)) {
+		if (params != null) {
 			UserInfo user = new UserInfo();
 			user.setId(loginUser.getId());
 			user.setIcon(params.getAvatarurl());
-			user.getDetailInfo().setUser(loginUser);
-			user.getDetailInfo().setSex("男".equals(params.getGender())?1:2);
-			user.getDetailInfo().setApartment(params.getAddress());
-			user.getDetailInfo().setBirthday(DateUtil.str2Date(params.getBirthday(), DateUtil.date_sdf));
+			UserDetailInfo detailInfo = new UserDetailInfo();
+			detailInfo.setUser(loginUser);
+			detailInfo.setSex("男".equals(params.getGender())?1:2);
+			detailInfo.setApartment(params.getAddress());
+			detailInfo.setBirthday(DateUtil.str2Date(params.getBirthday(), DateUtil.date_sdf));
+			user.setDetailInfo(detailInfo);
 			int result = userInfoService.updateUserInfo(user);
 			if(result != -1){
 				rj.setError_code(ResultJson.SUCCESS);
@@ -1149,7 +1153,7 @@ public class UserApiServiceImpl extends AbstractBaseServiceImpl<IUserInfoDao, Us
 	@Override
 	public ResultJson getVerity(ApiParams params) {
 		ResultJson rj = new ResultJson(ResultJson.ERROR_CODE_PARAMETERS,"参数错误");
-		if (oConvertUtils.isNotEmpty(params) && StringUtil.isNotEmpty(params.getPhone())) {
+		if (params != null && StringUtil.isNotEmpty(params.getPhone())) {
 			String phone = params.getPhone();
 			int length = 6;
 			String captcha = StringUtil.numRandom(length);
@@ -1178,12 +1182,12 @@ public class UserApiServiceImpl extends AbstractBaseServiceImpl<IUserInfoDao, Us
 		ResultJson rj = new ResultJson(ResultJson.ERROR_CODE_PARAMETERS,"参数错误");
 		// 当前登录用户
 		UserInfo loginUser = ApiCacheUtil.getLoginUser();
-		if (oConvertUtils.isEmpty(loginUser)) {
+		if (loginUser == null) {
 			rj.setError_code(ResultJson.ERROR_CODE_USER_NOT_LOGIN);
 			rj.setMessage("用户未登录");
 			return rj;
 		}
-		if (oConvertUtils.isNotEmpty(params) 
+		if (params != null
 				&& StringUtil.isNotEmpty(params.getOldpassword())
 				&& StringUtil.isNotEmpty(params.getPassword())
 				&& StringUtil.isNotEmpty(params.getType())) {

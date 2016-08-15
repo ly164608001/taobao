@@ -157,7 +157,8 @@ implements IUserInfoService {
 		if(updateRst == -1){
 			return -1;
 		}
-		updateRst = userDetailInfoDao.update(userInfo.getDetailInfo());
+		userInfo.getDetailInfo().setUser(userInfo);
+		updateRst = userDetailInfoDao.updateByUserid(userInfo.getDetailInfo());
 		return updateRst;
 	}
 

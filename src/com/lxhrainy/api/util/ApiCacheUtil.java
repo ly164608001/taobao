@@ -60,7 +60,7 @@ public class ApiCacheUtil {
 	}
 	public static UserInfo getLoginUser() {
 		UserInfo chacheUser= getUserChache();
-		if (oConvertUtils.isNotEmpty(chacheUser)) {
+		if (chacheUser != null) {
 			return chacheUser;
 		}
 		return null;
@@ -87,7 +87,7 @@ public class ApiCacheUtil {
 
 	public static void logoutUser() {
 		UserInfo loginUser = getUserChache();
-		if (oConvertUtils.isNotEmpty(loginUser)) {
+		if (loginUser != null) {
 			removeUserChache();
 		}
 	}

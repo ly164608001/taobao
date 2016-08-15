@@ -207,6 +207,64 @@
 		WHERE id = #{id}
 	</update>
 	
+	<update id="updateByUserid">
+		UPDATE user_detail_info 
+		<set>	
+			<if test="sex !=null">
+			sex = #{sex},
+			</if>
+			<if test="birthday !=null">
+			birthday = #{birthday},
+			</if>
+			<if test="bloodtype !=null and bloodtype !=''">
+			bloodtype = #{bloodtype},
+			</if>
+			<if test="birthplace !=null and birthplace !=''">
+			birthplace = #{birthplace},
+			</if>
+			<if test="apartment !=null and apartment !=''">
+			apartment = #{apartment},
+			</if>
+			<if test="personsesc !=null and personsesc !=''">
+			personsesc = #{personsesc},
+			</if>
+			<if test="educationdegree !=null ">
+			educationdegree = #{educationdegree},
+			</if>
+			<if test="job !=null ">
+			job = #{job},
+			</if>
+			<if test="position !=null and position !=''">
+			position = #{position},
+			</if>
+			<if test="contactaddress !=null and contactaddress !=''">
+			contactaddress = #{contactaddress},
+			</if>
+			<if test="email !=null and email !=''">
+			email = #{email},
+			</if>
+			<if test="qq !=null and qq !=''">
+			qq = #{qq},
+			</if>
+			<if test="realname !=null and realname !=''">
+			realname = #{realname},
+			</if>
+			<if test="certificatetype !=null">
+			certificatetype = #{certificatetype},
+			</if>
+			<if test="certificateno !=null and certificateno !=''">
+			certificateno = #{certificateno},
+			</if>
+			<if test="modifytime !=null">
+			modifytime = #{modifytime},
+			</if>
+			<if test="deleted !=null">
+			deleted = #{deleted},
+			</if>
+		</set> 
+		WHERE userid = #{user.id}
+	</update>
+	
 	<update id="deleteById">
 		update user_detail_info set 
 			deleted=1

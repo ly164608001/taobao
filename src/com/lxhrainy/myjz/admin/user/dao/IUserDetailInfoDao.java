@@ -21,5 +21,12 @@ public interface IUserDetailInfoDao extends IBaseDao<UserDetailInfo> {
 	 * @return
 	 */
 	UserDetailInfo getByUserid(@Param("userid")int userid);
+
+	/**
+	 * 根据用户ID修改详细信息
+	 * @param detailInfo
+	 * @return
+	 */
+	int updateByUserid(UserDetailInfo detailInfo);
 	
 }

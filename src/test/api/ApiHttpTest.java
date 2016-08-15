@@ -47,7 +47,7 @@ public class ApiHttpTest {
 	@Test
 	public void Login() throws Exception{
 		String url = URL+"/Login.htm";
-		String params = "{\"username\":\"yun\",\"password\":\"123456\",\"uuid\":\"adkalsjdfl\",\"platform\":\"android\"}";
+		String params = "{\"username\":\"新刷手\",\"password\":\"1234567\",\"uuid\":\"adkalsjdfl\",\"platform\":\"android\"}";
 		String result = HttpUtil.postHttpReq(url, params);
 		Assert.assertTrue(paserRsult(result));
 	}
@@ -68,6 +68,45 @@ public class ApiHttpTest {
 		Assert.assertTrue(paserRsult(result));
 	}
 	
+	@Test
+	public void UserInfo() throws Exception{
+		String url = URL+"/UserInfo.htm";
+		String params = "{}";
+		String result = HttpUtil.postHttpReq(url, params);
+		Assert.assertTrue(paserRsult(result));
+	}
+	
+	@Test
+	public void EditUserInfo() throws Exception{
+		String url = URL+"/EditUserInfo.htm";
+		String params = "{\"gender\":\"女\",\"avatarurl\":\"http://img0.bdstatic.com/img/image/imglogo-r.png\",\"birthday\":\"1980-07-07\",\"address\":\"福建省 福州市 鼓楼区\"}";
+		String result = HttpUtil.postHttpReq(url, params);
+		Assert.assertTrue(paserRsult(result));
+	}
+	
+	@Test
+	public void SetPassword() throws Exception{
+		String url = URL+"/SetPassword.htm";
+		String params = "{\"password\":\"1234567\",\"type\":1,\"oldpassword\":\"123456\"}";
+		String result = HttpUtil.postHttpReq(url, params);
+		Assert.assertTrue(paserRsult(result));
+	}
+	
+	@Test
+	public void Logout() throws Exception{
+		String url = URL+"/Logout.htm";
+		String params = "{\"platform\":\"android\",\"uuid\":\"adkalsjdfl\"}";
+		String result = HttpUtil.postHttpReq(url, params);
+		Assert.assertTrue(paserRsult(result));
+	}
+	
+	@Test
+	public void ForgetPassword() throws Exception{
+		String url = URL+"/ForgetPassword.htm";
+		String params = "{\"captcha\":\"12344\",\"phone\":\"17750310332\",\"password\":\"1234567\"}";
+		String result = HttpUtil.postHttpReq(url, params);
+		Assert.assertTrue(paserRsult(result));
+	}
 	
 	
 	/*@Test
