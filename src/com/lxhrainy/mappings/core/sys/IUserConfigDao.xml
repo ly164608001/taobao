@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.lxhrainy.core.sys.dao.IUserConfigDao">
+<mapper namespace="com.lxhrainy.myjz.admin.user.dao.IUserConfigDao">
     
     <sql id="userConfigColumns">
     	T.id AS "id",
@@ -108,7 +108,7 @@
 	
 	<update id="updateMsgSet">
 		UPDATE user_config SET 
-			message = #{message}
+			message = #{config.message}
 		WHERE userid = #{config.user.id}
 	</update>
 	

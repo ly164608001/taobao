@@ -6,8 +6,10 @@ import org.apache.ibatis.annotations.Param;
 
 import com.lxhrainy.core.annotation.MyBatisDao;
 import com.lxhrainy.core.common.dao.IBaseDao;
+import com.lxhrainy.core.sys.model.UserInfo;
 import com.lxhrainy.myjz.admin.order.model.OrderInfo;
 import com.lxhrainy.myjz.admin.order.oe.OrderInfoVO;
+import com.lxhrainy.myjz.admin.task.model.TaskStatistics;
 
 
 /**
@@ -24,5 +26,12 @@ public interface IOrderInfoDao extends IBaseDao<OrderInfo> {
 	 * @return
 	 */
 	List<OrderInfo> getListForMobile(@Param("condition")OrderInfoVO vo);
+
+	/**
+	 * 统计任务数
+	 * @param user
+	 * @return
+	 */
+	List<TaskStatistics> statisticsTask(@Param("user")UserInfo user);
 	
 }

@@ -6,10 +6,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.lxhrainy.core.common.service.AbstractBaseServiceImpl;
+import com.lxhrainy.core.sys.model.UserInfo;
 import com.lxhrainy.myjz.admin.order.dao.IOrderInfoDao;
 import com.lxhrainy.myjz.admin.order.model.OrderInfo;
 import com.lxhrainy.myjz.admin.order.oe.OrderInfoVO;
 import com.lxhrainy.myjz.admin.order.service.IOrderInfoService;
+import com.lxhrainy.myjz.admin.task.model.TaskStatistics;
 
 
 /**
@@ -27,6 +29,11 @@ implements IOrderInfoService {
 	@Override
 	public List<OrderInfo> getListForMobile(OrderInfoVO vo) {
 		return dao.getListForMobile(vo);
+	}
+
+	@Override
+	public List<TaskStatistics> statisticsTask(UserInfo user) {
+		return dao.statisticsTask(user);
 	}
 
 }

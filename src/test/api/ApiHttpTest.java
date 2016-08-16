@@ -45,6 +45,48 @@ public class ApiHttpTest {
 		Assert.assertTrue(paserRsult(result));
 	}
 	@Test
+	public void MessageRead() throws Exception{
+		String url = URL+"/MessageRead.htm";
+		String params = "{\"messagetype\":0,\"messageid\":0,\"offsetid\":5}";
+		String result = HttpUtil.postHttpReq(url, params);
+		Assert.assertTrue(paserRsult(result));
+	}
+	@Test
+	public void MessageDele() throws Exception{
+		String url = URL+"/MessageDele.htm";
+		String params = "{\"messagetype\":0,\"messageid\":0,\"offsetid\":3}";
+		String result = HttpUtil.postHttpReq(url, params);
+		Assert.assertTrue(paserRsult(result));
+	}
+	@Test
+	public void MessageSet() throws Exception{
+		String url = URL+"/MessageSet.htm";
+		String params = "{\"enable\":true}";
+		String result = HttpUtil.postHttpReq(url, params);
+		Assert.assertTrue(paserRsult(result));
+	}
+	@Test
+	public void Numbers() throws Exception{
+		String url = URL+"/Numbers.htm";
+		String params = "{\"platform\":\"android\"}";
+		String result = HttpUtil.postHttpReq(url, params);
+		Assert.assertTrue(paserRsult(result));
+	}
+	@Test
+	public void Config() throws Exception{
+		String url = URL+"/Config.htm";
+		String params = "{\"platform\":\"android\"}";
+		String result = HttpUtil.postHttpReq(url, params);
+		Assert.assertTrue(paserRsult(result));
+	}
+	@Test
+	public void NoticeList() throws Exception{
+		String url = URL+"/NoticeList.htm";
+		String params = "{}";
+		String result = HttpUtil.postHttpReq(url, params);
+		Assert.assertTrue(paserRsult(result));
+	}
+	@Test
 	public void Login() throws Exception{
 		String url = URL+"/Login.htm";
 		String params = "{\"username\":\"新刷手\",\"password\":\"1234567\",\"uuid\":\"adkalsjdfl\",\"platform\":\"android\"}";
@@ -103,10 +145,35 @@ public class ApiHttpTest {
 	@Test
 	public void ForgetPassword() throws Exception{
 		String url = URL+"/ForgetPassword.htm";
-		String params = "{\"captcha\":\"12344\",\"phone\":\"17750310332\",\"password\":\"1234567\"}";
+		String params = "{\"captcha\":\"317685\",\"phone\":\"17750310332\",\"password\":\"1234567\"}";
 		String result = HttpUtil.postHttpReq(url, params);
 		Assert.assertTrue(paserRsult(result));
 	}
+	
+	@Test
+	public void Certificate() throws Exception{
+		String url = URL+"/Certificate.htm";
+		String params = "{\"certificate\":\"64422＊＊＊＊＊123\",\"studentIdfront\" :\"http://img0.bdstatic.com/img/image/imglogo-r.png\",\"studentIdhand\":\"http://img0.bdstatic.com/img/image/imglogo-r.png\",\"identityfront\":\"http://img0.bdstatic.com/img/image/imglogo-r.png\",\"usertoken\":\"0\",\"identityhand\":\"http://img0.bdstatic.com/img/image/imglogo-r.png\",\"liveimage\":\"http://img0.bdstatic.com/img/image/imglogo-r.png\",\"name\":\"钱某某\",\"type\":0}";
+		String result = HttpUtil.postHttpReq(url, params);
+		Assert.assertTrue(paserRsult(result));
+	}
+	
+	@Test
+	public void CertificateInfo() throws Exception{
+		String url = URL+"/CertificateInfo.htm";
+		String params = "{}";
+		String result = HttpUtil.postHttpReq(url, params);
+		Assert.assertTrue(paserRsult(result));
+	}
+	
+	/*@Test
+	public void MessageList() throws Exception{
+		String url = URL+"/MessageList.htm";
+		String params = "{\"count\":0,\"messagetype\":0,\"offsetid\":0}";
+		String result = HttpUtil.postHttpReq(url, params);
+		Assert.assertTrue(paserRsult(result));
+	}*/
+	
 	
 	
 	/*@Test

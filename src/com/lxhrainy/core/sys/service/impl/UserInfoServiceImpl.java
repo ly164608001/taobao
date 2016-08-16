@@ -243,8 +243,7 @@ implements IUserInfoService {
 
 	@Override
 	public UserInfo getByPhone(String phone) {
-		// TODO Auto-generated method stub
-		return null;
+		return dao.getByPhone(phone);
 	}
 
 	@Override

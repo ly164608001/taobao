@@ -6,6 +6,7 @@
     	T.id AS "id",
 		T.content AS "content",
 		T.type AS "type",
+		T.status AS "status",
 		T.userid AS "user.id",
 		T.source AS "source",
 		T.createtime AS "createtime",
@@ -17,8 +18,8 @@
 		T.deleted AS "deleted"
     </sql>
     <sql id="noticeJoins">
-		LEFT JOIN sys_user U ON U.id = T.userid
-		LEFT JOIN sys_user CU ON CU.id = T.createUser
+		LEFT JOIN user_info U ON U.id = T.userid
+		LEFT JOIN user_info CU ON CU.id = T.createUser
     </sql>
     
 	<select id="getById" resultType="SysNotice">
@@ -46,17 +47,18 @@
 			<include refid="noticeJoins"/>
 		<if test="condition!=null">
 			<where>
-				<!-- <if test="condition.model!=null">
-					<if test="condition.model.serialno!=null and condition.model.serialno!=''">
-						T.serialno LIKE '${condition.model.serialno}%'
+				T.deleted = 0
+				<if test="condition.model!=null">
+					<if test="condition.model.type!=null">
+						AND T.type = #{condition.model.type}
+					</if>
+					<if test="condition.model.status!=null">
+						AND T.status = #{condition.model.status}
+					</if>
+					<if test="condition.model.user!=null and condition.model.user.id != null">
+						AND T.userid = #{condition.model.user.id}
 					</if>
 				</if>
-				<if test="condition.createtime_start != null">
-					T.createtime > #{condition.createtime_start}
-				</if>
-				<if test="condition.createtime_end != null">
-					T.createtime > #{condition.createtime_end}
-				</if> -->
 			</where>
 			order by T.ID DESC
 			<include refid="Sql.pager" />
@@ -69,17 +71,18 @@
 			<include refid="noticeJoins"/>
 		<if test="condition!=null">
 			<where>
-				<!-- <if test="condition.model!=null">
-					<if test="condition.model.serialno!=null and condition.model.serialno!=''">
-						T.serialno LIKE '${condition.model.serialno}%'
+				T.deleted = 0
+				<if test="condition.model!=null">
+					<if test="condition.model.type!=null">
+						AND T.type = #{condition.model.type}
+					</if>
+					<if test="condition.model.status!=null">
+						AND T.status = #{condition.model.status}
+					</if>
+					<if test="condition.model.user!=null and condition.model.user.id != null">
+						AND T.userid = #{condition.model.user.id}
 					</if>
 				</if>
-				<if test="condition.createtime_start != null">
-					T.createtime > #{condition.createtime_start}
-				</if>
-				<if test="condition.createtime_end != null">
-					T.createtime > #{condition.createtime_end}
-				</if> -->
 			</where>
 		</if>
 	</select>
@@ -91,6 +94,7 @@
 			<include refid="noticeJoins"/>
 		<if test="condition!=null">
 			<where>
+				AND T.deleted = 0
 				<if test="condition.model != null">
 					<if test="condition.model.type != null">
 						AND T.type = #{condition.model.type}
@@ -115,6 +119,7 @@
 			id, 
 			content, 
 			type, 
+			status,
 			<if test="createUser!=null and createUser.id!=null">
 				userid, 
 			</if>
@@ -132,6 +137,7 @@
 			#{id}, 
 			#{content}, 
 			#{type}, 
+			#{status},
 			<if test="createUser!=null and createUser.id!=null">
 				#{user.id}, 
 			</if>
@@ -152,6 +158,7 @@
 		UPDATE sys_notice SET 
 			content = #{content}, 
 			type = #{type}, 
+			status = #{status},
 			<if test="createUser!=null and createUser.id!=null">
 				userid = #{user.id}, 
 			</if>
@@ -181,19 +188,19 @@
 			<where>
 				<if test="condition.model != null">
 					<if test="condition.model.type != null">
-						AND T.type = #{condition.model.type}
+						AND type = #{condition.model.type}
 					</if>
 					<if test="condition.model.user != null">
 						<if test="condition.model.user.id != null">
-							AND T.userid = #{condition.model.user.id}
+							AND userid = #{condition.model.user.id}
 						</if>
 					</if>
 				</if>
 				<if test="condition.offsetid != null">
-					AND T.id &lt; #{condition.offsetid}
+					AND id &lt; #{condition.offsetid}
 				</if>
 				<if test="condition.messageid != null">
-					AND T.id = #{condition.messageid}
+					AND id = #{condition.messageid}
 				</if>
 			</where>
 		</if>
@@ -206,19 +213,19 @@
 			<where>
 				<if test="condition.model != null">
 					<if test="condition.model.type != null">
-						AND T.type = #{condition.model.type}
+						AND type = #{condition.model.type}
 					</if>
 					<if test="condition.model.user != null">
 						<if test="condition.model.user.id != null">
-							AND T.userid = #{condition.model.user.id}
+							AND userid = #{condition.model.user.id}
 						</if>
 					</if>
 				</if>
 				<if test="condition.offsetid != null">
-					AND T.id &lt; #{condition.offsetid}
+					AND id &lt; #{condition.offsetid}
 				</if>
 				<if test="condition.messageid != null">
-					AND T.id = #{condition.messageid}
+					AND id = #{condition.messageid}
 				</if>
 			</where>
 		</if>

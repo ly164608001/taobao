@@ -141,4 +141,14 @@
 		</if>
 	</select>
 	
+	<select id="statisticsTask" resultType="TaskStatistics">
+		SELECT 
+			count(T.id) AS "number",
+			T.type AS "targetplatfrom",
+			T.targetsubtype AS "targetsubtype"
+		FROM order_info T
+		where T.receiveruser = #{user.id}
+		GROUP BY T.type,T.targetsubtype
+	</select>
+	
 </mapper>

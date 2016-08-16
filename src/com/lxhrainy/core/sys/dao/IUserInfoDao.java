@@ -100,5 +100,12 @@ public interface IUserInfoDao extends IBaseDao<UserInfo> {
 	 * @throws
 	 */
 	int getEstateCountByCondition(@Param("condition")UserInfoVO vo);
+
+	/**
+	 * 根据手机号码获取用户信息
+	 * @param phone
+	 * @return
+	 */
+	UserInfo getByPhone(@Param("phone")String phone);
 	
 }

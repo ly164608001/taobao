@@ -40,6 +40,7 @@ import com.lxhrainy.myjz.admin.buyer.oe.AccountVO;
 import com.lxhrainy.myjz.admin.buyer.oe.LevelVO;
 import com.lxhrainy.myjz.admin.buyer.service.IAccountService;
 import com.lxhrainy.myjz.admin.buyer.service.ILevelService;
+import com.lxhrainy.myjz.admin.order.service.IOrderInfoService;
 import com.lxhrainy.myjz.admin.task.model.ComplainType;
 import com.lxhrainy.myjz.admin.task.model.TaskStatistics;
 import com.lxhrainy.myjz.admin.task.model.Tips;
@@ -95,6 +96,8 @@ public class UserApiServiceImpl extends AbstractBaseServiceImpl<IUserInfoDao, Us
 	private IUserAuthInfoService authInfoService;
 	@Autowired
 	private IUserDetailInfoService detailInfoService;
+	@Autowired
+	private IOrderInfoService orderInfoService;
 	
 	@Override
 	public ResultJson adlist(ApiParams params) {
@@ -136,8 +139,11 @@ public class UserApiServiceImpl extends AbstractBaseServiceImpl<IUserInfoDao, Us
 				SysNotice model = new SysNotice();
 				model.setType(oConvertUtils.getInt(params.getMessagetype()));
 				model.setUser(loginUser);
-				vo.setOffsetid(offsetid);
+				if(offsetid != 0){
+					vo.setOffsetid(offsetid);
+				}
 				vo.setCount(count);
+				vo.setModel(model);
 				
 				List<SysNotice> notices = sysNoticeService.getListForMobile(vo);
 				
@@ -187,10 +193,13 @@ public class UserApiServiceImpl extends AbstractBaseServiceImpl<IUserInfoDao, Us
 				SysNotice model = new SysNotice();
 				model.setType(oConvertUtils.getInt(params.getMessagetype()));
 				model.setUser(loginUser);
+				vo.setModel(model);
 				if(messageid != 0){
-					model.setId(messageid);
+					vo.setMessageid(messageid);
 				}else if(offsetid != 0){
 					vo.setOffsetid(offsetid);
+				}else{
+					return rj;
 				}
 				boolean result = sysNoticeService.updateFromMobile(vo);
 				if(result){
@@ -224,10 +233,13 @@ public class UserApiServiceImpl extends AbstractBaseServiceImpl<IUserInfoDao, Us
 				SysNotice model = new SysNotice();
 				model.setType(oConvertUtils.getInt(params.getMessagetype()));
 				model.setUser(loginUser);
+				vo.setModel(model);
 				if(messageid != 0){
-					model.setId(messageid);
+					vo.setMessageid(messageid);
 				}else if(offsetid != 0){
 					vo.setOffsetid(offsetid);
+				}else{
+					return rj;
 				}
 				boolean result = sysNoticeService.delMsgFromMobile(vo);
 				if(result){
@@ -303,16 +315,23 @@ public class UserApiServiceImpl extends AbstractBaseServiceImpl<IUserInfoDao, Us
 				model.setType(ApiConstant.MSG_USER);
 				model.setUser(loginUser);
 				model.setStatus(ApiConstant.MSG_UNREAD);
+				vo.setModel(model);
 				int message = sysNoticeService.getCountByCondition(vo);
 				rs.put("message", message);
-				JSONObject task = new JSONObject();
-				//TODO 获取任务数
-				TaskStatistics taskStatistics = new TaskStatistics();
-				task.put("number", taskStatistics.getNumber());
-				task.put("targetsubtype", taskStatistics.getTargetsubtype());
-				task.put("targetplatfrom", taskStatistics.getTargetplatfrom());
-				task.put("targettype", taskStatistics.getTargettype());
-				rs.put("task", task);
+				List<JSONObject> taskList = new ArrayList<JSONObject>();
+				//获取任务数
+				List<TaskStatistics> statisticsList = orderInfoService.statisticsTask(loginUser);
+				if(statisticsList != null && statisticsList.size() > 0){
+					for(TaskStatistics statistics : statisticsList){
+						JSONObject task = new JSONObject();
+						task.put("number", statistics.getNumber());
+						task.put("targetsubtype", statistics.getTargetsubtype());
+						task.put("targetplatfrom", statistics.getTargetplatfrom());
+						task.put("targettype", "0");
+						taskList.add(task);
+					}
+				}
+				rs.put("task", taskList);
 				rj.addSuccessMsg("成功",rs);
 			}
 		}
@@ -344,8 +363,8 @@ public class UserApiServiceImpl extends AbstractBaseServiceImpl<IUserInfoDao, Us
 					jdtypelist.add(level);
 				}
 			}
-			buyerlevel.put("0", tbtypelist);
-			buyerlevel.put("1", jdtypelist);
+			buyerlevel.put("taobao", tbtypelist);
+			buyerlevel.put("jingdong", jdtypelist);
 			//TODO 获取投诉类型
 			List<ComplainType> complainTypeList = new ArrayList<>();
 			List<JSONObject> complainttype = new ArrayList<>();
@@ -379,6 +398,8 @@ public class UserApiServiceImpl extends AbstractBaseServiceImpl<IUserInfoDao, Us
 		SysNoticeVO vo = new SysNoticeVO();
 		SysNotice model = new SysNotice();
 		model.setType(ApiConstant.MSG_WEB);
+		model.setDeleted(Global.NO);
+		vo.setModel(model);
 		vo.setCount(ApiConstant.MSG_WEB_NUM);
 		
 		List<SysNotice> notices = sysNoticeService.getListForMobile(vo);
@@ -416,7 +437,9 @@ public class UserApiServiceImpl extends AbstractBaseServiceImpl<IUserInfoDao, Us
 				AccountVO vo = new AccountVO();
 				AccountInfo model = new AccountInfo();
 				model.setCreateuser(loginUser);
-				vo.setOffsetid(offsetid);
+				if(offsetid != 0){
+					vo.setOffsetid(offsetid);
+				}
 				vo.setCount(count);
 				
 				List<AccountInfo> accountList = accountService.getListForMobile(vo);
@@ -580,7 +603,9 @@ public class UserApiServiceImpl extends AbstractBaseServiceImpl<IUserInfoDao, Us
 				TraceWithdrawlsVO vo = new TraceWithdrawlsVO();
 				TraceWithdrawls model = new TraceWithdrawls();
 				model.setUser(loginUser);
-				vo.setOffsetid(offsetid);
+				if(offsetid != 0){
+					vo.setOffsetid(offsetid);
+				}
 				vo.setCount(count);
 				
 				List<TraceWithdrawls> withdrawlsList = withdrawlsService.getListForMobile(vo);
@@ -626,7 +651,9 @@ public class UserApiServiceImpl extends AbstractBaseServiceImpl<IUserInfoDao, Us
 				TraceRecordVO vo = new TraceRecordVO();
 				TraceRecord model = new TraceRecord();
 				model.setUser(loginUser);
-				vo.setOffsetid(offsetid);
+				if(offsetid != 0){
+					vo.setOffsetid(offsetid);
+				}
 				vo.setCount(count);
 				List<TraceRecord> traceRecordList = traceRecordService.getListForMobile(vo);
 				JSONObject result = new JSONObject();
@@ -668,7 +695,9 @@ public class UserApiServiceImpl extends AbstractBaseServiceImpl<IUserInfoDao, Us
 				UserAccountVO vo = new UserAccountVO();
 				UserAccount model = new UserAccount();
 				model.setUser(loginUser);
-				vo.setOffsetid(offsetid);
+				if(offsetid != 0){
+					vo.setOffsetid(offsetid);
+				}
 				vo.setCount(count);
 				List<UserAccount> userAccountList = userAccountService.getListForMobile(vo);
 				JSONObject result = new JSONObject();
@@ -846,7 +875,7 @@ public class UserApiServiceImpl extends AbstractBaseServiceImpl<IUserInfoDao, Us
 		rj.setMessage("参数错误");
 		// 当前登录用户
 		UserInfo loginUser = ApiCacheUtil.getLoginUser();
-		if (oConvertUtils.isEmpty(loginUser)) {
+		if (loginUser == null) {
 			rj.setError_code(ResultJson.ERROR_CODE_USER_NOT_LOGIN);
 			rj.setMessage("用户未登录");
 			return rj;
@@ -1009,6 +1038,11 @@ public class UserApiServiceImpl extends AbstractBaseServiceImpl<IUserInfoDao, Us
 						account.setPaypassword(encrptPassword(mobileUser.getPassword()));
 						userMoneyService.save(account);
 						
+						//插入用户配置表
+						UserConfig config = new UserConfig();
+						config.setUser(mobileUserEntity);
+						userConfigService.save(config);
+						
 						rj.setSuccess(true);
 						rj.setError_code(ResultJson.SUCCESS);
 						rj.setMessage("注册成功");
@@ -1158,7 +1192,7 @@ public class UserApiServiceImpl extends AbstractBaseServiceImpl<IUserInfoDao, Us
 			int length = 6;
 			String captcha = StringUtil.numRandom(length);
 			try {
-				String result = UcsSmsUtil.templateSMS("27994", phone, captcha+",2");
+				String result = UcsSmsUtil.templateSMS("27994", phone, captcha);
 				if (oConvertUtils.isNotEmpty(result) && result.equals("000000")) {
 					ApiCacheUtil.addCaptchaChache(phone, captcha + "-" + DateUtil.getMillis());
 					rj.setError_code(ResultJson.SUCCESS);
