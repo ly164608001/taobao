@@ -40,7 +40,7 @@
 			发布任务
 		</dt>
 		<dd>
-			<a href="#">淘宝任务</a>
+			<a href="javascript:void(0);" onclick="changeMenu('front/seller/task/publishPrepare.htm');">淘宝任务</a>
 		</dd>
 		<dd>
 			<a href="#">淘宝超级任务</a>

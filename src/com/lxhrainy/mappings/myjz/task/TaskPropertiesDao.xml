@@ -2,6 +2,27 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lxhrainy.myjz.admin.task.dao.ITaskPropertiesDao">
     
+    <resultMap id="propertiesResult" type="TaskProperties">
+		<id property="id" column="id" />
+		<result property="name" column="name" />
+		<result property="status" column="status" />
+		<result property="type" column="type" />
+		<result property="price" column="price" />
+		<result property="elementtype" column="elementtype" />
+		<result property="elementnum" column="elementnum" />
+		<result property="needtype" column="needtype" />
+		<result property="neednum" column="neednum" />
+		<result property="sort" column="sort" />
+		<result property="elementname" column="elementname" />
+		<collection property="valueList" ofType="SysMenu">
+			<id property="id" column="valueList.id" />
+			<id property="label" column="valueList.label" />
+			<id property="keyvalue" column="valueList.keyvalue" />
+			<id property="memo" column="valueList.memo" />
+			<id property="status" column="valueList.status" />
+		</collection>
+	</resultMap>
+	
 	<sql id="taskPropertiesColumns">
 		T.id AS "id",
 		T.name AS "name",
@@ -16,9 +37,33 @@
 		T.elementname AS "elementname"
 	</sql>
 	
+	<sql id="propertiesValueColumns">
+		T.id AS "id",
+		T.name AS "name",
+		T.status AS "status",
+		T.type AS "type",
+		T.price AS "price",
+		T.elementtype AS "elementtype",
+		T.elementnum AS "elementnum",
+		T.needtype AS "needtype",
+		T.neednum AS "neednum",
+		T.sort AS "sort",
+		T.elementname AS "elementname",
+		
+		V.id AS "id",
+		V.label AS "label",
+		V.keyvalue AS "keyvalue",
+		V.memo AS "memo",
+		V.status AS "properties.status"
+	</sql>
+	
 	<sql id="taskPropertiesJoins">
 	</sql>
-    
+	
+	<sql id="propertiesValueJoins">
+		LEFT JOIN task_properties_value V ON V.propertiesid = T.id
+	</sql>
+	
     <sql id="where">
 		<if test="condition!=null">
 			<where>
@@ -53,6 +98,13 @@
 		<include refid="where"/>
 		order by T.ID DESC
 			<include refid="Sql.pager" />
+	</select>
+	
+	<select id="getAllWithValuelist" resultMap="propertiesResult">
+		SELECT 
+			<include refid="propertiesValueColumns"/>
+		FROM task_properties T
+		<include refid="propertiesValueJoins"/>
 	</select>
 	
 	<select id="findAllList" resultType="TaskProperties">
