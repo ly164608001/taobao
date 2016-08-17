@@ -1,7 +1,7 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : 127.0.0.1
+Source Server         : localhost
 Source Server Version : 50096
 Source Host           : localhost:3306
 Source Database       : myjz
@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50096
 File Encoding         : 65001
 
-Date: 2016-08-16 18:10:11
+Date: 2016-08-17 23:25:32
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -296,6 +296,7 @@ CREATE TABLE `order_info` (
   `shopid` int(11) default NULL COMMENT '店铺ID',
   `searchroad` int(11) default NULL COMMENT '搜索入口',
   `type` int(11) default NULL COMMENT '手机/电脑单类型',
+  `targetsubtype` int(11) default NULL COMMENT '任务目标副类型(0:常规单;1:流量单;)',
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='订单基本信息';
 
@@ -4291,7 +4292,7 @@ CREATE TABLE `sys_menu` (
   PRIMARY KEY  (`id`),
   KEY `sys_menu_parent_id` USING BTREE (`parentid`),
   KEY `sys_menu_del_flag` USING BTREE (`deleted`)
-) ENGINE=InnoDB AUTO_INCREMENT=93 DEFAULT CHARSET=utf8 COMMENT='菜单表';
+) ENGINE=InnoDB AUTO_INCREMENT=94 DEFAULT CHARSET=utf8 COMMENT='菜单表';
 
 -- ----------------------------
 -- Records of sys_menu
@@ -4326,6 +4327,7 @@ INSERT INTO `sys_menu` VALUES ('89', '88', '-1,1,88', '账户充值处理', '1',
 INSERT INTO `sys_menu` VALUES ('90', '88', '-1,1,88', '账户提现处理', '2', '', 'admin', null, '1', '', '3', '2016-08-11 17:43:55', '3', '2016-08-11 17:43:55', null, '0', '0', '0');
 INSERT INTO `sys_menu` VALUES ('91', '1', '-1,1', '任务管理', '433', '', 'admin', null, '1', '', '3', '2016-08-12 21:57:32', '3', '2016-08-12 21:57:32', null, '0', '0', '0');
 INSERT INTO `sys_menu` VALUES ('92', '91', '-1,1,91', '任务属性管理', '1', 'admin/task/properties/propertiesList.htm', 'admin', null, '1', '', '3', '2016-08-12 21:58:01', '3', '2016-08-12 22:41:14', null, '0', '0', '0');
+INSERT INTO `sys_menu` VALUES ('93', '91', '-1,1,91', '任务属性值管理', '2', 'admin/task/propertiesvalue/propertiesValueList.htm', 'admin', null, '1', '', '3', '2016-08-17 21:58:33', '3', '2016-08-17 21:58:33', null, '0', '0', '0');
 
 -- ----------------------------
 -- Table structure for `sys_notice`
@@ -4420,6 +4422,7 @@ INSERT INTO `sys_role_menu` VALUES ('1', '89');
 INSERT INTO `sys_role_menu` VALUES ('1', '90');
 INSERT INTO `sys_role_menu` VALUES ('1', '91');
 INSERT INTO `sys_role_menu` VALUES ('1', '92');
+INSERT INTO `sys_role_menu` VALUES ('1', '93');
 
 -- ----------------------------
 -- Table structure for `sys_user_role`
@@ -4490,12 +4493,58 @@ CREATE TABLE `task_properties` (
   `sort` int(11) default NULL COMMENT '任务完成排序',
   `elementname` varchar(255) default NULL COMMENT '别名',
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='任务属性';
+) ENGINE=InnoDB AUTO_INCREMENT=48 DEFAULT CHARSET=utf8 COMMENT='任务属性';
 
 -- ----------------------------
 -- Records of task_properties
 -- ----------------------------
-INSERT INTO `task_properties` VALUES ('1', '是否手机下单', '1', '1', '2', 'radio', '2', null, null, null, '页面提示信息');
+INSERT INTO `task_properties` VALUES ('1', 'isphoneorder', '1', '1', '2', 'radio', '2', 'null', '0', '1', '是否手机下单');
+INSERT INTO `task_properties` VALUES ('2', 'ordermode', '0', '1', '0', 'radio', '3', 'img', '1', '1', '拍单方式');
+INSERT INTO `task_properties` VALUES ('3', 'searchshopmode', '0', '1', '0', 'radio', '4', 'img', '1', '1', '搜索进店方式');
+INSERT INTO `task_properties` VALUES ('4', 'searchgoodskey', '0', '1', '0', 'text', '1', 'img', '1', '1', '搜商品关键字');
+INSERT INTO `task_properties` VALUES ('5', 'searchshopname', '0', '1', '0', 'text', '1', 'img', '1', '1', '搜店铺名称');
+INSERT INTO `task_properties` VALUES ('6', 'searchtrainkey', '0', '1', '0', 'text', '1', 'img', '1', '1', '搜直通车关键字');
+INSERT INTO `task_properties` VALUES ('7', 'commandaddr', '0', '1', '0', 'text', '1', 'img', '1', '1', '淘口令地址');
+INSERT INTO `task_properties` VALUES ('8', 'searchgoodstip', '0', '1', '0', 'text', '1', 'null', '1', '1', '商品搜索提示');
+INSERT INTO `task_properties` VALUES ('9', 'gooodslinkimg', '0', '1', '0', 'img', '1', 'img', '1', '1', '商品链接位置截图');
+INSERT INTO `task_properties` VALUES ('10', 'searchflowtip', '0', '1', '0', 'img', '4', 'null', '1', '1', '搜索流程提示图');
+INSERT INTO `task_properties` VALUES ('11', 'goodslinkaddr', '0', '1', '0', 'text', '1', 'null', '0', '1', '商品链接地址');
+INSERT INTO `task_properties` VALUES ('12', 'goodsbond', '0', '1', '0', 'text', '1', 'null', '0', '1', '单个商品保证金');
+INSERT INTO `task_properties` VALUES ('13', 'freemail', '0', '1', '0', 'radio', '2', 'null', '0', '1', '是否包邮');
+INSERT INTO `task_properties` VALUES ('14', 'batchordernum', '0', '1', '0', 'text', '1', 'null', '0', '1', '批量放单份数');
+INSERT INTO `task_properties` VALUES ('15', 'batchpublishinterval', '0', '1', '0', 'text', '1', 'null', '0', '1', '批量发布间隔');
+INSERT INTO `task_properties` VALUES ('16', 'goodsnum', '0', '1', '0', 'text', '1', 'null', '0', '1', '单任务拍下宝贝数');
+INSERT INTO `task_properties` VALUES ('17', 'basescore', '0', '1', '0', 'text', '1', 'null', '0', '1', '基本旺点');
+INSERT INTO `task_properties` VALUES ('18', 'appendrewardscore', '0', '1', '0', 'text', '1', 'null', '0', '1', '追加悬赏旺点');
+INSERT INTO `task_properties` VALUES ('19', 'confirmtime', '0', '2', '0', 'select', '1', 'null', '0', '1', '要求确认时间');
+INSERT INTO `task_properties` VALUES ('20', 'msgreminder', '0', '2', '1', 'radio', '2', 'img', '1', '1', '留言提醒');
+INSERT INTO `task_properties` VALUES ('21', 'askeveryone', '0', '2', '40', 'radio', '2', 'img', '1', '1', '问大家');
+INSERT INTO `task_properties` VALUES ('22', 'limitreceiveaddr', '0', '2', '5', 'radio', '2', 'null', '0', '1', '规定收货地址');
+INSERT INTO `task_properties` VALUES ('23', 'collectshop', '0', '2', '6', 'radio', '2', 'img', '1', '1', '收藏店铺');
+INSERT INTO `task_properties` VALUES ('24', 'collectmaineye', '0', '2', '6', 'radio', '2', 'img', '1', '1', '需要收藏主宝贝');
+INSERT INTO `task_properties` VALUES ('25', 'shareeye', '0', '2', '5', 'radio', '2', 'img', '1', '1', '分享宝贝');
+INSERT INTO `task_properties` VALUES ('26', 'searchlistimg', '0', '2', '2', 'radio', '2', 'img', '1', '1', '搜索列表页截图');
+INSERT INTO `task_properties` VALUES ('27', 'buystop', '0', '2', '0', 'radio', '2', 'mull', '0', '1', '购买前停留');
+INSERT INTO `task_properties` VALUES ('28', 'viewbottom', '0', '2', '5', 'radio', '2', 'null', '0', '1', '完整浏览到底');
+INSERT INTO `task_properties` VALUES ('29', 'shopviewgoods', '0', '2', '5', 'radio', '2', 'null', '0', '1', '店内浏览商品');
+INSERT INTO `task_properties` VALUES ('30', 'buybeforechat', '0', '2', '10', 'radio', '2', 'null', '0', '1', '旺旺聊天(拍前聊)');
+INSERT INTO `task_properties` VALUES ('31', 'compare3', '0', '2', '8', 'radio', '2', 'img', '1', '1', '货比三家');
+INSERT INTO `task_properties` VALUES ('32', 'limitappraisetext', '0', '2', '10', 'radio', '2', 'img', '1', '1', '规定好评内容');
+INSERT INTO `task_properties` VALUES ('33', 'appraiseimg', '0', '2', '10', 'radio', '2', 'img', '1', '1', '好评需要截图');
+INSERT INTO `task_properties` VALUES ('34', 'appraiseshow', '0', '2', '45', 'radio', '2', 'img', '1', '1', '好评要晒图');
+INSERT INTO `task_properties` VALUES ('35', 'iscreditpay', '0', '2', '-1', 'radio', '2', 'img', '1', '1', '是否允许信用支付');
+INSERT INTO `task_properties` VALUES ('36', 'limitbuyaccount', '0', '3', '4', 'radio', '2', 'null', '0', '1', '设置买号限制');
+INSERT INTO `task_properties` VALUES ('37', 'artificialaudit', '0', '3', '3', 'radio', '2', 'null', '0', '1', '人工审核接手人');
+INSERT INTO `task_properties` VALUES ('38', 'videoauth', '0', '3', '10', 'radio', '2', 'null', '2', '1', '视频认证');
+INSERT INTO `task_properties` VALUES ('39', 'limitbuyer', '0', '3', '0', 'radio', '2', 'null', '0', '1', '限制接手人');
+INSERT INTO `task_properties` VALUES ('40', 'buyerrealauth', '0', '3', '10', 'radio', '2', 'img', '1', '1', '买号实名认证');
+INSERT INTO `task_properties` VALUES ('41', 'limitbuyerarea', '0', '3', '45', 'radio', '2', 'null', '0', '1', '指定接手地区');
+INSERT INTO `task_properties` VALUES ('42', 'wwhsex', '0', '3', '30', 'radio', '2', 'img', '1', '1', '旺旺号性别');
+INSERT INTO `task_properties` VALUES ('43', 'mmhage', '0', '3', '30', 'radio', '2', 'img', '1', '1', '旺旺号买手年龄');
+INSERT INTO `task_properties` VALUES ('44', 'buyerlevel', '0', '3', '-2', 'radio', '2', 'null', '0', '1', '过滤买号等级');
+INSERT INTO `task_properties` VALUES ('45', 'isoldbuyer', '0', '3', '45', 'radio', '2', 'null', '0', '1', '是否老客户才可接');
+INSERT INTO `task_properties` VALUES ('46', 'timepublish', '0', '4', '0', 'radio', '2', 'null', '0', '1', '设置定时发布');
+INSERT INTO `task_properties` VALUES ('47', 'savetasktemp', '0', '4', '0', 'text', '1', 'null', '0', '1', '保存任务模版');
 
 -- ----------------------------
 -- Table structure for `task_properties_value`
@@ -4726,7 +4775,7 @@ CREATE TABLE `user_info` (
 -- Records of user_info
 -- ----------------------------
 INSERT INTO `user_info` VALUES ('1', 'yun', 'ifS7tw1E6a7Yx0lPE3rcSw==', '13067356435', '2016-05-20 11:37:27', '2016-05-20 11:37:30', '127.0.0.1', '1', '1', '0', '1', null, null, null, null, null, null, null);
-INSERT INTO `user_info` VALUES ('2', 'estate', 'ifS7tw1E6a7Yx0lPE3rcSw==', '18050804169', '2016-05-18 11:38:15', '2016-05-20 11:38:19', '127.0.0.1', '2', '2', '0', '1', null, null, null, null, null, null, null);
+INSERT INTO `user_info` VALUES ('2', 'seller', 'ifS7tw1E6a7Yx0lPE3rcSw==', '18050804169', '2016-05-18 11:38:15', '2016-05-20 11:38:19', '127.0.0.1', '2', '2', '0', '1', null, null, null, null, null, null, null);
 INSERT INTO `user_info` VALUES ('3', 'admin', 'ifS7tw1E6a7Yx0lPE3rcSw==', '13067356435', '2016-06-06 15:34:26', '2016-06-06 15:34:28', '127.0.0.1', '0', '1', '0', '0', null, null, null, null, null, null, null);
 INSERT INTO `user_info` VALUES ('4', 'luoxh', 'ifS7tw1E6a7Yx0lPE3rcSw==', '15980267262', '2016-06-08 10:10:34', null, null, '1', '1', '0', '1', null, null, null, null, null, null, null);
 

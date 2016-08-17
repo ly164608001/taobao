@@ -52,6 +52,7 @@
 		<table cellpadding="5">
 			<input type="hidden" name="id" value="${model.id}"/>
 			<input type="hidden" value="${model.type}" id="typeVal"/>
+			<input type="hidden" name="status" value="${model.status}" id="status"/>
 			<input type="hidden" value="${model.elementtype}" id="elementtypeVal"/>
 			<tr>
 				<td>属性名:</td>

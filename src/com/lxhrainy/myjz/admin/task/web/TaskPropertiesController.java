@@ -122,11 +122,16 @@ public class TaskPropertiesController extends BaseController {
 	public JSONObject updatesave(TaskProperties model) {
 		JSONObject rj = new JSONObject();
 		rj.put("success", false);
-		String name = null;
-		String elemtype = null;
-		String elemname = null;
+		if(model == null){
+			rj.put("msg", "信息填写不完整");
+			return rj;
+		}
 		
-		if(model == null || StringUtils.isEmpty(name) || StringUtils.isEmpty(elemtype)
+		String name = model.getName();
+		String elemtype = model.getElementtype();
+		String elemname = model.getElementname();
+		
+		if( StringUtils.isEmpty(name) || StringUtils.isEmpty(elemtype)
 				|| StringUtils.isEmpty(elemname) ){
 			rj.put("msg", "信息填写不完整");
 			return rj;
