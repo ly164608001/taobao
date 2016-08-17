@@ -4,7 +4,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-	<title>查看任务详情</title>
+	<title>发布淘宝任务</title>
 </head>
 <body>
 	<div class="workContent ml20">
@@ -12,9 +12,64 @@
 		<span class="title">发布淘宝任务</span>
 	</h4>
 	<div class="moneyOrder rechange workDetail">
-		<form action="" method="post" class="form form-horizontal" id="demoform-1">
+		<form action="" method="post" class="form form-horizontal" id="submitForm">
 			<legend></legend>
 			<h4>1.任务基本信息</h4>
+			
+			<c:forEach items="${taskPublish1}" var="pro">
+				<c:choose>
+					<!-- 单选框 -->
+					<c:when test="${pro.elementtype == 'radio'}">
+							<!-- 二选1-->
+							<c:if test="${pro.elementnum == 2}">
+								<div class="row cl">
+									<label class="form-label col-xs-4 col-sm-3">${pro.elementname}：</label>
+									<div class="formControls col-xs-4 col-sm-6">
+										<c:forEach items="${pro.valueList}" var="proVal">
+											<span class="tab-tip">${proVal.label}</span>
+										</c:forEach>
+									</div>
+								</div>
+							</c:if>
+							<!-- 多选1-->
+							<c:if test="${pro.elementnum > 2}">
+								<div class="row cl">
+									<label class="form-label col-xs-4 col-sm-3">${pro.elementname}</label>
+									<div class="formControls col-xs-8 col-sm-9">
+										<c:forEach items="${pro.valueList}" var="proVal">
+											<div class="radio-box">
+											   	 <input type="radio" name="${pro.name}" value="${proVal.keyvalue}"/>
+											   	 <label>${proVal.label}</label>
+										  	</div>
+										</c:forEach>
+									</div>
+								</div>
+							</c:if>
+							
+					</c:when>
+					
+					<!-- 下拉框 -->
+					<c:when test="${pro.elementtype == 'select'}">
+						<div class="row cl">
+							<label class="form-label col-xs-4 col-sm-3">${pro.elementname}</label>
+							<div class="formControls col-xs-2 col-sm-3">
+								<span class="select-box">
+								  <select class="select" size="1" name="${pro.name}">
+								  	 <c:forEach items="${pro.valueList}" var="proVal">
+								  		<option value="${proVal.keyvalue}">${proVal.label}</option>
+								  	 </c:forEach>
+								  </select>
+								</span>
+							</div>
+						</div>
+					</c:when>
+					
+					<%-- <c:when test=""></c:when>
+					<c:when test=""></c:when>
+					<c:when test=""></c:when> --%>
+				</c:choose>
+			</c:forEach>
+			
 			<div class="row cl">
 				<label class="form-label col-xs-4 col-sm-3">淘宝店铺<em class="orange">*</em></label>
 				<div class="formControls col-xs-2 col-sm-3">
@@ -395,13 +450,6 @@
 	</div>
 
 </div>
-<script type="text/javascript" src="lib/jquery/1.9.1/jquery.min.js"></script>
-<script type="text/javascript" src="lib/layer/2.1/layer.js"></script>
-<script type="text/javascript" src="lib/My97DatePicker/WdatePicker.js"></script>
-<script type="text/javascript" src="lib/layer/layer.js"></script>
-<script type="text/javascript" src="static/h-ui/js/H-ui.js"></script>
-<script type="text/javascript" src="js/page.js"></script>
-<script type="text/javascript" src="js/style.js"></script>
 <script>
 
 
@@ -420,7 +468,6 @@ $(function(){
 		}
 	});
 	
-    $.Huitab("#tab_demo .tabBar span","#tab_demo .tabCon","current","click","0");
     layer.ready(function(){ //为了layer.ext.js加载完毕再执行
 	  layer.photos({
 	    photos: '#layer-photos-demo'

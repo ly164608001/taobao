@@ -13,7 +13,7 @@ import com.lxhrainy.core.common.model.BaseModel;
 public class TaskProperties extends BaseModel {
 
 	private static final long serialVersionUID = 1L;
-	private String name; // 属性名称
+	private String name; // 元素name属性名称
 	private Integer status; // 使用状态(0,1)
 	private Integer type; // 展示区域块(1 任务基本属性 2任务需求设置 3买手身份验证 4发布任务设置)
 	private Integer price; // 所需蚂蚁币
@@ -22,7 +22,7 @@ public class TaskProperties extends BaseModel {
 	private String needtype; // 所需类型(刷手反馈数据类型)
 	private Integer neednum; // 所需个数
 	private String sort; // 任务完成排序
-	private String elementname; // 别名
+	private String elementname; // 显示的属性元素名称
 	private List<TaskPropertiesValue> valueList;
 
 	public List<TaskPropertiesValue> getValueList() {

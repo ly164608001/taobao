@@ -14,12 +14,11 @@
 		<result property="neednum" column="neednum" />
 		<result property="sort" column="sort" />
 		<result property="elementname" column="elementname" />
-		<collection property="valueList" ofType="SysMenu">
+		<collection property="valueList" ofType="TaskPropertiesValue">
 			<id property="id" column="valueList.id" />
 			<id property="label" column="valueList.label" />
 			<id property="keyvalue" column="valueList.keyvalue" />
 			<id property="memo" column="valueList.memo" />
-			<id property="status" column="valueList.status" />
 		</collection>
 	</resultMap>
 	
@@ -50,11 +49,10 @@
 		T.sort AS "sort",
 		T.elementname AS "elementname",
 		
-		V.id AS "id",
-		V.label AS "label",
-		V.keyvalue AS "keyvalue",
-		V.memo AS "memo",
-		V.status AS "properties.status"
+		V.id AS "valueList.id",
+		V.label AS "valueList.label",
+		V.keyvalue AS "valueList.keyvalue",
+		V.memo AS "valueList.memo"
 	</sql>
 	
 	<sql id="taskPropertiesJoins">

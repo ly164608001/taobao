@@ -30,6 +30,11 @@ public class SellerTaskPublishController extends BaseController {
 	@RequestMapping("/publishPrepare")
 	public ModelAndView publishPrepare(){
 		List<TaskPublish> list = propertiesService.getTaskPublishList();
+		//将每个显示模块的任务发布对象保存到mv
+		for (TaskPublish taskPublish : list) {
+			int type = taskPublish.getType();
+			mv.addObject("taskPublish"+type, taskPublish);
+		}
 		
 		mv.addObject("list", list);
 		mv.setViewName("front/seller/task/publishPrepare");
