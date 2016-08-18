@@ -41,7 +41,7 @@
 												</c:choose>
 											</c:forEach>
 											<c:if test="${not empty pro.price and pro.price > 0}">
-												<span class="gray">需支付<em class="red">${pro.price}</em>个蚂蚁币</span>
+												<span class="gray">&nbsp;&nbsp;需支付<em class="red">${pro.price}</em>个蚂蚁币</span>
 											</c:if>
 										</div>
 									</div>
@@ -56,6 +56,9 @@
 												   	 <label>${proVal.label}</label>
 											  	</div>
 											</c:forEach>
+											<c:if test="${not empty pro.price and pro.price > 0}">
+												<span class="gray">&nbsp;&nbsp;需支付<em class="red">${pro.price}</em>个蚂蚁币</span>
+											</c:if>
 										</div>
 									</div>
 								</c:if>
@@ -83,10 +86,30 @@
 								<div class="formControls col-xs-2 col-sm-3">
 									<input type="text" class="input-text" name="${pro.name}"/>
 								</div>
+								<c:if test="${not empty pro.price and pro.price > 0}">
+									<div class="formControls col-xs-6 col-sm-6">
+										<span class="text">&nbsp;&nbsp;<em class="gray">需支付<em class="red">${pro.price}</em>个蚂蚁币。</em></span>
+									</div>
+								</c:if>
 							</div>
 						</c:when>
 						
-						<c:when test="${pro.elementtype == 'img'}"></c:when>
+						<c:when test="${pro.elementtype == 'img'}">
+							<div class="row cl" style="min-height: 110px">
+								<label class="form-label col-xs-4 col-sm-3">${pro.elementname}：</label>
+								<div class="formControls col-xs-4 col-sm-6">
+									<span>
+										<a href="#" class="detail-jpg layer-photos-demo" id="layer-photos-demo"> 
+											<img layer-pid="showBigimg" layer-src="${basePath}static/css/front/images/jietu.png" src="images/jietu.png" alt="">
+										</a>
+									</span>
+									<br/>
+									<iframe src="${basePath}/upload/index.htm?extnames=*.jpg;*.jpeg;*.png;*.gif;" frameborder="0"
+										scrolling="no" height="34" width="112"></iframe>
+								</div>
+							</div>
+						</c:when>
+						
 						<c:when test="${pro.elementtype == 'checkbox'}"></c:when>
 						
 					</c:choose>
