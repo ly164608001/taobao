@@ -105,12 +105,24 @@
 									</span>
 									<br/>
 									<iframe src="${basePath}/upload/index.htm?extnames=*.jpg;*.jpeg;*.png;*.gif;" frameborder="0"
-										scrolling="no" height="34" width="112"></iframe>
+										scrolling="no" height="34" width="112" class="mt10 ml10"></iframe>
 								</div>
 							</div>
 						</c:when>
 						
-						<c:when test="${pro.elementtype == 'checkbox'}"></c:when>
+						<c:when test="${pro.elementtype == 'checkbox'}">
+							<div class="row cl">
+								<label class="form-label col-xs-4 col-sm-3">${pro.elementname}：</label>
+								<div class="formControls col-xs-8 col-sm-9 more-click">
+									<c:forEach items="${pro.valueList}" var="proVal">
+										<span class="tab-tip-add">是</span>
+									</c:forEach>
+									<c:if test="${not empty pro.price and pro.price > 0}">
+										<span><em class="gray">需支付<em class="red">${pro.price}</em>个蚂蚁币</em></span>
+									</c:if>
+								</div>
+							</div>
+						</c:when>
 						
 					</c:choose>
 					
