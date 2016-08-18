@@ -132,7 +132,7 @@ a{color: #333; text-decoration: none;font-size: 14px;}
 .addCar .form-label{width: 200px;text-align: right;}
 .sprite{display: inline-block;margin-right: 10px;}
 .tab-tip-add,.tab-tip{display: inline-block; height: 30px; line-height: 30px; padding: 0 10px; border: 2px solid #e5e5e5; cursor: pointer;}
-
+.more-click .tab-tip-add{margin: 0 10px 10px 0}
 /*.tab-tip.on{border: 2px solid #ff5a09}*/
 .tab-tip-add.active,.tab-tip-add:hover,.tab-tip.active,.tab-tip:hover{border: 2px solid #FF5A09;}
 .onShow, .onFocus, .onError, .onCorrect, .onLoad, .onTime{display: inline-block; display: -moz-inline-stack; zoom: 1; vertical-align: middle; background: url(../images/msg_bg.png) no-repeat; color: #444; line-height: 18px; padding: 2px 10px 2px 23px;}
