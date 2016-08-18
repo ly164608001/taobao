@@ -38,12 +38,61 @@
 		});
 	}
 
+	function changeBelongPro(selObj){
+		var selPro = $(selObj).val();
+		if(selPro == -1){
+			$('#valueSelect').val('');
+			$('#valueTr').hide();
+			return;
+		}
+		$.ajax({
+			type : "GET",
+			url : '${basePath}admin/task/propertiesvalue/getListByProperties.htm?propertiesid='+selPro,
+			dataType : "json",
+			success : function(res) {
+				if (res.success) {
+					var options = '<option value="">请选择</option>';
+					var valList = res.list;
+					for (var i = 0; i < valList.length; i++) {
+						var valObj = valList[i];
+						options += '<option value="'+valObj.id+'">'+valObj.label+'</option>';
+					}
+					
+					$('#valueSelect').empty().append(options);
+					$('#valueTr').show();
+				}
+			}
+		});
+	}
+	
+	$(function(){
+		$('#valueTr').hide();
+	})
 </script>
 </head>
 <body>
 
 	<form id="addform" method="post">
 		<table cellpadding="5">
+			<tr>
+				<td>所属属性:</td>
+				<td>
+					<select name="parent.id" onchange="changeBelongPro(this);">
+						<option value="-1">顶级属性</option>
+						<c:forEach items="${list}" var="pro">
+							<option value="${pro.id}">${pro.elementname}</option>
+						</c:forEach>
+					</select>					
+				</td>
+			</tr>
+			<tr id="valueTr">
+				<td>所属值:</td>
+				<td>
+					<select name="belongValue.id" id="valueSelect">
+						<option value="">请选择</option>
+					</select>					
+				</td>
+			</tr>
 			<tr>
 				<td>属性名:</td>
 				<td><input name="name" class="easyui-validatebox textbox" /></td>

@@ -14,6 +14,13 @@ import com.lxhrainy.myjz.admin.task.model.TaskPublish;
 public interface ITaskPropertiesService extends IBaseService<TaskProperties, Integer>{
 
 	/**
+	 * 根据pid获取子属性列表
+	 * @param pid
+	 * @return
+	 */
+	public List<TaskProperties> getListByPid(int pid);
+	
+	/**
 	 * 判断名称是否存在
 	 * @param name
 	 * @return
@@ -39,4 +46,10 @@ public interface ITaskPropertiesService extends IBaseService<TaskProperties, Int
 	 * 获取任务发布属性集合实体列表
 	 */
 	List<TaskPublish> getTaskPublishList();
+
+	/**
+	 * 可拥有副属性的属性列表(只需获取单选框和下拉框的元素列表)
+	 * @return
+	 */
+	public List<TaskProperties> getListSimpleChoose();
 }

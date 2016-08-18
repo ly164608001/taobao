@@ -36,6 +36,15 @@ implements ITaskPropertiesService {
 	private List<TaskPublish> proPublishList = null;
 	
 	/**
+	 * 根据pid获取子属性列表
+	 * @param pid
+	 * @return
+	 */
+	public List<TaskProperties> getListByPid(int pid) {
+		return dao.getListByPid(pid);
+	}
+	
+	/**
 	 * 判断名称是否存在
 	 * @param name
 	 * @return
@@ -123,6 +132,14 @@ implements ITaskPropertiesService {
 		
 		return -1;
 		
+	}
+	
+	/**
+	 * 可拥有副属性的属性列表(只需获取单选框和下拉框的元素列表)
+	 * @return
+	 */
+	public List<TaskProperties> getListSimpleChoose() {
+		return dao.getListSimpleChoose();
 	}
 	
 }

@@ -64,7 +64,11 @@ public class TaskPropertiesController extends BaseController {
 	 * @param
 	 */
 	@RequestMapping("/propertiesAdd")
-	public ModelAndView add(Integer pid) {
+	public ModelAndView add() {
+		//可拥有副属性的属性列表(只需获取单选框和下拉框的元素列表)
+		List<TaskProperties> list = propertiesService.getListSimpleChoose();
+		
+		mv.addObject("list", list);
 		mv.setViewName("admin/task/properties/propertiesAdd");
 		return mv;
 	}

@@ -14,6 +14,7 @@
 		<result property="neednum" column="neednum" />
 		<result property="sort" column="sort" />
 		<result property="elementname" column="elementname" />
+		<result property="parent.id" column="parent.id" />
 		<collection property="valueList" ofType="TaskPropertiesValue">
 			<id property="id" column="valueList.id" />
 			<id property="label" column="valueList.label" />
@@ -35,7 +36,8 @@
 		T.needtype AS "needtype",
 		T.neednum AS "neednum",
 		T.sort AS "sort",
-		T.elementname AS "elementname"
+		T.elementname AS "elementname",
+		T.parentid AS "parent.id"
 	</sql>
 	
 	<sql id="propertiesValueColumns">
@@ -50,6 +52,7 @@
 		T.neednum AS "neednum",
 		T.sort AS "sort",
 		T.elementname AS "elementname",
+		T.parentid AS "parent.id",
 		
 		V.id AS "valueList.id",
 		V.label AS "valueList.label",
@@ -71,7 +74,7 @@
 			<where>
 				<if test="condition.model!=null">
 					<if test="condition.model.name!=null and condition.model.name!=''">
-						AND T.name LIKE '%${condition.model.name}%'
+						AND T.elementname LIKE '%${condition.model.name}%'
 					</if>
 					<if test="condition.model.elementtype!=null and condition.model.elementtype!=''">
 						AND T.elementtype = #{condition.model.elementtype}
@@ -92,6 +95,21 @@
 		WHERE T.id = #{id}
 	</select>
 	
+	<select id="getListByPid" resultType="TaskProperties">
+		SELECT 
+			<include refid="taskPropertiesColumns"/>
+		FROM task_properties T
+		WHERE T.parentid = #{pid}
+	</select>
+	
+	<select id="getListSimpleChoose" resultType="TaskProperties">
+		SELECT 
+			<include refid="taskPropertiesColumns"/>
+		FROM task_properties T
+		WHERE T.parentid = -1
+		AND (T.elementtype = 'select' OR T.elementtype = 'radio')
+	</select>
+	
 	<select id="findListByPage" resultType="TaskProperties">
 		SELECT 
 			<include refid="taskPropertiesColumns"/>
@@ -102,11 +120,13 @@
 			<include refid="Sql.pager" />
 	</select>
 	
+	<!-- 获取顶级属性(完整：带值列表)列表 -->
 	<select id="getAllWithValuelist" resultMap="propertiesResult">
 		SELECT 
 			<include refid="propertiesValueColumns"/>
 		FROM task_properties T
 		<include refid="propertiesValueJoins"/>
+		WHERE parentid = -1
 	</select>
 	
 	<select id="findAllList" resultType="TaskProperties">
@@ -155,7 +175,9 @@
 			needtype,
 			neednum,
 			sort,
-			elementname
+			elementname,
+			parentid,
+			valueid
 		) VALUES (
 			#{id},
 			#{name},
@@ -167,7 +189,9 @@
 			#{needtype},
 			#{neednum},
 			#{sort},
-			#{elementname}
+			#{elementname},
+			#{parent.id},
+			#{belongValue.id}
 		)
 	</insert>
 	
@@ -182,7 +206,9 @@
 			needtype = #{needtype},
 			neednum = #{neednum},
 			sort = #{sort},
-			elementname = #{elementname}
+			elementname = #{elementname},
+			parentid = #{parent.id},
+			valueid = #{belongValue.id}
 		WHERE id = #{id}
 	</update>
 	

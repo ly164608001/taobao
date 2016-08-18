@@ -1,5 +1,7 @@
 package com.lxhrainy.myjz.admin.task.service;
 
+import java.util.List;
+
 import com.lxhrainy.core.common.service.IBaseService;
 import com.lxhrainy.myjz.admin.task.model.TaskPropertiesValue;
 
@@ -23,5 +25,12 @@ public interface ITaskPropertiesValueService extends IBaseService<TaskProperties
 	 *      -1 属性值已被删除或该属性已被使用不可删除
 	 */
 	public int delById(int id);
+	
+	/**
+	 * 根据属性获取属性值列表
+	 * @param propertiesid
+	 * @return
+	 */
+	public List<TaskPropertiesValue> getListByProperties(int propertiesid);
 
 }

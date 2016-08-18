@@ -1,5 +1,7 @@
 package com.lxhrainy.myjz.admin.task.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -49,6 +51,15 @@ implements ITaskPropertiesValueService {
 		
 		dao.deleteById(id);
 		return 1;
+	}
+	
+	/**
+	 * 根据属性获取属性值列表
+	 * @param propertiesid
+	 * @return
+	 */
+	public List<TaskPropertiesValue> getListByProperties(int propertiesid){
+		return dao.getListByProperties(propertiesid);
 	}
 	
 	

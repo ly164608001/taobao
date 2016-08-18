@@ -23,7 +23,26 @@ public class TaskProperties extends BaseModel {
 	private Integer neednum; // 所需个数
 	private String sort; // 任务完成排序
 	private String elementname; // 显示的属性元素名称
-	private List<TaskPropertiesValue> valueList;
+	
+	private List<TaskPropertiesValue> valueList; //所有值列表
+	private TaskProperties parent;//所属属性
+	private TaskPropertiesValue belongValue; //所属属性值
+
+	public TaskPropertiesValue getBelongValue() {
+		return belongValue;
+	}
+
+	public void setBelongValue(TaskPropertiesValue belongValue) {
+		this.belongValue = belongValue;
+	}
+
+	public TaskProperties getParent() {
+		return parent;
+	}
+
+	public void setParent(TaskProperties parent) {
+		this.parent = parent;
+	}
 
 	public List<TaskPropertiesValue> getValueList() {
 		return valueList;

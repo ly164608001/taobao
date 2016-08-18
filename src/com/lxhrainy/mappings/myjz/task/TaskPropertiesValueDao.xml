@@ -34,6 +34,18 @@
 		</if>
 	</sql>
 	
+	<select id="getListByProperties" resultType="TaskPropertiesValue">
+		SELECT 
+			T.id AS "id",
+			T.propertiesid AS "properties.id",
+			T.label AS "label",
+			T.keyvalue AS "keyvalue",
+			T.memo AS "memo",
+			T.isdefault AS "isdefault"
+		FROM task_properties_value T
+		WHERE T.propertiesid = #{propertiesid}
+	</select>
+	
 	<select id="getById" resultType="TaskPropertiesValue">
 		SELECT 
 			<include refid="taskPropertiesValueColumns"/>

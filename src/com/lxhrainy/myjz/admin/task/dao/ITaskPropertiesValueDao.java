@@ -1,5 +1,7 @@
 package com.lxhrainy.myjz.admin.task.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 
 import com.lxhrainy.core.annotation.MyBatisDao;
@@ -20,4 +22,9 @@ public interface ITaskPropertiesValueDao extends IBaseDao<TaskPropertiesValue> {
 	 * @param propertiesid
 	 */
 	void deleteByProperties(@Param("propertiesid")int propertiesid);
+	/**
+	 * 根据属性获取属性值列表
+	 * @param propertiesid
+	 */
+	List<TaskPropertiesValue> getListByProperties(@Param("propertiesid")int propertiesid);
 }

@@ -140,5 +140,10 @@ public class Global {
 	public final static int TRACE_FAIL = -1;		
 	/**交易 end**/
 	
+	/**任务属性 start**/
+	public final static int TOP_PRO_ID = -1;		
+	/**任务属性 end**/
+	
+	
 }
 

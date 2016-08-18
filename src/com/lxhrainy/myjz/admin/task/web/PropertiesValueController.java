@@ -187,5 +187,20 @@ public class PropertiesValueController extends BaseController {
 		return rj;
 	}
 	
-
+	/***
+	 * 根据属性获取值列表
+	 * @param ID
+	 */
+	@RequestMapping("/getListByProperties")
+	@ResponseBody
+	public JSONObject getListByProperties(Integer propertiesid) {
+		JSONObject rj = new JSONObject();
+		rj.put("success", true);
+		if(propertiesid != null){
+			rj.put("list", propertiesValueService.getListByProperties(propertiesid));
+		}
+		
+		return rj;
+	}
+	
 }
