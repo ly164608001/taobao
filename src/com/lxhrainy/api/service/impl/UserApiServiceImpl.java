@@ -453,6 +453,9 @@ public class UserApiServiceImpl extends AbstractBaseServiceImpl<IUserInfoDao, Us
 						accountObject.put("accountid", account.getId());
 						accountObject.put("accounttype", ApiConstant.TAOBAO);
 						accountObject.put("status", account.getStatus());
+						//TODO 本日，本周数
+						accountObject.put("todayCount", "0");
+						accountObject.put("weekCount", "0");
 						if(account.getLevel() != null){
 							String tags = account.getLevel().getName();
 							if(account.getIdentification().intValue() == ApiConstant.YES){
@@ -695,6 +698,7 @@ public class UserApiServiceImpl extends AbstractBaseServiceImpl<IUserInfoDao, Us
 				UserAccountVO vo = new UserAccountVO();
 				UserAccount model = new UserAccount();
 				model.setUser(loginUser);
+				vo.setModel(model);
 				if(offsetid != 0){
 					vo.setOffsetid(offsetid);
 				}
@@ -749,7 +753,7 @@ public class UserApiServiceImpl extends AbstractBaseServiceImpl<IUserInfoDao, Us
 					userAccount.setRegion(params.getPlace());
 					userAccount.setBankname(params.getBranch());
 					BasicBank bank = new BasicBank();
-					bank.setId(oConvertUtils.getInt(params.getBank()));
+					bank.setId(oConvertUtils.getInt(params.getBank()) + 1);
 					userAccount.setBank(bank);
 					
 					int result = userAccountService.save(userAccount);
