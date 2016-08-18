@@ -19,6 +19,8 @@
 			<id property="label" column="valueList.label" />
 			<id property="keyvalue" column="valueList.keyvalue" />
 			<id property="memo" column="valueList.memo" />
+			<id property="isdefault" column="valueList.isdefault" />
+			<id property="func" column="valueList.func" />
 		</collection>
 	</resultMap>
 	
@@ -52,7 +54,9 @@
 		V.id AS "valueList.id",
 		V.label AS "valueList.label",
 		V.keyvalue AS "valueList.keyvalue",
-		V.memo AS "valueList.memo"
+		V.memo AS "valueList.memo",
+		V.isdefault AS "valueList.isdefault",
+		V.func AS "valueList.func"
 	</sql>
 	
 	<sql id="taskPropertiesJoins">

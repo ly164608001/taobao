@@ -15,6 +15,15 @@ public class TaskPropertiesValue extends BaseModel {
 	private String label; // 选项名称
 	private String keyvalue; // 值
 	private String memo; // 备注
+	private Integer isdefault; // 是否默认值
+
+	public Integer getIsdefault() {
+		return isdefault;
+	}
+
+	public void setIsdefault(Integer isdefault) {
+		this.isdefault = isdefault;
+	}
 
 	public String getLabel() {
 		return label;

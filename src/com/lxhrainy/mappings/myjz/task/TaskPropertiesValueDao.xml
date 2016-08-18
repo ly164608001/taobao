@@ -8,7 +8,9 @@
 		T.label AS "label",
 		T.keyvalue AS "keyvalue",
 		T.memo AS "memo",
+		T.isdefault AS "isdefault",
 		P.name AS "properties.name",
+		P.elementname AS "properties.elementname",
 		P.status AS "properties.status"
 	</sql>
 	
@@ -72,13 +74,15 @@
 			propertiesid,
 			label,
 			keyvalue,
-			memo
+			memo,
+			isdefault
 		) VALUES (
 			#{id},
 			#{properties.id},
 			#{label},
 			#{keyvalue},
-			#{memo}
+			#{memo},
+			#{isdefault}
 		)
 	</insert>
 	
@@ -87,7 +91,8 @@
 			propertiesid = #{properties.id},
 			label = #{label},
 			keyvalue = #{keyvalue},
-			memo = #{memo}
+			memo = #{memo},
+			isdefault = #{isdefault}
 		WHERE id = #{id}
 	</update>
 	

@@ -16,6 +16,7 @@ import com.lxhrainy.myjz.admin.task.model.TaskPropertiesValue;
 import com.lxhrainy.myjz.admin.task.oe.PropertiesValueVO;
 import com.lxhrainy.myjz.admin.task.service.ITaskPropertiesService;
 import com.lxhrainy.myjz.admin.task.service.ITaskPropertiesValueService;
+import com.lxhrainy.myjz.common.constant.Global;
 
 @RequestMapping("/admin/task/propertiesvalue")
 @Controller
@@ -92,6 +93,9 @@ public class PropertiesValueController extends BaseController {
 				rj.put("success", false);
 				rj.put("msg", "保存失败");
 			}else{
+				if(model.getIsdefault() == null){
+					model.setIsdefault(Global.NO);
+				}
 				propertiesValueService.save(model);
 				rj.put("success", true);
 				rj.put("msg", "保存成功");

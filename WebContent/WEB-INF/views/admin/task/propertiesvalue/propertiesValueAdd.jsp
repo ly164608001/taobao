@@ -50,7 +50,7 @@
 					<select name="properties.id">
 						<option value="">请选择</option>
 						<c:forEach items="${propertiesList}" var="properties">
-							<option value="${properties.id}">${properties.name}</option>
+							<option value="${properties.id}">${properties.elementname}</option>
 						</c:forEach>
 					</select>
 				</td>
@@ -62,6 +62,10 @@
 			<tr>
 				<td>属性值:</td>
 				<td><input name="keyvalue" class="easyui-validatebox textbox" /></td>
+			</tr>
+			<tr>
+				<td>是否默认:</td>
+				<td><input name="isdefault" type="checkbox" value="1"/></td>
 			</tr>
 			<tr>
 				<td>备注:</td>

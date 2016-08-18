@@ -1,5 +1,6 @@
 package com.lxhrainy.myjz.front.web.seller.task;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,13 +31,18 @@ public class SellerTaskPublishController extends BaseController {
 	@RequestMapping("/publishPrepare")
 	public ModelAndView publishPrepare(){
 		List<TaskPublish> list = propertiesService.getTaskPublishList();
+		List<TaskPublish> showList = new ArrayList<TaskPublish>();
 		//将每个显示模块的任务发布对象保存到mv
 		for (TaskPublish taskPublish : list) {
 			int type = taskPublish.getType();
 			mv.addObject("taskPublish"+type, taskPublish);
 		}
+		//顺序保存发布任务实体
+		for (int i = 1; i <= list.size(); i++) {
+			showList.add((TaskPublish)mv.getModelMap().get("taskPublish"+i));
+		}
 		
-		mv.addObject("list", list);
+		mv.addObject("list", showList);
 		mv.setViewName("front/seller/task/publishPrepare");
 		return mv;
 	}
