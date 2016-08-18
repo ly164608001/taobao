@@ -54,9 +54,9 @@
 		<thead>
 			<tr>
 				<th field="id" width="40">id</th>
-				<th field="properties.name" width="120">属性</th>
+				<th field="properties.elementname" width="120">属性</th>
 				<th field="properties.status" formatter="formatterStatus" width="80">使用状态</th>
-				<th field="keyvalue" width="120">属性值名</th>
+				<th field="keyvalue" width="120">属性值</th>
 				<th field="label" width="120">选项名</th>
 				<th field="memo" width="120">备注</th>
 				<th field="isadmin" width="180" formatter="formatteradminuserbutton">操作</th>

@@ -63,6 +63,11 @@
 		return (value == 1 ? '已使用':'未使用');
 	}
 	
+	function doSearch(){
+		$('#dg').datagrid('options').pageNumber=1;
+		$('#dgquery').submit();
+	}
+	
 	toolbardata = [{  
 	    text: '添加',  
 	    iconCls: 'icon-add',  
@@ -76,6 +81,7 @@
 	<div class="easyui-panel" title="任务属性列表"
 		data-options="striped: true,collapsible:true,iconCls:'icon-search'">
 		<form id="dgquery">
+			<input name="page" type="hidden" value="${vo.page}" id="page"/>
 			<table>
 				<tr>
 					<td>属性名</td>
@@ -101,8 +107,8 @@
 							<option value="4">发布任务设置</option>
 						</select>
 					</td>
-					<td><a href="#" id="btn-search" class="easyui-linkbutton"
-						iconCls="icon-search" onclick="$('#dgquery').submit();">搜索</a></td>
+					<td><a href="javascript:void(0);" id="btn-search" class="easyui-linkbutton"
+						iconCls="icon-search" onclick="doSearch();">搜索</a></td>
 				</tr>
 			</table>
 
