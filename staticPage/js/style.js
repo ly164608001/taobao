@@ -61,6 +61,10 @@ $(function(){
 	// 添加选中项
 	$('.tab-tip').click(function(){
 		$(this).addClass('active').siblings().removeClass('active');
+	});
+	// 多选
+	$('.more-click .tab-tip-add').click(function(){
+		$(this).addClass('active');
 	})
 	// 返回顶部 
 	$(function(){$(window).on("scroll",$backToTopFun);$backToTopFun();});
