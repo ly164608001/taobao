@@ -54,10 +54,10 @@
 	upload_complete_handler : uploadComplete,
 
 	// 按钮设置
-	button_image_url : "${basePath}/static/swfupload/swfupload/small.png",	// 按钮图标
+	button_image_url : "${basePath}/static/css/front/images/upload-btn.png",	// 按钮图标
 	button_placeholder_id : "spanButtonPlaceholder",
-	button_width: 60,
-	button_height: 20,
+	button_width: 100,
+	button_height: 34,
 				
 	// swf设置
 	flash_url : "${basePath}/static/swfupload/swfupload/swfupload.swf",
