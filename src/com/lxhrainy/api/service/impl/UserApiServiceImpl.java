@@ -1014,7 +1014,7 @@ public class UserApiServiceImpl extends AbstractBaseServiceImpl<IUserInfoDao, Us
 					mobileUserEntity.setUsername(mobileUser.getUsername());
 					mobileUserEntity.setInviter(mobileUser.getInvitation());
 					mobileUserEntity.setType(ApiConstant.USER_BUYER);
-					mobileUserEntity.setPhone(mobileUser.getUsername());
+					mobileUserEntity.setPhone(mobileUser.getPhone());
 					mobileUserEntity.setStatus(ApiConstant.API_USER_ALLOW);
 					mobileUserEntity.setRegistertime(new Date());
 					mobileUserEntity.setUuid(mobileUser.getUuid());
@@ -1078,7 +1078,7 @@ public class UserApiServiceImpl extends AbstractBaseServiceImpl<IUserInfoDao, Us
 			result.put("QQ", mobileUser.getDetailInfo().getQq());
 			result.put("address", mobileUser.getDetailInfo().getApartment());
 			result.put("avatarurl", mobileUser.getIcon());
-			result.put("birthday", mobileUser.getDetailInfo().getBirthday());
+			result.put("birthday", mobileUser.getDetailInfo().getBirthday()==null?"":mobileUser.getDetailInfo().getBirthday());
 			result.put("gender", mobileUser.getDetailInfo().getSex().intValue()==1?"男":"女");
 			result.put("name", mobileUser.getDetailInfo().getRealname());
 			result.put("phone", mobileUser.getPhone());
@@ -1110,6 +1110,7 @@ public class UserApiServiceImpl extends AbstractBaseServiceImpl<IUserInfoDao, Us
 					&& StringUtil.isNotEmpty(mobileUser.getPlatform())
 					&& StringUtil.isNotEmpty(mobileUser.getUuid())) {
 				
+				//根据电话号码或用户名进行登录
 				UserInfo user = userInfoService.getByUsername(mobileUser.getUsername());
 				if (user != null) {
 					if (user.getStatus().intValue() == ApiConstant.API_USER_FORBIDDEN) {

@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
@@ -27,7 +28,7 @@ import com.lxhrainy.core.utils.UploadFileUtil;
  * @author dyno
  */
 @Controller
-@RequestMapping("/api")
+@RequestMapping(value="api")
 public class ApiController {
 	
 	@Autowired
@@ -35,7 +36,7 @@ public class ApiController {
 	@Autowired
 	private ITaskApiService taskApiService;
 	
-	@RequestMapping("/test")
+	@RequestMapping(value="test")
 	public String test() throws IOException {
 		return "api/test";
 	}
@@ -45,7 +46,7 @@ public class ApiController {
 	 * @param request
 	 * @param response
 	 */
-	@RequestMapping("/UploadImage")
+	@RequestMapping(value="UploadImage", method=RequestMethod.POST )
 	public void uploadimg(HttpServletRequest request, HttpServletResponse response) {
 		ResultJson rj = new ResultJson();
 		JSONObject result = UploadFileUtil.uploadFile(request);
@@ -65,7 +66,7 @@ public class ApiController {
 	 * @param params
 	 * @param response
 	 */
-	@RequestMapping("/AdList" )
+	@RequestMapping(value="AdList", method=RequestMethod.POST )
 	public void adlist(InputStream inputStream, HttpServletResponse response) {
 		ApiParams params = ApiJSONUtil.decryptJSON(inputStream, ApiParams.class);
 		ResultJson rj = userApiService.adlist(params);
@@ -77,7 +78,7 @@ public class ApiController {
 	 * @param params
 	 * @param response
 	 */
-	@RequestMapping("/MessageList")
+	@RequestMapping(value="MessageList",method = RequestMethod.POST)
 	public void msglist(InputStream inputStream, HttpServletResponse response) {
 		ApiParams params = ApiJSONUtil.decryptJSON(inputStream, ApiParams.class);
 		ResultJson rj = userApiService.msglist(params);
@@ -89,7 +90,7 @@ public class ApiController {
 	 * @param params
 	 * @param response
 	 */
-	@RequestMapping("/MessageRead")
+	@RequestMapping(value="MessageRead", method=RequestMethod.POST )
 	public void msgread(InputStream inputStream, HttpServletResponse response) {
 		ApiParams params = ApiJSONUtil.decryptJSON(inputStream, ApiParams.class);
 		ResultJson rj = userApiService.msgread(params);
@@ -100,7 +101,7 @@ public class ApiController {
 	 * @param params
 	 * @param response
 	 */
-	@RequestMapping("/MessageDele")
+	@RequestMapping(value="MessageDele", method=RequestMethod.POST )
 	public void msgdel(InputStream inputStream, HttpServletResponse response) {
 		ApiParams params = ApiJSONUtil.decryptJSON(inputStream, ApiParams.class);
 		ResultJson rj = userApiService.msgdel(params);
@@ -112,7 +113,7 @@ public class ApiController {
 	 * @param params
 	 * @param response
 	 */
-	@RequestMapping("/MessageSet")
+	@RequestMapping(value="MessageSet", method=RequestMethod.POST )
 	public void msgset(InputStream inputStream, HttpServletResponse response) {
 		ApiParams params = ApiJSONUtil.decryptJSON(inputStream, ApiParams.class);
 		ResultJson rj = userApiService.msgset(params);
@@ -124,7 +125,7 @@ public class ApiController {
 	 * @param params
 	 * @param response
 	 */
-	@RequestMapping("/Numbers")
+	@RequestMapping(value="Numbers", method=RequestMethod.POST )
 	public void numbers(InputStream inputStream, HttpServletResponse response) {
 		ApiParams params = ApiJSONUtil.decryptJSON(inputStream, ApiParams.class);
 		ResultJson rj = userApiService.getNumbers(params);
@@ -136,7 +137,7 @@ public class ApiController {
 	 * @param params
 	 * @param response
 	 */
-	@RequestMapping("/Config")
+	@RequestMapping(value="Config", method=RequestMethod.POST )
 	public void config(InputStream inputStream, HttpServletResponse response) {
 		ApiParams params = ApiJSONUtil.decryptJSON(inputStream, ApiParams.class);
 		ResultJson rj = userApiService.getSysConfig(params);
@@ -148,7 +149,7 @@ public class ApiController {
 	 * @param params
 	 * @param response
 	 */
-	@RequestMapping("/NoticeList")
+	@RequestMapping(value="NoticeList", method=RequestMethod.POST )
 	public void noticelist(InputStream inputStream, HttpServletResponse response) {
 		ApiParams params = ApiJSONUtil.decryptJSON(inputStream, ApiParams.class);
 		ResultJson rj = userApiService.noticelist(params);
@@ -170,7 +171,7 @@ public class ApiController {
 	 * @param response
 	 * @throws IOException 
 	 */
-	@RequestMapping("/BuyerAccountList")
+	@RequestMapping(value="BuyerAccountList", method=RequestMethod.POST )
 	public void buyerAccountList(InputStream inputStream, HttpServletResponse response) throws IOException {
 		ApiParams params =	ApiJSONUtil.decryptJSON(inputStream, ApiParams.class);
 		ResultJson rj = userApiService.buyerAccountList(params);
@@ -183,7 +184,7 @@ public class ApiController {
 	 * @param response
 	 * @throws IOException 
 	 */
-	@RequestMapping("/BuyerAccountAdd")
+	@RequestMapping(value="BuyerAccountAdd", method=RequestMethod.POST )
 	public void buyerAccountAdd(InputStream inputStream, HttpServletResponse response) throws IOException {
 		ApiParams params =	ApiJSONUtil.decryptJSON(inputStream, ApiParams.class);
 		ResultJson rj = userApiService.buyerAccountAdd(params);
@@ -195,7 +196,7 @@ public class ApiController {
 	 * @param params
 	 * @param response
 	 */
-	@RequestMapping("/WithdrawFee" )
+	@RequestMapping(value="WithdrawFee", method=RequestMethod.POST )
 	public void withdrawFee(InputStream inputStream, HttpServletResponse response) {
 		ApiParams params = ApiJSONUtil.decryptJSON(inputStream, ApiParams.class);
 		ResultJson rj = userApiService.withdrawFee(params);
@@ -206,7 +207,7 @@ public class ApiController {
 	 * @param params
 	 * @param response
 	 */
-	@RequestMapping("/Withdraw" )
+	@RequestMapping(value="Withdraw", method=RequestMethod.POST )
 	public void withdrawal(InputStream inputStream, HttpServletResponse response) {
 		ApiParams params = ApiJSONUtil.decryptJSON(inputStream, ApiParams.class);
 		ResultJson rj = userApiService.withdrawal(params);
@@ -217,7 +218,7 @@ public class ApiController {
 	 * @param params
 	 * @param response
 	 */
-	@RequestMapping("/WithdrawList" )
+	@RequestMapping(value="WithdrawList", method=RequestMethod.POST )
 	public void withdrawList(InputStream inputStream, HttpServletResponse response) {
 		ApiParams params = ApiJSONUtil.decryptJSON(inputStream, ApiParams.class);
 		ResultJson rj = userApiService.withdrawList(params);
@@ -229,7 +230,7 @@ public class ApiController {
 	 * @param params
 	 * @param response
 	 */
-	@RequestMapping("/IncomeList" )
+	@RequestMapping(value="IncomeList", method=RequestMethod.POST )
 	public void incomeList(InputStream inputStream, HttpServletResponse response) {
 		ApiParams params = ApiJSONUtil.decryptJSON(inputStream, ApiParams.class);
 		ResultJson rj = userApiService.incomeList(params);
@@ -241,7 +242,7 @@ public class ApiController {
 	 * @param params
 	 * @param response
 	 */
-	@RequestMapping("/BankcardList" )
+	@RequestMapping(value="BankcardList", method=RequestMethod.POST )
 	public void bankcardList(InputStream inputStream, HttpServletResponse response) {
 		ApiParams params = ApiJSONUtil.decryptJSON(inputStream, ApiParams.class);
 		ResultJson rj = userApiService.bankcardList(params);
@@ -252,7 +253,7 @@ public class ApiController {
 	 * @param params
 	 * @param response
 	 */
-	@RequestMapping("/BankcardAdd" )
+	@RequestMapping(value="BankcardAdd", method=RequestMethod.POST )
 	public void bankcardAdd(InputStream inputStream, HttpServletResponse response) {
 		ApiParams params = ApiJSONUtil.decryptJSON(inputStream, ApiParams.class);
 		ResultJson rj = userApiService.bankcardAdd(params);
@@ -263,7 +264,7 @@ public class ApiController {
 	* @param params
 	* @param response
 	*/
-	@RequestMapping("/BankcardDele" )
+	@RequestMapping(value="BankcardDele", method=RequestMethod.POST )
 	public void bankcardDele(InputStream inputStream, HttpServletResponse response) {
 		ApiParams params = ApiJSONUtil.decryptJSON(inputStream, ApiParams.class);
 		ResultJson rj = userApiService.bankcardDele(params);
@@ -292,7 +293,7 @@ public class ApiController {
 	 * @param response
 	 * @throws IOException 
 	 */
-	@RequestMapping("/Certificate")
+	@RequestMapping(value="Certificate", method=RequestMethod.POST )
 	public void certificate(InputStream inputStream, HttpServletResponse response){
 		ApiParams params =	ApiJSONUtil.decryptJSON(inputStream, ApiParams.class);
 		ResultJson rj = userApiService.certificate(params);
@@ -305,7 +306,7 @@ public class ApiController {
 	 * @param response
 	 * @throws IOException 
 	 */
-	@RequestMapping("/CertificateInfo")
+	@RequestMapping(value="CertificateInfo", method=RequestMethod.POST )
 	public void certificateInfo(InputStream inputStream, HttpServletResponse response){
 		ApiParams params =	ApiJSONUtil.decryptJSON(inputStream, ApiParams.class);
 		ResultJson rj = userApiService.certificateInfo(params);
@@ -318,7 +319,7 @@ public class ApiController {
 	 * @param response
 	 * @throws IOException 
 	 */
-	@RequestMapping("/ForgetPassword")
+	@RequestMapping(value="ForgetPassword", method=RequestMethod.POST )
 	public void resetPwd(InputStream inputStream, HttpServletResponse response){
 		ApiParams params =	ApiJSONUtil.decryptJSON(inputStream, ApiParams.class);
 		ResultJson rj = userApiService.forgetPassword(params);
@@ -334,7 +335,7 @@ public class ApiController {
 	 *		captcha 验证码（必须）
 	 * @param response
 	 */
-	@RequestMapping("/Sigin" )
+	@RequestMapping(value="Sigin", method=RequestMethod.POST )
 	public void register(InputStream inputStream, HttpServletResponse response) {
 		ApiParams params =	ApiJSONUtil.decryptJSON(inputStream, ApiParams.class);
 		ResultJson rj = userApiService.register(params);
@@ -348,7 +349,7 @@ public class ApiController {
 	 * 		    rule 用户身份（必须）0:货主,1:车主
 	 * @param response
 	 */
-	@RequestMapping("/UserInfo" )
+	@RequestMapping(value="UserInfo", method=RequestMethod.POST )
 	public void userInfo(InputStream inputStream, HttpServletResponse response) {
 		ApiParams params =	ApiJSONUtil.decryptJSON(inputStream, ApiParams.class);
 		ResultJson rj = userApiService.userInfo(params);
@@ -359,7 +360,7 @@ public class ApiController {
 	 * 登出接口
 	 * @param response
 	 */
-	@RequestMapping("/Logout" )
+	@RequestMapping(value="Logout", method=RequestMethod.POST )
 	public void logout(HttpServletResponse response) {
 		ResultJson rj =new ResultJson();
 		ApiCacheUtil.logoutUser();
@@ -376,7 +377,7 @@ public class ApiController {
 	 * 		password 密码（必须）
 	 * @param response
 	 */
-	@RequestMapping("/Login" )
+	@RequestMapping(value="Login", method=RequestMethod.POST )
 	public void login(InputStream inputStream, HttpServletResponse response) {
 		ApiParams params =	ApiJSONUtil.decryptJSON(inputStream, ApiParams.class);
 		ResultJson rj = userApiService.login(params);
@@ -390,7 +391,7 @@ public class ApiController {
 	 * 		password 密码（必须）
 	 * @param response
 	 */
-	@RequestMapping("/EditUserInfo" )
+	@RequestMapping(value="EditUserInfo", method=RequestMethod.POST )
 	public void editUserInfo(InputStream inputStream, HttpServletResponse response) {
 		ApiParams params =	ApiJSONUtil.decryptJSON(inputStream, ApiParams.class);
 		ResultJson rj = userApiService.editUserInfo(params);
@@ -403,7 +404,7 @@ public class ApiController {
 	 * @param response
 	 * @throws IOException 
 	 */
-	@RequestMapping("/GetInvitation")
+	@RequestMapping(value="GetInvitation", method=RequestMethod.POST )
 	public void getVerity(InputStream inputStream, HttpServletResponse response) throws IOException {
 		ApiParams params =	ApiJSONUtil.decryptJSON(inputStream, ApiParams.class);
 		ResultJson rj = userApiService.getVerity(params);
@@ -416,7 +417,7 @@ public class ApiController {
 	 * @param response
 	 * @throws IOException 
 	 */
-	@RequestMapping("/SetPassword")
+	@RequestMapping(value="SetPassword", method=RequestMethod.POST )
 	public void setPassword(InputStream inputStream, HttpServletResponse response) throws IOException {
 		ApiParams params =	ApiJSONUtil.decryptJSON(inputStream, ApiParams.class);
 		ResultJson rj = userApiService.setPassword(params);
@@ -436,7 +437,7 @@ public class ApiController {
 	 * @param response
 	 * @throws IOException 
 	 */
-	@RequestMapping("/TaskList")
+	@RequestMapping(value="TaskList", method=RequestMethod.POST )
 	public void taskList(InputStream inputStream, HttpServletResponse response) throws IOException {
 		ApiParams params =	ApiJSONUtil.decryptJSON(inputStream, ApiParams.class);
 		ResultJson rj = taskApiService.taskList(params);
@@ -449,7 +450,7 @@ public class ApiController {
 	 * @param response
 	 * @throws IOException 
 	 */
-	@RequestMapping("/TaskAction")
+	@RequestMapping(value="TaskAction", method=RequestMethod.POST )
 	public void taskAction(InputStream inputStream, HttpServletResponse response) throws IOException {
 		ApiParams params =	ApiJSONUtil.decryptJSON(inputStream, ApiParams.class);
 		ResultJson rj = taskApiService.taskAction(params);
@@ -462,7 +463,7 @@ public class ApiController {
 	 * @param response
 	 * @throws IOException 
 	 */
-	@RequestMapping("/GetTask")
+	@RequestMapping(value="GetTask", method=RequestMethod.POST )
 	public void getTask(InputStream inputStream, HttpServletResponse response) throws IOException {
 		ApiParams params =	ApiJSONUtil.decryptJSON(inputStream, ApiParams.class);
 		ResultJson rj = taskApiService.getTask(params);
@@ -475,7 +476,7 @@ public class ApiController {
 	 * @param response
 	 * @throws IOException 
 	 */
-	@RequestMapping("/Complain")
+	@RequestMapping(value="Complain", method=RequestMethod.POST )
 	public void complain(InputStream inputStream, HttpServletResponse response) throws IOException {
 		ApiParams params =	ApiJSONUtil.decryptJSON(inputStream, ApiParams.class);
 		ResultJson rj = taskApiService.complain(params);
@@ -488,7 +489,7 @@ public class ApiController {
 	 * @param response
 	 * @throws IOException 
 	 */
-	@RequestMapping("/TaskActionInfo")
+	@RequestMapping(value="TaskActionInfo", method=RequestMethod.POST )
 	public void taskActionInfo(InputStream inputStream, HttpServletResponse response) throws IOException {
 		ApiParams params =	ApiJSONUtil.decryptJSON(inputStream, ApiParams.class);
 		ResultJson rj = taskApiService.taskActionInfo(params);
@@ -501,7 +502,7 @@ public class ApiController {
 	 * @param response
 	 * @throws IOException 
 	 */
-	@RequestMapping("/ComplainList")
+	@RequestMapping(value="ComplainList", method=RequestMethod.POST )
 	public void complainList(InputStream inputStream, HttpServletResponse response) throws IOException {
 		ApiParams params =	ApiJSONUtil.decryptJSON(inputStream, ApiParams.class);
 		ResultJson rj = taskApiService.complainList(params);
