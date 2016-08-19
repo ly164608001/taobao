@@ -34,10 +34,13 @@ public interface ITaskPropertiesDao extends IBaseDao<TaskProperties> {
 	List<TaskProperties> getAllWithValuelist();
 	
 	List<TaskProperties> getListByPid(@Param("pid")int pid);
-
+	List<TaskProperties>  getListByValue(@Param("valueid")int valueid);
+	
 	/**
-	 * 获取只可单选的元素
+	 * 获取单选属性：如单选框和下拉框，能成为所属属性的属性 
 	 * @return
 	 */
 	List<TaskProperties> getListSimpleChoose();
+	
+	
 }

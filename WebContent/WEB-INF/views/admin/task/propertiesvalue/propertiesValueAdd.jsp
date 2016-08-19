@@ -68,6 +68,10 @@
 				<td><input name="isdefault" type="checkbox" value="1"/></td>
 			</tr>
 			<tr>
+				<td>方法名:</td>
+				<td><input name="func" class="easyui-validatebox textbox" /></td>
+			</tr>
+			<tr>
 				<td>备注:</td>
 				<td><input name="memo" class="easyui-validatebox textbox" /></td>
 			</tr>

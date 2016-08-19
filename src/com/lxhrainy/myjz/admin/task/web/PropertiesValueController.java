@@ -152,6 +152,7 @@ public class PropertiesValueController extends BaseController {
 				oldInfo.setLabel(label);
 				oldInfo.setProperties(properties);
 				oldInfo.setMemo(model.getMemo());
+				oldInfo.setFunc(model.getFunc());
 				propertiesValueService.update(oldInfo);
 				rj.put("success", true);
 				rj.put("msg", "更新成功");

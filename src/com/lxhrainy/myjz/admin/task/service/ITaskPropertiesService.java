@@ -52,4 +52,11 @@ public interface ITaskPropertiesService extends IBaseService<TaskProperties, Int
 	 * @return
 	 */
 	public List<TaskProperties> getListSimpleChoose();
+	
+	/**
+	 * 根据属性值获取子属性列表
+	 * @param valueid
+	 * @return
+	 */
+	public List<TaskProperties>  getListByValue(int valueid);
 }

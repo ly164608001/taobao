@@ -9,6 +9,7 @@
 		T.keyvalue AS "keyvalue",
 		T.memo AS "memo",
 		T.isdefault AS "isdefault",
+		T.func AS "func",
 		P.name AS "properties.name",
 		P.elementname AS "properties.elementname",
 		P.status AS "properties.status"
@@ -23,8 +24,8 @@
 			<where>
 				1=1
 				<if test="condition.model!=null">
-					<if test="condition.model.keyvalue!=null and condition.model.keyvalue!=''">
-						AND T.keyvalue LIKE '${condition.model.keyvalue}%'
+					<if test="condition.model.properties!=null and condition.model.properties.elementname!=null and condition.model.properties.elementname!=''">
+						AND P.elementname LIKE '${condition.model.properties.elementname}%'
 					</if>
 					<if test="condition.model.label!=null and condition.model.label!=''">
 						AND T.label LIKE '${condition.model.label}%'
@@ -87,14 +88,16 @@
 			label,
 			keyvalue,
 			memo,
-			isdefault
+			isdefault,
+			func
 		) VALUES (
 			#{id},
 			#{properties.id},
 			#{label},
 			#{keyvalue},
 			#{memo},
-			#{isdefault}
+			#{isdefault},
+			#{func}
 		)
 	</insert>
 	
@@ -104,7 +107,8 @@
 			label = #{label},
 			keyvalue = #{keyvalue},
 			memo = #{memo},
-			isdefault = #{isdefault}
+			isdefault = #{isdefault},
+			func = #{func}
 		WHERE id = #{id}
 	</update>
 	

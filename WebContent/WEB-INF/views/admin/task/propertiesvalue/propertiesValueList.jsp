@@ -38,8 +38,8 @@
 		<form id="dgquery">
 			<table>
 				<tr>
-					<td>属性值名</td>
-					<td><input name="model.keyvalue" class="easyui-validatebox textbox" value="${vo.model.keyvalue}" /></td>
+					<td>属性</td>
+					<td><input name="model.properties.elementname" class="easyui-validatebox textbox" value="${vo.model.properties.elementname}" /></td>
 					<td>选项名称</td>
 					<td><input name="model.label" class="easyui-validatebox textbox" value="${vo.model.label}" /></td>
 					<td></td>
@@ -58,6 +58,7 @@
 				<th field="properties.status" formatter="formatterStatus" width="80">使用状态</th>
 				<th field="keyvalue" width="120">属性值</th>
 				<th field="label" width="120">选项名</th>
+				<th field="func" width="100">方法名</th>
 				<th field="memo" width="120">备注</th>
 				<th field="isadmin" width="180" formatter="formatteradminuserbutton">操作</th>
 			</tr>

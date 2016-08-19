@@ -67,6 +67,10 @@
 						<c:if test="${model.properties.status == 1}">readonly="readonly"</c:if> /></td>
 			</tr>
 			<tr>
+				<td>方法名:</td>
+				<td><input name="func" value="${model.func}" class="easyui-validatebox textbox" /></td>
+			</tr>
+			<tr>
 				<td>备注:</td>
 				<td><input name="memo" value="${model.memo}" class="easyui-validatebox textbox" /></td>
 			</tr>

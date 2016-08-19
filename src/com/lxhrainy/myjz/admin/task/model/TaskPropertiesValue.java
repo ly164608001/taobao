@@ -16,6 +16,15 @@ public class TaskPropertiesValue extends BaseModel {
 	private String keyvalue; // 值
 	private String memo; // 备注
 	private Integer isdefault; // 是否默认值
+	private String func; // 触发的方法名
+
+	public String getFunc() {
+		return func;
+	}
+
+	public void setFunc(String func) {
+		this.func = func;
+	}
 
 	public Integer getIsdefault() {
 		return isdefault;

@@ -59,10 +59,6 @@
 		return result;
 	}
 	
-	function forrmaterStatus(value,row){
-		return (value == 1 ? '已使用':'未使用');
-	}
-	
 	function doSearch(){
 		$('#dg').datagrid('options').pageNumber=1;
 		$('#dgquery').submit();
@@ -118,15 +114,15 @@
 		<thead>
 			<tr>
 				<th field="id" width="40">id</th>
-				<th field="name" width="120">属性名</th>
-				<th field="elementname" width="120">别名</th>
+				<th field="name" width="120">属性</th>
+				<th field="elementname" width="120">属性名</th>
+				<th field="parent.elementname" width="120">所属属性</th>
 				<th field="elementtype" formatter="formatterElementtype" width="80">元素类型</th>
 				<th field="elementnum" width="60">元素个数</th>
 				<th field="neednum" width="60">所需个数</th>
 				<th field="sort" width="60">完成排序</th>
 				<th field="price" width="70">所需蚂蚁币</th>
 				<th field="type" formatter="formatterType" width="100">展示区域</th>
-				<th field="status" formatter="forrmaterStatus" width="60">状态</th>
 				<th field="isadmin" width="180" formatter="formatteradminuserbutton">操作</th>
 			</tr>
 		</thead>

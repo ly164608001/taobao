@@ -5,6 +5,30 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 	<title>发布淘宝任务</title>
+	
+	<script type="text/javascript">
+		/**
+		 *	根据属性值显示属性
+		 * @param obj 点击的元素对象
+		*/
+		function showProByValue(obj){
+			var proid = $(obj).attr('proid');
+			var valueid = $(obj).attr('id');
+			//隐藏同属性下的所有副属性
+			$('.parentProId'+proid).hide();
+			$('.proVal'+valueid).show();
+			
+			var iframeId = $(window.parent.document).find("#external-frame").attr('id');
+			setIframeHeightChild(iframeId);
+		}
+		
+		
+		$(function(){
+			$('.initHidden').hide();
+			//搜索进店的初始
+			showProByValue($('#62'));
+		})
+	</script> 
 </head>
 <body>
 	<div class="workContent ml20">
@@ -27,17 +51,33 @@
 				</h4>
 				<!-- 展示属性 -->
 				<c:forEach items="${taskPublish.propertiesList}" var="pro">
-					<c:choose>
+					<!-- 属性显示块开头 -->
+					<div 
+						<c:if test="${empty pro.belongValue or empty pro.belongValue.id}">
+							class="row cl" 
+						</c:if>
+						<c:if test="${not empty pro.belongValue and not empty pro.belongValue.id}">
+							class="row cl initHidden parentProId${pro.parent.id} proVal${pro.belongValue.id}" 
+						</c:if>
+						
+						<c:if test="${pro.elementtype == 'img'}">style="min-height: 110px"</c:if> >
 					
+					<!-- 属性显示块 -->
+					<c:choose>
 						<c:when test="${pro.elementtype == 'radio'}">
 								<c:if test="${pro.elementnum == 2}">
-									<div class="row cl">
 										<label class="form-label col-xs-4 col-sm-3">${pro.elementname}：</label>
 										<div class="formControls col-xs-4 col-sm-6">
 											<c:forEach items="${pro.valueList}" var="proVal">
 												<c:choose>
-													<c:when test="${proVal.isdefault == 1}"><span class="tab-tip active">${proVal.label}</span></c:when>
-													<c:otherwise><span class="tab-tip">${proVal.label}</span></c:otherwise>
+													<c:when test="${proVal.isdefault == 1}">
+														<span class="tab-tip active" proid="${pro.id}" id="${proVal.id}"
+															 <c:if test="${not empty proVal.func}">onclick="${proVal.func};"</c:if> >${proVal.label}</span>
+													</c:when>
+													<c:otherwise>
+														<span class="tab-tip" proid="${pro.id}" id="${proVal.id}"
+															<c:if test="${not empty proVal.func}">onclick="${proVal.func};"</c:if> >${proVal.label}</span>
+													</c:otherwise>
 												</c:choose>
 											</c:forEach>
 											<c:if test="${not empty pro.price and pro.price > 0}">
@@ -47,12 +87,14 @@
 									</div>
 								</c:if>
 								<c:if test="${pro.elementnum > 2}">
-									<div class="row cl">
 										<label class="form-label col-xs-4 col-sm-3">${pro.elementname}：</label>
 										<div class="formControls col-xs-8 col-sm-9">
 											<c:forEach items="${pro.valueList}" var="proVal">
 												<div class="radio-box">
-												   	 <input type="radio" name="${pro.name}" <c:if test="${proVal.isdefault == 1}">checked="checked"</c:if> value="${proVal.keyvalue}"/>
+												   	 <input type="radio" name="${pro.name}" id="${proVal.id}" value="${proVal.keyvalue}"
+												   	 	proid="${pro.id}" valueid="${proVal.id}"
+												   	 	<c:if test="${proVal.isdefault == 1}">checked="checked"</c:if>
+												   	 	<c:if test="${not empty proVal.func}">onclick="${proVal.func};"</c:if>  />
 												   	 <label>${proVal.label}</label>
 											  	</div>
 											</c:forEach>
@@ -65,7 +107,6 @@
 						</c:when>
 						
 						<c:when test="${pro.elementtype == 'select'}">
-							<div class="row cl">
 								<label class="form-label col-xs-4 col-sm-3">${pro.elementname}</label>
 								<div class="formControls col-xs-2 col-sm-3">
 									<span class="select-box">
@@ -81,7 +122,6 @@
 						</c:when>
 						
 						<c:when test="${pro.elementtype == 'text'}">
-							<div class="row cl">
 								<label class="form-label col-xs-4 col-sm-3">${pro.elementname}：<!-- <em class="orange">*</em> --></label>
 								<div class="formControls col-xs-2 col-sm-3">
 									<input type="text" class="input-text" name="${pro.name}"/>
@@ -95,7 +135,6 @@
 						</c:when>
 						
 						<c:when test="${pro.elementtype == 'img'}">
-							<div class="row cl" style="min-height: 110px">
 								<label class="form-label col-xs-4 col-sm-3">${pro.elementname}：</label>
 								<div class="formControls col-xs-4 col-sm-6">
 									<span>
@@ -111,7 +150,6 @@
 						</c:when>
 						
 						<c:when test="${pro.elementtype == 'checkbox'}">
-							<div class="row cl">
 								<label class="form-label col-xs-4 col-sm-3">${pro.elementname}：</label>
 								<div class="formControls col-xs-8 col-sm-9 more-click">
 									<c:forEach items="${pro.valueList}" var="proVal">

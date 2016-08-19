@@ -15,6 +15,7 @@
 		<result property="sort" column="sort" />
 		<result property="elementname" column="elementname" />
 		<result property="parent.id" column="parent.id" />
+		<result property="belongValue.id" column="belongValue.id" />
 		<collection property="valueList" ofType="TaskPropertiesValue">
 			<id property="id" column="valueList.id" />
 			<id property="label" column="valueList.label" />
@@ -37,7 +38,9 @@
 		T.neednum AS "neednum",
 		T.sort AS "sort",
 		T.elementname AS "elementname",
-		T.parentid AS "parent.id"
+		T.valueid AS "belongValue.id",
+		T.parentid AS "parent.id",
+		P.elementname AS "parent.elementname"
 	</sql>
 	
 	<sql id="propertiesValueColumns">
@@ -53,6 +56,7 @@
 		T.sort AS "sort",
 		T.elementname AS "elementname",
 		T.parentid AS "parent.id",
+		T.valueid AS "belongValue.id",
 		
 		V.id AS "valueList.id",
 		V.label AS "valueList.label",
@@ -63,6 +67,7 @@
 	</sql>
 	
 	<sql id="taskPropertiesJoins">
+		LEFT JOIN task_properties P ON P.id = T.parentid
 	</sql>
 	
 	<sql id="propertiesValueJoins">
@@ -87,6 +92,25 @@
 		</if>
 	</sql>
 	
+	<!-- 获取单选属性：如单选框和下拉框，能成为所属属性的属性 -->
+	<select id="getListSimpleChoose" resultType="TaskProperties">
+		SELECT 
+			<include refid="taskPropertiesColumns"/>
+		FROM task_properties T
+		<include refid="taskPropertiesJoins"/>
+		WHERE T.parentid = -1
+		AND (T.elementtype = 'select' OR T.elementtype = 'radio')
+	</select>
+	
+	<!-- 根据值获取所归属的属性列表 -->
+	<select id="getListByValue" resultType="TaskProperties">
+		SELECT 
+			<include refid="taskPropertiesColumns"/>
+		FROM task_properties T
+		<include refid="taskPropertiesJoins"/>
+		WHERE T.valueid = #{valueid}
+	</select>
+	
 	<select id="getById" resultType="TaskProperties">
 		SELECT 
 			<include refid="taskPropertiesColumns"/>
@@ -100,14 +124,6 @@
 			<include refid="taskPropertiesColumns"/>
 		FROM task_properties T
 		WHERE T.parentid = #{pid}
-	</select>
-	
-	<select id="getListSimpleChoose" resultType="TaskProperties">
-		SELECT 
-			<include refid="taskPropertiesColumns"/>
-		FROM task_properties T
-		WHERE T.parentid = -1
-		AND (T.elementtype = 'select' OR T.elementtype = 'radio')
 	</select>
 	
 	<select id="findListByPage" resultType="TaskProperties">
@@ -126,7 +142,7 @@
 			<include refid="propertiesValueColumns"/>
 		FROM task_properties T
 		<include refid="propertiesValueJoins"/>
-		WHERE parentid = -1
+		ORDER BY T.showsort ASC,T.id DESC
 	</select>
 	
 	<select id="findAllList" resultType="TaskProperties">

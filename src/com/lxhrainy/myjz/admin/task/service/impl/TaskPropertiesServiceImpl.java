@@ -142,4 +142,8 @@ implements ITaskPropertiesService {
 		return dao.getListSimpleChoose();
 	}
 	
+	public List<TaskProperties>  getListByValue(int valueid) {
+		return dao.getListByValue(valueid);
+	}
+	
 }
