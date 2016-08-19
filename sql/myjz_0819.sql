@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50096
 File Encoding         : 65001
 
-Date: 2016-08-19 16:16:25
+Date: 2016-08-19 18:07:58
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -4496,7 +4496,7 @@ CREATE TABLE `task_properties` (
   `valueid` int(11) default NULL COMMENT '所属属性值id(只有parentid不等于-1)才有该属性',
   `showsort` int(11) default NULL COMMENT '显示顺序',
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=60 DEFAULT CHARSET=utf8 COMMENT='任务属性';
+) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=utf8 COMMENT='任务属性';
 
 -- ----------------------------
 -- Records of task_properties
@@ -4560,6 +4560,7 @@ INSERT INTO `task_properties` VALUES ('56', 'filterlevelassist', '过滤买号�
 INSERT INTO `task_properties` VALUES ('57', 'msgcontent', '给卖家留言内容', '0', '2', '0', 'text', '1', 'null', '0', '2', '20', '32', '2');
 INSERT INTO `task_properties` VALUES ('58', 'msgreminderassist', '留言提醒副属性', '0', '2', '0', 'checkbox', '2', 'null', '0', '2', '20', '32', '2');
 INSERT INTO `task_properties` VALUES ('59', 'maingoodspic', '主宝贝图', '0', '1', '0', 'img', '1', 'null', '0', '2', '1', '30', '2');
+INSERT INTO `task_properties` VALUES ('60', 'askquestion', '给卖家提问的问题内容', '0', '2', '0', 'text', '1', 'null', '1', '0', '21', '33', null);
 
 -- ----------------------------
 -- Table structure for `task_properties_value`
@@ -4581,8 +4582,8 @@ CREATE TABLE `task_properties_value` (
 -- ----------------------------
 INSERT INTO `task_properties_value` VALUES ('1', '1', '否', '0', '', '1', 'showProByValue(this)');
 INSERT INTO `task_properties_value` VALUES ('2', '13', '否', '0', null, '1', null);
-INSERT INTO `task_properties_value` VALUES ('3', '20', '否', '0', null, '1', null);
-INSERT INTO `task_properties_value` VALUES ('4', '21', '否', '0', null, '1', null);
+INSERT INTO `task_properties_value` VALUES ('3', '20', '否', '0', '', '1', 'showProByValue(this)');
+INSERT INTO `task_properties_value` VALUES ('4', '21', '否', '0', '', '1', 'showProByValue(this)');
 INSERT INTO `task_properties_value` VALUES ('5', '22', '否', '0', null, '1', null);
 INSERT INTO `task_properties_value` VALUES ('6', '23', '否', '0', null, '1', null);
 INSERT INTO `task_properties_value` VALUES ('7', '24', '否', '0', null, '1', null);
@@ -4611,7 +4612,7 @@ INSERT INTO `task_properties_value` VALUES ('29', '46', '否', '0', null, '1', n
 INSERT INTO `task_properties_value` VALUES ('30', '1', '是', '1', null, '0', 'showProByValue(this)');
 INSERT INTO `task_properties_value` VALUES ('31', '13', '是', '1', null, '0', null);
 INSERT INTO `task_properties_value` VALUES ('32', '20', '是', '1', '', '0', 'showProByValue(this)');
-INSERT INTO `task_properties_value` VALUES ('33', '21', '是', '1', null, '0', null);
+INSERT INTO `task_properties_value` VALUES ('33', '21', '是', '1', '', '0', 'showProByValue(this)');
 INSERT INTO `task_properties_value` VALUES ('34', '22', '是', '1', null, '0', null);
 INSERT INTO `task_properties_value` VALUES ('35', '23', '是', '1', null, '0', null);
 INSERT INTO `task_properties_value` VALUES ('36', '24', '是', '1', null, '0', null);
