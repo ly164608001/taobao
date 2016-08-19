@@ -83,7 +83,7 @@ public class BuyerAccountController extends BaseController {
 	@RequestMapping("/downloadTemplate")
 	@ResponseBody
 	public ResponseEntity<byte[]> downloadTemplate(HttpServletRequest request)  throws IOException{
-		String path = request.getServletContext().getRealPath("/download") + "/批量导入小号.xlsx";
+		String path = request.getSession().getServletContext().getRealPath("/download") + "/批量导入小号.xlsx";
         File file = new File(path);  
         HttpHeaders headers = new HttpHeaders();    
         String fileName = new String("批量导入小号.xlsx".getBytes("UTF-8"),"iso-8859-1");//为了解决中文名称乱码问题  

@@ -61,109 +61,105 @@
 						</c:if>
 						
 						<c:if test="${pro.elementtype == 'img'}">style="min-height: 110px"</c:if> >
+						
+						<label class="form-label col-xs-4 col-sm-3">
+							<c:if test="${fn:indexOf(pro.elementname,'副属性') == -1}">
+								${pro.elementname}：
+							</c:if>
+						</label>
 					
 					<!-- 属性显示块 -->
 					<c:choose>
 						<c:when test="${pro.elementtype == 'radio'}">
-								<c:if test="${pro.elementnum == 2}">
-										<label class="form-label col-xs-4 col-sm-3">${pro.elementname}：</label>
-										<div class="formControls col-xs-4 col-sm-6">
-											<c:forEach items="${pro.valueList}" var="proVal">
-												<c:choose>
-													<c:when test="${proVal.isdefault == 1}">
-														<span class="tab-tip active" proid="${pro.id}" id="${proVal.id}"
-															 <c:if test="${not empty proVal.func}">onclick="${proVal.func};"</c:if> >${proVal.label}</span>
-													</c:when>
-													<c:otherwise>
-														<span class="tab-tip" proid="${pro.id}" id="${proVal.id}"
-															<c:if test="${not empty proVal.func}">onclick="${proVal.func};"</c:if> >${proVal.label}</span>
-													</c:otherwise>
-												</c:choose>
-											</c:forEach>
-											<c:if test="${not empty pro.price and pro.price > 0}">
-												<span class="gray">&nbsp;&nbsp;需支付<em class="red">${pro.price}</em>个蚂蚁币</span>
-											</c:if>
-										</div>
-									</div>
-								</c:if>
-								<c:if test="${pro.elementnum > 2}">
-										<label class="form-label col-xs-4 col-sm-3">${pro.elementname}：</label>
-										<div class="formControls col-xs-8 col-sm-9">
-											<c:forEach items="${pro.valueList}" var="proVal">
-												<div class="radio-box">
-												   	 <input type="radio" name="${pro.name}" id="${proVal.id}" value="${proVal.keyvalue}"
-												   	 	proid="${pro.id}" valueid="${proVal.id}"
-												   	 	<c:if test="${proVal.isdefault == 1}">checked="checked"</c:if>
-												   	 	<c:if test="${not empty proVal.func}">onclick="${proVal.func};"</c:if>  />
-												   	 <label>${proVal.label}</label>
-											  	</div>
-											</c:forEach>
-											<c:if test="${not empty pro.price and pro.price > 0}">
-												<span class="gray">&nbsp;&nbsp;需支付<em class="red">${pro.price}</em>个蚂蚁币</span>
-											</c:if>
-										</div>
-									</div>
-								</c:if>
+							<c:if test="${pro.elementnum == 2}">
+								<div class="formControls col-xs-4 col-sm-6">
+									<c:forEach items="${pro.valueList}" var="proVal">
+										<c:choose>
+											<c:when test="${proVal.isdefault == 1}">
+												<span class="tab-tip active" proid="${pro.id}" id="${proVal.id}"
+													 <c:if test="${not empty proVal.func}">onclick="${proVal.func};"</c:if> >${proVal.label}</span>
+											</c:when>
+											<c:otherwise>
+												<span class="tab-tip" proid="${pro.id}" id="${proVal.id}"
+													<c:if test="${not empty proVal.func}">onclick="${proVal.func};"</c:if> >${proVal.label}</span>
+											</c:otherwise>
+										</c:choose>
+									</c:forEach>
+									<c:if test="${not empty pro.price and pro.price > 0}">
+										<span class="gray">&nbsp;&nbsp;需支付<em class="red">${pro.price}</em>个蚂蚁币</span>
+									</c:if>
+								</div>
+							</c:if>
+							<c:if test="${pro.elementnum > 2}">
+								<div class="formControls col-xs-8 col-sm-9">
+									<c:forEach items="${pro.valueList}" var="proVal">
+										<div class="radio-box">
+										   	 <input type="radio" name="${pro.name}" id="${proVal.id}" value="${proVal.keyvalue}"
+										   	 	proid="${pro.id}" valueid="${proVal.id}"
+										   	 	<c:if test="${proVal.isdefault == 1}">checked="checked"</c:if>
+										   	 	<c:if test="${not empty proVal.func}">onclick="${proVal.func};"</c:if>  />
+										   	 <label>${proVal.label}</label>
+									  	</div>
+									</c:forEach>
+									<c:if test="${not empty pro.price and pro.price > 0}">
+										<span class="gray">&nbsp;&nbsp;需支付<em class="red">${pro.price}</em>个蚂蚁币</span>
+									</c:if>
+								</div>
+							</c:if>
 						</c:when>
 						
 						<c:when test="${pro.elementtype == 'select'}">
-								<label class="form-label col-xs-4 col-sm-3">${pro.elementname}</label>
-								<div class="formControls col-xs-2 col-sm-3">
-									<span class="select-box">
-									  <select class="select" size="1" name="${pro.name}">
-									  	 <option value="">请选择</option>
-									  	 <c:forEach items="${pro.valueList}" var="proVal">
-									  		<option value="${proVal.keyvalue}">${proVal.label}</option>
-									  	 </c:forEach>
-									  </select>
-									</span>
-								</div>
+							<div class="formControls col-xs-2 col-sm-3">
+								<span class="select-box">
+								  <select class="select" size="1" name="${pro.name}">
+								  	 <option value="">请选择</option>
+								  	 <c:forEach items="${pro.valueList}" var="proVal">
+								  		<option value="${proVal.keyvalue}">${proVal.label}</option>
+								  	 </c:forEach>
+								  </select>
+								</span>
 							</div>
 						</c:when>
 						
 						<c:when test="${pro.elementtype == 'text'}">
-								<label class="form-label col-xs-4 col-sm-3">${pro.elementname}：<!-- <em class="orange">*</em> --></label>
-								<div class="formControls col-xs-2 col-sm-3">
-									<input type="text" class="input-text" name="${pro.name}"/>
-								</div>
-								<c:if test="${not empty pro.price and pro.price > 0}">
-									<div class="formControls col-xs-6 col-sm-6">
-										<span class="text">&nbsp;&nbsp;<em class="gray">需支付<em class="red">${pro.price}</em>个蚂蚁币。</em></span>
-									</div>
-								</c:if>
+							<div class="formControls col-xs-2 col-sm-3">
+								<input type="text" class="input-text" name="${pro.name}"/>
 							</div>
+							<c:if test="${not empty pro.price and pro.price > 0}">
+								<div class="formControls col-xs-6 col-sm-6">
+									<span class="text">&nbsp;&nbsp;<em class="gray">需支付<em class="red">${pro.price}</em>个蚂蚁币。</em></span>
+								</div>
+							</c:if>
 						</c:when>
 						
 						<c:when test="${pro.elementtype == 'img'}">
-								<label class="form-label col-xs-4 col-sm-3">${pro.elementname}：</label>
-								<div class="formControls col-xs-4 col-sm-6">
-									<span>
-										<a href="#" class="detail-jpg layer-photos-demo" id="layer-photos-demo"> 
-											<img layer-pid="showBigimg" layer-src="${basePath}static/css/front/images/jietu.png" src="images/jietu.png" alt="">
-										</a>
-									</span>
-									<br/>
-									<iframe src="${basePath}/upload/index.htm?extnames=*.jpg;*.jpeg;*.png;*.gif;" frameborder="0"
-										scrolling="no" height="34" width="112" class="mt10 ml10"></iframe>
-								</div>
+							<div class="formControls col-xs-4 col-sm-6">
+								<span>
+									<a href="#" class="detail-jpg layer-photos-demo" id="layer-photos-demo"> 
+										<img layer-pid="showBigimg" layer-src="${basePath}static/css/front/images/jietu.png" src="images/jietu.png" alt="">
+									</a>
+								</span>
+								<br/>
+								<iframe src="${basePath}/upload/index.htm?extnames=*.jpg;*.jpeg;*.png;*.gif;" frameborder="0"
+									scrolling="no" height="34" width="112" class="mt10 ml10"></iframe>
 							</div>
 						</c:when>
 						
 						<c:when test="${pro.elementtype == 'checkbox'}">
-								<label class="form-label col-xs-4 col-sm-3">${pro.elementname}：</label>
-								<div class="formControls col-xs-8 col-sm-9 more-click">
-									<c:forEach items="${pro.valueList}" var="proVal">
-										<span class="tab-tip-add">是</span>
-									</c:forEach>
-									<c:if test="${not empty pro.price and pro.price > 0}">
-										<span><em class="gray">需支付<em class="red">${pro.price}</em>个蚂蚁币</em></span>
-									</c:if>
-								</div>
+							<div class="formControls col-xs-8 col-sm-9 more-click">
+								<c:forEach items="${pro.valueList}" var="proVal">
+									<%-- <span class="tab-tip-add">${proVal.label}</span> --%>
+									<span><input type="checkbox"/>${proVal.label}</span>
+								</c:forEach>
+								<c:if test="${not empty pro.price and pro.price > 0}">
+									<span><em class="gray">需支付<em class="red">${pro.price}</em>个蚂蚁币</em></span>
+								</c:if>
 							</div>
 						</c:when>
 						
 					</c:choose>
 					
+					</div>
 				</c:forEach><!-- 任务属性循环end -->
 			
 			</c:forEach><!-- 最外层任务展示局域end -->
