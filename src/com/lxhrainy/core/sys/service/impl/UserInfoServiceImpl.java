@@ -193,7 +193,7 @@ implements IUserInfoService {
 		model.setType(Global.USER_ADMIN);
 		model.setDeleted(Global.NO);
 		model.setStatus(Global.ENABLE);
-		model.setPassword(encrptPassword(Global.DEFAULT_PASSWORD));
+		model.setPassword(encrptPassword(model.getPassword()));
 		return super.save(model);
 	}
 
