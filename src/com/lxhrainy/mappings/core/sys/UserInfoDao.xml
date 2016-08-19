@@ -303,7 +303,7 @@
 			T.status,
 			T.password
 		FROM user_info T
-		WHERE T.username = #{username} or T.username = #{username}
+		WHERE T.username = #{username} or T.phone = #{username}
 	</select>
 	
 	<!--START 会员 -->
