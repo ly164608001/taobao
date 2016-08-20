@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50096
 File Encoding         : 65001
 
-Date: 2016-08-19 18:07:58
+Date: 2016-08-20 17:39:20
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -4555,7 +4555,7 @@ INSERT INTO `task_properties` VALUES ('51', 'searchAname', '搜A商品名称', '
 INSERT INTO `task_properties` VALUES ('52', 'searchAlink', '搜A商品链接地址', '0', '1', '0', 'text', '1', 'null', '0', '2', '2', '61', '2');
 INSERT INTO `task_properties` VALUES ('53', 'searchAprice', '搜A商品单价', '0', '1', '0', 'text', '1', 'null', '0', '2', '2', '61', '2');
 INSERT INTO `task_properties` VALUES ('54', 'orderBpic', '拍B商品主图', '0', '1', '0', 'img', '1', 'null', '0', '2', '2', '61', '2');
-INSERT INTO `task_properties` VALUES ('55', 'signtype', '签收类型', '0', '1', '0', 'radio', '2', 'null', '0', '2', '19', '67', '2');
+INSERT INTO `task_properties` VALUES ('55', 'signtype', '签收类型', '0', '2', '0', 'radio', '2', 'null', '0', '2', '19', '67', '2');
 INSERT INTO `task_properties` VALUES ('56', 'filterlevelassist', '过滤买号等级副属性', '0', '3', '0', 'select', '10', 'null', '0', '2', '44', '56', '2');
 INSERT INTO `task_properties` VALUES ('57', 'msgcontent', '给卖家留言内容', '0', '2', '0', 'text', '1', 'null', '0', '2', '20', '32', '2');
 INSERT INTO `task_properties` VALUES ('58', 'msgreminderassist', '留言提醒副属性', '0', '2', '0', 'checkbox', '2', 'null', '0', '2', '20', '32', '2');

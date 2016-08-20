@@ -8,12 +8,19 @@
 	
 	<script type="text/javascript">
 		/**
-		 *	根据属性值显示属性
+		 * 根据属性值显示属性
 		 * @param obj 点击的元素对象
-		*/
+		 */
 		function showProByValue(obj){
 			var proid = $(obj).attr('proid');
 			var valueid = $(obj).attr('id');
+			showAssistPro(proid, valueid);
+		}
+		
+		/**
+		* 显示副属性
+		*/
+		function showAssistPro(proid, valueid){
 			//隐藏同属性下的所有副属性
 			$('.parentProId'+proid).hide();
 			$('.proVal'+valueid).show();
@@ -22,13 +29,27 @@
 			setIframeHeightChild(iframeId);
 		}
 		
+		/**
+		 * 下拉框触发事件
+		 */
+		function selChangeEvent(obj){
+			var valueid = $(obj).val();
+			valueid = valueid.split(' ')[1];
+			var proid = $(obj).attr('id');
+			showAssistPro(proid, valueid);
+		}
+		
+		//存放值属性的映射关系
+		var proValMap = new Array();
 		
 		$(function(){
 			$('.initHidden').hide();
 			//搜索进店的初始
 			showProByValue($('#62'));
 		})
+		
 	</script> 
+	
 </head>
 <body>
 	<div class="workContent ml20">
@@ -94,8 +115,8 @@
 								<div class="formControls col-xs-8 col-sm-9">
 									<c:forEach items="${pro.valueList}" var="proVal">
 										<div class="radio-box">
-										   	 <input type="radio" name="${pro.name}" id="${proVal.id}" value="${proVal.keyvalue}"
-										   	 	proid="${pro.id}" valueid="${proVal.id}"
+										   	 <input type="radio" name="${pro.name}" id="${proVal.id}" 
+										   	 	proid="${pro.id}" value="${proVal.keyvalue}"
 										   	 	<c:if test="${proVal.isdefault == 1}">checked="checked"</c:if>
 										   	 	<c:if test="${not empty proVal.func}">onclick="${proVal.func};"</c:if>  />
 										   	 <label>${proVal.label}</label>
@@ -111,10 +132,13 @@
 						<c:when test="${pro.elementtype == 'select'}">
 							<div class="formControls col-xs-2 col-sm-3">
 								<span class="select-box">
-								  <select class="select" size="1" name="${pro.name}">
+								  <select class="select" size="1" name="${pro.name}" id="${pro.id}" onchange="selChangeEvent(this);">
 								  	 <option value="">请选择</option>
 								  	 <c:forEach items="${pro.valueList}" var="proVal">
-								  		<option value="${proVal.keyvalue}">${proVal.label}</option>
+								  	 	<script>
+											proValMap[${proVal.id}] = ${pro.id};
+										</script>
+								  		<option value="${proVal.keyvalue} ${proVal.id}">${proVal.label}</option>
 								  	 </c:forEach>
 								  </select>
 								</span>
@@ -169,30 +193,5 @@
 	</div>
 
 </div>
-<script>
-
-
-$(function(){
-
-	// 收缩
-	$('.open-btn').on('click',function(){
-		$(this).parent('.tiro-control').siblings('.panel').find('.showHide').slideToggle();
-		$(this).toggleClass('active');
-		if ($(this).hasClass('active')) {
-			$(this).text('展开');
-			// $(this).find('i').css('background-position','4px -28px')
-		}else{
-			$(this).text('收缩');
-			// $(this).find('i').css('background-position','4px 7px')
-		}
-	});
-	
-    layer.ready(function(){ //为了layer.ext.js加载完毕再执行
-	  layer.photos({
-	    photos: '#layer-photos-demo'
-	  });
-});  
-});
-</script>
 </body>
 </html>
