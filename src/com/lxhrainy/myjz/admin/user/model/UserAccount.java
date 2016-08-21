@@ -24,6 +24,7 @@ public class UserAccount extends BaseModel {
 	private String region; // 开户行(省/市)
 	private SysArea area; // 开户行(省/市id)
 	private String bankname; // 支行名称
+	private Integer deleted;
 
 	public SysArea getArea() {
 		return area;
@@ -87,6 +88,14 @@ public class UserAccount extends BaseModel {
 
 	public void setBankname(String bankname) {
 		this.bankname = bankname;
+	}
+
+	public Integer getDeleted() {
+		return deleted;
+	}
+
+	public void setDeleted(Integer deleted) {
+		this.deleted = deleted;
 	}
 
 }
