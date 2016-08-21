@@ -4,6 +4,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import com.lxhrainy.api.util.HttpUtil;
+import com.lxhrainy.api.util.ImageBinary;
 import com.lxhrainy.api.util.ResultJson;
 import com.lxhrainy.core.utils.JSONHelper;
 import com.lxhrainy.core.utils.StringUtil;
@@ -192,6 +193,14 @@ public class ApiHttpTest {
 	public void BankcardDele() throws Exception{
 		String url = URL+"/BankcardDele.htm";
 		String params = "{\"count\":20,\"offsetid\":0}";
+		String result = HttpUtil.postHttpReq(url, params);
+		Assert.assertTrue(paserRsult(result));
+	}
+	@Test
+	public void UploadImage() throws Exception{
+		String url = URL+"/UploadImage.htm";
+		String image = ImageBinary.getImageBinary();
+		String params = "{\"image\":\""+image+"\"}";
 		String result = HttpUtil.postHttpReq(url, params);
 		Assert.assertTrue(paserRsult(result));
 	}

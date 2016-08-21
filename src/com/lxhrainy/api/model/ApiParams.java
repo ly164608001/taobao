@@ -147,6 +147,17 @@ public class ApiParams {
 	private String tasktype;
 	/**end 任务**/
 	
+	/**
+	 * 二进制图片
+	 */
+	private String image;
+	
+	public String getImage() {
+		return image;
+	}
+	public void setImage(String image) {
+		this.image = image;
+	}
 	public String getAccount() {
 		return account;
 	}

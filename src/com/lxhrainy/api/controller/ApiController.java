@@ -19,8 +19,9 @@ import com.lxhrainy.api.service.ITaskApiService;
 import com.lxhrainy.api.service.IUserApiService;
 import com.lxhrainy.api.util.ApiCacheUtil;
 import com.lxhrainy.api.util.ApiJSONUtil;
+import com.lxhrainy.api.util.ImageBinary;
 import com.lxhrainy.api.util.ResultJson;
-import com.lxhrainy.core.utils.UploadFileUtil;
+import com.lxhrainy.core.utils.oConvertUtils;
 
 
 /**
@@ -47,16 +48,25 @@ public class ApiController {
 	 * @param response
 	 */
 	@RequestMapping(value="UploadImage", method=RequestMethod.POST )
-	public void uploadimg(HttpServletRequest request, HttpServletResponse response) {
+	public void uploadimg(HttpServletRequest request, InputStream inputStream, HttpServletResponse response) {
+		ApiParams params = ApiJSONUtil.decryptJSON(inputStream, ApiParams.class);
 		ResultJson rj = new ResultJson();
-		JSONObject result = UploadFileUtil.uploadFile(request);
-		if ((boolean) result.get("success")) {
-			rj.setSuccess(true);
-			rj.setError_code(ResultJson.SUCCESS);
-			rj.setMessage("上传成功");
-		} else {
-			rj.setError_code(ResultJson.ERROR_CODE_API);
-			rj.setMessage("上传失败");
+		rj.setError_code(ResultJson.ERROR_CODE_PARAMETERS);
+		rj.setMessage("参数错误");
+		if (params != null 
+				&& oConvertUtils.isNotEmpty(params.getImage())){
+			String filename = ImageBinary.base64StringToImage(params.getImage(), request);
+			if (oConvertUtils.isNotEmpty(filename)) {
+				JSONObject result = new JSONObject();
+				result.put("imgeurl", filename);
+				rj.setResult(result);
+				rj.setSuccess(true);
+				rj.setError_code(ResultJson.SUCCESS);
+				rj.setMessage("上传成功");
+			} else {
+				rj.setError_code(ResultJson.ERROR_CODE_API);
+				rj.setMessage("上传失败");
+			}
 		}
 		this.writeJsonToResponse(rj, response);
 	}

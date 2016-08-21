@@ -183,7 +183,7 @@
 	    	<bean class="com.lxhrainy.api.interceptors.AuthInterceptor">
 	    		<property name="excludeUrls">
 					<list>
-						<value>api/uploadimg.htm</value>
+						<value>api/UploadImage.htm</value>
 						<value>api/AdList.htm</value>
 						<value>api/Login.htm</value>
 						<value>api/Sigin.htm</value>
