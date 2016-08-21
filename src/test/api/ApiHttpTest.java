@@ -96,6 +96,14 @@ public class ApiHttpTest {
 	}
 	
 	@Test
+	public void BuyerAccountAdd() throws Exception{
+		String url = URL+"/BuyerAccountAdd.htm";
+		String params = "{\"accountid\":\"2\",\"account\":\"随便修改\",\"levelimage\":\"http://img0.bdstatic.com/img/image/imglogo-r.png\",\"level\":\"0\",\"accounttype\":0}";
+		String result = HttpUtil.postHttpReq(url, params);
+		Assert.assertTrue(paserRsult(result));
+	}
+	
+	@Test
 	public void Login() throws Exception{
 		String url = URL+"/Login.htm";
 		String params = "{\"username\":\"新刷手\",\"password\":\"1234567\",\"uuid\":\"adkalsjdfl\",\"platform\":\"android\"}";
@@ -192,7 +200,7 @@ public class ApiHttpTest {
 	@Test
 	public void BankcardDele() throws Exception{
 		String url = URL+"/BankcardDele.htm";
-		String params = "{\"count\":20,\"offsetid\":0}";
+		String params = "{\"bankid\":5}";
 		String result = HttpUtil.postHttpReq(url, params);
 		Assert.assertTrue(paserRsult(result));
 	}
@@ -201,6 +209,34 @@ public class ApiHttpTest {
 		String url = URL+"/UploadImage.htm";
 		String image = ImageBinary.getImageBinary();
 		String params = "{\"image\":\""+image+"\"}";
+		String result = HttpUtil.postHttpReq(url, params);
+		Assert.assertTrue(paserRsult(result));
+	}
+	@Test
+	public void Withdraw() throws Exception{
+		String url = URL+"/Withdraw.htm";
+		String params = "{\"costtime\" : 0,  \"bankid\" : 5,  \"money\" : 10,  \"password\" : \"1234567\",\"fee\" : 1}";
+		String result = HttpUtil.postHttpReq(url, params);
+		Assert.assertTrue(paserRsult(result));
+	}
+	@Test
+	public void WithdrawList() throws Exception{
+		String url = URL+"/WithdrawList.htm";
+		String params = "{ \"count\":20,\"offsetid\":0}";
+		String result = HttpUtil.postHttpReq(url, params);
+		Assert.assertTrue(paserRsult(result));
+	}
+	@Test
+	public void WithdrawFee() throws Exception{
+		String url = URL+"/WithdrawFee.htm";
+		String params = "{\"money\":10,\"bank\":1,\"costtime\":1}";
+		String result = HttpUtil.postHttpReq(url, params);
+		Assert.assertTrue(paserRsult(result));
+	}
+	@Test
+	public void IncomeList() throws Exception{
+		String url = URL+"/IncomeList.htm";
+		String params = "{ \"count\":20,\"offsetid\":0}";
 		String result = HttpUtil.postHttpReq(url, params);
 		Assert.assertTrue(paserRsult(result));
 	}

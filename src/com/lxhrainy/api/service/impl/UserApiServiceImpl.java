@@ -437,6 +437,7 @@ public class UserApiServiceImpl extends AbstractBaseServiceImpl<IUserInfoDao, Us
 				AccountVO vo = new AccountVO();
 				AccountInfo model = new AccountInfo();
 				model.setCreateuser(loginUser);
+				vo.setModel(model);
 				if(offsetid != 0){
 					vo.setOffsetid(offsetid);
 				}
@@ -458,8 +459,10 @@ public class UserApiServiceImpl extends AbstractBaseServiceImpl<IUserInfoDao, Us
 						accountObject.put("weekCount", "0");
 						if(account.getLevel() != null){
 							String tags = account.getLevel().getName();
-							if(account.getIdentification().intValue() == ApiConstant.YES){
-								tags += ",实名";
+							if(account.getIdentification() != null){
+								if(account.getIdentification().intValue() == ApiConstant.YES){
+									tags += ",实名";
+								}
 							}
 							accountObject.put("tags", tags);
 						}else{
@@ -495,6 +498,7 @@ public class UserApiServiceImpl extends AbstractBaseServiceImpl<IUserInfoDao, Us
 				accountInfo.setCreateuser(loginUser);
 				accountInfo.setCreatetime(new Date());
 				accountInfo.setAuditstatus(ApiConstant.AUDIT_INIT);
+				accountInfo.setStatus(ApiConstant.NO);
 				accountInfo.setLevelpic(params.getLevelimage());
 				LevelInfo level = new LevelInfo();
 				level.setId(oConvertUtils.getInt(params.getLevel()));
@@ -511,11 +515,11 @@ public class UserApiServiceImpl extends AbstractBaseServiceImpl<IUserInfoDao, Us
 				if(result != -1){
 					rj.setSuccess(true);
 					rj.setError_code(ResultJson.SUCCESS);
-					rj.setMessage("操作成功");
+					rj.setMessage("小号添加成功");
 				}else{
 					rj.setError_code(ResultJson.ERROR_CODE_GENERAL);
 					rj.setSuccess(false);
-					rj.setMessage("操作失败");
+					rj.setMessage("小号添加失败");
 				}
 			}
 		}
@@ -606,6 +610,7 @@ public class UserApiServiceImpl extends AbstractBaseServiceImpl<IUserInfoDao, Us
 				TraceWithdrawlsVO vo = new TraceWithdrawlsVO();
 				TraceWithdrawls model = new TraceWithdrawls();
 				model.setUser(loginUser);
+				vo.setModel(model);
 				if(offsetid != 0){
 					vo.setOffsetid(offsetid);
 				}
@@ -654,6 +659,7 @@ public class UserApiServiceImpl extends AbstractBaseServiceImpl<IUserInfoDao, Us
 				TraceRecordVO vo = new TraceRecordVO();
 				TraceRecord model = new TraceRecord();
 				model.setUser(loginUser);
+				vo.setModel(model);
 				if(offsetid != 0){
 					vo.setOffsetid(offsetid);
 				}
@@ -752,6 +758,7 @@ public class UserApiServiceImpl extends AbstractBaseServiceImpl<IUserInfoDao, Us
 					userAccount.setAccountno(params.getCard());
 					userAccount.setRegion(params.getPlace());
 					userAccount.setBankname(params.getBranch());
+					userAccount.setDeleted(Global.NO);
 					BasicBank bank = new BasicBank();
 					bank.setId(oConvertUtils.getInt(params.getBank()) + 1);
 					userAccount.setBank(bank);

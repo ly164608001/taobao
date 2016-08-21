@@ -23,7 +23,7 @@
     <sql id="where">
 		<if test="condition!=null">
 			<where>
-				1 = 1
+				T.deleted = 0
 				<if test="condition.model!=null">
 				</if>
 			</where>
@@ -85,7 +85,8 @@
 			accountno,
 			region,
 			regionid,
-			bankname
+			bankname,
+			deleted
 		) VALUES (
 			#{id},
 			#{user.id},
@@ -95,7 +96,8 @@
 			#{accountno},
 			#{region},
 			#{area.id},
-			#{bankname}
+			#{bankname},
+			#{deleted}
 		)
 	</insert>
 	
@@ -108,12 +110,21 @@
 			accountno = #{accountno},
 			region = #{region},
 			regionid = #{regionid},
-			bankname = #{bankname}
+			bankname = #{bankname},
+			deleted = #{deleted}
 		WHERE id = #{id}
 	</update>
 	
 	<update id="delete">
 		DELETE FROM user_account
+		WHERE id = #{id}
+	</update>
+	
+	<update id="deleteById">
+		update 
+			user_account
+		set
+			deleted = 1
 		WHERE id = #{id}
 	</update>
 	
@@ -124,6 +135,7 @@
 			<include refid="userAccountJoins"/>
 		<if test="condition!=null">
 			<where>
+				T.deleted = 0
 				<if test="condition.model != null">
 					<if test="condition.model.user != null">
 						<if test="condition.model.user.id != null">

@@ -152,9 +152,9 @@
 		<if test="condition!=null">
 			<where>
 				<if test="condition.model != null">
-					<if test="condition.model.user != null">
-						<if test="condition.model.user.id != null">
-							AND T.userid = #{condition.model.user.id}
+					<if test="condition.model.createuser != null">
+						<if test="condition.model.createuser.id != null">
+							AND T.createuser = #{condition.model.createuser.id}
 						</if>
 					</if>
 				</if>
