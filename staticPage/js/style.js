@@ -64,7 +64,7 @@ $(function(){
 	});
 	// 多选
 	$('.more-click .tab-tip-add').click(function(){
-		$(this).addClass('active');
+		$(this).toggleClass('active');
 	})
 	// 返回顶部 
 	$(function(){$(window).on("scroll",$backToTopFun);$backToTopFun();});
