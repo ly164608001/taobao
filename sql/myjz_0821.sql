@@ -1,7 +1,7 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : 127.0.0.1
+Source Server         : localhost
 Source Server Version : 50096
 Source Host           : localhost:3306
 Source Database       : myjz
@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50096
 File Encoding         : 65001
 
-Date: 2016-08-20 17:39:20
+Date: 2016-08-21 23:11:08
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -4496,7 +4496,7 @@ CREATE TABLE `task_properties` (
   `valueid` int(11) default NULL COMMENT '所属属性值id(只有parentid不等于-1)才有该属性',
   `showsort` int(11) default NULL COMMENT '显示顺序',
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=utf8 COMMENT='任务属性';
+) ENGINE=InnoDB AUTO_INCREMENT=71 DEFAULT CHARSET=utf8 COMMENT='任务属性';
 
 -- ----------------------------
 -- Records of task_properties
@@ -4561,6 +4561,16 @@ INSERT INTO `task_properties` VALUES ('57', 'msgcontent', '给卖家留言内容
 INSERT INTO `task_properties` VALUES ('58', 'msgreminderassist', '留言提醒副属性', '0', '2', '0', 'checkbox', '2', 'null', '0', '2', '20', '32', '2');
 INSERT INTO `task_properties` VALUES ('59', 'maingoodspic', '主宝贝图', '0', '1', '0', 'img', '1', 'null', '0', '2', '1', '30', '2');
 INSERT INTO `task_properties` VALUES ('60', 'askquestion', '给卖家提问的问题内容', '0', '2', '0', 'text', '1', 'null', '1', '0', '21', '33', null);
+INSERT INTO `task_properties` VALUES ('61', 'creditpayassist', '是否允许信用支付副属性', '0', '2', '0', 'checkbox', '5', 'null', '0', '0', '35', '47', null);
+INSERT INTO `task_properties` VALUES ('62', 'receivername', '姓名', '0', '2', '0', 'text', '1', 'null', '0', '0', '22', '34', null);
+INSERT INTO `task_properties` VALUES ('63', 'receiverphone', '手机', '0', '2', '0', 'text', '1', 'null', '0', '0', '22', '34', null);
+INSERT INTO `task_properties` VALUES ('64', 'receivercode', '邮编', '0', '2', '0', 'text', '1', 'null', '0', '0', '22', '34', null);
+INSERT INTO `task_properties` VALUES ('65', 'reviceveraddr', '地址', '0', '2', '0', 'text', '1', 'null', '0', '0', '22', '34', null);
+INSERT INTO `task_properties` VALUES ('66', 'collectassist', '收藏副宝贝', '0', '2', '0', 'radio', '2', 'null', '0', '0', '-1', null, null);
+INSERT INTO `task_properties` VALUES ('67', 'collectassist2', '收藏副宝贝副属性', '0', '2', '0', 'radio', '2', 'null', '0', '0', '66', '87', null);
+INSERT INTO `task_properties` VALUES ('68', 'compare3assist', '货比三家副属性', '0', '2', '0', 'radio', '3', 'null', '0', '0', '31', '43', null);
+INSERT INTO `task_properties` VALUES ('69', 'appraisetextassist', '规定好评内容副属性', '0', '2', '0', 'text', '1', 'null', '0', '0', '-1', null, null);
+INSERT INTO `task_properties` VALUES ('70', 'ppraiseshowassist', '好评要嗮图副属性', '0', '2', '0', 'img', '4', 'null', '0', '0', '34', '46', null);
 
 -- ----------------------------
 -- Table structure for `task_properties_value`
@@ -4575,7 +4585,7 @@ CREATE TABLE `task_properties_value` (
   `isdefault` int(1) default NULL COMMENT '是否默认',
   `func` varchar(64) default NULL COMMENT '点击值触发事件名',
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=82 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=94 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of task_properties_value
@@ -4661,6 +4671,18 @@ INSERT INTO `task_properties_value` VALUES ('78', '56', '四钻买号及以上(�
 INSERT INTO `task_properties_value` VALUES ('79', '56', '五钻买号及以上(信誉>=5001)250个旺点', '10', '', '0', null);
 INSERT INTO `task_properties_value` VALUES ('80', '58', '请匿名购买', '1', '', '0', null);
 INSERT INTO `task_properties_value` VALUES ('81', '58', ' 请只收货等待默认好评', '2', '', '0', null);
+INSERT INTO `task_properties_value` VALUES ('82', '61', '花呗', '1', '', '0', '');
+INSERT INTO `task_properties_value` VALUES ('83', '61', '信用卡', '2', '', '0', '');
+INSERT INTO `task_properties_value` VALUES ('84', '61', '余额宝分期', '3', '', '0', '');
+INSERT INTO `task_properties_value` VALUES ('85', '61', '淘宝信用支付', '4', '', '0', '');
+INSERT INTO `task_properties_value` VALUES ('86', '61', '店铺优惠券', '5', '', '0', '');
+INSERT INTO `task_properties_value` VALUES ('87', '66', '是', '1', null, '0', null);
+INSERT INTO `task_properties_value` VALUES ('88', '66', '否', '0', null, '1', null);
+INSERT INTO `task_properties_value` VALUES ('89', '67', '收藏任意一款副宝贝', '1', '', '1', '');
+INSERT INTO `task_properties_value` VALUES ('90', '67', '收藏排行榜销量最多的那款副宝贝', '2', '', '0', '');
+INSERT INTO `task_properties_value` VALUES ('91', '68', '货比一家', '1', '', '1', '');
+INSERT INTO `task_properties_value` VALUES ('92', '68', '货比二家', '2', '', '0', '');
+INSERT INTO `task_properties_value` VALUES ('93', '68', '货比三家', '3', '', '0', '');
 
 -- ----------------------------
 -- Table structure for `trace_recharge`
@@ -4750,16 +4772,17 @@ CREATE TABLE `user_account` (
   `region` varchar(255) default NULL COMMENT '开户行(省/市)',
   `bankname` varchar(255) default NULL COMMENT '支行名称',
   `regionid` int(11) default NULL COMMENT '开户地区id',
+  `deleted` int(1) default '0' COMMENT '删除标识',
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='用户银行卡';
 
 -- ----------------------------
 -- Records of user_account
 -- ----------------------------
-INSERT INTO `user_account` VALUES ('1', '3', '2016-08-06 11:31:01', '1', '热', '让人', null, 'bb', '110100');
-INSERT INTO `user_account` VALUES ('2', '3', '2016-08-06 12:40:05', '2', '信息', '21554012454535353', null, '嘎嘎', '110100');
-INSERT INTO `user_account` VALUES ('3', '3', '2016-08-06 12:56:08', '3', '日3额', '热 ', null, '放大', '120101');
-INSERT INTO `user_account` VALUES ('4', '3', '2016-08-06 14:05:48', '10', 'gg', '1252465235656323', null, '支行个', '421200');
+INSERT INTO `user_account` VALUES ('1', '3', '2016-08-06 11:31:01', '1', '热', '让人', null, 'bb', '110100', '0');
+INSERT INTO `user_account` VALUES ('2', '3', '2016-08-06 12:40:05', '2', '信息', '21554012454535353', null, '嘎嘎', '110100', '0');
+INSERT INTO `user_account` VALUES ('3', '3', '2016-08-06 12:56:08', '3', '日3额', '热 ', null, '放大', '120101', '0');
+INSERT INTO `user_account` VALUES ('4', '3', '2016-08-06 14:05:48', '10', 'gg', '1252465235656323', null, '支行个', '421200', '0');
 
 -- ----------------------------
 -- Table structure for `user_auth_info`

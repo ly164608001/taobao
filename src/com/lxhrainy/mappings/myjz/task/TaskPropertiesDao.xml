@@ -151,6 +151,7 @@
 		FROM task_properties T
 		<include refid="taskPropertiesJoins"/>
 		<include refid="where"/>
+		ORDER BY T.elementname
 	</select>
 	
 	<select id="getCountByCondition" resultType="int">

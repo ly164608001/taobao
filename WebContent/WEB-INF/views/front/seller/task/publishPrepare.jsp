@@ -8,7 +8,7 @@
 	
 	<script type="text/javascript">
 		/**
-		 * 根据属性值显示属性
+		 * 根据属性值显示属性 radio
 		 * @param obj 点击的元素对象
 		 */
 		function showProByValue(obj){
@@ -39,13 +39,38 @@
 			showAssistPro(proid, valueid);
 		}
 		
-		//存放值属性的映射关系
+		//存放值属性的映射关系(用于页面表单显示)
 		var proValMap = new Array();
+		//表单数据：propertiesid,valueid,valuestr
+		var proValForm = new Array();
+		
+		function addForm(propertiesid, valueid, valuestr){
+			for (var i = 0; i < proValForm.length; i++) {
+				if(proValForm[i].propertiesid == propertiesid){
+					proValForm[i].valueid = valueid;
+					proValForm[i].valuestr = valuestr;
+					return;
+				} 
+			}
+			
+			var formObj = new Object();
+			formObj.propertiesid = propertiesid;
+			formObj.valueid = valueid;
+			formObj.valuestr = valuestr;
+			proValForm.push(formObj);
+		}
 		
 		$(function(){
 			$('.initHidden').hide();
 			//搜索进店的初始
 			showProByValue($('#62'));
+			
+			//发布任务
+			$('#submitBtn').click(function(){
+				//将选中的下拉框和输入框值保存proValForm中
+				
+			});
+			
 		})
 		
 	</script> 
@@ -68,10 +93,14 @@
 						<c:when test="${vs.count == 2}">2.任务需求设置</c:when>
 						<c:when test="${vs.count == 3}">3.买手身份验证</c:when>
 						<c:when test="${vs.count == 4}">4.发布任务设置</c:when>
-					</c:choose>
+					</c:choose>  
 				</h4>
 				<!-- 展示属性 -->
 				<c:forEach items="${taskPublish.propertiesList}" var="pro">
+					<script>
+						addForm(${pro.id},'','');
+					</script>
+				
 					<!-- 属性显示块开头 -->
 					<div 
 						<c:if test="${empty pro.belongValue or empty pro.belongValue.id}">
@@ -97,12 +126,15 @@
 									<c:forEach items="${pro.valueList}" var="proVal">
 										<c:choose>
 											<c:when test="${proVal.isdefault == 1}">
-												<span class="tab-tip active" proid="${pro.id}" id="${proVal.id}"
-													 <c:if test="${not empty proVal.func}">onclick="${proVal.func};"</c:if> >${proVal.label}</span>
+												<script>
+													addForm(${pro.id},${proVal.id},'');
+												</script>
+												<span class="tab-tip active" proid="${pro.id}" id="${proVal.id}" onclick="showProByValue(this);"
+													 <%-- <c:if test="${not empty proVal.func}">onclick="${proVal.func};"</c:if> --%> >${proVal.label}</span>
 											</c:when>
 											<c:otherwise>
-												<span class="tab-tip" proid="${pro.id}" id="${proVal.id}"
-													<c:if test="${not empty proVal.func}">onclick="${proVal.func};"</c:if> >${proVal.label}</span>
+												<span class="tab-tip" proid="${pro.id}" id="${proVal.id}" onclick="showProByValue(this);"
+													<%-- <c:if test="${not empty proVal.func}">onclick="${proVal.func};"</c:if> --%> >${proVal.label}</span>
 											</c:otherwise>
 										</c:choose>
 									</c:forEach>
@@ -114,11 +146,17 @@
 							<c:if test="${pro.elementnum > 2}">
 								<div class="formControls col-xs-8 col-sm-9">
 									<c:forEach items="${pro.valueList}" var="proVal">
+										<c:if test="${proVal.isdefault == 1}">
+											<script>
+												addForm(${pro.id},${proVal.id},'');
+											</script>
+										</c:if>
+										
 										<div class="radio-box">
-										   	 <input type="radio" name="${pro.name}" id="${proVal.id}" 
+										   	 <input type="radio" name="${pro.name}" id="${proVal.id}" onclick="showProByValue(this);"
 										   	 	proid="${pro.id}" value="${proVal.keyvalue}"
 										   	 	<c:if test="${proVal.isdefault == 1}">checked="checked"</c:if>
-										   	 	<c:if test="${not empty proVal.func}">onclick="${proVal.func};"</c:if>  />
+										   	 	<%-- <c:if test="${not empty proVal.func}">onclick="${proVal.func};"</c:if> --%>  />
 										   	 <label>${proVal.label}</label>
 									  	</div>
 									</c:forEach>
@@ -188,6 +226,11 @@
 			
 			</c:forEach><!-- 最外层任务展示局域end -->
 			
+			<div class="row cl">
+				<div class="col-xs-2 col-sm-4 btnWrap">
+					<input class="btn radius btn-secondary btn-ti" id="submitBtn" type="button" value="立即发布任务" />
+				</div>
+			</div>
 		</form>
 		
 	</div>

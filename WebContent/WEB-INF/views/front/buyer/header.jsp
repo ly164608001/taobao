@@ -8,6 +8,10 @@
 			$('#url').val(url);
 			$('#form').submit();
 		}
+		
+		function loginout(){
+			top.location.href = '${basePath}front/loginout.htm';
+		}
 	</script>
 <body>
 	
@@ -58,6 +62,9 @@
 				</li>
 				<li>
 					<a href="${basePath}front/helpcenter/main.htm" target="_blank">帮助中心</a>
+				</li>
+				<li>
+					<a href="javascript:void(0);" onclick="loginout();">退出</a>
 				</li>
 			</ul>
 		</nav>

@@ -64,7 +64,7 @@
                     <img src="${basePath}/static/css/front/images/icon-psw.png" width="16" height="16"></div>
                 <div class="login-ipt-txt mt15">
                     <div class="reCaptcha">
-                        <input type="text" placeholder="请输入手机验证码">
+                        <input type="text" placeholder="请输入验证码">
                         <input class="btn-reCaptcha btn-reCaptcha-y" type="button" value="获取验证码">
                         <input class="btn-reCaptcha btn-reCaptcha-t" type="button" value="倒计时60S" style="display: none;"></div>
                 </div>
