@@ -132,21 +132,6 @@ public class ApiParams {
 	private String studentIdhand;
 	/**end 实名认证**/
 	
-	/**start 任务列表**/
-	//0:大厅的任务列表;1:我的任务列表;
-	private String ismine;
-	//0:进行中;1:已完成;2:全部;
-	private String status;
-	//0:手机单;1:电脑单;
-	private String targetplatfrom;
-	//0:常规单;1:流量单;
-	private String targetsubtype;
-	//0:淘宝;1:京东;
-	private String targettype;
-	//0:普通任务;1:超级任务;2:全部;
-	private String tasktype;
-	/**end 任务**/
-	
 	/**
 	 * 二进制图片
 	 */
@@ -403,42 +388,6 @@ public class ApiParams {
 	}
 	public void setStudentIdhand(String studentIdhand) {
 		this.studentIdhand = studentIdhand;
-	}
-	public String getIsmine() {
-		return ismine;
-	}
-	public void setIsmine(String ismine) {
-		this.ismine = ismine;
-	}
-	public String getTargetplatfrom() {
-		return targetplatfrom;
-	}
-	public void setTargetplatfrom(String targetplatfrom) {
-		this.targetplatfrom = targetplatfrom;
-	}
-	public String getTargetsubtype() {
-		return targetsubtype;
-	}
-	public void setTargetsubtype(String targetsubtype) {
-		this.targetsubtype = targetsubtype;
-	}
-	public String getTargettype() {
-		return targettype;
-	}
-	public void setTargettype(String targettype) {
-		this.targettype = targettype;
-	}
-	public String getTasktype() {
-		return tasktype;
-	}
-	public void setTasktype(String tasktype) {
-		this.tasktype = tasktype;
-	}
-	public String getStatus() {
-		return status;
-	}
-	public void setStatus(String status) {
-		this.status = status;
 	}
 	
 }

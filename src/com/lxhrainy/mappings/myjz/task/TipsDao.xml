@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lxhrainy.myjz.admin.task.dao.ITipsDao">
+    
+	<sql id="basicColumns">
+		T.id AS "id",
+		T.title AS "title",
+		T.keyword AS "keyword",
+		T.content AS "content",
+		T.createuser AS "createuser.id",
+		T.createtime AS "createtime",
+		T.deleted AS "deleted"
+	</sql>
+	
+    <select id="findAllList" resultType="Tips">
+		SELECT 
+			<include refid="basicColumns"/>
+		FROM tips T
+		where T.deleted = 0
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO tips(
+			id,
+			title,
+			keyword,
+			content,
+			createuser,
+			createtime,
+			deleted
+		) VALUES (
+			#{id},
+			#{title},
+			#{keyword},
+			#{content},
+			#{createuser.id},
+			#{createtime},
+			#{deleted}
+		)
+	</insert>
+	
+</mapper>

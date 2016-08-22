@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.alibaba.fastjson.JSONObject;
-import com.lxhrainy.api.model.ApiParams;
+import com.lxhrainy.api.model.ApiOrderParams;
 import com.lxhrainy.api.service.ITaskApiService;
 import com.lxhrainy.api.util.ApiCacheUtil;
 import com.lxhrainy.api.util.ResultJson;
@@ -36,7 +36,7 @@ public class TaskApiServiceImpl extends AbstractBaseServiceImpl<IUserInfoDao, Us
 	private IOrderInfoService orderInfoService;
 	
 	@Override
-	public ResultJson taskList(ApiParams params) {
+	public ResultJson taskList(ApiOrderParams params) {
 		ResultJson rj = new ResultJson();
 		rj.setError_code(ResultJson.ERROR_CODE_PARAMETERS);
 		rj.setMessage("参数错误");
@@ -56,6 +56,7 @@ public class TaskApiServiceImpl extends AbstractBaseServiceImpl<IUserInfoDao, Us
 				OrderInfo model = new OrderInfo();
 				//model.setType(oConvertUtils.getInt(params.getMessagetype()));
 				model.setReceiveruser(loginUser);
+				vo.setModel(model);
 				vo.setOffsetid(offsetid);
 				vo.setCount(count);
 				
@@ -109,31 +110,41 @@ public class TaskApiServiceImpl extends AbstractBaseServiceImpl<IUserInfoDao, Us
 	}
 
 	@Override
-	public ResultJson taskAction(ApiParams params) {
+	public ResultJson taskAction(ApiOrderParams params) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public ResultJson getTask(ApiParams params) {
+	public ResultJson getTask(ApiOrderParams params) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public ResultJson complain(ApiParams params) {
+	public ResultJson complain(ApiOrderParams params) {
+		ResultJson rj = new ResultJson();
+		rj.setError_code(ResultJson.ERROR_CODE_PARAMETERS);
+		rj.setMessage("参数错误");
+		if (oConvertUtils.isNotEmpty(params)
+				&& StringUtil.isNumeric(params.getComplaintype())
+				&& StringUtil.isNumeric(params.getTaskid())
+				&& oConvertUtils.isNotEmpty(params.getSellerid())
+				&& oConvertUtils.isNotEmpty(params.getContent())
+				&& oConvertUtils.isNotEmpty(params.getProveimage())){
+			
+		}
+		return null;
+	}
+
+	@Override
+	public ResultJson taskActionInfo(ApiOrderParams params) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public ResultJson taskActionInfo(ApiParams params) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ResultJson complainList(ApiParams params) {
+	public ResultJson complainList(ApiOrderParams params) {
 		// TODO Auto-generated method stub
 		return null;
 	}

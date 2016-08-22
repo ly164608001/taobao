@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.lxhrainy.api.model.ApiOrderParams;
 import com.lxhrainy.api.model.ApiParams;
 import com.lxhrainy.api.service.ITaskApiService;
 import com.lxhrainy.api.service.IUserApiService;
@@ -449,7 +450,7 @@ public class ApiController {
 	 */
 	@RequestMapping(value="TaskList", method=RequestMethod.POST )
 	public void taskList(InputStream inputStream, HttpServletResponse response) throws IOException {
-		ApiParams params =	ApiJSONUtil.decryptJSON(inputStream, ApiParams.class);
+		ApiOrderParams params =	ApiJSONUtil.decryptJSON(inputStream, ApiOrderParams.class);
 		ResultJson rj = taskApiService.taskList(params);
 		this.writeJsonToResponse(rj, response);
 	}
@@ -462,7 +463,7 @@ public class ApiController {
 	 */
 	@RequestMapping(value="TaskAction", method=RequestMethod.POST )
 	public void taskAction(InputStream inputStream, HttpServletResponse response) throws IOException {
-		ApiParams params =	ApiJSONUtil.decryptJSON(inputStream, ApiParams.class);
+		ApiOrderParams params =	ApiJSONUtil.decryptJSON(inputStream, ApiOrderParams.class);
 		ResultJson rj = taskApiService.taskAction(params);
 		this.writeJsonToResponse(rj, response);
 	}
@@ -475,7 +476,7 @@ public class ApiController {
 	 */
 	@RequestMapping(value="GetTask", method=RequestMethod.POST )
 	public void getTask(InputStream inputStream, HttpServletResponse response) throws IOException {
-		ApiParams params =	ApiJSONUtil.decryptJSON(inputStream, ApiParams.class);
+		ApiOrderParams params =	ApiJSONUtil.decryptJSON(inputStream, ApiOrderParams.class);
 		ResultJson rj = taskApiService.getTask(params);
 		this.writeJsonToResponse(rj, response);
 	}
@@ -488,7 +489,7 @@ public class ApiController {
 	 */
 	@RequestMapping(value="Complain", method=RequestMethod.POST )
 	public void complain(InputStream inputStream, HttpServletResponse response) throws IOException {
-		ApiParams params =	ApiJSONUtil.decryptJSON(inputStream, ApiParams.class);
+		ApiOrderParams params =	ApiJSONUtil.decryptJSON(inputStream, ApiOrderParams.class);
 		ResultJson rj = taskApiService.complain(params);
 		this.writeJsonToResponse(rj, response);
 	}
@@ -501,7 +502,7 @@ public class ApiController {
 	 */
 	@RequestMapping(value="TaskActionInfo", method=RequestMethod.POST )
 	public void taskActionInfo(InputStream inputStream, HttpServletResponse response) throws IOException {
-		ApiParams params =	ApiJSONUtil.decryptJSON(inputStream, ApiParams.class);
+		ApiOrderParams params =	ApiJSONUtil.decryptJSON(inputStream, ApiOrderParams.class);
 		ResultJson rj = taskApiService.taskActionInfo(params);
 		this.writeJsonToResponse(rj, response);
 	}
@@ -514,7 +515,7 @@ public class ApiController {
 	 */
 	@RequestMapping(value="ComplainList", method=RequestMethod.POST )
 	public void complainList(InputStream inputStream, HttpServletResponse response) throws IOException {
-		ApiParams params =	ApiJSONUtil.decryptJSON(inputStream, ApiParams.class);
+		ApiOrderParams params =	ApiJSONUtil.decryptJSON(inputStream, ApiOrderParams.class);
 		ResultJson rj = taskApiService.complainList(params);
 		this.writeJsonToResponse(rj, response);
 	}

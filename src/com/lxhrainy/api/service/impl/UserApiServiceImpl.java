@@ -44,6 +44,10 @@ import com.lxhrainy.myjz.admin.order.service.IOrderInfoService;
 import com.lxhrainy.myjz.admin.task.model.ComplainType;
 import com.lxhrainy.myjz.admin.task.model.TaskStatistics;
 import com.lxhrainy.myjz.admin.task.model.Tips;
+import com.lxhrainy.myjz.admin.task.oe.ComplainTypeVO;
+import com.lxhrainy.myjz.admin.task.oe.TipsVO;
+import com.lxhrainy.myjz.admin.task.service.IComplainTypeService;
+import com.lxhrainy.myjz.admin.task.service.ITipsService;
 import com.lxhrainy.myjz.admin.trace.model.TraceRecord;
 import com.lxhrainy.myjz.admin.trace.model.TraceWithdrawls;
 import com.lxhrainy.myjz.admin.trace.oe.TraceRecordVO;
@@ -98,6 +102,10 @@ public class UserApiServiceImpl extends AbstractBaseServiceImpl<IUserInfoDao, Us
 	private IUserDetailInfoService detailInfoService;
 	@Autowired
 	private IOrderInfoService orderInfoService;
+	@Autowired
+	private IComplainTypeService complainTypeService;
+	@Autowired
+	private ITipsService tipsService;
 	
 	@Override
 	public ResultJson adlist(ApiParams params) {
@@ -365,8 +373,9 @@ public class UserApiServiceImpl extends AbstractBaseServiceImpl<IUserInfoDao, Us
 			}
 			buyerlevel.put("taobao", tbtypelist);
 			buyerlevel.put("jingdong", jdtypelist);
-			//TODO 获取投诉类型
-			List<ComplainType> complainTypeList = new ArrayList<>();
+			//获取投诉类型
+			ComplainTypeVO vo = new ComplainTypeVO();
+			List<ComplainType> complainTypeList = complainTypeService.getAllList(vo);
 			List<JSONObject> complainttype = new ArrayList<>();
 			for(ComplainType complainType : complainTypeList){
 				JSONObject complain = new JSONObject();
@@ -374,9 +383,10 @@ public class UserApiServiceImpl extends AbstractBaseServiceImpl<IUserInfoDao, Us
 				complain.put("name", complainType.getName());
 				complainttype.add(complain);
 			}
-			//TODO 获取提示信息
+			//获取提示信息
 			JSONObject tips = new JSONObject();
-			List<Tips> tipList = new ArrayList<>();
+			TipsVO tipsVo = new TipsVO();
+			List<Tips> tipList = tipsService.getAllList(tipsVo);
 			for(Tips tip : tipList){
 				//tips.put("withdrawnotice", "周一至周六上午11:00前申请，100元起提现在提现预计12点到账，首次提现不收取手续费，当日第二次以后每次收取1元手续费");
 				tips.put(tip.getKeyword(), tip.getContent());

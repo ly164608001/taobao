@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lxhrainy.myjz.admin.task.dao.IComplainTypeDao">
+    
+	<sql id="basicColumns">
+		T.id AS "id",
+		T.name AS "name",
+		T.createuser AS "createuser.id",
+		T.createtime AS "createtime",
+		T.deleted AS "deleted"
+	</sql>
+	
+    <select id="findAllList" resultType="ComplainType">
+		SELECT 
+			<include refid="basicColumns"/>
+		FROM complain_type T
+		where T.deleted = 0
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO complain_type(
+			id,
+			name,
+			createuser,
+			createtime,
+			deleted
+		) VALUES (
+			#{id},
+			#{name},
+			#{createuser.id},
+			#{createtime},
+			#{deleted}
+		)
+	</insert>
+	
+</mapper>
