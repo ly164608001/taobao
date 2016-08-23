@@ -27,6 +27,7 @@ public class OrderInfo extends BaseModel {
 	private Shop shop; // 店铺ID
 	private Integer searchroad; // 搜索入口
 	private String type; // 手机/电脑单类型
+	private Integer targetsubtype;//任务目标副类型(0:常规单;1:流量单;) 
 
 	public UserInfo getCreateuser() {
 		return createuser;
@@ -122,6 +123,14 @@ public class OrderInfo extends BaseModel {
 
 	public void setType(String type) {
 		this.type = type;
+	}
+
+	public Integer getTargetsubtype() {
+		return targetsubtype;
+	}
+
+	public void setTargetsubtype(Integer targetsubtype) {
+		this.targetsubtype = targetsubtype;
 	}
 
 }

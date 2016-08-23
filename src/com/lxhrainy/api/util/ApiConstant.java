@@ -66,4 +66,13 @@ public class ApiConstant {
 	public final static int USER_SELLER = 2 ;  
 	public final static int USER_ADMIN = 0 ;
 	
+	//用户申诉状态
+	public final static int COMPLAIN_FAIL = -1;//失败
+	public final static int COMPLAIN_INIT = -1;//未处理
+	public final static int COMPLAIN_SUCC = -1;//成功
+	
+	//申诉来源
+	public final static int COMPLAIN_TOOTHER = 0;
+	public final static int COMPLAIN_MY = 1;
+	
 }

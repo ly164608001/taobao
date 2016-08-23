@@ -59,6 +59,13 @@ public class ApiOrderParams {
 	private String sellerid;
 	//end 申诉
 	
+	//start 申诉列表
+	/**
+	 * 0:我发起的申诉;1:我收到的申诉
+	 */
+	private String issend;
+	//end 申诉列表
+	
 	public String getTaskid() {
 		return taskid;
 	}
@@ -136,6 +143,12 @@ public class ApiOrderParams {
 	}
 	public void setOffsetid(String offsetid) {
 		this.offsetid = offsetid;
+	}
+	public String getIssend() {
+		return issend;
+	}
+	public void setIssend(String issend) {
+		this.issend = issend;
 	}
 	
 }

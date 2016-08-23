@@ -148,4 +148,37 @@
 		WHERE id = #{id}
 	</update>
 	
+	<select id="getListForMobile" resultType="ComplainInfo">
+		SELECT 
+			T.id AS "id",
+			T.sellerid AS "seller.id",
+			T.taskid AS "task.id",
+			T.complaintype AS "complaintype.id",
+			T.content AS "content",
+			T.proveimage AS "proveimage",
+			T.status AS "status",
+			T.createtime,
+			UI.username AS "seller.username",
+			OI.targetsubtype AS "task.targetsubtype"
+		FROM complain_info T
+		LEFT JOIN order_info OI on OI.id = T.taskid
+		LEFT JOIN user_info UI on UI.id = T.sellerid
+		<if test="condition!=null">
+			<where>
+				<if test="condition.model != null">
+					<if test="condition.model.createuser != null and condition.model.createuser.id != null">
+						AND T.createuser = #{condition.model.createuser.id}
+					</if>
+					<if test="condition.model.seller != null and condition.model.seller.id != null">
+						AND T.sellerid = #{condition.model.seller.id}
+					</if>
+				</if>
+				<if test="condition.offsetid != null">
+					AND T.id &lt; #{condition.offsetid}
+				</if>
+			</where>
+		order by T.id desc
+		limit 0,${condition.count}
+		</if>
+	</select>
 </mapper>
