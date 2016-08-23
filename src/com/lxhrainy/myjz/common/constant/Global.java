@@ -144,6 +144,12 @@ public class Global {
 	public final static int TOP_PRO_ID = -1;		
 	/**任务属性 end**/
 	
+	/**订单状态 start**/
+	public final static int ORDER_STATUS_INIT = 0;	
+	public final static int ORDER_STATUS_PUBLISH = 1;
+	public final static int ORDER_STATUS_RECEIVE = 2;
+	public final static int ORDER_STATUS_FINISH = 3;
+	/**订单状态 end**/
 	
 }
 

@@ -69,6 +69,14 @@
 		)
 	</insert>
 	
+	<insert id="insertBatch" parameterType="ArrayList">  
+	    insert order_other_properties(orderid,propertiesvalueid,propertiesvalue)  
+	    values  
+	    <foreach collection="list" item="obj" index="index" separator="," >  
+	       (#{obj.order.id},#{obj.propertiesval.id},#{obj.propertiesvalue})  
+	    </foreach>  
+    </insert>
+	
 	<update id="update">
 		UPDATE order_other_properties SET 	
 			orderid = #{order.id},

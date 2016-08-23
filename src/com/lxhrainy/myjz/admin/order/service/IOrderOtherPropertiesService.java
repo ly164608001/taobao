@@ -1,5 +1,7 @@
 package com.lxhrainy.myjz.admin.order.service;
 
+import java.util.List;
+
 import com.lxhrainy.core.common.service.IBaseService;
 import com.lxhrainy.myjz.admin.order.model.OrderOtherProperties;
 
@@ -10,4 +12,5 @@ import com.lxhrainy.myjz.admin.order.model.OrderOtherProperties;
  */
 public interface IOrderOtherPropertiesService extends IBaseService<OrderOtherProperties, Integer>{
 
+	public void insertBatch(List<OrderOtherProperties> list);
 }

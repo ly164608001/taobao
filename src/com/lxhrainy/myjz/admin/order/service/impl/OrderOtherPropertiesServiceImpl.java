@@ -1,5 +1,7 @@
 package com.lxhrainy.myjz.admin.order.service.impl;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,4 +23,12 @@ public class OrderOtherPropertiesServiceImpl extends
 AbstractBaseServiceImpl<IOrderOtherPropertiesDao, OrderOtherProperties, Integer>
 implements IOrderOtherPropertiesService {
 
+	/**
+	 * 批量插入
+	 * @param list
+	 */
+	@Transactional(readOnly = false)
+	public void insertBatch(List<OrderOtherProperties> list) {
+		dao.insertBatch(list);
+	}
 }

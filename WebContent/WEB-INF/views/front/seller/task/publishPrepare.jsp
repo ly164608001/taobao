@@ -49,6 +49,9 @@
 				if(proValForm[i].propertiesid == propertiesid){
 					proValForm[i].valueid = valueid;
 					proValForm[i].valuestr = valuestr;
+				/* 	proValForm[i].elementname = elementname;
+					proValForm[i].price = price;
+					proValForm[i].valuelabel = valuelabel; */
 					return;
 				} 
 			}
@@ -57,6 +60,9 @@
 			formObj.propertiesid = propertiesid;
 			formObj.valueid = valueid;
 			formObj.valuestr = valuestr;
+			/* formObj.elementname = elementname;
+			formObj.price = price;
+			formObj.valuelabel = valuelabel; */
 			proValForm.push(formObj);
 		}
 		
@@ -68,6 +74,36 @@
 			//发布任务
 			$('#submitBtn').click(function(){
 				//将选中的下拉框和输入框值保存proValForm中
+				var proid = $(this).attr('id');
+				
+				$('.select').each(function(){
+					var valueid = $(this).val();
+					if(!isNull(valueid)){
+						valueid = valueid.split(' ')[1];
+						addForm(proid,valueid,'');
+					}
+				});
+				
+				$('.formInput').each(function(){
+					var valueStr = $(this).val();
+					if(!isNull(valueStr)){
+						addForm(proid,'',valueStr);
+					}
+				});
+				
+				var formData = JSON.stringify(proValForm);
+				console.log(formData);
+				$('#formData').val(formData);
+				$.ajax({
+					type : 'POST',
+					url : '${basePath}front/seller/task/publish.htm',
+					data : {'formData':formData},
+					dataType : 'JSON',
+					success : function(result){
+						top.layer.msg(result.msg);
+					}
+					
+				});
 				
 			});
 			
@@ -78,11 +114,10 @@
 </head>
 <body>
 	<div class="workContent ml20">
-	<h4>
-		<span class="title">发布淘宝任务</span>
-	</h4>
-	<div class="moneyOrder rechange workDetail">
-		<form class="form form-horizontal" id="submitForm">
+		<h4>
+			<span class="title">发布淘宝任务</span>
+		</h4>
+		<div class="moneyOrder rechange workDetail">
 			<legend></legend>
 			
 			<!-- 展示显示局域 -->
@@ -185,7 +220,7 @@
 						
 						<c:when test="${pro.elementtype == 'text'}">
 							<div class="formControls col-xs-2 col-sm-3">
-								<input type="text" class="input-text" name="${pro.name}"/>
+								<input type="text" class="input-text formInput" proid="${pro.id}" name="${pro.name}"/>
 							</div>
 							<c:if test="${not empty pro.price and pro.price > 0}">
 								<div class="formControls col-xs-6 col-sm-6">
@@ -198,7 +233,7 @@
 							<div class="formControls col-xs-4 col-sm-6">
 								<span>
 									<a href="#" class="detail-jpg layer-photos-demo" id="layer-photos-demo"> 
-										<img layer-pid="showBigimg" layer-src="${basePath}static/css/front/images/jietu.png" src="images/jietu.png" alt="">
+										<img layer-pid="showBigimg" layer-src="${basePath}static/css/front/images/jietu.png" src="images/jietu.png" alt="" />
 									</a>
 								</span>
 								<br/>
@@ -231,8 +266,6 @@
 					<input class="btn radius btn-secondary btn-ti" id="submitBtn" type="button" value="立即发布任务" />
 				</div>
 			</div>
-		</form>
-		
 	</div>
 
 </div>

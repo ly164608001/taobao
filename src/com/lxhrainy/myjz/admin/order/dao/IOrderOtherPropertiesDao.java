@@ -1,5 +1,9 @@
 package com.lxhrainy.myjz.admin.order.dao;
 
+import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
+
 import com.lxhrainy.core.annotation.MyBatisDao;
 import com.lxhrainy.core.common.dao.IBaseDao;
 import com.lxhrainy.myjz.admin.order.model.OrderOtherProperties;
@@ -13,4 +17,9 @@ import com.lxhrainy.myjz.admin.order.model.OrderOtherProperties;
 @MyBatisDao
 public interface IOrderOtherPropertiesDao extends IBaseDao<OrderOtherProperties> {
 	
+	/**
+	 * 批量插入
+	 * @param list
+	 */
+	void insertBatch(@Param("list")List<OrderOtherProperties> list);
 }

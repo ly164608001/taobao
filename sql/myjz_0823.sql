@@ -1,7 +1,7 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : localhost
+Source Server         : 127.0.0.1
 Source Server Version : 50096
 Source Host           : localhost:3306
 Source Database       : myjz
@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50096
 File Encoding         : 65001
 
-Date: 2016-08-21 23:11:08
+Date: 2016-08-23 18:06:55
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -195,6 +195,29 @@ CREATE TABLE `buyer_account_vpn_info` (
 -- Records of buyer_account_vpn_info
 -- ----------------------------
 INSERT INTO `buyer_account_vpn_info` VALUES ('1', '1', '1111', '111', '111', '11', '232', '3232', '32', null, '发放', '2132', '1232', '发达发达', '2016-07-18 21:38:59', '2016-07-26 21:41:16', '220000');
+
+-- ----------------------------
+-- Table structure for `complain_info`
+-- ----------------------------
+DROP TABLE IF EXISTS `complain_info`;
+CREATE TABLE `complain_info` (
+  `id` int(11) NOT NULL auto_increment,
+  `sellerid` int(11) default NULL COMMENT '商家ID',
+  `createuser` int(11) default NULL COMMENT '创建人',
+  `createtime` datetime default NULL COMMENT '创建时间',
+  `taskid` int(11) default NULL COMMENT '任务ID',
+  `complaintype` int(11) default NULL,
+  `content` varchar(255) default NULL COMMENT '申诉内容',
+  `proveimage` varchar(512) default NULL COMMENT '申诉图片(以“,”隔开)',
+  `status` int(1) default NULL COMMENT '申诉状态（0：未处理；1：申诉成功；-1：申诉失败）',
+  `audituser` int(11) default NULL COMMENT '审核人',
+  `audittime` datetime default NULL COMMENT '审核时间',
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='申诉表';
+
+-- ----------------------------
+-- Records of complain_info
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for `goods_type`
@@ -4486,7 +4509,7 @@ CREATE TABLE `task_properties` (
   `elementname` varchar(255) default NULL COMMENT '别名',
   `status` int(1) default NULL COMMENT '使用状态(0,1)',
   `type` int(1) default NULL COMMENT '展示区域',
-  `price` int(11) default NULL COMMENT '所需蚂蚁币',
+  `price` int(11) default '0' COMMENT '所需蚂蚁币',
   `elementtype` varchar(255) default NULL COMMENT '元素类型',
   `elementnum` int(11) default NULL COMMENT '元素个数',
   `needtype` varchar(255) default NULL COMMENT '所需类型',
