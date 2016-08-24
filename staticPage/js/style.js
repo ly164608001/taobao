@@ -1,12 +1,3 @@
-// iframe高度自适应
-function setIframeHeight(iframe) {
-	if (iframe) {
-		iframeWin = iframe.contentWindow || iframe.contentDocument.parentWindow;
-		if (iframeWin.document.body) {
-			iframe.height = iframeWin.document.documentElement.scrollHeight || iframeWin.document.body.scrollHeight;
-		}
-	}
-};
 
 function setIframeHeightChild(IframeId){
 	$(window.parent.document).find('#'+IframeId).map(function(){
@@ -23,9 +14,6 @@ $(function(){
 	if($('body div:first').hasClass("PersonalCenter-main-r")){
 		setIframeHeightChild(iframeId);
 	}
-	
-	//调用iframe自适应方法
-	setIframeHeight(document.getElementById('external-frame'));
 	
 	// JavaScript Document
 	$('.stage-nav li').click(function(){
@@ -50,7 +38,7 @@ $(function(){
 		return false;
 	})
 	
-	//时间初始化
+/*	//时间初始化
 	var timeBet=new Array();
 	var innerHtml='';
 	timeBet.push('<input class="Wdate write-time input-text radius size-M"  type="text"  onFocus="WdatePicker({dateFmt:&quot;yyyy-MM-dd HH:mm:ss&quot;,isShowClear:false,readOnly:true})"/>');
@@ -65,7 +53,7 @@ $(function(){
          );
 	innerHtml=timeBet.join('');
 	$('.timeBet').append(innerHtml);
-	
+*/	
 	// 添加选中项
 	$('.tab-tip').click(function(){
 		$(this).addClass('active').siblings().removeClass('active');

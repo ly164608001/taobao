@@ -1,19 +1,39 @@
 package com.lxhrainy.myjz.admin.order.oe;
 
+import java.util.Date;
+
 import com.lxhrainy.core.common.oe.BaseVO;
-import com.lxhrainy.myjz.admin.buyer.model.AccountInfo;
 import com.lxhrainy.myjz.admin.order.model.OrderInfo;
 
 public class OrderInfoVO extends BaseVO {
 
 	private OrderInfo model;
-	
+
 	private Integer offsetid;
-	
+
 	private Integer count;
+
+	private Date publicBegin;
+	private Date publicEnd;
 
 	public OrderInfo getModel() {
 		return model;
+	}
+
+	public Date getPublicBegin() {
+		return publicBegin;
+	}
+
+	public void setPublicBegin(Date publicBegin) {
+		this.publicBegin = publicBegin;
+	}
+
+	public Date getPublicEnd() {
+		return publicEnd;
+	}
+
+	public void setPublicEnd(Date publicEnd) {
+		this.publicEnd = publicEnd;
 	}
 
 	public void setModel(OrderInfo model) {

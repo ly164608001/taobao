@@ -1,5 +1,7 @@
 package com.lxhrainy.myjz.admin.order.service.impl;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +37,7 @@ implements IOrderInfoService {
 	private IOrderOtherPropertiesService orderOtherProService;
 	@Autowired
 	private IUserMoneyService moneyService;
+	private static long orderNum = 0l;  
 	
 	@Override
 	public List<OrderInfo> getListForMobile(OrderInfoVO vo) {
@@ -56,6 +59,7 @@ implements IOrderInfoService {
 	public int createTask(OrderInfo model, List<OrderOtherProperties> proList,int totalPrice) {
 		
 		//插入订单
+		model.setOrderno(genOrderNo(model));
 		dao.insert(model);
 		
 		//插入订单的其他属性
@@ -67,6 +71,19 @@ implements IOrderInfoService {
 		//扣除蚂蚁币
 		UserMoney moneyInfo = moneyService.getByUserId(model.getCreateuser().getId());  
 		return moneyService.frozonMoney(moneyInfo, totalPrice);
+	}
+	
+	/**
+	 * 生成订单编号
+	 * @return
+	 */
+	private synchronized String genOrderNo(OrderInfo model){
+		Date createDate = model.getCreatetime();
+		String str = new SimpleDateFormat("yyyyMMddHHmm").format(createDate);
+		orderNum ++;  
+		long orderNo = Long.parseLong((str)) * 10000;  
+		orderNo += orderNum;
+		return "TB" + orderNo;
 	}
 	
 }
