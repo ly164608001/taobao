@@ -1,5 +1,7 @@
 package com.lxhrainy.myjz.admin.seller.service;
 
+import java.util.List;
+
 import com.lxhrainy.core.common.service.IBaseService;
 import com.lxhrainy.myjz.admin.seller.model.Shop;
 
@@ -27,5 +29,12 @@ public interface IShopService extends IBaseService<Shop, Integer>{
 	 *        -2 非激活状态
 	 */
 	public int cancelActivate(int id);
+	
+	/**
+	 * 获取用户的店铺列表
+	 * @param userid
+	 * @return
+	 */
+	public List<Shop> getListByUser(int userid);
 
 }

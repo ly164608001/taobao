@@ -60,6 +60,7 @@ implements IOrderInfoService {
 		
 		//插入订单
 		model.setOrderno(genOrderNo(model));
+		model.setBond(totalPrice*0.68);
 		dao.insert(model);
 		
 		//插入订单的其他属性

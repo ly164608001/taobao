@@ -144,12 +144,19 @@ public class Global {
 	public final static int TOP_PRO_ID = -1;		
 	/**任务属性 end**/
 	
-	/**订单状态 start**/
+	/**订单 start**/
+	//状态 0 初始化 1 已发布 2 已接手待审核 3 已付款待审核 4 待发货 5 待收货 6 已好评待确认
+	//	 7 已追评待确认 8 已完成 -1 申述中 -2申述失败
 	public final static int ORDER_STATUS_INIT = 0;	
 	public final static int ORDER_STATUS_PUBLISH = 1;
 	public final static int ORDER_STATUS_RECEIVE = 2;
-	public final static int ORDER_STATUS_FINISH = 3;
-	/**订单状态 end**/
+	public final static int ORDER_STATUS_PAYED = 3;
+	public final static int ORDER_STATUS_SENED = 4;
+	public final static int ORDER_STATUS_RECEIPTED = 5;
+	public final static int ORDER_STATUS_PRAISE = 6;
+	public final static int ORDER_STATUS_APPEND = 7;
+	public final static int ORDER_STATUS_FINISH = 8;
+	/**订单 end**/
 	
 }
 

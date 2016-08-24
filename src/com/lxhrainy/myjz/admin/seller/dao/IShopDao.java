@@ -1,5 +1,7 @@
 package com.lxhrainy.myjz.admin.seller.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 
 import com.lxhrainy.core.annotation.MyBatisDao;
@@ -21,5 +23,12 @@ public interface IShopDao extends IBaseDao<Shop> {
 	 * @param status
 	 */
 	void updateStatus(@Param("id")int id, @Param("status")int status);
+
+	/**
+	 * 根据用户获取店铺列表
+	 * @param userid
+	 * @return
+	 */
+	List<Shop> getListByUser(@Param("userid")int userid);
 	
 }

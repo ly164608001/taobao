@@ -2,20 +2,10 @@
 function setIframeHeightChild(IframeId){
 	$(window.parent.document).find('#'+IframeId).map(function(){
     var main = $(window.parent.document).find('#'+IframeId);
-    var thisheight = $('body').height()+100;
+    var thisheight = $(document).height()+100;
     main.height(thisheight);
     });
 }
-
-//子页面调用iframe自适应方法
-$(function(){
-	var iframeId = $(window.parent.document).find("#external-frame").attr('id');
-	$('body').addClass('clearfix');
-	if($('body div:first').hasClass("workContent")){
-		setIframeHeightChild(iframeId);
-	}
-})
-$(function(){
 	
 // 增加缩减iframe高度方法
 function listenIframeHeight(){
@@ -25,6 +15,11 @@ function listenIframeHeight(){
 	}
 }
 
+
+$(function(){
+
+	listenIframeHeight();
+	
 	// JavaScript Document
 	$('.stage-nav li').click(function(){
 		$(this).addClass('li-h2').siblings().removeClass('li-h2');

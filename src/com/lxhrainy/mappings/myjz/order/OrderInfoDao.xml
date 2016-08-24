@@ -15,10 +15,19 @@
 		T.receivetime AS "receivetime",
 		T.shopid AS "shop.id",
 		T.searchroad AS "searchroad",
-		T.type AS "type"
+		T.type AS "type",
+		T.paytime AS "paytime",
+		
+		RU.loginip AS "receiveruser.loginip",
+		RU.creditscore AS "receiveruser.creditscore",
+		RU.username AS "receiveruser.username",
+		
+		S.name AS "shop.name"
 	</sql>
 	
 	<sql id="orderInfoJoins">
+		LEFT JOIN USER_INFO RU ON RU.id = T.receiveruser 
+		LEFT JOIN seller_shop S ON S.id = T.shopid
 	</sql>
     
     <sql id="where">
@@ -88,7 +97,8 @@
 			receivetime,
 			shopid,
 			searchroad,
-			type
+			type,
+			paytime
 		) VALUES (
 			#{id},
 			#{orderno},
@@ -102,7 +112,8 @@
 			#{receivetime},
 			#{shop.id},
 			#{searchroad},
-			#{type}
+			#{type},
+			#{paytime}
 		)
 	</insert>
 	
@@ -119,7 +130,8 @@
 			receivetime = #{receivetime},
 			shopid = #{shop.id},
 			searchroad = #{searchroad},
-			type = #{type}
+			type = #{type},
+			paytime = #{paytime}
 		WHERE id = #{id}
 	</update>
 	

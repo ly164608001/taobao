@@ -159,7 +159,9 @@
 									<th>任务状态</th>
 									<th>任务操作</th>
 								</tr>
-								<%-- <c:forEach items="${list}" var="order"> --%>
+							</thead>
+							<tbody>
+								<c:forEach items="${list}" var="order" varStatus="vs"> 
 									<tr>
 										<th><input type="checkbox" name=""></th>
 										<th colspan="6">
@@ -167,13 +169,9 @@
 										 	<span class="mr10">QQ:5464569846</span>
 										</th>
 									</tr>
-								<%-- </c:forEach> --%>
-							</thead>
-							<tbody>
-								<%-- <c:forEach items="${list}" var="order"> --%>
 									<tr>
-										<td>1</td>
-										<td class="first"><span>TB201606261747428126850</span> <span>发布人：L千语</span>
+										<td>${vs.count}</td>
+										<td class="first"><span>${order.orderno}</span> <span>发布人：${order.createuser.username}</span>
 											<span> 关键词： <em class="red">布衣柜</em> <em class="red">实木</em>
 										</span> <span> <span class="label label-warning radius">淘宝</span>
 												<span class="mobile-order"
@@ -216,19 +214,20 @@
 									<tr>
 										<td colspan="5"><span> 接手方： <img
 												src="${basePath}static/css/front/images/vip0.jpg"> (IP:
-													<em>106.3.45.233</em> ) 接手时间： <em>2016/6/24 18:03:59</em>
-													付款时间： <em>2016/6/24 19:07:50</em></span></td>
+													<em>${order.receiveruser.loginip}</em> ) 
+													接手时间： <em><f:formatDate value="${order.receivetime}" pattern="yyyy/MM/dd HH:mm:ss" /></em>
+													付款时间： <em><f:formatDate value="${order.paytime}" pattern="yyyy/MM/dd HH:mm:ss" /></em></span></td>
 										<td><span> <i class="wangwang"></i> 采用买号 <em
 												class="blue">独家秀秀</em>
 										</span></td>
 										<td><span> <a href="#" class="btn btn-link">查看淘宝地址</a>
 										</span></td>
 									</tr>
-								<%-- </c:forEach> --%>
+								</c:forEach> 
 							</tbody>
 						</table>
 					</div>
-					<div class="  mt10 text-c">
+					<div class="mt10 text-c">
 						<a href="#" class="btn btn-secondary radius"> <i></i> 刷新任务
 						</a>
 					</div>
@@ -243,8 +242,7 @@
 
 	<script>
 		$(function() {
-			var iframeId = $(window.parent.document).find("#external-frame").attr('id');
-			setIframeHeightChild('external-frame');
+			listenIframeHeight();
 			
 			// 收缩
 			$('.open-btn').on('click', function() {
@@ -258,8 +256,7 @@
 					$(this).text('收缩');
 					$(this).css('background-position', '52px 11px');
 				}
-				var iframeId = $(window.parent.document).find("#external-frame").attr('id');
-				setIframeHeightChild(iframeId);
+				listenIframeHeight();
 			});
 			
 			$.Huitab("#tab_demo .tabBar span", "#tab_demo .tabCon", "current",

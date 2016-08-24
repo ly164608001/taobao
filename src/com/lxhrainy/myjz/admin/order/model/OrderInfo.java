@@ -17,6 +17,7 @@ public class OrderInfo extends BaseModel {
 	private static final long serialVersionUID = 1L;
 	private String orderno; // 订单编号
 	private Date createtime; // 订单创建时间
+	private Date paytime; // 付款时间
 	private UserInfo createuser; // 创建人
 	private Date publictime; // 任务发布时间
 	private Integer istime; // 是否定时发布
@@ -27,7 +28,15 @@ public class OrderInfo extends BaseModel {
 	private Shop shop; // 店铺ID
 	private Integer searchroad; // 搜索入口
 	private String type; // 手机/电脑单类型
-	private Integer targetsubtype;//任务目标副类型(0:常规单;1:流量单;) 
+	private Integer targetsubtype;// 任务目标副类型(0:常规单;1:流量单;)
+
+	public Date getPaytime() {
+		return paytime;
+	}
+
+	public void setPaytime(Date paytime) {
+		this.paytime = paytime;
+	}
 
 	public UserInfo getCreateuser() {
 		return createuser;

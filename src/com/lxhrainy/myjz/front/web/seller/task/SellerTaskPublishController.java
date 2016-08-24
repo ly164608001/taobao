@@ -17,6 +17,8 @@ import com.lxhrainy.core.common.controller.BaseController;
 import com.lxhrainy.myjz.admin.order.model.OrderInfo;
 import com.lxhrainy.myjz.admin.order.model.OrderOtherProperties;
 import com.lxhrainy.myjz.admin.order.service.IOrderInfoService;
+import com.lxhrainy.myjz.admin.seller.model.Shop;
+import com.lxhrainy.myjz.admin.seller.service.IShopService;
 import com.lxhrainy.myjz.admin.task.model.TaskProperties;
 import com.lxhrainy.myjz.admin.task.model.TaskPropertiesValue;
 import com.lxhrainy.myjz.admin.task.model.TaskPublish;
@@ -39,6 +41,8 @@ public class SellerTaskPublishController extends BaseController {
 	private ITaskPropertiesService propertiesService;
 	@Autowired
 	private ITaskPropertiesValueService valueService;
+	@Autowired
+	private IShopService shopService;
 	
 	/**
 	 * 任务列表
@@ -57,7 +61,10 @@ public class SellerTaskPublishController extends BaseController {
 		for (int i = 1; i <= list.size(); i++) {
 			showList.add((TaskPublish)mv.getModelMap().get("taskPublish"+i));
 		}
+		//获取店铺列表
+		List<Shop> shopList = shopService.getListByUser(getCurrentUser().getId());
 		
+		mv.addObject("shopList", shopList);
 		mv.addObject("list", showList);
 		mv.setViewName("front/seller/task/publishPrepare");
 		return mv;
@@ -91,7 +98,7 @@ public class SellerTaskPublishController extends BaseController {
 			
 			//拼凑orderOtherProperties
 			OrderOtherProperties otherPro = new OrderOtherProperties();
-			if(valueid != null){
+			if(valueid != null && valueid.intValue() != -1){
 				otherPro.setPropertiesval(proValue);
 				proList.add(otherPro);
 			}else if(StringUtils.isNoneEmpty(valuestr)){
@@ -111,7 +118,7 @@ public class SellerTaskPublishController extends BaseController {
 			}
 			
 			//计算总需蚂蚁币(所属蚂蚁币放于value字段上 )
-			if(proValue.getLabel().equals("是")){
+			if(proValue != null && proValue.getLabel().equals("是")){
 				totalPrice += properties.getPrice();
 			}
 			

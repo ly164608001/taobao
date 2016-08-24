@@ -1,5 +1,7 @@
 package com.lxhrainy.myjz.admin.seller.service.impl;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,6 +24,15 @@ public class ShopServiceImpl extends
 AbstractBaseServiceImpl<IShopDao, Shop, Integer>
 implements IShopService {
 
+	/**
+	 * 获取用户的店铺列表
+	 * @param userid
+	 * @return
+	 */
+	public List<Shop> getListByUser(int userid){
+		return dao.getListByUser(userid);
+	}
+	
 	/**
 	 * 激活店铺
 	 * @param id

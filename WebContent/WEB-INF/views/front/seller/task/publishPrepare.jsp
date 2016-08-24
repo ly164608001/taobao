@@ -6,7 +6,12 @@
 <head>
 	<title>发布淘宝任务</title>
 	
+	<script type="text/javascript" src="${basePath}static/js/My97DatePicker/WdatePicker.js"></script>
 	<script type="text/javascript">
+		function shopMgr(){
+			window.location.href = basePath + 'front/seller/shop/shopList.htm';
+		}
+	
 		/**
 		 * 根据属性值显示属性 radio
 		 * @param obj 点击的元素对象
@@ -49,9 +54,6 @@
 				if(proValForm[i].propertiesid == propertiesid){
 					proValForm[i].valueid = valueid;
 					proValForm[i].valuestr = valuestr;
-				/* 	proValForm[i].elementname = elementname;
-					proValForm[i].price = price;
-					proValForm[i].valuelabel = valuelabel; */
 					return;
 				} 
 			}
@@ -60,55 +62,62 @@
 			formObj.propertiesid = propertiesid;
 			formObj.valueid = valueid;
 			formObj.valuestr = valuestr;
-			/* formObj.elementname = elementname;
-			formObj.price = price;
-			formObj.valuelabel = valuelabel; */
 			proValForm.push(formObj);
 		}
 		
 		$(function(){
-			$('.initHidden').hide();
+			$('.initHidden').hide();  //副属性隐藏
+			$('.istimediv').hide();   //定时发布隐藏
+			
 			//搜索进店的初始
 			showProByValue($('#62'));
 			
-			//发布任务
-			$('#submitBtn').click(function(){
-				//将选中的下拉框和输入框值保存proValForm中
-				var proid = $(this).attr('id');
-				
-				$('.select').each(function(){
-					var valueid = $(this).val();
-					if(!isNull(valueid)){
-						valueid = valueid.split(' ')[1];
-						addForm(proid,valueid,'');
-					}
-				});
-				
-				$('.formInput').each(function(){
-					var valueStr = $(this).val();
-					if(!isNull(valueStr)){
-						addForm(proid,'',valueStr);
-					}
-				});
-				
-				var formData = JSON.stringify(proValForm);
-				console.log(formData);
-				$('#formData').val(formData);
-				$.ajax({
-					type : 'POST',
-					url : '${basePath}front/seller/task/publish.htm',
-					data : {'formData':formData},
-					dataType : 'JSON',
-					success : function(result){
-						top.layer.msg(result.msg);
-					}
-					
-				});
-				
+			//是否定时发布
+			$('.istime').click(function(){
+				var txt = $(this).text();
+				if(txt == '是'){
+					$('#istime').val(1);
+					$('.istimediv').show();
+				}else{
+					$('#istime').val(0);
+					$('.istimediv').hide();
+				}
 			});
 			
 		})
 		
+		function submitForm(){
+			//将选中的下拉框和输入框值保存proValForm中
+			var proid = $(this).attr('id');
+			
+			$('.select').each(function(){
+				var valueid = $(this).val();
+				if(!isNull(valueid)){
+					valueid = valueid.split(' ')[1];
+					addForm(proid,valueid,'');
+				}
+			});
+			
+			$('.formInput').each(function(){
+				var valueStr = $(this).val();
+				if(!isNull(valueStr)){
+					addForm(proid,'',valueStr);
+				}
+			});
+			
+			var formData = JSON.stringify(proValForm);
+			$('#formData').val(formData);
+			$.ajax({
+				type : 'POST',
+				url : '${basePath}front/seller/task/publish.htm',
+				data : $('#submitForm').serialize(),
+				dataType : 'JSON',
+				success : function(result){
+					top.layer.msg(result.msg);
+				}
+				
+			});
+		}
 	</script> 
 	
 </head>
@@ -117,6 +126,10 @@
 		<h4>
 			<span class="title">发布淘宝任务</span>
 		</h4>
+		<form id="submitForm" class="form form-horizontal">
+		<input type="hidden" id="formData" name="formData" />
+		<input type="hidden" id="istime" name="istime" value="0"/>
+		<input type="hidden" name="targetsubtype" value="1"/>
 		<div class="moneyOrder rechange workDetail">
 			<legend></legend>
 			
@@ -127,13 +140,42 @@
 						<c:when test="${vs.count == 1}">1.任务基本信息</c:when>
 						<c:when test="${vs.count == 2}">2.任务需求设置</c:when>
 						<c:when test="${vs.count == 3}">3.买手身份验证</c:when>
-						<c:when test="${vs.count == 4}">4.发布任务设置</c:when>
 					</c:choose>  
 				</h4>
+				
+				<c:if test="${vs.count == 1}">
+					<div class="row cl">
+						<label class="form-label col-xs-4 col-sm-3">淘宝店铺：</label>
+						<div class="formControls col-xs-2 col-sm-3">
+							<span class="select-box">
+							  <select class="select" size="1" name="shop.id">
+							    <c:forEach items="${shopList}" var="shop"><option value="${shop.id}">${shop.name}</option></c:forEach>
+							  </select>
+							</span>
+						</div>
+						<div class="formControls col-xs-2 col-sm-3">
+							<a href="javascript:void(0);" onclick="shopMgr();" class="text">添加店铺</a>
+						</div>
+					</div>
+					<div class="row cl">
+						<label class="form-label col-xs-4 col-sm-3">搜索入口：</label>
+						<div class="formControls col-xs-2 col-sm-3">
+							<span class="select-box">
+							  <select class="select" size="1" name="searchroad">
+							    <option value="1">淘宝任务</option>
+							  </select>
+							</span>
+						</div>
+						<div class="formControls col-xs-4 col-sm-5">
+							<span class="text gray">提示买手是通过淘宝首页或者天猫首页进去搜索</span>
+						</div>
+					</div>
+				</c:if>
+				
 				<!-- 展示属性 -->
 				<c:forEach items="${taskPublish.propertiesList}" var="pro">
 					<script>
-						addForm(${pro.id},'','');
+						addForm(${pro.id},'-1','');
 					</script>
 				
 					<!-- 属性显示块开头 -->
@@ -261,13 +303,38 @@
 			
 			</c:forEach><!-- 最外层任务展示局域end -->
 			
+			<h4>4.发布任务设置</h4>
+				<div class="row cl">
+					<label class="form-label col-xs-4 col-sm-3">是否定时发布：</label>
+					<div class="formControls col-xs-4 col-sm-6">
+						<span class="tab-tip istime">是</span>
+						<span class="tab-tip istime active">否</span>
+					</div>
+				</div>
+				<div class="row cl istimediv">
+					<label class="form-label col-xs-4 col-sm-3">发布时间：</label>
+					<div class="formControls col-xs-2 col-sm-3">
+						<input class="Wdate write-time input-text radius size-M"  type="text" name="publictime"
+							 onFocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',isShowClear:false,readOnly:true})"/>
+					</div>
+					<div class="formControls col-xs-2 col-sm-3">
+					</div>
+				</div>
+				<div class="row cl">
+					<label class="form-label col-xs-4 col-sm-3">保存任务模板：</label>
+					<div class="formControls col-xs-2 col-sm-3">
+						<input type="text" class="input-text" /></div>
+					<div class="formControls col-xs-2 col-sm-3">
+					</div>
+				</div>
+			
 			<div class="row cl">
 				<div class="col-xs-2 col-sm-4 btnWrap">
-					<input class="btn radius btn-secondary btn-ti" id="submitBtn" type="button" value="立即发布任务" />
+					<input class="btn radius btn-secondary btn-ti" id="submitBtn" type="button" value="立即发布任务" onclick="submitForm()"/>
 				</div>
 			</div>
 	</div>
-
+	</form>
 </div>
 </body>
 </html>

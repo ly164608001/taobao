@@ -38,6 +38,14 @@
 		</if>
 	</sql>
     
+    <select id="getListByUser" resultType="Shop">
+		SELECT 
+			<include refid="sellerShopColumns"/>
+		FROM seller_shop T 
+		<include refid="sellerShopJoins"/>
+		WHERE T.userid = #{userid}
+	</select>
+    
 	<select id="getById" resultType="Shop">
 		SELECT 
 			<include refid="sellerShopColumns"/>
