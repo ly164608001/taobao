@@ -165,24 +165,27 @@
 									<tr>
 										<th><input type="checkbox" name=""></th>
 										<th colspan="6">
-											<span class="mr10">发布时间：<f:formatDate value="${order.publictime}" pattern="yyyy-MM-DD HH:mm:ss"/></span>
+											<span class="mr10">发布时间：<f:formatDate value="${order.publictime}" pattern="yyyy-MM-dd HH:mm:ss"/></span>
 										 	<span class="mr10">QQ:5464569846</span>
 										</th>
 									</tr>
 									<tr>
 										<td>${vs.count}</td>
-										<td class="first"><span>${order.orderno}</span> <span>发布人：${order.createuser.username}</span>
-											<span> 关键词： <em class="red">布衣柜</em> <em class="red">实木</em>
-										</span> <span> <span class="label label-warning radius">淘宝</span>
-												<span class="mobile-order"
-												title="接任务者需要通过手机、pad等智能设备的app下单支付">手机订单</span>
-										</span></td>
-										<td class="text-c assure-icon alipay"><span> <em
-												class="red">1</em> 件
-										</span> <span> 单件 <em class="red">138.00</em> 元
-										</span> <span> 总额 <em class="red">138.00</em> 元
-										</span> <span> <i></i> 平台担保
-										</span></td>
+										<td class="first">
+											<span>${order.orderno}</span> <span>发布人：${order.createuser.username}</span>
+											<span> 关键词： <em class="red">布衣柜</em> <em class="red">实木</em></span> 
+											<span> 
+												<span class="label label-warning radius">淘宝</span>
+												<span class="mobile-order" title="接任务者需要通过手机、pad等智能设备的app下单支付">手机订单</span>
+											</span>
+										</td>
+										<td class="text-c assure-icon alipay">
+											<span> <em class="red">1</em> 件
+											</span> <span> 单件 <em class="red">138.00</em> 元
+											</span> <span> 总额 <em class="red">138.00</em> 元
+											</span> <span> <i></i> 平台担保
+											</span>
+										</td>
 										<td><span>物流显示签收后五星带字好评</span> <span> <span
 												class="label label-success radius">本人签收</span> <span
 												class="label label-success radius">三星</span> <span
@@ -202,14 +205,24 @@
 												</span> <span> <a href="#" class="btn btn-link btnBady">查看宝贝截图</a>
 												</span></span></td>
 										<td><span class="red">8.04元</span> <span>11.82个旺点</span></td>
-										<td><span>申诉中</span> <span> <a href="#"
-												class="btn btn-link">我要撤销申诉</a>
-										</span></td>
-										<td><span> <a href="#"
-												class="btn btn btn-secondary radius btn-sure">我要审核</a>
-										</span> <span> <a href="#" class="btn btn-link btn-answer">查看申诉</a>
-										</span> <span> <a href="#" class="btn btn-link">查看任务详情</a>
-										</span></td>
+										<td>
+											<c:choose>
+												<c:when test="${order.status == 1}">已发布待接单</c:when>
+												<c:when test="${order.status == 1}">已付款待审核</c:when>
+												<c:when test="${order.status == 1}"></c:when>
+												<c:when test="${order.status == 1}"></c:when>
+												<c:when test="${order.status == 1}"></c:when>
+												<c:when test="${order.status == 1}"></c:when>
+												<c:when test="${order.status == 1}"></c:when>
+											</c:choose>
+											<span>申诉中</span> 
+											<span> <a href="#" class="btn btn-link">我要撤销申诉</a></span>
+										</td>
+										<td>
+											<span> <a href="#" class="btn btn btn-secondary radius btn-sure">我要审核</a></span> 
+											<span> <a href="#" class="btn btn-link btn-answer">查看申诉</a></span>
+											<span> <a href="#" class="btn btn-link">查看任务详情</a> </span>
+										</td>
 									</tr>
 									<tr>
 										<td colspan="5"><span> 接手方： <img

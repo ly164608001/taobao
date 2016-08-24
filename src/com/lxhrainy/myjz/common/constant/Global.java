@@ -156,6 +156,8 @@ public class Global {
 	public final static int ORDER_STATUS_PRAISE = 6;
 	public final static int ORDER_STATUS_APPEND = 7;
 	public final static int ORDER_STATUS_FINISH = 8;
+	public final static int ORDER_STATUS_STATE = -1;
+	public final static int ORDER_STATUS_STATE_FAIL = -2;
 	/**订单 end**/
 	
 }

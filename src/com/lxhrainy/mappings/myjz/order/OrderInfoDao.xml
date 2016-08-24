@@ -26,6 +26,7 @@
 	</sql>
 	
 	<sql id="orderInfoJoins">
+		LEFT JOIN USER_INFO CU ON CU.id = T.createuser 
 		LEFT JOIN USER_INFO RU ON RU.id = T.receiveruser 
 		LEFT JOIN seller_shop S ON S.id = T.shopid
 	</sql>

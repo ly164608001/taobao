@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50096
 File Encoding         : 65001
 
-Date: 2016-08-23 18:06:55
+Date: 2016-08-24 20:23:27
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -320,12 +320,14 @@ CREATE TABLE `order_info` (
   `searchroad` int(11) default NULL COMMENT '搜索入口',
   `type` int(11) default NULL COMMENT '手机/电脑单类型',
   `targetsubtype` int(11) default NULL COMMENT '任务目标副类型(0:常规单;1:流量单;)',
+  `paytime` datetime default NULL COMMENT '付款时间',
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='订单基本信息';
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='订单基本信息';
 
 -- ----------------------------
 -- Records of order_info
 -- ----------------------------
+INSERT INTO `order_info` VALUES ('3', 'TB2016082419160003', '2016-08-24 19:16:47', '2', '2016-08-24 19:16:47', '0', '1', '0.00', null, null, '1', '1', null, null, null);
 
 -- ----------------------------
 -- Table structure for `order_other_properties`
@@ -337,11 +339,45 @@ CREATE TABLE `order_other_properties` (
   `propertiesvalueid` int(11) default NULL COMMENT '属性值ID',
   `propertiesvalue` varchar(255) default NULL COMMENT '属性值',
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='订单其他属性';
+) ENGINE=InnoDB AUTO_INCREMENT=103 DEFAULT CHARSET=utf8 COMMENT='订单其他属性';
 
 -- ----------------------------
 -- Records of order_other_properties
 -- ----------------------------
+INSERT INTO `order_other_properties` VALUES ('69', null, '2', null);
+INSERT INTO `order_other_properties` VALUES ('70', null, '62', null);
+INSERT INTO `order_other_properties` VALUES ('71', null, '59', null);
+INSERT INTO `order_other_properties` VALUES ('72', null, '1', null);
+INSERT INTO `order_other_properties` VALUES ('73', null, '91', null);
+INSERT INTO `order_other_properties` VALUES ('74', null, '89', null);
+INSERT INTO `order_other_properties` VALUES ('75', null, '88', null);
+INSERT INTO `order_other_properties` VALUES ('76', null, '18', null);
+INSERT INTO `order_other_properties` VALUES ('77', null, '17', null);
+INSERT INTO `order_other_properties` VALUES ('78', null, '16', null);
+INSERT INTO `order_other_properties` VALUES ('79', null, '15', null);
+INSERT INTO `order_other_properties` VALUES ('80', null, '14', null);
+INSERT INTO `order_other_properties` VALUES ('81', null, '13', null);
+INSERT INTO `order_other_properties` VALUES ('82', null, '12', null);
+INSERT INTO `order_other_properties` VALUES ('83', null, '11', null);
+INSERT INTO `order_other_properties` VALUES ('84', null, '10', null);
+INSERT INTO `order_other_properties` VALUES ('85', null, '9', null);
+INSERT INTO `order_other_properties` VALUES ('86', null, '8', null);
+INSERT INTO `order_other_properties` VALUES ('87', null, '7', null);
+INSERT INTO `order_other_properties` VALUES ('88', null, '6', null);
+INSERT INTO `order_other_properties` VALUES ('89', null, '5', null);
+INSERT INTO `order_other_properties` VALUES ('90', null, '4', null);
+INSERT INTO `order_other_properties` VALUES ('91', null, '3', null);
+INSERT INTO `order_other_properties` VALUES ('92', null, '28', null);
+INSERT INTO `order_other_properties` VALUES ('93', null, '26', null);
+INSERT INTO `order_other_properties` VALUES ('94', null, '25', null);
+INSERT INTO `order_other_properties` VALUES ('95', null, '24', null);
+INSERT INTO `order_other_properties` VALUES ('96', null, '23', null);
+INSERT INTO `order_other_properties` VALUES ('97', null, '22', null);
+INSERT INTO `order_other_properties` VALUES ('98', null, '21', null);
+INSERT INTO `order_other_properties` VALUES ('99', null, '20', null);
+INSERT INTO `order_other_properties` VALUES ('100', null, '19', null);
+INSERT INTO `order_other_properties` VALUES ('101', null, '27', null);
+INSERT INTO `order_other_properties` VALUES ('102', null, null, null);
 
 -- ----------------------------
 -- Table structure for `seller_label`
@@ -425,8 +461,8 @@ CREATE TABLE `seller_shop` (
 -- ----------------------------
 -- Records of seller_shop
 -- ----------------------------
-INSERT INTO `seller_shop` VALUES ('1', '布衣柜商家', '1', '布衣柜', 'http://www.taobao.com', '10', '1', '1', '2016-07-04 23:50:17', '1');
-INSERT INTO `seller_shop` VALUES ('5', '腾达店', '1', '22', '22', '0', '1', '3', '2016-07-05 00:33:19', '1');
+INSERT INTO `seller_shop` VALUES ('1', '布衣柜商家', '1', '布衣柜', 'http://www.taobao.com', '10', '1', '2', '2016-07-04 23:50:17', '1');
+INSERT INTO `seller_shop` VALUES ('5', '腾达店', '1', '22', '22', '0', '1', '2', '2016-07-05 00:33:19', '1');
 INSERT INTO `seller_shop` VALUES ('6', '天使街23号', '1', '22 ', 'www.baodiu.com2', '0', '0', '3', '2016-07-05 21:22:40', '1');
 INSERT INTO `seller_shop` VALUES ('7', '云店', null, 'yun', 'www.yun.com', '0', '0', '3', '2016-07-19 22:33:15', '1');
 
@@ -4535,7 +4571,7 @@ INSERT INTO `task_properties` VALUES ('8', 'searchgoodstip', '商品搜索提示
 INSERT INTO `task_properties` VALUES ('9', 'gooodslinkimg', '商品链接位置截图', '0', '1', '0', 'img', '1', 'img', '1', '1', '-1', null, null);
 INSERT INTO `task_properties` VALUES ('10', 'searchflowtip', '搜索流程提示图', '0', '1', '0', 'img', '4', 'null', '1', '1', '-1', null, null);
 INSERT INTO `task_properties` VALUES ('11', 'goodslinkaddr', '商品链接地址', '0', '1', '0', 'text', '1', 'null', '0', '1', '-1', null, null);
-INSERT INTO `task_properties` VALUES ('12', 'goodsbond', '单个商品保证金', '0', '1', '0', 'text', '1', 'null', '0', '1', '-1', null, null);
+INSERT INTO `task_properties` VALUES ('12', 'bond', '单个商品保证金', '0', '1', '0', 'text', '1', 'null', '0', '1', '-1', null, null);
 INSERT INTO `task_properties` VALUES ('13', 'freemail', '是否包邮', '0', '1', '0', 'radio', '2', 'null', '0', '1', '-1', null, null);
 INSERT INTO `task_properties` VALUES ('14', 'batchordernum', '批量放单份数', '0', '1', '0', 'text', '1', 'null', '0', '1', '-1', null, null);
 INSERT INTO `task_properties` VALUES ('15', 'batchpublishinterval', '批量发布间隔', '0', '1', '0', 'text', '1', 'null', '0', '1', '-1', null, null);
@@ -4569,8 +4605,6 @@ INSERT INTO `task_properties` VALUES ('42', 'wwhsex', '旺旺号性别', '0', '3
 INSERT INTO `task_properties` VALUES ('43', 'mmhage', '旺旺号买手年龄', '0', '3', '30', 'radio', '2', 'img', '1', '1', '-1', null, null);
 INSERT INTO `task_properties` VALUES ('44', 'buyerlevel', '过滤买号等级', '0', '3', '-2', 'radio', '2', 'null', '0', '1', '-1', null, '1');
 INSERT INTO `task_properties` VALUES ('45', 'isoldbuyer', '是否老客户才可接', '0', '3', '45', 'radio', '2', 'null', '0', '1', '-1', null, null);
-INSERT INTO `task_properties` VALUES ('46', 'timepublish', '设置定时发布', '0', '4', '0', 'radio', '2', 'null', '0', '1', '-1', null, null);
-INSERT INTO `task_properties` VALUES ('47', 'savetasktemp', '保存任务模版', '0', '4', '0', 'text', '1', 'null', '0', '1', '-1', null, null);
 INSERT INTO `task_properties` VALUES ('48', 'assist1pic', '副宝贝1主图', '0', '1', '0', 'img', '1', 'null', '0', '2', '2', '60', '2');
 INSERT INTO `task_properties` VALUES ('49', 'assist1link', '副宝贝1链接地址', '0', '1', '0', 'text', '1', 'null', '0', '2', '2', '60', '2');
 INSERT INTO `task_properties` VALUES ('50', 'assist1price', '副宝贝1单价', '0', '1', '0', 'text', '1', 'null', '0', '2', '2', '60', '2');
@@ -4935,9 +4969,10 @@ CREATE TABLE `user_money` (
   `frozenbalance` double(20,2) default NULL COMMENT '冻结金额',
   `deleted` int(1) default NULL COMMENT '删除标识',
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='账户信息';
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='账户信息';
 
 -- ----------------------------
 -- Records of user_money
 -- ----------------------------
 INSERT INTO `user_money` VALUES ('1', '3', 'ifS7tw1E6a7Yx0lPE3rcSw==', '100.00', '272.00', '224.00', '0');
+INSERT INTO `user_money` VALUES ('2', '2', 'ifS7tw1E6a7Yx0lPE3rcSw==', '100.00', '100.00', '0.00', '0');
