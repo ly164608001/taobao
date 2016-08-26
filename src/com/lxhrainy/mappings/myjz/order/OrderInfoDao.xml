@@ -17,6 +17,8 @@
 		T.searchroad AS "searchroad",
 		T.type AS "type",
 		T.paytime AS "paytime",
+		T.mainstatus AS "mainstatus",
+		T.targetsubtype AS "targetsubtype",
 		
 		RU.loginip AS "receiveruser.loginip",
 		RU.creditscore AS "receiveruser.creditscore",
@@ -36,14 +38,20 @@
 			<where>
 				1 = 1
 				<if test="condition.publicBegin != null">
-					AND T.publictime &gt;= #{condition.publicEnd}
+					AND T.publictime &gt;= #{condition.publicBegin}
 				</if>
 				<if test="condition.publicEnd != null">
 					AND T.publictime &lt;= #{condition.publicEnd}
 				</if>
 				<if test="condition.model!=null">
+					<if test="condition.model.targetsubtype != null">
+						AND T.targetsubtype = #{condition.model.targetsubtype}
+					</if>
 					<if test="condition.model.orderno != null and condition.model.orderno != ''">
 						AND T.orderno LIKE CONCAT('%',#{condition.model.orderno},'%') 
+					</if>
+					<if test="condition.model.mainstatus!=null">
+						AND T.mainstatus = #{condition.model.mainstatus}
 					</if>
 				</if>
 			</where>
@@ -99,7 +107,9 @@
 			shopid,
 			searchroad,
 			type,
-			paytime
+			paytime,
+			mainstatus,
+			targetsubtype
 		) VALUES (
 			#{id},
 			#{orderno},
@@ -114,7 +124,9 @@
 			#{shop.id},
 			#{searchroad},
 			#{type},
-			#{paytime}
+			#{paytime},
+			#{mainstatus},
+			#{targetsubtype}
 		)
 	</insert>
 	
@@ -132,7 +144,9 @@
 			shopid = #{shop.id},
 			searchroad = #{searchroad},
 			type = #{type},
-			paytime = #{paytime}
+			paytime = #{paytime},
+			mainstatus = #{mainstatus},
+			targetsubtype = #{targetsubtype}
 		WHERE id = #{id}
 	</update>
 	

@@ -130,6 +130,7 @@
 		<input type="hidden" id="formData" name="formData" />
 		<input type="hidden" id="istime" name="istime" value="0"/>
 		<input type="hidden" name="targetsubtype" value="1"/>
+		<input type="hidden" name="type" value="1"/>
 		<div class="moneyOrder rechange workDetail">
 			<legend></legend>
 			

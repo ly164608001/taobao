@@ -23,6 +23,7 @@
 			<id property="memo" column="valueList.memo" />
 			<id property="isdefault" column="valueList.isdefault" />
 			<id property="func" column="valueList.func" />
+			<id property="price" column="valueList.price" />
 		</collection>
 	</resultMap>
 	
@@ -63,7 +64,8 @@
 		V.keyvalue AS "valueList.keyvalue",
 		V.memo AS "valueList.memo",
 		V.isdefault AS "valueList.isdefault",
-		V.func AS "valueList.func"
+		V.func AS "valueList.func",
+		V.price AS "valueList.price"
 	</sql>
 	
 	<sql id="taskPropertiesJoins">

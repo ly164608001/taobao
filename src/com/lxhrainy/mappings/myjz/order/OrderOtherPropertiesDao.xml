@@ -6,7 +6,8 @@
 		T.id AS "id",
 		T.orderid AS "order.id",
 		T.propertiesvalueid AS "propertiesval.id",
-		T.propertiesvalue AS "propertiesvalue"
+		T.propertiesvalue AS "propertiesvalue",
+		T.propertiesid AS "properties.id"
 	</sql>
 	
 	<sql id="orderOtherPropertiesJoins">
@@ -60,20 +61,22 @@
 			id,
 			orderid,
 			propertiesvalueid,
-			propertiesvalue
+			propertiesvalue,
+			propertiesid
 		) VALUES (
 			#{id},
 			#{order.id},
 			#{propertiesval.id},
-			#{propertiesvalue}
+			#{propertiesvalue},
+			#{properties.id}
 		)
 	</insert>
 	
 	<insert id="insertBatch" parameterType="ArrayList">  
-	    insert order_other_properties(orderid,propertiesvalueid,propertiesvalue)  
+	    insert order_other_properties(orderid,propertiesid,propertiesvalueid,propertiesvalue)  
 	    values  
 	    <foreach collection="list" item="obj" index="index" separator="," >  
-	       (#{obj.order.id},#{obj.propertiesval.id},#{obj.propertiesvalue})  
+	       (#{obj.order.id},#{obj.properties.id},#{obj.propertiesval.id},#{obj.propertiesvalue})  
 	    </foreach>  
     </insert>
 	
@@ -81,7 +84,8 @@
 		UPDATE order_other_properties SET 	
 			orderid = #{order.id},
 			propertiesvalueid = #{propertiesval.id},
-			propertiesvalue = #{propertiesvalue}
+			propertiesvalue = #{propertiesvalue},
+			propertiesid = #{properties.id}
 		WHERE id = #{id}
 	</update>
 	

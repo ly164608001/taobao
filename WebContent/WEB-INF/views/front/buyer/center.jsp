@@ -40,9 +40,6 @@
 					<a href="javascript:void(0);" onclick="changeMenu('front/buyer/task/taskTaobaoList.htm');">淘宝精刷任务</a>
 				</dd>
 				<dd>
-					<a href="javascript:void(0);" onclick="changeMenu('front/buyer/task/taskTaobaoNormalList.htm');" >淘宝普通任务</a>
-				</dd>
-				<dd>
 					<a href="javascript:void(0);" onclick="changeMenu('front/buyer/taskappeal/taobaoAppealList.htm');">任务申述</a>
 				</dd>
 				

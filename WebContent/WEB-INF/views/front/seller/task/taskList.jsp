@@ -58,11 +58,11 @@
 						6、任务【 <span class="orange">确认收货好评，完成任务</span> 】的商家审核步骤，商家在默认 <span
 							class="orange">24小时</span> 内未审核，如果 <span class="orange">再超过24小时</span>
 						还未审核，即在 <span class="blue">48小时未审核</span>
-						，系统将自动返款(本金和佣金)给买家，请商家及时审核，出现相关问题后果自负。任务有超时会补偿旺点给买家（ <span
-							class="blue">每超出12小时补偿2个旺点</span> ）；
+						，系统将自动返款(本金和佣金)给买家，请商家及时审核，出现相关问题后果自负。任务有超时会补偿蚂蚁币给买家（ <span
+							class="blue">每超出12小时补偿2个蚂蚁币</span> ）；
 					</p>
 					<p>
-						7、 <span class="blue">1个旺点=0.68元</span> ；
+						7、 <span class="blue">1个蚂蚁币=0.68元</span> ；
 					</p>
 
 					<p>
@@ -81,10 +81,6 @@
 		</div>
 		<div class="tiro-control">
 			<span class="click-btn open-btn">收缩</span>
-			<!--  <span class="click-btn open-btn">
-						收缩 <i></i>
-					</span>
-					-->
 		</div>
 
 		</section>
@@ -94,28 +90,35 @@
 		<div class="workDoing mt20">
 			<div id="tab_demo" class="HuiTab">
 				<div class="tabBar cl">
-					<span class="clearfix tip-numberWrap"> <em class="f-l">要你操作的任务</em>
+					<span onclick="searchByStatus(1);" <c:if test="${vo.model.mainstatus == 1}">class="clearfix tip-numberWrap"</c:if>><em class="f-l">要您操作的任务</em>
 						<em class="tips-number f-l">20</em>
-					</span> <span> <em class="f-l">进行中的任务</em> <em
+					</span> 
+					<span onclick="searchByStatus(2);" <c:if test="${vo.model.mainstatus == 2}">class="clearfix tip-numberWrap"</c:if>> <em class="f-l">进行中的任务</em> <em
 						class="tips-number f-l">20</em>
-					</span> <span> <em class="f-l">暂停中的任务</em> <em
+					</span> 
+					<span onclick="searchByStatus(3);" <c:if test="${vo.model.mainstatus == 3}">class="clearfix tip-numberWrap"</c:if>> <em class="f-l">暂停中的任务</em> <em
 						class="tips-number f-l">20</em>
-					</span> <span> <em class="f-l">已完成的任务</em> <em
+					</span> 
+					<span onclick="searchByStatus(4);" <c:if test="${vo.model.mainstatus == 4}">class="clearfix tip-numberWrap"</c:if>> <em class="f-l">已完成的任务</em> <em
 						class="tips-number f-l">20</em>
-					</span> <span> <em class="f-l">全部任务</em> <em
+					</span> 
+					<span onclick="searchByStatus(-1);" <c:if test="${empty vo.model.status}">class="clearfix tip-numberWrap"</c:if>> <em class="f-l">全部任务</em> <em
 						class="tips-number f-l">20</em>
 					</span>
 				</div>
 				<div class="tabCon">
 					<div class="search-tab mt20 search-tab-other">
+					  <form id="searchForm" method="post" action="${basePath}front/seller/task/taskList.htm">
+					  	<input type="hidden" name="model.mainstatus" value="${vo.model.mainstatus}" id="pstatus"/>
 						<ul>
-							<li class="tab02"><span class="tab-title"
-								style="width: 140px;">任务编号、订单号：</span> <input type="text"
-								placeholder="请输入任务编号" class="input-text radius size-M">
-									<span class="tab-title">淘宝号：</span> <input type="text"
-									placeholder="请输入淘宝号" class="input-text radius size-M">
-										<span class="tab-title">单品价格：</span> <input type="text"
-										placeholder="请输入单品价格" class="input-text radius size-M"></li>
+							<li class="tab02">
+								<span class="tab-title" style="width: 140px;">任务编号：</span>
+								<input type="text" placeholder="请输入任务编号" class="input-text radius size-M" />
+								<span class="tab-title">淘宝号：</span> 
+								<input type="text" placeholder="请输入淘宝号" class="input-text radius size-M" />
+								<span class="tab-title">单品价格：</span> 
+								<input type="text" placeholder="请输入单品价格" class="input-text radius size-M" />
+							</li>
 							<li class="tab02"><span class="tab-title">发布时间：</span> <span
 								class="timeBet"> <input id="d4311" placeholder="请输入开始时间"
 									class="Wdate write-time input-text radius size-M" type="text"
@@ -132,8 +135,9 @@
 										<option value="2">菜单二</option>
 										<option value="3">菜单三</option>
 								</select>
-							</span> <input class="btn radius btn-secondary" type="button" value="查询"></li>
+							</span> <input class="btn radius btn-secondary" type="button" onclick="dosearch();" value="查询"></li>
 						</ul>
+					  </form>
 					</div>
 					<div class="serch-type clearfix mt20">
 						<span class="title f-l">当前状态：</span>
@@ -204,7 +208,7 @@
 													class="pt5 order"> 淘宝订单号： <em class="red">1639040737871287</em>
 												</span> <span> <a href="#" class="btn btn-link btnBady">查看宝贝截图</a>
 												</span></span></td>
-										<td><span class="red">8.04元</span> <span>11.82个旺点</span></td>
+										<td><span class="red">8.04元</span> <span>11.82个蚂蚁币</span></td>
 										<td>
 											<c:choose>
 												<c:when test="${order.status == 1}">已发布待接单</c:when>
@@ -254,6 +258,12 @@
 	</div>
 
 	<script>
+		function searchByStatus(status){
+			$('#searchForm input[type!="button"]').val('');
+			$('#pstatus').val(status);
+			$('#searchForm').submit();
+		}
+		
 		$(function() {
 			listenIframeHeight();
 			
@@ -270,15 +280,6 @@
 					$(this).css('background-position', '52px 11px');
 				}
 				listenIframeHeight();
-			});
-			
-			$.Huitab("#tab_demo .tabBar span", "#tab_demo .tabCon", "current",
-					"click", "0");
-			
-			
-			layer.config({
-				extend : [ 'skin/layerSkinExtend.css' ], //加载新皮肤
-				skin : 'layer-ext-myskin' //一旦设定，所有弹层风格都采用此主题。
 			});
 			
 			// 任务申诉

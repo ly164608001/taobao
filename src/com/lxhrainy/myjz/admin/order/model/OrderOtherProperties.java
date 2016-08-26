@@ -1,6 +1,7 @@
 package com.lxhrainy.myjz.admin.order.model;
 
 import com.lxhrainy.core.common.model.BaseModel;
+import com.lxhrainy.myjz.admin.task.model.TaskProperties;
 import com.lxhrainy.myjz.admin.task.model.TaskPropertiesValue;
 
 /**
@@ -15,6 +16,15 @@ public class OrderOtherProperties extends BaseModel {
 	private OrderInfo order; // 订单ID
 	private TaskPropertiesValue propertiesval; // 属性值ID
 	private String propertiesvalue; // 属性值
+	private TaskProperties properties; // 属性
+
+	public TaskProperties getProperties() {
+		return properties;
+	}
+
+	public void setProperties(TaskProperties properties) {
+		this.properties = properties;
+	}
 
 	public OrderInfo getOrder() {
 		return order;

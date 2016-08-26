@@ -29,6 +29,15 @@ public class OrderInfo extends BaseModel {
 	private Integer searchroad; // 搜索入口
 	private String type; // 手机/电脑单类型
 	private Integer targetsubtype;// 任务目标副类型(0:常规单;1:流量单;)
+	private Integer mainstatus;
+
+	public Integer getMainstatus() {
+		return mainstatus;
+	}
+
+	public void setMainstatus(Integer mainstatus) {
+		this.mainstatus = mainstatus;
+	}
 
 	public Date getPaytime() {
 		return paytime;

@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50096
 File Encoding         : 65001
 
-Date: 2016-08-24 20:23:27
+Date: 2016-08-26 11:09:21
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -312,13 +312,14 @@ CREATE TABLE `order_info` (
   `createuser` int(11) default NULL COMMENT '创建人',
   `publictime` datetime default NULL COMMENT '任务发布时间',
   `istime` int(1) default NULL COMMENT '是否定时发布',
+  `mainstatus` int(11) default NULL COMMENT '任务总状态 1 要您操作 2 进行中 3 暂停 4 已完成',
   `status` int(11) default NULL COMMENT '订单状态',
   `bond` double(10,2) default NULL COMMENT '担保金',
   `receiveruser` int(11) default NULL COMMENT '接单人',
   `receivetime` datetime default NULL COMMENT '接单时间',
   `shopid` int(11) default NULL COMMENT '店铺ID',
   `searchroad` int(11) default NULL COMMENT '搜索入口',
-  `type` int(11) default NULL COMMENT '手机/电脑单类型',
+  `type` int(11) default NULL COMMENT '0手机/1电脑单类型',
   `targetsubtype` int(11) default NULL COMMENT '任务目标副类型(0:常规单;1:流量单;)',
   `paytime` datetime default NULL COMMENT '付款时间',
   PRIMARY KEY  (`id`)
@@ -327,7 +328,7 @@ CREATE TABLE `order_info` (
 -- ----------------------------
 -- Records of order_info
 -- ----------------------------
-INSERT INTO `order_info` VALUES ('3', 'TB2016082419160003', '2016-08-24 19:16:47', '2', '2016-08-24 19:16:47', '0', '1', '0.00', null, null, '1', '1', null, null, null);
+INSERT INTO `order_info` VALUES ('3', 'TB2016082419160003', '2016-08-24 19:16:47', '2', '2016-08-24 19:16:47', '0', null, '1', '0.00', null, null, '1', '1', '1', '0', null);
 
 -- ----------------------------
 -- Table structure for `order_other_properties`
@@ -338,46 +339,47 @@ CREATE TABLE `order_other_properties` (
   `orderid` int(11) default NULL COMMENT '订单ID',
   `propertiesvalueid` int(11) default NULL COMMENT '属性值ID',
   `propertiesvalue` varchar(255) default NULL COMMENT '属性值',
+  `propertiesid` int(11) default NULL COMMENT '属性id',
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=103 DEFAULT CHARSET=utf8 COMMENT='订单其他属性';
 
 -- ----------------------------
 -- Records of order_other_properties
 -- ----------------------------
-INSERT INTO `order_other_properties` VALUES ('69', null, '2', null);
-INSERT INTO `order_other_properties` VALUES ('70', null, '62', null);
-INSERT INTO `order_other_properties` VALUES ('71', null, '59', null);
-INSERT INTO `order_other_properties` VALUES ('72', null, '1', null);
-INSERT INTO `order_other_properties` VALUES ('73', null, '91', null);
-INSERT INTO `order_other_properties` VALUES ('74', null, '89', null);
-INSERT INTO `order_other_properties` VALUES ('75', null, '88', null);
-INSERT INTO `order_other_properties` VALUES ('76', null, '18', null);
-INSERT INTO `order_other_properties` VALUES ('77', null, '17', null);
-INSERT INTO `order_other_properties` VALUES ('78', null, '16', null);
-INSERT INTO `order_other_properties` VALUES ('79', null, '15', null);
-INSERT INTO `order_other_properties` VALUES ('80', null, '14', null);
-INSERT INTO `order_other_properties` VALUES ('81', null, '13', null);
-INSERT INTO `order_other_properties` VALUES ('82', null, '12', null);
-INSERT INTO `order_other_properties` VALUES ('83', null, '11', null);
-INSERT INTO `order_other_properties` VALUES ('84', null, '10', null);
-INSERT INTO `order_other_properties` VALUES ('85', null, '9', null);
-INSERT INTO `order_other_properties` VALUES ('86', null, '8', null);
-INSERT INTO `order_other_properties` VALUES ('87', null, '7', null);
-INSERT INTO `order_other_properties` VALUES ('88', null, '6', null);
-INSERT INTO `order_other_properties` VALUES ('89', null, '5', null);
-INSERT INTO `order_other_properties` VALUES ('90', null, '4', null);
-INSERT INTO `order_other_properties` VALUES ('91', null, '3', null);
-INSERT INTO `order_other_properties` VALUES ('92', null, '28', null);
-INSERT INTO `order_other_properties` VALUES ('93', null, '26', null);
-INSERT INTO `order_other_properties` VALUES ('94', null, '25', null);
-INSERT INTO `order_other_properties` VALUES ('95', null, '24', null);
-INSERT INTO `order_other_properties` VALUES ('96', null, '23', null);
-INSERT INTO `order_other_properties` VALUES ('97', null, '22', null);
-INSERT INTO `order_other_properties` VALUES ('98', null, '21', null);
-INSERT INTO `order_other_properties` VALUES ('99', null, '20', null);
-INSERT INTO `order_other_properties` VALUES ('100', null, '19', null);
-INSERT INTO `order_other_properties` VALUES ('101', null, '27', null);
-INSERT INTO `order_other_properties` VALUES ('102', null, null, null);
+INSERT INTO `order_other_properties` VALUES ('69', null, '2', null, null);
+INSERT INTO `order_other_properties` VALUES ('70', null, '62', null, null);
+INSERT INTO `order_other_properties` VALUES ('71', null, '59', null, null);
+INSERT INTO `order_other_properties` VALUES ('72', null, '1', null, null);
+INSERT INTO `order_other_properties` VALUES ('73', null, '91', null, null);
+INSERT INTO `order_other_properties` VALUES ('74', null, '89', null, null);
+INSERT INTO `order_other_properties` VALUES ('75', null, '88', null, null);
+INSERT INTO `order_other_properties` VALUES ('76', null, '18', null, null);
+INSERT INTO `order_other_properties` VALUES ('77', null, '17', null, null);
+INSERT INTO `order_other_properties` VALUES ('78', null, '16', null, null);
+INSERT INTO `order_other_properties` VALUES ('79', null, '15', null, null);
+INSERT INTO `order_other_properties` VALUES ('80', null, '14', null, null);
+INSERT INTO `order_other_properties` VALUES ('81', null, '13', null, null);
+INSERT INTO `order_other_properties` VALUES ('82', null, '12', null, null);
+INSERT INTO `order_other_properties` VALUES ('83', null, '11', null, null);
+INSERT INTO `order_other_properties` VALUES ('84', null, '10', null, null);
+INSERT INTO `order_other_properties` VALUES ('85', null, '9', null, null);
+INSERT INTO `order_other_properties` VALUES ('86', null, '8', null, null);
+INSERT INTO `order_other_properties` VALUES ('87', null, '7', null, null);
+INSERT INTO `order_other_properties` VALUES ('88', null, '6', null, null);
+INSERT INTO `order_other_properties` VALUES ('89', null, '5', null, null);
+INSERT INTO `order_other_properties` VALUES ('90', null, '4', null, null);
+INSERT INTO `order_other_properties` VALUES ('91', null, '3', null, null);
+INSERT INTO `order_other_properties` VALUES ('92', null, '28', null, null);
+INSERT INTO `order_other_properties` VALUES ('93', null, '26', null, null);
+INSERT INTO `order_other_properties` VALUES ('94', null, '25', null, null);
+INSERT INTO `order_other_properties` VALUES ('95', null, '24', null, null);
+INSERT INTO `order_other_properties` VALUES ('96', null, '23', null, null);
+INSERT INTO `order_other_properties` VALUES ('97', null, '22', null, null);
+INSERT INTO `order_other_properties` VALUES ('98', null, '21', null, null);
+INSERT INTO `order_other_properties` VALUES ('99', null, '20', null, null);
+INSERT INTO `order_other_properties` VALUES ('100', null, '19', null, null);
+INSERT INTO `order_other_properties` VALUES ('101', null, '27', null, null);
+INSERT INTO `order_other_properties` VALUES ('102', null, null, null, null);
 
 -- ----------------------------
 -- Table structure for `seller_label`
@@ -4641,105 +4643,106 @@ CREATE TABLE `task_properties_value` (
   `memo` varchar(255) default NULL COMMENT '备注',
   `isdefault` int(1) default NULL COMMENT '是否默认',
   `func` varchar(64) default NULL COMMENT '点击值触发事件名',
+  `price` int(11) default NULL COMMENT '所需蚂蚁币',
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=94 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of task_properties_value
 -- ----------------------------
-INSERT INTO `task_properties_value` VALUES ('1', '1', '否', '0', '', '1', 'showProByValue(this)');
-INSERT INTO `task_properties_value` VALUES ('2', '13', '否', '0', null, '1', null);
-INSERT INTO `task_properties_value` VALUES ('3', '20', '否', '0', '', '1', 'showProByValue(this)');
-INSERT INTO `task_properties_value` VALUES ('4', '21', '否', '0', '', '1', 'showProByValue(this)');
-INSERT INTO `task_properties_value` VALUES ('5', '22', '否', '0', null, '1', null);
-INSERT INTO `task_properties_value` VALUES ('6', '23', '否', '0', null, '1', null);
-INSERT INTO `task_properties_value` VALUES ('7', '24', '否', '0', null, '1', null);
-INSERT INTO `task_properties_value` VALUES ('8', '25', '否', '0', null, '1', null);
-INSERT INTO `task_properties_value` VALUES ('9', '26', '否', '0', null, '1', null);
-INSERT INTO `task_properties_value` VALUES ('10', '27', '否', '0', null, '1', null);
-INSERT INTO `task_properties_value` VALUES ('11', '28', '否', '0', null, '1', null);
-INSERT INTO `task_properties_value` VALUES ('12', '29', '否', '0', null, '1', null);
-INSERT INTO `task_properties_value` VALUES ('13', '30', '否', '0', null, '1', null);
-INSERT INTO `task_properties_value` VALUES ('14', '31', '否', '0', null, '1', null);
-INSERT INTO `task_properties_value` VALUES ('15', '32', '否', '0', null, '1', null);
-INSERT INTO `task_properties_value` VALUES ('16', '33', '否', '0', null, '1', null);
-INSERT INTO `task_properties_value` VALUES ('17', '34', '否', '0', null, '1', null);
-INSERT INTO `task_properties_value` VALUES ('18', '35', '否', '0', null, '1', null);
-INSERT INTO `task_properties_value` VALUES ('19', '36', '否', '0', null, '1', null);
-INSERT INTO `task_properties_value` VALUES ('20', '37', '否', '0', null, '1', null);
-INSERT INTO `task_properties_value` VALUES ('21', '38', '否', '0', null, '1', null);
-INSERT INTO `task_properties_value` VALUES ('22', '39', '否', '0', null, '1', null);
-INSERT INTO `task_properties_value` VALUES ('23', '40', '否', '0', null, '1', null);
-INSERT INTO `task_properties_value` VALUES ('24', '41', '否', '0', null, '1', null);
-INSERT INTO `task_properties_value` VALUES ('25', '42', '否', '0', null, '1', null);
-INSERT INTO `task_properties_value` VALUES ('26', '43', '否', '0', null, '1', null);
-INSERT INTO `task_properties_value` VALUES ('27', '44', '否', '0', null, '1', null);
-INSERT INTO `task_properties_value` VALUES ('28', '45', '否', '0', null, '1', null);
-INSERT INTO `task_properties_value` VALUES ('29', '46', '否', '0', null, '1', null);
-INSERT INTO `task_properties_value` VALUES ('30', '1', '是', '1', null, '0', 'showProByValue(this)');
-INSERT INTO `task_properties_value` VALUES ('31', '13', '是', '1', null, '0', null);
-INSERT INTO `task_properties_value` VALUES ('32', '20', '是', '1', '', '0', 'showProByValue(this)');
-INSERT INTO `task_properties_value` VALUES ('33', '21', '是', '1', '', '0', 'showProByValue(this)');
-INSERT INTO `task_properties_value` VALUES ('34', '22', '是', '1', null, '0', null);
-INSERT INTO `task_properties_value` VALUES ('35', '23', '是', '1', null, '0', null);
-INSERT INTO `task_properties_value` VALUES ('36', '24', '是', '1', null, '0', null);
-INSERT INTO `task_properties_value` VALUES ('37', '25', '是', '1', null, '0', null);
-INSERT INTO `task_properties_value` VALUES ('38', '26', '是', '1', null, '0', null);
-INSERT INTO `task_properties_value` VALUES ('39', '27', '是', '1', null, '0', null);
-INSERT INTO `task_properties_value` VALUES ('40', '28', '是', '1', null, '0', null);
-INSERT INTO `task_properties_value` VALUES ('41', '29', '是', '1', null, '0', null);
-INSERT INTO `task_properties_value` VALUES ('42', '30', '是', '1', null, '0', null);
-INSERT INTO `task_properties_value` VALUES ('43', '31', '是', '1', null, '0', null);
-INSERT INTO `task_properties_value` VALUES ('44', '32', '是', '1', null, '0', null);
-INSERT INTO `task_properties_value` VALUES ('45', '33', '是', '1', null, '0', null);
-INSERT INTO `task_properties_value` VALUES ('46', '34', '是', '1', null, '0', null);
-INSERT INTO `task_properties_value` VALUES ('47', '35', '是', '1', null, '0', null);
-INSERT INTO `task_properties_value` VALUES ('48', '36', '是', '1', null, '0', null);
-INSERT INTO `task_properties_value` VALUES ('49', '37', '是', '1', null, '0', null);
-INSERT INTO `task_properties_value` VALUES ('50', '38', '是', '1', null, '0', null);
-INSERT INTO `task_properties_value` VALUES ('51', '39', '是', '1', null, '0', null);
-INSERT INTO `task_properties_value` VALUES ('52', '40', '是', '1', null, '0', null);
-INSERT INTO `task_properties_value` VALUES ('53', '41', '是', '1', null, '0', null);
-INSERT INTO `task_properties_value` VALUES ('54', '42', '是', '1', null, '0', null);
-INSERT INTO `task_properties_value` VALUES ('55', '43', '是', '1', null, '0', null);
-INSERT INTO `task_properties_value` VALUES ('56', '44', '是', '1', null, '0', null);
-INSERT INTO `task_properties_value` VALUES ('57', '45', '是', '1', null, '0', null);
-INSERT INTO `task_properties_value` VALUES ('58', '46', '是', '1', null, '0', null);
-INSERT INTO `task_properties_value` VALUES ('59', '2', '单链接', '1', null, '1', null);
-INSERT INTO `task_properties_value` VALUES ('60', '2', '多链接', '2', null, '0', null);
-INSERT INTO `task_properties_value` VALUES ('61', '2', '搜A拍B', '3', null, '0', null);
-INSERT INTO `task_properties_value` VALUES ('62', '3', '搜商品', '1', null, '1', 'showProByValue(this)');
-INSERT INTO `task_properties_value` VALUES ('63', '3', '搜店铺', '2', null, '0', 'showProByValue(this)');
-INSERT INTO `task_properties_value` VALUES ('64', '3', '搜直通车', '3', null, '0', 'showProByValue(this)');
-INSERT INTO `task_properties_value` VALUES ('65', '3', '淘口令', '4', null, '0', 'showProByValue(this)');
-INSERT INTO `task_properties_value` VALUES ('66', '19', '马上好评（针对店铺卖虚拟商品，如：话费、游戏币）', '1', '', '0', null);
-INSERT INTO `task_properties_value` VALUES ('67', '19', '物流显示签收后才能确认收货(旺点2)', '2', '', '0', null);
-INSERT INTO `task_properties_value` VALUES ('68', '55', '需买手本人签收', '1', '', '0', null);
-INSERT INTO `task_properties_value` VALUES ('69', '55', '落地签收', '2', '', '0', null);
-INSERT INTO `task_properties_value` VALUES ('70', '56', '一心买号及以上(信誉>=4)5个旺点', '1', '', '0', null);
-INSERT INTO `task_properties_value` VALUES ('71', '56', '二心买号及以上(信誉>=11)10个旺点', '2', '', '0', null);
-INSERT INTO `task_properties_value` VALUES ('72', '56', '三心买号及以上(信誉>=41)15个旺点', '3', '', '0', null);
-INSERT INTO `task_properties_value` VALUES ('73', '56', '四心买号及以上(信誉>=91)25个旺点', '4', '', '0', null);
-INSERT INTO `task_properties_value` VALUES ('74', '56', '五心买号及以上(信誉>=151)35个旺点', '5', '', '0', null);
-INSERT INTO `task_properties_value` VALUES ('75', '56', '一钻买号及以上(信誉>=251)50个旺点', '6', '', '0', null);
-INSERT INTO `task_properties_value` VALUES ('76', '56', '二钻买号及以上(信誉>=501)100个旺点', '7', '', '0', null);
-INSERT INTO `task_properties_value` VALUES ('77', '56', '三钻买号及以上(信誉>=1001)150个旺点', '8', '', '0', null);
-INSERT INTO `task_properties_value` VALUES ('78', '56', '四钻买号及以上(信誉>=2001)200个旺点', '9', '', '0', null);
-INSERT INTO `task_properties_value` VALUES ('79', '56', '五钻买号及以上(信誉>=5001)250个旺点', '10', '', '0', null);
-INSERT INTO `task_properties_value` VALUES ('80', '58', '请匿名购买', '1', '', '0', null);
-INSERT INTO `task_properties_value` VALUES ('81', '58', ' 请只收货等待默认好评', '2', '', '0', null);
-INSERT INTO `task_properties_value` VALUES ('82', '61', '花呗', '1', '', '0', '');
-INSERT INTO `task_properties_value` VALUES ('83', '61', '信用卡', '2', '', '0', '');
-INSERT INTO `task_properties_value` VALUES ('84', '61', '余额宝分期', '3', '', '0', '');
-INSERT INTO `task_properties_value` VALUES ('85', '61', '淘宝信用支付', '4', '', '0', '');
-INSERT INTO `task_properties_value` VALUES ('86', '61', '店铺优惠券', '5', '', '0', '');
-INSERT INTO `task_properties_value` VALUES ('87', '66', '是', '1', null, '0', null);
-INSERT INTO `task_properties_value` VALUES ('88', '66', '否', '0', null, '1', null);
-INSERT INTO `task_properties_value` VALUES ('89', '67', '收藏任意一款副宝贝', '1', '', '1', '');
-INSERT INTO `task_properties_value` VALUES ('90', '67', '收藏排行榜销量最多的那款副宝贝', '2', '', '0', '');
-INSERT INTO `task_properties_value` VALUES ('91', '68', '货比一家', '1', '', '1', '');
-INSERT INTO `task_properties_value` VALUES ('92', '68', '货比二家', '2', '', '0', '');
-INSERT INTO `task_properties_value` VALUES ('93', '68', '货比三家', '3', '', '0', '');
+INSERT INTO `task_properties_value` VALUES ('1', '1', '否', '0', '', '1', 'showProByValue(this)', null);
+INSERT INTO `task_properties_value` VALUES ('2', '13', '否', '0', null, '1', null, null);
+INSERT INTO `task_properties_value` VALUES ('3', '20', '否', '0', '', '1', 'showProByValue(this)', null);
+INSERT INTO `task_properties_value` VALUES ('4', '21', '否', '0', '', '1', 'showProByValue(this)', null);
+INSERT INTO `task_properties_value` VALUES ('5', '22', '否', '0', null, '1', null, null);
+INSERT INTO `task_properties_value` VALUES ('6', '23', '否', '0', null, '1', null, null);
+INSERT INTO `task_properties_value` VALUES ('7', '24', '否', '0', null, '1', null, null);
+INSERT INTO `task_properties_value` VALUES ('8', '25', '否', '0', null, '1', null, null);
+INSERT INTO `task_properties_value` VALUES ('9', '26', '否', '0', null, '1', null, null);
+INSERT INTO `task_properties_value` VALUES ('10', '27', '否', '0', null, '1', null, null);
+INSERT INTO `task_properties_value` VALUES ('11', '28', '否', '0', null, '1', null, null);
+INSERT INTO `task_properties_value` VALUES ('12', '29', '否', '0', null, '1', null, null);
+INSERT INTO `task_properties_value` VALUES ('13', '30', '否', '0', null, '1', null, null);
+INSERT INTO `task_properties_value` VALUES ('14', '31', '否', '0', null, '1', null, null);
+INSERT INTO `task_properties_value` VALUES ('15', '32', '否', '0', null, '1', null, null);
+INSERT INTO `task_properties_value` VALUES ('16', '33', '否', '0', null, '1', null, null);
+INSERT INTO `task_properties_value` VALUES ('17', '34', '否', '0', null, '1', null, null);
+INSERT INTO `task_properties_value` VALUES ('18', '35', '否', '0', null, '1', null, null);
+INSERT INTO `task_properties_value` VALUES ('19', '36', '否', '0', null, '1', null, null);
+INSERT INTO `task_properties_value` VALUES ('20', '37', '否', '0', null, '1', null, null);
+INSERT INTO `task_properties_value` VALUES ('21', '38', '否', '0', null, '1', null, null);
+INSERT INTO `task_properties_value` VALUES ('22', '39', '否', '0', null, '1', null, null);
+INSERT INTO `task_properties_value` VALUES ('23', '40', '否', '0', null, '1', null, null);
+INSERT INTO `task_properties_value` VALUES ('24', '41', '否', '0', null, '1', null, null);
+INSERT INTO `task_properties_value` VALUES ('25', '42', '否', '0', null, '1', null, null);
+INSERT INTO `task_properties_value` VALUES ('26', '43', '否', '0', null, '1', null, null);
+INSERT INTO `task_properties_value` VALUES ('27', '44', '否', '0', null, '1', null, null);
+INSERT INTO `task_properties_value` VALUES ('28', '45', '否', '0', null, '1', null, null);
+INSERT INTO `task_properties_value` VALUES ('29', '46', '否', '0', null, '1', null, null);
+INSERT INTO `task_properties_value` VALUES ('30', '1', '是', '1', null, '0', 'showProByValue(this)', null);
+INSERT INTO `task_properties_value` VALUES ('31', '13', '是', '1', null, '0', null, null);
+INSERT INTO `task_properties_value` VALUES ('32', '20', '是', '1', '', '0', 'showProByValue(this)', null);
+INSERT INTO `task_properties_value` VALUES ('33', '21', '是', '1', '', '0', 'showProByValue(this)', null);
+INSERT INTO `task_properties_value` VALUES ('34', '22', '是', '1', null, '0', null, null);
+INSERT INTO `task_properties_value` VALUES ('35', '23', '是', '1', null, '0', null, null);
+INSERT INTO `task_properties_value` VALUES ('36', '24', '是', '1', null, '0', null, null);
+INSERT INTO `task_properties_value` VALUES ('37', '25', '是', '1', null, '0', null, null);
+INSERT INTO `task_properties_value` VALUES ('38', '26', '是', '1', null, '0', null, null);
+INSERT INTO `task_properties_value` VALUES ('39', '27', '是', '1', null, '0', null, null);
+INSERT INTO `task_properties_value` VALUES ('40', '28', '是', '1', null, '0', null, null);
+INSERT INTO `task_properties_value` VALUES ('41', '29', '是', '1', null, '0', null, null);
+INSERT INTO `task_properties_value` VALUES ('42', '30', '是', '1', null, '0', null, null);
+INSERT INTO `task_properties_value` VALUES ('43', '31', '是', '1', null, '0', null, null);
+INSERT INTO `task_properties_value` VALUES ('44', '32', '是', '1', null, '0', null, null);
+INSERT INTO `task_properties_value` VALUES ('45', '33', '是', '1', null, '0', null, null);
+INSERT INTO `task_properties_value` VALUES ('46', '34', '是', '1', null, '0', null, null);
+INSERT INTO `task_properties_value` VALUES ('47', '35', '是', '1', null, '0', null, null);
+INSERT INTO `task_properties_value` VALUES ('48', '36', '是', '1', null, '0', null, null);
+INSERT INTO `task_properties_value` VALUES ('49', '37', '是', '1', null, '0', null, null);
+INSERT INTO `task_properties_value` VALUES ('50', '38', '是', '1', null, '0', null, null);
+INSERT INTO `task_properties_value` VALUES ('51', '39', '是', '1', null, '0', null, null);
+INSERT INTO `task_properties_value` VALUES ('52', '40', '是', '1', null, '0', null, null);
+INSERT INTO `task_properties_value` VALUES ('53', '41', '是', '1', null, '0', null, null);
+INSERT INTO `task_properties_value` VALUES ('54', '42', '是', '1', null, '0', null, null);
+INSERT INTO `task_properties_value` VALUES ('55', '43', '是', '1', null, '0', null, null);
+INSERT INTO `task_properties_value` VALUES ('56', '44', '是', '1', null, '0', null, null);
+INSERT INTO `task_properties_value` VALUES ('57', '45', '是', '1', null, '0', null, null);
+INSERT INTO `task_properties_value` VALUES ('58', '46', '是', '1', null, '0', null, null);
+INSERT INTO `task_properties_value` VALUES ('59', '2', '单链接', '1', null, '1', null, null);
+INSERT INTO `task_properties_value` VALUES ('60', '2', '多链接', '2', null, '0', null, null);
+INSERT INTO `task_properties_value` VALUES ('61', '2', '搜A拍B', '3', null, '0', null, null);
+INSERT INTO `task_properties_value` VALUES ('62', '3', '搜商品', '1', null, '1', 'showProByValue(this)', null);
+INSERT INTO `task_properties_value` VALUES ('63', '3', '搜店铺', '2', null, '0', 'showProByValue(this)', null);
+INSERT INTO `task_properties_value` VALUES ('64', '3', '搜直通车', '3', null, '0', 'showProByValue(this)', null);
+INSERT INTO `task_properties_value` VALUES ('65', '3', '淘口令', '4', null, '0', 'showProByValue(this)', null);
+INSERT INTO `task_properties_value` VALUES ('66', '19', '马上好评（针对店铺卖虚拟商品，如：话费、游戏币）', '1', '', '0', null, null);
+INSERT INTO `task_properties_value` VALUES ('67', '19', '物流显示签收后才能确认收货(旺点2)', '2', '', '0', null, null);
+INSERT INTO `task_properties_value` VALUES ('68', '55', '需买手本人签收', '1', '', '0', null, null);
+INSERT INTO `task_properties_value` VALUES ('69', '55', '落地签收', '2', '', '0', null, null);
+INSERT INTO `task_properties_value` VALUES ('70', '56', '一心买号及以上(信誉>=4)5个旺点', '1', '', '0', null, null);
+INSERT INTO `task_properties_value` VALUES ('71', '56', '二心买号及以上(信誉>=11)10个旺点', '2', '', '0', null, null);
+INSERT INTO `task_properties_value` VALUES ('72', '56', '三心买号及以上(信誉>=41)15个旺点', '3', '', '0', null, null);
+INSERT INTO `task_properties_value` VALUES ('73', '56', '四心买号及以上(信誉>=91)25个旺点', '4', '', '0', null, null);
+INSERT INTO `task_properties_value` VALUES ('74', '56', '五心买号及以上(信誉>=151)35个旺点', '5', '', '0', null, null);
+INSERT INTO `task_properties_value` VALUES ('75', '56', '一钻买号及以上(信誉>=251)50个旺点', '6', '', '0', null, null);
+INSERT INTO `task_properties_value` VALUES ('76', '56', '二钻买号及以上(信誉>=501)100个旺点', '7', '', '0', null, null);
+INSERT INTO `task_properties_value` VALUES ('77', '56', '三钻买号及以上(信誉>=1001)150个旺点', '8', '', '0', null, null);
+INSERT INTO `task_properties_value` VALUES ('78', '56', '四钻买号及以上(信誉>=2001)200个旺点', '9', '', '0', null, null);
+INSERT INTO `task_properties_value` VALUES ('79', '56', '五钻买号及以上(信誉>=5001)250个旺点', '10', '', '0', null, null);
+INSERT INTO `task_properties_value` VALUES ('80', '58', '请匿名购买', '1', '', '0', null, null);
+INSERT INTO `task_properties_value` VALUES ('81', '58', ' 请只收货等待默认好评', '2', '', '0', null, null);
+INSERT INTO `task_properties_value` VALUES ('82', '61', '花呗', '1', '', '0', '', null);
+INSERT INTO `task_properties_value` VALUES ('83', '61', '信用卡', '2', '', '0', '', null);
+INSERT INTO `task_properties_value` VALUES ('84', '61', '余额宝分期', '3', '', '0', '', null);
+INSERT INTO `task_properties_value` VALUES ('85', '61', '淘宝信用支付', '4', '', '0', '', null);
+INSERT INTO `task_properties_value` VALUES ('86', '61', '店铺优惠券', '5', '', '0', '', null);
+INSERT INTO `task_properties_value` VALUES ('87', '66', '是', '1', null, '0', null, null);
+INSERT INTO `task_properties_value` VALUES ('88', '66', '否', '0', null, '1', null, null);
+INSERT INTO `task_properties_value` VALUES ('89', '67', '收藏任意一款副宝贝', '1', '', '1', '', null);
+INSERT INTO `task_properties_value` VALUES ('90', '67', '收藏排行榜销量最多的那款副宝贝', '2', '', '0', '', null);
+INSERT INTO `task_properties_value` VALUES ('91', '68', '货比一家', '1', '', '1', '', null);
+INSERT INTO `task_properties_value` VALUES ('92', '68', '货比二家', '2', '', '0', '', null);
+INSERT INTO `task_properties_value` VALUES ('93', '68', '货比三家', '3', '', '0', '', null);
 
 -- ----------------------------
 -- Table structure for `trace_recharge`

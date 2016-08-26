@@ -17,6 +17,15 @@ public class TaskPropertiesValue extends BaseModel {
 	private String memo; // 备注
 	private Integer isdefault; // 是否默认值
 	private String func; // 触发的方法名
+	private Integer price; // 所需蚂蚁币
+
+	public Integer getPrice() {
+		return price;
+	}
+
+	public void setPrice(Integer price) {
+		this.price = price;
+	}
 
 	public String getFunc() {
 		return func;

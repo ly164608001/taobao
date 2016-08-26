@@ -13,8 +13,17 @@ public class OrderInfoVO extends BaseVO {
 
 	private Integer count;
 
+	private Integer status; // 查询使用状态
 	private Date publicBegin;
 	private Date publicEnd;
+
+	public Integer getStatus() {
+		return status;
+	}
+
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
 
 	public OrderInfo getModel() {
 		return model;

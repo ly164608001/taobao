@@ -92,13 +92,9 @@
 			<span class="click-btn open-btn">
 				收缩 <i></i>
 			</span>
-			<!--  <span class="click-btn open-btn">
-			收缩
-			<i></i>
-		</span>
-		-->
-	</div>
+		</div>
 </section>
+
 <section class="container taobaoData">
 	<div id="tab_demo" class="HuiTab">
 		<div class="tabBar cl">
@@ -107,14 +103,10 @@
 			<span>您能接的精刷任务</span>
 			<span>您能接的流量任务</span>
 		</div>
+		
 		<div class="tabCon">
 			<div class="search-tab">
 				<ul class="clearfix">
-					<li class="tab01">
-						<span class="tab-title">任务类型：</span>
-						<span class="tab-tip">淘宝任务</span>
-						<span class="tab-tip">京东任务</span>
-					</li>
 					<li class="tab02">
 						<span class="tab-title">任务编号：</span>
 						<input type="text" placeholder="请输入任务编号" class="input-text radius size-M">
@@ -162,61 +154,18 @@
 						</tr>
 					</thead>
 					<tbody>
+					  <c:forEach items="${list}" var="order">
 						<tr>
 							<td class="first">
-								<span>TB201606261747428126850</span>
-								<span>发布人：L千语</span>
-								<span>
-									<span class="label label-warning radius">淘宝</span>
-									<span class="mobile-order" title="接任务者需要通过手机、pad等智能设备的app下单支付">手机订单</span>
-								</span>
-
-							</td>
-							<td>
-								<span class="orange">71.40</span>
-							</td>
-							<td>
-								<span>物流显示签收后五星带字好评</span>
-								<span>
-									<span class="label label-success radius">本人签收</span>
-									<span class="label label-success radius">三星</span>
-									<span class="label label-success radius">实名</span>
-									<span class="label label-success radius">拍付款</span>
-									<span class="label label-warning radius">分享</span>
-									<span class="label label-warning radius">收藏</span>
-									<span class="label label-warning radius">浏览</span>
-									<span class="label label-success radius">本人签收</span>
-									<span class="label label-success radius">三星</span>
-									<span class="label label-success radius">实名</span>
-									<span class="label label-success radius">拍付款</span>
-									<span class="label label-warning radius">分享</span>
-									<span class="label label-warning radius">收藏</span>
-									<span class="label label-warning radius">浏览</span>
-								</span>
-							</td>
-							<td>
-								<span class="orange">11.75元</span>
-							</td>
-							<td>
-								<span>2016/6/26 17:47:42</span>
-							</td>
-							<td>
-								<a href="#" class="btn-share">分享到</a>
-							</td>
-							<td>
-								<input class="btn radius btn-secondary" type="button" value="抢此任务"></td>
-						</tr>
-						<tr>
-							<td class="first">
-								<span>TB201606261747428126850</span>
-								<span>发布人：L千语</span>
+								<span>${order.orderno}</span>
+								<span>发布人：${order.createuser.username}</span>
 								<span>
 									<span class="label label-warning radius">淘宝</span>
 									<span class="mobile-order" title="接任务者需要通过手机、pad等智能设备的app下单支付">手机订单</span>
 								</span>
 							</td>
 							<td>
-								<span class="orange">71.40</span>
+								<span class="orange">${order.bond}</span>
 							</td>
 							<td>
 								<span>物流显示签收后五星带字好评</span>
@@ -241,7 +190,7 @@
 								<span class="orange">11.75元</span>
 							</td>
 							<td>
-								<span>2016/6/26 17:47:42</span>
+								<span><f:formatDate value="${order.publictime}" pattern="yyyy/MM/dd HH:mm:ss"/></span>
 							</td>
 							<td>
 								<a href="#" class="btn-share">分享到</a>
@@ -249,130 +198,12 @@
 							<td>
 								<input class="btn radius btn-secondary" type="button" value="抢此任务"></td>
 						</tr>
-						<tr>
-							<td class="first">
-								<span>TB201606261747428126850</span>
-								<span>发布人：L千语</span>
-								<span class="label label-warning radius">淘宝</span>
-							</td>
-							<td>
-								<span class="orange">71.40</span>
-							</td>
-							<td>
-								<span>物流显示签收后五星带字好评</span>
-								<span>
-									<span class="label label-success radius">本人签收</span>
-									<span class="label label-success radius">三星</span>
-									<span class="label label-success radius">实名</span>
-									<span class="label label-success radius">拍付款</span>
-									<span class="label label-warning radius">分享</span>
-									<span class="label label-warning radius">收藏</span>
-									<span class="label label-warning radius">浏览</span>
-									<span class="label label-success radius">本人签收</span>
-									<span class="label label-success radius">三星</span>
-									<span class="label label-success radius">实名</span>
-									<span class="label label-success radius">拍付款</span>
-									<span class="label label-warning radius">分享</span>
-									<span class="label label-warning radius">收藏</span>
-									<span class="label label-warning radius">浏览</span>
-								</span>
-							</td>
-							<td>
-								<span class="orange">11.75元</span>
-							</td>
-							<td>
-								<span>2016/6/26 17:47:42</span>
-							</td>
-							<td>
-								<a href="#" class="btn-share">分享到</a>
-							</td>
-							<td>
-								<input class="btn radius btn-secondary" type="button" value="抢此任务"></td>
-						</tr>
-						<tr>
-							<td class="first">
-								<span>TB201606261747428126850</span>
-								<span>发布人：L千语</span>
-								<span class="label label-warning radius">淘宝</span>
-							</td>
-							<td>
-								<span class="orange">71.40</span>
-							</td>
-							<td>
-								<span>物流显示签收后五星带字好评</span>
-								<span>
-									<span class="label label-success radius">本人签收</span>
-									<span class="label label-success radius">三星</span>
-									<span class="label label-success radius">实名</span>
-									<span class="label label-success radius">拍付款</span>
-									<span class="label label-warning radius">分享</span>
-									<span class="label label-warning radius">收藏</span>
-									<span class="label label-warning radius">浏览</span>
-									<span class="label label-success radius">本人签收</span>
-									<span class="label label-success radius">三星</span>
-									<span class="label label-success radius">实名</span>
-									<span class="label label-success radius">拍付款</span>
-									<span class="label label-warning radius">分享</span>
-									<span class="label label-warning radius">收藏</span>
-									<span class="label label-warning radius">浏览</span>
-								</span>
-							</td>
-							<td>
-								<span class="orange">11.75元</span>
-							</td>
-							<td>
-								<span>2016/6/26 17:47:42</span>
-							</td>
-							<td>
-								<a href="#" class="btn-share">分享到</a>
-							</td>
-							<td>
-								<input class="btn radius btn-secondary" type="button" value="抢此任务"></td>
-						</tr>
-						<tr>
-							<td class="first">
-								<span>TB201606261747428126850</span>
-								<span>发布人：L千语</span>
-								<span class="label label-warning radius">淘宝</span>
-							</td>
-							<td>
-								<span class="orange">71.40</span>
-							</td>
-							<td>
-								<span>物流显示签收后五星带字好评</span>
-								<span>
-									<span class="label label-success radius">本人签收</span>
-									<span class="label label-success radius">三星</span>
-									<span class="label label-success radius">实名</span>
-									<span class="label label-success radius">拍付款</span>
-									<span class="label label-warning radius">分享</span>
-									<span class="label label-warning radius">收藏</span>
-									<span class="label label-warning radius">浏览</span>
-									<span class="label label-success radius">本人签收</span>
-									<span class="label label-success radius">三星</span>
-									<span class="label label-success radius">实名</span>
-									<span class="label label-success radius">拍付款</span>
-									<span class="label label-warning radius">分享</span>
-									<span class="label label-warning radius">收藏</span>
-									<span class="label label-warning radius">浏览</span>
-								</span>
-							</td>
-							<td>
-								<span class="orange">11.75元</span>
-							</td>
-							<td>
-								<span>2016/6/26 17:47:42</span>
-							</td>
-							<td>
-								<a href="#" class="btn-share">分享到</a>
-							</td>
-							<td>
-								<input class="btn radius btn-secondary" type="button" value="抢此任务"></td>
-						</tr>
+					  </c:forEach>
 					</tbody>
 				</table>
 			</div>
 		</div>
+		
 		<div class="tabCon">
 			<p class="mt10">提示：流量单平台会收取10%佣金!</p>
 			<div class="searchTable mt10">
@@ -389,10 +220,11 @@
 						</tr>
 					</thead>
 					<tbody>
+					  <c:forEach items="${list}" var="order">
 						<tr>
 							<td class="first">
-								<span>TB201606261747428126850</span>
-								<span>发布人：L千语</span>
+								<span>${order.orderno}</span>
+								<span>发布人：${order.createuser.username}</span>
 								<span class="label label-warning radius">淘宝</span>
 							</td>
 							<td>
@@ -421,180 +253,25 @@
 								<span class="orange">11.75元</span>
 							</td>
 							<td>
-								<span>2016/6/26 17:47:42</span>
+								<span><f:formatDate value="${order.publictime}" pattern="yyyy/MM/dd HH:mm:ss"/></span>
 							</td>
 							<td>
 								<a href="#" class="btn-share">分享到</a>
 							</td>
 							<td>
-								<input class="btn radius btn-secondary" type="button" value="抢此任务"></td>
+								<input class="btn radius btn-secondary" type="button" value="抢此任务" />
+							</td>
 						</tr>
-						<tr>
-							<td class="first">
-								<span>TB201606261747428126850</span>
-								<span>发布人：L千语</span>
-								<span class="label label-warning radius">淘宝</span>
-							</td>
-							<td>
-								<span class="orange">71.40</span>
-							</td>
-							<td>
-								<span>物流显示签收后五星带字好评</span>
-								<span>
-									<span class="label label-success radius">本人签收</span>
-									<span class="label label-success radius">三星</span>
-									<span class="label label-success radius">实名</span>
-									<span class="label label-success radius">拍付款</span>
-									<span class="label label-warning radius">分享</span>
-									<span class="label label-warning radius">收藏</span>
-									<span class="label label-warning radius">浏览</span>
-									<span class="label label-success radius">本人签收</span>
-									<span class="label label-success radius">三星</span>
-									<span class="label label-success radius">实名</span>
-									<span class="label label-success radius">拍付款</span>
-									<span class="label label-warning radius">分享</span>
-									<span class="label label-warning radius">收藏</span>
-									<span class="label label-warning radius">浏览</span>
-								</span>
-							</td>
-							<td>
-								<span class="orange">11.75元</span>
-							</td>
-							<td>
-								<span>2016/6/26 17:47:42</span>
-							</td>
-							<td>
-								<a href="#" class="btn-share">分享到</a>
-							</td>
-							<td>
-								<input class="btn radius btn-secondary" type="button" value="抢此任务"></td>
-						</tr>
-						<tr>
-							<td class="first">
-								<span>TB201606261747428126850</span>
-								<span>发布人：L千语</span>
-								<span class="label label-warning radius">淘宝</span>
-							</td>
-							<td>
-								<span class="orange">71.40</span>
-							</td>
-							<td>
-								<span>物流显示签收后五星带字好评</span>
-								<span>
-									<span class="label label-success radius">本人签收</span>
-									<span class="label label-success radius">三星</span>
-									<span class="label label-success radius">实名</span>
-									<span class="label label-success radius">拍付款</span>
-									<span class="label label-warning radius">分享</span>
-									<span class="label label-warning radius">收藏</span>
-									<span class="label label-warning radius">浏览</span>
-									<span class="label label-success radius">本人签收</span>
-									<span class="label label-success radius">三星</span>
-									<span class="label label-success radius">实名</span>
-									<span class="label label-success radius">拍付款</span>
-									<span class="label label-warning radius">分享</span>
-									<span class="label label-warning radius">收藏</span>
-									<span class="label label-warning radius">浏览</span>
-								</span>
-							</td>
-							<td>
-								<span class="orange">11.75元</span>
-							</td>
-							<td>
-								<span>2016/6/26 17:47:42</span>
-							</td>
-							<td>
-								<a href="#" class="btn-share">分享到</a>
-							</td>
-							<td>
-								<input class="btn radius btn-secondary" type="button" value="抢此任务"></td>
-						</tr>
-						<tr>
-							<td class="first">
-								<span>TB201606261747428126850</span>
-								<span>发布人：L千语</span>
-								<span class="label label-warning radius">淘宝</span>
-							</td>
-							<td>
-								<span class="orange">71.40</span>
-							</td>
-							<td>
-								<span>物流显示签收后五星带字好评</span>
-								<span>
-									<span class="label label-success radius">本人签收</span>
-									<span class="label label-success radius">三星</span>
-									<span class="label label-success radius">实名</span>
-									<span class="label label-success radius">拍付款</span>
-									<span class="label label-warning radius">分享</span>
-									<span class="label label-warning radius">收藏</span>
-									<span class="label label-warning radius">浏览</span>
-									<span class="label label-success radius">本人签收</span>
-									<span class="label label-success radius">三星</span>
-									<span class="label label-success radius">实名</span>
-									<span class="label label-success radius">拍付款</span>
-									<span class="label label-warning radius">分享</span>
-									<span class="label label-warning radius">收藏</span>
-									<span class="label label-warning radius">浏览</span>
-								</span>
-							</td>
-							<td>
-								<span class="orange">11.75元</span>
-							</td>
-							<td>
-								<span>2016/6/26 17:47:42</span>
-							</td>
-							<td>
-								<a href="#" class="btn-share">分享到</a>
-							</td>
-							<td>
-								<input class="btn radius btn-secondary" type="button" value="抢此任务"></td>
-						</tr>
-						<tr>
-							<td class="first">
-								<span>TB201606261747428126850</span>
-								<span>发布人：L千语</span>
-								<span class="label label-warning radius">淘宝</span>
-							</td>
-							<td>
-								<span class="orange">71.40</span>
-							</td>
-							<td>
-								<span>物流显示签收后五星带字好评</span>
-								<span>
-									<span class="label label-success radius">本人签收</span>
-									<span class="label label-success radius">三星</span>
-									<span class="label label-success radius">实名</span>
-									<span class="label label-success radius">拍付款</span>
-									<span class="label label-warning radius">分享</span>
-									<span class="label label-warning radius">收藏</span>
-									<span class="label label-warning radius">浏览</span>
-									<span class="label label-success radius">本人签收</span>
-									<span class="label label-success radius">三星</span>
-									<span class="label label-success radius">实名</span>
-									<span class="label label-success radius">拍付款</span>
-									<span class="label label-warning radius">分享</span>
-									<span class="label label-warning radius">收藏</span>
-									<span class="label label-warning radius">浏览</span>
-								</span>
-							</td>
-							<td>
-								<span class="orange">11.75元</span>
-							</td>
-							<td>
-								<span>2016/6/26 17:47:42</span>
-							</td>
-							<td>
-								<a href="#" class="btn-share">分享到</a>
-							</td>
-							<td>
-								<input class="btn radius btn-secondary" type="button" value="抢此任务"></td>
-						</tr>
+					 </c:forEach>
 					</tbody>
 				</table>
 			</div>
 		</div>
+		
 		<div class="tabCon">内容三</div>
+		
 		<div class="tabCon">内容四</div>
+		
 	</div>
 
 </section>
@@ -631,34 +308,28 @@ $(function(){
 		$(this).toggleClass('active');
 		if ($(this).hasClass('active')) {
 			$(this).text('展开');
-			// $(this).find('i').css('background-position','4px -28px')
 		}else{
 			$(this).text('收缩');
-			// $(this).find('i').css('background-position','4px 7px')
 		}
 	});
 $.Huitab("#tab_demo .tabBar span","#tab_demo .tabCon","current","click","0");
 
-layer.config({
-	    extend: ['skin/layerSkinExtend.css'], //加载新皮肤
-	    skin: 'layer-ext-myskin' //一旦设定，所有弹层风格都采用此主题。
-	});
-        
         // 抢此任务
         $('.btn-secondary').on('click',function(){
         	index= top.layer.open({
-            type:2,
-            area:['500px','450px'],
-            shadeClose:true,
-            content:['./任务操作状态说明(弹窗).html','no'],
-            btn:['确定','取消'],
-            title:'重点说明(100秒后自动关闭)',
-            time:100000,
-            yes:function(index){
-                layer.close(indexAgency);
-            }
-        }); 
-        })
+	            type:2,
+	            area:['500px','450px'],
+	            shadeClose:true,
+	            content:['./任务操作状态说明(弹窗).html','no'],
+	            btn:['确定','取消'],
+	            title:'重点说明(100秒后自动关闭)',
+	            time:100000,
+	            yes:function(index){
+	                layer.close(indexAgency);
+	            }
+	        }); 
+        });
+        
         // 确定分享
         $('.btn-share').on('click',function(){
             indexOk = top.layer.open({

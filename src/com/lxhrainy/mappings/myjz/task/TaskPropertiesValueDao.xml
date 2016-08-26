@@ -10,6 +10,7 @@
 		T.memo AS "memo",
 		T.isdefault AS "isdefault",
 		T.func AS "func",
+		T.price AS "price",
 		P.name AS "properties.name",
 		P.elementname AS "properties.elementname",
 		P.status AS "properties.status"
@@ -42,6 +43,7 @@
 			T.label AS "label",
 			T.keyvalue AS "keyvalue",
 			T.memo AS "memo",
+			T.price AS "price",
 			T.isdefault AS "isdefault"
 		FROM task_properties_value T
 		WHERE T.propertiesid = #{propertiesid}
@@ -89,7 +91,8 @@
 			keyvalue,
 			memo,
 			isdefault,
-			func
+			func,
+			price
 		) VALUES (
 			#{id},
 			#{properties.id},
@@ -97,7 +100,8 @@
 			#{keyvalue},
 			#{memo},
 			#{isdefault},
-			#{func}
+			#{func},
+			#{price}
 		)
 	</insert>
 	
@@ -108,7 +112,8 @@
 			keyvalue = #{keyvalue},
 			memo = #{memo},
 			isdefault = #{isdefault},
-			func = #{func}
+			func = #{func},
+			price = #{price}
 		WHERE id = #{id}
 	</update>
 	
