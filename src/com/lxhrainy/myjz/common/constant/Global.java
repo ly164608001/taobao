@@ -160,10 +160,10 @@ public class Global {
 	public final static int ORDER_STATUS_STATE_FAIL = -2;
 	
 	//查询状态 1要您操作 2进行中 3暂停 4已完成
-	public final static int ORDER_SSTATUS_AUDIT = 1;	
-	public final static int ORDER_SSTATUS_ING = 2;	
-	public final static int ORDER_SSTATUS_PAUSE = 3;	
-	public final static int ORDER_SSTATUS_FINISH = 4;	
+	public final static int ORDER_SSTATUS_AUDIT = 2;	
+	public final static int ORDER_SSTATUS_ING = 0;	
+	public final static int ORDER_SSTATUS_PAUSE = 1;	
+	public final static int ORDER_SSTATUS_FINISH = 3;	
 	/**订单 end**/
 	
 }

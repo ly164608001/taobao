@@ -27,8 +27,10 @@ import com.lxhrainy.myjz.admin.order.oe.OrderInfoVO;
 import com.lxhrainy.myjz.admin.order.service.IOrderInfoService;
 import com.lxhrainy.myjz.admin.task.model.ComplainInfo;
 import com.lxhrainy.myjz.admin.task.model.ComplainType;
+import com.lxhrainy.myjz.admin.task.model.TaskProperties;
 import com.lxhrainy.myjz.admin.task.oe.ComplainInfoVO;
 import com.lxhrainy.myjz.admin.task.service.IComplainInfoService;
+import com.lxhrainy.myjz.common.constant.Global;
 
 /**
  * 业务数据
@@ -49,7 +51,7 @@ public class TaskApiServiceImpl extends AbstractBaseServiceImpl<IUserInfoDao, Us
 		rj.setError_code(ResultJson.ERROR_CODE_PARAMETERS);
 		rj.setMessage("参数错误");
 		if (oConvertUtils.isNotEmpty(params) 
-				&& oConvertUtils.isNotEmpty(params.getIsmine())
+				&& StringUtil.isNumeric(params.getIsmine())
 				&& StringUtil.isNumeric(params.getStatus())
 				&& StringUtil.isNumeric(params.getTargetplatfrom())
 				&& StringUtil.isNumeric(params.getTargetsubtype())
@@ -63,7 +65,11 @@ public class TaskApiServiceImpl extends AbstractBaseServiceImpl<IUserInfoDao, Us
 				OrderInfoVO vo = new OrderInfoVO();
 				OrderInfo model = new OrderInfo();
 				//model.setType(oConvertUtils.getInt(params.getMessagetype()));
-				model.setReceiveruser(loginUser);
+				int ismine = oConvertUtils.getInt(params.getIsmine(), 0);
+				if(ismine == 1){
+					model.setReceiveruser(loginUser);
+				}
+				//status 0:进行中;1:已完成;2:全部;
 				vo.setModel(model);
 				vo.setOffsetid(offsetid);
 				vo.setCount(count);
@@ -75,6 +81,47 @@ public class TaskApiServiceImpl extends AbstractBaseServiceImpl<IUserInfoDao, Us
 				if (oConvertUtils.isNotEmpty(orderList) && orderList.size() > 0) {
 					for (OrderInfo order : orderList) {
 						JSONObject orderObject = new JSONObject();
+						
+						if(order.getAccount() != null){
+							orderObject.put("accountid", order.getAccount().getId());
+							orderObject.put("account", order.getAccount().getAccountno());
+						}else{
+							orderObject.put("accountid", "");
+							orderObject.put("account", "");
+						}
+						orderObject.put("accounttype", "0");
+						if(order.getSignList() != null && order.getSignList().size() > 0){
+							List<String> attributes = new ArrayList<>();
+							for(TaskProperties item : order.getSignList()){
+								attributes.add(item.getSignname());
+							}
+							orderObject.put("attributes", attributes);
+						}else{
+							orderObject.put("attributes", "");
+						}
+						if(order.getStatus().intValue() < Global.ORDER_STATUS_FINISH){
+							orderObject.put("complaintstate", true);
+						}else{
+							orderObject.put("complaintstate", false);
+						}
+						
+						if(order.getStatus().intValue() == Global.ORDER_SSTATUS_ING){
+							orderObject.put("edit", true);
+							orderObject.put("edittitle", "开始任务");
+						}else{
+							orderObject.put("edit", false);
+							orderObject.put("edittitle", "");
+						}
+						//担保金
+						orderObject.put("guarantees", order.getBond());
+						orderObject.put("issuper", order.getIssuper());
+						if(order.getReceiveruser() != null){
+							//0:不是;1:是;
+							orderObject.put("own", "1");
+						}else{
+							orderObject.put("own", "0");
+						}
+						orderObject.put("price", order.getPrice());
 						//0:常规单;1:流量单;
 						orderObject.put("targetsubtype", "0");
 						orderObject.put("taskid", order.getId());
@@ -86,10 +133,10 @@ public class TaskApiServiceImpl extends AbstractBaseServiceImpl<IUserInfoDao, Us
 						orderObject.put("account", "");
 						orderObject.put("edit", "");
 						orderObject.put("total", "");
-						orderObject.put("accountid", "");
+						
 						orderObject.put("own", "");
 						orderObject.put("issuper", "");
-						orderObject.put("guarantees", "");
+						
 						orderObject.put("targetplatfrom", "");
 						orderObject.put("complaintstate", "");
 						orderObject.put("producturl", "");
@@ -98,8 +145,6 @@ public class TaskApiServiceImpl extends AbstractBaseServiceImpl<IUserInfoDao, Us
 						orderObject.put("targettype", "");
 						orderObject.put("sellerid", "");
 						orderObject.put("price", "");
-						
-						orderObject.put("attributes", "");
 						
 						orderObject.put("accounttype", "");
 						list.add(orderObject);

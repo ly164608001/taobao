@@ -19,18 +19,24 @@
 		T.paytime AS "paytime",
 		T.mainstatus AS "mainstatus",
 		T.targetsubtype AS "targetsubtype",
+		T.accountid AS "account.id",
+		T.issuper AS "issuper",
+		T.price AS "price",
 		
 		RU.loginip AS "receiveruser.loginip",
 		RU.creditscore AS "receiveruser.creditscore",
 		RU.username AS "receiveruser.username",
 		
-		S.name AS "shop.name"
+		S.name AS "shop.name",
+		
+		BAI.accountno AS "account.accountno"
 	</sql>
 	
 	<sql id="orderInfoJoins">
 		LEFT JOIN USER_INFO CU ON CU.id = T.createuser 
 		LEFT JOIN USER_INFO RU ON RU.id = T.receiveruser 
 		LEFT JOIN seller_shop S ON S.id = T.shopid
+		LEFT JOIN buyer_account_info BAI on BAI.id = T.accountid
 	</sql>
     
     <sql id="where">
@@ -109,7 +115,9 @@
 			type,
 			paytime,
 			mainstatus,
-			targetsubtype
+			targetsubtype,
+			issuper,
+			price
 		) VALUES (
 			#{id},
 			#{orderno},
@@ -126,7 +134,9 @@
 			#{type},
 			#{paytime},
 			#{mainstatus},
-			#{targetsubtype}
+			#{targetsubtype},
+			#{issuper},
+			#{price}
 		)
 	</insert>
 	
@@ -146,7 +156,9 @@
 			type = #{type},
 			paytime = #{paytime},
 			mainstatus = #{mainstatus},
-			targetsubtype = #{targetsubtype}
+			targetsubtype = #{targetsubtype},
+			issuper = #{issuper},
+			price = #{price}
 		WHERE id = #{id}
 	</update>
 	
@@ -155,11 +167,76 @@
 		WHERE id = #{id}
 	</update>
 	
+	
+	
+	
+	
+	<resultMap type="OrderInfo" id="mobileOrderInfo">
+		<result property="id" column="id"/>
+		<result property="orderno" column="orderno"/>
+		<result property="createtime" column="createtime"/>
+		<result property="createuser.id" column="createuser.id"/>
+		<result property="createuser.username" column="createuser.username"/>
+		<result property="publictime" column="publictime"/>
+		<result property="istime" column="istime"/>
+		<result property="status" column="status"/>
+		<result property="bond" column="bond"/>
+		<result property="receivetime" column="receivetime"/>
+		<result property="shop.id" column="shop.id"/>
+		<result property="shop.name" column="shop.name"/>
+		<result property="searchroad" column="searchroad"/>
+		<result property="type" column="type"/>
+		<result property="paytime" column="paytime"/>
+		<result property="mainstatus" column="mainstatus"/>
+		<result property="issuper" column="issuper"/>
+		<result property="targetsubtype" column="targetsubtype"/>
+		<result property="price" column="price"/>
+		<result property="account.id" column="account.id"/>
+		<result property="account.accountno" column="account.accountno"/>
+		<collection property="signList" ofType="TaskProperties">
+			<id property="id" column="signList.signname" />
+		</collection>
+	</resultMap>
+	
+	<sql id="mobileOrderInfoColumns">
+		T.id AS "id",
+		T.orderno AS "orderno",
+		T.createtime AS "createtime",
+		T.createuser AS "createuser.id",
+		T.publictime AS "publictime",
+		T.istime AS "istime",
+		T.status AS "status",
+		T.bond AS "bond",
+		T.receiveruser AS "receiveruser.id",
+		T.receivetime AS "receivetime",
+		T.shopid AS "shop.id",
+		T.searchroad AS "searchroad",
+		T.type AS "type",
+		T.paytime AS "paytime",
+		T.mainstatus AS "mainstatus",
+		T.targetsubtype AS "targetsubtype",
+		T.accountid AS "account.id",
+		T.issuper AS "issuper",
+		T.price AS "price",
+		S.name AS "shop.name",
+		BAI.accountno AS "account.accountno",
+		TP.signname AS "signList.signname"
+	</sql>
+	
+	<sql id="mobileOrderInfoJoins">
+		LEFT JOIN USER_INFO CU ON CU.id = T.createuser 
+		LEFT JOIN USER_INFO RU ON RU.id = T.receiveruser 
+		LEFT JOIN seller_shop S ON S.id = T.shopid
+		LEFT JOIN buyer_account_info BAI on BAI.id = T.accountid
+		LEFT JOIN order_other_properties OOP on OOP.id = T.id
+		LEFT JOIN task_properties TP on TP.id = OOP.propertiesid
+	</sql>
+	
 	<select id="getListForMobile" resultType="OrderInfo">
 		SELECT 
-			<include refid="orderInfoColumns"/>
+			<include refid="mobileOrderInfoColumns"/>
 		FROM sys_notice T
-			<include refid="orderInfoJoins"/>
+			<include refid="mobileOrderInfoJoins"/>
 		<if test="condition!=null">
 			<where>
 				<if test="condition.model != null">
@@ -168,12 +245,16 @@
 							AND T.userid = #{condition.model.user.id}
 						</if>
 					</if>
+					<if test="condition.model.status != null">
+						AND T.status = #{condition.model.status}
+					</if>
 				</if>
 				<if test="condition.offsetid != null">
 					AND T.id &lt; #{condition.offsetid}
 				</if>
 			</where>
 		order by T.id desc
+		group by T.id
 		limit 0,${condition.count}
 		</if>
 	</select>

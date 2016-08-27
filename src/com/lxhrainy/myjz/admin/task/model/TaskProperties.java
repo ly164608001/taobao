@@ -24,6 +24,8 @@ public class TaskProperties extends BaseModel {
 	private String sort; // 任务完成排序
 	private String elementname; // 显示的属性元素名称
 	
+	private String signname;
+	
 	private List<TaskPropertiesValue> valueList; //所有值列表
 	private TaskProperties parent;//所属属性
 	private TaskPropertiesValue belongValue; //所属属性值
@@ -130,6 +132,14 @@ public class TaskProperties extends BaseModel {
 
 	public void setElementname(String elementname) {
 		this.elementname = elementname;
+	}
+
+	public String getSignname() {
+		return signname;
+	}
+
+	public void setSignname(String signname) {
+		this.signname = signname;
 	}
 
 }

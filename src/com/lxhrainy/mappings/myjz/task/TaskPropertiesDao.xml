@@ -16,6 +16,7 @@
 		<result property="elementname" column="elementname" />
 		<result property="parent.id" column="parent.id" />
 		<result property="belongValue.id" column="belongValue.id" />
+		<result property="signname" column="signname"/>
 		<collection property="valueList" ofType="TaskPropertiesValue">
 			<id property="id" column="valueList.id" />
 			<id property="label" column="valueList.label" />
@@ -41,6 +42,7 @@
 		T.elementname AS "elementname",
 		T.valueid AS "belongValue.id",
 		T.parentid AS "parent.id",
+		T.signname AS "signname",
 		P.elementname AS "parent.elementname"
 	</sql>
 	
@@ -58,6 +60,7 @@
 		T.elementname AS "elementname",
 		T.parentid AS "parent.id",
 		T.valueid AS "belongValue.id",
+		T.signname AS "signname",
 		
 		V.id AS "valueList.id",
 		V.label AS "valueList.label",
@@ -196,7 +199,8 @@
 			sort,
 			elementname,
 			parentid,
-			valueid
+			valueid,
+			signname
 		) VALUES (
 			#{id},
 			#{name},
@@ -210,7 +214,8 @@
 			#{sort},
 			#{elementname},
 			#{parent.id},
-			#{belongValue.id}
+			#{belongValue.id},
+			#{signname}
 		)
 	</insert>
 	
@@ -227,7 +232,8 @@
 			sort = #{sort},
 			elementname = #{elementname},
 			parentid = #{parent.id},
-			valueid = #{belongValue.id}
+			valueid = #{belongValue.id},
+			signname = #{signname}
 		WHERE id = #{id}
 	</update>
 	

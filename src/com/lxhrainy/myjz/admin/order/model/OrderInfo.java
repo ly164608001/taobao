@@ -1,10 +1,13 @@
 package com.lxhrainy.myjz.admin.order.model;
 
 import java.util.Date;
+import java.util.List;
 
 import com.lxhrainy.core.common.model.BaseModel;
 import com.lxhrainy.core.sys.model.UserInfo;
+import com.lxhrainy.myjz.admin.buyer.model.AccountInfo;
 import com.lxhrainy.myjz.admin.seller.model.Shop;
+import com.lxhrainy.myjz.admin.task.model.TaskProperties;
 
 /**
  * 订单信息Entity
@@ -30,6 +33,45 @@ public class OrderInfo extends BaseModel {
 	private String type; // 手机/电脑单类型
 	private Integer targetsubtype;// 任务目标副类型(0:常规单;1:流量单;)
 	private Integer mainstatus;
+	private Integer issuper;
+	private Double price;
+	
+	private AccountInfo account;//接单人的淘宝号
+	
+	//展示的属性标签列表
+	private List<TaskProperties> signList;
+
+	public Double getPrice() {
+		return price;
+	}
+
+	public void setPrice(Double price) {
+		this.price = price;
+	}
+
+	public Integer getIssuper() {
+		return issuper;
+	}
+
+	public void setIssuper(Integer issuper) {
+		this.issuper = issuper;
+	}
+
+	public List<TaskProperties> getSignList() {
+		return signList;
+	}
+
+	public void setSignList(List<TaskProperties> signList) {
+		this.signList = signList;
+	}
+
+	public AccountInfo getAccount() {
+		return account;
+	}
+
+	public void setAccount(AccountInfo account) {
+		this.account = account;
+	}
 
 	public Integer getMainstatus() {
 		return mainstatus;
