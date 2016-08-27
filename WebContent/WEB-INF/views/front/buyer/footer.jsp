@@ -16,8 +16,9 @@
 			<br>用心做站，做不一样的站</p>
 	</div>
 	</footer>
-	<a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=270863798&site=qq&menu=yes" id="QQ-link">
-	<img border="0" src="http://wpa.qq.com/pa?p=2:270863798:53" alt="点击这里给我发消息" title="点击这里给我发消息"/>
+	<a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=3516057440&site=qq&menu=yes" id="QQ-link">
+		<img border="0" src="http://wpa.qq.com/pa?p=2:3516057440:53" 
+			alt="点击这里给我发消息" title="点击这里给我发消息"/>
 	</a>
 </body>
 </html>

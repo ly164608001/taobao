@@ -268,7 +268,7 @@ p{font-size: 14px;}
 /*账户充值*/
 .crechange-tip a i{display: inline-block; width: 16px; height: 16px; background: url(images/tip-icon1.png) no-repeat 0 -120px; vertical-align: middle; margin-right: 6px;}
 .moneyOrder.rechange .form-horizontal .form-label{min-width: 180px;}
-.rechange .formControls span.text{display: inline-block;height: 31px;line-height: 31px}
+.rechange .formControls span.text{display: inline-block;height: 22px;line-height: 22px}
 .rechange .formControls a.text{display: inline-block;height: 31px;line-height: 31px;color: #0f9ae0}
 .rechange .btnWrap .btn-ti{margin-left: 150px;padding: 5px 55px;height: 40px;line-height: 40px;}
 /*淘宝任务*/

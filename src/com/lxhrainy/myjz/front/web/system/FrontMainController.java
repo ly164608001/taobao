@@ -37,6 +37,9 @@ public class FrontMainController extends BaseController {
 	public ModelAndView main()
 	{
 		HttpSession session = ContextHolderUtils.getSession();
+		if(getCurrentUser()==null){
+			return new ModelAndView(new RedirectView("login.htm"));
+		}
 		UserInfo currentUser = ClientManager.getInstance().getClient(session.getId()).getUser();
 		if(currentUser.getType().intValue() == Global.USER_BUYER){
 			//刷手首页

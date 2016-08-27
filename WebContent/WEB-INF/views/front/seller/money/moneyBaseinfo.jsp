@@ -13,9 +13,9 @@
 				data : $('#submitForm').serialize(),
 				success : function(result){
 					if(result.success){
-						top.layer.alert('更新成功');
+						top.layer.msg('更新成功');
 					}else{
-						top.layer.alert(result.msg);
+						top.layer.msg(result.msg);
 					}
 				}
 			}); 
@@ -69,17 +69,17 @@
 						<div class="row cl">
 							<label class="form-label col-xs-4 col-sm-3">性别：</label>
 							<div class="formControls col-xs-6 col-sm-6">
-								<div class="radio-box">
+								<div class="radio-box" style="padding-left: 0px;">
 									<input type="radio" name="sex" value="${fns:getDictValue('男','SEX','')}"
 										<c:if test="${fns:getDictValue('男','SEX','') == model.detailInfo.sex}">checked="checked"</c:if> />
 									<label>男</label>
 								</div>
-								<div class="radio-box">
+								<div class="radio-box" style="padding-left: 0px;">
 									<input type="radio" name="sex" value="${fns:getDictValue('女','SEX','')}"
 										<c:if test="${fns:getDictValue('女','SEX','') == model.detailInfo.sex}">checked="checked"</c:if> />
 									<label>女</label>
 								</div>
-								<div class="radio-box">
+								<div class="radio-box" style="padding-left: 0px;">
 									<input type="radio" name="sex" value=""
 										<c:if test="${empty model.detailInfo.sex}">checked="checked"</c:if> />
 									<label>保密</label>
@@ -89,9 +89,8 @@
 						<div class="row cl">
 							<label class="form-label col-xs-4 col-sm-3">出生日期：</label>
 							<div class="formControls col-xs-2 col-sm-3">
-								<input class="Wdate write-time input-text radius size-M"  type="text" 
-									value='<f:formatDate pattern="yyyy-MM-dd" value="${model.detailInfo.birthday}"/>' name="birthday"
-								 	onFocus="WdatePicker({dateFmt:&quot;yyyy-MM-dd&quot;,isShowClear:false,readOnly:true});"/>
+								<input class="Wdate write-time input-text radius size-M"  type="text" onFocus="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:false,readOnly:true});"
+									value="<f:formatDate pattern='yyyy-MM-dd' value='${model.detailInfo.birthday}'/>" name="birthday"/>
 							</div>
 						</div>
 						<div class="row cl">
