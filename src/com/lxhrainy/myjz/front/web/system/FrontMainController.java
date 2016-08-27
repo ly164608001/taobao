@@ -1,7 +1,5 @@
 package com.lxhrainy.myjz.front.web.system;
 
-import java.util.List;
-
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +10,6 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import com.lxhrainy.core.common.controller.BaseController;
 import com.lxhrainy.core.model.ClientManager;
-import com.lxhrainy.core.sys.model.SysMenu;
 import com.lxhrainy.core.sys.model.UserInfo;
 import com.lxhrainy.core.sys.service.ISysMenuService;
 import com.lxhrainy.core.sys.service.IUserInfoService;
@@ -48,10 +45,7 @@ public class FrontMainController extends BaseController {
 			//商家首页
 			mv = new ModelAndView("front/seller/main");
 		}
-		//TODO:获取用户权限列表
-		List<SysMenu> menuList = null ;//sysMenuservice.getTreeByUserId(currentUser.getId(), Global.FRONT);
 		mv.addObject("frontUser", currentUser);
-		mv.addObject("menuList", menuList);
 		return mv;
 	}
 	

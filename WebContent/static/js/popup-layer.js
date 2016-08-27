@@ -62,9 +62,10 @@ function layerPromptIframe(iframeUrl,title,succssFn,isScoll,width,height){
 		showScoll = isScoll;
 	}
 	
-	var indexIframe = layer.open({
+	var indexIframe = top.layer.open({
         type : 2,
         area : [ width + 'px', height + 'px'],
+        offset: ['200px', '400px'],
         closeBtn : 1,
         shadeClose : true,
         content : [ iframeUrl,showScoll],
@@ -72,10 +73,10 @@ function layerPromptIframe(iframeUrl,title,succssFn,isScoll,width,height){
         btn : ['确定','取消'],
         yes : function(index, layero){
         	//获取弹出框DOM的body元素
-        	var body = layer.getChildFrame('body', index);
+        	var body = top.layer.getChildFrame('body', index);
         	var url = body.find('#submitForm').attr('action');
         	//验证表单(需要子页面定义个checkForm方法，处理验证失败的消息提示并返回验证结果)
-        	var iframeWin = window[layero.find('iframe')[0]['name']]; 
+        	var iframeWin = top.window[layero.find('iframe')[0]['name']]; 
         	var isValid = iframeWin.checkForm();
         	if(!isValid){
         		return;

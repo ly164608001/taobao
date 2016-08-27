@@ -14,7 +14,7 @@
 	</script>
 </head>
 <body>
-	<section class="container mt50">
+	<section class="container">
 		<nav class="Hui-breadcrumb">
 			<!-- <i class="icon iconfont">&#xf012b;</i>
 		-->

@@ -17,7 +17,7 @@
 	</script>
 </head>
 <body>
-<section class="container mt50 clearfix">
+<section class="container clearfix">
 <nav class="Hui-breadcrumb">
 <span>当前位置：</span>
 <a class="maincolor" href="/">首页</a>

@@ -144,7 +144,7 @@ a{color: #333; text-decoration: none;font-size: 14px;}
 .helpCenter{min-height: 710px}
 /*登入界面*/
 .phcolor{color:#999;}
-.indexCenter-login{width: 1000px;margin: 0 auto;margin-top: 60px;overflow: hidden;margin-bottom: 250px;}
+.indexCenter-login{width: 1000px;margin: 0 auto;overflow: hidden;}
 .login-ad{width: 650px;height: 400px;}
 *.login-ad{width: 620px;height: 400px;overflow: hidden;}
 *.login-ipt{height: 399px;}
@@ -169,16 +169,16 @@ a{color: #333; text-decoration: none;font-size: 14px;}
 .btn-login:hover{color: #fff;}
 /*前端-注册*/
 .register-header{}
-.register-header-w1000{width:1000px; margin:80px auto 0px; padding:0 0 10px 0; border-bottom:#dcdcdc solid 1px;}
+.register-header-w1000{width:1000px; margin:80px auto 0px;margin-top : 0px;padding:0 0 10px 0; border-bottom:#dcdcdc solid 1px;}
 .register-header-l{float:left;}
 .regist-wwl-logo{float:left;}
 .goback{margin:50px 0 0 0;isplay:inline-block; color:#414141; font-size:14px; float:left;}
 .register-header-r{float:right;}
 .LoginNow{width:100px; height:30px; line-height:30px; color:#7ab800; font-size:14px; border:#7ab800 solid 1px; background:#fff; outline:none;cursor: pointer;}
 .register-main-w1000{width:1000px; margin:0 auto;}
-.register-main{min-height: 600px}
-.register-main-title{height:80px; line-height:80px; color:#414141; font-size:24px; letter-spacing:2px;}
-.register-main-content{margin-bottom:20px;}
+.register-main{min-height: 500px}
+.register-main-title{float:left;height:80px; line-height:80px; color:#414141; font-size:24px; letter-spacing:2px;}
+.register-main-content{float:left;padding-left:100px;margin-top: 20px;}
 .register-main-content li span{font-size:14px; vertical-align:middle}
 .register-main-content li input{vertical-align:middle}
 .register-main-content li{margin-bottom:20px; position: relative; top:0; right:0;}
@@ -196,7 +196,7 @@ a{color: #333; text-decoration: none;font-size: 14px;}
 .btn-reCaptcha-t{color: #ff0000;}
 .btn-now{width:285px; height:35px; line-height:35px; margin:20px 0 0 340px; color:#fff; font-size:14px; border:none; outline:none; border-radius:5px; background:#7ab800;cursor: pointer;}
 .register-main-content li label.label-check{height: 20px;line-height: 20px;text-align: left;padding-left: 10px}
-.register-main-content li .label-checkWrap input[type=checkbox]{margin-top: 5px}
+.register-main-content li .label-checkWrap input[type=radio]{margin-top: 5px}
 .register-main-content li .label-checkWrap {padding-top: 10px}
 .register-main-content .msg-tips{padding-left: 115px}
 .register-main-content li  .checkyan input.checkyanIpt{width: 200px;}
