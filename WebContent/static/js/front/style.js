@@ -2,7 +2,8 @@
 function setIframeHeightChild(IframeId){
 	$(window.parent.document).find('#'+IframeId).map(function(){
     var main = $(window.parent.document).find('#'+IframeId);
-    var thisheight = $(document).height()+100;
+    $('body').addClass('clearfix');
+    var thisheight = $('body').height()+100;
     main.height(thisheight);
     });
 }
