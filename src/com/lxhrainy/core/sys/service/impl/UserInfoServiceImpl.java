@@ -97,6 +97,11 @@ implements IUserInfoService {
 		return 1;
 	}
 
+	/**
+	 * 前台用户注册
+	 * 1 成功
+	 * -2 用户名已存在
+	 */
 	@Override
 	@Transactional(readOnly = false)
 	public int registerMember(UserInfo user) {
@@ -108,9 +113,9 @@ implements IUserInfoService {
 			result = -2;
 		}else{
 			user.setPassword(encrptPassword(user.getPassword()));
-			user.setType(Global.USER_BUYER);
 			//保存用户
-			result = userInfoDao.insert(user);
+			userInfoDao.insert(user);
+			result = user.getId();
 			if(result != -1){
 				user.setId(result);
 				//创建用户的账户信息
@@ -133,7 +138,7 @@ implements IUserInfoService {
 				userAuthInfoDao.insert(authInfo);
 				
 				//分配用户权限
-				sysRoleDao.insertUserRole(result, Global.ROLE_MEMBER);
+				sysRoleDao.insertUserRole(result, user.getType());
 			}
 		}
 		return result;

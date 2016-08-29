@@ -47,19 +47,6 @@
 		D.deleted AS "detailInfo.deleted"
 	</sql>
 	
-	<sql id="enterpriseInfoColumns">
-		E.enterprisename AS "enterprise.enterprisename",
-		E.logo AS "enterprise.logo",
-		E.website AS "enterprise.website",
-		E.telephone AS "enterprise.telephone",
-		E.location AS "enterprise.location",
-		E.detailaddress AS "enterprise.detailaddress",
-		E.longitude AS "enterprise.longitude",
-		E.latitude AS "enterprise.latitude",
-		E.enterprisedesc AS "enterprise.enterprisedesc",
-		E.enterpriseculture AS "enterprise.enterpriseculture"
-	</sql>
-	
 	<sql id="moneyColumns">
 		UM.status AS "account.status"
 	</sql>
@@ -70,22 +57,17 @@
 	
 	<sql id="userInfoJoins">
 		LEFT JOIN user_detail_info D ON D.userid = T.id
-		LEFT JOIN user_enterprise_assoc ASSOC ON ASSOC.userid = T.id
-		LEFT JOIN enterprise_info E ON E.id = ASSOC.enterpriseid
 		LEFT JOIN sys_user_role UR ON UR.userid = T.id
 		LEFT JOIN sys_role R ON R.id = UR.roleid
 	</sql>
 	
-	<sql id="enterpriseJoins">
-		LEFT JOIN user_enterprise_assoc ASSOC ON ASSOC.userid = T.id
-		LEFT JOIN enterprise_info E ON E.id = ASSOC.enterpriseid
-	</sql>
-
-    
     <sql id="where">
 		<if test="condition!=null">
 			<where>
 			    1 = 1 
+			    <if test="condition.showAdmin!=null">
+					AND T.username != 'admin'
+				</if>
 				<if test="condition.model!=null">
 					<if test="condition.model.deleted!=null">
 						AND T.deleted = #{condition.model.deleted}
@@ -122,10 +104,8 @@
 	
 	<select id="getUserEnterpriseInfo" resultType="UserInfo">
 		SELECT 
-			<include refid="userInfoColumns"/>,
-			<include refid="enterpriseInfoColumns"/>
+			<include refid="userInfoColumns"/>
 		FROM user_info T
-		<include refid="enterpriseJoins"/>
 		WHERE T.id = #{id}
 	</select>
 	
@@ -166,10 +146,7 @@
 		<include refid="where"/>
 	</select>
 	
-	<insert id="insert">
-	    <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
-	        SELECT LAST_INSERT_ID() AS id
-	    </selectKey>
+	<insert id="insert" useGeneratedKeys="true" keyProperty="id">
 		INSERT INTO user_info(
 			id,
 			username,
@@ -184,9 +161,11 @@
 			channel,
 			icon,
 			memo,
-			updatetime,
-			updateuser,
-			creditscore,
+			updatetime
+			<if test="updateuser!=null and updateuser.id!=null">
+			,updateuser
+			</if>
+			,creditscore,
 			uuid,
 			platform,
 			inviter
@@ -204,9 +183,11 @@
 			#{channel},
 			#{icon},
 			#{memo},
-			#{updatetime},
-			#{updateuser.id},
-			#{creditscore},
+			#{updatetime}
+			<if test="updateuser!=null and updateuser.id!=null">
+			,${updateuser.id}
+			</if>
+			,#{creditscore},
 			#{uuid},
 			#{platform},
 			#{inviter}
@@ -250,13 +231,13 @@
 			memo = #{memo},
 			</if>	
 			<if test="updatetime !=null ">
-			updatetime = #{updatetime},
+			updatetime = #{updatetime}
 			</if>
 			<if test="updateuser !=null and updateuser.id != null">
-			updateuser = #{updateuser.id},
+			,updateuser = #{updateuser.id}
 			</if>
 			<if test="creditscore != null">
-			creditscore = #{creditscore},
+			,creditscore = #{creditscore},
 			</if>
 			<if test="uuid != null and uuid != ''">
 			uuid = #{uuid},
@@ -305,68 +286,6 @@
 		FROM user_info T
 		WHERE T.username = #{username} or T.phone = #{username}
 	</select>
-	
-	<!--START 会员 -->
-	<sql id="memberColumns">
-		UI.username AS "updateuser.username",
-    	UAI.certificationstatus AS "authInfo.certificationstatus"
-    </sql>
-    <sql id="memberJoins">
-    	LEFT JOIN user_info UI ON UI.id = T.updateuser
-		LEFT JOIN user_auth_info UAI ON UAI.userid = T.id
-	</sql>
-	<select id="findMemberListByPage" resultType="UserInfo">
-		SELECT 
-			<include refid="userInfoColumns"/>,
-			<include refid="memberColumns"/>
-		FROM user_info T
-		<include refid="memberJoins"/>
-		<include refid="where"/>
-		order by T.ID DESC
-			<include refid="Sql.pager" />
-	</select>
-	<select id="getMemberCountByCondition" resultType="int">
-		SELECT 
-			count(*)
-		FROM user_info T
-		<include refid="memberJoins"/>
-		<include refid="where"/>
-	</select>
-	<!-- END 会员 -->
-	
-	<sql id="enterpriseColumns">
-		EA.status AS "enterpriseAuth.status"
-	</sql>
-	<sql id="enterpriseAuthJoins">
-		LEFT JOIN user_enterprise_assoc ASSOC ON ASSOC.userid = T.id
-		LEFT JOIN enterprise_auth EA ON EA.enterpriseid = ASSOC.enterpriseid
-	</sql>	
-	<!--START 房地产商 -->
-	<sql id="estateColumns">
-    </sql>
-    <sql id="estateJoins">
-	</sql>
-	<select id="findEstateListByPage" resultType="UserInfo">
-		SELECT 
-			<include refid="userInfoColumns"/>,
-			<include refid="enterpriseColumns"/>,
-			<include refid="moneyColumns"/>
-		FROM user_info T
-		<include refid="enterpriseAuthJoins"/>
-		<include refid="moneyJoins"/>
-		<include refid="where"/>
-		order by T.ID DESC
-			<include refid="Sql.pager" />
-	</select>
-	<select id="getEstateCountByCondition" resultType="int">
-		SELECT 
-			count(*)
-		FROM user_info T
-		<include refid="enterpriseAuthJoins"/>
-		<include refid="moneyJoins"/>
-		<include refid="where"/>
-	</select>
-	<!-- END 房地产商 -->
 	
 	<select id="getByPhone" resultType="UserInfo">
 		SELECT 

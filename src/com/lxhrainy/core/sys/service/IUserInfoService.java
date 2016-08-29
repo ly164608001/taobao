@@ -32,10 +32,11 @@ public interface IUserInfoService extends IBaseService<UserInfo, Integer>{
 
 	/**
 	 * @Title: registerUser 
-	 * @Description: 注册用户
+	 * @Description: 前台用户注册
 	 * @param @param user
 	 * @param @return    设定文件 
-	 * @return int    返回类型 
+	 * @return int     1 成功
+	 * 					-2 用户名已存在
 	 * @throws
 	 */
 	int registerMember(UserInfo user);

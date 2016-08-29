@@ -138,12 +138,22 @@ public class LoginController extends BaseController {
 	
 	@RequestMapping("/doRegister")
 	@ResponseBody
-	public JSONObject doRegister(UserInfo user, String captcha){
+	public JSONObject doRegister(UserInfo user, String repassword){
 		JSONObject rj = new JSONObject();
+		rj.put("success", false);
+		if(user == null || StringUtils.isEmpty(repassword) || StringUtils.isEmpty(user.getPassword())
+			|| StringUtils.isEmpty(user.getUsername()) || StringUtils.isEmpty(user.getPhone())){
+			rj.put("msg", "信息请填写完整");
+			return rj;
+		}
+		if(!repassword.equals(user.getPassword())){
+			rj.put("msg", "两次密码不一致");
+			return rj;
+		}
+		
 		user.setDeleted(Global.NO);
 		user.setRegistertime(new Date());
 		user.setStatus(Global.ENABLE);
-		user.setType(Global.USER_BUYER);
 		user.setChannel(Global.FRONT);
 		int result = userInfoService.registerMember(user);
 		if(result == -2){

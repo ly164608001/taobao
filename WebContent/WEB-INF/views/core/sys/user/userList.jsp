@@ -42,8 +42,10 @@ function formatteradminuserbutton(value,row)
 	<div class="easyui-panel" title="用户列表"
 		data-options="striped: true,collapsible:true,iconCls:'icon-search'">
 		<form id="dgquery">
-			<input type="hidden" name="model.deleted" value="0" /> <input
-				type="hidden" name="model.type" value="0" />
+			<input type="hidden" name="model.deleted" value="0" /> 
+			<input type="hidden" name="model.type" value="0" />
+			<input type="hidden" name="showAdmin" value="1" />
+			
 			<table>
 				<tr>
 					<td>用户名</td>

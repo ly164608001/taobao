@@ -82,9 +82,9 @@
 					<td>
 						<select name="target" class="select144">
 							<option value="admin" <c:if test="${model.target == 'admin'}">selected</c:if>>运营</option>
-							<option value="member" <c:if test="${model.target == 'member'}">selected</c:if>>会员</option>
+							<%-- <option value="member" <c:if test="${model.target == 'member'}">selected</c:if>>会员</option>
 							<option value="agency" <c:if test="${model.target == 'agency'}">selected</c:if>>代理</option>
-							<option value="estate" <c:if test="${model.target == 'estate'}">selected</c:if>>房地产商</option>
+							<option value="estate" <c:if test="${model.target == 'estate'}">selected</c:if>>房地产商</option> --%>
 						</select>
 					</td>
 				</tr>

@@ -6,6 +6,34 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>注册</title>
+    <script type="text/javascript">
+    	function register(){
+    		var repassword = $('#repassword').val();
+    		var password = $('#password').val();
+    			
+    		if(isNull(repassword) || isNull(password)){
+    			top.layer.msg('请将信息填写完整');
+    			return;
+    		}
+    		if(repassword != password){
+    			top.layer.msg('两次密码不一致');
+    			return;
+    		}
+    		
+    		$.ajax({
+    			url:'${basePath}front/doRegister.htm',
+    			dataType:'json',
+    			data:$('#registerForm').serialize(),
+    			success : function(result){
+    				if(result.success){
+    					top.layer.msg('注册成功');
+    				}else{
+    					top.layer.msg(result.msg);
+    				}
+    			}
+    		});
+    	}
+    </script>
 </head>
 <body>
     <!--register-->
@@ -27,6 +55,7 @@
         <div class="register-main-w1000">
             <div class="register-main-title">会员注册</div>
             <div class="register-main-content">
+              <form id="registerForm">
                 <ul>
                     <li class="clearfix">
                         <label>
@@ -43,58 +72,30 @@
                         <label>
                             用户名： <em class="red">*</em>
                         </label>
-                        <input type="text" name="username" placeholder="请输入用户名" />
+                        <input type="text" name="username" id="username" placeholder="请输入用户名" />
                     </li>
                     <li class="clearfix">
                         <label>
                             设置账号密码： <em class="red">*</em>
                         </label>
-                        <input type="text" name="password" placeholder="请输入密码" />
-                        <div class="level">
-                            <span class="level-weak">弱</span>
-                            <span class="level-middle">中</span>
-                            <span class="level-strong">强</span>
-                        </div>
+                        <input type="text" name="password" id="password" placeholder="请输入密码" />
                     </li>
                     <li class="clearfix">
                         <label>
                             确认账号密码：
                             <em class="red">*</em>
                         </label>
-                        <input type="text" name="repassword" placeholder="请确认密码" />
-                        <span class="tip red">两次密码不一致，请重新输入</span>
+                        <input type="text" name="repassword" placeholder="请确认密码" id="repassword"/>
+                        <!-- <span class="tip red">两次密码不一致，请重新输入</span> -->
                     </li>
-                    <li class="clearfix">
-                        <label>
-                            QQ号码：
-                            <em class="red">*</em>
-                        </label>
-                        <input type="text" name="detailInfo.qq" placeholder="请输入手机号" />
-                        <span class="tip">请填写您常使用的QQ号码</span>
-                    </li>
-                   <!--  <li class="clearfix msg-tips">
-                        <p>QQ请一定正确填写，客服在验证审核环节及后续服务时都会使用QQ联系你</p>
-                    </li> -->
                     <li class="clearfix">
                         <label>
                             输入手机号：
                             <em class="red">*</em>
                         </label>
-                        <input type="text" name="phone" placeholder="请输入手机号" />
+                        <input type="text" name="phone" id="phone" placeholder="请输入手机号" />
                         <span class="tip">请填写您常使用手机号码</span>
                     </li>
-                    <!-- <li class="clearfix">
-                        <label>
-                            验证码：
-                            <em class="red">*</em>
-                        </label>
-                        <div class="reCaptcha checkyan">
-                            <input type="text" placeholder="请输入手机验证码" class="checkyanIpt" />
-                            <span class="checkyanImg">验证码</span>
-                           <span class="tip">看不清？ <a href="#" class="red">换一换</a></span>
-                           <span class="tip">请输入验证码</span>
-                        </div>
-                    </li> -->
                     <li class="clearfix">
                         <label>
                             手机验证码：
@@ -106,8 +107,9 @@
                         </div>
                     </li>
                 </ul>
+                </form>
             </div>
-            <input class="btn-now" type="button" value="确认并注册" />
+            <input class="btn-now" type="button" value="确认并注册" onclick="register();"/>
         </div>
     </div>
 <%@include file="/WEB-INF/views/front/buyer/footer.jsp" %>

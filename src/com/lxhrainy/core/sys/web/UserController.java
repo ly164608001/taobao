@@ -13,6 +13,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.lxhrainy.core.common.controller.BaseController;
 import com.lxhrainy.core.sys.model.UserInfo;
 import com.lxhrainy.core.sys.service.IUserInfoService;
+import com.lxhrainy.core.utils.AESUtil;
 import com.lxhrainy.myjz.admin.user.oe.UserInfoVO;
 
 @RequestMapping("/admin/sys/user")
@@ -61,7 +62,7 @@ public class UserController extends BaseController {
 	 */
 	@RequestMapping("/userAdd")
 	public ModelAndView insert() {
-		mv = new ModelAndView("core/sys/user/userAdd");
+		mv.setViewName("core/sys/user/userAdd");
 		return mv;
 	}
 	
@@ -73,6 +74,7 @@ public class UserController extends BaseController {
 	@ResponseBody
 	public JSONObject insertsave(UserInfo model) {
 		JSONObject rj = new JSONObject();
+		model.setPassword(encrptPassword("123456"));
 		int result = userInfoService.save(model);
 		if(result != -1){
 			rj.put("success", true);
@@ -146,6 +148,20 @@ public class UserController extends BaseController {
 		rj.put("success", true);
 		rj.put("msg", "密码已重置");
 		return rj;
+	}
+	
+	/**
+	 * 加密密码
+	 * @param password
+	 * @return
+	 */
+	private String encrptPassword(String password) {
+		try {
+			return AESUtil.encrptString(password, "1234567812345678");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "";
 	}
 
 }
