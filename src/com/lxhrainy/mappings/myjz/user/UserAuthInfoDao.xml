@@ -31,8 +31,8 @@
 		<if test="condition!=null">
 			<where>
 				<if test="condition.model!=null">
-					<if test="condition.model.deleted!=null">
-						T.deleted = #{condition.model.deleted}
+					<if test="condition.model.certificationstatus!=null">
+						T.certificationstatus = #{condition.model.certificationstatus}
 					</if>
 				</if>
 			</where>

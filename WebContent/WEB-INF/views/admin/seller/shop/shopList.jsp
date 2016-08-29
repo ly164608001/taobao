@@ -1,11 +1,14 @@
 <%@ page language="java"  pageEncoding="UTF-8"%>
 <%@include file="/headDeclare.jsp" %>
 <%@include file="/tagDeclare.jsp"%>
+<%@include file="/adminHeadDeclare.jsp"%>
 <html>
 <head>
-<link rel="stylesheet" type="text/css" href="${basePath}static/js/easyui/themes/bootstrap/easyui.css"/>
-<link rel="stylesheet" type="text/css" href="${basePath}static/js/easyui/themes/icon.css"/>
+<link rel="stylesheet" type="text/css" href="${basePath}static/js/easyui/themes/bootstrap/easyui.css" />
+<link rel="stylesheet" type="text/css" href="${basePath}static/js/easyui/themes/icon.css" />
 <script type="text/javascript" src="${basePath}static/js/admin/global.js"></script>
+<script type="text/javascript" src="${basePath}static/js/admin/user/operator.js"></script>
+<script type="text/javascript" src="${basePath}static/js/admin/initdata.js"></script>
 
 <script>
 	

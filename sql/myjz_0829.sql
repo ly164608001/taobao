@@ -1,7 +1,7 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : 127.0.0.1
+Source Server         : localhost
 Source Server Version : 50096
 Source Host           : localhost:3306
 Source Database       : myjz
@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50096
 File Encoding         : 65001
 
-Date: 2016-08-29 18:17:24
+Date: 2016-08-29 23:09:28
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -4385,7 +4385,7 @@ INSERT INTO `sys_menu` VALUES ('83', '81', '-11,81,', '小号管理', '1', 'admi
 INSERT INTO `sys_menu` VALUES ('84', '81', '-11,81,', '刷手首页', '31', 'front/buyer/index.htm', null, null, '1', '', '3', '2016-07-09 18:00:24', '3', '2016-07-09 18:00:24', null, '0', '0', '1');
 INSERT INTO `sys_menu` VALUES ('85', '1', '-1,1', '我的账户', '431', '', 'admin', null, '1', '', '3', '2016-07-16 09:41:22', '3', '2016-07-16 09:41:22', null, '0', '0', '1');
 INSERT INTO `sys_menu` VALUES ('86', '85', '-1,1,85', '出错', '1', '才', 'admin', null, '1', '', '3', '2016-07-16 09:41:43', '3', '2016-07-16 09:41:43', null, '1', '0', '0');
-INSERT INTO `sys_menu` VALUES ('87', '81', '-11,,81', '实名认证审核', '32', '', 'admin', null, '1', '', '3', '2016-08-11 17:42:14', '3', '2016-08-11 17:42:14', null, '0', '0', '0');
+INSERT INTO `sys_menu` VALUES ('87', '81', '-11,,81', '实名认证审核', '32', 'admin/buyer/auth/authList.htm', 'admin', null, '1', '', '3', '2016-08-11 17:42:14', '3', '2016-08-29 23:02:36', null, '0', '0', '0');
 INSERT INTO `sys_menu` VALUES ('88', '1', '-1,1', '账户管理', '432', '', 'admin', null, '1', '', '3', '2016-08-11 17:42:56', '3', '2016-08-11 17:42:56', null, '0', '0', '0');
 INSERT INTO `sys_menu` VALUES ('89', '88', '-1,1,88', '账户充值处理', '1', 'admin/trace/recharge/rechargeList.htm', 'admin', null, '1', '', '3', '2016-08-11 17:43:38', '3', '2016-08-18 08:55:27', null, '0', '0', '0');
 INSERT INTO `sys_menu` VALUES ('90', '88', '-1,1,88', '账户提现处理', '2', 'admin/trace/withdrawls/withdrawlsList.htm', 'admin', null, '1', '', '3', '2016-08-11 17:43:55', '3', '2016-08-18 08:54:45', null, '0', '0', '0');
