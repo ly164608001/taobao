@@ -132,6 +132,12 @@
 		WHERE id = #{id}
 	</update>
 	
+	<update id="updateAuditStatus">
+		UPDATE buyer_account_info
+		SET auditstatus = #{auditstatus}
+		WHERE id = #{id}
+	</update>
+	
 	<update id="updateSort">
 		UPDATE buyer_account_info
 		SET sort = #{sort}

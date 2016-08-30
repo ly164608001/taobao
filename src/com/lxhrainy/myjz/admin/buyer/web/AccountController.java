@@ -2,7 +2,6 @@ package com.lxhrainy.myjz.admin.buyer.web;
 
 import java.util.List;
 
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -66,111 +65,48 @@ public class AccountController extends BaseController {
 	}
 
 	/***
-	 * 新增
-	 * @param
-	 */
-	@RequestMapping("/accountAdd")
-	public ModelAndView add(Integer pid) {
-		mv.setViewName("admin/buyer/account/accountAdd");
-		return mv;
-	}
-	
-	/***
-	 * 新增保存
-	 * @param
-	 */
-	@RequestMapping("/addsave")
-	@ResponseBody
-	public JSONObject addsave(AccountInfo model) {
-		JSONObject rj = new JSONObject();
-		if(model == null){
-			rj.put("success", false);
-			rj.put("msg", "保存失败");
-		}else{
-			accountService.save(model);
-			rj.put("success", true);
-			rj.put("msg", "保存成功");
-		}
-		return rj;
-	}
-	
-	/***
-	 * 修改
-	 * @param
-	 */
-	@RequestMapping("/accountUpdate")
-	public ModelAndView update(Integer id) {
-		if(id != null){
-			AccountInfo model = accountService.getById(id);
-			mv.addObject("model", model);
-		}
-		
-		mv.setViewName("admin/buyer/account/accountUpdate");
-		return mv;
-	}
-	
-	/***
-	 * 保存
-	 * @param
-	 */
-	@RequestMapping("/updatesave")
-	@ResponseBody
-	public JSONObject updatesave(AccountInfo model) {
-		JSONObject rj = new JSONObject();
-		rj.put("success", false);
-		rj.put("msg", "更新失败");
-		
-		String name = null;
-		
-		if(model != null && model.getId() != null ){
-			if(!StringUtils.isEmpty(name) ){
-				AccountInfo oldInfo = accountService.getById(model.getId());
-				accountService.update(oldInfo);
-				rj.put("success", true);
-				rj.put("msg", "更新成功");
-			}
-		}
-		return rj;
-	}
-	
-	/***
-	 * 删除
+	 * 审核通过
 	 * @param ID
 	 */
-	@RequestMapping("/accountDelete")
+	@RequestMapping("/pass")
 	@ResponseBody
-	public JSONObject delete(Integer id) {
-		JSONObject rj = new JSONObject();
-		accountService.deleteById(id);
-		rj.put("success", true);
-		rj.put("msg", "删除成功");
-		return rj;
+	public JSONObject pass(Integer id) {
+		return audit(id,Global.AUDIT_PASS);
 	}
 	
 	/***
-	 * 启用
+	 * 审核驳回
 	 * @param ID
 	 */
-	@RequestMapping("/able")
+	@RequestMapping("/reject")
 	@ResponseBody
-	public JSONObject able(Integer id) {
-		JSONObject rj = new JSONObject();
-		accountService.able(id);
-		rj.put("success", true);
-		return rj;
-	}
-	
-	/***
-	 * 禁用
-	 * @param ID
-	 */
-	@RequestMapping("/unable")
-	@ResponseBody
-	public JSONObject unable(Integer id) {
-		JSONObject rj = new JSONObject();
-		accountService.unable(id);
-		rj.put("success", true);
-		return rj;
+	public JSONObject reject(Integer id) {
+		return audit(id,Global.AUDIT_REJECT);
 	}
 
+	private JSONObject audit(Integer id,int auditStatus){
+		JSONObject rj = new JSONObject();
+		rj.put("success", false);
+		
+		if(id == null){
+			rj.put("msg", "请选择要操作的申请记录");
+			return rj;
+		}
+		
+		int result = accountService.audit(id,auditStatus);
+		switch (result) {
+		case -1:
+			rj.put("msg", "申请记录不存在");
+			return rj;
+		case -2:
+			rj.put("msg", "非待审状态,不可进行审核操作");
+			return rj;
+		default:
+			break;
+		}
+		
+		rj.put("success", true);
+		return rj;
+	}
+	
 }

@@ -8,16 +8,16 @@
 <script type="text/javascript" src="${basePath}static/js/admin/global.js"></script>
 
 <script>
-	function updateStatus(id,opr){
+	function audit(id,opr){
 		var tipMsg = '';
 		var url = '${basePath}admin/buyer/account/';
 		
-		if(opr == 'able'){
-			tipMsg = '确认启用该小号?';
-			url += 'able.htm?id=' + id;
+		if(opr == 'pass'){
+			tipMsg = '确认通过该待审记录?';
+			url += 'pass.htm?id=' + id;
 		}else{
-			tipMsg = '确认禁用该小号?';
-			url += 'unable.htm?id=' + id;
+			tipMsg = '确认驳回该待审记录?';
+			url += 'reject.htm?id=' + id;
 		}
 		
 		$.messager.confirm('确认',tipMsg,function(a){  
@@ -33,28 +33,27 @@
 	}
 	
 	function formatteradminuserbutton(value,row) {
-		var btn = '';
-		var status = row.status;
-		
-		if(status == 1){
-			btn += '<a href="javascript:void(0)" class="easyui-linkbutton" onclick="updateStatus('+row.id+',\'unable\')">禁用</a>&nbsp;';
-		}else{
-			btn += '<a href="javascript:void(0)" class="easyui-linkbutton" onclick="updateStatus('+row.id+',\'able\')">启用</a>&nbsp;';
-		} 
-		
-		btn += '<a href="javascript:void(0)" class="easyui-linkbutton" onclick="openDialog(\'收获地址\',\'${basePath}admin/buyer/account/accountUpdate.htm?id='+row.id+'\',420,320)">收获地址</a>&nbsp;'
-		 		+ '<a href="javascript:void(0)" class="easyui-linkbutton" onclick="openDialog(\'vpn设置\',\'${basePath}admin/buyer/account/accountUpdate.htm?id='+row.id+'\',420,320)">vpn设置</a>&nbsp;'		
-		 		+ '<a href="javascript:void(0)" class="easyui-linkbutton" onclick="openDialog(\'基础信息\',\'${basePath}admin/buyer/account/accountUpdate.htm?id='+row.id+'\',420,320)">基础信息</a>&nbsp;'
+		var btn = '<a href="javascript:void(0)" class="easyui-linkbutton" onclick="openDialog(\'确认通过\',\'${basePath}admin/buyer/account/accountUpdate.htm?id='+row.id+'\',420,320)">查看</a>&nbsp;';';
+		if(row.auditstatus == 0){
+			btn += '<a href="javascript:void(0)" class="easyui-linkbutton" onclick="openDialog(\'确认通过\',\'${basePath}admin/buyer/account/accountUpdate.htm?id='+row.id+'\',420,320)">通过</a>&nbsp;'
+	 		+ '<a href="javascript:void(0)" class="easyui-linkbutton" onclick="openDialog(\'确认驳回\',\'${basePath}admin/buyer/account/accountUpdate.htm?id='+row.id+'\',420,320)">驳回</a>&nbsp;';	
+		}
 		
 		return btn;
+	}
+	
+	function formatterIdentity(value,row){
+		return (value == 1 ? '是' : '否');
 	}
 	
 	function formatterStatus(value,row){
 		var txt = '';
 		if(value == 1){
-			txt = '启用';
-		}else{
-			txt = '禁用';
+			txt = '审核通过';
+		}else if(value == 0){
+			txt = '待审核';
+		}else if(value == -1){
+			txt = '审核失败';
 		}
 		return txt;
 	}
@@ -76,36 +75,24 @@
 </script>
 </head>
 <body>
-	<div class="easyui-panel" title="小号列表"
+	<div class="easyui-panel" title="买家小号列表"
 		data-options="striped: true,collapsible:true,iconCls:'icon-search'">
 		<form id="dgquery">
-			<input name="model.createuser.id" type="hidden" value="${loginUser.id}">
+			<input name="model.createuser.id" type="hidden" value="${loginUser.id}" />
 		</form>
 	</div>
 	<table id="dg" cellspacing="0" cellpadding="0" url="datalist.json">
 		<thead>
 			<tr>
 				<th field="id" width="40">id</th>
-				<th field="accountno" width="100">淘宝账号 </th>
+				<th field="accountno" width="100">淘宝旺旺号</th>
 				<th field="credit" formatter="formatterLevel" width="120">现信誉</th>
-				<th field="receivednum" width="120">当日/本周/已接任务数</th>
-				<th field="status" formatter="formatterStatus" width="80">买号状态</th>
-				<th field="sort" width="80">买号排序</th>
+				<th field="identification" formatter="formatterIdentity" width="120">是否已实名</th>
+				<th field="auditstatus" formatter="formatterStatus" width="80">审核状态</th>
+				<th field="createuser.username" width="80">申请人</th>
 				<th field="isadmin" width="200" formatter="formatteradminuserbutton">操作</th>
 			</tr>
 		</thead>
 	</table>
-	
-	<script>
-	toolbardata = [{  
-	            text: '添加',  
-	            iconCls: 'icon-add',  
-	            handler: function() {  
-	                openDialog("添加","${basePath}admin/buyer/account/accountAdd.htm",380,280);  
-	            }  
-	        }] ;
-	</script>
-	<script type="text/javascript" src="${basePath}static/js/admin/initdata.js"></script>
-	<div id="mydialog"></div>
 </body>
 </html>

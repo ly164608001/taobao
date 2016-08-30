@@ -122,4 +122,24 @@ implements IAccountService  {
 		return dao.getListForMobile(vo);
 	}
 
+	/**
+	 * 审核
+	 * @param id
+	 * @return 1 成功
+	 * 		   -1申请记录不存在
+	 * 		   -2 该申请非待审状态
+	 */
+	public int audit(int id,int auditstatus){
+		AccountInfo model = this.getById(id);
+		if(model == null){
+			return -1;
+		}
+		
+		if(model.getAuditstatus() != Global.AUDIT_INIT){
+			return -2;
+		}
+		
+		dao.updateAuditStatus(id,auditstatus);
+		return 1;
+	}
 }

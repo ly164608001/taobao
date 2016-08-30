@@ -42,4 +42,13 @@ public interface IAccountService extends IBaseService<AccountInfo, Integer>{
 	 */
 	List<AccountInfo> getListForMobile(AccountVO vo);
 
+	/**
+	 * 审核通过
+	 * @param id
+	 * @return 1 成功
+	 * 		   -1 申请记录不存在
+	 * 		   -2 该申请非待审状态
+	 */
+	public int audit(int id,int auditstatus);
+
 }

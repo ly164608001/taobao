@@ -38,5 +38,7 @@ public interface IAccountInfoDao extends IBaseDao<AccountInfo> {
 	 * @return
 	 */
 	List<AccountInfo> getListForMobile(@Param("condition")AccountVO vo);
+
+	void updateAuditStatus(@Param("id")int id, @Param("auditstatus")int auditstatus);
 	
 }
